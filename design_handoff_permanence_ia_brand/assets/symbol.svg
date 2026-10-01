@@ -1,0 +1,6 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Permanence IA">
+  <defs><mask id="cut" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48"><rect width="48" height="48" fill="#fff"/><circle cx="39" cy="9" r="9" fill="#000"/></mask></defs>
+  <path d="M14 6H30A10 10 0 0 1 40 16V28A10 10 0 0 1 30 38H17L8 44.5V36.3A10 10 0 0 1 4 28V16A10 10 0 0 1 14 6Z" fill="#0F3A48" mask="url(#cut)"/>
+  <g fill="#FFFFFF"><rect x="11.75" y="17" width="4.5" height="10" rx="2.25"/><rect x="19.75" y="13" width="4.5" height="18" rx="2.25"/><rect x="27.75" y="17" width="4.5" height="10" rx="2.25"/></g>
+  <circle cx="39" cy="9" r="5.5" fill="#2E9E98"/>
+</svg>

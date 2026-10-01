@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Permanence IA — Identité visuelle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --petrol:#0F3A48; --petrol-2:#0A2A35; --ink:#0B1D24;
+  --turq:#2E9E98; --turq-soft:#7FCFC8; --turq-tint:#E3F3F1;
+  --white:#FFFFFF; --grey:#F3F5F6; --grey-2:#E4E9EB; --mute:#5E7179;
+  --night:#0D1A1F; --night-2:#16262D;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Manrope,sans-serif;color:var(--ink);background:#E9EDEF;-webkit-font-smoothing:antialiased}
+.board{width:1440px;margin:0 auto;background:var(--white)}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--mute);text-transform:uppercase}
+section{padding:88px 96px;border-top:1px solid var(--grey-2)}
+.sec-head{display:grid;grid-template-columns:220px 1fr;gap:32px;margin-bottom:48px;align-items:baseline}
+.sec-head h2{font-size:34px;font-weight:700;letter-spacing:-.02em;color:var(--petrol)}
+.sec-head p{grid-column:2;color:var(--mute);font-size:16px;line-height:1.6;max-width:720px;text-wrap:pretty}
+
+/* lockup */
+.lockup{display:inline-flex;align-items:center;gap:.34em;font-weight:700;letter-spacing:-.025em;line-height:1;white-space:nowrap}
+.lockup svg{height:1.25em;width:1.25em;flex:none}
+.lockup .w{color:var(--c-word,var(--petrol))}
+.lockup .ia{color:var(--c-ia,var(--turq));margin-left:.22em}
+.stack{display:inline-flex;flex-direction:column;align-items:center;gap:.4em;font-weight:700;letter-spacing:-.025em;line-height:1}
+.stack svg{height:2.2em;width:2.2em}
+
+/* hero */
+.hero{padding:0;border:0;display:grid;grid-template-columns:1.25fr 1fr;min-height:680px}
+.hero-l{padding:72px 96px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-r{background:var(--petrol);position:relative;display:grid;place-items:center;overflow:hidden}
+.hero-r .big svg{width:300px;height:300px}
+.hero h1{font-size:15px;font-weight:600}
+.hero .claim{font-size:48px;line-height:1.1;font-weight:600;letter-spacing:-.03em;color:var(--petrol);max-width:560px;text-wrap:balance}
+.hero .claim em{font-style:normal;color:var(--turq)}
+.meta{display:flex;gap:40px}
+.meta div{display:flex;flex-direction:column;gap:6px}
+.meta b{font-size:14px;font-weight:600}
+
+/* concept */
+.concept{display:grid;grid-template-columns:520px 1fr;gap:72px;align-items:center}
+.grid-box{background:var(--grey);border-radius:4px;aspect-ratio:1;position:relative;
+  background-image:linear-gradient(var(--grey-2) 1px,transparent 1px),linear-gradient(90deg,var(--grey-2) 1px,transparent 1px);
+  background-size:calc(100%/12) calc(100%/12)}
+.grid-box svg{position:absolute;inset:0;width:100%;height:100%}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--grey-2);border:1px solid var(--grey-2)}
+.pillar{background:#fff;padding:28px;display:flex;flex-direction:column;gap:12px}
+.pillar .n{font-family:'IBM Plex Mono';font-size:12px;color:var(--turq)}
+.pillar h3{font-size:20px;font-weight:700;color:var(--petrol)}
+.pillar p{font-size:14.5px;line-height:1.55;color:var(--mute)}
+
+/* variants */
+.variants{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.v{border-radius:6px;height:260px;display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px}
+.v .stage{flex:1;display:grid;place-items:center;font-size:40px}
+.v .lbl{display:flex;justify-content:space-between}
+.v.light{background:var(--grey)}
+.v.white{background:#fff;border:1px solid var(--grey-2)}
+.v.petrol{background:var(--petrol)} .v.petrol .mono{color:var(--turq-soft)}
+.v.night{background:var(--night)} .v.night .mono{color:#7F949B}
+.v.black{background:#fff;border:1px solid var(--grey-2)}
+
+/* sizes */
+.sizes{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.panel{background:var(--grey);border-radius:6px;padding:36px}
+.row-sizes{display:flex;align-items:flex-end;gap:40px;margin-top:28px}
+.row-sizes figure{display:flex;flex-direction:column;align-items:center;gap:14px}
+.clear{position:relative;display:inline-block;padding:44px;outline:1px dashed var(--turq);margin-top:28px;background:#fff}
+.clear .x{position:absolute;font-family:'IBM Plex Mono';font-size:11px;color:var(--turq)}
+
+/* palette */
+.palette{display:grid;grid-template-columns:2fr 1.4fr 1fr 1fr 1fr;gap:12px;height:340px}
+.sw{border-radius:6px;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.sw b{font-size:17px;font-weight:700}
+.sw .codes{font-family:'IBM Plex Mono';font-size:12px;line-height:1.7;opacity:.85}
+.ratio{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-top:18px}
+
+/* type */
+.type{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.specimen{background:var(--grey);border-radius:6px;padding:40px}
+.specimen .aa{font-size:150px;font-weight:700;letter-spacing:-.04em;color:var(--petrol);line-height:1}
+.scale div{display:grid;grid-template-columns:120px 1fr;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--grey-2)}
+
+/* applications */
+.apps{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.card-a{grid-column:span 6;background:var(--grey);border-radius:6px;padding:48px;display:flex;gap:28px;align-items:center;justify-content:center}
+.bc{width:255px;height:165px;border-radius:5px;box-shadow:0 12px 30px -12px rgba(11,29,36,.3);padding:20px;display:flex;flex-direction:column;justify-content:space-between;flex:none}
+.app-lbl{grid-column:span 12;margin:28px 0 -6px}
+.sig{grid-column:span 6;background:var(--grey);border-radius:6px;padding:40px;display:flex;align-items:center}
+.mail{background:#fff;border-radius:6px;width:100%;box-shadow:0 10px 30px -14px rgba(11,29,36,.25);font-size:13px}
+.mail-h{padding:12px 18px;border-bottom:1px solid var(--grey-2);color:var(--mute)}
+.mail-b{padding:22px 18px}
+.inv{grid-column:span 5;background:var(--grey);border-radius:6px;padding:40px;display:flex;justify-content:center}
+.paper{background:#fff;width:330px;aspect-ratio:1/1.414;box-shadow:0 12px 30px -14px rgba(11,29,36,.3);padding:26px;font-size:8.5px;display:flex;flex-direction:column;gap:14px}
+.paper .ln{height:5px;background:var(--grey-2);border-radius:2px}
+.phone-a{grid-column:span 3;background:var(--petrol);border-radius:6px;display:grid;place-items:center;padding:36px 0}
+.phone{width:210px;height:430px;border-radius:32px;background:var(--night);padding:9px;box-shadow:0 20px 40px -12px rgba(0,0,0,.5)}
+.screen{height:100%;border-radius:24px;background:var(--grey);overflow:hidden;display:flex;flex-direction:column}
+.homes{grid-column:span 4;background:linear-gradient(#C9D6DA,#E3EAEC);border-radius:6px;display:flex;align-items:center;justify-content:center;gap:22px;padding:30px}
+.appicon{width:76px;height:76px;border-radius:18px;display:grid;place-items:center}
+.appicon svg{width:48px;height:48px}
+.web{grid-column:span 12;border-radius:6px;overflow:hidden;border:1px solid var(--grey-2)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--grey-2)}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:14px;font-weight:500;color:var(--mute)}
+.btn{background:var(--petrol);color:#fff;padding:11px 18px;border-radius:8px;font-size:14px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--petrol);border:1px solid var(--grey-2)}
+.web-hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;padding:64px 40px 56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--turq-tint);color:var(--petrol);font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--turq)}
+.callcard{background:var(--grey);border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.bubble{background:#fff;border-radius:12px 12px 12px 3px;padding:12px 14px;font-size:14px;line-height:1.45;max-width:85%}
+.bubble.me{align-self:flex-end;background:var(--petrol);color:#fff;border-radius:12px 12px 3px 12px}
+.ads{grid-column:span 12;display:grid;grid-template-columns:1fr 1.6fr;gap:20px}
+.poster{background:var(--petrol);border-radius:6px;padding:48px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;height:480px}
+.banner{border-radius:6px;background:var(--grey);padding:48px;display:flex;flex-direction:column;justify-content:space-between;height:480px}
+.sectors{display:flex;flex-wrap:wrap;gap:8px}
+.sectors span{border:1px solid var(--grey-2);background:#fff;border-radius:99px;padding:7px 13px;font-size:13px;font-weight:500;color:var(--petrol)}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.rule{display:flex;flex-direction:column;gap:12px}
+.rule .box{height:150px;border-radius:6px;background:var(--grey);display:grid;place-items:center;font-size:24px;position:relative}
+.rule .box::after{content:'';position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;border:2px solid #C4513F;background:linear-gradient(45deg,transparent 45%,#C4513F 45% 55%,transparent 55%)}
+.rule p{font-size:14px;color:var(--mute)}
+footer{padding:36px 96px;display:flex;justify-content:space-between;align-items:center;background:var(--petrol-2);color:#9FB6BD}
+</style>
+</head>
+<body>
+<div class="board">
+
+<!-- HERO -->
+<section class="hero" data-screen-label="01 Couverture">
+  <div class="hero-l">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="mono">Charte d'identité · v1.0 · 2026</span>
+      <span class="mono">permanenceia.com</span>
+    </div>
+    <div>
+      <div class="lockup" data-logo style="font-size:64px"></div>
+      <p class="claim" style="margin-top:48px">L'accueil téléphonique de votre entreprise, <em>tenu 24 h/24</em> par un agent vocal fiable.</p>
+    </div>
+    <div class="meta">
+      <div><span class="mono">Marque</span><b>Permanence IA</b></div>
+      <div><span class="mono">Positionnement</span><b>Sérieux · Humain · Rassurant</b></div>
+      <div><span class="mono">Cibles</span><b>PME, santé, droit, artisans, services</b></div>
+    </div>
+  </div>
+  <div class="hero-r">
+    <div class="big" data-mark data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8"></div>
+    <span class="mono" style="position:absolute;bottom:32px;left:40px;color:var(--turq-soft)">Symbole · « La bulle en veille »</span>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section data-screen-label="02 Concept">
+  <div class="sec-head"><span class="mono">01 — Symbole</span><h2>Une conversation, toujours ouverte</h2>
+    <p>Le symbole réunit quatre idées en trois formes seulement. Il est construit sur une grille de 48 unités, avec des rayons et des épaisseurs cohérents pour rester net à toutes les tailles.</p></div>
+  <div class="concept">
+    <div class="grid-box" id="construct"></div>
+    <div class="pillars">
+      <div class="pillar"><span class="n">A · Bulle de dialogue</span><h3>L'échange</h3><p>Un carré arrondi (r = 10 u) dont la queue, en bas à gauche, rappelle la parole adressée à quelqu'un.</p></div>
+      <div class="pillar"><span class="n">B · Onde vocale</span><h3>La voix</h3><p>Trois barres d'amplitude symétriques (10 · 18 · 10 u). C'est une voix posée et régulière, pas un signal agressif.</p></div>
+      <div class="pillar"><span class="n">C · Point de disponibilité</span><h3>La connexion</h3><p>Le témoin turquoise « en ligne », détaché de la bulle par un liseré de 3,5 u, signale que quelqu'un répond, de jour comme de nuit.</p></div>
+      <div class="pillar"><span class="n">D · Continuité</span><h3>La confiance</h3><p>Une silhouette pleine et stable, sans rupture. Le point est toujours allumé, ce qui dit que le service ne s'interrompt jamais.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VARIANTS -->
+<section data-screen-label="03 Variantes">
+  <div class="sec-head"><span class="mono">02 — Déclinaisons</span><h2>Variantes du logo</h2>
+    <p>Le logo principal s'utilise sur fond blanc ou gris très clair. Chaque déclinaison a un usage précis, et le mot-symbole s'écrit toujours exactement « Permanence IA ».</p></div>
+  <div class="variants">
+    <div class="v white"><div class="stage"><div class="lockup" data-logo></div></div><div class="lbl"><span class="mono">A · Principale</span><span class="mono">Web · documents</span></div></div>
+    <div class="v light"><div class="stage"><div class="stack" data-stack style="font-size:30px"></div></div><div class="lbl"><span class="mono">B · Verticale</span><span class="mono">Affiche · réseaux</span></div></div>
+    <div class="v black"><div class="stage"><div class="lockup" data-logo data-b="#0B0B0B" data-w="#FFFFFF" data-d="#0B0B0B" style="--c-word:#0B0B0B;--c-ia:#0B0B0B"></div></div><div class="lbl"><span class="mono">C · Monochrome noir</span><span class="mono">Fax · tampon · gravure</span></div></div>
+    <div class="v petrol"><div class="stage"><div class="lockup" data-logo data-b="#FFFFFF" data-w="#0F3A48" data-d="#FFFFFF" style="--c-word:#fff;--c-ia:#fff"></div></div><div class="lbl"><span class="mono">D · Blanc sur fond sombre</span><span class="mono">Signalétique · vidéo</span></div></div>
+    <div class="v night"><div class="stage"><div class="lockup" data-logo data-b="#E8F1F2" data-w="#0D1A1F" data-d="#5FC4BB" style="--c-word:#E8F1F2;--c-ia:#5FC4BB"></div></div><div class="lbl"><span class="mono">E · Mode sombre</span><span class="mono">App · interface</span></div></div>
+    <div class="v light"><div class="stage" style="gap:28px;display:flex;justify-content:center;align-items:center">
+      <div class="appicon" style="background:var(--petrol)" data-mark data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8"></div>
+      <div class="appicon" style="background:#fff;box-shadow:0 0 0 1px var(--grey-2)" data-mark></div>
+      <div style="width:76px;height:76px;display:grid;place-items:center" data-mark></div>
+    </div><div class="lbl"><span class="mono">F · Symbole seul</span><span class="mono">Icône · favicon · avatar</span></div></div>
+  </div>
+</section>
+
+<!-- SIZES -->
+<section data-screen-label="04 Lisibilité">
+  <div class="sec-head"><span class="mono">03 — Lisibilité</span><h2>Tailles minimales et zone de protection</h2>
+    <p>Le symbole reste reconnaissable à 24 px de hauteur, et même à 16 px en favicon. Autour du logo, on réserve une marge égale à la hauteur du point de disponibilité ×2, notée « x ».</p></div>
+  <div class="sizes">
+    <div class="panel">
+      <span class="mono">Symbole — de 96 px à 16 px</span>
+      <div class="row-sizes" id="sizes"></div>
+      <span class="mono" style="display:block;margin-top:40px">Logo complet — minimum 24 px de hauteur</span>
+      <div class="row-sizes" style="gap:48px;align-items:center">
+        <div class="lockup" data-logo style="font-size:19.2px"></div>
+        <div class="lockup" data-logo style="font-size:14px"></div>
+        <span class="mono">← 24 px · 18 px (impression 6 mm)</span>
+      </div>
+    </div>
+    <div class="panel" style="display:flex;flex-direction:column;align-items:flex-start">
+      <span class="mono">Zone de protection</span>
+      <div class="clear"><div class="lockup" data-logo style="font-size:34px"></div>
+        <span class="x" style="top:14px;left:50%">x</span><span class="x" style="bottom:14px;left:50%">x</span>
+        <span class="x" style="left:16px;top:45%">x</span><span class="x" style="right:16px;top:45%">x</span></div>
+      <p style="margin-top:28px;font-size:14.5px;color:var(--mute);line-height:1.6">Aucun texte, pictogramme ou bord de support ne doit entrer dans cette zone. Sur les supports très petits (tampon, en-tête de SMS), on préfère le symbole seul.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PALETTE -->
+<section data-screen-label="05 Couleurs">
+  <div class="sec-head"><span class="mono">04 — Couleurs</span><h2>Palette</h2>
+    <p>Le bleu pétrole porte la marque et la confiance. Le turquoise est un accent discret, réservé au point de disponibilité, aux états actifs et à quelques mots clés. Les surfaces restent blanches ou gris très clair.</p></div>
+  <div class="palette">
+    <div class="sw" style="background:var(--petrol);color:#fff"><b>Pétrole profond</b><div class="codes">HEX #0F3A48<br>RVB 15 · 58 · 72<br>CMJN 90 · 50 · 38 · 50<br>Pantone ≈ 7477 C</div></div>
+    <div class="sw" style="background:var(--turq);color:#fff"><b>Turquoise discret</b><div class="codes">HEX #2E9E98<br>RVB 46 · 158 · 152<br>CMJN 74 · 10 · 44 · 0<br>Pantone ≈ 7472 C</div></div>
+    <div class="sw" style="background:var(--grey);color:var(--ink)"><b>Gris clair</b><div class="codes">HEX #F3F5F6<br>RVB 243 · 245 · 246</div></div>
+    <div class="sw" style="background:#fff;border:1px solid var(--grey-2);color:var(--ink)"><b>Blanc</b><div class="codes">HEX #FFFFFF</div></div>
+    <div class="sw" style="background:var(--night);color:#E8F1F2"><b>Nuit</b><div class="codes">HEX #0D1A1F<br>Mode sombre<br>Accent #5FC4BB</div></div>
+  </div>
+  <div class="ratio"><i style="flex:50;background:#fff;border:1px solid var(--grey-2)"></i><i style="flex:25;background:var(--grey)"></i><i style="flex:17;background:var(--petrol)"></i><i style="flex:5;background:var(--ink)"></i><i style="flex:3;background:var(--turq)"></i></div>
+  <div style="display:flex;justify-content:space-between;margin-top:10px"><span class="mono">Proportions d'usage : blanc 50 · gris 25 · pétrole 17 · texte 5 · turquoise 3</span><span class="mono">Contraste pétrole / blanc : 11,9 : 1 (AAA)</span></div>
+</section>
+
+<!-- TYPE -->
+<section data-screen-label="06 Typographie">
+  <div class="sec-head"><span class="mono">05 — Typographie</span><h2>Manrope</h2>
+    <p>Une grotesque géométrique aux formes ouvertes. Elle est très lisible au téléphone comme sur une facture, chaleureuse sans être familière, et gratuite (licence OFL). IBM Plex Mono sert uniquement aux données techniques : horaires, numéros, références.</p></div>
+  <div class="type">
+    <div class="specimen">
+      <div class="aa">Aa 24</div>
+      <p style="font-size:22px;margin-top:24px;color:var(--petrol);font-weight:500;line-height:1.4">Bonjour, cabinet du Dr Martin. Je peux vous proposer un rendez-vous jeudi à 9 h 30.</p>
+      <p class="mono" style="margin-top:28px;text-transform:none">ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789 · éèàçù €</p>
+    </div>
+    <div class="scale">
+      <div><span class="mono">Titre · 700</span><span style="font-size:36px;font-weight:700;letter-spacing:-.025em;color:var(--petrol)">Jamais d'appel manqué</span></div>
+      <div><span class="mono">Sous-titre · 600</span><span style="font-size:22px;font-weight:600">Votre standard, 24 h/24</span></div>
+      <div><span class="mono">Texte · 400</span><span style="font-size:16px;line-height:1.55;color:var(--mute)">L'agent accueille, qualifie et transfère l'appel à un humain si besoin.</span></div>
+      <div><span class="mono">Donnée · Mono</span><span style="font-family:'IBM Plex Mono';font-size:15px">+33 1 84 80 24 24 · 03:12</span></div>
+      <div><span class="mono">Mot-symbole</span><span style="font-size:15px">Manrope 700, approche −2,5 %, « IA » en turquoise</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section data-screen-label="07 Applications">
+  <div class="sec-head"><span class="mono">06 — Applications</span><h2>Le logo au quotidien</h2>
+    <p>Mises en situation sur les principaux points de contact : carte de visite, signature e-mail, facture, application mobile, site internet et publicité.</p></div>
+  <div class="apps">
+    <span class="mono app-lbl">Carte de visite 85 × 55 mm · Signature e-mail</span>
+    <div class="card-a">
+      <div class="bc" style="background:var(--petrol);justify-content:center;align-items:center"><div class="lockup" data-logo data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8" style="font-size:22px;--c-word:#fff;--c-ia:#7FCFC8"></div></div>
+      <div class="bc" style="background:#fff">
+        <div data-mark style="width:26px;height:26px"></div>
+        <div><div style="font-weight:700;font-size:14px;color:var(--petrol)">Claire Dubois</div><div style="font-size:10.5px;color:var(--mute);margin-top:2px">Responsable déploiement</div>
+        <div style="font-family:'IBM Plex Mono';font-size:9.5px;line-height:1.7;margin-top:12px;color:var(--ink)">+33 1 84 80 24 24<br>claire@permanenceia.com<br>permanenceia.com</div></div>
+      </div>
+    </div>
+    <div class="sig"><div class="mail">
+      <div class="mail-h">À : contact@cabinet-lefevre.fr · Objet : Mise en service de votre agent</div>
+      <div class="mail-b"><p style="color:var(--mute);line-height:1.6">Bonjour Maître Lefèvre,<br>votre agent est actif depuis ce matin. Vous trouverez le récapitulatif des premiers appels dans votre espace.</p>
+        <div style="display:flex;gap:16px;align-items:center;margin-top:22px;padding-top:18px;border-top:1px solid var(--grey-2)">
+          <div data-mark style="width:40px;height:40px"></div>
+          <div style="border-left:1px solid var(--grey-2);padding-left:16px;line-height:1.55"><b style="color:var(--petrol)">Claire Dubois</b> · Responsable déploiement<br><span style="color:var(--mute)">Permanence IA · <span style="color:var(--turq);font-weight:600">permanenceia.com</span> · +33 1 84 80 24 24</span></div>
+        </div></div></div></div>
+
+    <span class="mono app-lbl">Facture · Application mobile · Icône d'app</span>
+    <div class="inv"><div class="paper">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="lockup" data-logo style="font-size:13px"></div><div style="text-align:right;font-family:'IBM Plex Mono';color:var(--mute);line-height:1.6">FACTURE<br>N° PIA-2026-0918</div></div>
+      <div style="height:2px;background:var(--petrol);margin:6px 0 4px"></div>
+      <div style="display:flex;justify-content:space-between;line-height:1.6"><div><b>Garage Moreau SARL</b><br><span style="color:var(--mute)">12 rue des Artisans, 69003 Lyon</span></div><div style="text-align:right;color:var(--mute)">Émise le 28/09/2026<br>Échéance 28/10/2026</div></div>
+      <div style="background:var(--grey);padding:6px 8px;display:flex;justify-content:space-between;font-weight:700;color:var(--petrol);margin-top:6px"><span>Désignation</span><span>Montant HT</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0 8px"><span>Agent vocal · Formule Atelier · sept.</span><span>149,00 €</span></div>
+      <div style="display:flex;justify-content:space-between;padding:0 8px"><span>Minutes supplémentaires (212)</span><span>31,80 €</span></div>
+      <div class="ln" style="width:60%"></div><div class="ln" style="width:40%"></div>
+      <div style="margin-top:auto;display:flex;justify-content:flex-end"><div style="background:var(--petrol);color:#fff;padding:8px 12px;font-weight:700;font-size:10px">Total TTC 216,96 €</div></div>
+      <div style="font-family:'IBM Plex Mono';color:var(--mute);font-size:7px;border-top:1px solid var(--grey-2);padding-top:8px">Permanence IA · permanenceia.com · SIRET 000 000 000 00000</div>
+    </div></div>
+    <div class="phone-a"><div class="phone"><div class="screen">
+      <div style="padding:20px 16px 12px;display:flex;align-items:center;justify-content:space-between"><div class="lockup" data-logo style="font-size:11px"></div><span class="pill" style="font-size:9px;padding:4px 8px"><i style="width:5px;height:5px"></i>En ligne</span></div>
+      <div style="padding:6px 16px"><div style="font-size:10px;color:var(--mute)">Cette nuit</div><div style="font-size:22px;font-weight:700;color:var(--petrol);letter-spacing:-.02em">14 appels traités</div></div>
+      <div style="margin:12px 12px 0;display:flex;flex-direction:column;gap:8px;font-size:10px">
+        <div style="background:#fff;border-radius:10px;padding:10px"><b>RDV pris</b> · Mme Roux<br><span style="color:var(--mute)">Jeu. 9 h 30 · Contrôle</span></div>
+        <div style="background:#fff;border-radius:10px;padding:10px;box-shadow:inset 0 0 0 1.5px var(--turq)"><b style="color:var(--turq)">Urgence transmise</b><br><span style="color:var(--mute)">03:12 · transféré au Dr Martin</span></div>
+        <div style="background:#fff;border-radius:10px;padding:10px"><b>Demande qualifiée</b> · Devis<br><span style="color:var(--mute)">Rappel prévu à 10 h</span></div>
+      </div>
+    </div></div></div>
+    <div class="homes">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="appicon" style="background:var(--petrol);box-shadow:0 8px 18px -8px rgba(0,0,0,.4)" data-mark data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8"></div><span style="font-size:11px;font-weight:600;color:var(--ink)">Permanence</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="appicon" style="background:var(--night);box-shadow:0 8px 18px -8px rgba(0,0,0,.4)" data-mark data-b="#E8F1F2" data-w="#0D1A1F" data-d="#5FC4BB"></div><span style="font-size:11px;font-weight:600;color:var(--ink)">Mode sombre</span></div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:7px;background:var(--petrol);display:grid;place-items:center" data-mark data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8" data-size="22"></div><span style="font-size:11px;font-weight:600;color:var(--ink)">32 px</span></div>
+    </div>
+
+    <span class="mono app-lbl">Site internet</span>
+    <div class="web">
+      <div class="nav"><div class="lockup" data-logo style="font-size:21px"></div>
+        <ul><li>Fonctionnement</li><li>Métiers</li><li>Tarifs</li><li>Sécurité &amp; RGPD</li></ul>
+        <div style="display:flex;gap:10px"><span class="btn ghost">Se connecter</span><span class="btn">Écouter une démo</span></div></div>
+      <div class="web-hero">
+        <div><span class="pill"><i></i>Agent disponible · 24 h/24 · 7 j/7</span>
+          <h3 style="font-size:52px;line-height:1.05;letter-spacing:-.035em;color:var(--petrol);margin:22px 0 18px;font-weight:700;text-wrap:balance">Chaque appel reçoit une réponse.</h3>
+          <p style="font-size:18px;line-height:1.55;color:var(--mute);max-width:480px">Votre agent vocal accueille, prend les rendez-vous, qualifie les demandes et vous passe la main quand il le faut.</p>
+          <div style="display:flex;gap:12px;margin-top:28px"><span class="btn" style="padding:14px 22px">Essayer gratuitement</span><span class="btn ghost" style="padding:14px 22px">Appeler la démo</span></div></div>
+        <div class="callcard">
+          <div style="display:flex;justify-content:space-between"><span class="mono">Appel entrant · 21:47</span><span class="mono" style="color:var(--turq)">● En cours</span></div>
+          <div class="bubble">Bonsoir, Agence Horizon Immobilier. Que puis-je faire pour vous ?</div>
+          <div class="bubble me">J'aimerais visiter l'appartement rue Carnot.</div>
+          <div class="bubble">Bien sûr. Je vous propose samedi à 10 h ou à 14 h.</div>
+          <div style="font-size:13px;color:var(--mute);border-top:1px solid var(--grey-2);padding-top:12px">→ Transfert vers un conseiller possible à tout moment</div>
+        </div>
+      </div>
+    </div>
+
+    <span class="mono app-lbl">Publicité</span>
+    <div class="ads">
+      <div class="poster">
+        <div class="lockup" data-logo data-b="#FFFFFF" data-w="#0F3A48" data-d="#7FCFC8" style="font-size:22px;--c-word:#fff;--c-ia:#7FCFC8"></div>
+        <div><div style="font-size:50px;font-weight:700;line-height:1.02;letter-spacing:-.035em;text-wrap:balance">Votre standard ne ferme jamais.</div>
+          <p style="margin-top:18px;color:#B5CDD3;font-size:16px;line-height:1.5">Accueil, rendez-vous, urgences : un agent vocal répond pour vous, jour et nuit.</p></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600">permanenceia.com</span><span class="mono" style="color:var(--turq-soft)">Affiche 40 × 60</span></div>
+      </div>
+      <div class="banner">
+        <div style="display:flex;justify-content:space-between"><div class="lockup" data-logo style="font-size:22px"></div><span class="mono">Annonce presse · LinkedIn</span></div>
+        <div><div style="font-size:46px;font-weight:700;line-height:1.05;letter-spacing:-.035em;color:var(--petrol);max-width:700px;text-wrap:balance">Il est 3 h du matin. <span style="color:var(--turq)">On décroche.</span></div>
+          <p style="margin-top:16px;color:var(--mute);font-size:17px;max-width:560px;line-height:1.5">Un accueil téléphonique courtois et fiable pour les professionnels qui ne peuvent pas tout faire à la fois.</p></div>
+        <div class="sectors"><span>Cabinets médicaux</span><span>Avocats</span><span>Artisans</span><span>Garages</span><span>Agences immobilières</span><span>Cliniques</span><span>Salons</span><span>Professions libérales</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section data-screen-label="08 Interdits">
+  <div class="sec-head"><span class="mono">07 — Usages à proscrire</span><h2>À ne pas faire</h2></div>
+  <div class="rules">
+    <div class="rule"><div class="box"><span style="font-weight:700;color:var(--petrol);letter-spacing:-.02em">PermanenceAI</span></div><p>Modifier le nom. On écrit toujours « Permanence IA ».</p></div>
+    <div class="rule"><div class="box"><div class="lockup" data-logo data-b="#7B3FE4" data-d="#FF3DA5" style="--c-word:#7B3FE4;--c-ia:#FF3DA5"></div></div><p>Utiliser des couleurs hors palette, du violet, du rose ou du néon.</p></div>
+    <div class="rule"><div class="box"><div class="lockup" data-logo style="transform:scaleX(1.35)"></div></div><p>Déformer, étirer ou faire pivoter le logo.</p></div>
+    <div class="rule"><div class="box" style="background:repeating-linear-gradient(45deg,#8FA5AC 0 10px,#C7D3D6 10px 20px)"><div class="lockup" data-logo></div></div><p>Poser le logo sur un fond chargé ou peu contrasté.</p></div>
+  </div>
+</section>
+
+<footer><div class="lockup" data-logo data-b="#FFFFFF" data-w="#0A2A35" data-d="#7FCFC8" style="font-size:18px;--c-word:#fff;--c-ia:#7FCFC8"></div><span class="mono" style="color:#7F9AA2">Charte d'identité Permanence IA · permanenceia.com · v1.0</span></footer>
+</div>
+
+<script>
+const BUBBLE="M14 6H30A10 10 0 0 1 40 16V28A10 10 0 0 1 30 38H17L8 44.5V36.3A10 10 0 0 1 4 28V16A10 10 0 0 1 14 6Z";
+let uid=0;
+function mark({b='#0F3A48',w='#FFFFFF',d='#2E9E98',extra=''}={}){
+  const id='k'+(uid++);
+  return `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Permanence IA">
+  <defs><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48"><rect width="48" height="48" fill="#fff"/><circle cx="39" cy="9" r="9" fill="#000"/></mask></defs>
+  <path d="${BUBBLE}" fill="${b}" mask="url(#${id})"/>
+  <g fill="${w}"><rect x="11.75" y="17" width="4.5" height="10" rx="2.25"/><rect x="19.75" y="13" width="4.5" height="18" rx="2.25"/><rect x="27.75" y="17" width="4.5" height="10" rx="2.25"/></g>
+  <circle cx="39" cy="9" r="5.5" fill="${d}"/>${extra}</svg>`;
+}
+function opts(el){return {b:el.dataset.b,w:el.dataset.w,d:el.dataset.d}}
+function clean(o){Object.keys(o).forEach(k=>o[k]===undefined&&delete o[k]);return o}
+document.querySelectorAll('[data-logo]').forEach(el=>{
+  el.innerHTML=mark(clean(opts(el)))+`<span><span class="w">Permanence</span><span class="ia">IA</span></span>`;
+});
+document.querySelectorAll('[data-stack]').forEach(el=>{
+  el.innerHTML=mark()+`<span><span style="color:var(--petrol)">Permanence</span> <span style="color:var(--turq)">IA</span></span>`;
+});
+document.querySelectorAll('[data-mark]').forEach(el=>{
+  el.innerHTML=mark(clean(opts(el)));
+  const s=el.querySelector('svg'); const sz=el.dataset.size;
+  if(sz){s.style.width=sz+'px';s.style.height=sz+'px'}
+  else if(!s.parentElement.style.width && !el.classList.contains('appicon')){}
+  if(!sz && !el.closest('.big') && !el.classList.contains('appicon')){s.style.width='100%';s.style.height='100%'}
+});
+// sizes row
+const sizes=[96,64,48,32,24,16];
+document.getElementById('sizes').innerHTML=sizes.map(s=>`<figure><div style="width:${s}px;height:${s}px">${mark()}</div><span class="mono">${s} px</span></figure>`).join('');
+document.querySelectorAll('#sizes svg').forEach(s=>{s.style.width='100%';s.style.height='100%'});
+// construction
+const guides=`<g fill="none" stroke="#2E9E98" stroke-width=".18" stroke-dasharray=".8 .6">
+ <circle cx="14" cy="16" r="10"/><circle cx="30" cy="16" r="10"/><circle cx="30" cy="28" r="10"/><circle cx="14" cy="28" r="10"/>
+ <circle cx="39" cy="9" r="9"/><line x1="0" y1="22" x2="48" y2="22"/><line x1="22" y1="0" x2="22" y2="48"/></g>
+ <g font-family="IBM Plex Mono" font-size="1.7" fill="#0F3A48"><text x="1" y="47">A</text><text x="23" y="11.6">B</text><text x="45" y="4">C</text><text x="1" y="3">48 u</text></g>`;
+document.getElementById('construct').innerHTML=mark({b:'rgba(15,58,72,.88)',extra:guides});
+</script>
+</body>
+</html>
