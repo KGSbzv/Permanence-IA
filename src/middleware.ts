@@ -27,4 +27,5 @@ export function middleware(req: NextRequest) {
 }
 
 // Pages uniquement : ni API, ni fichiers statiques.
-export const config = { matcher: '/((?!api|_next/static|_next/image|.*\\..*).*)' };
+// La racine « / » est listée à part : avec l’i18n, le motif générique ne l’attrape pas.
+export const config = { matcher: ['/', '/((?!api|_next/static|_next/image|.*\\..*).*)'] };
