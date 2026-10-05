@@ -51,7 +51,7 @@ export default function MentionsLegales() {
                 Le site vitrine commercial et l&apos;application sont hébergés par :
               </p>
               <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Plateforme front-end :</strong> Vercel Inc., 340 S Lemon Ave #1142 Walnut, CA 91789, USA.</li>
+                <li><strong>Plateforme front-end :</strong> Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Région d&apos;hébergement : us-east4 (Virginie du Nord, États-Unis).</li>
                 <li><strong>Bases de données &amp; Stockage :</strong> Supabase Inc., infrastructures situées au sein de l&apos;Union Européenne (Région AWS EU-WEST-1, Dublin, Irlande).</li>
                 <li><strong>Réseau téléphonique &amp; Synthèse vocale :</strong> Infrastructure de téléphonie voix cloud certifiée conforme aux normes européennes de télécommunication.</li>
               </ul>

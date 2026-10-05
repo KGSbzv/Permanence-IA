@@ -33,7 +33,7 @@ const DEMO_TRANSCRIPT: DialogTurn[] = [
   },
   {
     speaker: 'caller',
-    text: "Oui, c'est le 06 12 34 56 78, au nom de Dupont.",
+    text: "Oui, je vous le communique : c'est au nom de Dupont.",
     time: '00:25',
   },
   {
@@ -87,7 +87,7 @@ export default function CallDemoPlayer() {
           <div className="w-3 h-3 rounded-full bg-amber-400" />
           <div className="w-3 h-3 rounded-full bg-emerald-400" />
           <span className="ml-2 text-xs font-mono text-navy/60 dark:text-gray-400 flex items-center gap-1.5">
-            <PhoneIncoming className="w-3.5 h-3.5 text-primary" /> Appel entrant en direct &bull; 01 89 71 22 00
+            <PhoneIncoming className="w-3.5 h-3.5 text-primary" /> Démonstration simulée &bull; exemple de conversation
           </span>
         </div>
         <div className="flex items-center gap-2">

@@ -1,0 +1,9 @@
+{
+  "apphosting": [
+    {
+      "backendId": "permanence-ia",
+      "rootDir": "/",
+      "ignore": ["node_modules", ".git", "firebase-debug.log", "permanenceia-md", "design_handoff_permanence_ia_brand", "*.png"]
+    }
+  ]
+}

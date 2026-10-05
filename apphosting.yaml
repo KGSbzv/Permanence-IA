@@ -1,0 +1,24 @@
+# Firebase App Hosting — backend Next.js (région : us-east4)
+runConfig:
+  minInstances: 0
+  maxInstances: 4
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 80
+
+env:
+  # À activer après création du secret : firebase apphosting:secrets:set SUPABASE_URL
+  # - variable: SUPABASE_URL
+  #   secret: SUPABASE_URL
+  # À activer après création du secret : firebase apphosting:secrets:set SUPABASE_SERVICE_ROLE_KEY
+  # - variable: SUPABASE_SERVICE_ROLE_KEY
+  #   secret: SUPABASE_SERVICE_ROLE_KEY
+  # À activer après création du secret : firebase apphosting:secrets:set ZOHO_SMTP_PASS
+  # - variable: ZOHO_SMTP_PASS
+  #   secret: ZOHO_SMTP_PASS
+  - variable: ZOHO_SMTP_USER
+    value: contact@permanentia.com
+  - variable: ZOHO_SMTP_HOST
+    value: smtp.zoho.com
+  - variable: NOTIFY_EMAIL
+    value: contact@permanentia.com
