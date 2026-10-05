@@ -6,7 +6,7 @@ import { PRICE_NOTE } from '@/data/site';
 
 export default function Recharges() {
   return (
-    <Layout title="Recharges de minutes — Permanence IA" description="Recharges de minutes dès 39 € HT les 100 minutes. Ajoutez des minutes à tout moment ; passez au forfait supérieur quand votre volume grandit.">
+    <Layout title="Recharges de minutes — Permanence IA" description="Recharges de crédit dès 39 $ HT pour 100 minutes supplémentaires. Ajoutez des minutes à tout moment ; passez au forfait supérieur quand votre volume grandit.">
       <section className="bg-paper">
         <div className="wrap py-14 lg:py-20">
           <Heading as="h1" title="Ajoutez des minutes à tout moment" intro="La recharge dépanne un mois plus chargé. Si vous rechargez souvent, le forfait supérieur devient plus économique : nous vous le signalons." />
@@ -19,8 +19,8 @@ export default function Recharges() {
         <div className="mt-10">
           <Steps steps={[
             { title: 'Suivez votre usage', text: 'Votre tableau de bord affiche les minutes consommées et restantes.' },
-            { title: 'Ajoutez des minutes', text: 'Une recharge de 100 à 2 500 minutes, en un clic.' },
-            { title: 'Continuez sans coupure', text: 'Les minutes s’ajoutent immédiatement à votre quota.' },
+            { title: 'Ajoutez du crédit', text: 'Une recharge de 39 $ à 725 $, en un clic depuis votre espace.' },
+            { title: 'Continuez sans coupure', text: 'Le crédit paie les minutes au-delà du forfait et ne périme pas.' },
           ]} />
         </div>
       </Section>

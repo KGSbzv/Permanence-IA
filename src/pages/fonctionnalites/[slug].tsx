@@ -38,7 +38,7 @@ export default function ModulePage({ slug }: { slug: string }) {
           </div>
           <div className="rounded-3xl border border-line bg-paper p-8">
             <p className="font-display text-lg font-bold">Inclus à partir du forfait {from.name}</p>
-            <p className="mt-2 text-[15px]">{from.price ? `${from.price} € HT / mois · ${from.minutes}` : from.minutes}</p>
+            <p className="mt-2 text-[15px]">{from.price ? `${from.price} $ HT / mois · ${from.minutes}` : from.minutes}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={`/offres/${from.slug}`} className="btn-primary text-sm">Voir l’offre {from.name}</Link>
               <Link href="/tarifs#comparatif" className="btn-ghost text-sm">Comparer les offres</Link>

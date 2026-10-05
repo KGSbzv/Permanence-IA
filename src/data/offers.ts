@@ -7,11 +7,12 @@ export interface Offer {
   slug: OfferSlug;
   name: string;
   audience: string;
-  price: number | null; // € HT / mois (null = sur devis)
+  price: number | null; // $ HT / mois (null = sur devis)
   priceLabel?: string;
   minutes: string;
   minutesCount: number; // pour le calculateur et le prix par minute
   perMinute?: string; // coût réel par minute du forfait
+  extraMinute?: number; // $ HT par minute supplémentaire (crédit), toujours > perMinute
   title: string; // titre de la page offre
   pitch: string;
   cta: string;
@@ -25,7 +26,7 @@ export const OFFERS: Offer[] = [
     name: 'Découverte',
     audience: 'Pour tester l’agent sur votre activité',
     price: 0,
-    priceLabel: '0 €',
+    priceLabel: '0 $',
     minutes: '30 minutes sur 14 jours',
     minutesCount: 30,
     title: 'Testez l’agent gratuitement pendant 14 jours',
@@ -41,7 +42,8 @@ export const OFFERS: Offer[] = [
     price: 99,
     minutes: '350 min / mois',
     minutesCount: 350,
-    perMinute: '0,28 € HT / min',
+    perMinute: '0,28 $ HT / min',
+    extraMinute: 0.39,
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch:
       'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
@@ -55,7 +57,8 @@ export const OFFERS: Offer[] = [
     price: 249,
     minutes: '1 000 min / mois',
     minutesCount: 1000,
-    perMinute: '0,25 € HT / min',
+    perMinute: '0,25 $ HT / min',
+    extraMinute: 0.36,
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch:
       'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
@@ -70,7 +73,8 @@ export const OFFERS: Offer[] = [
     price: 499,
     minutes: '2 200 min / mois',
     minutesCount: 2200,
-    perMinute: '0,23 € HT / min',
+    perMinute: '0,23 $ HT / min',
+    extraMinute: 0.32,
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch:
       'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
@@ -161,15 +165,10 @@ export const MATRIX: MatrixGroup[] = [
   },
 ];
 
-// Recharges ponctuelles : plus chères à la minute que les forfaits (dépannage, pas solution durable).
-export const RECHARGES = [
-  { minutes: '100 min', minutesCount: 100, price: 39 },
-  { minutes: '250 min', minutesCount: 250, price: 89 },
-  { minutes: '500 min', minutesCount: 500, price: 159 },
-  { minutes: '1 000 min', minutesCount: 1000, price: 299 },
-  { minutes: '2 500 min', minutesCount: 2500, price: 725 },
-];
+// Recharges de crédit (modèle Autocalls) : le crédit acheté paie les minutes au-delà du forfait,
+// au tarif « minute supplémentaire » du forfait, toujours plus cher que la minute incluse.
+export const RECHARGES = [39, 89, 159, 299, 725];
 
-export const perMin = (price: number, minutes: number) => `${(price / minutes).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} €`;
-
-export const euro = (n: number) => `${n.toLocaleString('fr-FR')} €`;
+export const money = (n: number, digits = 0) => `${n.toLocaleString('fr-FR', { minimumFractionDigits: digits, maximumFractionDigits: digits })} $`;
+export const euro = money; // compatibilité
+export const perMin = (price: number, minutes: number) => money(price / minutes, 2);

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { MODULES, Module } from '@/data/modules';
 import { SECTORS, Sector } from '@/data/sectors';
-import { Cell, MATRIX, OFFERS, Offer, RECHARGES, euro, perMin } from '@/data/offers';
+import { Cell, MATRIX, OFFERS, Offer, RECHARGES, euro, money } from '@/data/offers';
 import { INTEGRATIONS } from '@/data/integrations';
 import { DEMO_URL, GROWTH_LINES, PRICE_NOTE, SIGNUP_URL, TRIAL_LINE } from '@/data/site';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
@@ -287,27 +287,39 @@ export function MatrixTable() {
   );
 }
 
-/** Recharges : dépannage ponctuel, volontairement plus chères à la minute que les forfaits. */
+/** Recharges de crédit : dépannage ponctuel, la minute supplémentaire coûte plus cher que la minute incluse. */
 export function RechargeTables() {
-  const plans = OFFERS.filter((o) => o.perMinute);
+  const plans = OFFERS.filter((o) => o.extraMinute);
   return (
-    <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-      <div className="rounded-2xl border border-line bg-white p-6">
-        <h3 className="text-h3 font-semibold">Recharges de minutes</h3>
-        <p className="mt-1 text-[15px]">Pour dépanner un mois plus chargé. Les minutes s’ajoutent immédiatement à votre compte.</p>
-        <table className="mt-4 w-full text-[15px]">
-          <thead><tr className="border-b border-line text-left text-sm text-slate"><th className="py-2 font-medium">Volume</th><th className="py-2 text-right font-medium">Prix HT</th><th className="py-2 text-right font-medium">Soit par minute</th></tr></thead>
-          <tbody>{RECHARGES.map((r) => <tr key={r.minutes} className="border-b border-line last:border-0"><td className="py-2.5 font-medium text-ink">{r.minutes}</td><td className="py-2.5 text-right font-semibold text-ink">{euro(r.price)}</td><td className="py-2.5 text-right text-slate">{perMin(r.price, r.minutesCount)}</td></tr>)}</tbody>
+    <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-white p-6">
+        <h3 className="text-h3 font-semibold">Recharges de crédit</h3>
+        <p className="mt-1 text-[15px]">Le crédit paie les minutes au-delà de votre forfait. Il ne périme pas et s’ajoute immédiatement.</p>
+        <table className="mt-4 w-full min-w-[460px] text-[15px]">
+          <thead>
+            <tr className="border-b border-line text-left text-sm text-slate">
+              <th className="py-2 font-medium">Recharge HT</th>
+              {plans.map((o) => <th key={o.slug} className="py-2 text-right font-medium">{o.name}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {RECHARGES.map((amount) => (
+              <tr key={amount} className="border-b border-line last:border-0">
+                <td className="py-2.5 font-semibold text-ink">{money(amount)}</td>
+                {plans.map((o) => <td key={o.slug} className="py-2.5 text-right text-slate">≈ {Math.floor(amount / o.extraMinute!).toLocaleString('fr-FR')} min</td>)}
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       <div className="rounded-2xl bg-ink p-6 text-white/80">
         <h3 className="text-h3 font-semibold text-white">Le forfait reste plus économique</h3>
-        <p className="mt-1 text-[15px]">Plus le forfait est grand, plus la minute coûte moins cher.</p>
+        <p className="mt-1 text-[15px]">Une minute incluse coûte toujours moins cher qu’une minute supplémentaire.</p>
         <ul className="mt-5 space-y-3">
           {plans.map((o) => (
-            <li key={o.slug} className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-3 last:border-0">
-              <span className="font-display font-semibold text-white">{o.name}</span>
-              <span className="text-sm">{o.minutes} · <span className="font-semibold text-signal-glow">{o.perMinute}</span></span>
+            <li key={o.slug} className="border-b border-white/10 pb-3 last:border-0">
+              <p className="font-display font-semibold text-white">{o.name}</p>
+              <p className="text-sm">Incluse : <span className="font-semibold text-signal-glow">{o.perMinute}</span> · supplémentaire : {money(o.extraMinute!, 2)} HT / min</p>
             </li>
           ))}
         </ul>
@@ -325,8 +337,8 @@ export function GrowthBlock() {
     { t: 'Au-delà de 2 500 min régulières', d: 'Nous construisons une offre sur mesure.' },
   ];
   const cases = [
-    { m: '400 min ce mois-ci', plan: 'Réceptionniste + une recharge de 100 min', note: '99 € + 39 € = 138 € HT. Un dépassement ponctuel : la recharge suffit.' },
-    { m: '900 min chaque mois', plan: 'Passez au forfait Assistant', note: '249 € HT pour 1 000 min, contre 297 € avec Réceptionniste + recharges. Moins cher, et de la marge.' },
+    { m: '400 min ce mois-ci', plan: 'Réceptionniste + une recharge de crédit', note: '99 $ + 50 min × 0,39 $ ≈ 119 $ HT. Un dépassement ponctuel : la recharge suffit.' },
+    { m: '900 min chaque mois', plan: 'Passez au forfait Assistant', note: '249 $ HT pour 1 000 min, contre ≈ 314 $ avec Réceptionniste + minutes supplémentaires. Moins cher, et de la marge.' },
     { m: '2 500 min régulières', plan: 'Offre sur mesure', note: 'Au-delà du forfait Centre d’appels, nous négocions un prix à la minute adapté à votre volume.' },
   ];
   return (
@@ -361,19 +373,19 @@ export function GrowthBlock() {
 /** Forfait recommandé pour un volume mensuel, selon les règles d’évolution. */
 export function planFor(minutes: number) {
   const [, rec, asst, centre, custom] = OFFERS;
-  // Seuils calculés pour que le forfait supérieur devienne moins cher que forfait + recharges.
+  // Seuils : le forfait supérieur devient moins cher que forfait + minutes supplémentaires.
   if (minutes > 2500) return { offer: custom, extra: '' };
   if (minutes <= rec.minutesCount) return { offer: rec, extra: '' };
-  if (minutes <= 720) return { offer: rec, extra: ' + recharge ponctuelle' };
+  if (minutes <= 735) return { offer: rec, extra: ' + recharge ponctuelle' };
   if (minutes <= asst.minutesCount) return { offer: asst, extra: '' };
-  if (minutes <= 1700) return { offer: asst, extra: ' + recharge ponctuelle' };
+  if (minutes <= 1690) return { offer: asst, extra: ' + recharge ponctuelle' };
   if (minutes <= centre.minutesCount) return { offer: centre, extra: '' };
   return { offer: centre, extra: ' + recharge, ou sur mesure si régulier' };
 }
 
 export function EconomyBlock() {
   const [calls, setCalls] = useState(200);
-  const [cost, setCost] = useState(1.5);
+  const [cost, setCost] = useState(1.7);
   const [duration, setDuration] = useState(2);
   const human = calls * cost;
   const minutes = calls * duration;
@@ -383,7 +395,7 @@ export function EconomyBlock() {
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
       <div>
-        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,50 € par appel, soit plus de 300 € pour 200 appels. Le forfait Réceptionniste à 99 € HT couvre 350 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
+        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,70 $ par appel, soit plus de 300 $ pour 200 appels. Le forfait Réceptionniste à 99 $ HT couvre 350 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="rounded-2xl border border-line bg-white p-5">
             <p className="font-display font-semibold text-ink">Accueil humain</p>
@@ -394,14 +406,14 @@ export function EconomyBlock() {
             <ul className="mt-3 space-y-1.5 text-[14px]"><li>Disponible 24/7</li><li>Forfait clair, prix HT</li><li>Plusieurs appels en parallèle</li></ul>
           </div>
         </div>
-        <p className="mt-4 text-sm text-slate-light">Hypothèse indicative : les coûts d’accueil varient fortement selon le pays, les horaires et les charges. Un appel n’équivaut pas à une minute.</p>
+        <p className="mt-4 text-sm text-slate-light">Hypothèse indicative, en dollars US : les coûts d’accueil varient fortement selon le pays, les horaires et les charges. Un appel n’équivaut pas à une minute.</p>
       </div>
 
       <form className="rounded-3xl border border-line bg-paper p-6 sm:p-8" onSubmit={(e) => e.preventDefault()} aria-label="Calculateur de coût">
         <p className="font-display text-xl font-bold">Calculez votre cas</p>
         {[
           { id: 'calls', label: 'Appels par mois', v: calls, set: setCalls, min: 20, max: 2000, step: 10, unit: '' },
-          { id: 'cost', label: 'Coût humain estimé par appel', v: cost, set: setCost, min: 0.5, max: 5, step: 0.1, unit: ' €' },
+          { id: 'cost', label: 'Coût humain estimé par appel', v: cost, set: setCost, min: 0.5, max: 5, step: 0.1, unit: ' $' },
           { id: 'dur', label: 'Durée moyenne d’un appel', v: duration, set: setDuration, min: 1, max: 8, step: 0.5, unit: ' min' },
         ].map((f) => (
           <div key={f.id} className="mt-5">
@@ -410,7 +422,7 @@ export function EconomyBlock() {
           </div>
         ))}
         <div className="mt-6 grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Coût humain estimé</p><p className="font-display text-2xl font-bold text-ink">{fmt(human)} €</p></div>
+          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Coût humain estimé</p><p className="font-display text-2xl font-bold text-ink">{fmt(human)} $</p></div>
           <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Volume d’appels</p><p className="font-display text-2xl font-bold text-ink">{fmt(minutes)} min</p></div>
         </div>
         <div className="mt-3 rounded-xl bg-ink p-4 text-white">

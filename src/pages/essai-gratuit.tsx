@@ -76,7 +76,7 @@ export default function EssaiGratuit() {
                   <div>
                     <label htmlFor="su-plan" className="mb-1.5 block text-sm font-semibold text-ink">Offre souhaitée</label>
                     <select id="su-plan" name="plan" className="field" defaultValue={OFFERS.some((o) => o.slug === planQuery) ? planQuery : 'decouverte'}>
-                      {OFFERS.map((o) => <option key={o.slug} value={o.slug}>{o.name}{o.price ? ` — ${o.price} € HT/mois` : o.price === 0 ? ' — gratuit' : ' — sur devis'}</option>)}
+                      {OFFERS.map((o) => <option key={o.slug} value={o.slug}>{o.name}{o.price ? ` — ${o.price} $ HT/mois` : o.price === 0 ? ' — gratuit' : ' — sur devis'}</option>)}
                     </select>
                   </div>
                 </div>
