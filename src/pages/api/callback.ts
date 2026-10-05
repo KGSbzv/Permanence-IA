@@ -9,7 +9,13 @@ async function saveToSupabase(row: Record<string, unknown>) {
   if (!url || !key) throw new Error('Supabase non configuré');
   const res = await fetch(`${url}/rest/v1/callbacks`, {
     method: 'POST',
-    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    headers: {
+      apikey: key,
+      // Les clés sb_secret_... ne sont pas des JWT : seul l'en-tête apikey est utilisé.
+      ...(key.startsWith('eyJ') ? { Authorization: `Bearer ${key}` } : {}),
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
     body: JSON.stringify(row),
   });
   if (!res.ok) throw new Error(`Supabase ${res.status}`);

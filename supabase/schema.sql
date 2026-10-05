@@ -79,3 +79,9 @@ CREATE TABLE IF NOT EXISTS callbacks (
 );
 ALTER TABLE callbacks ENABLE ROW LEVEL SECURITY; -- accès uniquement via la clé service
 CREATE INDEX IF NOT EXISTS idx_callbacks_status ON callbacks(status);
+
+-- Sécurité : RLS activé sur toutes les tables (accès via la clé service côté serveur uniquement)
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE subscriptions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE api_calls ENABLE ROW LEVEL SECURITY;
+ALTER TABLE trials ENABLE ROW LEVEL SECURITY;
