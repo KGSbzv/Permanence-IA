@@ -74,7 +74,13 @@ export default function EssaiGratuit() {
       description="Activez votre équipe d'agents IA en moins de 5 minutes. Plan Découverte sans carte bancaire, sans engagement et sans numéro public."
     >
       <div className="py-16 sm:py-24">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-2 lg:gap-12 lg:items-start">
+          {/* Visuel d'authentification (desktop) */}
+          <div className="hidden lg:block sticky top-24 rounded-3xl overflow-hidden border border-gray-200 dark:border-navy-light/60 shadow-brand">
+            <img src="/logo/auth-light.jpg" alt="" aria-hidden="true" className="block dark:hidden w-full h-auto" />
+            <img src="/logo/auth-dark.jpg" alt="" aria-hidden="true" className="hidden dark:block w-full h-auto" />
+          </div>
+          <div className="w-full max-w-2xl mx-auto">
           
           {/* Progress Header */}
           <div className="mb-10 text-center space-y-3">
@@ -419,6 +425,7 @@ export default function EssaiGratuit() {
             </div>
           )}
 
+          </div>
         </div>
       </div>
     </Layout>
