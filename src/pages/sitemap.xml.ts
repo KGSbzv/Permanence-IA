@@ -4,7 +4,7 @@ import { OFFERS } from '@/data/offers';
 import { SECTORS } from '@/data/sectors';
 import { SITE } from '@/data/site';
 
-const STATIC = ['/', '/tarifs', '/demo', '/contact', '/integrations', '/securite', '/faq', '/secteurs', '/fonctionnalites', '/offres/recharges', '/essai-gratuit', '/about', '/mentions-legales', '/cgu', '/confidentialite', '/cookies'];
+const STATIC = ['/', '/tarifs', '/demo', '/contact', '/integrations', '/securite', '/faq', '/aide', '/secteurs', '/fonctionnalites', '/offres/recharges', '/essai-gratuit', '/about', '/mentions-legales', '/cgu', '/confidentialite', '/cookies'];
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const paths = [

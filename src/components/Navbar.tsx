@@ -15,7 +15,7 @@ const MENUS: { label: string; items: Item[]; wide?: boolean }[] = [
     label: 'Ressources',
     items: [
       { href: '/demo', label: 'Démo live' }, { href: '/integrations', label: 'Intégrations' },
-      { href: '/securite', label: 'Sécurité et conformité' }, { href: '/faq', label: 'Questions fréquentes' },
+      { href: '/securite', label: 'Sécurité et conformité' }, { href: '/faq', label: 'Questions fréquentes' }, { href: '/aide', label: 'Aide de l’espace client' },
       { href: '/about', label: 'À propos' }, { href: '/contact', label: 'Contact et rappel' },
     ],
   },

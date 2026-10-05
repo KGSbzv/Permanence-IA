@@ -14,7 +14,7 @@ const COLS = [
   {
     title: 'Ressources',
     links: [
-      { href: '/demo', label: 'Démo live' }, { href: '/integrations', label: 'Intégrations' }, { href: '/faq', label: 'Questions fréquentes' },
+      { href: '/demo', label: 'Démo live' }, { href: '/integrations', label: 'Intégrations' }, { href: '/faq', label: 'Questions fréquentes' }, { href: '/aide', label: 'Aide de l’espace client' },
       { href: '/about', label: 'À propos' }, { href: '/securite', label: 'Sécurité et conformité' }, { href: '/contact', label: 'Contact' },
     ],
   },
