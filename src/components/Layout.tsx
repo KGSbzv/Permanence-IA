@@ -1,42 +1,50 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { PhoneCall } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { SIGNUP_URL, SITE } from '@/data/site';
+import { useCallbackModal } from '@/context/CallbackContext';
 
 interface LayoutProps {
   children: React.ReactNode;
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   ogImage?: string;
+  jsonLd?: object;
 }
 
-export default function Layout({
-  children,
-  title = 'Permanence IA | Réceptionniste IA 24/7 pour votre entreprise',
-  description = 'Ne manquez plus aucun appel. Permanence IA décroche, qualifie vos leads et planifie vos rendez-vous 24h/24 et 7j/7 avec un agent vocal naturel et fiable. Essai gratuit 7 jours.',
-  ogImage = '/og-image.jpg',
-}: LayoutProps) {
+export default function Layout({ children, title, description, ogImage = '/og-image.jpg', jsonLd }: LayoutProps) {
+  const { asPath } = useRouter();
+  const { openCallbackModal } = useCallbackModal();
+  const url = `${SITE.url}${asPath.split('?')[0].split('#')[0]}`;
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F1419] text-[#1A2332] dark:text-white transition-colors duration-200">
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <link rel="canonical" href={url} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={ogImage} />
+        <meta property="og:url" content={url} />
+        <meta property="og:image" content={`${SITE.url}${ogImage}`} />
         <meta property="og:type" content="website" />
+        <meta property="og:locale" content="fr_FR" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
+        {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
       </Head>
-
+      <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2">Aller au contenu</a>
       <Navbar />
-
-      <main className="flex-grow">
-        {children}
-      </main>
-
+      <main id="contenu">{children}</main>
       <Footer />
-    </div>
+      {/* Barre d’action collante sur mobile (doc 113) */}
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden">
+        <Link href={SIGNUP_URL} className="btn-primary py-2.5 text-sm">Essai gratuit</Link>
+        <button type="button" onClick={() => openCallbackModal({ type: 'commercial' })} className="btn-ghost py-2.5 text-sm"><PhoneCall className="h-4 w-4" aria-hidden />Être rappelé</button>
+      </div>
+      <div className="h-16 lg:hidden" aria-hidden />
+    </>
   );
 }

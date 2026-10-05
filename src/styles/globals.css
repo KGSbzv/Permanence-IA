@@ -1,70 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #4ECDC4;
-  --color-primary-hover: #3DBBB2;
-  --color-navy: #1A2332;
-  --color-accent: #A8D5D5;
-  --color-bg: #FFFFFF;
-  --color-bg-alt: #F5F6F7;
-  --color-border: #E5E7EB;
-  --color-ink: #1A2332;
-  --color-ink-muted: #6B7A8B;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-white font-sans text-[17px] leading-relaxed text-slate antialiased;
+  }
+  h1, h2, h3, h4 { @apply font-display text-ink; }
+  :focus-visible { @apply outline-none ring-2 ring-signal ring-offset-2; }
+  ::selection { @apply bg-signal-soft text-ink; }
 }
 
-.dark {
-  --color-primary: #4ECDC4;
-  --color-primary-hover: #5FE0DB;
-  --color-navy: #0F1419;
-  --color-accent: #5FE0DB;
-  --color-bg: #0F1419;
-  --color-bg-alt: #161F2B;
-  --color-border: #243044;
-  --color-ink: #FFFFFF;
-  --color-ink-muted: #9AA7B5;
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
+  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-5 py-3 font-semibold transition-colors disabled:opacity-60; }
+  .btn-primary { @apply btn bg-ink text-white hover:bg-ink-soft; }
+  .btn-signal { @apply btn bg-signal text-white hover:bg-signal-deep; }
+  .btn-ghost { @apply btn border border-line bg-white text-ink hover:border-ink; }
+  .btn-light { @apply btn border border-white/25 text-white hover:bg-white/10; }
+  .field { @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-[15px] text-ink placeholder:text-slate-light focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/25; }
+  .kw { @apply text-signal; }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: var(--color-ink);
-  background-color: var(--color-bg);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.font-mono {
-  font-family: 'IBM Plex Mono', monospace;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(107, 122, 139, 0.25);
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 122, 139, 0.4);
-}
-
-/* Subtle glow animations */
-@keyframes pulse-subtle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.08); }
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 2.5s infinite ease-in-out;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

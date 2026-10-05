@@ -8,11 +8,11 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#1A2332" />
+        <meta name="theme-color" content="#0E1B4D" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
-      <body className="bg-white dark:bg-[#0F1419] text-[#1A2332] dark:text-white transition-colors duration-200">
+      <body>
         <Main />
         <NextScript />
       </body>

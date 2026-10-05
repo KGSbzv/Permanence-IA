@@ -13,7 +13,7 @@ export default function ArticleDetail() {
 
   if (!article) {
     return (
-      <Layout title="Article non trouvé | Permanence IA">
+      <Layout title="Article non trouvé | Permanence IA" description="Cet article n’existe pas ou a été déplacé.">
         <div className="py-24 text-center max-w-xl mx-auto space-y-4">
           <h1 className="text-3xl font-extrabold text-navy dark:text-white">Article introuvable</h1>
           <p className="text-sm text-navy/70 dark:text-gray-400">L&apos;article que vous cherchez n&apos;existe pas ou a été déplacé.</p>
@@ -84,7 +84,7 @@ export default function ArticleDetail() {
             </div>
             <h3 className="text-2xl font-extrabold">Prêt à équiper votre entreprise d&apos;un standard IA ?</h3>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Testez dès aujourd&apos;hui notre agent vocal en conditions réelles pendant 7 jours sans engagement.
+              Testez dès aujourd&apos;hui notre agent vocal en conditions réelles pendant 14 jours, avec 30 minutes incluses et sans engagement.
             </p>
             <div className="pt-2">
               <Link

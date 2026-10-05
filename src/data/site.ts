@@ -1,0 +1,18 @@
+// Constantes partagées par toutes les pages : une seule source pour le message d'essai et les liens.
+export const SITE = {
+  name: 'Permanence IA',
+  url: 'https://www.permanenceia.com',
+  appUrl: 'https://app.permanenceia.com',
+  email: 'contact@permanenceia.com',
+  company: 'SINAY STRATEGIC LLC',
+};
+
+// Formulation imposée par la documentation (doc 90) : identique partout.
+export const TRIAL_LINE = '14 jours d’essai gratuit — 30 minutes incluses — prix HT — sans engagement';
+export const TRIAL_BADGES = ['14 jours d’essai gratuit', '30 minutes incluses', 'Prix HT', 'Sans engagement'];
+export const PRICE_NOTE = 'Prix HT — taxes locales en sus si applicables.';
+
+// Inscription : page interne tant que l’inscription sur l’app white-label n’est pas câblée (phase 6).
+export const SIGNUP_URL = '/essai-gratuit';
+export const LOGIN_URL = `${SITE.appUrl}/login`;
+export const DEMO_URL = '/demo';

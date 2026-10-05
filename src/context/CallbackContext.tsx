@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-export type CallbackType = 'commercial' | 'support';
+export type CallbackType = 'commercial' | 'support' | 'demo';
 
 export interface CallbackOptions {
   type?: CallbackType;
   sector?: string;
-  agent?: string;
-  plan?: string;
 }
 
 interface CallbackContextType {
@@ -27,27 +25,14 @@ export const CallbackProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [isOpen, setIsOpen] = useState(false);
   const [options, setOptions] = useState<CallbackOptions>({});
 
-  const openCallbackModal = (newOptions: CallbackOptions = {}) => {
-    setOptions(newOptions);
+  const openCallbackModal = useCallback((next: CallbackOptions = {}) => {
+    setOptions(next);
     setIsOpen(true);
-  };
+  }, []);
+  const closeCallbackModal = useCallback(() => setIsOpen(false), []);
 
-  const closeCallbackModal = () => {
-    setIsOpen(false);
-  };
-
-  return (
-    <CallbackContext.Provider
-      value={{
-        isOpen,
-        options,
-        openCallbackModal,
-        closeCallbackModal,
-      }}
-    >
-      {children}
-    </CallbackContext.Provider>
-  );
+  const value = useMemo(() => ({ isOpen, options, openCallbackModal, closeCallbackModal }), [isOpen, options, openCallbackModal, closeCallbackModal]);
+  return <CallbackContext.Provider value={value}>{children}</CallbackContext.Provider>;
 };
 
 export const useCallbackModal = () => useContext(CallbackContext);

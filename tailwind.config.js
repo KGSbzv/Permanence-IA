@@ -1,53 +1,48 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class',
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/pages/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#4ECDC4',
-          hover: '#3dbbb2',
-          light: '#A8D5D5',
-          soft: '#E8F8F7',
-          dark: '#3bb5ad',
-        },
-        navy: {
-          DEFAULT: '#1A2332',
-          dark: '#0F1419',
-          light: '#243044',
-          subtle: '#2a3b50',
-        },
-        accent: {
-          DEFAULT: '#A8D5D5',
-          glow: '#5FE0DB',
-        },
-        ink: {
-          DEFAULT: '#1A2332',
-          muted: '#6B7A8B',
-          lightMuted: '#9AA7B5',
-          inverted: '#FFFFFF',
-        },
+        // Couleurs tirées du logo Permanence IA
+        ink: { DEFAULT: '#0E1B4D', soft: '#22306A' },
+        signal: { DEFAULT: '#0FA3C4', deep: '#0B7F99', soft: '#E2F5FA', glow: '#5AD3EC' },
+        paper: '#F5F8FB',
+        slate: { DEFAULT: '#4A5875', light: '#7A869E' },
+        line: '#DDE5EE',
+        night: { DEFAULT: '#0A1233', raised: '#141E47' },
+        ok: '#1E9E6A',
+        // Alias pour les pages héritées (légal, blog)
+        navy: { DEFAULT: '#0E1B4D', dark: '#0A1233', light: '#22306A' },
+        primary: { DEFAULT: '#0FA3C4', hover: '#0B7F99' },
+        accent: { DEFAULT: '#E2F5FA', glow: '#5AD3EC' },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'Menlo', 'Courier New', 'monospace'],
+        display: ['Poppins', 'system-ui', 'sans-serif'],
+        sans: ['Figtree', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // Échelle typographique (ratio ~1.25)
+        hero: ['clamp(2.25rem, 4.2vw, 3.4rem)', { lineHeight: '1.06', letterSpacing: '-0.025em' }],
+        h2: ['clamp(1.9rem, 3.4vw, 2.7rem)', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
+        h3: ['1.3rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
       },
       boxShadow: {
-        'brand': '0 12px 30px -10px rgba(26, 35, 50, 0.12)',
-        'brand-hover': '0 20px 40px -12px rgba(78, 205, 196, 0.25)',
-        'dark-brand': '0 12px 30px -10px rgba(0, 0, 0, 0.5)',
+        card: '0 1px 2px rgba(14,27,77,.06), 0 8px 24px -12px rgba(14,27,77,.18)',
+        float: '0 24px 60px -24px rgba(14,27,77,.35)',
       },
-      borderRadius: {
-        'xl': '12px',
-        '2xl': '16px',
-        '3xl': '24px',
-      }
+      maxWidth: { prose: '68ch' },
+      keyframes: {
+        rise: { from: { opacity: '0', transform: 'translateY(6px)' }, to: { opacity: '1', transform: 'none' } },
+        pulsering: { '0%': { boxShadow: '0 0 0 0 rgba(15,163,196,.45)' }, '100%': { boxShadow: '0 0 0 14px rgba(15,163,196,0)' } },
+        wave: { '0%,100%': { transform: 'scaleY(.35)' }, '50%': { transform: 'scaleY(1)' } },
+      },
+      animation: {
+        rise: 'rise .45s ease-out both',
+        pulsering: 'pulsering 1.8s ease-out infinite',
+        wave: 'wave 1.1s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
-}
+};
