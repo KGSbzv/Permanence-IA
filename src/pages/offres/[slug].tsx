@@ -8,7 +8,7 @@ import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
 import { FinalCTA, GrowthBlock, ModuleCards, PricingCards, RechargeTables } from '@/components/blocks';
 import { MATRIX, OFFERS, Offer, OfferSlug, euro } from '@/data/offers';
 import { FAQ_PRICING } from '@/data/faq';
-import { PRICE_NOTE, SIGNUP_URL } from '@/data/site';
+import { PRICE_NOTE, SIGNUP_URL, SITE } from '@/data/site';
 
 const MODULES_BY_OFFER: Record<OfferSlug, string[]> = {
   decouverte: ['demo-live', 'widget-web', 'base-de-connaissances'],
@@ -28,7 +28,22 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
   const price = o.price === null ? o.priceLabel! : euro(o.price);
 
   return (
-    <Layout title={`Forfait ${o.name} — ${price}${o.price ? ' HT / mois' : ''} · Permanence IA`} description={`${o.title}. ${o.minutes}. 14 jours d’essai gratuit, 30 minutes incluses, prix HT, sans engagement.`}>
+    <Layout
+      title={o.price === 0 ? 'Essai gratuit 14 jours — 30 minutes · Permanence IA' : `Forfait ${o.name} — ${price}${o.price ? ' HT / mois' : ''} · Permanence IA`}
+      description={`${o.title}. Essai gratuit 14 jours, 30 minutes incluses, prix HT.`.slice(0, 158)}
+      breadcrumbs={[{ name: 'Tarifs', path: '/tarifs' }, { name: o.name, path: `/offres/${o.slug}` }]}
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          ...(o.price !== null ? [{
+            '@type': 'Product', name: `Permanence IA ${o.name}`, description: o.pitch, brand: { '@type': 'Brand', name: 'Permanence IA' },
+            offers: { '@type': 'Offer', price: o.price, priceCurrency: 'USD', url: `${SITE.url}/offres/${o.slug}`,
+              priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: 'USD', unitText: 'MONTH', valueAddedTaxIncluded: false } },
+          }] : []),
+          { '@type': 'FAQPage', mainEntity: FAQ_PRICING.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+        ],
+      }}
+    >
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:py-20">
           <div>

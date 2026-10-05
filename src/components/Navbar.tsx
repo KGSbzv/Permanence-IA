@@ -9,14 +9,14 @@ import { LOGIN_URL, SIGNUP_URL, TRIAL_LINE } from '@/data/site';
 
 type Item = { href: string; label: string; text?: string };
 const MENUS: { label: string; items: Item[]; wide?: boolean }[] = [
-  { label: 'Fonctionnalités', wide: true, items: MODULES.map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name, text: m.short })) },
+  { label: 'Fonctionnalités', wide: true, items: [...MODULES.map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name, text: m.short })), { href: '/fonctionnalites', label: 'Toutes les fonctionnalités', text: 'Vue d’ensemble des modules et des forfaits.' }] },
   { label: 'Secteurs', items: [...SECTORS.map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })), { href: '/secteurs', label: 'Tous les secteurs' }] },
   {
     label: 'Ressources',
     items: [
       { href: '/demo', label: 'Démo live' }, { href: '/integrations', label: 'Intégrations' },
       { href: '/securite', label: 'Sécurité et conformité' }, { href: '/faq', label: 'Questions fréquentes' },
-      { href: '/blog', label: 'Blog' }, { href: '/contact', label: 'Contact et rappel' },
+      { href: '/about', label: 'À propos' }, { href: '/contact', label: 'Contact et rappel' },
     ],
   },
 ];

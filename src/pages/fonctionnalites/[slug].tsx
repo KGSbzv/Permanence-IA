@@ -16,7 +16,11 @@ export default function ModulePage({ slug }: { slug: string }) {
   const more = [...related, ...MODULES.filter((x) => x.slug !== m.slug && x.family !== m.family).map((x) => x.slug)].slice(0, 3);
 
   return (
-    <Layout title={`${m.name} — Permanence IA`} description={`${m.title}. ${m.intro.slice(0, 120)}…`}>
+    <Layout
+      title={`${m.name} — agent vocal IA | Permanence IA`}
+      description={`${m.short.replace(/\.$/, '')}. Inclus dès le forfait ${from.name}. Essai gratuit 14 jours.`.slice(0, 158)}
+      breadcrumbs={[{ name: 'Fonctionnalités', path: '/fonctionnalites' }, { name: m.name, path: `/fonctionnalites/${m.slug}` }]}
+    >
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
           <div>

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 // Landing sectorielle type (doc 114) : hero métier, badges, CTA, rappel, ce que l’agent fait,
 // ce que ça inclut, intégrations, économie, sécurité, FAQ métier, preuve visuelle, CTA final.
 import React from 'react';
@@ -20,7 +21,8 @@ export default function SectorPage({ slug }: { slug: string }) {
   return (
     <Layout
       title={`${s.name} : agent vocal IA 24/7 — Permanence IA`}
-      description={`${s.title}. ${s.subtitle} 14 jours d’essai gratuit, 30 minutes incluses, prix HT.`}
+      description={`${s.name} : ${s.short.replace(/\.$/, '')}. Essai gratuit 14 jours, 30 minutes incluses, prix HT.`.slice(0, 158)}
+      breadcrumbs={[{ name: 'Secteurs', path: '/secteurs' }, { name: s.name, path: `/secteurs/${s.slug}` }]}
       ogImage={s.photo}
       jsonLd={{
         '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.url}/secteurs/${s.slug}`,
@@ -101,6 +103,7 @@ export default function SectorPage({ slug }: { slug: string }) {
       {/* Prix HT */}
       <Section>
         <Heading title="Prix HT, sans engagement" intro={`Pour ${s.name.toLowerCase()}, nous recommandons le forfait ${offer(s.offer).name}. Commencez par l’essai gratuit : 14 jours et 30 minutes incluses.`} />
+        <p className="mt-3"><Link href={`/offres/${s.offer}`} className="font-semibold text-signal-deep underline">Voir le détail du forfait {offer(s.offer).name}</Link></p>
         <div className="mt-10"><PricingCards only={['receptionniste', 'assistant', 'centre-appels']} /></div>
         <GrowthLines className="mt-6" />
       </Section>

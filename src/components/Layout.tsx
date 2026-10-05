@@ -15,18 +15,26 @@ interface LayoutProps {
   description: string;
   ogImage?: string;
   jsonLd?: object;
+  /** Fil d’Ariane (hors accueil) pour le balisage BreadcrumbList. */
+  breadcrumbs?: { name: string; path: string }[];
+  noindex?: boolean;
 }
 
-export default function Layout({ children, title, description, ogImage = '/og-image.jpg', jsonLd }: LayoutProps) {
+export default function Layout({ children, title, description, ogImage = '/og-image.jpg', jsonLd, breadcrumbs, noindex }: LayoutProps) {
   const { asPath } = useRouter();
   const { openCallbackModal } = useCallbackModal();
   const url = `${SITE.url}${asPath.split('?')[0].split('#')[0]}`;
+  const crumbs = breadcrumbs && {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Accueil', path: '/' }, ...breadcrumbs].map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: `${SITE.url}${b.path}` })),
+  };
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={url} />
+        {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={url} />}
+        <meta property="og:site_name" content="Permanence IA" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={url} />
@@ -34,7 +42,10 @@ export default function Layout({ children, title, description, ogImage = '/og-im
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="fr_FR" />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
         {jsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />}
+        {crumbs && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />}
       </Head>
       <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2">Aller au contenu</a>
       <Navbar />

@@ -16,9 +16,10 @@ import { SITE } from '@/data/site';
 export default function Home() {
   return (
     <Layout
-      title="Permanence IA — Agents vocaux IA qui répondent, qualifient et réservent 24/7"
+      title="Permanence IA — Agents vocaux IA 24/7 pour vos appels"
       description="Automatisez vos appels avec une IA qui répond, qualifie et réserve pour vous. 14 jours d’essai gratuit, 30 minutes incluses, prix HT, sans engagement."
-      jsonLd={{ '@context': 'https://schema.org', '@type': 'Organization', name: 'Permanence IA', url: SITE.url, email: SITE.email, logo: `${SITE.url}/icon-512.png`, legalName: SITE.company }}
+      jsonLd={{ '@context': 'https://schema.org', '@type': 'Organization', name: 'Permanence IA', url: SITE.url, email: SITE.email, logo: `${SITE.url}/icon-512.png`, legalName: SITE.company,
+        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, availableLanguage: ['French', 'English'] } }}
     >
       {/* Hero : promesse + démo live réelle (l’agent vous appelle) */}
       <section className="overflow-hidden bg-paper">

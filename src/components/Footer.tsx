@@ -8,14 +8,14 @@ import { OFFERS } from '@/data/offers';
 import { SITE, LOGIN_URL, SIGNUP_URL } from '@/data/site';
 
 const COLS = [
-  { title: 'Plateforme', links: MODULES.slice(0, 7).map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name })) },
+  { title: 'Plateforme', links: [...MODULES.slice(0, 7).map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name })), { href: '/fonctionnalites', label: 'Toutes les fonctionnalités' }] },
   { title: 'Offres', links: [...OFFERS.map((o) => ({ href: `/offres/${o.slug}`, label: o.name })), { href: '/offres/recharges', label: 'Recharges de minutes' }, { href: '/tarifs', label: 'Comparer les offres' }] },
   { title: 'Secteurs', links: SECTORS.map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })) },
   {
     title: 'Ressources',
     links: [
       { href: '/demo', label: 'Démo live' }, { href: '/integrations', label: 'Intégrations' }, { href: '/faq', label: 'Questions fréquentes' },
-      { href: '/blog', label: 'Blog' }, { href: '/securite', label: 'Sécurité et conformité' }, { href: '/contact', label: 'Contact' },
+      { href: '/about', label: 'À propos' }, { href: '/securite', label: 'Sécurité et conformité' }, { href: '/contact', label: 'Contact' },
     ],
   },
 ];

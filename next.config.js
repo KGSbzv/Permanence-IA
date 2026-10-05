@@ -12,6 +12,11 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Domaine nu → www (une seule version indexée).
+      { source: '/:path*', has: [{ type: 'host', value: 'permanenceia.com' }], destination: 'https://www.permanenceia.com/:path*', permanent: true },
+      { source: '/offres', destination: '/tarifs', permanent: true },
+      // Pas encore d’articles : le blog renvoie vers la FAQ.
+      { source: '/blog', destination: '/faq', permanent: false },
       { source: '/plombiers', destination: '/secteurs/services-a-domicile', permanent: true },
       { source: '/dentaire', destination: '/secteurs/dentaire-cliniques', permanent: true },
       { source: '/cliniques', destination: '/secteurs/dentaire-cliniques', permanent: true },

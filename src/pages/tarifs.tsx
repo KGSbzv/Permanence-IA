@@ -10,11 +10,20 @@ import { PRICE_NOTE, SITE } from '@/data/site';
 export default function Tarifs() {
   return (
     <Layout
-      title="Tarifs Permanence IA — offres HT, minutes incluses et recharges"
-      description="Réceptionniste 99 $ HT / 350 min, Assistant 249 $ HT / 1 000 min, Centre d’appels 499 $ HT / 2 200 min. 14 jours d’essai gratuit, 30 minutes incluses, sans engagement."
+      title="Tarifs — forfaits HT et recharges · Permanence IA"
+      description="Réceptionniste 99 $ HT / 350 min, Assistant 249 $ HT / 1 000 min, Centre d’appels 499 $ HT / 2 200 min. Essai gratuit 14 jours, 30 minutes incluses."
       jsonLd={{
-        '@context': 'https://schema.org', '@type': 'Product', name: 'Permanence IA', brand: 'Permanence IA', url: `${SITE.url}/tarifs`,
-        offers: OFFERS.filter((o) => o.price !== null).map((o) => ({ '@type': 'Offer', name: o.name, price: o.price, priceCurrency: 'USD', url: `${SITE.url}/offres/${o.slug}` })),
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Product', name: 'Permanence IA', brand: { '@type': 'Brand', name: 'Permanence IA' }, url: `${SITE.url}/tarifs`,
+            offers: OFFERS.filter((o) => o.price !== null).map((o) => ({
+              '@type': 'Offer', name: o.name, price: o.price, priceCurrency: 'USD', url: `${SITE.url}/offres/${o.slug}`,
+              priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: 'USD', unitText: 'MONTH', valueAddedTaxIncluded: false },
+            })),
+          },
+          { '@type': 'FAQPage', mainEntity: FAQ_PRICING.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+        ],
       }}
     >
       <section className="bg-paper">
