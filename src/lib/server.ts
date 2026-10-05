@@ -1,10 +1,9 @@
-// Outils côté serveur partagés par les routes API : Supabase (REST), email (Zoho SMTP),
-// API white-label Autocalls et vérification du jeton des webhooks.
+// Outils côté serveur partagés par les routes API : Supabase (REST), email (Zoho SMTP)
+// et vérification du jeton des webhooks.
+import { timingSafeEqual } from 'crypto';
 import type { NextApiRequest } from 'next';
 import nodemailer from 'nodemailer';
 
-export const TRIAL_MINUTES = 30;
-export const TRIAL_DAYS = 14;
 export const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
 
 function supabaseHeaders(extra: Record<string, string> = {}) {
@@ -62,26 +61,13 @@ export async function sendMail(to: string, subject: string, text: string, html?:
   await transporter.sendMail({ from: `Permanence IA <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
 }
 
-/** Ajoute ou retire des minutes à un client white-label (API Autocalls réservée aux admins). */
-export async function transferMinutes(email: string, operation: 'add' | 'remove', amount: number) {
-  const key = process.env.AUTOCALLS_API_KEY;
-  if (!key) throw new Error('Clé API Autocalls non configurée');
-  const res = await fetch('https://app.autocalls.ai/api/white-label/transfer', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ email, transfer_type: 'minutes', operation, amount }),
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(`Autocalls transfer ${res.status}: ${JSON.stringify(data).slice(0, 200)}`);
-  return data;
-}
-
-/** Les webhooks portent un jeton secret dans l’URL (?token=…) ou l’en-tête x-webhook-token. */
+/** Jeton secret des webhooks : en-tête x-webhook-token, ou ?token=… car Autocalls n’envoie pas d’en-têtes personnalisés. */
 export function isAuthorized(req: NextApiRequest) {
   const expected = process.env.WEBHOOK_TOKEN;
   if (!expected) return false;
-  const got = (req.query.token as string) || (req.headers['x-webhook-token'] as string) || '';
-  return got.length === expected.length && got === expected;
+  const got = Buffer.from(String(req.headers['x-webhook-token'] || req.query.token || ''));
+  const want = Buffer.from(expected);
+  return got.length === want.length && timingSafeEqual(got, want);
 }
 
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));

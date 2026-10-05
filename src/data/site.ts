@@ -14,12 +14,12 @@ export const TRIAL_BADGES = ['14 jours d’essai gratuit', '30 minutes incluses'
 export const GROWTH_LINES = ['Ajoutez des minutes à tout moment', 'Passez à l’offre supérieure quand votre volume grandit'];
 export const PRICE_NOTE = 'Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables.';
 
-// Inscription : page interne tant que l’inscription sur l’app white-label n’est pas câblée (phase 6).
+// Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';
+export const REGISTER_URL = `${SITE.appUrl}/register`;
 export const LOGIN_URL = `${SITE.appUrl}/login`;
 export const DEMO_URL = '/demo';
 
 // Widget Autocalls (assistante commerciale voix + chat, assistant 21203).
-// À remplacer par https://app.permanenceia.com/embed.js une fois le domaine white-label activé.
-export const WIDGET_SRC = 'https://app.autocalls.ai/embed.js';
+export const WIDGET_SRC = `${SITE.appUrl}/embed.js`;
 export const WIDGET_ASSISTANT_ID = '2841fa2d-1fed-4fbc-b832-28b954d049a6';

@@ -17,12 +17,12 @@ export const FAQ_GENERAL: QA[] = [
   { q: 'Puis-je utiliser SIP ?', a: 'Oui, à partir du forfait Assistant. Nous vous guidons pour connecter votre trunk SIP ou votre standard.' },
   { q: 'Comment chargez-vous les informations de mon entreprise ?', a: 'Vous ajoutez vos documents PDF, les pages de votre site ou vos procédures dans la base de connaissances. L’agent s’y réfère pendant l’appel.' },
   { q: 'Est-ce conforme au RGPD ?', a: 'La plateforme propose les outils nécessaires : consentement, liste d’exclusion, durée de rétention configurable, suppression des données et contrôle des accès. Votre configuration et vos mentions d’information restent à adapter à votre activité ; nous vous accompagnons.' },
-  { q: 'Comment fonctionne l’essai gratuit ?', a: '14 jours d’essai gratuit avec 30 minutes d’appels incluses, sans engagement. À la fin, vous choisissez une offre ou vous arrêtez simplement.' },
+  { q: 'Comment fonctionne l’essai gratuit ?', a: 'Vous créez votre compte, puis vous choisissez le forfait à tester : les 14 premiers jours sont gratuits, avec 30 minutes d’appels incluses. Une carte est demandée à l’activation mais rien n’est débité pendant l’essai. Annulez avant la fin des 14 jours et vous ne payez rien.' },
   { q: 'L’agent se présente-t-il comme une IA ?', a: 'Oui. L’agent est présenté honnêtement comme un assistant IA, et peut transférer à un humain lorsque vous l’avez prévu.' },
 ];
 
 export const FAQ_PRICING: QA[] = [
-  { q: 'Que se passe-t-il après les 30 minutes d’essai ?', a: 'Les appels s’arrêtent jusqu’à ce que vous choisissiez une offre. Aucun paiement n’est déclenché automatiquement.' },
+  { q: 'Que se passe-t-il après les 30 minutes d’essai ?', a: 'Les 30 minutes sont le plafond de la période d’essai : une fois atteintes, les appels s’arrêtent jusqu’à la fin de l’essai ou jusqu’à ce que vous démarriez votre abonnement. À la fin des 14 jours, le forfait choisi démarre, sauf si vous l’avez annulé depuis votre espace.' },
   { q: 'Les prix sont-ils HT ?', a: 'Oui, tous les prix sont affichés hors taxes. Les taxes locales s’ajoutent si elles s’appliquent.' },
   { q: 'Que se passe-t-il si je dépasse mes minutes ?', a: 'Vous ajoutez des minutes à tout moment avec une recharge, pour dépanner un mois chargé. Si vous dépassez régulièrement, le forfait supérieur revient moins cher à la minute : nous vous le signalons.' },
   { q: 'Puis-je utiliser mon propre numéro ?', a: 'Oui, par renvoi d’appel, import Twilio ou Telnyx, ou connexion SIP à partir du forfait Assistant.' },

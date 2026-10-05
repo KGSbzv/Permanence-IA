@@ -104,7 +104,7 @@ export default function Home() {
         <Heading title="Opérationnel en quatre étapes" intro="Vous n’avez pas besoin d’expertise technique. Nous vous accompagnons à chaque étape." />
         <div className="mt-12">
           <Steps steps={[
-            { title: 'Créez votre compte', text: 'Essai gratuit de 14 jours, 30 minutes incluses, sans carte bancaire.' },
+            { title: 'Créez votre compte', text: 'Choisissez votre forfait : 14 jours gratuits, 30 minutes incluses, rien n’est débité pendant l’essai.' },
             { title: 'Décrivez votre activité', text: 'Services, horaires, questions fréquentes, règles de transfert.' },
             { title: 'Testez l’agent', text: 'Écoutez-le en démo live et ajustez le ton et les réponses.' },
             { title: 'Branchez vos appels', text: 'Renvoi de votre ligne, nouveau numéro ou SIP, et widget sur votre site.' },

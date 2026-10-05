@@ -42,11 +42,12 @@ export default function CGU() {
                 Article 2 &mdash; Modalités de l&apos;essai gratuit de 14 jours
               </h2>
               <p>
-                Chaque nouvel utilisateur bénéficie d&apos;une période d&apos;essai gratuit d&apos;une durée de quatorze (14) jours calendaires consécutifs à compter de la création de son compte, incluant 30 minutes d&apos;appels :
+                Chaque nouveau client bénéficie, lors de sa première souscription à un forfait, d&apos;une période d&apos;essai gratuit de quatorze (14) jours calendaires consécutifs, incluant 30 minutes d&apos;appels :
               </p>
               <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Aucune carte bancaire requise :</strong> Aucun moyen de paiement n&apos;est exigé pour démarrer l&apos;essai de l&apos;offre Découverte. Tous les prix sont exprimés hors taxes.</li>
-                <li><strong>Arrêt automatique :</strong> À l&apos;issue des 14 jours ou des 30 minutes incluses, si l&apos;utilisateur ne choisit pas d&apos;activer un abonnement payant, le service s&apos;interrompt de plein droit sans qu&apos;aucune somme ne soit débitée.</li>
+                <li><strong>Moyen de paiement :</strong> Une carte bancaire est demandée à l&apos;activation de l&apos;essai. Aucune somme n&apos;est débitée pendant les 14 jours d&apos;essai. Tous les prix sont exprimés hors taxes.</li>
+                <li><strong>Plafond d&apos;usage :</strong> Les appels sont limités à 30 minutes pendant l&apos;essai ; au-delà, ils sont suspendus jusqu&apos;au démarrage de l&apos;abonnement.</li>
+                <li><strong>Fin de l&apos;essai :</strong> À l&apos;issue des 14 jours, l&apos;abonnement au forfait choisi démarre et la première mensualité est prélevée, sauf si le client l&apos;a annulé avant cette date depuis son espace client, auquel cas aucune somme n&apos;est débitée.</li>
                 <li><strong>Usage loyal :</strong> L&apos;essai gratuit est limité à un seul par entité juridique / numéro d&apos;immatriculation.</li>
               </ul>
             </section>

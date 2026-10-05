@@ -1,4 +1,4 @@
-// Inscription à l’essai. Phase 6 : remplacer l’envoi par la création du compte sur l’app white-label.
+// Essai gratuit : création du compte sur l’app (essai natif 14 j / 30 min), ou demande d’accompagnement.
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Check } from 'lucide-react';
@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 import { Heading, TrialBadges } from '@/components/ui';
 import { OFFERS } from '@/data/offers';
 import { SECTORS } from '@/data/sectors';
-import { LOGIN_URL } from '@/data/site';
+import { LOGIN_URL, REGISTER_URL } from '@/data/site';
 
 export default function EssaiGratuit() {
   const { query } = useRouter();
@@ -17,15 +17,15 @@ export default function EssaiGratuit() {
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    if (!f.get('terms')) { setError('Acceptez les conditions pour créer votre compte.'); return; }
+    if (!f.get('terms')) { setError('Acceptez les conditions pour être rappelé.'); return; }
     setState('sending'); setError('');
     try {
       const res = await fetch('/api/callback', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'), company: f.get('company'),
-          sector: f.get('sector'), consentCall: true, type: 'commercial', agent: 'Inscription essai',
-          note: `Demande d’essai — offre ${f.get('plan')} — ${f.get('company') || ''}`,
+          sector: f.get('sector'), consentCall: true, type: 'commercial', agent: 'Accompagnement essai',
+          note: `Demande d’accompagnement à l’essai — offre ${f.get('plan')} — ${f.get('company') || ''}`,
         }),
       });
       if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || 'L’inscription n’a pas pu être envoyée.');
@@ -34,14 +34,14 @@ export default function EssaiGratuit() {
   }
 
   return (
-    <Layout title="Essai gratuit 14 jours — 30 minutes incluses · Permanence IA" description="Créez votre compte Permanence IA : 14 jours d’essai gratuit, 30 minutes incluses, prix HT, sans engagement et sans carte bancaire pour l’offre Découverte.">
+    <Layout title="Essai gratuit 14 jours — 30 minutes incluses · Permanence IA" description="Créez votre compte Permanence IA : 14 jours d’essai gratuit, 30 minutes incluses, prix HT, rien n’est débité pendant l’essai, annulable à tout moment.">
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1fr_1.1fr] lg:py-20">
           <div>
-            <Heading as="h1" title="Réclamez vos 30 minutes gratuites" intro="Créez votre compte, configurez votre premier agent et testez-le sur votre activité pendant 14 jours." />
+            <Heading as="h1" title="Réclamez vos 30 minutes gratuites" intro="Créez votre compte, choisissez le forfait à tester et essayez votre agent sur votre activité pendant 14 jours." />
             <TrialBadges className="mt-6" />
             <ul className="mt-8 space-y-3 text-ink">
-              {['Aucune carte bancaire pour l’offre Découverte', 'Aucun paiement déclenché automatiquement', 'Démo live et widget web inclus', 'Accompagnement pour la première configuration'].map((t) => (
+              {['Carte demandée à l’activation, rien n’est débité pendant 14 jours', 'Annulez depuis votre espace avant la fin de l’essai : vous ne payez rien', 'Démo live et widget web inclus', 'Accompagnement pour la première configuration'].map((t) => (
                 <li key={t} className="flex gap-3"><Check className="mt-1 h-4 w-4 text-signal" aria-hidden />{t}</li>
               ))}
             </ul>
@@ -50,16 +50,28 @@ export default function EssaiGratuit() {
               <img src="/logo/auth-light.jpg" alt="" aria-hidden className="w-full" />
             </div>
           </div>
+          <div className="grid content-start gap-6">
+          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
+            <p className="font-display text-xl font-bold">Créer mon compte</p>
+            <ol className="mt-4 space-y-2 text-ink">
+              <li>1. Créez votre compte avec votre email professionnel.</li>
+              <li>2. Choisissez le forfait à tester dans votre espace.</li>
+              <li>3. Configurez votre agent et passez vos premiers appels.</li>
+            </ol>
+            <a href={REGISTER_URL} className="btn-primary mt-6 w-full">Créer mon compte gratuit</a>
+            <p className="mt-3 text-center text-sm">Déjà client ? <a href={LOGIN_URL} className="font-semibold text-signal-deep hover:underline">Connexion</a></p>
+          </div>
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
             {state === 'sent' ? (
               <div role="status">
-                <p className="font-display text-2xl font-bold">Votre demande d’essai est enregistrée</p>
-                <p className="mt-3">Vous recevez vos accès par email à l’adresse indiquée. Un conseiller peut vous appeler pour vous aider à configurer votre premier agent.</p>
-                <a href={LOGIN_URL} className="btn-primary mt-6">Aller à la connexion</a>
+                <p className="font-display text-2xl font-bold">Votre demande est enregistrée</p>
+                <p className="mt-3">Un conseiller vous rappelle pour configurer votre premier agent avec vous.</p>
+                <a href={REGISTER_URL} className="btn-primary mt-6">Créer mon compte maintenant</a>
               </div>
             ) : (
               <form onSubmit={submit} className="grid gap-4">
-                <p className="font-display text-xl font-bold">Créer mon compte</p>
+                <p className="font-display text-xl font-bold">Préférez être accompagné ?</p>
+                <p className="-mt-2 text-sm">Laissez vos coordonnées : un conseiller vous rappelle pour démarrer l’essai avec vous.</p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div><label htmlFor="su-name" className="mb-1.5 block text-sm font-semibold text-ink">Nom et prénom</label><input id="su-name" name="name" required autoComplete="name" className="field" /></div>
                   <div><label htmlFor="su-company" className="mb-1.5 block text-sm font-semibold text-ink">Entreprise</label><input id="su-company" name="company" required autoComplete="organization" className="field" /></div>
@@ -82,13 +94,13 @@ export default function EssaiGratuit() {
                 </div>
                 <label className="flex items-start gap-2.5 text-sm">
                   <input type="checkbox" name="terms" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
-                  <span>J’accepte les <a href="/cgu" className="font-semibold text-signal-deep underline">conditions générales</a> et la <a href="/confidentialite" className="font-semibold text-signal-deep underline">politique de confidentialité</a>, et d’être contacté pour la mise en place de mon compte.</span>
+                  <span>J’accepte les <a href="/cgu" className="font-semibold text-signal-deep underline">conditions générales</a> et la <a href="/confidentialite" className="font-semibold text-signal-deep underline">politique de confidentialité</a>, et d’être rappelé pour la mise en place de mon compte.</span>
                 </label>
                 {error && <p role="alert" className="text-sm font-medium text-red-700">{error}</p>}
-                <button type="submit" disabled={state === 'sending'} className="btn-primary">{state === 'sending' ? 'Envoi…' : 'Créer mon compte gratuit'}</button>
-                <p className="text-center text-sm">Déjà client ? <a href={LOGIN_URL} className="font-semibold text-signal-deep hover:underline">Connexion</a></p>
+                <button type="submit" disabled={state === 'sending'} className="btn-primary">{state === 'sending' ? 'Envoi…' : 'Être rappelé'}</button>
               </form>
             )}
+          </div>
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
-// Webhook « User Signup » de l’espace white-label : enregistre le nouveau client,
-// lui crédite les minutes d’essai et prévient l’équipe.
+// Webhook « User Signup » de l’espace white-label : enregistre le nouveau client et prévient l’équipe.
+// L’essai (14 jours, 30 minutes) est géré nativement par la plateforme à la première souscription.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, TRIAL_MINUTES, dbInsertIfNew, dbUpdate, isAuthorized, sendMail, transferMinutes } from '@/lib/server';
+import { NOTIFY_TO, dbInsertIfNew, isAuthorized, sendMail } from '@/lib/server';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const { name, email, created_at } = req.body || {};
   if (!email) return res.status(400).json({ error: 'Email manquant.' });
 
-  // Idempotence : les minutes ne sont créditées qu’à la première réception de cette inscription.
+  // Idempotence : l’équipe n’est prévenue qu’à la première réception de cette inscription.
   let isNew = false;
   try {
     isNew = await dbInsertIfNew('signups', { email: String(email).toLowerCase(), name: name || null, signed_up_at: created_at || new Date().toISOString() }, 'email');
@@ -20,17 +20,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   if (!isNew) return res.status(200).json({ received: true, duplicate: true });
 
-  let granted = false;
-  let grantError: string | null = null;
-  try { await transferMinutes(email, 'add', TRIAL_MINUTES); granted = true; } catch (e: any) { grantError = e.message; console.error('[signup] transfer:', e.message); }
-  if (granted) {
-    try { await dbUpdate('signups', `email=eq.${encodeURIComponent(String(email).toLowerCase())}`, { trial_minutes: TRIAL_MINUTES }); } catch (e: any) { console.error('[signup] supabase update:', e.message); }
-  }
-
   try {
     await sendMail(NOTIFY_TO, `Nouvelle inscription — ${name || email}`,
-      `Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nMinutes d’essai créditées : ${granted ? TRIAL_MINUTES : `non (${grantError})`}`);
+      `Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nProchaine étape : choix d’un forfait (essai 14 jours / 30 minutes).`);
   } catch (e: any) { console.error('[signup] email:', e.message); }
 
-  return res.status(200).json({ received: true, trial_minutes: granted ? TRIAL_MINUTES : 0 });
+  return res.status(200).json({ received: true });
 }
