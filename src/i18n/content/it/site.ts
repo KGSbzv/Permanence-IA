@@ -1,0 +1,11 @@
+// Messaggi trasversali (banner di prova, badge, nota sui prezzi). Le cifre arrivano dal mercato.
+import type { SITE_TEXT as FR_SITE_TEXT } from '../fr/site';
+
+export const SITE_TEXT: typeof FR_SITE_TEXT = {
+  trialLine: (days: number, minutes: number) => `${days} giorni di prova gratuita — ${minutes} minuti inclusi — prezzi IVA esclusa — senza vincoli`,
+  trialBadges: (days: number, minutes: number) => [`${days} giorni di prova gratuita`, `${minutes} minuti inclusi`, 'Prezzi IVA esclusa', 'Senza vincoli'],
+  growthLines: ['Aggiunga minuti in qualsiasi momento', 'Passi al piano superiore quando il Suo volume cresce'],
+  priceNote: 'Prezzi in dollari USA (USD), IVA esclusa — eventuali imposte locali in aggiunta. Numero di telefono dedicato opzionale, fatturato mensilmente.',
+  skipToContent: 'Vai al contenuto',
+  languageLabel: 'Lingua',
+};

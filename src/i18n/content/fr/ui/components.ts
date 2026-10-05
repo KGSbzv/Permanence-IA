@@ -290,7 +290,7 @@ export const UI_COMPONENTS = {
   },
 
   heroDemo: {
-    langs: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Arabe', 'Néerlandais'],
+    langs: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Arabe', 'Néerlandais', 'Polonais'],
     voices: ['Féminine', 'Masculine'],
     consentRequired: 'Cochez la case pour recevoir l’appel.',
     sendFailed: 'La demande n’a pas pu être envoyée.',

@@ -1,0 +1,520 @@
+// Interface text for shared components (src/components). Figures (prices, minutes, trial days)
+// and the brand are passed as parameters: they come from the market (src/i18n/markets.ts).
+
+/** Some callers pass names already lowercased: restore the initial capital where a label starts with them. */
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+export const UI_COMPONENTS = {
+  layout: {
+    home: 'Home',
+    freeTrial: 'Free trial',
+    callMeBack: 'Request a callback',
+  },
+
+  navbar: {
+    menus: {
+      features: 'Features',
+      allFeatures: 'All features',
+      allFeaturesText: 'Overview of the modules and plans.',
+      sectors: 'Sectors',
+      allSectors: 'All sectors',
+      resources: 'Resources',
+    },
+    resources: {
+      demo: 'Live demo',
+      integrations: 'Integrations',
+      security: 'Security and compliance',
+      faq: 'FAQs',
+      help: 'Customer area help',
+      about: 'About',
+      contact: 'Contact and callback',
+    },
+    pricing: 'Pricing',
+    login: 'Log in',
+    startFree: 'Start for free',
+    mainNav: 'Main navigation',
+    mobileNav: 'Mobile navigation',
+    openMenu: 'Open menu',
+    closeMenu: 'Close menu',
+  },
+
+  footer: {
+    tagline: 'AI voice agents that answer, qualify, book and call back for your business, 24/7.',
+    startFree: 'Start for free',
+    login: 'Log in',
+    gdpr: 'Built-in GDPR tools',
+    encryption: 'Encryption in transit and at rest',
+    cols: {
+      platform: 'Platform',
+      allFeatures: 'All features',
+      offers: 'Plans',
+      recharges: 'Minute top-ups',
+      compare: 'Compare plans',
+      sectors: 'Sectors',
+      resources: 'Resources',
+    },
+    resources: {
+      demo: 'Live demo',
+      integrations: 'Integrations',
+      faq: 'FAQs',
+      help: 'Customer area help',
+      about: 'About',
+      security: 'Security and compliance',
+      contact: 'Contact',
+    },
+    copyright: (year: number, brand: string, company: string) => `© ${year} ${brand} — a brand of ${company}. Prices shown excl. tax.`,
+    legal: {
+      notice: 'Legal notice',
+      terms: 'Terms and conditions',
+      privacy: 'Privacy',
+      cookies: 'Cookies',
+    },
+  },
+
+  callbackModal: {
+    titleSupport: 'Request a support callback',
+    titleCommercial: 'Leave your number and we’ll call you back',
+    intro: 'Choose a time. We don’t publish a phone number: we call you back.',
+    close: 'Close',
+  },
+
+  trialNudge: {
+    title: (minutes: string) => `Your first ${minutes} minutes are free`,
+    close: 'Close',
+    text: (days: number) => `Test your voice agent on your real calls for ${days} days before you decide.`,
+    points: ['Nothing is charged during the trial', 'Cancel in one click from your customer area', 'First agent ready in a few minutes'],
+    claim: (minutes: string) => `Claim my ${minutes} minutes`,
+    callMeBack: 'I’d rather have a callback',
+  },
+
+  liveCall: {
+    title: 'Reception agent',
+    leadTitle: 'Request created',
+    ariaLabel: 'Example of a call handled by the agent',
+    ended: 'Call ended · summary sent',
+    ongoing: 'Call in progress',
+  },
+
+  trialBadges: {
+    ariaLabel: 'Trial terms',
+  },
+
+  ctas: {
+    primary: 'Start for free',
+    demo: 'Try our agent live',
+    callback: 'Leave your number and we’ll call you back',
+  },
+
+  callbackForm: {
+    submit: 'Request a callback',
+    consentRequired: 'Tick the box to agree to be called back.',
+    sendFailed: 'Your request could not be sent.',
+    retry: (email: string) => `Please try again or email ${email}.`,
+    sentTitle: 'Callback request sent',
+    sentText: 'We will call you back at the time you chose. A confirmation email is sent if you provided one.',
+    name: 'Name',
+    phone: 'Phone',
+    sector: 'Sector',
+    choose: 'Choose…',
+    otherSector: 'Other business',
+    when: 'When should we call you?',
+    slots: {
+      asap: 'As soon as possible',
+      todayAfternoon: 'This afternoon',
+      tomorrowMorning: 'Tomorrow morning',
+      tomorrowAfternoon: 'Tomorrow afternoon',
+    },
+    email: 'Email',
+    emailHint: '(for confirmation)',
+    need: 'What you need',
+    needPlaceholder: 'E.g. I miss calls in the evening, I want to automate bookings…',
+    consent: (brand: string) => `I agree to be called back on the number provided, including by a ${brand} AI voice agent. My data is used only to handle my request.`,
+    sending: 'Sending…',
+  },
+
+  benefits: {
+    items: [
+      { title: 'Answer even out of hours', text: 'Evenings, weekends, during your appointments: every call gets an answer.' },
+      { title: 'Qualify automatically', text: 'The agent asks your questions and sends you a complete request.' },
+      { title: 'Book appointments', text: 'Straight into your calendar, with confirmation and a reminder.' },
+      { title: 'Call leads back faster', text: 'A completed form becomes a call within minutes.' },
+      { title: 'Keep people for what matters', text: 'Transfer to your team when the situation calls for it.' },
+    ],
+    seeAgent: 'See the agent in detail',
+  },
+
+  moduleCards: {
+    seeIncluded: 'See what’s included',
+  },
+
+  includesSchema: {
+    // Same order as the component's icons: telephony, automation, CRM, messages, calendar, management, security.
+    families: [
+      { name: 'Telephony', items: ['Inbound and outbound calls', 'Optional dedicated number', 'SIP integration', 'Transfer to a person', 'Caller identification'] },
+      { name: 'Automation', items: ['Prompt editor', 'No-code flow builder', 'Automation assistant', '300+ tools you can connect'] },
+      { name: 'CRM and data', items: ['Leads and pre-qualification', 'Knowledge base', 'Call history', 'Webhooks and API'] },
+      { name: 'Messages', items: ['SMS', 'WhatsApp and templates', 'Messenger and Instagram', 'Web widget'] },
+      { name: 'Calendar', items: ['Appointment booking', 'Confirmations and reminders', 'Rescheduling and cancellations'] },
+      { name: 'Management', items: ['Dashboard', 'Detailed reports', 'Roles and permissions'] },
+      { name: 'Security', items: ['Consent and opt-out', 'Configurable retention', 'Encryption', 'Activity log'] },
+    ],
+    centerTitle: 'Your AI voice agent',
+    centerText: 'At the centre: an agent set up for your business. Around it: everything it can use.',
+    perOffer: 'See what’s included in each plan',
+  },
+
+  steps: {
+    step: (n: number) => `Step ${n}`,
+  },
+
+  demoBlock: {
+    title: 'Try our agent live now',
+    intro: 'Talk to the agent from your browser, or leave your number to receive a demo call tailored to your sector.',
+    launchTitle: 'Start the live demo',
+    launchText: 'A real conversation, nothing to install.',
+    callbackTitle: 'Call me back',
+    callbackText: 'The agent calls you at the time you choose.',
+    formTitle: 'Get a demo call',
+    formText: 'Free, no commitment. You hear the voice and how the agent qualifies a request.',
+    submit: 'Call me back',
+  },
+
+  sectorCards: {
+    seePage: (sectorLower: string) => `See the ${sectorLower} page`,
+  },
+
+  pricingCards: {
+    daysFree: (days: number) => `${days} days free`,
+    negotiated: 'Negotiated per-minute price',
+    mostChosen: 'Most popular',
+    perMinute: (label: string) => `that’s ${label}`,
+    details: 'Plan details',
+  },
+
+  matrix: {
+    included: 'Included',
+    notIncluded: 'Not included',
+    caption: 'Features included in each plan',
+    inYourInterface: 'In your interface',
+    pricePerMonth: 'Price excl. tax / month',
+    includedMinutes: 'Included minutes',
+  },
+
+  recharges: {
+    title: 'Credit top-ups',
+    text: 'Credit pays for minutes beyond your plan. It never expires and is added immediately.',
+    rechargeCol: 'Top-up excl. tax',
+    approxMinutes: (n: string) => `≈ ${n} min`,
+    cheaperTitle: 'A plan is still cheaper',
+    cheaperText: 'An included minute always costs less than an extra minute.',
+    included: 'Included:',
+    extra: (price: string) => ` · extra: ${price} excl. tax / min`,
+  },
+
+  growthBlock: {
+    rules: [
+      { title: 'Slightly over, once', text: 'A top-up is enough to finish the month.' },
+      { title: 'Over again and again', text: 'We suggest the next plan up.' },
+      { title: 'Frequent top-ups', text: 'Your dashboard shows you that you are paying too much for your usage.' },
+    ],
+    ruleCustom: (minutes: string) => `Over ${minutes} min regularly`,
+    ruleCustomText: 'We build a custom plan.',
+    case1Minutes: (minutes: string) => `${minutes} min this month`,
+    case1Plan: (plan: string) => `${plan} + a credit top-up`,
+    case1Note: (price: string, extraMinutes: string, extraPrice: string, total: string) =>
+      `${price} + ${extraMinutes} min × ${extraPrice} ≈ ${total} excl. tax. A one-off overage: a top-up is enough.`,
+    case2Minutes: (minutes: string) => `${minutes} min every month`,
+    case2Plan: (plan: string) => `Move up to the ${plan} plan`,
+    case2Note: (price: string, minutes: string, total: string, smallerPlan: string) =>
+      `${price} excl. tax for ${minutes} min, compared with ≈ ${total} with ${smallerPlan} + extra minutes. Cheaper, with room to spare.`,
+    case3Minutes: (minutes: string) => `${minutes} min regularly`,
+    case3Plan: 'Custom plan',
+    case3Note: (plan: string) => `Beyond the ${plan} plan, we negotiate a per-minute price suited to your volume.`,
+    title: 'Add minutes or change plan, at the right time',
+    intro: 'You never pay more per minute than you need to: we tell you when a top-up is enough and when the next plan up works out better.',
+    customerAt: 'A customer at',
+  },
+
+  planFor: {
+    oneOffRecharge: ' + one-off top-up',
+    rechargeOrCustom: ' + top-up, or custom if regular',
+  },
+
+  economy: {
+    title: 'A more predictable cost than a human receptionist',
+    intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
+      `In some setups, a human receptionist costs around ${costPerCall} per call, or more than ${totalCost} for ${calls} calls. The ${plan} plan at ${price} excl. tax covers ${minutes} minutes a month, with 24/7 availability. Compare with your own figures.`,
+    humanTitle: 'Human receptionist',
+    humanPoints: ['Office hours', 'Variable cost: salary, employer costs, cover', 'Calls missed at peak times'],
+    aiPoints: ['Available 24/7', 'Clear plan, prices excl. tax', 'Several calls in parallel'],
+    disclaimer: 'Indicative assumption, in US dollars: reception costs vary widely by country, hours and employer costs. A call is not the same as a minute.',
+    calculator: 'Cost calculator',
+    calculateTitle: 'Work out your case',
+    callsPerMonth: 'Calls per month',
+    costPerCall: 'Estimated human cost per call',
+    avgDuration: 'Average call length',
+    min: ' min',
+    humanCost: 'Estimated human cost',
+    callVolume: 'Call volume',
+    suitedPlan: 'Plan suited to this volume',
+    perMonth: (price: string) => ` — ${price} excl. tax / month`,
+  },
+
+  security: {
+    items: [
+      { title: 'Consent and opt-out', text: 'Consent to callbacks, handling of refusals, permitted calling hours and an exclusion list.' },
+      { title: 'Data protection', text: 'Encryption in transit and at rest, role-based access and configurable retention periods.' },
+      { title: 'Traceability', text: 'Call history, transcripts and an activity log for every account.' },
+      { title: 'Access control', text: 'Roles and permissions for each team member with the Call Centre plan.' },
+      { title: 'Regulatory readiness', text: 'Tools to apply the GDPR: information, right of access, deletion, retention.' },
+      { title: 'Infrastructure', text: 'Platform hosted with established cloud providers, with backups and monitoring.' },
+    ],
+    title: 'Security and compliance for your AI calls',
+    intro: 'Your calls contain information about your customers. The platform gives you the settings to protect it and respect their choices.',
+    approach: 'Our approach to security',
+    privacy: 'Privacy policy',
+  },
+
+  voicesNumbers: {
+    langs: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Dutch', 'Arabic', 'Polish', 'Romanian', 'Turkish', 'Swedish'],
+    others: '+ 70 more',
+    voicesTitle: 'Natural voices in your language',
+    voicesText: 'More than 80 languages and many accents. The agent detects the caller’s language and replies in the same language.',
+    numbersTitle: 'Your number or a dedicated number',
+    numbersText: 'Keep your number (call forwarding, Twilio or Telnyx import, SIP connection to your phone system) or add a dedicated number as an option, billed monthly on top of your plan.',
+    telephonyOptions: 'See telephony options',
+  },
+
+  finalCta: {
+    title: 'Ready to automate your calls?',
+    primary: 'Start my free trial',
+    demo: 'See the live demo',
+    advisorTitle: 'Talk to an adviser',
+    advisorText: 'Leave your number: we will call you back to answer your questions.',
+  },
+
+  heroDemo: {
+    langs: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Arabic', 'Dutch', 'Polish'],
+    voices: ['Female', 'Male'],
+    consentRequired: 'Tick the box to receive the call.',
+    sendFailed: 'Your request could not be sent.',
+    title: 'Live demo',
+    available: 'Agent available',
+    sentTitle: 'The agent is about to call you',
+    sentText: (sectorLower: string, langLower: string) => `Keep your phone handy. The ${sectorLower} scenario is ready, in ${cap(langLower)}.`,
+    intro: 'Choose a voice and a language: the agent calls you and plays out a scenario from your trade.',
+    lang: 'Language',
+    voice: 'Voice',
+    sector: 'Sector',
+    firstName: 'Your first name',
+    phone: 'Your phone number',
+    consent: 'I agree to be called by the demo AI voice agent.',
+    sending: 'Sending…',
+    submit: 'Ring my phone',
+  },
+
+  industryMarquee: ['Plumbers', 'Electricians', 'Dental practices', 'Clinics', 'Estate agents', 'Property management', 'Garages', 'Body shops', 'Hair salons', 'Beauty salons', 'Restaurants', 'Hotels', 'Law firms', 'E-commerce', 'Physios', 'Vets'],
+
+  // Same order as the component's flags.
+  languageMarquee: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Dutch', 'Belgian French', 'Swiss French', 'Québécois', 'Arabic', 'Polish', 'Romanian', 'Turkish', 'Swedish'],
+
+  agentTeam: {
+    // Same order as the component's icons and links.
+    agents: [
+      { name: 'AI receptionist', role: 'Answers every call, filters and transfers what matters.' },
+      { name: 'Booking agent', role: 'Books, confirms, reminds and handles rescheduling.' },
+      { name: 'Qualification agent', role: 'Asks your questions and prepares records ready to act on.' },
+      { name: 'Support agent', role: 'Answers from your documents, escalates sensitive cases.' },
+      { name: 'Follow-up agent', role: 'Confirms, follows up quotes and re-engages your contacts.' },
+      { name: 'Messaging agent', role: 'Replies and confirms by SMS, WhatsApp and Instagram.' },
+    ],
+    title: 'Build your team of AI agents',
+    intro: 'Each agent has a specific role. Turn on the ones your business needs; they share the same history and the same information.',
+    custom: 'Need a particular scenario? We set up a custom agent.',
+  },
+
+  sectorShowcase: {
+    chooseSector: 'Choose a sector',
+    agentFor: (sectorLower: string) => `${cap(sectorLower)} agent`,
+    seeSolution: (sectorLower: string) => `See the ${sectorLower} solution`,
+  },
+
+  useCaseTabs: {
+    ariaLabel: 'Types of use',
+    // Same order as the component's icons.
+    tabs: {
+      entrants: {
+        label: 'Inbound calls',
+        items: [
+          { title: '24/7 reception', text: 'Every call gets an answer, even at night and at weekends.' },
+          { title: 'Appointment booking', text: 'Booked straight into your calendar, with confirmation.' },
+          { title: 'Customer support', text: 'Answers from your documents, with no queue.' },
+          { title: 'Qualification', text: 'The right questions asked before passing on.' },
+          { title: 'Transfer to a person', text: 'Hand over to your team when it matters.' },
+          { title: 'Emergencies', text: 'Sorted according to your rules, with an immediate alert.' },
+        ],
+      },
+      sortants: {
+        label: 'Outbound calls',
+        items: [
+          { title: 'Calling back web leads', text: 'A completed form becomes a call within minutes.' },
+          { title: 'Confirmations', text: 'Appointments and bookings confirmed the day before.' },
+          { title: 'Quote follow-ups', text: 'Pending quotes followed up at the right times.' },
+          { title: 'Pre-qualification', text: 'Contacts screened before your team calls.' },
+          { title: 'Renewals', text: 'Customers contacted again to renew or add services.' },
+          { title: 'Satisfaction surveys', text: 'Feedback collected after the service.' },
+        ],
+      },
+      messages: {
+        label: 'Messages',
+        items: [
+          { title: 'WhatsApp', text: 'Confirmations, reminders and written replies.' },
+          { title: 'SMS', text: 'A summary after every call.' },
+          { title: 'Instagram and Messenger', text: 'Direct messages in one place.' },
+          { title: 'Web widget', text: 'Talk to the agent or get a callback from your website.' },
+          { title: 'Waiting list', text: 'Let people know when a slot opens up.' },
+          { title: 'Single history', text: 'Calls and messages in the same place.' },
+        ],
+      },
+    },
+  },
+
+  platformGrid: {
+    simultaneousTitle: 'Simultaneous calls',
+    simultaneousText: 'No queue: the agent handles several calls at once on the same line.',
+    knowledgeTitle: 'Knowledge base',
+    knowledgeText: 'PDFs, pages from your website, procedures: the agent answers with your information.',
+    promptTitle: 'Prompt assistant',
+    promptText: 'Describe the purpose of the call: a step-by-step assistant sets up how the agent behaves.',
+    transferTitle: 'Transfer to a person',
+    transferText: 'When the customer asks or the situation calls for it, the call is handed over to your team.',
+    aiAgent: 'AI agent',
+    yourTeam: 'Your team',
+    reportsTitle: 'Detailed reports',
+    reportsText: 'Recordings, transcripts, summaries and charts for every call.',
+    campaignsTitle: 'Outbound campaigns',
+    campaignsText: 'Import contacts who have given consent, or trigger calls from your tools and forms.',
+  },
+
+  lifecycle: {
+    title: 'The whole customer journey, in one place',
+    intro: 'From the first enquiry to a loyal customer: one platform, one history.',
+    ariaLabel: 'Journey stages',
+    // Same order as the component's icons and mock-ups.
+    stages: [
+      { key: 'Attract', title: 'Capture every enquiry', items: ['Landing pages by sector', 'Web widget: talk or get a callback', 'Local numbers and forwarding of your line', '24/7 answers to calls and messages'] },
+      { key: 'Convert', title: 'Turn enquiries into customers', items: ['Qualification on your criteria', 'Leads called back within minutes', 'Appointments booked in your calendar', 'CRM record created automatically'] },
+      { key: 'Retain', title: 'Stay in touch with your customers', items: ['Confirmations and reminders', 'Support that answers from your documents', 'Follow-ups, renewals and surveys', 'WhatsApp, SMS, Instagram'] },
+      { key: 'Measure', title: 'Manage with real figures', items: ['Volumes, durations and outcomes', 'Appointments booked and transfers', 'Minute usage and alerts', 'Call recordings and transcripts'] },
+    ],
+  },
+
+  portalPreview: {
+    // Same order as the component's tag colours.
+    calls: [
+      { who: 'New patient', what: 'Appointment Tuesday 9:30 am', tag: 'Booked' },
+      { who: 'Water leak', what: 'Priority callback requested', tag: 'Urgent' },
+      { who: 'Two-bed flat buyer', what: 'Viewing Saturday 11 am', tag: 'Qualified' },
+      { who: 'Opening hours question', what: 'Answer given', tag: 'Resolved' },
+    ],
+    title: 'Your customer area, clear from the first login',
+    intro: 'Calls, appointments, leads, messages and minutes: everything is visible in one place, on desktop and mobile.',
+    points: ['Summary of every call and next action', 'Listen to recordings and read transcripts', 'Minute tracking and usage alerts', 'Set up your agents without code'],
+    roles: 'Role-based access for each team member (Call Centre plan).',
+    dashboard: 'Dashboard',
+    sampleData: 'Sample data · last 30 days',
+    stats: [['Calls', '412'], ['Appointments', '96'], ['Leads', '183'], ['Minutes', '62%']],
+    notification: 'Notification',
+    notifBooking: 'New appointment booked by the agent: Tuesday 9:30 am.',
+    notifMinutes: 'Minutes: 62% used.',
+  },
+
+  beforeAfter: {
+    without: 'Without an AI agent',
+    with: (brand: string) => `With ${brand}`,
+  },
+
+  mock: {
+    call: {
+      agent: 'Reception agent',
+      meta: 'Inbound call · 01:24',
+      client: 'Hello, I’d like to book an appointment.',
+      reply: 'Of course. Is this for a first visit?',
+    },
+    calendar: {
+      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+      week: 'Week 42',
+      added: 'Appointment added by the agent',
+      slot: 'Tuesday · 9:30 – 10:00 am',
+    },
+    transcript: {
+      label: 'Transcript',
+      question: 'Could I have your approximate budget?',
+      answer: 'Around £300,000.',
+      summaryLabel: 'Summary:',
+      summary: ' purchase, budget £300k, viewing requested Saturday.',
+    },
+    knowledge: {
+      title: 'Knowledge base',
+      rows: [
+        { name: 'reception-procedures.pdf', meta: 'PDF · 1.2 MB' },
+        { name: 'Your website pages', meta: '18 pages indexed' },
+        { name: 'Prices and opening hours', meta: 'Updated today' },
+      ],
+    },
+    prompt: {
+      title: 'Purpose of the call',
+      hint: 'Describe what the agent needs to achieve.',
+      text: 'Greet the patient, find out whether they are new, offer two slots and confirm by SMS.',
+      tags: ['Tone: warm', 'Polite, formal address', 'No medical advice'],
+    },
+    flow: {
+      title: 'Scenario: web lead',
+      steps: [
+        { title: 'New form', source: 'Website' },
+        { title: 'Call the lead', source: 'Sales agent' },
+        { title: 'Create the record', source: 'CRM' },
+        { title: 'Send the confirmation', source: 'WhatsApp' },
+      ],
+    },
+    numbers: {
+      title: 'Your lines',
+      rows: [
+        { country: 'United Kingdom', kind: 'Local number', agent: 'Reception agent' },
+        { country: 'Australia', kind: 'Local number', agent: 'Booking agent' },
+        { country: 'Your phone system', kind: 'SIP trunk', agent: 'Out-of-hours forwarding' },
+      ],
+    },
+    report: {
+      handled: 'Calls handled · example',
+      demo: 'Demo',
+      stats: [['Appointments', '96'], ['Qualified', '183'], ['Transfers', '27']],
+    },
+    widget: {
+      question: 'Got a question? Let’s talk.',
+      talk: 'Talk to the agent',
+      callback: 'Request a callback',
+    },
+    whatsapp: {
+      title: 'WhatsApp · Confirmation',
+      confirmation: 'Your appointment is confirmed for Tuesday at 9:30 am. Reply 2 to move it.',
+      reply: 'Perfect, thank you!',
+    },
+    campaign: {
+      title: 'Campaigns',
+      rows: [['Week 42 confirmations', 'In progress', '68%'], ['September quote follow-up', 'Completed', '41%'], ['Inactive customers', 'Scheduled', '—']],
+      note: 'Sample figures · calls only to contacts who have given consent',
+    },
+    lead: {
+      title: 'Qualified request',
+      interest: 'High interest',
+      fields: [['Need', 'Renovation quote'], ['Area', 'North London'], ['Budget', '£8k – £12k'], ['Timescale', 'Within 1 month']],
+      next: 'Next action: callback tomorrow 9 am',
+    },
+    support: {
+      client: 'My order hasn’t arrived.',
+      agent: 'Let me check. Could you give me your order number?',
+      found: 'Answer found in “delivery-terms.pdf”',
+    },
+  },
+};

@@ -18,7 +18,9 @@ import { useI18n } from '@/i18n';
 export function HeroDemo() {
   const { c, locale } = useI18n();
   const t = c.ui.components.heroDemo;
-  const [lang, setLang] = useState(t.langs[0]);
+  // Langue de démo proposée par défaut : celle du site (ordre de la liste : fr, en, es, de, it, pt, ar, nl, pl).
+  const defaultLang = { fr: 0, 'en-gb': 1, 'en-au': 1, it: 4, nl: 7, pl: 8 }[locale] ?? 1;
+  const [lang, setLang] = useState(t.langs[defaultLang] ?? t.langs[1]);
   const [voice, setVoice] = useState(t.voices[0]);
   const [sector, setSector] = useState(c.sectors[0].slug);
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');

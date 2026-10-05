@@ -1,0 +1,518 @@
+// Interfaceteksten van de gedeelde componenten (src/components). De cijfers (prijzen, minuten,
+// proefdagen) en de merknaam komen als parameters binnen: ze komen uit de markt (src/i18n/markets.ts).
+export const UI_COMPONENTS = {
+  layout: {
+    home: 'Home',
+    freeTrial: 'Gratis proberen',
+    callMeBack: 'Terugbellen',
+  },
+
+  navbar: {
+    menus: {
+      features: 'Functies',
+      allFeatures: 'Alle functies',
+      allFeaturesText: 'Overzicht van de modules en abonnementen.',
+      sectors: 'Sectoren',
+      allSectors: 'Alle sectoren',
+      resources: 'Hulpbronnen',
+    },
+    resources: {
+      demo: 'Live demo',
+      integrations: 'Integraties',
+      security: 'Beveiliging en compliance',
+      faq: 'Veelgestelde vragen',
+      help: 'Help bij de klantomgeving',
+      about: 'Over ons',
+      contact: 'Contact en terugbellen',
+    },
+    pricing: 'Prijzen',
+    login: 'Inloggen',
+    startFree: 'Gratis beginnen',
+    mainNav: 'Hoofdnavigatie',
+    mobileNav: 'Mobiele navigatie',
+    openMenu: 'Menu openen',
+    closeMenu: 'Menu sluiten',
+  },
+
+  footer: {
+    tagline: 'AI-spraakagents die opnemen, kwalificeren, afspraken boeken en terugbellen voor uw bedrijf, 24 uur per dag.',
+    startFree: 'Gratis beginnen',
+    login: 'Inloggen',
+    gdpr: 'Ingebouwde AVG-hulpmiddelen',
+    encryption: 'Versleuteling tijdens verzending en opslag',
+    cols: {
+      platform: 'Platform',
+      allFeatures: 'Alle functies',
+      offers: 'Abonnementen',
+      recharges: 'Minuten opwaarderen',
+      compare: 'Abonnementen vergelijken',
+      sectors: 'Sectoren',
+      resources: 'Hulpbronnen',
+    },
+    resources: {
+      demo: 'Live demo',
+      integrations: 'Integraties',
+      faq: 'Veelgestelde vragen',
+      help: 'Help bij de klantomgeving',
+      about: 'Over ons',
+      security: 'Beveiliging en compliance',
+      contact: 'Contact',
+    },
+    copyright: (year: number, brand: string, company: string) => `© ${year} ${brand} — een merk van ${company}. Getoonde prijzen zijn excl. btw.`,
+    legal: {
+      notice: 'Juridische informatie',
+      terms: 'Algemene voorwaarden',
+      privacy: 'Privacy',
+      cookies: 'Cookies',
+    },
+  },
+
+  callbackModal: {
+    titleSupport: 'Terugbelverzoek voor support',
+    titleCommercial: 'Laat uw nummer achter, wij bellen u terug',
+    intro: 'Kies uw tijdslot. Wij publiceren geen telefoonnummer: wij bellen u terug.',
+    close: 'Sluiten',
+  },
+
+  trialNudge: {
+    title: (minutes: string) => `Uw eerste ${minutes} minuten zijn gratis`,
+    close: 'Sluiten',
+    text: (days: number) => `Test uw spraakagent ${days} dagen lang op uw echte gesprekken, voordat u beslist.`,
+    points: ['Tijdens de proefperiode wordt niets afgeschreven', 'Met één klik op te zeggen in uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
+    claim: (minutes: string) => `Claim mijn ${minutes} minuten`,
+    callMeBack: 'Liever teruggebeld worden',
+  },
+
+  liveCall: {
+    title: 'Receptieagent',
+    leadTitle: 'Aanvraag aangemaakt',
+    ariaLabel: 'Voorbeeld van een gesprek afgehandeld door de agent',
+    ended: 'Gesprek beëindigd · samenvatting verstuurd',
+    ongoing: 'Gesprek bezig',
+  },
+
+  trialBadges: {
+    ariaLabel: 'Voorwaarden van de proefperiode',
+  },
+
+  ctas: {
+    primary: 'Gratis beginnen',
+    demo: 'Probeer onze agent live',
+    callback: 'Laat uw nummer achter, wij bellen u terug',
+  },
+
+  callbackForm: {
+    submit: 'Laat u terugbellen',
+    consentRequired: 'Vink het vakje aan om akkoord te gaan met terugbellen.',
+    sendFailed: 'De aanvraag kon niet worden verzonden.',
+    retry: (email: string) => `Probeer het opnieuw of mail naar ${email}.`,
+    sentTitle: 'Terugbelverzoek verzonden',
+    sentText: 'Wij bellen u terug op het gekozen tijdslot. Als u uw e-mailadres hebt opgegeven, ontvangt u een bevestiging.',
+    name: 'Naam',
+    phone: 'Telefoon',
+    sector: 'Sector',
+    choose: 'Kies…',
+    otherSector: 'Andere branche',
+    when: 'Wanneer mogen we u terugbellen?',
+    slots: {
+      asap: 'Zo snel mogelijk',
+      todayAfternoon: 'Vanmiddag',
+      tomorrowMorning: 'Morgenochtend',
+      tomorrowAfternoon: 'Morgenmiddag',
+    },
+    email: 'E-mail',
+    emailHint: '(voor de bevestiging)',
+    need: 'Uw vraag',
+    needPlaceholder: 'Bijv.: ik mis ’s avonds gesprekken, ik wil afspraken automatiseren…',
+    consent: (brand: string) => `Ik ga ermee akkoord dat ik op het opgegeven nummer word teruggebeld, ook door een AI-spraakagent van ${brand}. Mijn gegevens worden alleen gebruikt om mijn aanvraag af te handelen.`,
+    sending: 'Verzenden…',
+  },
+
+  benefits: {
+    items: [
+      { title: 'Neem ook buiten openingstijden op', text: '’s Avonds, in het weekend, tijdens uw afspraken: elk gesprek krijgt antwoord.' },
+      { title: 'Kwalificeer automatisch', text: 'De agent stelt uw vragen en stuurt u een volledige aanvraag.' },
+      { title: 'Boek afspraken', text: 'Direct in uw agenda, met bevestiging en herinnering.' },
+      { title: 'Bel leads sneller terug', text: 'Een ingevuld formulier wordt binnen enkele minuten een gesprek.' },
+      { title: 'Houd mensen vrij voor wat belangrijk is', text: 'Doorverbinden naar uw team wanneer de situatie dat vraagt.' },
+    ],
+    seeAgent: 'Bekijk de agent in detail',
+  },
+
+  moduleCards: {
+    seeIncluded: 'Bekijk wat erbij hoort',
+  },
+
+  includesSchema: {
+    // Zelfde volgorde als de iconen van de component: telefonie, automatisering, CRM, berichten, agenda, sturing, beveiliging.
+    families: [
+      { name: 'Telefonie', items: ['Inkomende en uitgaande gesprekken', 'Optioneel eigen nummer', 'SIP-koppeling', 'Doorverbinden naar een medewerker', 'Nummerherkenning'] },
+      { name: 'Automatisering', items: ['Prompteditor', 'No-code flow builder', 'Automatiseringsassistent', '300+ koppelbare tools'] },
+      { name: 'CRM en gegevens', items: ['Leads en voorkwalificatie', 'Kennisbank', 'Gespreksgeschiedenis', 'Webhooks en API'] },
+      { name: 'Berichten', items: ['Sms', 'WhatsApp en templates', 'Messenger en Instagram', 'Webwidget'] },
+      { name: 'Agenda', items: ['Afspraken plannen', 'Bevestigingen en herinneringen', 'Verplaatsingen en annuleringen'] },
+      { name: 'Sturing', items: ['Dashboard', 'Uitgebreide rapporten', 'Rollen en rechten'] },
+      { name: 'Beveiliging', items: ['Toestemming en afmelden', 'Instelbare bewaartermijn', 'Versleuteling', 'Activiteitenlogboek'] },
+    ],
+    centerTitle: 'Uw AI-spraakagent',
+    centerText: 'In het midden: een agent die is ingesteld op uw bedrijf. Eromheen: alles wat hij kan gebruiken.',
+    perOffer: 'Bekijk wat er per abonnement inbegrepen is',
+  },
+
+  steps: {
+    step: (n: number) => `Stap ${n}`,
+  },
+
+  demoBlock: {
+    title: 'Probeer onze agent nu live',
+    intro: 'Praat vanuit uw browser met de agent, of laat uw nummer achter voor een demonstratiegesprek dat past bij uw sector.',
+    launchTitle: 'Start de live demo',
+    launchText: 'Een echt gesprek, zonder installatie.',
+    callbackTitle: 'Laat mij terugbellen',
+    callbackText: 'De agent belt u op het gekozen tijdslot.',
+    formTitle: 'Ontvang een demonstratiegesprek',
+    formText: 'Gratis en vrijblijvend. U hoort de stem en de manier waarop de agent een aanvraag kwalificeert.',
+    submit: 'Laat mij terugbellen',
+  },
+
+  sectorCards: {
+    seePage: (sectorLower: string) => `Bekijk de pagina over ${sectorLower}`,
+  },
+
+  pricingCards: {
+    daysFree: (days: number) => `${days} dagen gratis`,
+    negotiated: 'Onderhandelde prijs per minuut',
+    mostChosen: 'Meest gekozen',
+    perMinute: (label: string) => `oftewel ${label}`,
+    details: 'Details van het abonnement',
+  },
+
+  matrix: {
+    included: 'Inbegrepen',
+    notIncluded: 'Niet inbegrepen',
+    caption: 'Functies inbegrepen in elk abonnement',
+    inYourInterface: 'In uw interface',
+    pricePerMonth: 'Prijs excl. btw / maand',
+    includedMinutes: 'Inbegrepen minuten',
+  },
+
+  recharges: {
+    title: 'Tegoed opwaarderen',
+    text: 'Met het tegoed betaalt u de minuten boven uw abonnement. Het vervalt niet en wordt direct toegevoegd.',
+    rechargeCol: 'Opwaardering excl. btw',
+    approxMinutes: (n: string) => `≈ ${n} min`,
+    cheaperTitle: 'Het abonnement blijft voordeliger',
+    cheaperText: 'Een inbegrepen minuut is altijd goedkoper dan een extra minuut.',
+    included: 'Inbegrepen:',
+    extra: (price: string) => ` · extra: ${price} excl. btw / min`,
+  },
+
+  growthBlock: {
+    rules: [
+      { title: 'Eenmalig iets meer verbruikt', text: 'Een opwaardering is genoeg om de maand af te maken.' },
+      { title: 'Regelmatig meer verbruikt', text: 'Wij stellen u het grotere abonnement voor.' },
+      { title: 'Vaak opwaarderen', text: 'Uw dashboard laat zien dat u te veel betaalt voor uw gebruik.' },
+    ],
+    ruleCustom: (minutes: string) => `Vanaf ${minutes} min per maand`,
+    ruleCustomText: 'Wij stellen een abonnement op maat samen.',
+    case1Minutes: (minutes: string) => `${minutes} min deze maand`,
+    case1Plan: (plan: string) => `${plan} + een opwaardering`,
+    case1Note: (price: string, extraMinutes: string, extraPrice: string, total: string) =>
+      `${price} + ${extraMinutes} min × ${extraPrice} ≈ ${total} excl. btw. Eenmalig iets meer: een opwaardering is genoeg.`,
+    case2Minutes: (minutes: string) => `${minutes} min per maand`,
+    case2Plan: (plan: string) => `Stap over op ${plan}`,
+    case2Note: (price: string, minutes: string, total: string, smallerPlan: string) =>
+      `${price} excl. btw voor ${minutes} min, tegenover ≈ ${total} met ${smallerPlan} + extra minuten. Goedkoper, en met ruimte over.`,
+    case3Minutes: (minutes: string) => `${minutes} min per maand`,
+    case3Plan: 'Maatwerk',
+    case3Note: (plan: string) => `Boven het abonnement ${plan} spreken we een prijs per minuut af die past bij uw volume.`,
+    title: 'Voeg minuten toe of wissel van abonnement, op het juiste moment',
+    intro: 'U betaalt nooit meer per minuut dan nodig: wij laten u weten wanneer een opwaardering volstaat en wanneer het grotere abonnement voordeliger wordt.',
+    customerAt: 'Een klant met',
+  },
+
+  planFor: {
+    oneOffRecharge: ' + eenmalige opwaardering',
+    rechargeOrCustom: ' + opwaardering, of maatwerk bij vast volume',
+  },
+
+  economy: {
+    title: 'Voorspelbaardere kosten dan een menselijke receptie',
+    intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
+      `In sommige situaties kost een menselijke receptie rond de ${costPerCall} per gesprek, oftewel meer dan ${totalCost} voor ${calls} gesprekken. Het abonnement ${plan} van ${price} excl. btw omvat ${minutes} minuten per maand, met 24/7 beschikbaarheid. Vergelijk het met uw eigen cijfers.`,
+    humanTitle: 'Menselijke receptie',
+    humanPoints: ['Kantoortijden', 'Wisselende kosten: salaris, werkgeverslasten, vervanging', 'Gemiste gesprekken op drukke momenten'],
+    aiPoints: ['24/7 beschikbaar', 'Duidelijk abonnement, prijzen excl. btw', 'Meerdere gesprekken tegelijk'],
+    disclaimer: 'Indicatieve aanname, in Amerikaanse dollars: de kosten van een receptie verschillen sterk per land, openingstijden en werkgeverslasten. Een gesprek is niet gelijk aan een minuut.',
+    calculator: 'Kostencalculator',
+    calculateTitle: 'Bereken uw situatie',
+    callsPerMonth: 'Gesprekken per maand',
+    costPerCall: 'Geschatte menselijke kosten per gesprek',
+    avgDuration: 'Gemiddelde gespreksduur',
+    min: ' min',
+    humanCost: 'Geschatte menselijke kosten',
+    callVolume: 'Belvolume',
+    suitedPlan: 'Passend abonnement voor dit volume',
+    perMonth: (price: string) => ` — ${price} excl. btw / maand`,
+  },
+
+  security: {
+    items: [
+      { title: 'Toestemming en afmelden', text: 'Toestemming voor terugbellen, afhandeling van weigeringen, toegestane beltijden en uitsluitingslijst.' },
+      { title: 'Gegevensbescherming', text: 'Versleuteling tijdens verzending en opslag, toegang per rol en instelbare bewaartermijn.' },
+      { title: 'Traceerbaarheid', text: 'Gespreksgeschiedenis, transcripties en activiteitenlogboek voor elk account.' },
+      { title: 'Toegangsbeheer', text: 'Rollen en rechten per teamlid met het Callcenter-abonnement.' },
+      { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering, bewaartermijn.' },
+      { title: 'Infrastructuur', text: 'Platform gehost bij erkende cloudproviders, met back-ups en monitoring.' },
+    ],
+    title: 'Beveiliging en compliance voor uw AI-gesprekken',
+    intro: 'Uw gesprekken bevatten informatie over uw klanten. Het platform geeft u de instellingen om die te beschermen en hun keuzes te respecteren.',
+    approach: 'Onze aanpak van beveiliging',
+    privacy: 'Privacybeleid',
+  },
+
+  voicesNumbers: {
+    langs: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds'],
+    others: '+ 70 andere',
+    voicesTitle: 'Natuurlijke stemmen in uw taal',
+    voicesText: 'Meer dan 80 talen en veel accenten. De agent herkent de taal van de beller en antwoordt in dezelfde taal.',
+    numbersTitle: 'Uw eigen nummer of een nieuw nummer',
+    numbersText: 'Behoud uw nummer (doorschakelen, import via Twilio of Telnyx, SIP-koppeling met uw telefooncentrale) of neem optioneel een eigen nummer, per maand gefactureerd bovenop het abonnement.',
+    telephonyOptions: 'Bekijk de telefonieopties',
+  },
+
+  finalCta: {
+    title: 'Klaar om uw gesprekken te automatiseren?',
+    primary: 'Start mijn gratis proefperiode',
+    demo: 'Bekijk de live demo',
+    advisorTitle: 'Spreek een adviseur',
+    advisorText: 'Laat uw nummer achter: wij bellen u terug om uw vragen te beantwoorden.',
+  },
+
+  heroDemo: {
+    langs: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Arabisch', 'Nederlands', 'Pools'],
+    voices: ['Vrouwelijk', 'Mannelijk'],
+    consentRequired: 'Vink het vakje aan om het gesprek te ontvangen.',
+    sendFailed: 'De aanvraag kon niet worden verzonden.',
+    title: 'Live demo',
+    available: 'Agent beschikbaar',
+    sentTitle: 'De agent belt u zo',
+    // Talen worden in het Nederlands met een hoofdletter geschreven: de eerste letter wordt hersteld.
+    sentText: (sectorLower: string, langLower: string) =>
+      `Houd uw telefoon bij de hand. Het scenario ${sectorLower} staat klaar, in het ${langLower.charAt(0).toUpperCase()}${langLower.slice(1)}.`,
+    intro: 'Kies een stem en een taal: de agent belt u en speelt een scenario uit uw vak.',
+    lang: 'Taal',
+    voice: 'Stem',
+    sector: 'Sector',
+    firstName: 'Uw voornaam',
+    phone: 'Uw telefoonnummer',
+    consent: 'Ik ga ermee akkoord dat de AI-demonstratieagent mij belt.',
+    sending: 'Verzenden…',
+    submit: 'Laat mijn telefoon overgaan',
+  },
+
+  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'E-commerce', 'Fysiotherapeuten', 'Dierenartsen'],
+
+  // Zelfde volgorde als de vlaggen van de component.
+  languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'België', 'Zwitserland', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds'],
+
+  agentTeam: {
+    // Zelfde volgorde als de iconen en links van de component.
+    agents: [
+      { name: 'AI-receptionist', role: 'Neemt elk gesprek aan, filtert en verbindt door wat belangrijk is.' },
+      { name: 'Afsprakenagent', role: 'Boekt, bevestigt, herinnert en regelt verplaatsingen.' },
+      { name: 'Kwalificatieagent', role: 'Stelt uw vragen en maakt overzichten klaar om mee aan de slag te gaan.' },
+      { name: 'Supportagent', role: 'Antwoordt op basis van uw documenten, escaleert gevoelige gevallen.' },
+      { name: 'Opvolgagent', role: 'Bevestigt, volgt offertes op en brengt uw contacten weer in beweging.' },
+      { name: 'Berichtenagent', role: 'Antwoordt en bevestigt via sms, WhatsApp en Instagram.' },
+    ],
+    title: 'Stel uw team van AI-agents samen',
+    intro: 'Elke agent heeft een duidelijke rol. Activeer de agents die uw bedrijf nodig heeft; ze delen dezelfde geschiedenis en dezelfde informatie.',
+    custom: 'Een specifiek scenario nodig? Wij stellen een agent op maat in.',
+  },
+
+  sectorShowcase: {
+    chooseSector: 'Kies een sector',
+    agentFor: (sectorLower: string) => `Agent voor ${sectorLower}`,
+    seeSolution: (sectorLower: string) => `Bekijk de oplossing voor ${sectorLower}`,
+  },
+
+  useCaseTabs: {
+    ariaLabel: 'Soorten gebruik',
+    // Zelfde volgorde als de iconen van de component.
+    tabs: {
+      entrants: {
+        label: 'Inkomende gesprekken',
+        items: [
+          { title: 'Ontvangst 24/7', text: 'Elk gesprek krijgt antwoord, ook ’s nachts en in het weekend.' },
+          { title: 'Afspraken plannen', text: 'Direct boeken in uw agenda, met bevestiging.' },
+          { title: 'Klantenservice', text: 'Antwoorden op basis van uw documenten, zonder wachtrij.' },
+          { title: 'Kwalificatie', text: 'De juiste vragen gesteld voordat er wordt doorgegeven.' },
+          { title: 'Doorverbinden', text: 'Overdracht naar uw team wanneer het ertoe doet.' },
+          { title: 'Spoedgevallen', text: 'Sortering volgens uw regels en directe melding.' },
+        ],
+      },
+      sortants: {
+        label: 'Uitgaande gesprekken',
+        items: [
+          { title: 'Webleads terugbellen', text: 'Een ingevuld formulier wordt binnen enkele minuten een gesprek.' },
+          { title: 'Bevestigingen', text: 'Afspraken en reserveringen de dag ervoor bevestigd.' },
+          { title: 'Offertes opvolgen', text: 'Openstaande offertes opgevolgd op de juiste tijden.' },
+          { title: 'Voorkwalificatie', text: 'Contacten gefilterd voordat uw team belt.' },
+          { title: 'Verlengingen', text: 'Klanten opnieuw benaderd om te verlengen of aan te vullen.' },
+          { title: 'Tevredenheidsonderzoeken', text: 'Beoordelingen verzameld na de dienstverlening.' },
+        ],
+      },
+      messages: {
+        label: 'Berichten',
+        items: [
+          { title: 'WhatsApp', text: 'Bevestigingen, herinneringen en schriftelijke antwoorden.' },
+          { title: 'Sms', text: 'Overzicht na elk gesprek.' },
+          { title: 'Instagram en Messenger', text: 'Directe berichten op één plek.' },
+          { title: 'Webwidget', text: 'Met de agent praten of teruggebeld worden vanaf uw website.' },
+          { title: 'Wachtlijst', text: 'Melden wanneer er een plek vrijkomt.' },
+          { title: 'Eén geschiedenis', text: 'Gesprekken en berichten op dezelfde plek.' },
+        ],
+      },
+    },
+  },
+
+  platformGrid: {
+    simultaneousTitle: 'Gelijktijdige gesprekken',
+    simultaneousText: 'Geen wachtrij: de agent handelt meerdere gesprekken tegelijk af op dezelfde lijn.',
+    knowledgeTitle: 'Kennisbank',
+    knowledgeText: 'Pdf’s, pagina’s van uw website, procedures: de agent antwoordt met uw informatie.',
+    promptTitle: 'Promptassistent',
+    promptText: 'Beschrijf het doel van het gesprek: een stapsgewijze assistent stelt het gedrag van de agent in.',
+    transferTitle: 'Doorverbinden naar een medewerker',
+    transferText: 'Als de klant erom vraagt of de situatie het vereist, gaat het gesprek naar uw team.',
+    aiAgent: 'AI-agent',
+    yourTeam: 'Uw team',
+    reportsTitle: 'Uitgebreide rapporten',
+    reportsText: 'Opnames, transcripties, samenvattingen en grafieken voor elk gesprek.',
+    campaignsTitle: 'Uitgaande campagnes',
+    campaignsText: 'Importeer contacten die toestemming hebben gegeven of start gesprekken vanuit uw tools en formulieren.',
+  },
+
+  lifecycle: {
+    title: 'De hele klantreis op één plek',
+    intro: 'Van de eerste aanvraag tot vaste klant: één platform, één geschiedenis.',
+    ariaLabel: 'Fasen van de klantreis',
+    // Zelfde volgorde als de iconen en mock-ups van de component.
+    stages: [
+      { key: 'Aantrekken', title: 'Vang elke aanvraag op', items: ['Landingspagina’s per sector', 'Webwidget: praten of teruggebeld worden', 'Lokale nummers en doorschakeling van uw lijn', '24/7 antwoord op gesprekken en berichten'] },
+      { key: 'Converteren', title: 'Maak van aanvragen klanten', items: ['Kwalificatie volgens uw criteria', 'Leads binnen enkele minuten teruggebeld', 'Afspraken direct in uw agenda', 'CRM-kaart automatisch aangemaakt'] },
+      { key: 'Binden', title: 'Blijf in contact met uw klanten', items: ['Bevestigingen en herinneringen', 'Support op basis van uw documenten', 'Opvolging, verlengingen en enquêtes', 'WhatsApp, sms, Instagram'] },
+      { key: 'Meten', title: 'Stuur bij op basis van echte cijfers', items: ['Volumes, gespreksduur en resultaten', 'Geboekte afspraken en doorverbindingen', 'Minutenverbruik en meldingen', 'Gesprekken terugluisteren en transcripties'] },
+    ],
+  },
+
+  portalPreview: {
+    // Zelfde volgorde als de labelkleuren van de component.
+    calls: [
+      { who: 'Nieuwe patiënt', what: 'Afspraak dinsdag 9.30 uur', tag: 'Geboekt' },
+      { who: 'Waterlekkage', what: 'Met voorrang terugbellen gevraagd', tag: 'Spoed' },
+      { who: 'Koper driekamerappartement', what: 'Bezichtiging zaterdag 11.00 uur', tag: 'Gekwalificeerd' },
+      { who: 'Vraag over openingstijden', what: 'Antwoord gegeven', tag: 'Opgelost' },
+    ],
+    title: 'Uw klantomgeving, overzichtelijk vanaf de eerste keer inloggen',
+    intro: 'Gesprekken, afspraken, leads, berichten en minuten: alles zichtbaar op één plek, op de computer en op uw telefoon.',
+    points: ['Samenvatting van elk gesprek en de volgende actie', 'Opnames en transcripties terugluisteren', 'Minutenverbruik volgen en meldingen', 'Uw agents instellen zonder code'],
+    roles: 'Toegang per rol voor elk teamlid (Callcenter-abonnement).',
+    dashboard: 'Dashboard',
+    sampleData: 'Voorbeeldgegevens · afgelopen 30 dagen',
+    stats: [['Gesprekken', '412'], ['Afspraken', '96'], ['Leads', '183'], ['Minuten', '62%']],
+    notification: 'Melding',
+    notifBooking: 'Nieuwe afspraak geboekt door de agent: dinsdag 9.30 uur.',
+    notifMinutes: 'Minuten: 62% gebruikt.',
+  },
+
+  beforeAfter: {
+    without: 'Zonder AI-agent',
+    with: (brand: string) => `Met ${brand}`,
+  },
+
+  mock: {
+    call: {
+      agent: 'Receptieagent',
+      meta: 'Inkomend gesprek · 01:24',
+      client: 'Goedendag, ik wil graag een afspraak maken.',
+      reply: 'Natuurlijk. Is het voor een eerste bezoek?',
+    },
+    calendar: {
+      days: ['Ma', 'Di', 'Wo', 'Do', 'Vr'],
+      week: 'Week 42',
+      added: 'Afspraak toegevoegd door de agent',
+      slot: 'Dinsdag · 9.30 – 10.00 uur',
+    },
+    transcript: {
+      label: 'Transcriptie',
+      question: 'Wat is ongeveer uw budget?',
+      answer: 'Rond de € 300.000.',
+      summaryLabel: 'Samenvatting:',
+      summary: ' aankoop, budget € 300.000, bezichtiging gewenst op zaterdag.',
+    },
+    knowledge: {
+      title: 'Kennisbank',
+      rows: [
+        { name: 'procedures-ontvangst.pdf', meta: 'Pdf · 1,2 MB' },
+        { name: 'Pagina’s van uw website', meta: '18 pagina’s geïndexeerd' },
+        { name: 'Prijzen en openingstijden', meta: 'Vandaag bijgewerkt' },
+      ],
+    },
+    prompt: {
+      title: 'Doel van het gesprek',
+      hint: 'Beschrijf wat de agent moet bereiken.',
+      text: 'De patiënt ontvangen, nagaan of het een nieuwe patiënt is, twee tijdsloten voorstellen en per sms bevestigen.',
+      tags: ['Toon: hartelijk', 'U-vorm', 'Geen medisch advies'],
+    },
+    flow: {
+      title: 'Scenario: weblead',
+      steps: [
+        { title: 'Nieuw formulier', source: 'Website' },
+        { title: 'Lead bellen', source: 'Verkoopagent' },
+        { title: 'Kaart aanmaken', source: 'CRM' },
+        { title: 'Bevestiging sturen', source: 'WhatsApp' },
+      ],
+    },
+    numbers: {
+      title: 'Uw lijnen',
+      rows: [
+        { country: 'Nederland', kind: 'Lokaal nummer', agent: 'Receptieagent' },
+        { country: 'België', kind: 'Lokaal nummer', agent: 'Afsprakenagent' },
+        { country: 'Uw telefooncentrale', kind: 'SIP-trunk', agent: 'Doorschakeling buiten openingstijden' },
+      ],
+    },
+    report: {
+      handled: 'Afgehandelde gesprekken · voorbeeld',
+      demo: 'Demo',
+      stats: [['Afspraken', '96'], ['Gekwalificeerd', '183'], ['Doorverbonden', '27']],
+    },
+    widget: {
+      question: 'Een vraag? Laten we praten.',
+      talk: 'Praat met de agent',
+      callback: 'Terugbellen',
+    },
+    whatsapp: {
+      title: 'WhatsApp · Bevestiging',
+      confirmation: 'Uw afspraak op dinsdag om 9.30 uur is bevestigd. Antwoord 2 om te verplaatsen.',
+      reply: 'Prima, dank u!',
+    },
+    campaign: {
+      title: 'Campagnes',
+      rows: [['Bevestigingen week 42', 'Bezig', '68%'], ['Opvolging offertes september', 'Afgerond', '41%'], ['Inactieve klanten', 'Gepland', '—']],
+      note: 'Voorbeeldcijfers · alleen gesprekken met contacten die toestemming hebben gegeven',
+    },
+    lead: {
+      title: 'Gekwalificeerde aanvraag',
+      interest: 'Sterke interesse',
+      fields: [['Behoefte', 'Offerte renovatie'], ['Regio', 'Utrecht-Oost'], ['Budget', '€ 8.000 – 12.000'], ['Termijn', 'Binnen 1 maand']],
+      next: 'Volgende actie: morgen om 9.00 uur terugbellen',
+    },
+    support: {
+      client: 'Mijn bestelling is niet aangekomen.',
+      agent: 'Ik kijk het na. Kunt u mij het bestelnummer geven?',
+      found: 'Antwoord gevonden in „leveringsvoorwaarden.pdf”',
+    },
+  },
+};

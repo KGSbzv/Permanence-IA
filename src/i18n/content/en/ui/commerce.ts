@@ -1,0 +1,278 @@
+// Interface text for the sales pages: home, pricing, plans, top-ups, sectors,
+// features, integrations. Figures (prices, minutes, trial days) and the brand
+// come in as parameters from the market (src/i18n/markets.ts): never write them here.
+//
+// Titles with a highlighted keyword are split into { before, kw, after }: `kw` is shown in colour.
+
+export const UI_COMMERCE = {
+  home: {
+    meta: {
+      title: (brand: string) => `${brand} — AI Receptionists that answer every call`,
+      description: (days: number, minutes: number) =>
+        `Automate your calls with AI that answers, qualifies and books for you. ${days}-day free trial, ${minutes} minutes included, prices excl. tax, no commitment.`,
+    },
+    hero: {
+      title: { before: 'AI Receptionists that ', kw: 'answer every call', after: '.' },
+      intro: 'Voice agents that pick up every call, ask the right questions, book appointments and send you a clear summary. Available 24/7, set up for your trade, live in a few minutes.',
+      photoAlt: 'Business owner reading a call summary on her phone',
+    },
+    showcase: { title: 'See the agent at work in your trade', intro: 'Choose a sector: the call plays out, then the request arrives ready to handle.' },
+    benefits: { title: 'What the agent does for your business', intro: 'A voice agent trained on your business, working when your team can’t pick up.' },
+    features: {
+      booking: {
+        title: { before: 'Automate ', kw: 'appointment booking and reminders', after: '' },
+        text: 'Practices, salons, garages, agencies: the agent connects to your calendar, offers free slots, books and confirms. Rescheduling and cancellations included.',
+        points: ['Live calendar: Google, Outlook, Cal.com, Calendly', 'Confirmation by SMS or WhatsApp', 'Reminder the day before the appointment'],
+        link: 'See appointment booking',
+      },
+      support: {
+        title: { before: 'Answer ', kw: 'your customers’ questions', after: ' with no waiting' },
+        text: 'The agent relies on your documents, web pages and procedures. It answers accurately, and transfers anything that needs a person to your team.',
+        points: ['Knowledge base: PDFs, website, data', 'Several calls at once, with no queue', 'Transfer to a person based on your rules'],
+        link: 'See customer support',
+      },
+      leads: {
+        title: { before: 'Qualify and ', kw: 'call back your prospects', after: ' faster' },
+        text: 'A form completed on your website becomes a call within minutes. The agent qualifies, follows up and prepares a record your team can act on straight away.',
+        points: ['Pre-qualification on your criteria', 'Automatic follow-ups and confirmations', 'Campaigns to contacts who have given consent'],
+        link: 'See lead qualification',
+      },
+    },
+    useCases: { title: 'An agent for every type of call', intro: 'Inbound, outbound or messages: turn on the uses your business needs.' },
+    platform: {
+      title: 'The complete platform to automate your calls',
+      intro: 'Everything is included: voice, intelligence, telephony, automations and reports, in one place.',
+      link: 'All features',
+    },
+    steps: {
+      title: 'Up and running in four steps',
+      intro: 'You don’t need any technical expertise. We support you at every step.',
+      items: (days: number, minutes: number) => [
+        { title: 'Create your account', text: `Choose your plan: ${days} days free, ${minutes} minutes included, nothing charged during the trial.` },
+        { title: 'Describe your business', text: 'Services, opening hours, common questions, transfer rules.' },
+        { title: 'Test the agent', text: 'Listen to it in the live demo and adjust the tone and answers.' },
+        { title: 'Connect your calls', text: 'Forward your line, get a new number or use SIP, and add the widget to your website.' },
+      ],
+    },
+    sectors: {
+      title: 'Agents tailored to your trade',
+      intro: 'Six sectors where every missed call costs a customer. The agent asks the right questions for each one.',
+      link: 'All sectors',
+    },
+    integrations: {
+      title: 'Connected to your tools',
+      intro: 'Calendar, CRM, messaging, telephony: the agent works with what you already use. The flow builder connects over 300 tools without code, like Zapier or Make.',
+      link: 'See all integrations',
+    },
+    pricing: {
+      title: 'Clear plans, prices excl. tax',
+      intro: 'Choose based on your call volume. The bigger the plan, the less each minute costs.',
+      compare: 'Compare all included features',
+    },
+    faq: {
+      title: 'Frequently asked questions',
+      intro: 'Can’t find your answer? Leave your number and an adviser will call you back.',
+      link: 'All questions',
+    },
+  },
+
+  tarifs: {
+    meta: {
+      title: (brand: string) => `Pricing — plans excl. tax and top-ups · ${brand}`,
+      /** One plan in the description: `price` and `minutes` already formatted. */
+      plan: (name: string, price: string, minutes: string) => `${name} ${price} excl. tax / ${minutes} min`,
+      description: (plans: string[], days: number, minutes: number) =>
+        `${plans.join(', ')}. ${days}-day free trial, ${minutes} minutes included.`,
+    },
+    hero: {
+      title: 'Choose the plan that fits your call volume',
+      intro: (days: number, minutes: number) =>
+        `All prices are shown excluding tax. The bigger the plan, the less each minute costs. The free trial includes ${days} days and ${minutes} minutes of calls.`,
+      moreMinutes: 'Need more minutes? Add a top-up at any time.',
+    },
+    matrix: {
+      title: 'What’s included in your interface',
+      intro: 'Each row matches a page or feature you will find in your customer area. Nothing else is hidden behind a button.',
+    },
+    recharges: {
+      title: 'Need more minutes?',
+      intro: 'A top-up covers a busy month. For regular volume, the next plan up is still the most economical option.',
+      link: 'How top-ups work',
+    },
+    faq: {
+      title: 'Questions about pricing',
+      intro: 'Not sure which plan suits you? Request a callback, or try the agent live.',
+      primary: 'Start for free',
+      demo: 'See the live demo',
+    },
+    finalCta: (minutes: number) => `Start with ${minutes} free minutes`,
+  },
+
+  offer: {
+    metaTitleTrial: (days: number, minutes: number, brand: string) => `${days}-day free trial — ${minutes} minutes · ${brand}`,
+    /** `monthly`: adds "excl. tax / month" when the price is a monthly amount. */
+    metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `${name} plan — ${price}${monthly ? ' excl. tax / month' : ''} · ${brand}`,
+    metaDescription: (title: string, days: number, minutes: number) => `${title}. ${days}-day free trial, ${minutes} minutes included, prices excl. tax.`,
+    breadcrumb: 'Pricing',
+    productName: (brand: string, name: string) => `${brand} ${name}`,
+    eyebrow: (name: string, audience: string) => `${name} plan · ${audience}`,
+    demo: 'Try our agent live',
+    perMonth: 'excl. tax / month',
+    perMinuteLine: (perMinute: string) => `that’s ${perMinute} within the plan`,
+    facts: {
+      minutes: 'Included minutes',
+      more: 'Need more?',
+      moreCustom: 'Negotiated volume',
+      moreDefault: 'Top up at any time',
+      commitment: 'Commitment',
+      commitmentValue: 'None',
+    },
+    included: {
+      title: 'What you get in your interface',
+      intro: 'The exact list of features available with this plan.',
+      notIncluded: 'Not included',
+      includedLabel: 'Included',
+      compare: 'Compare with the other plans',
+    },
+    modules: { title: 'The core modules of this plan' },
+    extra: {
+      title: 'Extra minutes',
+      intro: 'A busier month? Add a top-up. Growing volume? Move up a plan.',
+    },
+    others: { title: 'Other plans' },
+    faq: { title: 'Frequently asked questions' },
+  },
+
+  recharges: {
+    meta: {
+      title: (brand: string) => `Minute top-ups — ${brand}`,
+      description: (price: string, minutes: string) =>
+        `Credit top-ups from ${price} excl. tax for ${minutes} extra minutes. Add minutes at any time; move up a plan when your volume grows.`,
+    },
+    hero: {
+      title: 'Add minutes at any time',
+      intro: 'A top-up covers a busier month. If you top up often, the next plan up becomes more economical: we will let you know.',
+    },
+    how: {
+      title: 'How it works',
+      steps: (min: string, max: string) => [
+        { title: 'Track your usage', text: 'Your dashboard shows the minutes used and remaining.' },
+        { title: 'Add credit', text: `A top-up from ${min} to ${max}, in one click from your customer area.` },
+        { title: 'Carry on without interruption', text: 'Credit pays for minutes beyond your plan and never expires.' },
+      ],
+    },
+  },
+
+  sectorsIndex: {
+    meta: {
+      title: (brand: string) => `Sectors — AI voice agents by trade · ${brand}`,
+      description: 'Home services, dental and clinics, real estate, garages, beauty, restaurants and hospitality: an AI voice agent tailored to each trade.',
+    },
+    hero: {
+      title: 'A voice agent tailored to your trade',
+      intro: 'We have chosen six sectors where calls come in when teams are busy, and where every missed enquiry costs a customer.',
+    },
+    other: {
+      title: 'Your business isn’t on the list?',
+      intro: 'Law firms, e-commerce, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
+      primary: 'Start for free',
+      demo: 'Try our agent live',
+    },
+  },
+
+  sector: {
+    meta: {
+      title: (name: string, brand: string) => `${name}: 24/7 AI voice agent — ${brand}`,
+      /** `short` is the sector's short sentence, without a final full stop. */
+      description: (name: string, short: string, days: number, minutes: number) =>
+        `${name}: ${short}. ${days}-day free trial, ${minutes} minutes included, prices excl. tax.`,
+    },
+    breadcrumb: 'Sectors',
+    liveCallTitle: (name: string) => `${name} agent`,
+    change: {
+      title: 'What changes when the agent answers for you',
+      intro: (targets: string) => `${targets}. In your trade, every unanswered call is an enquiry that goes elsewhere.`,
+    },
+    handles: {
+      title: 'What the agent handles for your business',
+      intro: 'It asks the questions you would ask, in a natural order, and sends you a complete request.',
+    },
+    /** Benefits title: "agency" for real estate, "business" elsewhere. */
+    benefitsTitle: (slug: string) => `What it changes for your ${slug === 'immobilier' ? 'agency' : 'business'}`,
+    how: { title: 'How it works' },
+    includes: { title: 'What’s included', intro: 'The most useful modules for your trade, all available in your customer area.' },
+    integrations: {
+      title: 'Useful integrations',
+      intro: 'Your calendar, CRM, messaging and telephony stay the same: the agent connects to them.',
+    },
+    pricing: {
+      title: 'Prices excl. tax, no commitment',
+      intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
+        `For the ${sectorName.toLowerCase()} sector, we recommend the ${offerName} plan. Start with the free trial: ${days} days and ${minutes} minutes included.`,
+      link: (offerName: string) => `See the ${offerName} plan details`,
+    },
+    faq: { title: (name: string) => `Frequently asked questions — ${name}` },
+    callback: {
+      title: 'Get in touch: leave your number and we’ll call you back',
+      text: 'An adviser will call you back to look at your case.',
+    },
+    others: { title: 'Other sectors' },
+    finalCta: 'Ready to stop missing calls?',
+  },
+
+  featuresIndex: {
+    meta: {
+      title: (brand: string) => `Features — AI calling platform · ${brand}`,
+      description: 'AI receptionist, appointment booking, support, qualification, campaigns, WhatsApp, knowledge base, flow builder, SIP, reporting and web widget.',
+    },
+    hero: {
+      title: 'Everything you need to automate your calls',
+      intro: 'Thirteen modules, turned on according to your plan, from your customer area.',
+    },
+    overview: { title: 'Overview' },
+  },
+
+  feature: {
+    meta: {
+      title: (name: string, brand: string) => `${name} — AI voice agent | ${brand}`,
+      /** `short` is the module's benefit sentence, without a final full stop. */
+      description: (short: string, offerName: string, days: number) => `${short}. Included from the ${offerName} plan. ${days}-day free trial.`,
+    },
+    breadcrumb: 'Features',
+    eyebrow: (family: string, name: string) => `${family} · ${name}`,
+    uses: { title: 'What it’s for' },
+    from: {
+      title: (offerName: string) => `Included from the ${offerName} plan`,
+      /** `price` already formatted in the market currency. */
+      priceLine: (price: string, minutes: string) => `${price} excl. tax / month · ${minutes}`,
+      offerLink: (offerName: string) => `See the ${offerName} plan`,
+      compare: 'Compare plans',
+    },
+    how: { title: 'How it works' },
+    cases: { title: 'Use cases' },
+    integrations: { title: 'Related integrations', link: 'All integrations' },
+    more: { title: 'You might also like' },
+  },
+
+  integrations: {
+    meta: {
+      title: (brand: string) => `Integrations — calendar, CRM, WhatsApp, SIP · ${brand}`,
+      description: 'Connect the AI voice agent to Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP and over 300 tools without code.',
+    },
+    hero: {
+      title: 'Connected to the tools you already use',
+      intro: 'Calendar, CRM, messaging, telephony: the agent fits into the way you work, and the flow builder connects over 300 tools without code.',
+    },
+    flow: {
+      title: { before: 'Build your automations ', kw: 'without code', after: '' },
+      text: 'A completed form, a finished call, a new lead: each event can trigger a series of actions in your tools, as in Zapier or Make, straight from your customer area.',
+      points: ['Over 300 tools available', 'Drag and drop, no development', 'Tests before activation'],
+      link: 'See the flow builder',
+    },
+    api: {
+      title: { before: 'Webhooks and API for ', kw: 'your systems', after: '' },
+      text: 'With the Call Centre plan, receive every completed call and its extracted data in your own systems, or control the agent from your software.',
+      points: ['Webhook after every call', 'Extracted variables: outcome, interest, time slot', 'MCP tools for your assistants'],
+    },
+  },
+};
