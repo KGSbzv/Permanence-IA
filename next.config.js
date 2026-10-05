@@ -2,6 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   images: { unoptimized: true },
+  // Autorise l’interface white-label à récupérer les logos et icônes du site.
+  async headers() {
+    const cors = [{ key: 'Access-Control-Allow-Origin', value: 'https://app.autocalls.ai' }];
+    return [
+      { source: '/logo/:path*', headers: cors },
+      { source: '/icon-:size.png', headers: cors },
+    ];
+  },
   async redirects() {
     return [
       { source: '/plombiers', destination: '/secteurs/services-a-domicile', permanent: true },
