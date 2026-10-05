@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS signups (
   ended_sent_at TIMESTAMP WITH TIME ZONE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
-CREATE INDEX IF NOT EXISTS idx_signups_email ON signups(email);
+CREATE UNIQUE INDEX IF NOT EXISTS uniq_signups_email ON signups(email);
 
 -- 7. Appels et conversations des agents (webhooks post-call et conversation ended)
 CREATE TABLE IF NOT EXISTS call_events (

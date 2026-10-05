@@ -61,9 +61,13 @@ export default function Confidentialite() {
                 Pour exécuter ses engagements contractuels, Permanence IA s&apos;appuie sur des partenaires techniques de premier ordre, tous soumis à des obligations strictes de sécurité et de confidentialité :
               </p>
               <ul className="list-disc pl-5 space-y-1.5">
-                <li><strong>Stripe Payments Europe :</strong> Gestion des abonnements et encaissements conformes à la norme bancaire PCI-DSS Niveau 1.</li>
-                <li><strong>Supabase / AWS UE :</strong> Stockage des bases de données PostgreSQL hébergées sur le territoire de l&apos;Union Européenne (Région AWS Irlande).</li>
-                <li><strong>Réseaux Télécoms &amp; Traitement vocal :</strong> Passerelles voix conformes aux standards européens de téléphonie chiffrée.</li>
+                <li><strong>Autocalls :</strong> plateforme technique des agents vocaux (traitement des appels, transcription, synthèse vocale, espace client).</li>
+                <li><strong>Stripe :</strong> gestion des abonnements, des paiements et des taxes (norme PCI-DSS niveau 1).</li>
+                <li><strong>Supabase :</strong> base de données des demandes de rappel et des inscriptions, hébergée aux États-Unis (AWS, Virginie).</li>
+                <li><strong>Google Cloud (Firebase App Hosting) :</strong> hébergement du site, aux États-Unis.</li>
+                <li><strong>Zoho Mail :</strong> envoi des emails de confirmation et de suivi.</li>
+                <li><strong>Opérateurs télécoms et fournisseurs de voix et d&apos;IA</strong> utilisés par la plateforme pour acheminer les appels et générer les réponses.</li>
+                <li><strong>Transferts hors Union européenne :</strong> certains de ces prestataires sont situés aux États-Unis ; les transferts sont encadrés par les clauses contractuelles types de la Commission européenne ou un mécanisme équivalent.</li>
               </ul>
             </section>
 

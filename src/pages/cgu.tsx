@@ -68,10 +68,10 @@ export default function CGU() {
                 Article 4 &mdash; Facturation, Tarifs &amp; Résiliation
               </h2>
               <p>
-                Les règlements sont opérés mensuellement ou annuellement via notre prestataire de paiement sécurisé Stripe. L&apos;abonnement est reconduit tacitement pour des périodes successives de même durée.
+                Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées automatiquement au paiement selon le pays du client et son statut (particulier ou entreprise, avec ou sans numéro de TVA). Les règlements sont opérés mensuellement via notre prestataire de paiement sécurisé Stripe ; l&apos;abonnement est reconduit tacitement chaque mois.
               </p>
               <p>
-                Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord <strong>app.permanenceia.com</strong>. La résiliation prendra effet au terme de la période mensuelle ou annuelle déjà acquittée.
+                Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord <strong>app.permanenceia.com</strong>. La résiliation prendra effet au terme de la période mensuelle déjà acquittée. Le client peut changer de forfait à tout moment et ajouter des minutes par une recharge de crédit ; le crédit acheté ne périme pas et sert à payer les minutes au-delà du forfait, au tarif de minute supplémentaire indiqué sur la page Tarifs.
               </p>
             </section>
 

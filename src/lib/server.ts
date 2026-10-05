@@ -26,6 +26,18 @@ export async function dbInsert(table: string, row: Record<string, unknown>) {
   if (!res.ok) throw new Error(`Supabase ${table} ${res.status}: ${(await res.text()).slice(0, 200)}`);
 }
 
+/** Insère la ligne si elle n’existe pas (contrainte unique) ; renvoie true seulement si elle a été créée. */
+export async function dbInsertIfNew(table: string, row: Record<string, unknown>, onConflict: string) {
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}?on_conflict=${onConflict}`, {
+    method: 'POST',
+    headers: supabaseHeaders({ Prefer: 'resolution=ignore-duplicates,return=representation' }),
+    body: JSON.stringify(row),
+  });
+  if (!res.ok) throw new Error(`Supabase ${table} ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  const created = await res.json().catch(() => []);
+  return Array.isArray(created) && created.length > 0;
+}
+
 export async function dbSelect<T>(table: string, query: string): Promise<T[]> {
   const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}?${query}`, { headers: supabaseHeaders() });
   if (!res.ok) throw new Error(`Supabase ${table} ${res.status}`);
