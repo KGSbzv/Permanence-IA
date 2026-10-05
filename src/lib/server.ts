@@ -79,4 +79,15 @@ export function toE164(raw: string) {
   return null;
 }
 
+/** Numéros que l’agent peut rappeler automatiquement : pays desservis, hors numéros surtaxés ou spéciaux. */
+const CALLABLE = [
+  /^\+33[1-79]\d{8}$/, // France métropolitaine (hors 08)
+  /^\+32[1-9]\d{7,8}$/, // Belgique
+  /^\+41[1-79]\d{8}$/, // Suisse
+  /^\+352\d{6,9}$/, // Luxembourg
+  /^\+377\d{8}$/, // Monaco
+  /^\+1(?!(?:900|976|8(?:00|33|44|55|66|77|88)))[2-9]\d{2}[2-9]\d{6}$/, // États-Unis / Canada hors surtaxés et numéros verts
+];
+export const isAutoCallable = (e164: string) => CALLABLE.some((r) => r.test(e164));
+
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));

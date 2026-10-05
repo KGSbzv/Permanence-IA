@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, dbInsert, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, sendMail, toE164 } from '@/lib/server';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -19,7 +19,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const leadHook = row.type === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
   const e164 = toE164(String(phone));
   const queueCall = async () => {
-    if (!leadHook || !e164) throw new Error(leadHook ? `numéro non reconnu : ${phone}` : 'webhook de campagne non configuré');
+    if (!leadHook) throw new Error('webhook de campagne non configuré');
+    // Garde-fous contre les appels abusifs : pays desservis seulement, et une seule demande par numéro sur 7 jours.
+    if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
+    const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
+    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(String(phone))}&created_at=gte.${since}&limit=2`);
+    if (recent.length > 1) throw new Error('demande déjà en file pour ce numéro');
     const r = await fetch(leadHook, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone: e164, company: company || '', sector: sector || '', note: [note, slot && `Créneau souhaité : ${slot}`].filter(Boolean).join(' — ') }),
@@ -27,11 +32,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!r.ok) throw new Error(`campagne ${r.status}`);
   };
 
-  const [db, mail, call] = await Promise.allSettled([
+  const [db, mail] = await Promise.allSettled([
     dbInsert('callbacks', row),
     sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
-    queueCall(),
   ]);
+  // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
+  const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée'))]);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   if (call.status === 'rejected') console.error('[callback] campagne:', call.reason?.message);
