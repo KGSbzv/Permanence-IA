@@ -2,16 +2,17 @@
 // ce que ça inclut, intégrations, économie, sécurité, FAQ métier, preuve visuelle, CTA final.
 import React from 'react';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { AlertTriangle } from 'lucide-react';
 import Layout from '@/components/Layout';
 import LiveCall from '@/components/LiveCall';
+import { BeforeAfter, PortalPreview } from '@/components/extras';
 import { CTAs, CallbackForm, FaqDark, Heading, Section, Tick, TrialBadges } from '@/components/ui';
 import {
-  DemoBlock, EconomyBlock, FinalCTA, IntegrationsGrid, LaunchBlock, ModuleCards, PricingCards, SECTOR_ICON,
+  DemoBlock, EconomyBlock, FinalCTA, GrowthLines, IntegrationsGrid, ModuleCards, PricingCards, SECTOR_ICON,
   SectorCards, SectorVisual, SecurityBlock, Steps,
 } from '@/components/blocks';
 import { SECTORS, Sector } from '@/data/sectors';
 import { SITE } from '@/data/site';
+import { offer } from '@/data/offers';
 
 export default function SectorPage({ slug }: { slug: string }) {
   const s = SECTORS.find((x) => x.slug === slug) as Sector;
@@ -43,18 +44,10 @@ export default function SectorPage({ slug }: { slug: string }) {
         </div>
       </section>
 
-      {/* Problème métier */}
+      {/* Problème métier : avant / après */}
       <Section>
-        <div className="grid gap-10 lg:grid-cols-2">
-          <Heading title="Ce qui vous fait perdre des clients aujourd’hui" intro={`${s.targets}. Dans votre métier, chaque appel sans réponse est une demande qui part ailleurs.`} />
-          <ul className="space-y-4">
-            {s.problems.map((p) => (
-              <li key={p} className="flex gap-3 rounded-2xl border border-line bg-white p-5">
-                <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-signal" aria-hidden /><span className="text-ink">{p}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Heading title="Ce qui change quand l’agent répond à votre place" intro={`${s.targets}. Dans votre métier, chaque appel sans réponse est une demande qui part ailleurs.`} />
+        <div className="mt-10"><BeforeAfter before={s.problems} after={s.benefits.slice(0, 3)} /></div>
       </Section>
 
       {/* Ce que l’agent prend en charge + preuve visuelle */}
@@ -91,6 +84,8 @@ export default function SectorPage({ slug }: { slug: string }) {
         <div className="mt-10"><ModuleCards slugs={s.modules} /></div>
       </Section>
 
+      <Section tone="paper"><PortalPreview /></Section>
+
       <DemoBlock sector={s.slug} />
 
       {/* Intégrations */}
@@ -105,9 +100,9 @@ export default function SectorPage({ slug }: { slug: string }) {
 
       {/* Prix HT */}
       <Section>
-        <Heading title="Prix HT, sans engagement" intro={`Pour ${s.name.toLowerCase()}, nous recommandons l’offre ${s.offer === 'pro' ? 'Pro' : 'Croissance'}. Commencez par l’essai gratuit.`} />
-        <div className="mt-10"><PricingCards only={['essentiel', 'croissance', 'pro']} /></div>
-        {s.launchPush && <div className="mt-14"><LaunchBlock /></div>}
+        <Heading title="Prix HT, sans engagement" intro={`Pour ${s.name.toLowerCase()}, nous recommandons le forfait ${offer(s.offer).name}. Commencez par l’essai gratuit : 14 jours et 30 minutes incluses.`} />
+        <div className="mt-10"><PricingCards only={['receptionniste', 'assistant', 'centre-appels']} /></div>
+        <GrowthLines className="mt-6" />
       </Section>
 
       <Section tone="paper"><SecurityBlock /></Section>

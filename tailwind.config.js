@@ -36,11 +36,13 @@ module.exports = {
         rise: { from: { opacity: '0', transform: 'translateY(6px)' }, to: { opacity: '1', transform: 'none' } },
         pulsering: { '0%': { boxShadow: '0 0 0 0 rgba(15,163,196,.45)' }, '100%': { boxShadow: '0 0 0 14px rgba(15,163,196,0)' } },
         wave: { '0%,100%': { transform: 'scaleY(.35)' }, '50%': { transform: 'scaleY(1)' } },
+        marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
       },
       animation: {
         rise: 'rise .45s ease-out both',
         pulsering: 'pulsering 1.8s ease-out infinite',
         wave: 'wave 1.1s ease-in-out infinite',
+        marquee: 'marquee 40s linear infinite',
       },
     },
   },

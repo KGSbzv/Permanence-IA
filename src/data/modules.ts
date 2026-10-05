@@ -34,7 +34,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Appels hors horaires', 'Pics d’appels pendant les rendez-vous', 'Premier tri avant transfert'],
     integrations: ['Calendrier', 'Widget web', 'SIP', 'Webhooks'],
-    from: 'essentiel', mock: 'call',
+    from: 'receptionniste', mock: 'call',
   },
   {
     slug: 'demo-live', name: 'Démo live de l’agent', family: 'Téléphonie',
@@ -64,7 +64,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Cabinets et cliniques', 'Salons et instituts', 'Ateliers et garages'],
     integrations: ['Google Agenda', 'Outlook', 'Cal.com', 'Calendly'],
-    from: 'essentiel', mock: 'calendar',
+    from: 'receptionniste', mock: 'calendar',
   },
   {
     slug: 'support-client', name: 'Support client', family: 'Automatisation',
@@ -79,7 +79,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Suivi de commande ou de dossier', 'Questions horaires et tarifs', 'Premier niveau technique'],
     integrations: ['Base de connaissances', 'Transfert humain', 'Webhooks'],
-    from: 'essentiel', mock: 'support',
+    from: 'receptionniste', mock: 'support',
   },
   {
     slug: 'qualification-des-leads', name: 'Qualification des leads', family: 'CRM et données',
@@ -94,7 +94,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Demandes de devis', 'Prospects immobiliers', 'Leads de campagnes'],
     integrations: ['HubSpot', 'Zoho CRM', 'Google Sheets', 'Webhooks'],
-    from: 'croissance', mock: 'lead',
+    from: 'assistant', mock: 'lead',
   },
   {
     slug: 'campagnes-sortantes', name: 'Campagnes sortantes', family: 'Automatisation',
@@ -109,7 +109,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Confirmations', 'Relances de devis', 'Renouvellements et ventes additionnelles'],
     integrations: ['Leads', 'CRM', 'Liste de blocage'],
-    from: 'croissance', mock: 'campaign',
+    from: 'assistant', mock: 'campaign',
   },
   {
     slug: 'whatsapp-messages', name: 'WhatsApp et messages', family: 'Messages',
@@ -124,7 +124,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Récapitulatif de rendez-vous', 'Liste d’attente', 'Réponses aux messages'],
     integrations: ['WhatsApp', 'SMS', 'Messenger', 'Instagram'],
-    from: 'croissance', mock: 'whatsapp',
+    from: 'assistant', mock: 'whatsapp',
   },
   {
     slug: 'base-de-connaissances', name: 'Base de connaissances', family: 'CRM et données',
@@ -139,7 +139,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Tarifs et horaires', 'Procédures internes', 'Conditions et politiques'],
     integrations: ['PDF', 'Pages web', 'API'],
-    from: 'essentiel', mock: 'knowledge',
+    from: 'receptionniste', mock: 'knowledge',
   },
   {
     slug: 'editeur-de-prompts', name: 'Éditeur de prompts', family: 'Automatisation',
@@ -154,7 +154,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Accueil', 'Qualification', 'Support'],
     integrations: ['Modèles de prompts', 'Démo live'],
-    from: 'essentiel', mock: 'prompt',
+    from: 'receptionniste', mock: 'prompt',
   },
   {
     slug: 'flow-builder', name: 'Flow builder', family: 'Automatisation',
@@ -169,7 +169,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Lead web rappelé en quelques minutes', 'Fiche CRM créée après l’appel', 'Alerte équipe sur urgence'],
     integrations: ['HubSpot', 'Zoho', 'Google Sheets', 'Cal.com'],
-    from: 'croissance', mock: 'flow',
+    from: 'assistant', mock: 'flow',
   },
   {
     slug: 'sip-numeros', name: 'SIP et numéros', family: 'Téléphonie',
@@ -184,7 +184,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Renvoi du standard', 'Lignes par établissement', 'Numéros internationaux'],
     integrations: ['SIP', 'Twilio', 'Telnyx'],
-    from: 'croissance', mock: 'numbers',
+    from: 'assistant', mock: 'numbers',
   },
   {
     slug: 'reporting', name: 'Reporting', family: 'Pilotage',
@@ -199,7 +199,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Suivi hebdomadaire', 'Comparaison par agent', 'Usage des minutes'],
     integrations: ['Export', 'Webhooks', 'API'],
-    from: 'essentiel', mock: 'report',
+    from: 'receptionniste', mock: 'report',
   },
   {
     slug: 'widget-web', name: 'Widget web', family: 'Messages',

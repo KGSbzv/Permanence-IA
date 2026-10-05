@@ -1,21 +1,21 @@
 // Offres HT (doc 92) et fonctions incluses, alignées sur les pages et fonctions
 // réellement activables dans l’interface client white-label (admin Autocalls).
 
-export type OfferSlug = 'decouverte' | 'essentiel' | 'croissance' | 'pro' | 'sur-mesure';
+export type OfferSlug = 'decouverte' | 'receptionniste' | 'assistant' | 'centre-appels' | 'sur-mesure';
 
 export interface Offer {
   slug: OfferSlug;
   name: string;
   audience: string;
-  launchPrice: number | null; // € HT / mois au lancement
-  normalPrice: number | null; // € HT / mois ensuite
-  priceLabel?: string; // pour Découverte et Sur mesure
+  price: number | null; // € HT / mois (null = sur devis)
+  priceLabel?: string;
   minutes: string;
-  overage: string;
+  minutesCount: number; // pour le calculateur et le prix par minute
+  perMinute?: string; // coût réel par minute du forfait
   title: string; // titre de la page offre
   pitch: string;
   cta: string;
-  highlights: string[]; // résumé carte tarif
+  highlights: string[];
   featured?: boolean;
 }
 
@@ -24,11 +24,10 @@ export const OFFERS: Offer[] = [
     slug: 'decouverte',
     name: 'Découverte',
     audience: 'Pour tester l’agent sur votre activité',
-    launchPrice: 0,
-    normalPrice: 0,
+    price: 0,
     priceLabel: '0 €',
     minutes: '30 minutes sur 14 jours',
-    overage: 'Passage à une offre payante',
+    minutesCount: 30,
     title: 'Testez l’agent gratuitement pendant 14 jours',
     pitch:
       'Découvrez la plateforme, configurez un premier agent, essayez la démo live et utilisez jusqu’à 30 minutes d’appels pour valider le potentiel sur votre activité.',
@@ -36,62 +35,61 @@ export const OFFERS: Offer[] = [
     highlights: ['1 agent de test', 'Démo live de l’agent', 'Widget web et formulaire de rappel', 'Aperçu de la base de connaissances'],
   },
   {
-    slug: 'essentiel',
-    name: 'Essentiel',
+    slug: 'receptionniste',
+    name: 'Réceptionniste',
     audience: 'Indépendants et petites structures',
-    launchPrice: 59,
-    normalPrice: 79,
-    minutes: '150 min / mois',
-    overage: '0,19 € HT / min ou recharge',
-    title: 'L’offre simple pour ne plus perdre les demandes importantes',
+    price: 99,
+    minutes: '300 min / mois',
+    minutesCount: 300,
+    perMinute: '0,33 € HT / min',
+    title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch:
-      'Essentiel capte les appels, qualifie les demandes et organise les rappels, sans complexité. Votre réceptionniste IA répond 24/7 et vous transmet un résumé clair de chaque demande.',
-    cta: 'Démarrer Essentiel',
+      'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
+    cta: 'Choisir Réceptionniste',
     highlights: ['Réceptionniste IA 24/7', 'Agenda connecté', 'Widget web de rappel', 'Transfert vers un humain'],
   },
   {
-    slug: 'croissance',
-    name: 'Croissance',
+    slug: 'assistant',
+    name: 'Assistant',
     audience: 'Entreprises locales à volume régulier',
-    launchPrice: 129,
-    normalPrice: 179,
-    minutes: '500 min / mois',
-    overage: '0,156 à 0,138 € HT / min selon le lot',
-    title: 'La meilleure offre pour automatiser vos demandes à volume régulier',
+    price: 249,
+    minutes: '800 min / mois',
+    minutesCount: 800,
+    perMinute: '0,31 € HT / min',
+    title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch:
-      'Croissance combine capture, qualification, rappels, agenda, messages et scénarios automatisés pour les entreprises qui veulent convertir plus de demandes.',
-    cta: 'Choisir Croissance',
-    highlights: ['Tout Essentiel', 'Flow builder et automatisations', 'Campagnes et leads', 'SMS, WhatsApp et Instagram', 'Vos numéros via SIP'],
+      'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
+    cta: 'Choisir Assistant',
+    highlights: ['Tout Réceptionniste', 'Flow builder et automatisations', 'Campagnes et leads', 'SMS, WhatsApp et Instagram', 'Vos numéros via SIP'],
     featured: true,
   },
   {
-    slug: 'pro',
-    name: 'Pro',
-    audience: 'Équipes et activités multiservices',
-    launchPrice: 249,
-    normalPrice: 349,
-    minutes: '1 500 min / mois',
-    overage: '0,129 € HT / min ou add-on',
-    title: 'L’offre la plus complète pour structurer l’accueil, les rendez-vous et le support',
+    slug: 'centre-appels',
+    name: 'Centre d’appels',
+    audience: 'Équipes, multi-services et gros volumes',
+    price: 499,
+    minutes: '2 000 min / mois',
+    minutesCount: 2000,
+    perMinute: '0,25 € HT / min',
+    title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch:
-      'Pro ajoute le reporting détaillé, les rôles, plusieurs agents et plusieurs métiers, la base de connaissances avancée et les connexions API pour professionnaliser votre réception IA.',
-    cta: 'Profiter du tarif de lancement',
-    highlights: ['Tout Croissance', 'Rapports détaillés', 'Multi-agents et rôles', 'API, webhooks et outils MCP', 'Support prioritaire'],
+      'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
+    cta: 'Choisir Centre d’appels',
+    highlights: ['Tout Assistant', 'Multi-agents et rôles', 'Rapports détaillés', 'API, webhooks et outils MCP', 'Support prioritaire'],
   },
   {
     slug: 'sur-mesure',
     name: 'Sur mesure',
-    audience: 'Réseaux, multi-sites et intégrations avancées',
-    launchPrice: null,
-    normalPrice: null,
-    priceLabel: 'À partir de 399 €',
-    minutes: 'À partir de 2 500 min / mois',
-    overage: 'Contractuel',
-    title: 'Une configuration adaptée à vos règles, vos sites et vos intégrations',
+    audience: 'Au-delà de 2 500 minutes régulières',
+    price: null,
+    priceLabel: 'Sur devis',
+    minutes: 'Volume adapté à votre activité',
+    minutesCount: 2500,
+    title: 'Une configuration adaptée à vos volumes, vos sites et vos intégrations',
     pitch:
-      'Pour les réseaux et les organisations multi-sites : quotas personnalisés, règles par établissement, intégrations avancées, SLA et déploiement accompagné.',
+      'Pour les réseaux, les organisations multi-sites et les volumes réguliers au-delà de 2 500 minutes : prix à la minute négocié, règles par établissement, intégrations avancées et déploiement accompagné.',
     cta: 'Parler à un expert',
-    highlights: ['Tout Pro', 'Règles multi-sites', 'Quotas personnalisés', 'SLA et déploiement guidé'],
+    highlights: ['Tout Centre d’appels', 'Prix à la minute négocié', 'Règles multi-sites', 'SLA et déploiement guidé'],
   },
 ];
 
@@ -103,13 +101,13 @@ export type Cell = boolean | string;
 export interface MatrixRow { label: string; detail: string; cells: Record<OfferSlug, Cell> }
 export interface MatrixGroup { group: string; rows: MatrixRow[] }
 
-const all = (v: Cell): Record<OfferSlug, Cell> => ({ decouverte: v, essentiel: v, croissance: v, pro: v, 'sur-mesure': v });
+const all = (v: Cell): Record<OfferSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 
 export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agents et appels',
     rows: [
-      { label: 'Assistants vocaux IA', detail: 'Agents entrants et sortants', cells: { decouverte: '1 de test', essentiel: '1', croissance: '3', pro: 'Multi-agents', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Assistants vocaux IA', detail: 'Agents entrants et sortants', cells: { decouverte: '1 de test', receptionniste: '1', assistant: '3', 'centre-appels': 'Multi-agents', 'sur-mesure': 'Sur mesure' } },
       { label: 'Historique des appels', detail: 'Enregistrements, transcriptions, résumés', cells: { ...all(true), decouverte: 'Limité' } },
       { label: 'Conversations', detail: 'Échanges écrits et vocaux centralisés', cells: all(true) },
       { label: 'Transfert vers un humain', detail: 'Bascule vers votre équipe', cells: { ...all(true), decouverte: false } },
@@ -119,10 +117,10 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Configuration de l’agent',
     rows: [
-      { label: 'Éditeur de prompts IA', detail: 'Comportement, ton, règles', cells: { decouverte: 'Aperçu', essentiel: 'Simplifié', croissance: true, pro: true, 'sur-mesure': true } },
-      { label: 'Base de connaissances', detail: 'PDF, pages web, procédures', cells: { decouverte: 'Aperçu', essentiel: 'Basique', croissance: true, pro: 'Avancée', 'sur-mesure': 'Avancée' } },
-      { label: 'Flow builder', detail: 'Scénarios visuels sans code', cells: { decouverte: false, essentiel: false, croissance: true, pro: 'Avancé', 'sur-mesure': 'Avancé' } },
-      { label: 'Automatisations', detail: 'Plus de 300 outils connectables', cells: { decouverte: false, essentiel: false, croissance: true, pro: true, 'sur-mesure': true } },
+      { label: 'Éditeur de prompts IA', detail: 'Comportement, ton, règles', cells: { decouverte: 'Aperçu', receptionniste: 'Simplifié', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Base de connaissances', detail: 'PDF, pages web, procédures', cells: { decouverte: 'Aperçu', receptionniste: 'Basique', assistant: true, 'centre-appels': 'Avancée', 'sur-mesure': 'Avancée' } },
+      { label: 'Flow builder', detail: 'Scénarios visuels sans code', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Avancé', 'sur-mesure': 'Avancé' } },
+      { label: 'Automatisations', detail: 'Plus de 300 outils connectables', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
@@ -131,50 +129,47 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly', cells: { ...all(true), decouverte: 'Aperçu' } },
       { label: 'Widget web', detail: 'Rappel et appel depuis votre site', cells: all(true) },
       { label: 'Identification de l’appelant', detail: 'Bouton caller ID', cells: { ...all(true), decouverte: false } },
-      { label: 'Leads et préqualification', detail: 'Fiches prospects structurées', cells: { decouverte: false, essentiel: 'Basique', croissance: true, pro: true, 'sur-mesure': true } },
+      { label: 'Leads et préqualification', detail: 'Fiches prospects structurées', cells: { decouverte: false, receptionniste: 'Basique', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
     group: 'Messages et campagnes',
     rows: [
-      { label: 'Campagnes sortantes', detail: 'Relances, confirmations, rappels', cells: { decouverte: false, essentiel: false, croissance: 'Encadrées', pro: true, 'sur-mesure': true } },
-      { label: 'Historique SMS', detail: 'Envois et réponses', cells: { decouverte: false, essentiel: false, croissance: true, pro: true, 'sur-mesure': true } },
-      { label: 'WhatsApp', detail: 'Expéditeurs et templates', cells: { decouverte: false, essentiel: false, croissance: true, pro: true, 'sur-mesure': true } },
-      { label: 'Messenger et Instagram', detail: 'Canaux de messagerie', cells: { decouverte: false, essentiel: false, croissance: true, pro: true, 'sur-mesure': true } },
+      { label: 'Campagnes sortantes', detail: 'Relances, confirmations, rappels', cells: { decouverte: false, receptionniste: false, assistant: 'Encadrées', 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Historique SMS', detail: 'Envois et réponses', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'WhatsApp', detail: 'Expéditeurs et templates', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Messenger et Instagram', detail: 'Canaux de messagerie', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
     group: 'Téléphonie',
     rows: [
-      { label: 'Numéros internationaux', detail: 'Dans plus de 150 pays', cells: { decouverte: false, essentiel: 'En option', croissance: true, pro: true, 'sur-mesure': true } },
-      { label: 'Intégration SIP', detail: 'Vos numéros et votre standard', cells: { decouverte: false, essentiel: false, croissance: true, pro: true, 'sur-mesure': true } },
+      { label: 'Numéros internationaux', detail: 'Dans plus de 150 pays', cells: { decouverte: false, receptionniste: 'En option', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Intégration SIP', detail: 'Vos numéros et votre standard', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Liste de blocage', detail: 'Numéros exclus des appels', cells: { ...all(true), decouverte: false } },
     ],
   },
   {
     group: 'Pilotage et équipe',
     rows: [
-      { label: 'Rapports détaillés', detail: 'Volumes, durées, conversions', cells: { decouverte: false, essentiel: 'Tableau de bord', croissance: 'Tableau de bord', pro: true, 'sur-mesure': true } },
-      { label: 'Rôles et permissions', detail: 'Accès par membre de l’équipe', cells: { decouverte: false, essentiel: false, croissance: false, pro: true, 'sur-mesure': true } },
-      { label: 'API, webhooks et outils MCP', detail: 'Connexion à vos systèmes', cells: { decouverte: false, essentiel: false, croissance: false, pro: true, 'sur-mesure': true } },
-      { label: 'Règles multi-sites et SLA', detail: 'Plusieurs établissements', cells: { decouverte: false, essentiel: false, croissance: false, pro: false, 'sur-mesure': true } },
-      { label: 'Support', detail: 'Accompagnement', cells: { decouverte: 'Ressources', essentiel: 'Standard', croissance: 'Standard', pro: 'Prioritaire', 'sur-mesure': 'Dédié' } },
+      { label: 'Rapports détaillés', detail: 'Volumes, durées, conversions', cells: { decouverte: false, receptionniste: 'Tableau de bord', assistant: 'Tableau de bord', 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Rôles et permissions', detail: 'Accès par membre de l’équipe', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'API, webhooks et outils MCP', detail: 'Connexion à vos systèmes', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Règles multi-sites et SLA', detail: 'Plusieurs établissements', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
+      { label: 'Support', detail: 'Accompagnement', cells: { decouverte: 'Ressources', receptionniste: 'Standard', assistant: 'Standard', 'centre-appels': 'Prioritaire', 'sur-mesure': 'Dédié' } },
     ],
   },
 ];
 
+// Recharges ponctuelles : plus chères à la minute que les forfaits (dépannage, pas solution durable).
 export const RECHARGES = [
-  { minutes: '100 min', launch: 19, normal: 29 },
-  { minutes: '250 min', launch: 39, normal: 59 },
-  { minutes: '500 min', launch: 69, normal: 99 },
-  { minutes: '1 000 min', launch: 129, normal: 179 },
-  { minutes: '2 500 min', launch: 279, normal: 399 },
+  { minutes: '100 min', minutesCount: 100, price: 39 },
+  { minutes: '250 min', minutesCount: 250, price: 89 },
+  { minutes: '500 min', minutesCount: 500, price: 159 },
+  { minutes: '1 000 min', minutesCount: 1000, price: 299 },
+  { minutes: '2 500 min', minutesCount: 2500, price: 699 },
 ];
 
-export const ADDONS = [
-  { minutes: '+300 min / mois', launch: 39, normal: 59 },
-  { minutes: '+800 min / mois', launch: 89, normal: 119 },
-  { minutes: '+1 500 min / mois', launch: 149, normal: 219 },
-];
+export const perMin = (price: number, minutes: number) => `${(price / minutes).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} €`;
 
 export const euro = (n: number) => `${n.toLocaleString('fr-FR')} €`;

@@ -28,7 +28,7 @@ export default function Integrations() {
         <FeatureRow
           reverse
           title={<>Webhooks et API pour <span className="kw">vos systèmes</span></>}
-          text="Avec l’offre Pro, recevez chaque fin d’appel et ses données extraites dans vos propres systèmes, ou pilotez l’agent depuis votre logiciel."
+          text="Avec le forfait Centre d’appels, recevez chaque fin d’appel et ses données extraites dans vos propres systèmes, ou pilotez l’agent depuis votre logiciel."
           points={['Webhook après chaque appel', 'Variables extraites : résultat, intérêt, créneau', 'Outils MCP pour vos assistants']}
           mock={<Mock kind="report" />}
         />

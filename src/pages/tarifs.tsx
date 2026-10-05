@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { EconomyBlock, FinalCTA, LaunchBlock, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
+import { EconomyBlock, FinalCTA, GrowthBlock, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
 import { FAQ_PRICING } from '@/data/faq';
 import { OFFERS } from '@/data/offers';
 import { PRICE_NOTE, SITE } from '@/data/site';
@@ -11,34 +11,34 @@ export default function Tarifs() {
   return (
     <Layout
       title="Tarifs Permanence IA — offres HT, minutes incluses et recharges"
-      description="Découverte 0 €, Essentiel 59 € HT, Croissance 129 € HT, Pro 249 € HT au lancement. 14 jours d’essai gratuit, 30 minutes incluses, sans engagement."
+      description="Réceptionniste 99 € HT / 300 min, Assistant 249 € HT / 800 min, Centre d’appels 499 € HT / 2 000 min. 14 jours d’essai gratuit, 30 minutes incluses, sans engagement."
       jsonLd={{
         '@context': 'https://schema.org', '@type': 'Product', name: 'Permanence IA', brand: 'Permanence IA', url: `${SITE.url}/tarifs`,
-        offers: OFFERS.filter((o) => o.launchPrice !== null).map((o) => ({ '@type': 'Offer', name: o.name, price: o.launchPrice, priceCurrency: 'EUR', url: `${SITE.url}/offres/${o.slug}` })),
+        offers: OFFERS.filter((o) => o.price !== null).map((o) => ({ '@type': 'Offer', name: o.name, price: o.price, priceCurrency: 'EUR', url: `${SITE.url}/offres/${o.slug}` })),
       }}
     >
       <section className="bg-paper">
         <div className="wrap py-14 text-center lg:py-20">
-          <Heading as="h1" center title="Choisissez l’offre adaptée à votre volume d’appels" intro="Tous les tarifs sont affichés hors taxes. L’essai gratuit comprend 14 jours et 30 minutes d’appels incluses." />
+          <Heading as="h1" center title="Choisissez le forfait adapté à votre volume d’appels" intro="Tous les tarifs sont affichés hors taxes. Plus le forfait est grand, plus la minute coûte moins cher. L’essai gratuit comprend 14 jours et 30 minutes d’appels incluses." />
           <TrialBadges className="mt-6 justify-center" />
           <div className="mt-12 text-left"><PricingCards /></div>
-          <p className="mt-6 text-sm text-slate-light">{PRICE_NOTE} Dépassement facturé à la minute selon l’offre, ou recharge.</p>
+          <p className="mt-6 text-sm text-slate-light">{PRICE_NOTE} Besoin de plus de minutes ? Ajoutez une recharge à tout moment.</p>
         </div>
       </section>
 
       <Section id="comparatif">
         <Heading title="Ce qui est inclus dans votre interface" intro="Chaque ligne correspond à une page ou une fonction que vous retrouvez dans votre espace client. Rien d’autre n’est caché derrière un bouton." />
         <div className="mt-10"><MatrixTable /></div>
-        <p className="mt-4 text-sm text-slate-light">Les dépassements : Essentiel 0,19 € HT/min · Croissance 0,156 à 0,138 € HT/min selon le lot · Pro 0,129 € HT/min · Sur mesure contractuel.</p>
+        
       </Section>
 
       <Section tone="paper" id="recharges">
-        <Heading title="Besoin de plus de minutes ?" intro="Ajoutez des minutes à la carte ou chaque mois, sans changer d’offre." />
+        <Heading title="Besoin de plus de minutes ?" intro="La recharge dépanne un mois chargé. Pour un volume régulier, le forfait supérieur reste la meilleure solution économique." />
         <div className="mt-10"><RechargeTables /></div>
         <Link href="/offres/recharges" className="mt-6 inline-block font-semibold text-signal-deep hover:underline">Comment fonctionnent les recharges</Link>
       </Section>
 
-      <Section><LaunchBlock /></Section>
+      <Section><GrowthBlock /></Section>
 
       <Section tone="paper"><EconomyBlock /></Section>
 

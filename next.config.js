@@ -10,6 +10,9 @@ const nextConfig = {
       { source: '/immobilier', destination: '/secteurs/immobilier', permanent: true },
       { source: '/industries', destination: '/secteurs', permanent: true },
       { source: '/demo-live', destination: '/demo', permanent: true },
+      { source: '/offres/essentiel', destination: '/offres/receptionniste', permanent: true },
+      { source: '/offres/croissance', destination: '/offres/assistant', permanent: true },
+      { source: '/offres/pro', destination: '/offres/centre-appels', permanent: true },
     ];
   },
 };

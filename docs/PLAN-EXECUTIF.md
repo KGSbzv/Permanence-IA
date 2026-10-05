@@ -9,7 +9,10 @@ capture de l'admin white-label Autocalls (pages et fonctions activables).
 - **Positionnement** : plateforme d'agents vocaux IA qui répondent, qualifient, réservent et rappellent, 24/7.
 - **Message d'essai unique, partout** : « 14 jours d'essai gratuit — 30 minutes incluses — prix HT — sans engagement ».
 - **3 actions de conversion à chaque section** : démarrer l'essai, essayer l'agent en live, laisser son numéro.
-- **Offres HT** (doc 92) : Découverte 0 € · Essentiel 59 → 79 € · Croissance 129 → 179 € · Pro 249 → 349 € · Sur mesure dès 399 €. Recharges et add-ons de minutes.
+- **Forfaits HT** (validés le 5 octobre 2026) : Découverte 0 € (14 j, 30 min) · Réceptionniste 99 € / 300 min (0,33 €/min) · Assistant 249 € / 800 min (0,31 €/min) · Centre d’appels 499 € / 2 000 min (0,25 €/min) · Sur mesure au-delà de 2 500 min régulières.
+- **Recharges** (dépannage, plus chères que les forfaits) : 100 min 39 € · 250 min 89 € · 500 min 159 € · 1 000 min 299 € · 2 500 min 699 €. Pas de facturation à la minute au-delà du forfait.
+- **Règles d’évolution** : dépassement ponctuel → recharge ; dépassements répétés → forfait supérieur ; recharges fréquentes → alerte « vous payez trop cher » ; au-delà de 2 500 min régulières → sur mesure.
+- **À afficher partout** : 14 jours d’essai gratuit, 30 minutes incluses, prix HT, sans engagement, ajoutez des minutes à tout moment, passez à l’offre supérieure quand votre volume grandit.
 - **Contenu des offres = ce que le client voit réellement dans son interface Autocalls** (pages et fonctions de la capture admin).
 - **Plus d'offre agence white-label publique** (doc 98).
 - **Garde-fous** : aucun chiffre, avis, certification ou compteur de places non vérifié ; l'argument 1,50 €/appel présenté comme hypothèse ; pas de numéro d'entreprise affiché.
@@ -19,7 +22,7 @@ capture de l'admin white-label Autocalls (pages et fonctions activables).
 | Type | Pages |
 |---|---|
 | Principales | Accueil, Tarifs, Démo live, Contact / rappel, Intégrations, Sécurité & conformité, FAQ, Secteurs, Blog |
-| Offres | Découverte, Essentiel, Croissance, Pro, Sur mesure, Recharges minutes |
+| Forfaits | Découverte, Réceptionniste, Assistant, Centre d’appels, Sur mesure, Recharges minutes |
 | Landings secteurs | Services à domicile, Dentaire & cliniques, Immobilier, Automobile, Beauté & bien-être, Restaurants & hôtellerie |
 | Modules | Réceptionniste IA, Démo live, Rendez-vous, Support client, Qualification, Campagnes sortantes, WhatsApp & messages, Base de connaissances, Éditeur de prompts, Flow builder, SIP & numéros, Reporting, Widget web |
 | Légal | Mentions légales, CGU/CGV, Confidentialité, Cookies |
@@ -28,7 +31,7 @@ Anciennes URL (`/plombiers`, `/dentaire`, `/cliniques`, `/immobilier`, `/essai-g
 
 ## Correspondance offres ↔ interface Autocalls
 
-| Fonction interface (admin) | Découverte | Essentiel | Croissance | Pro | Sur mesure |
+| Fonction interface (admin) | Découverte | Réceptionniste | Assistant | Centre d’appels | Sur mesure |
 |---|:-:|:-:|:-:|:-:|:-:|
 | Assistants, Historique des appels, Conversations | essai | ✓ | ✓ | ✓ | ✓ |
 | Calendar integration, Web widget, Caller ID | aperçu | ✓ | ✓ | ✓ | ✓ |

@@ -37,8 +37,8 @@ export default function ModulePage({ slug }: { slug: string }) {
             <ul className="mt-8 space-y-4 text-lg">{m.uses.map((u) => <Tick key={u}>{u}</Tick>)}</ul>
           </div>
           <div className="rounded-3xl border border-line bg-paper p-8">
-            <p className="font-display text-lg font-bold">Inclus à partir de l’offre {from.name}</p>
-            <p className="mt-2 text-[15px]">{from.launchPrice ? `${from.launchPrice} € HT / mois au lancement · ${from.minutes}` : from.minutes}</p>
+            <p className="font-display text-lg font-bold">Inclus à partir du forfait {from.name}</p>
+            <p className="mt-2 text-[15px]">{from.price ? `${from.price} € HT / mois · ${from.minutes}` : from.minutes}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={`/offres/${from.slug}`} className="btn-primary text-sm">Voir l’offre {from.name}</Link>
               <Link href="/tarifs#comparatif" className="btn-ghost text-sm">Comparer les offres</Link>

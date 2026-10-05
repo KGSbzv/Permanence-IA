@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Check, ChevronDown, PhoneCall, Play, Sparkles } from 'lucide-react';
-import { DEMO_URL, SIGNUP_URL, TRIAL_BADGES } from '@/data/site';
+import { ArrowUpRight, Check, ChevronDown, PhoneCall, Play, Sparkles } from 'lucide-react';
+import { DEMO_URL, GROWTH_LINES, SIGNUP_URL, TRIAL_BADGES } from '@/data/site';
 import { SECTORS } from '@/data/sectors';
 import { useCallbackModal } from '@/context/CallbackContext';
 
@@ -37,6 +37,11 @@ export function TrialBadges({ dark = false, className = '' }: { dark?: boolean; 
       {TRIAL_BADGES.map((b) => (
         <li key={b} className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
           <Check className="h-3.5 w-3.5 text-signal" aria-hidden /> {b}
+        </li>
+      ))}
+      {GROWTH_LINES.map((g) => (
+        <li key={g} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm font-medium ${dark ? 'border-white/15 text-white/85' : 'border-line text-ink'}`}>
+          <ArrowUpRight className="h-3.5 w-3.5 text-signal" aria-hidden /> {g}
         </li>
       ))}
     </ul>

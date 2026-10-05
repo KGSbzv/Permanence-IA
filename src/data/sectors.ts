@@ -17,7 +17,6 @@ export interface Sector {
   modules: string[]; // slugs de modules mis en avant
   steps: { title: string; text: string }[];
   offer: OfferSlug; // offre recommandée
-  launchPush: boolean; // afficher le tarif de lancement Pro
   ctas: [string, string];
   call: { who: 'agent' | 'client'; text: string }[]; // extrait de conversation
   lead: { label: string; value: string }[]; // fiche créée
@@ -49,7 +48,7 @@ export const SECTORS: Sector[] = [
       { title: 'Vous recevez la fiche', text: 'Résumé par email et dans votre tableau de bord.' },
       { title: 'Vous rappelez ou intervenez', text: 'Avec toutes les informations en main.' },
     ],
-    offer: 'croissance', launchPush: true,
+    offer: 'assistant',
     ctas: ['Tester gratuitement pendant 14 jours', 'Voir comment les demandes sont qualifiées'],
     call: [
       { who: 'client', text: 'Bonjour, j’ai une fuite sous l’évier, ça coule beaucoup.' },
@@ -88,7 +87,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le rendez-vous est posé', text: 'Dans votre agenda, selon vos règles.' },
       { title: 'La veille, l’agent confirme', text: 'Par appel ou message, et libère le créneau si besoin.' },
     ],
-    offer: 'pro', launchPush: true,
+    offer: 'assistant',
     ctas: ['Démarrer l’essai gratuit', 'Demander une démonstration'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais un rendez-vous pour un détartrage.' },
@@ -127,7 +126,7 @@ export const SECTORS: Sector[] = [
       { title: 'La visite est proposée', text: 'Dans l’agenda de l’agent concerné.' },
       { title: 'Le suivi est automatique', text: 'Relance après visite et mise à jour du CRM.' },
     ],
-    offer: 'pro', launchPush: true,
+    offer: 'assistant',
     ctas: ['Tester l’agent immobilier', 'Réclamer mes 30 minutes'],
     call: [
       { who: 'client', text: 'J’appelle pour le T3 avec balcon, il est toujours disponible ?' },
@@ -166,7 +165,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le créneau est réservé', text: 'Selon la charge de l’atelier.' },
       { title: 'Le client est relancé', text: 'Confirmation et rappel avant le rendez-vous.' },
     ],
-    offer: 'croissance', launchPush: true,
+    offer: 'assistant',
     ctas: ['Voir la démo garage', 'Optimiser mon atelier'],
     call: [
       { who: 'client', text: 'J’ai un bruit au freinage depuis deux jours.' },
@@ -178,7 +177,7 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'L’agent fait-il un diagnostic ?', a: 'Non. Il note les symptômes décrits par le client et prépare la demande : le diagnostic reste celui de votre atelier.' },
       { q: 'Peut-il annoncer des prix ?', a: 'Uniquement les tarifs que vous lui fournissez, par exemple un forfait vidange. Pour le reste, il propose un devis.' },
-      { q: 'Et les relances de devis ?', a: 'Avec l’offre Croissance, une campagne peut rappeler les clients dont le devis est en attente, aux horaires que vous choisissez.' },
+      { q: 'Et les relances de devis ?', a: 'Avec le forfait Assistant, une campagne peut rappeler les clients dont le devis est en attente, aux horaires que vous choisissez.' },
     ],
   },
   {
@@ -205,7 +204,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le rendez-vous est réservé', text: 'Dans votre agenda en ligne.' },
       { title: 'Le rappel part la veille', text: 'Par message, avec possibilité de reporter.' },
     ],
-    offer: 'croissance', launchPush: false,
+    offer: 'receptionniste',
     ctas: ['Remplir mon agenda', 'Commencer gratuitement'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais une coupe et un brushing samedi.' },
@@ -216,7 +215,7 @@ export const SECTORS: Sector[] = [
     lead: [{ label: 'Prestation', value: 'Coupe + brushing' }, { label: 'Durée', value: '1 h' }, { label: 'Praticienne', value: 'Léa' }, { label: 'Créneau', value: 'Samedi 10 h' }],
     faq: [
       { q: 'Peut-on gérer plusieurs praticiennes ?', a: 'Oui. Chaque personne a ses prestations, durées et disponibilités dans l’agenda connecté.' },
-      { q: 'Les clientes peuvent-elles réserver par WhatsApp ?', a: 'Oui, avec l’offre Croissance : l’agent répond aussi par écrit et envoie les confirmations sur WhatsApp ou par SMS.' },
+      { q: 'Les clientes peuvent-elles réserver par WhatsApp ?', a: 'Oui, avec le forfait Assistant : l’agent répond aussi par écrit et envoie les confirmations sur WhatsApp ou par SMS.' },
       { q: 'L’agent promet-il des résultats ?', a: 'Non. Il reste sur l’organisation : prestations, durées, disponibilités. Il ne fait aucune promesse esthétique ou médicale.' },
     ],
   },
@@ -244,7 +243,7 @@ export const SECTORS: Sector[] = [
       { title: 'La réservation est confirmée', text: 'Avec un message récapitulatif.' },
       { title: 'Votre équipe est prévenue', text: 'Seulement quand une intervention est nécessaire.' },
     ],
-    offer: 'croissance', launchPush: true,
+    offer: 'receptionniste',
     ctas: ['Automatiser mes réservations', 'Demander une démonstration'],
     call: [
       { who: 'client', text: 'Avez-vous une table pour quatre ce soir vers 20 h ?' },

@@ -8,9 +8,9 @@ import {
 } from 'lucide-react';
 import { MODULES, Module } from '@/data/modules';
 import { SECTORS, Sector } from '@/data/sectors';
-import { ADDONS, Cell, MATRIX, OFFERS, Offer, RECHARGES, euro } from '@/data/offers';
+import { Cell, MATRIX, OFFERS, Offer, RECHARGES, euro, perMin } from '@/data/offers';
 import { INTEGRATIONS } from '@/data/integrations';
-import { DEMO_URL, PRICE_NOTE, SIGNUP_URL, TRIAL_LINE } from '@/data/site';
+import { DEMO_URL, GROWTH_LINES, PRICE_NOTE, SIGNUP_URL, TRIAL_LINE } from '@/data/site';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
 
@@ -201,15 +201,13 @@ export function SectorCards({ exclude }: { exclude?: string }) {
 
 /* ---------- Tarifs ---------- */
 
-function PriceTag({ o }: { o: Offer }) {
-  const amount = o.launchPrice === null ? '399 €' : euro(o.launchPrice);
+function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
+  const amount = o.price === null ? o.priceLabel : euro(o.price);
   return (
     <div>
-      {o.slug === 'sur-mesure' && <p className="text-sm">À partir de</p>}
-      <p className="font-display text-[2rem] font-bold leading-none text-ink">{amount}</p>
-      <p className="mt-1.5 text-sm text-slate">
-        {o.launchPrice === 0 ? '14 jours offerts' : 'HT / mois'}
-        {o.launchPrice ? <span className="block text-xs">Lancement · ensuite {euro(o.normalPrice!)} HT</span> : null}
+      <p className={`font-display text-[2rem] font-bold leading-none ${light ? 'text-white' : 'text-ink'}`}>{amount}</p>
+      <p className={`mt-1.5 text-sm ${light ? 'text-white/70' : 'text-slate'}`}>
+        {o.price === 0 ? '14 jours offerts' : o.price === null ? 'Prix à la minute négocié' : 'HT / mois'}
       </p>
     </div>
   );
@@ -224,16 +222,25 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
           {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal px-3 py-1 text-xs font-semibold text-white">Le plus choisi</span>}
           <p className={`font-display text-lg font-bold ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
           <p className="mt-1 min-h-[2.5rem] text-sm">{o.audience}</p>
-          <div className={`mt-4 ${o.featured ? '[&_p]:!text-white [&_span]:!text-white/70' : ''}`}><PriceTag o={o} /></div>
+          <div className="mt-4"><PriceTag o={o} light={o.featured} /></div>
           <p className={`mt-3 text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
+          {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>soit {o.perMinute}</p>}
           <ul className="mt-4 flex-1 space-y-2 text-[14px]">
             {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
           </ul>
-          <Link href={o.slug === 'sur-mesure' ? '/contact' : o.slug === 'decouverte' ? SIGNUP_URL : `/offres/${o.slug}`} className={`mt-6 ${o.featured ? 'btn-signal' : 'btn-ghost'} text-sm`}>{o.cta}</Link>
+          <Link href={o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}`} className={`mt-6 ${o.featured ? 'btn-signal' : 'btn-ghost'} text-sm`}>{o.cta}</Link>
           <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>Détail de l’offre</Link>
         </div>
       ))}
     </div>
+  );
+}
+
+export function GrowthLines({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
+  return (
+    <ul className={`flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium ${dark ? 'text-white/80' : 'text-ink'} ${className}`}>
+      {GROWTH_LINES.map((l) => <li key={l} className="flex items-center gap-2"><ArrowUpRight className="h-4 w-4 text-signal" aria-hidden />{l}</li>)}
+    </ul>
   );
 }
 
@@ -247,8 +254,8 @@ export function MatrixTable() {
   return (
     <div className="overflow-x-auto rounded-2xl border border-line bg-white">
       <table className="w-full min-w-[760px] border-collapse text-left text-[14px]">
-        <caption className="sr-only">Fonctions incluses dans chaque offre</caption>
-        <thead className="sticky top-0 bg-white">
+        <caption className="sr-only">Fonctions incluses dans chaque forfait</caption>
+        <thead className="bg-white">
           <tr className="border-b border-line">
             <th scope="col" className="p-4 font-display text-sm font-semibold text-ink">Dans votre interface</th>
             {OFFERS.map((o) => <th key={o.slug} scope="col" className={`p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'text-ink'}`}>{o.name}</th>)}
@@ -256,8 +263,12 @@ export function MatrixTable() {
         </thead>
         <tbody>
           <tr className="border-b border-line bg-paper/60">
+            <th scope="row" className="p-4 font-medium text-ink">Prix HT / mois</th>
+            {OFFERS.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.price === null ? o.priceLabel : euro(o.price)}</td>)}
+          </tr>
+          <tr className="border-b border-line bg-paper/60">
             <th scope="row" className="p-4 font-medium text-ink">Minutes incluses</th>
-            {OFFERS.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}</td>)}
+            {OFFERS.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}{o.perMinute && <span className="block font-normal text-slate-light">{o.perMinute}</span>}</td>)}
           </tr>
           {MATRIX.map((g) => (
             <React.Fragment key={g.group}>
@@ -276,37 +287,70 @@ export function MatrixTable() {
   );
 }
 
+/** Recharges : dépannage ponctuel, volontairement plus chères à la minute que les forfaits. */
 export function RechargeTables() {
-  const T = ({ title, rows, text }: { title: string; text: string; rows: { minutes: string; launch: number; normal: number }[] }) => (
-    <div className="rounded-2xl border border-line bg-white p-6">
-      <h3 className="text-h3 font-semibold">{title}</h3>
-      <p className="mt-1 text-[15px]">{text}</p>
-      <table className="mt-4 w-full text-[15px]">
-        <thead><tr className="border-b border-line text-left text-sm text-slate"><th className="py-2 font-medium">Volume</th><th className="py-2 text-right font-medium">Lancement HT</th><th className="py-2 text-right font-medium">Normal HT</th></tr></thead>
-        <tbody>{rows.map((r) => <tr key={r.minutes} className="border-b border-line last:border-0"><td className="py-2.5 font-medium text-ink">{r.minutes}</td><td className="py-2.5 text-right font-semibold text-ink">{euro(r.launch)}</td><td className="py-2.5 text-right text-slate">{euro(r.normal)}</td></tr>)}</tbody>
-      </table>
-    </div>
-  );
+  const plans = OFFERS.filter((o) => o.perMinute);
   return (
-    <div className="grid gap-5 lg:grid-cols-2">
-      <T title="Recharges ponctuelles" text="Des minutes en plus, utilisables quand vous en avez besoin." rows={RECHARGES} />
-      <T title="Add-ons mensuels" text="Un volume supplémentaire chaque mois, à prix réduit." rows={ADDONS} />
+    <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
+      <div className="rounded-2xl border border-line bg-white p-6">
+        <h3 className="text-h3 font-semibold">Recharges de minutes</h3>
+        <p className="mt-1 text-[15px]">Pour dépanner un mois plus chargé. Les minutes s’ajoutent immédiatement à votre compte.</p>
+        <table className="mt-4 w-full text-[15px]">
+          <thead><tr className="border-b border-line text-left text-sm text-slate"><th className="py-2 font-medium">Volume</th><th className="py-2 text-right font-medium">Prix HT</th><th className="py-2 text-right font-medium">Soit par minute</th></tr></thead>
+          <tbody>{RECHARGES.map((r) => <tr key={r.minutes} className="border-b border-line last:border-0"><td className="py-2.5 font-medium text-ink">{r.minutes}</td><td className="py-2.5 text-right font-semibold text-ink">{euro(r.price)}</td><td className="py-2.5 text-right text-slate">{perMin(r.price, r.minutesCount)}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div className="rounded-2xl bg-ink p-6 text-white/80">
+        <h3 className="text-h3 font-semibold text-white">Le forfait reste plus économique</h3>
+        <p className="mt-1 text-[15px]">Plus le forfait est grand, plus la minute coûte moins cher.</p>
+        <ul className="mt-5 space-y-3">
+          {plans.map((o) => (
+            <li key={o.slug} className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-3 last:border-0">
+              <span className="font-display font-semibold text-white">{o.name}</span>
+              <span className="text-sm">{o.minutes} · <span className="font-semibold text-signal-glow">{o.perMinute}</span></span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
-/** Bloc tarif de lancement : aucun compteur de places tant qu’il n’est pas relié au système réel (doc 88). */
-export function LaunchBlock() {
+/** Règles d’évolution : recharge pour un dépassement ponctuel, forfait supérieur pour un usage régulier. */
+export function GrowthBlock() {
+  const rules = [
+    { t: 'Dépassement léger, une fois', d: 'Une recharge suffit pour finir le mois.' },
+    { t: 'Dépassements répétés', d: 'Nous vous proposons le forfait supérieur.' },
+    { t: 'Recharges fréquentes', d: 'Votre tableau de bord vous indique que vous payez trop cher pour votre usage.' },
+    { t: 'Au-delà de 2 500 min régulières', d: 'Nous construisons une offre sur mesure.' },
+  ];
+  const cases = [
+    { m: '350 min', plan: 'Réceptionniste + une recharge de 100 min', note: 'Dépassement ponctuel : la recharge est la bonne réponse.' },
+    { m: '900 min chaque mois', plan: 'Passez au forfait Centre d’appels', note: 'Vous rechargez tous les mois à 0,39 € la minute. Le forfait supérieur vous donne 2 000 minutes à 0,25 € la minute et de la marge pour grandir.' },
+    { m: '2 500 min régulières', plan: 'Offre sur mesure', note: 'Prix à la minute négocié selon votre volume.' },
+  ];
   return (
-    <div className="grid gap-6 rounded-3xl bg-gradient-to-br from-ink to-ink-soft p-8 text-white/80 sm:p-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+    <div className="grid gap-10 lg:grid-cols-2">
       <div>
-        <p className="font-display text-sm font-semibold text-signal-glow">Tarif de lancement pour les 20 premiers clients</p>
-        <h2 className="mt-2 text-h2 font-bold text-white">Pro à 249 € HT / mois au lieu de 349 € HT</h2>
-        <p className="mt-3 max-w-prose">1 500 minutes par mois, multi-agents, rapports détaillés, rôles, API et support prioritaire. Le prix de lancement s’applique aux 20 premiers établissements éligibles, tant que l’offre est ouverte ; le prix normal est ensuite de 349 € HT.</p>
+        <Heading title="Ajoutez des minutes ou changez de forfait, au bon moment" intro="Vous ne payez jamais une minute plus cher que nécessaire : nous vous indiquons quand une recharge suffit et quand le forfait supérieur devient plus avantageux." />
+        <ol className="mt-8 space-y-4">
+          {rules.map((r, i) => (
+            <li key={r.t} className="flex gap-4">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-signal-soft font-display text-sm font-bold text-signal-deep">{i + 1}</span>
+              <div><p className="font-display font-semibold text-ink">{r.t}</p><p className="text-[15px]">{r.d}</p></div>
+            </li>
+          ))}
+        </ol>
       </div>
-      <div className="flex flex-col gap-3">
-        <Link href="/offres/pro" className="btn-signal">Profiter du tarif de lancement</Link>
-        <Link href="/tarifs" className="btn-light">Comparer les offres</Link>
+      <div className="space-y-4">
+        {cases.map((c) => (
+          <div key={c.m} className="rounded-2xl border border-line bg-white p-6">
+            <p className="text-sm text-slate">Un client à</p>
+            <p className="font-display text-2xl font-bold text-ink">{c.m}</p>
+            <p className="mt-2 font-semibold text-signal-deep">{c.plan}</p>
+            <p className="mt-1 text-[15px]">{c.note}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -314,24 +358,30 @@ export function LaunchBlock() {
 
 /* ---------- Comparatif économique (prudent, doc 87) avec calculateur ---------- */
 
+/** Forfait recommandé pour un volume mensuel, selon les règles d’évolution. */
+export function planFor(minutes: number) {
+  const [, rec, asst, centre, custom] = OFFERS;
+  if (minutes > 2500) return { offer: custom, extra: '' };
+  if (minutes <= rec.minutesCount) return { offer: rec, extra: '' };
+  if (minutes <= rec.minutesCount + 100) return { offer: rec, extra: ' + une recharge ponctuelle' };
+  if (minutes <= asst.minutesCount) return { offer: asst, extra: '' };
+  if (minutes <= centre.minutesCount) return { offer: centre, extra: '' };
+  return { offer: centre, extra: ' + recharges, ou offre sur mesure' };
+}
+
 export function EconomyBlock() {
   const [calls, setCalls] = useState(200);
   const [cost, setCost] = useState(1.5);
   const [duration, setDuration] = useState(2);
   const human = calls * cost;
   const minutes = calls * duration;
-  const plan = useMemo(() => {
-    if (minutes <= 150) return OFFERS[1];
-    if (minutes <= 500) return OFFERS[2];
-    if (minutes <= 1500) return OFFERS[3];
-    return OFFERS[4];
-  }, [minutes]);
+  const { offer: plan, extra } = useMemo(() => planFor(minutes), [minutes]);
   const fmt = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 0 });
 
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
       <div>
-        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,50 € par appel. Le forfait Croissance à 129 € HT couvre jusqu’à 500 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
+        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,50 € par appel, soit plus de 300 € pour 200 appels. Le forfait Réceptionniste à 99 € HT couvre 300 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="rounded-2xl border border-line bg-white p-5">
             <p className="font-display font-semibold text-ink">Accueil humain</p>
@@ -339,7 +389,7 @@ export function EconomyBlock() {
           </div>
           <div className="rounded-2xl border border-ink bg-ink p-5 text-white/80">
             <p className="font-display font-semibold text-white">Permanence IA</p>
-            <ul className="mt-3 space-y-1.5 text-[14px]"><li>Disponible 24/7</li><li>Quota de minutes clair, prix HT</li><li>Plusieurs appels en parallèle</li></ul>
+            <ul className="mt-3 space-y-1.5 text-[14px]"><li>Disponible 24/7</li><li>Forfait clair, prix HT</li><li>Plusieurs appels en parallèle</li></ul>
           </div>
         </div>
         <p className="mt-4 text-sm text-slate-light">Hypothèse indicative : les coûts d’accueil varient fortement selon le pays, les horaires et les charges. Un appel n’équivaut pas à une minute.</p>
@@ -362,9 +412,9 @@ export function EconomyBlock() {
           <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Volume d’appels</p><p className="font-display text-2xl font-bold text-ink">{fmt(minutes)} min</p></div>
         </div>
         <div className="mt-3 rounded-xl bg-ink p-4 text-white">
-          <p className="text-xs text-white/60">Offre adaptée à ce volume</p>
-          <p className="font-display text-lg font-bold">{plan.name} — {plan.launchPrice ? `${euro(plan.launchPrice)} HT / mois` : plan.priceLabel + ' HT / mois'}</p>
-          <p className="text-xs text-white/60">{plan.minutes}{minutes > 1500 ? ' · ou Pro + add-ons' : ''}</p>
+          <p className="text-xs text-white/60">Forfait adapté à ce volume</p>
+          <p className="font-display text-lg font-bold">{plan.name}{plan.price ? ` — ${euro(plan.price)} HT / mois` : ''}{extra}</p>
+          <p className="text-xs text-white/60">{plan.minutes}</p>
         </div>
       </form>
     </div>
@@ -378,7 +428,7 @@ export function SecurityBlock() {
     { icon: UserCheck, t: 'Consentement et opt-out', d: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
     { icon: Lock, t: 'Protection des données', d: 'Chiffrement en transit et au repos, accès par rôle et durée de conservation configurable.' },
     { icon: ScrollText, t: 'Traçabilité', d: 'Historique des appels, transcriptions et journal des actions pour chaque compte.' },
-    { icon: KeyRound, t: 'Contrôle des accès', d: 'Rôles et permissions par membre de l’équipe à partir de l’offre Pro.' },
+    { icon: KeyRound, t: 'Contrôle des accès', d: 'Rôles et permissions par membre de l’équipe avec le forfait Centre d’appels.' },
     { icon: ShieldCheck, t: 'Préparation réglementaire', d: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression, rétention.' },
     { icon: Globe2, t: 'Infrastructure', d: 'Plateforme hébergée chez des fournisseurs cloud reconnus, avec sauvegardes et surveillance.' },
   ];
