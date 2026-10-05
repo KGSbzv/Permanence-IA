@@ -16,6 +16,11 @@ export default function HeroAgents() {
 
   return (
     <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-[#0B0F14] dark:via-[#0F1419] dark:to-[#0B0F14]">
+      {/* Bandeau d'en-tête de marque */}
+      <div className="absolute inset-x-0 top-0 h-48 sm:h-56 pointer-events-none overflow-hidden opacity-50 dark:opacity-40 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]">
+        <img src="/logo/header-light.jpg" alt="" aria-hidden="true" className="block dark:hidden w-full h-full object-cover" />
+        <img src="/logo/header-dark.jpg" alt="" aria-hidden="true" className="hidden dark:block w-full h-full object-cover" />
+      </div>
       {/* Background glow effects */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 dark:bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/3 left-1/4 w-[350px] h-[350px] bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-2xl pointer-events-none" />

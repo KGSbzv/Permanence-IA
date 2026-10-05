@@ -6,11 +6,6 @@ import CallDemoPlayer from './CallDemoPlayer';
 export default function Hero() {
   return (
     <section className="relative overflow-hidden pt-8 pb-20 lg:pt-14 lg:pb-28">
-      {/* Bandeau d'en-tête de marque */}
-      <div className="absolute inset-x-0 top-0 h-48 sm:h-56 -z-10 pointer-events-none overflow-hidden opacity-60 dark:opacity-50 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]">
-        <img src="/logo/header-light.jpg" alt="" aria-hidden="true" className="block dark:hidden w-full h-full object-cover" />
-        <img src="/logo/header-dark.jpg" alt="" aria-hidden="true" className="hidden dark:block w-full h-full object-cover" />
-      </div>
       {/* Background radial gradient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] pointer-events-none opacity-40 dark:opacity-20 blur-3xl -z-10 bg-gradient-to-b from-primary/30 via-accent/10 to-transparent" />
 
