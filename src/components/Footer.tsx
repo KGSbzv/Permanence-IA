@@ -58,7 +58,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://app.permanenceia.com"
+                  href="https://app.permanentia.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 hover:text-primary dark:hover:text-accent-glow transition-colors"
@@ -121,8 +121,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:contact@permanenceia.com" className="inline-flex items-center gap-1.5 hover:text-primary dark:hover:text-accent-glow transition-colors">
-                  <Mail className="w-3.5 h-3.5" /> contact@permanenceia.com
+                <a href="mailto:contact@permanentia.com" className="inline-flex items-center gap-1.5 hover:text-primary dark:hover:text-accent-glow transition-colors">
+                  <Mail className="w-3.5 h-3.5" /> contact@permanentia.com
                 </a>
               </li>
             </ul>
@@ -136,9 +136,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Permanence IA — Tous droits réservés. Architecture vocale Autocalls White-Label.
           </div>
           <div className="flex items-center space-x-6">
-            <span className="font-mono">permanenceia.com</span>
+            <span className="font-mono">permanentia.com</span>
             <span>&bull;</span>
-            <span className="font-mono">app.permanenceia.com</span>
+            <span className="font-mono">app.permanentia.com</span>
           </div>
         </div>
       </div>

@@ -259,7 +259,7 @@ export default function FAQ() {
             </p>
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="mailto:contact@permanenceia.com"
+                href="mailto:contact@permanentia.com"
                 className="px-6 py-3 rounded-xl bg-navy dark:bg-primary text-white dark:text-navy text-sm font-bold shadow hover:opacity-90"
               >
                 Envoyer un email à l&apos;équipe

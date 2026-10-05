@@ -10,7 +10,7 @@ export default function FAQCTASection() {
   const faqs = [
     {
       q: 'Le plan Découverte est-il réellement 100% gratuit ?',
-      a: 'Oui, absolument. L’inscription au plan Découverte ne nécessite aucune carte bancaire et ne comporte aucun engagement ni reconduction automatique. Vous accédez au portail app.permanenceia.com, à la configuration de vos agents et au mode bac à sable.',
+      a: 'Oui, absolument. L’inscription au plan Découverte ne nécessite aucune carte bancaire et ne comporte aucun engagement ni reconduction automatique. Vous accédez au portail app.permanentia.com, à la configuration de vos agents et au mode bac à sable.',
     },
     {
       q: 'Pourquoi n’affichez-vous aucun numéro de téléphone public ?',

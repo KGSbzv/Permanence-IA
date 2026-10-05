@@ -31,13 +31,15 @@ export default function MentionsLegales() {
                 1. Éditeur du site
               </h2>
               <p>
-                Le site internet accessible à l&apos;adresse <strong>https://permanenceia.com</strong> est édité par la société <strong>Permanence IA SAS</strong>.
+                Le site internet accessible à l&apos;adresse <strong>https://permanentia.com</strong> est édité par la société <strong>SINAY STRATEGIC LLC</strong>.
               </p>
               <ul className="list-disc pl-5 space-y-1">
-                <li><strong>Statut :</strong> Société par Actions Simplifiée (SAS)</li>
-                <li><strong>Siège social :</strong> 10 Rue de la Paix, 75002 Paris, France</li>
-                <li><strong>Email de contact :</strong> legal@permanenceia.com</li>
-                <li><strong>Directeur de la publication :</strong> Alexandre Renoir, en qualité de Président.</li>
+                <li><strong>Nom commercial :</strong> Permanence IA</li>
+                <li><strong>Statut :</strong> Limited Liability Company (LLC), État du Wyoming, États-Unis</li>
+                <li><strong>Numéro d&apos;enregistrement :</strong> 2026-001905061</li>
+                <li><strong>Siège social :</strong> 1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001, États-Unis</li>
+                <li><strong>Email de contact :</strong> contact@permanentia.com</li>
+                <li><strong>Directeur de la publication :</strong> le représentant légal de SINAY STRATEGIC LLC.</li>
               </ul>
             </section>
 
@@ -60,7 +62,7 @@ export default function MentionsLegales() {
                 3. Propriété intellectuelle
               </h2>
               <p>
-                La marque <strong>Permanence IA</strong>, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l&apos;ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes sources figurant sur le site sont la propriété exclusive de Permanence IA SAS.
+                La marque <strong>Permanence IA</strong>, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l&apos;ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes sources figurant sur le site sont la propriété exclusive de SINAY STRATEGIC LLC.
               </p>
               <p>
                 Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.

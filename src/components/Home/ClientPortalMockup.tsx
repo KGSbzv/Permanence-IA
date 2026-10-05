@@ -22,7 +22,7 @@ export default function ClientPortalMockup() {
             Un portail complet pour piloter vos agents et vos leads
           </h2>
           <p className="mt-4 text-base sm:text-lg text-navy/70 dark:text-gray-300">
-            Accessible depuis <code className="px-2 py-0.5 rounded bg-gray-100 dark:bg-navy-dark text-primary text-xs font-mono font-bold">app.permanenceia.com</code> avec gestion fine des rôles (propriétaire, administrateur, opérateur, support).
+            Accessible depuis <code className="px-2 py-0.5 rounded bg-gray-100 dark:bg-navy-dark text-primary text-xs font-mono font-bold">app.permanentia.com</code> avec gestion fine des rôles (propriétaire, administrateur, opérateur, support).
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export default function ClientPortalMockup() {
                 <span className="w-3 h-3 rounded-full bg-emerald-400" />
               </div>
               <span className="text-xs font-mono text-gray-500 dark:text-gray-400">
-                https://app.permanenceia.com/dashboard
+                https://app.permanentia.com/dashboard
               </span>
             </div>
 
@@ -229,13 +229,13 @@ export default function ClientPortalMockup() {
               Déjà client ou partenaire ? Accédez à votre interface de production.
             </span>
             <a
-              href="https://app.permanenceia.com/login"
+              href="https://app.permanentia.com/login"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-navy dark:bg-white text-white dark:text-navy text-xs font-bold hover:opacity-90 transition-all shadow-sm"
             >
               <LogIn className="w-3.5 h-3.5" />
-              <span>Ouvrir l’application app.permanenceia.com</span>
+              <span>Ouvrir l’application app.permanentia.com</span>
             </a>
           </div>
 

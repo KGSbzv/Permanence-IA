@@ -60,3 +60,22 @@ CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 CREATE INDEX IF NOT EXISTS idx_subscriptions_user_id ON subscriptions(user_id);
 CREATE INDEX IF NOT EXISTS idx_api_calls_user_id ON api_calls(user_id);
 CREATE INDEX IF NOT EXISTS idx_trials_user_id ON trials(user_id);
+
+-- 5. Table Callbacks (demandes de rappel, règle zéro numéro public)
+CREATE TABLE IF NOT EXISTS callbacks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT,
+  company TEXT,
+  sector TEXT,
+  slot TEXT DEFAULT 'asap',
+  note TEXT,
+  type TEXT NOT NULL DEFAULT 'commercial', -- 'commercial', 'support'
+  agent TEXT,
+  consent_call BOOLEAN NOT NULL DEFAULT FALSE,
+  status TEXT NOT NULL DEFAULT 'pending', -- 'pending', 'scheduled', 'done', 'cancelled'
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+ALTER TABLE callbacks ENABLE ROW LEVEL SECURITY; -- accès uniquement via la clé service
+CREATE INDEX IF NOT EXISTS idx_callbacks_status ON callbacks(status);
