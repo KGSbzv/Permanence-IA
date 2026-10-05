@@ -14,6 +14,7 @@ export default function Demo() {
           <div>
             <h1 className="text-hero font-extrabold text-white">Essayez en live notre agent maintenant</h1>
             <p className="mt-5 max-w-prose text-lg">Laissez votre numéro et choisissez votre secteur : l’agent vous appelle et joue un scénario de votre métier. Vous entendez sa voix, son rythme et la façon dont il qualifie une demande.</p>
+            <p className="mt-3 max-w-prose">Vous préférez tout de suite ? Cliquez sur la bulle en bas à droite de l’écran : notre assistante vous répond à l’oral ou par écrit.</p>
             <TrialBadges dark className="mt-6" />
           </div>
           <div className="rounded-3xl bg-white p-6 text-slate sm:p-8">

@@ -90,3 +90,39 @@ ALTER TABLE trials ENABLE ROW LEVEL SECURITY;
 GRANT USAGE ON SCHEMA public TO service_role;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO service_role;
+
+-- 6. Inscriptions à l'espace client (webhook « User Signup ») et relances d'essai
+CREATE TABLE IF NOT EXISTS signups (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email TEXT NOT NULL,
+  name TEXT,
+  signed_up_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  trial_minutes INT DEFAULT 0,
+  reminder_sent_at TIMESTAMP WITH TIME ZONE,
+  ended_sent_at TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_signups_email ON signups(email);
+
+-- 7. Appels et conversations des agents (webhooks post-call et conversation ended)
+CREATE TABLE IF NOT EXISTS call_events (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  kind TEXT NOT NULL DEFAULT 'call',
+  external_id TEXT,
+  assistant_id BIGINT,
+  assistant_name TEXT,
+  customer_phone TEXT,
+  duration_seconds INT,
+  status TEXT,
+  outcome TEXT,
+  summary TEXT,
+  variables JSONB DEFAULT '{}'::jsonb,
+  transcript TEXT,
+  recording_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_call_events_outcome ON call_events(outcome);
+
+ALTER TABLE signups ENABLE ROW LEVEL SECURITY;
+ALTER TABLE call_events ENABLE ROW LEVEL SECURITY;
+GRANT ALL ON signups, call_events TO service_role;

@@ -1,47 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer from 'nodemailer';
-
-const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
-
-async function saveToSupabase(row: Record<string, unknown>) {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('Supabase non configuré');
-  const res = await fetch(`${url}/rest/v1/callbacks`, {
-    method: 'POST',
-    headers: {
-      apikey: key,
-      // Les clés sb_secret_... ne sont pas des JWT : seul l'en-tête apikey est utilisé.
-      ...(key.startsWith('eyJ') ? { Authorization: `Bearer ${key}` } : {}),
-      'Content-Type': 'application/json',
-      Prefer: 'return=minimal',
-    },
-    body: JSON.stringify(row),
-  });
-  if (!res.ok) throw new Error(`Supabase ${res.status}`);
-}
-
-async function notifyByEmail(row: Record<string, any>) {
-  if (!process.env.ZOHO_SMTP_USER || !process.env.ZOHO_SMTP_PASS) throw new Error('SMTP Zoho non configuré');
-  const transporter = nodemailer.createTransport({
-    host: process.env.ZOHO_SMTP_HOST || 'smtp.zoho.com',
-    port: 465,
-    secure: true,
-    auth: { user: process.env.ZOHO_SMTP_USER, pass: process.env.ZOHO_SMTP_PASS },
-  });
-  await transporter.sendMail({
-    from: `Permanence IA <${process.env.ZOHO_SMTP_USER}>`,
-    to: NOTIFY_TO,
-    subject: `Nouvelle demande de rappel (${row.type}) — ${row.name}`,
-    text: Object.entries(row).map(([k, v]) => `${k}: ${v}`).join('\n'),
-  });
-}
+import { NOTIFY_TO, dbInsert, sendMail } from '@/lib/server';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
 
   const { name, phone, email, company, sector, slot, note, consentCall, type, agent } = req.body || {};
-  if (!consentCall) return res.status(400).json({ error: 'Consentement au rappel requis.' });
+  // Accepte true ou "true" (les outils des agents envoient des chaînes).
+  if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
 
   const row = {
@@ -50,7 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     agent: agent || null, consent_call: true, status: 'pending',
   };
 
-  const [db, mail] = await Promise.allSettled([saveToSupabase(row), notifyByEmail(row)]);
+  const [db, mail] = await Promise.allSettled([
+    dbInsert('callbacks', row),
+    sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
+  ]);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   // Succès seulement si la demande est conservée quelque part.

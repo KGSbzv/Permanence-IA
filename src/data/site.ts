@@ -18,3 +18,8 @@ export const PRICE_NOTE = 'Prix en dollars US (USD), hors taxes — taxes locale
 export const SIGNUP_URL = '/essai-gratuit';
 export const LOGIN_URL = `${SITE.appUrl}/login`;
 export const DEMO_URL = '/demo';
+
+// Widget Autocalls (assistante commerciale voix + chat, assistant 21203).
+// À remplacer par https://app.permanenceia.com/embed.js une fois le domaine white-label activé.
+export const WIDGET_SRC = 'https://app.autocalls.ai/embed.js';
+export const WIDGET_ASSISTANT_ID = '2841fa2d-1fed-4fbc-b832-28b954d049a6';

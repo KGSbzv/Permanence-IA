@@ -13,6 +13,8 @@ env:
     secret: SUPABASE_SERVICE_ROLE_KEY
   - variable: ZOHO_SMTP_PASS
     secret: ZOHO_SMTP_PASS
+  - variable: WEBHOOK_TOKEN
+    secret: WEBHOOK_TOKEN
   - variable: ZOHO_SMTP_USER
     value: contact@permanenceia.com
   - variable: ZOHO_SMTP_HOST

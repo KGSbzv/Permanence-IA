@@ -1,11 +1,12 @@
 import React from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { PhoneCall } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { SIGNUP_URL, SITE } from '@/data/site';
+import { SIGNUP_URL, SITE, WIDGET_ASSISTANT_ID, WIDGET_SRC } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 
 interface LayoutProps {
@@ -40,11 +41,13 @@ export default function Layout({ children, title, description, ogImage = '/og-im
       <main id="contenu">{children}</main>
       <Footer />
       {/* Barre d’action collante sur mobile (doc 113) */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white/95 p-3 pr-20 backdrop-blur lg:hidden">
         <Link href={SIGNUP_URL} className="btn-primary py-2.5 text-sm">Essai gratuit</Link>
         <button type="button" onClick={() => openCallbackModal({ type: 'commercial' })} className="btn-ghost py-2.5 text-sm"><PhoneCall className="h-4 w-4" aria-hidden />Être rappelé</button>
       </div>
       <div className="h-16 lg:hidden" aria-hidden />
+      {/* Assistante commerciale IA (voix + chat) sur toutes les pages */}
+      <Script src={WIDGET_SRC} data-assistant-id={WIDGET_ASSISTANT_ID} strategy="lazyOnload" />
     </>
   );
 }
