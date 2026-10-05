@@ -15,6 +15,10 @@ env:
     secret: ZOHO_SMTP_PASS
   - variable: WEBHOOK_TOKEN
     secret: WEBHOOK_TOKEN
+  - variable: LEAD_WEBHOOK_COMMERCIAL
+    secret: LEAD_WEBHOOK_COMMERCIAL
+  - variable: LEAD_WEBHOOK_SUPPORT
+    secret: LEAD_WEBHOOK_SUPPORT
   - variable: ZOHO_SMTP_USER
     value: contact@permanenceia.com
   - variable: ZOHO_SMTP_HOST

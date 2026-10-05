@@ -70,4 +70,13 @@ export function isAuthorized(req: NextApiRequest) {
   return got.length === want.length && timingSafeEqual(got, want);
 }
 
+/** Numéro au format international (+33…) ; les numéros français à 10 chiffres sont convertis. Null si illisible. */
+export function toE164(raw: string) {
+  const s = raw.replace(/[\s.\-()]/g, '');
+  if (/^\+\d{8,15}$/.test(s)) return s;
+  if (/^00\d{8,15}$/.test(s)) return `+${s.slice(2)}`;
+  if (/^0\d{9}$/.test(s)) return `+33${s.slice(1)}`;
+  return null;
+}
+
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));

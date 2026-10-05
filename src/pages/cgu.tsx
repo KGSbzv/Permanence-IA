@@ -5,28 +5,25 @@ import Link from 'next/link';
 export default function CGU() {
   return (
     <Layout
-      title="Conditions Générales d'Utilisation (CGU) | Permanence IA"
+      title="Conditions générales (CGU / CGV) — Permanence IA"
       description="Consultez les conditions générales d'utilisation et de vente applicables aux forfaits et services de standard téléphonique IA Permanence IA."
     >
-      <div className="py-16 sm:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="bg-white py-14 lg:py-20">
+        <div className="wrap space-y-10">
           
           <div className="space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary dark:text-accent-glow bg-primary/10 dark:bg-primary/20 px-3.5 py-1.5 rounded-full border border-primary/30">
-              Conditions contractuelles
-            </span>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-navy dark:text-white">
+            <h1 className="text-hero font-extrabold">
               Conditions Générales d&apos;Utilisation &amp; de Vente (CGU/CGV)
             </h1>
-            <p className="text-xs text-navy/60 dark:text-gray-400">
+            <p className="text-sm text-slate-light">
               Applicables aux professionnels et entreprises &bull; Dernière mise à jour : 29 Septembre 2026
             </p>
           </div>
 
-          <div className="prose dark:prose-invert max-w-none space-y-8 text-sm sm:text-base text-navy/80 dark:text-gray-300 leading-relaxed">
+          <div className="max-w-3xl space-y-10 leading-relaxed">
             
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 1 &mdash; Objet du service
               </h2>
               <p>
@@ -38,7 +35,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 2 &mdash; Modalités de l&apos;essai gratuit de 14 jours
               </h2>
               <p>
@@ -53,7 +50,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 3 &mdash; Droit de rétractation &amp; Garantie Sérénité 14 jours
               </h2>
               <p>
@@ -65,7 +62,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 4 &mdash; Facturation, Tarifs &amp; Résiliation
               </h2>
               <p>
@@ -77,7 +74,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 5 &mdash; Responsabilité et nature de l&apos;obligation
               </h2>
               <p>
@@ -89,7 +86,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 6 &mdash; Usages interdits &amp; Suspension
               </h2>
               <p>
@@ -98,7 +95,7 @@ export default function CGU() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 Article 7 &mdash; Droit applicable et juridiction compétente
               </h2>
               <p>

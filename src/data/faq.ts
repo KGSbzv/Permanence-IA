@@ -18,6 +18,8 @@ export const FAQ_GENERAL: QA[] = [
   { q: 'Comment chargez-vous les informations de mon entreprise ?', a: 'Vous ajoutez vos documents PDF, les pages de votre site ou vos procédures dans la base de connaissances. L’agent s’y réfère pendant l’appel.' },
   { q: 'Est-ce conforme au RGPD ?', a: 'La plateforme propose les outils nécessaires : consentement, liste d’exclusion, durée de rétention configurable, suppression des données et contrôle des accès. Votre configuration et vos mentions d’information restent à adapter à votre activité ; nous vous accompagnons.' },
   { q: 'Comment fonctionne l’essai gratuit ?', a: 'Vous créez votre compte, puis vous choisissez le forfait à tester : les 14 premiers jours sont gratuits, avec 30 minutes d’appels incluses. Une carte est demandée à l’activation mais rien n’est débité pendant l’essai. Annulez avant la fin des 14 jours et vous ne payez rien.' },
+  { q: 'L’espace client est-il en français ?', a: 'L’interface de l’espace client est en anglais. Une assistante d’aide intégrée vous guide en français, par écrit ou à voix haute, et la page Aide de l’espace client traduit chaque menu et détaille les tâches courantes pas à pas.' },
+  { q: 'Qui me rappelle quand je laisse mon numéro ?', a: 'Notre assistante vocale IA vous rappelle aux heures ouvrées pour comprendre votre besoin et vous faire une démonstration ; un conseiller prend le relais si vous le souhaitez. Vous pouvez demander à ne plus être rappelé à tout moment.' },
   { q: 'L’agent se présente-t-il comme une IA ?', a: 'Oui. L’agent est présenté honnêtement comme un assistant IA, et peut transférer à un humain lorsque vous l’avez prévu.' },
 ];
 
@@ -28,5 +30,7 @@ export const FAQ_PRICING: QA[] = [
   { q: 'Puis-je utiliser mon propre numéro ?', a: 'Oui, par renvoi d’appel, import Twilio ou Telnyx, ou connexion SIP à partir du forfait Assistant.' },
   { q: 'Avez-vous une démo live ?', a: 'Oui. Vous pouvez parler à l’agent depuis votre navigateur ou demander à être rappelé pour une démonstration.' },
   { q: 'Pourquoi une recharge coûte-t-elle plus cher à la minute qu’un forfait ?', a: 'La recharge sert de dépannage ponctuel. Le forfait reste la solution la plus économique pour un volume régulier : plus il est grand, plus le prix à la minute baisse.' },
+  { q: 'Comment suis-je facturé ?', a: 'L’abonnement est prélevé chaque mois sur votre carte, à la date anniversaire, et la facture est disponible dans votre espace (Billing info). Les recharges de minutes sont facturées au moment de l’achat. Les taxes sont calculées automatiquement selon votre pays et votre statut.' },
+  { q: 'Comment annuler mon abonnement ?', a: 'Depuis votre espace (Billing info), à tout moment et sans frais. Pendant l’essai, l’annulation évite tout débit. Après l’essai, l’abonnement reste actif jusqu’à la fin de la période déjà payée, puis s’arrête.' },
   { q: 'Puis-je changer de forfait ?', a: 'Oui, à tout moment et sans engagement. Passez au forfait supérieur quand votre volume grandit ; le changement est affiché avant confirmation.' },
 ];

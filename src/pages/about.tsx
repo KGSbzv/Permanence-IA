@@ -1,13 +1,21 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import { Heading, Section, Tick } from '@/components/ui';
+import { Heading, Photo, Section, Tick } from '@/components/ui';
+import { AgentTeam } from '@/components/extras';
 import { FinalCTA } from '@/components/blocks';
 import { SITE } from '@/data/site';
 
 export default function About() {
   return (
     <Layout title="À propos — Permanence IA" description="Permanence IA aide les entreprises à répondre à chaque appel grâce à des agents vocaux IA. Une marque de SINAY STRATEGIC LLC.">
-      <section className="bg-paper"><div className="wrap py-14 lg:py-20"><Heading as="h1" title="Chaque appel mérite une réponse" intro="Permanence IA est née d’un constat simple : les petites entreprises perdent des clients parce que personne ne peut décrocher au bon moment." /></div></section>
+      <section className="bg-paper">
+        <div className="wrap grid gap-12 py-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:py-20">
+          <Heading as="h1" title="Chaque appel mérite une réponse" intro="Permanence IA est née d’un constat simple : les petites entreprises perdent des clients parce que personne ne peut décrocher au bon moment." />
+          <div className="aspect-[4/3] overflow-hidden rounded-3xl border border-line">
+            <Photo src="/photos/hero.jpg" alt="Une dirigeante consulte son téléphone dans son bureau" className="object-[50%_20%]" fallback={<div className="h-full w-full bg-signal-soft" />} />
+          </div>
+        </div>
+      </section>
       <Section>
         <div className="grid gap-12 lg:grid-cols-2">
           <div className="space-y-4 text-lg">
@@ -26,6 +34,7 @@ export default function About() {
           </div>
         </div>
       </Section>
+      <Section tone="paper"><AgentTeam /></Section>
       <FinalCTA />
     </Layout>
   );

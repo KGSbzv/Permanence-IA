@@ -5,6 +5,29 @@ import { Heading, Section } from '@/components/ui';
 import { HELP_GLOSSARY, HELP_MENU, HELP_TASKS } from '@/data/help';
 import { LOGIN_URL, SITE } from '@/data/site';
 
+// Aperçu d’un échange avec l’assistante d’aide : ce que le client voit dans son espace.
+function HelpChatPreview() {
+  const lines: { me?: boolean; text: React.ReactNode }[] = [
+    { me: true, text: 'Où est-ce que j’ajoute des minutes ?' },
+    { text: <>En haut à droite, ouvrez le menu de votre profil puis cliquez sur <b>Add credits</b> (ajouter du crédit). Choisissez une recharge : le crédit ne périme pas.</> },
+    { me: true, text: 'Et pour mettre l’agent sur mon site ?' },
+    { text: <>Ouvrez votre agent dans <b>Assistants</b>, section <b>Web widget</b> (widget web) : activez-le, puis copiez le code fourni. On le fait ensemble ?</> },
+  ];
+  return (
+    <div className="rounded-3xl border border-line bg-white p-5 shadow-float" aria-label="Exemple d’échange avec l’assistante d’aide">
+      <div className="flex items-center justify-between border-b border-line pb-3">
+        <p className="font-display font-semibold text-ink">Aide Permanence IA</p>
+        <span className="text-xs text-slate-light">En français · écrit ou voix</span>
+      </div>
+      <div className="mt-4 space-y-3">
+        {lines.map((l, i) => (
+          <p key={i} className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] ${l.me ? 'ml-auto bg-signal text-white' : 'bg-paper text-ink'}`}>{l.text}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Aide() {
   return (
     <Layout
@@ -13,13 +36,16 @@ export default function Aide() {
       breadcrumbs={[{ name: 'Aide', path: '/aide' }]}
     >
       <section className="bg-paper">
-        <div className="wrap py-14 lg:py-20">
+        <div className="wrap grid gap-12 py-14 lg:grid-cols-[1fr_1fr] lg:items-center lg:py-20">
+          <div>
           <Heading
             as="h1"
             title="Aide de votre espace client"
             intro="Votre espace client s’affiche en anglais. Ce guide traduit chaque menu et vous accompagne pas à pas. Dans l’espace, l’assistante d’aide (bulle en bas à droite) répond aussi en français, par écrit ou à voix haute."
           />
           <a href={LOGIN_URL} className="btn-primary mt-8">Ouvrir mon espace</a>
+          </div>
+          <HelpChatPreview />
         </div>
       </section>
 

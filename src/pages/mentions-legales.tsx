@@ -6,28 +6,25 @@ import { Shield } from 'lucide-react';
 export default function MentionsLegales() {
   return (
     <Layout
-      title="Mentions Légales | Permanence IA"
+      title="Mentions légales — Permanence IA"
       description="Mentions légales, informations sur l'éditeur, l'hébergement et les droits d'auteur de la plateforme Permanence IA."
     >
-      <div className="py-16 sm:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div className="bg-white py-14 lg:py-20">
+        <div className="wrap space-y-10">
           
           <div className="space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-primary dark:text-accent-glow bg-primary/10 dark:bg-primary/20 px-3.5 py-1.5 rounded-full border border-primary/30">
-              Informations légales
-            </span>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-navy dark:text-white">
+            <h1 className="text-hero font-extrabold">
               Mentions Légales
             </h1>
-            <p className="text-xs text-navy/60 dark:text-gray-400">
+            <p className="text-sm text-slate-light">
               Dernière mise à jour : 29 Septembre 2026
             </p>
           </div>
 
-          <div className="prose dark:prose-invert max-w-none space-y-8 text-sm sm:text-base text-navy/80 dark:text-gray-300 leading-relaxed">
+          <div className="max-w-3xl space-y-10 leading-relaxed">
             
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 1. Éditeur du site
               </h2>
               <p>
@@ -44,7 +41,7 @@ export default function MentionsLegales() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 2. Hébergement de la plateforme
               </h2>
               <p>
@@ -58,7 +55,7 @@ export default function MentionsLegales() {
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 3. Propriété intellectuelle
               </h2>
               <p>
@@ -67,13 +64,13 @@ export default function MentionsLegales() {
               <p>
                 Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.
               </p>
-              <p className="text-xs text-navy/60 dark:text-gray-400">
+              <p className="text-sm text-slate-light">
                 La mention Autocalls White-Label Architecture relève de la licence technologique concédée par Autocalls Inc.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-xl font-bold text-navy dark:text-white border-b border-gray-200 dark:border-navy-light/60 pb-2">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 4. Limitation de responsabilité
               </h2>
               <p>
