@@ -17,8 +17,8 @@ env:
   # - variable: ZOHO_SMTP_PASS
   #   secret: ZOHO_SMTP_PASS
   - variable: ZOHO_SMTP_USER
-    value: contact@permanentia.com
+    value: contact@permanenceia.com
   - variable: ZOHO_SMTP_HOST
     value: smtp.zoho.com
   - variable: NOTIFY_EMAIL
-    value: contact@permanentia.com
+    value: contact@permanenceia.com

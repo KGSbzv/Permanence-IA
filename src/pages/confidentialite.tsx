@@ -85,7 +85,7 @@ export default function Confidentialite() {
               </p>
               <p className="flex items-center gap-2 font-medium text-primary">
                 <Mail className="w-4 h-4" />
-                <span>Pour toute demande, adressez un email à : <strong>contact@permanentia.com</strong></span>
+                <span>Pour toute demande, adressez un email à : <strong>contact@permanenceia.com</strong></span>
               </p>
             </section>
 

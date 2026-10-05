@@ -59,7 +59,7 @@ export default function CGU() {
                 Bien que les contrats conclus entre professionnels ne bénéficient pas légalement du droit de rétractation consommateur, Permanence IA accorde à titre commercial une <strong>garantie de remboursement intégral sous 14 jours</strong> suivant la première souscription payante.
               </p>
               <p>
-                Sur simple notification par email à <strong>contact@permanentia.com</strong> dans les 14 jours suivant le premier paiement, l&apos;intégralité de la mensualité est remboursée sans justification.
+                Sur simple notification par email à <strong>contact@permanenceia.com</strong> dans les 14 jours suivant le premier paiement, l&apos;intégralité de la mensualité est remboursée sans justification.
               </p>
             </section>
 
@@ -71,7 +71,7 @@ export default function CGU() {
                 Les règlements sont opérés mensuellement ou annuellement via notre prestataire de paiement sécurisé Stripe. L&apos;abonnement est reconduit tacitement pour des périodes successives de même durée.
               </p>
               <p>
-                Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord <strong>app.permanentia.com</strong>. La résiliation prendra effet au terme de la période mensuelle ou annuelle déjà acquittée.
+                Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord <strong>app.permanenceia.com</strong>. La résiliation prendra effet au terme de la période mensuelle ou annuelle déjà acquittée.
               </p>
             </section>
 

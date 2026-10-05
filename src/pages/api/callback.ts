@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanentia.com';
+const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
 
 async function saveToSupabase(row: Record<string, unknown>) {
   const url = process.env.SUPABASE_URL;

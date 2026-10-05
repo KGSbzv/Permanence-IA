@@ -24,7 +24,7 @@ export default function Tarifs() {
       agents: 'Aperçu 10 agents IA',
       minutes: 'Mode Sandbox',
       features: [
-        'Accès portail client app.permanentia.com',
+        'Accès portail client app.permanenceia.com',
         'Audit guidé de votre standard téléphonique',
         'Catalogue complet des 10 agents IA',
         'Formulaire callback en simulation sandbox',
@@ -173,7 +173,7 @@ export default function Tarifs() {
   const faqs = [
     {
       q: 'Qu’est-ce qui est inclus dans le forfait Gratuit 0 € ?',
-      a: 'Le plan Gratuit vous donne un accès sans carte bancaire au portail app.permanentia.com, à la configuration de vos agents IA, à l’audit guidé de votre standard et au mode bac à sable pour simuler le parcours callback sans frais.',
+      a: 'Le plan Gratuit vous donne un accès sans carte bancaire au portail app.permanenceia.com, à la configuration de vos agents IA, à l’audit guidé de votre standard et au mode bac à sable pour simuler le parcours callback sans frais.',
     },
     {
       q: 'Puis-je changer ou résilier mon package à tout moment ?',

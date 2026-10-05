@@ -31,14 +31,14 @@ export default function MentionsLegales() {
                 1. Éditeur du site
               </h2>
               <p>
-                Le site internet accessible à l&apos;adresse <strong>https://permanentia.com</strong> est édité par la société <strong>SINAY STRATEGIC LLC</strong>.
+                Le site internet accessible à l&apos;adresse <strong>https://permanenceia.com</strong> est édité par la société <strong>SINAY STRATEGIC LLC</strong>.
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li><strong>Nom commercial :</strong> Permanence IA</li>
                 <li><strong>Statut :</strong> Limited Liability Company (LLC), État du Wyoming, États-Unis</li>
                 <li><strong>Numéro d&apos;enregistrement :</strong> 2026-001905061</li>
                 <li><strong>Siège social :</strong> 1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001, États-Unis</li>
-                <li><strong>Email de contact :</strong> contact@permanentia.com</li>
+                <li><strong>Email de contact :</strong> contact@permanenceia.com</li>
                 <li><strong>Directeur de la publication :</strong> le représentant légal de SINAY STRATEGIC LLC.</li>
               </ul>
             </section>

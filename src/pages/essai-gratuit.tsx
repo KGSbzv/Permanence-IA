@@ -391,14 +391,14 @@ export default function EssaiGratuit() {
                 <div className="text-navy/80 dark:text-gray-300 space-y-1 pl-6">
                   <div>✓ Agent {formData.selectedAgent === 'receptionniste' ? 'Réceptionniste IA Vocale' : formData.selectedAgent} prêt à être testé</div>
                   <div>✓ Formulaire de rappel sans numéro public disponible</div>
-                  <div>✓ Tableau de bord sandbox actif sur app.permanentia.com</div>
+                  <div>✓ Tableau de bord sandbox actif sur app.permanenceia.com</div>
                 </div>
               </div>
 
               {/* Action buttons */}
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
-                  href="https://app.permanentia.com/login"
+                  href="https://app.permanenceia.com/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary hover:bg-[#3dbbb2] text-navy font-bold text-sm shadow flex items-center justify-center gap-2"

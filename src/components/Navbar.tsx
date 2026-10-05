@@ -153,7 +153,7 @@ export default function Navbar() {
             </button>
 
             <a
-              href="https://app.permanentia.com/login"
+              href="https://app.permanenceia.com/login"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold text-navy/80 dark:text-gray-300 hover:text-primary dark:hover:text-accent-glow transition-colors"
@@ -263,7 +263,7 @@ export default function Navbar() {
               <span>Demander un rappel</span>
             </button>
             <a
-              href="https://app.permanentia.com/login"
+              href="https://app.permanenceia.com/login"
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-navy/80 dark:text-gray-300 hover:text-primary"

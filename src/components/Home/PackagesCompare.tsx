@@ -17,7 +17,7 @@ export default function PackagesCompare() {
       period: 'Sans engagement',
       desc: 'Idéal pour tester l’interface, auditer vos besoins et découvrir les agents sans CB.',
       features: [
-        'Accès portail app.permanentia.com',
+        'Accès portail app.permanenceia.com',
         'Audit guidé de votre standard',
         'Aperçu interactif des 10 agents IA',
         'Formulaire de rappel en mode sandbox',

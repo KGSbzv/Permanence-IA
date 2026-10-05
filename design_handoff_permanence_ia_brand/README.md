@@ -1,7 +1,7 @@
 # Handoff: Permanence IA — Brand identity & logo system
 
 ## Overview
-Visual identity for **Permanence IA** (permanentia.com), a French company providing 24/7 AI voice agents that answer business phones (reception, appointment booking, lead qualification, urgent escalation, transfer to a human). Targets: SMBs, medical practices, lawyers, liberal professions, craftsmen, real-estate agencies, garages, clinics, salons.
+Visual identity for **Permanence IA** (permanenceia.com), a French company providing 24/7 AI voice agents that answer business phones (reception, appointment booking, lead qualification, urgent escalation, transfer to a human). Targets: SMBs, medical practices, lawyers, liberal professions, craftsmen, real-estate agencies, garages, clinics, salons.
 Brand attributes: serious, reliable, human, modern, reassuring. No purple/pink/neon, no flashy gradients, no robot/brain/circuit imagery.
 
 The package contains one brand board (single long scrolling page, 1440 px wide) covering: symbol concept, logo variants, legibility, palette, typography, applications (business card, email signature, invoice, mobile app, app icons, website hero, ads) and misuse rules.
@@ -83,7 +83,7 @@ Usage ratio: white 50 / grey 25 / petrol 17 / ink 5 / turquoise 3. Petrol on whi
 6. **Typography**: specimen + scale table.
 7. **Applications**:
    - Business card 85×55 mm: front = petrol, centered white lockup; back = white, symbol 26px top-left, name Manrope 700 14px, contact in Plex Mono 9.5px.
-   - Email signature: 40px symbol | 1px divider | name bold petrol + "Permanence IA · permanentia.com · phone" (domain turquoise 600).
+   - Email signature: 40px symbol | 1px divider | name bold petrol + "Permanence IA · permanenceia.com · phone" (domain turquoise 600).
    - Invoice A4: lockup top-left, 2px petrol rule, grey table header, petrol total box, mono footer.
    - Mobile app: header lockup + "En ligne" pill (turquoise-tint bg, turquoise dot), KPI "14 appels traités", event cards (urgent card has 1.5px turquoise inset outline).
    - Website hero: nav (lockup 21px, links, ghost + primary buttons radius 8), pill "Agent disponible · 24 h/24 · 7 j/7", H1 52px "Chaque appel reçoit une réponse.", chat transcript card (agent bubbles white, caller bubbles petrol).

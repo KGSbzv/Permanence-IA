@@ -64,7 +64,7 @@ export default function ArchitectureProcess() {
       color: 'from-amber-500/20 to-orange-500/20',
       agent: 'Agent Données & Portail Client',
       deliverables: [
-        'Dashboard unifié accessible sur app.permanentia.com',
+        'Dashboard unifié accessible sur app.permanenceia.com',
         'Taux de décroché, volume d’appels et délais moyens de réponse',
         'Attribution claire des canaux et chiffre d’affaires généré',
         'Historique complet des consentements et enregistrements RGPD',
