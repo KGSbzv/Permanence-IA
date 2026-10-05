@@ -11,7 +11,7 @@ export default function Footer() {
           
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-2 space-y-4">
-            <Logo height={34} />
+            <Logo height={44} />
             <p className="text-sm text-navy/70 dark:text-gray-400 max-w-sm leading-relaxed">
               Standard téléphonique IA 24 h/24 &amp; 7 j/7. Réception d&apos;appels, qualification intelligente des leads, prise de rendez-vous automatique et escalade d&apos;urgence sans rupture de service.
             </p>

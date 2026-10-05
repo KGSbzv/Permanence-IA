@@ -13,7 +13,7 @@ export default function Logo({ className = '', variant = 'full', height = 36, hr
     <div className={`inline-flex items-center gap-2 select-none ${className}`}>
       {variant === 'icon' ? (
         <img
-          src="/logo/permanence-ia-icon-80.svg"
+          src="/icon-192.png"
           alt="Permanence IA"
           width={height}
           height={height}
@@ -23,14 +23,14 @@ export default function Logo({ className = '', variant = 'full', height = 36, hr
         <>
           {/* Light mode logo */}
           <img
-            src="/logo/permanence-ia-dark.svg"
+            src="/logo/logo-light.png"
             alt="Permanence IA"
             style={{ height: `${height}px`, width: 'auto' }}
             className="block dark:hidden object-contain"
           />
           {/* Dark mode logo */}
           <img
-            src="/logo/permanence-ia-light.svg"
+            src="/logo/logo-dark.png"
             alt="Permanence IA"
             style={{ height: `${height}px`, width: 'auto' }}
             className="hidden dark:block object-contain"

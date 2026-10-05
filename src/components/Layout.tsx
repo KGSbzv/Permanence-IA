@@ -14,7 +14,7 @@ export default function Layout({
   children,
   title = 'Permanence IA | Réceptionniste IA 24/7 pour votre entreprise',
   description = 'Ne manquez plus aucun appel. Permanence IA décroche, qualifie vos leads et planifie vos rendez-vous 24h/24 et 7j/7 avec un agent vocal naturel et fiable. Essai gratuit 7 jours.',
-  ogImage = '/logo/permanence-ia-full.svg',
+  ogImage = '/og-image.jpg',
 }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-[#0F1419] text-[#1A2332] dark:text-white transition-colors duration-200">

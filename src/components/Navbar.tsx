@@ -31,7 +31,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <Logo height={34} />
+              <Logo height={44} />
             </Link>
           </div>
 
