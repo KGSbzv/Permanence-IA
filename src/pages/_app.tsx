@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { CallbackProvider } from '@/context/CallbackContext';
 import CallbackModal from '@/components/CallbackModal';
+import TrialNudge from '@/components/TrialNudge';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -12,6 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Component {...pageProps} />
       <CallbackModal />
+      <TrialNudge />
     </CallbackProvider>
   );
 }
