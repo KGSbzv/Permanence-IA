@@ -173,9 +173,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'sip-numeros', name: 'SIP et numéros', family: 'Téléphonie',
-    short: 'Vos numéros existants ou des numéros dans plus de 150 pays.',
+    short: 'Gardez vos numéros, ou prenez un numéro dédié en option.',
     title: 'Gardez vos numéros ou obtenez-en de nouveaux',
-    intro: 'Connectez votre standard ou votre opérateur par SIP, importez vos numéros Twilio ou Telnyx, ou obtenez un numéro local dans plus de 150 pays.',
+    intro: 'Connectez votre standard ou votre opérateur par SIP, importez vos numéros Twilio ou Telnyx, ou prenez un numéro dédié en option (facturé au mois, selon le pays).',
     uses: ['Garder le numéro connu de vos clients', 'Ouvrir une ligne locale', 'Gérer plusieurs sites'],
     steps: [
       { title: 'Choisissez l’option', text: 'Numéro fourni, import ou trunk SIP.' },

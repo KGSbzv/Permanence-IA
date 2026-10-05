@@ -148,7 +148,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Téléphonie',
     rows: [
-      { label: 'Numéros internationaux', detail: 'Dans plus de 150 pays', cells: { decouverte: false, receptionniste: 'En option', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Numéro dédié', detail: 'Option facturée au mois, selon le pays', cells: { decouverte: false, receptionniste: 'En option', assistant: 'En option', 'centre-appels': 'En option', 'sur-mesure': 'En option' } },
       { label: 'Intégration SIP', detail: 'Vos numéros et votre standard', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Liste de blocage', detail: 'Numéros exclus des appels', cells: { ...all(true), decouverte: false } },
     ],

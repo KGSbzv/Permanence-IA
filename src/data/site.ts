@@ -12,7 +12,7 @@ export const TRIAL_LINE = '14 jours d’essai gratuit — 30 minutes incluses �
 export const TRIAL_BADGES = ['14 jours d’essai gratuit', '30 minutes incluses', 'Prix HT', 'Sans engagement'];
 // Messages d’évolution à afficher partout avec l’essai.
 export const GROWTH_LINES = ['Ajoutez des minutes à tout moment', 'Passez à l’offre supérieure quand votre volume grandit'];
-export const PRICE_NOTE = 'Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables.';
+export const PRICE_NOTE = 'Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables. Numéro de téléphone dédié en option, facturé au mois.';
 
 // Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';

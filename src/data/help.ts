@@ -15,7 +15,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Leads', fr: 'Contacts / prospects', text: 'Les contacts importés ou créés, avec leur statut.' },
   { en: 'Inbox', fr: 'Messagerie', text: 'Conversations écrites centralisées : widget web, WhatsApp, SMS, Messenger, Instagram.' },
   { en: 'Channels → WhatsApp / Messenger & Instagram', fr: 'Canaux', text: 'Connecter vos comptes de messagerie.' },
-  { en: 'Get new phone number', fr: 'Obtenir un numéro', text: 'Acheter un numéro local dans plus de 150 pays.' },
+  { en: 'Get new phone number', fr: 'Obtenir un numéro', text: 'Acheter un numéro dédié (option payée chaque mois, prix affiché avant l’achat).' },
   { en: 'Your phone numbers', fr: 'Vos numéros', text: 'Vos numéros, l’import Twilio / Telnyx et la connexion SIP.' },
   { en: 'Automate platform', fr: 'Automatisations', text: 'Flow builder sans code relié à plus de 300 outils (forfait Assistant et plus).' },
   { en: 'Change plan', fr: 'Changer de forfait', text: 'Passer au forfait supérieur ou inférieur.' },

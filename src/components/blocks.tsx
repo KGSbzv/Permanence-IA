@@ -72,7 +72,7 @@ export function ModuleCards({ slugs, max }: { slugs?: string[]; max?: number }) 
 /** Grand schéma « ce que ça inclut », organisé par familles (doc 95 §4). */
 export function IncludesSchema() {
   const families: { name: string; icon: React.ElementType; items: string[] }[] = [
-    { name: 'Téléphonie', icon: Phone, items: ['Appels entrants et sortants', 'Numéros dans 150+ pays', 'Intégration SIP', 'Transfert vers un humain', 'Identification de l’appelant'] },
+    { name: 'Téléphonie', icon: Phone, items: ['Appels entrants et sortants', 'Numéro dédié en option', 'Intégration SIP', 'Transfert vers un humain', 'Identification de l’appelant'] },
     { name: 'Automatisation', icon: Workflow, items: ['Éditeur de prompts', 'Flow builder sans code', 'Assistant d’automatisation', '300+ outils connectables'] },
     { name: 'CRM et données', icon: Database, items: ['Leads et préqualification', 'Base de connaissances', 'Historique des appels', 'Webhooks et API'] },
     { name: 'Messages', icon: MessageSquare, items: ['SMS', 'WhatsApp et templates', 'Messenger et Instagram', 'Widget web'] },
@@ -478,8 +478,8 @@ export function VoicesNumbers() {
       </div>
       <div className="rounded-3xl bg-paper p-8">
         <Phone className="h-7 w-7 text-signal" aria-hidden />
-        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">Numéros internationaux et SIP</h3>
-        <p className="mt-2">Obtenez un numéro local dans plus de 150 pays, ou gardez vos numéros : renvoi d’appel, import Twilio ou Telnyx, ou connexion SIP à votre standard.</p>
+        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">Votre numéro ou un numéro dédié</h3>
+        <p className="mt-2">Gardez votre numéro (renvoi d’appel, import Twilio ou Telnyx, connexion SIP à votre standard) ou prenez un numéro dédié en option, facturé au mois en plus du forfait.</p>
         <Link href="/fonctionnalites/sip-numeros" className="mt-5 inline-flex items-center gap-1 font-semibold text-signal-deep hover:underline">Voir les options téléphonie<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
       </div>
     </div>
