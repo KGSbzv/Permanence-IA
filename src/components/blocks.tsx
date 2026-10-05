@@ -6,19 +6,21 @@ import {
   Lock, MessageSquare, Minus, Phone, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
   UtensilsCrossed, Workflow, Wrench,
 } from 'lucide-react';
-import { MODULES, Module } from '@/data/modules';
-import { SECTORS, Sector } from '@/data/sectors';
-import { Cell, MATRIX, OFFERS, Offer, RECHARGES, euro, money } from '@/data/offers';
-import { INTEGRATIONS } from '@/data/integrations';
-import { DEMO_URL, GROWTH_LINES, PRICE_NOTE, SIGNUP_URL, TRIAL_LINE } from '@/data/site';
+import { MODULES as FR_MODULES } from '@/i18n/content/fr/modules';
+import type { Sector } from '@/i18n/content/fr/sectors';
+import type { Cell } from '@/i18n/content/fr/offers';
+import { DEMO_URL, SIGNUP_URL } from '@/data/site';
+import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
 
 /* ---------- Icônes ---------- */
 
-const FAMILY_ICON: Record<Module['family'], React.ElementType> = {
+// Icônes indexées sur les familles françaises (clés stables) : on retrouve la famille d’un module par son slug.
+const FAMILY_ICON: Record<string, React.ElementType> = {
   'Téléphonie': Phone, Automatisation: Workflow, 'CRM et données': Database, Messages: MessageSquare, Agenda: CalendarDays, Pilotage: BarChart3,
 };
+const familyIcon = (slug: string) => FAMILY_ICON[FR_MODULES.find((m) => m.slug === slug)?.family ?? ''] || Sparkles;
 export const SECTOR_ICON: Record<string, React.ElementType> = {
   'services-a-domicile': Wrench, 'dentaire-cliniques': Stethoscope, immobilier: Home, automobile: Car, 'beaute-bien-etre': Sparkles, 'restaurants-hotellerie': UtensilsCrossed,
 };
@@ -26,13 +28,9 @@ export const SECTOR_ICON: Record<string, React.ElementType> = {
 /* ---------- Ce que l’agent sait faire ---------- */
 
 export function Benefits() {
-  const items = [
-    ['Répondez même hors horaires', 'Soirs, week-ends, pendant vos rendez-vous : chaque appel reçoit une réponse.'],
-    ['Qualifiez automatiquement', 'L’agent pose vos questions et vous transmet une demande complète.'],
-    ['Réservez des rendez-vous', 'Directement dans votre agenda, avec confirmation et rappel.'],
-    ['Rappelez les leads plus vite', 'Un formulaire rempli devient un appel en quelques minutes.'],
-    ['Gardez l’humain pour l’important', 'Transfert vers votre équipe quand la situation l’exige.'],
-  ];
+  const { c } = useI18n();
+  const t = c.ui.components.benefits;
+  const items = t.items.map((i) => [i.title, i.text]);
   return (
     <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
       {items.map(([t, d]) => (
@@ -42,7 +40,7 @@ export function Benefits() {
         </div>
       ))}
       <div className="flex items-end border-t-2 border-signal pt-4">
-        <Link href="/fonctionnalites/receptionniste-ia" className="inline-flex items-center gap-1 font-semibold text-signal-deep hover:underline">Voir l’agent en détail<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
+        <Link href="/fonctionnalites/receptionniste-ia" className="inline-flex items-center gap-1 font-semibold text-signal-deep hover:underline">{t.seeAgent}<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
       </div>
     </div>
   );
@@ -51,17 +49,18 @@ export function Benefits() {
 /* ---------- Modules ---------- */
 
 export function ModuleCards({ slugs, max }: { slugs?: string[]; max?: number }) {
-  const list = (slugs ? slugs.map((s) => MODULES.find((m) => m.slug === s)!).filter(Boolean) : MODULES).slice(0, max);
+  const { c } = useI18n();
+  const list = (slugs ? slugs.map((s) => c.modules.find((m) => m.slug === s)!).filter(Boolean) : c.modules).slice(0, max);
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {list.map((m) => {
-        const Icon = FAMILY_ICON[m.family];
+        const Icon = familyIcon(m.slug);
         return (
           <Link key={m.slug} href={`/fonctionnalites/${m.slug}`} className="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-colors hover:border-ink">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-signal-soft"><Icon className="h-5 w-5 text-signal-deep" aria-hidden /></span>
             <h3 className="mt-4 text-h3 font-semibold">{m.name}</h3>
             <p className="mt-1.5 flex-1 text-[15px]">{m.short}</p>
-            <span className="mt-4 text-sm font-semibold text-signal-deep group-hover:underline">Voir ce que ça inclut</span>
+            <span className="mt-4 text-sm font-semibold text-signal-deep group-hover:underline">{c.ui.components.moduleCards.seeIncluded}</span>
           </Link>
         );
       })}
@@ -70,25 +69,21 @@ export function ModuleCards({ slugs, max }: { slugs?: string[]; max?: number }) 
 }
 
 /** Grand schéma « ce que ça inclut », organisé par familles (doc 95 §4). */
+const INCLUDES_ICONS: React.ElementType[] = [Phone, Workflow, Database, MessageSquare, CalendarDays, BarChart3, ShieldCheck];
+
 export function IncludesSchema() {
-  const families: { name: string; icon: React.ElementType; items: string[] }[] = [
-    { name: 'Téléphonie', icon: Phone, items: ['Appels entrants et sortants', 'Numéro dédié en option', 'Intégration SIP', 'Transfert vers un humain', 'Identification de l’appelant'] },
-    { name: 'Automatisation', icon: Workflow, items: ['Éditeur de prompts', 'Flow builder sans code', 'Assistant d’automatisation', '300+ outils connectables'] },
-    { name: 'CRM et données', icon: Database, items: ['Leads et préqualification', 'Base de connaissances', 'Historique des appels', 'Webhooks et API'] },
-    { name: 'Messages', icon: MessageSquare, items: ['SMS', 'WhatsApp et templates', 'Messenger et Instagram', 'Widget web'] },
-    { name: 'Agenda', icon: CalendarDays, items: ['Prise de rendez-vous', 'Confirmations et rappels', 'Reports et annulations'] },
-    { name: 'Pilotage', icon: BarChart3, items: ['Tableau de bord', 'Rapports détaillés', 'Rôles et permissions'] },
-    { name: 'Sécurité', icon: ShieldCheck, items: ['Consentement et opt-out', 'Rétention configurable', 'Chiffrement', 'Journal des actions'] },
-  ];
+  const { c } = useI18n();
+  const t = c.ui.components.includesSchema;
+  const families: { name: string; icon: React.ElementType; items: string[] }[] = t.families.map((f, i) => ({ ...f, icon: INCLUDES_ICONS[i] || Sparkles }));
   return (
     <div className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div className="flex flex-col justify-between rounded-2xl bg-ink p-6 text-white">
         <div>
           <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-signal"><Sparkles className="h-6 w-6" aria-hidden /></span>
-          <p className="mt-5 font-display text-2xl font-bold leading-tight text-white">Votre agent vocal IA</p>
-          <p className="mt-2 text-[15px] text-white/70">Au centre : un agent configuré pour votre activité. Autour : tout ce qu’il peut utiliser.</p>
+          <p className="mt-5 font-display text-2xl font-bold leading-tight text-white">{t.centerTitle}</p>
+          <p className="mt-2 text-[15px] text-white/70">{t.centerText}</p>
         </div>
-        <Link href="/tarifs#comparatif" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal-glow hover:underline">Voir ce qui est inclus par offre<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
+        <Link href="/tarifs#comparatif" className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-signal-glow hover:underline">{t.perOffer}<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
       </div>
       {families.map((f) => (
         <div key={f.name} className="rounded-2xl border border-line bg-white p-5">
@@ -118,11 +113,12 @@ export function FeatureRow({ title, text, points, mock, reverse = false, link }:
 /* ---------- Comment ça marche (séquence réelle → étapes numérotées) ---------- */
 
 export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
+  const { c } = useI18n();
   return (
     <ol className={`grid gap-6 sm:grid-cols-2 ${steps.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
       {steps.map((s, i) => (
         <li key={s.title} className="relative rounded-2xl border border-line bg-white p-6">
-          <span className="font-display text-sm font-bold text-signal">Étape {i + 1}</span>
+          <span className="font-display text-sm font-bold text-signal">{c.ui.components.steps.step(i + 1)}</span>
           <h3 className="mt-2 text-h3 font-semibold">{s.title}</h3>
           <p className="mt-1.5 text-[15px]">{s.text}</p>
         </li>
@@ -134,29 +130,31 @@ export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
 /* ---------- Démo live ---------- */
 
 export function DemoBlock({ sector }: { sector?: string }) {
+  const { c } = useI18n();
+  const t = c.ui.components.demoBlock;
   return (
     <Section tone="night" id="demo">
       <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         <div>
-          <Heading dark title="Essayez en live notre agent maintenant" intro="Parlez à l’agent depuis votre navigateur, ou laissez votre numéro pour recevoir un appel de démonstration adapté à votre secteur." />
+          <Heading dark title={t.title} intro={t.intro} />
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <Link href={DEMO_URL} className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10 hover:bg-white/10">
               <Phone className="h-6 w-6 text-signal-glow" aria-hidden />
-              <p className="mt-3 font-display font-semibold text-white">Lancer la démo live</p>
-              <p className="mt-1 text-sm">Une conversation réelle, sans installation.</p>
+              <p className="mt-3 font-display font-semibold text-white">{t.launchTitle}</p>
+              <p className="mt-1 text-sm">{t.launchText}</p>
             </Link>
             <div className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
               <UserCheck className="h-6 w-6 text-signal-glow" aria-hidden />
-              <p className="mt-3 font-display font-semibold text-white">Me faire rappeler</p>
-              <p className="mt-1 text-sm">L’agent vous appelle au créneau choisi.</p>
+              <p className="mt-3 font-display font-semibold text-white">{t.callbackTitle}</p>
+              <p className="mt-1 text-sm">{t.callbackText}</p>
             </div>
           </div>
           <TrialBadges dark className="mt-8" />
         </div>
         <div className="rounded-3xl bg-white p-6 text-slate sm:p-8">
-          <p className="font-display text-xl font-bold">Recevoir un appel de démonstration</p>
-          <p className="mb-5 mt-1 text-[15px]">Gratuit, sans engagement. Vous entendez la voix et la façon dont l’agent qualifie une demande.</p>
-          <CallbackForm type="demo" sector={sector} compact submitLabel="Me faire rappeler" />
+          <p className="font-display text-xl font-bold">{t.formTitle}</p>
+          <p className="mb-5 mt-1 text-[15px]">{t.formText}</p>
+          <CallbackForm type="demo" sector={sector} compact submitLabel={t.submit} />
         </div>
       </div>
     </Section>
@@ -180,9 +178,10 @@ export function SectorVisual({ s, className = '' }: { s: Sector; className?: str
 }
 
 export function SectorCards({ exclude }: { exclude?: string }) {
+  const { c } = useI18n();
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {SECTORS.filter((s) => s.slug !== exclude).map((s) => {
+      {c.sectors.filter((s) => s.slug !== exclude).map((s) => {
         const Icon = SECTOR_ICON[s.slug];
         return (
           <Link key={s.slug} href={`/secteurs/${s.slug}`} className="group overflow-hidden rounded-2xl border border-line bg-white hover:border-ink">
@@ -190,7 +189,7 @@ export function SectorCards({ exclude }: { exclude?: string }) {
             <div className="p-5">
               <h3 className="flex items-center gap-2 text-h3 font-semibold"><Icon className="h-5 w-5 text-signal" aria-hidden />{s.name}</h3>
               <p className="mt-1.5 text-[15px]">{s.short}</p>
-              <span className="mt-3 inline-block text-sm font-semibold text-signal-deep group-hover:underline">Voir la page {s.name.toLowerCase()}</span>
+              <span className="mt-3 inline-block text-sm font-semibold text-signal-deep group-hover:underline">{c.ui.components.sectorCards.seePage(s.name.toLowerCase())}</span>
             </div>
           </Link>
         );
@@ -202,34 +201,38 @@ export function SectorCards({ exclude }: { exclude?: string }) {
 /* ---------- Tarifs ---------- */
 
 function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
-  const amount = o.price === null ? o.priceLabel : euro(o.price);
+  const { c, market, money } = useI18n();
+  const t = c.ui.components.pricingCards;
+  const amount = o.price === null ? o.priceLabel : money(o.price);
   return (
     <div>
       <p className={`font-display text-[2rem] font-bold leading-none ${light ? 'text-white' : 'text-ink'}`}>{amount}</p>
       <p className={`mt-1.5 text-sm ${light ? 'text-white/70' : 'text-slate'}`}>
-        {o.price === 0 ? '14 jours offerts' : o.price === null ? 'Prix à la minute négocié' : 'HT / mois'}
+        {o.price === 0 ? t.daysFree(market.trial.days) : o.price === null ? t.negotiated : c.offerLabels.perMonth}
       </p>
     </div>
   );
 }
 
 export function PricingCards({ only }: { only?: Offer['slug'][] }) {
-  const list = only ? OFFERS.filter((o) => only.includes(o.slug)) : OFFERS;
+  const { c, offers } = useI18n();
+  const t = c.ui.components.pricingCards;
+  const list = only ? offers.filter((o) => only.includes(o.slug)) : offers;
   return (
     <div className={`grid gap-4 md:grid-cols-2 ${list.length >= 5 ? 'xl:grid-cols-5' : list.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
       {list.map((o) => (
         <div key={o.slug} className={`relative flex flex-col rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
-          {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal px-3 py-1 text-xs font-semibold text-white">Le plus choisi</span>}
+          {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
           <p className={`font-display text-lg font-bold ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
           <p className="mt-1 min-h-[2.5rem] text-sm">{o.audience}</p>
           <div className="mt-4"><PriceTag o={o} light={o.featured} /></div>
           <p className={`mt-3 text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
-          {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>soit {o.perMinute}</p>}
+          {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(o.perMinute)}</p>}
           <ul className="mt-4 flex-1 space-y-2 text-[14px]">
             {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
           </ul>
           <Link href={o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}`} className={`mt-6 ${o.featured ? 'btn-signal' : 'btn-ghost'} text-sm`}>{o.cta}</Link>
-          <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>Détail de l’offre</Link>
+          <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>{t.details}</Link>
         </div>
       ))}
     </div>
@@ -237,46 +240,49 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
 }
 
 export function GrowthLines({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
+  const { c } = useI18n();
   return (
     <ul className={`flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium ${dark ? 'text-white/80' : 'text-ink'} ${className}`}>
-      {GROWTH_LINES.map((l) => <li key={l} className="flex items-center gap-2"><ArrowUpRight className="h-4 w-4 text-signal" aria-hidden />{l}</li>)}
+      {c.site.growthLines.map((l) => <li key={l} className="flex items-center gap-2"><ArrowUpRight className="h-4 w-4 text-signal" aria-hidden />{l}</li>)}
     </ul>
   );
 }
 
-function CellView({ v }: { v: Cell }) {
-  if (v === true) return <Check className="mx-auto h-4 w-4 text-signal" aria-label="Inclus" />;
-  if (v === false) return <Minus className="mx-auto h-4 w-4 text-line" aria-label="Non inclus" />;
+function CellView({ v, t }: { v: Cell; t: { included: string; notIncluded: string } }) {
+  if (v === true) return <Check className="mx-auto h-4 w-4 text-signal" aria-label={t.included} />;
+  if (v === false) return <Minus className="mx-auto h-4 w-4 text-line" aria-label={t.notIncluded} />;
   return <span className="text-[13px] font-medium text-ink">{v}</span>;
 }
 
 export function MatrixTable() {
+  const { c, offers, money } = useI18n();
+  const t = c.ui.components.matrix;
   return (
     <div className="overflow-x-auto rounded-2xl border border-line bg-white">
       <table className="w-full min-w-[760px] border-collapse text-left text-[14px]">
-        <caption className="sr-only">Fonctions incluses dans chaque forfait</caption>
+        <caption className="sr-only">{t.caption}</caption>
         <thead className="bg-white">
           <tr className="border-b border-line">
-            <th scope="col" className="p-4 font-display text-sm font-semibold text-ink">Dans votre interface</th>
-            {OFFERS.map((o) => <th key={o.slug} scope="col" className={`p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'text-ink'}`}>{o.name}</th>)}
+            <th scope="col" className="p-4 font-display text-sm font-semibold text-ink">{t.inYourInterface}</th>
+            {offers.map((o) => <th key={o.slug} scope="col" className={`p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'text-ink'}`}>{o.name}</th>)}
           </tr>
         </thead>
         <tbody>
           <tr className="border-b border-line bg-paper/60">
-            <th scope="row" className="p-4 font-medium text-ink">Prix HT / mois</th>
-            {OFFERS.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.price === null ? o.priceLabel : euro(o.price)}</td>)}
+            <th scope="row" className="p-4 font-medium text-ink">{t.pricePerMonth}</th>
+            {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.price === null ? o.priceLabel : money(o.price)}</td>)}
           </tr>
           <tr className="border-b border-line bg-paper/60">
-            <th scope="row" className="p-4 font-medium text-ink">Minutes incluses</th>
-            {OFFERS.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}{o.perMinute && <span className="block font-normal text-slate-light">{o.perMinute}</span>}</td>)}
+            <th scope="row" className="p-4 font-medium text-ink">{t.includedMinutes}</th>
+            {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}{o.perMinute && <span className="block font-normal text-slate-light">{o.perMinute}</span>}</td>)}
           </tr>
-          {MATRIX.map((g) => (
+          {c.matrix.map((g) => (
             <React.Fragment key={g.group}>
               <tr><th colSpan={6} scope="colgroup" className="bg-paper px-4 pb-2 pt-5 font-display text-sm font-semibold text-ink">{g.group}</th></tr>
               {g.rows.map((r) => (
                 <tr key={r.label} className="border-b border-line">
                   <th scope="row" className="p-4 font-normal"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] text-slate-light">{r.detail}</span></th>
-                  {OFFERS.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} /></td>)}
+                  {offers.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} t={t} /></td>)}
                 </tr>
               ))}
             </React.Fragment>
@@ -289,37 +295,39 @@ export function MatrixTable() {
 
 /** Recharges de crédit : dépannage ponctuel, la minute supplémentaire coûte plus cher que la minute incluse. */
 export function RechargeTables() {
-  const plans = OFFERS.filter((o) => o.extraMinute);
+  const { c, market, offers, money, num } = useI18n();
+  const t = c.ui.components.recharges;
+  const plans = offers.filter((o) => o.extraMinute);
   return (
     <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
       <div className="overflow-x-auto rounded-2xl border border-line bg-white p-6">
-        <h3 className="text-h3 font-semibold">Recharges de crédit</h3>
-        <p className="mt-1 text-[15px]">Le crédit paie les minutes au-delà de votre forfait. Il ne périme pas et s’ajoute immédiatement.</p>
+        <h3 className="text-h3 font-semibold">{t.title}</h3>
+        <p className="mt-1 text-[15px]">{t.text}</p>
         <table className="mt-4 w-full min-w-[460px] text-[15px]">
           <thead>
             <tr className="border-b border-line text-left text-sm text-slate">
-              <th className="py-2 font-medium">Recharge HT</th>
+              <th className="py-2 font-medium">{t.rechargeCol}</th>
               {plans.map((o) => <th key={o.slug} className="py-2 text-right font-medium">{o.name}</th>)}
             </tr>
           </thead>
           <tbody>
-            {RECHARGES.map((amount) => (
+            {market.recharges.map((amount) => (
               <tr key={amount} className="border-b border-line last:border-0">
                 <td className="py-2.5 font-semibold text-ink">{money(amount)}</td>
-                {plans.map((o) => <td key={o.slug} className="py-2.5 text-right text-slate">≈ {Math.floor(amount / o.extraMinute!).toLocaleString('fr-FR')} min</td>)}
+                {plans.map((o) => <td key={o.slug} className="py-2.5 text-right text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="rounded-2xl bg-ink p-6 text-white/80">
-        <h3 className="text-h3 font-semibold text-white">Le forfait reste plus économique</h3>
-        <p className="mt-1 text-[15px]">Une minute incluse coûte toujours moins cher qu’une minute supplémentaire.</p>
+        <h3 className="text-h3 font-semibold text-white">{t.cheaperTitle}</h3>
+        <p className="mt-1 text-[15px]">{t.cheaperText}</p>
         <ul className="mt-5 space-y-3">
           {plans.map((o) => (
             <li key={o.slug} className="border-b border-white/10 pb-3 last:border-0">
               <p className="font-display font-semibold text-white">{o.name}</p>
-              <p className="text-sm">Incluse : <span className="font-semibold text-signal-glow">{o.perMinute}</span> · supplémentaire : {money(o.extraMinute!, 2)} HT / min</p>
+              <p className="text-sm">{t.included} <span className="font-semibold text-signal-glow">{o.perMinute}</span>{t.extra(money(o.extraMinute!, 2))}</p>
             </li>
           ))}
         </ul>
@@ -330,21 +338,32 @@ export function RechargeTables() {
 
 /** Règles d’évolution : recharge pour un dépassement ponctuel, forfait supérieur pour un usage régulier. */
 export function GrowthBlock() {
+  const { c, offer, money, num } = useI18n();
+  const t = c.ui.components.growthBlock;
+  const rec = offer('receptionniste'), asst = offer('assistant'), centre = offer('centre-appels'), custom = offer('sur-mesure');
+  // Exemples chiffrés calculés sur la grille du marché : un dépassement ponctuel, puis un usage régulier.
+  const overflow = 50; // minutes au-delà du forfait Réceptionniste ce mois-ci
+  const regular = 900; // minutes régulières, entre Réceptionniste et Assistant
+  const recPrice = rec.price ?? 0, recExtra = rec.extraMinute ?? 0;
   const rules = [
-    { t: 'Dépassement léger, une fois', d: 'Une recharge suffit pour finir le mois.' },
-    { t: 'Dépassements répétés', d: 'Nous vous proposons le forfait supérieur.' },
-    { t: 'Recharges fréquentes', d: 'Votre tableau de bord vous indique que vous payez trop cher pour votre usage.' },
-    { t: 'Au-delà de 2 500 min régulières', d: 'Nous construisons une offre sur mesure.' },
+    ...t.rules.map((r) => ({ t: r.title, d: r.text })),
+    { t: t.ruleCustom(num(custom.minutesCount)), d: t.ruleCustomText },
   ];
   const cases = [
-    { m: '400 min ce mois-ci', plan: 'Réceptionniste + une recharge de crédit', note: '99 $ + 50 min × 0,39 $ ≈ 119 $ HT. Un dépassement ponctuel : la recharge suffit.' },
-    { m: '900 min chaque mois', plan: 'Passez au forfait Assistant', note: '249 $ HT pour 1 000 min, contre ≈ 314 $ avec Réceptionniste + minutes supplémentaires. Moins cher, et de la marge.' },
-    { m: '2 500 min régulières', plan: 'Offre sur mesure', note: 'Au-delà du forfait Centre d’appels, nous négocions un prix à la minute adapté à votre volume.' },
+    {
+      m: t.case1Minutes(num(rec.minutesCount + overflow)), plan: t.case1Plan(rec.name),
+      note: t.case1Note(money(recPrice), num(overflow), money(recExtra, 2), money(Math.round(recPrice + overflow * recExtra))),
+    },
+    {
+      m: t.case2Minutes(num(regular)), plan: t.case2Plan(asst.name),
+      note: t.case2Note(money(asst.price ?? 0), num(asst.minutesCount), money(Math.round(recPrice + (regular - rec.minutesCount) * recExtra)), rec.name),
+    },
+    { m: t.case3Minutes(num(custom.minutesCount)), plan: t.case3Plan, note: t.case3Note(centre.name) },
   ];
   return (
     <div className="grid gap-10 lg:grid-cols-2">
       <div>
-        <Heading title="Ajoutez des minutes ou changez de forfait, au bon moment" intro="Vous ne payez jamais une minute plus cher que nécessaire : nous vous indiquons quand une recharge suffit et quand le forfait supérieur devient plus avantageux." />
+        <Heading title={t.title} intro={t.intro} />
         <ol className="mt-8 space-y-4">
           {rules.map((r, i) => (
             <li key={r.t} className="flex gap-4">
@@ -355,12 +374,12 @@ export function GrowthBlock() {
         </ol>
       </div>
       <div className="space-y-4">
-        {cases.map((c) => (
-          <div key={c.m} className="rounded-2xl border border-line bg-white p-6">
-            <p className="text-sm text-slate">Un client à</p>
-            <p className="font-display text-2xl font-bold text-ink">{c.m}</p>
-            <p className="mt-2 font-semibold text-signal-deep">{c.plan}</p>
-            <p className="mt-1 text-[15px]">{c.note}</p>
+        {cases.map((x) => (
+          <div key={x.m} className="rounded-2xl border border-line bg-white p-6">
+            <p className="text-sm text-slate">{t.customerAt}</p>
+            <p className="font-display text-2xl font-bold text-ink">{x.m}</p>
+            <p className="mt-2 font-semibold text-signal-deep">{x.plan}</p>
+            <p className="mt-1 text-[15px]">{x.note}</p>
           </div>
         ))}
       </div>
@@ -370,64 +389,77 @@ export function GrowthBlock() {
 
 /* ---------- Comparatif économique (prudent, doc 87) avec calculateur ---------- */
 
-/** Forfait recommandé pour un volume mensuel, selon les règles d’évolution. */
-export function planFor(minutes: number) {
-  const [, rec, asst, centre, custom] = OFFERS;
-  // Seuils : le forfait supérieur devient moins cher que forfait + minutes supplémentaires.
-  if (minutes > 2500) return { offer: custom, extra: '' };
+/** Seuil (en minutes) au-delà duquel le forfait supérieur coûte moins cher que forfait + minutes supplémentaires. */
+const breakEven = (from: Offer, to: Offer) =>
+  Math.round(from.minutesCount + ((to.price ?? 0) - (from.price ?? 0)) / (from.extraMinute || 1));
+
+/** Forfait recommandé pour un volume mensuel, selon les règles d’évolution (grille du marché courant). */
+export function planFor(minutes: number, i18n: Pick<ReturnType<typeof getI18n>, 'offer' | 'c'>) {
+  const { offer, c } = i18n;
+  const t = c.ui.components.planFor;
+  const rec = offer('receptionniste'), asst = offer('assistant'), centre = offer('centre-appels'), custom = offer('sur-mesure');
+  if (minutes > custom.minutesCount) return { offer: custom, extra: '' };
   if (minutes <= rec.minutesCount) return { offer: rec, extra: '' };
-  if (minutes <= 735) return { offer: rec, extra: ' + recharge ponctuelle' };
+  if (minutes <= breakEven(rec, asst)) return { offer: rec, extra: t.oneOffRecharge };
   if (minutes <= asst.minutesCount) return { offer: asst, extra: '' };
-  if (minutes <= 1690) return { offer: asst, extra: ' + recharge ponctuelle' };
+  if (minutes <= breakEven(asst, centre)) return { offer: asst, extra: t.oneOffRecharge };
   if (minutes <= centre.minutesCount) return { offer: centre, extra: '' };
-  return { offer: centre, extra: ' + recharge, ou sur mesure si régulier' };
+  return { offer: centre, extra: t.rechargeOrCustom };
 }
 
 export function EconomyBlock() {
   const [calls, setCalls] = useState(200);
   const [cost, setCost] = useState(1.7);
   const [duration, setDuration] = useState(2);
+  const i18n = useI18n();
+  const { c, market, offer, money, num } = i18n;
+  const t = c.ui.components.economy;
   const human = calls * cost;
   const minutes = calls * duration;
-  const { offer: plan, extra } = useMemo(() => planFor(minutes), [minutes]);
-  const fmt = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 0 });
+  const { offer: plan, extra } = useMemo(() => planFor(minutes, i18n), [minutes, i18n]);
+  const rec = offer('receptionniste');
+  // Montant sans décimales inutiles (ex. « 1,7 $ »), dans la devise et le format du marché.
+  const amount = (n: number) => new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'narrowSymbol', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(n);
+  const value = (n: number) => n.toLocaleString(market.numberLocale);
+  // Hypothèse indicative d’accueil humain : 1,70 par appel, 200 appels par mois.
+  const sampleCost = 1.7, sampleCalls = 200;
 
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
       <div>
-        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,70 $ par appel, soit plus de 300 $ pour 200 appels. Le forfait Réceptionniste à 99 $ HT couvre 350 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
+        <Heading title={t.title} intro={t.intro(money(sampleCost, 2), money(Math.floor((sampleCost * sampleCalls) / 100) * 100), num(sampleCalls), rec.name, money(rec.price ?? 0), num(rec.minutesCount))} />
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="rounded-2xl border border-line bg-white p-5">
-            <p className="font-display font-semibold text-ink">Accueil humain</p>
-            <ul className="mt-3 space-y-1.5 text-[14px]"><li>Horaires de bureau</li><li>Coût variable : salaire, charges, remplacements</li><li>Appels manqués aux pics</li></ul>
+            <p className="font-display font-semibold text-ink">{t.humanTitle}</p>
+            <ul className="mt-3 space-y-1.5 text-[14px]">{t.humanPoints.map((p) => <li key={p}>{p}</li>)}</ul>
           </div>
           <div className="rounded-2xl border border-ink bg-ink p-5 text-white/80">
-            <p className="font-display font-semibold text-white">Permanence IA</p>
-            <ul className="mt-3 space-y-1.5 text-[14px]"><li>Disponible 24/7</li><li>Forfait clair, prix HT</li><li>Plusieurs appels en parallèle</li></ul>
+            <p className="font-display font-semibold text-white">{market.brand}</p>
+            <ul className="mt-3 space-y-1.5 text-[14px]">{t.aiPoints.map((p) => <li key={p}>{p}</li>)}</ul>
           </div>
         </div>
-        <p className="mt-4 text-sm text-slate-light">Hypothèse indicative, en dollars US : les coûts d’accueil varient fortement selon le pays, les horaires et les charges. Un appel n’équivaut pas à une minute.</p>
+        <p className="mt-4 text-sm text-slate-light">{t.disclaimer}</p>
       </div>
 
-      <form className="rounded-3xl border border-line bg-paper p-6 sm:p-8" onSubmit={(e) => e.preventDefault()} aria-label="Calculateur de coût">
-        <p className="font-display text-xl font-bold">Calculez votre cas</p>
+      <form className="rounded-3xl border border-line bg-paper p-6 sm:p-8" onSubmit={(e) => e.preventDefault()} aria-label={t.calculator}>
+        <p className="font-display text-xl font-bold">{t.calculateTitle}</p>
         {[
-          { id: 'calls', label: 'Appels par mois', v: calls, set: setCalls, min: 20, max: 2000, step: 10, unit: '' },
-          { id: 'cost', label: 'Coût humain estimé par appel', v: cost, set: setCost, min: 0.5, max: 5, step: 0.1, unit: ' $' },
-          { id: 'dur', label: 'Durée moyenne d’un appel', v: duration, set: setDuration, min: 1, max: 8, step: 0.5, unit: ' min' },
+          { id: 'calls', label: t.callsPerMonth, v: calls, set: setCalls, min: 20, max: 2000, step: 10, show: value },
+          { id: 'cost', label: t.costPerCall, v: cost, set: setCost, min: 0.5, max: 5, step: 0.1, show: amount },
+          { id: 'dur', label: t.avgDuration, v: duration, set: setDuration, min: 1, max: 8, step: 0.5, show: (n: number) => `${value(n)}${t.min}` },
         ].map((f) => (
           <div key={f.id} className="mt-5">
-            <label htmlFor={f.id} className="flex justify-between text-sm font-semibold text-ink"><span>{f.label}</span><output htmlFor={f.id}>{f.v.toLocaleString('fr-FR')}{f.unit}</output></label>
+            <label htmlFor={f.id} className="flex justify-between text-sm font-semibold text-ink"><span>{f.label}</span><output htmlFor={f.id}>{f.show(f.v)}</output></label>
             <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0FA3C4]" />
           </div>
         ))}
         <div className="mt-6 grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Coût humain estimé</p><p className="font-display text-2xl font-bold text-ink">{fmt(human)} $</p></div>
-          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">Volume d’appels</p><p className="font-display text-2xl font-bold text-ink">{fmt(minutes)} min</p></div>
+          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">{t.humanCost}</p><p className="font-display text-2xl font-bold text-ink">{money(human)}</p></div>
+          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">{t.callVolume}</p><p className="font-display text-2xl font-bold text-ink">{num(minutes)}{t.min}</p></div>
         </div>
         <div className="mt-3 rounded-xl bg-ink p-4 text-white">
-          <p className="text-xs text-white/60">Forfait adapté à ce volume</p>
-          <p className="font-display text-lg font-bold">{plan.name}{plan.price ? ` — ${euro(plan.price)} HT / mois` : ''}{extra}</p>
+          <p className="text-xs text-white/60">{t.suitedPlan}</p>
+          <p className="font-display text-lg font-bold">{plan.name}{plan.price ? t.perMonth(money(plan.price)) : ''}{extra}</p>
           <p className="text-xs text-white/60">{plan.minutes}</p>
         </div>
       </form>
@@ -437,22 +469,19 @@ export function EconomyBlock() {
 
 /* ---------- Sécurité et conformité (formulation vérifiable) ---------- */
 
+const SECURITY_ICONS: React.ElementType[] = [UserCheck, Lock, ScrollText, KeyRound, ShieldCheck, Globe2];
+
 export function SecurityBlock() {
-  const items = [
-    { icon: UserCheck, t: 'Consentement et opt-out', d: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
-    { icon: Lock, t: 'Protection des données', d: 'Chiffrement en transit et au repos, accès par rôle et durée de conservation configurable.' },
-    { icon: ScrollText, t: 'Traçabilité', d: 'Historique des appels, transcriptions et journal des actions pour chaque compte.' },
-    { icon: KeyRound, t: 'Contrôle des accès', d: 'Rôles et permissions par membre de l’équipe avec le forfait Centre d’appels.' },
-    { icon: ShieldCheck, t: 'Préparation réglementaire', d: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression, rétention.' },
-    { icon: Globe2, t: 'Infrastructure', d: 'Plateforme hébergée chez des fournisseurs cloud reconnus, avec sauvegardes et surveillance.' },
-  ];
+  const { c } = useI18n();
+  const tx = c.ui.components.security;
+  const items = tx.items.map((it, n) => ({ icon: SECURITY_ICONS[n] || ShieldCheck, t: it.title, d: it.text }));
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr]">
       <div>
-        <Heading title="Sécurité et conformité pour vos appels IA" intro="Vos appels contiennent des informations sur vos clients. La plateforme vous donne les réglages pour les protéger et respecter leurs choix." />
+        <Heading title={tx.title} intro={tx.intro} />
         <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
-          <Link href="/securite" className="text-signal-deep hover:underline">Notre approche sécurité</Link>
-          <Link href="/confidentialite" className="text-signal-deep hover:underline">Politique de confidentialité</Link>
+          <Link href="/securite" className="text-signal-deep hover:underline">{tx.approach}</Link>
+          <Link href="/confidentialite" className="text-signal-deep hover:underline">{tx.privacy}</Link>
         </div>
       </div>
       <div className="grid gap-x-8 gap-y-6 rounded-3xl border border-line bg-white p-6 sm:grid-cols-2 sm:p-8">
@@ -467,20 +496,22 @@ export function SecurityBlock() {
 /* ---------- Langues et numéros ---------- */
 
 export function VoicesNumbers() {
-  const langs = ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois'];
+  const { c } = useI18n();
+  const t = c.ui.components.voicesNumbers;
+  const langs = t.langs;
   return (
     <div className="grid gap-5 lg:grid-cols-2">
       <div className="rounded-3xl border border-line bg-white p-8">
         <Languages className="h-7 w-7 text-signal" aria-hidden />
-        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">Des voix naturelles dans votre langue</h3>
-        <p className="mt-2">Plus de 80 langues et de nombreux accents. L’agent détecte la langue de l’appelant et lui répond dans la même langue.</p>
-        <ul className="mt-5 flex flex-wrap gap-2">{langs.map((l) => <li key={l} className="rounded-full bg-paper px-3 py-1 text-sm text-ink">{l}</li>)}<li className="rounded-full bg-signal-soft px-3 py-1 text-sm font-semibold text-ink">+ 70 autres</li></ul>
+        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">{t.voicesTitle}</h3>
+        <p className="mt-2">{t.voicesText}</p>
+        <ul className="mt-5 flex flex-wrap gap-2">{langs.map((l) => <li key={l} className="rounded-full bg-paper px-3 py-1 text-sm text-ink">{l}</li>)}<li className="rounded-full bg-signal-soft px-3 py-1 text-sm font-semibold text-ink">{t.others}</li></ul>
       </div>
       <div className="rounded-3xl bg-paper p-8">
         <Phone className="h-7 w-7 text-signal" aria-hidden />
-        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">Votre numéro ou un numéro dédié</h3>
-        <p className="mt-2">Gardez votre numéro (renvoi d’appel, import Twilio ou Telnyx, connexion SIP à votre standard) ou prenez un numéro dédié en option, facturé au mois en plus du forfait.</p>
-        <Link href="/fonctionnalites/sip-numeros" className="mt-5 inline-flex items-center gap-1 font-semibold text-signal-deep hover:underline">Voir les options téléphonie<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
+        <h3 className="mt-4 font-display text-[1.6rem] font-bold leading-tight">{t.numbersTitle}</h3>
+        <p className="mt-2">{t.numbersText}</p>
+        <Link href="/fonctionnalites/sip-numeros" className="mt-5 inline-flex items-center gap-1 font-semibold text-signal-deep hover:underline">{t.telephonyOptions}<ArrowUpRight className="h-4 w-4" aria-hidden /></Link>
       </div>
     </div>
   );
@@ -489,9 +520,10 @@ export function VoicesNumbers() {
 /* ---------- Intégrations ---------- */
 
 export function IntegrationsGrid({ max }: { max?: number }) {
+  const { c } = useI18n();
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {INTEGRATIONS.slice(0, max).map((i) => (
+      {c.integrations.slice(0, max).map((i) => (
         <li key={i.name} className="flex items-center gap-3 rounded-xl border border-line bg-white p-4">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white" style={{ background: i.color }} aria-hidden>{i.mark}</span>
           <div className="min-w-0"><p className="font-semibold text-ink">{i.name}</p><p className="truncate text-[13px] text-slate">{i.text}</p></div>
@@ -503,22 +535,24 @@ export function IntegrationsGrid({ max }: { max?: number }) {
 
 /* ---------- CTA final ---------- */
 
-export function FinalCTA({ title = 'Prêt à automatiser vos appels ?', sector }: { title?: string; sector?: string }) {
+export function FinalCTA({ title, sector }: { title?: string; sector?: string }) {
+  const { c, market } = useI18n();
+  const t = c.ui.components.finalCta;
   return (
     <Section tone="paper">
       <div className="grid gap-10 rounded-3xl bg-white p-8 shadow-card sm:p-12 lg:grid-cols-2 lg:items-center">
         <div>
-          <h2 className="text-h2 font-bold">{title}</h2>
-          <p className="mt-3 font-semibold text-ink">{TRIAL_LINE}</p>
-          <CTAs className="mt-8" primary="Démarrer mon essai gratuit" demo="Voir la démo live" sector={sector} />
+          <h2 className="text-h2 font-bold">{title ?? t.title}</h2>
+          <p className="mt-3 font-semibold text-ink">{c.site.trialLine(market.trial.days, market.trial.minutes)}</p>
+          <CTAs className="mt-8" primary={t.primary} demo={t.demo} sector={sector} />
         </div>
         <div className="rounded-2xl bg-paper p-6">
-          <p className="font-display text-lg font-bold">Parler à un conseiller</p>
-          <p className="mb-4 mt-1 text-[15px]">Laissez votre numéro : nous vous rappelons pour répondre à vos questions.</p>
+          <p className="font-display text-lg font-bold">{t.advisorTitle}</p>
+          <p className="mb-4 mt-1 text-[15px]">{t.advisorText}</p>
           <CallbackForm compact sector={sector} />
         </div>
       </div>
-      <p className="mt-6 text-center text-sm text-slate-light">{PRICE_NOTE}</p>
+      <p className="mt-6 text-center text-sm text-slate-light">{c.site.priceNote}</p>
     </Section>
   );
 }

@@ -3,13 +3,18 @@ import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
 import { CTAs, Heading, Section, TrialBadges } from '@/components/ui';
 import { FeatureRow, FinalCTA, IntegrationsGrid } from '@/components/blocks';
+import { useI18n } from '@/i18n';
+
+const Kw = ({ t }: { t: { before: string; kw: string; after: string } }) => <>{t.before}<span className="kw">{t.kw}</span>{t.after}</>;
 
 export default function Integrations() {
+  const { c, market } = useI18n();
+  const t = c.ui.commerce.integrations;
   return (
-    <Layout title="Intégrations — agenda, CRM, WhatsApp, SIP · Permanence IA" description="Connectez l’agent vocal IA à Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP et plus de 300 outils sans code.">
+    <Layout title={t.meta.title(market.brand)} description={t.meta.description}>
       <section className="bg-paper">
         <div className="wrap py-14 lg:py-20">
-          <Heading as="h1" title="Connecté aux outils que vous utilisez déjà" intro="Agenda, CRM, messageries, téléphonie : l’agent s’intègre à votre organisation, et le flow builder relie plus de 300 outils sans code." />
+          <Heading as="h1" title={t.hero.title} intro={t.hero.intro} />
           <TrialBadges className="mt-6" />
           <CTAs className="mt-8" />
         </div>
@@ -17,19 +22,19 @@ export default function Integrations() {
       <Section><IntegrationsGrid /></Section>
       <Section tone="paper">
         <FeatureRow
-          title={<>Construisez vos automatisations <span className="kw">sans code</span></>}
-          text="Un formulaire rempli, un appel terminé, un nouveau lead : chaque événement peut déclencher une suite d’actions dans vos outils, comme dans Zapier ou Make, directement depuis votre espace."
-          points={['Plus de 300 outils disponibles', 'Glisser-déposer, aucun développement', 'Tests avant activation']}
+          title={<Kw t={t.flow.title} />}
+          text={t.flow.text}
+          points={t.flow.points}
           mock={<Mock kind="flow" />}
-          link={{ href: '/fonctionnalites/flow-builder', label: 'Voir le flow builder' }}
+          link={{ href: '/fonctionnalites/flow-builder', label: t.flow.link }}
         />
       </Section>
       <Section>
         <FeatureRow
           reverse
-          title={<>Webhooks et API pour <span className="kw">vos systèmes</span></>}
-          text="Avec le forfait Centre d’appels, recevez chaque fin d’appel et ses données extraites dans vos propres systèmes, ou pilotez l’agent depuis votre logiciel."
-          points={['Webhook après chaque appel', 'Variables extraites : résultat, intérêt, créneau', 'Outils MCP pour vos assistants']}
+          title={<Kw t={t.api.title} />}
+          text={t.api.text}
+          points={t.api.points}
           mock={<Mock kind="report" />}
         />
       </Section>

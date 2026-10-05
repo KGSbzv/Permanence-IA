@@ -4,7 +4,7 @@ import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, sendMail, toE164 } from 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
 
-  const { name, phone, email, company, sector, slot, note, consentCall, type, agent } = req.body || {};
+  const { name, phone, email, company, sector, slot, note, consentCall, type, agent, locale } = req.body || {};
   // Accepte true ou "true" (les outils des agents envoient des chaînes).
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
@@ -13,13 +13,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const row = {
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
     slot: slot || 'asap', note: note || null, type: type === 'support' ? 'support' : 'commercial',
-    agent: agent || null, consent_call: true, status: 'pending',
+    agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
   // Rappel automatique : la demande rejoint la campagne d’appels de l’agent concerné (commercial ou support).
   const leadHook = row.type === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
   const queueCall = async () => {
     if (!leadHook) throw new Error('webhook de campagne non configuré');
+    // Les campagnes de rappel utilisent des agents francophones : les demandes d’autres langues sont traitées par l’équipe.
+    if (locale && locale !== 'fr') throw new Error(`demande en langue ${locale} : rappel par l’équipe`);
     // Garde-fous contre les appels abusifs : pays desservis seulement, et une seule demande par numéro sur 7 jours.
     if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
     const since = new Date(Date.now() - 7 * 86_400_000).toISOString();

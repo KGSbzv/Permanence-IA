@@ -1,5 +1,5 @@
 // Six landings sectorielles (docs 80-89 et 106-111).
-import type { OfferSlug } from './offers';
+import type { PlanSlug as OfferSlug } from '../../markets';
 
 export interface Sector {
   slug: string;

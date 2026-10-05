@@ -2,10 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { CallbackForm } from './ui';
+import { useI18n } from '@/i18n';
 
 export default function CallbackModal() {
   const { isOpen, options, closeCallbackModal } = useCallbackModal();
   const dialog = useRef<HTMLDivElement>(null);
+  const { c } = useI18n();
+  const t = c.ui.components.callbackModal;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,10 +31,10 @@ export default function CallbackModal() {
       >
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
-            <h2 id="cb-title" className="font-display text-2xl font-bold">{support ? 'Demander un rappel du support' : 'Laissez votre numéro, on vous rappelle'}</h2>
-            <p className="mt-1 text-[15px]">Choisissez votre créneau. Nous ne publions aucun numéro : c’est nous qui vous rappelons.</p>
+            <h2 id="cb-title" className="font-display text-2xl font-bold">{support ? t.titleSupport : t.titleCommercial}</h2>
+            <p className="mt-1 text-[15px]">{t.intro}</p>
           </div>
-          <button type="button" onClick={closeCallbackModal} aria-label="Fermer" className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
+          <button type="button" onClick={closeCallbackModal} aria-label={t.close} className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
         </div>
         <CallbackForm type={options.type || 'commercial'} sector={options.sector} />
       </div>

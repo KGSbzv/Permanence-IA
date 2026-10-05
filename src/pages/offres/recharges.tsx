@@ -2,26 +2,28 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import { Heading, Section, TrialBadges } from '@/components/ui';
 import { FinalCTA, GrowthBlock, RechargeTables, Steps } from '@/components/blocks';
-import { PRICE_NOTE } from '@/data/site';
+import { useI18n } from '@/i18n';
 
 export default function Recharges() {
+  const { c, market, money, num } = useI18n();
+  const t = c.ui.commerce.recharges;
+  const first = market.recharges[0];
+  const last = market.recharges[market.recharges.length - 1];
+  // Minutes qu’achète la plus petite recharge au tarif « minute supplémentaire » du premier forfait payant.
+  const firstMinutes = Math.round(first / (market.plans.receptionniste.extraMinute ?? 1));
   return (
-    <Layout title="Recharges de minutes — Permanence IA" description="Recharges de crédit dès 39 $ HT pour 100 minutes supplémentaires. Ajoutez des minutes à tout moment ; passez au forfait supérieur quand votre volume grandit.">
+    <Layout title={t.meta.title(market.brand)} description={t.meta.description(money(first), num(firstMinutes))}>
       <section className="bg-paper">
         <div className="wrap py-14 lg:py-20">
-          <Heading as="h1" title="Ajoutez des minutes à tout moment" intro="La recharge dépanne un mois plus chargé. Si vous rechargez souvent, le forfait supérieur devient plus économique : nous vous le signalons." />
+          <Heading as="h1" title={t.hero.title} intro={t.hero.intro} />
           <TrialBadges className="mt-6" />
         </div>
       </section>
-      <Section><RechargeTables /><p className="mt-4 text-sm text-slate-light">{PRICE_NOTE}</p></Section>
+      <Section><RechargeTables /><p className="mt-4 text-sm text-slate-light">{c.site.priceNote}</p></Section>
       <Section tone="paper">
-        <Heading title="Comment ça fonctionne" />
+        <Heading title={t.how.title} />
         <div className="mt-10">
-          <Steps steps={[
-            { title: 'Suivez votre usage', text: 'Votre tableau de bord affiche les minutes consommées et restantes.' },
-            { title: 'Ajoutez du crédit', text: 'Une recharge de 39 $ à 725 $, en un clic depuis votre espace.' },
-            { title: 'Continuez sans coupure', text: 'Le crédit paie les minutes au-delà du forfait et ne périme pas.' },
-          ]} />
+          <Steps steps={t.how.steps(money(first), money(last))} />
         </div>
       </Section>
       <Section><GrowthBlock /></Section>

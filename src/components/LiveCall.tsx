@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, Mic } from 'lucide-react';
 import { Bubble, Wave } from './Mock';
+import { useI18n } from '@/i18n';
 
 interface Props {
   title?: string;
@@ -11,7 +12,9 @@ interface Props {
   leadTitle?: string;
 }
 
-export default function LiveCall({ title = 'Agent d’accueil', call, lead, leadTitle = 'Demande créée' }: Props) {
+export default function LiveCall({ title, call, lead, leadTitle }: Props) {
+  const { c } = useI18n();
+  const t = c.ui.components.liveCall;
   const total = call.length + 1; // les répliques puis la fiche
   const [step, setStep] = useState(total);
   const root = useRef<HTMLDivElement>(null);
@@ -34,14 +37,14 @@ export default function LiveCall({ title = 'Agent d’accueil', call, lead, lead
 
   const done = step >= total;
   return (
-    <div ref={root} className="relative" aria-label="Exemple d’appel traité par l’agent">
+    <div ref={root} className="relative" aria-label={t.ariaLabel}>
       <div className="rounded-3xl border border-line bg-white p-5 shadow-float">
         <div className="flex items-center justify-between rounded-2xl bg-night px-4 py-3 text-white">
           <div className="flex items-center gap-3">
             <span className={`flex h-10 w-10 items-center justify-center rounded-full bg-signal ${done ? '' : 'animate-pulsering'}`}><Mic className="h-4 w-4" aria-hidden /></span>
             <div>
-              <p className="text-sm font-semibold">{title}</p>
-              <p className="text-xs text-white/60">{done ? 'Appel terminé · résumé envoyé' : 'Appel en cours'}</p>
+              <p className="text-sm font-semibold">{title ?? t.title}</p>
+              <p className="text-xs text-white/60">{done ? t.ended : t.ongoing}</p>
             </div>
           </div>
           {!done && <Wave bars={14} />}
@@ -60,7 +63,7 @@ export default function LiveCall({ title = 'Agent d’accueil', call, lead, lead
         aria-hidden={!done}
       >
         <p className="flex items-center gap-2 font-display text-sm font-semibold text-ink">
-          <CheckCircle2 className="h-4 w-4 text-ok" aria-hidden /> {leadTitle}
+          <CheckCircle2 className="h-4 w-4 text-ok" aria-hidden /> {leadTitle ?? t.leadTitle}
         </p>
         <dl className="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
           {lead.map((f) => (

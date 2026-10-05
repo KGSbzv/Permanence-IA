@@ -1,111 +1,78 @@
-// Offres HT (doc 92) et fonctions incluses, alignées sur les pages et fonctions
-// réellement activables dans l’interface client white-label (admin Autocalls).
+// Textes des offres et de la matrice des fonctions. Les prix et minutes viennent du marché
+// (src/i18n/markets.ts) : ce fichier ne contient que des mots.
+import type { PlanSlug } from '../../markets';
 
-export type OfferSlug = 'decouverte' | 'receptionniste' | 'assistant' | 'centre-appels' | 'sur-mesure';
-
-export interface Offer {
-  slug: OfferSlug;
+export interface OfferText {
   name: string;
   audience: string;
-  price: number | null; // $ HT / mois (null = sur devis)
-  priceLabel?: string;
-  minutes: string;
-  minutesCount: number; // pour le calculateur et le prix par minute
-  perMinute?: string; // coût réel par minute du forfait
-  extraMinute?: number; // $ HT par minute supplémentaire (crédit), toujours > perMinute
   title: string; // titre de la page offre
   pitch: string;
   cta: string;
   highlights: string[];
-  featured?: boolean;
 }
 
-export const OFFERS: Offer[] = [
-  {
-    slug: 'decouverte',
+export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
+  decouverte: {
     name: 'Découverte',
     audience: 'Pour tester l’agent sur votre activité',
-    price: 0,
-    priceLabel: '0 $',
-    minutes: '30 minutes sur 14 jours',
-    minutesCount: 30,
     title: 'Testez l’agent gratuitement pendant 14 jours',
-    pitch:
-      'Découvrez la plateforme, configurez un premier agent, essayez la démo live et utilisez jusqu’à 30 minutes d’appels pour valider le potentiel sur votre activité.',
+    pitch: 'Découvrez la plateforme, configurez un premier agent, essayez la démo live et utilisez jusqu’à 30 minutes d’appels pour valider le potentiel sur votre activité.',
     cta: 'Réclamer mes 30 minutes',
     highlights: ['1 agent de test', 'Démo live de l’agent', 'Widget web et formulaire de rappel', 'Aperçu de la base de connaissances'],
   },
-  {
-    slug: 'receptionniste',
+  receptionniste: {
     name: 'Réceptionniste',
     audience: 'Indépendants et petites structures',
-    price: 99,
-    minutes: '350 min / mois',
-    minutesCount: 350,
-    perMinute: '0,28 $ HT / min',
-    extraMinute: 0.39,
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
-    pitch:
-      'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
+    pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
     cta: 'Choisir Réceptionniste',
     highlights: ['Réceptionniste IA 24/7', 'Agenda connecté', 'Widget web de rappel', 'Transfert vers un humain'],
   },
-  {
-    slug: 'assistant',
+  assistant: {
     name: 'Assistant',
     audience: 'Entreprises locales à volume régulier',
-    price: 249,
-    minutes: '1 000 min / mois',
-    minutesCount: 1000,
-    perMinute: '0,25 $ HT / min',
-    extraMinute: 0.36,
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
-    pitch:
-      'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
+    pitch: 'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
     highlights: ['Tout Réceptionniste', 'Flow builder et automatisations', 'Campagnes et leads', 'SMS, WhatsApp et Instagram', 'Vos numéros via SIP'],
-    featured: true,
   },
-  {
-    slug: 'centre-appels',
+  'centre-appels': {
     name: 'Centre d’appels',
     audience: 'Équipes, multi-services et gros volumes',
-    price: 499,
-    minutes: '2 200 min / mois',
-    minutesCount: 2200,
-    perMinute: '0,23 $ HT / min',
-    extraMinute: 0.32,
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
-    pitch:
-      'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
+    pitch: 'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
     highlights: ['Tout Assistant', 'Multi-agents et rôles', 'Rapports détaillés', 'API, webhooks et outils MCP', 'Support prioritaire'],
   },
-  {
-    slug: 'sur-mesure',
+  'sur-mesure': {
     name: 'Sur mesure',
     audience: 'Au-delà de 2 500 minutes régulières',
-    price: null,
-    priceLabel: 'Sur devis',
-    minutes: 'Volume adapté à votre activité',
-    minutesCount: 2500,
     title: 'Une configuration adaptée à vos volumes, vos sites et vos intégrations',
-    pitch:
-      'Pour les réseaux, les organisations multi-sites et les volumes réguliers au-delà de 2 500 minutes : prix à la minute négocié, règles par établissement, intégrations avancées et déploiement accompagné.',
+    pitch: 'Pour les réseaux, les organisations multi-sites et les volumes réguliers au-delà de 2 500 minutes : prix à la minute négocié, règles par établissement, intégrations avancées et déploiement accompagné.',
     cta: 'Parler à un expert',
     highlights: ['Tout Centre d’appels', 'Prix à la minute négocié', 'Règles multi-sites', 'SLA et déploiement guidé'],
   },
-];
+};
 
-export const offer = (slug: OfferSlug) => OFFERS.find((o) => o.slug === slug)!;
+/** Libellés construits à partir des chiffres du marché. `n` est déjà formaté (ex. « 1 000 »). */
+export const OFFER_LABELS = {
+  free: '0 $',
+  onQuote: 'Sur devis',
+  minutesPerMonth: (n: string) => `${n} min / mois`,
+  trialMinutes: (n: string, days: number) => `${n} minutes sur ${days} jours`,
+  customVolume: 'Volume adapté à votre activité',
+  perMinute: (price: string) => `${price} HT / min`,
+  exclTax: 'HT',
+  perMonth: 'HT / mois',
+};
 
 // Matrice des fonctions : chaque ligne correspond à une page ou une fonction de l’interface client.
 // Valeurs : true = inclus, false = non inclus, texte = niveau.
 export type Cell = boolean | string;
-export interface MatrixRow { label: string; detail: string; cells: Record<OfferSlug, Cell> }
+export interface MatrixRow { label: string; detail: string; cells: Record<PlanSlug, Cell> }
 export interface MatrixGroup { group: string; rows: MatrixRow[] }
 
-const all = (v: Cell): Record<OfferSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
+const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 
 export const MATRIX: MatrixGroup[] = [
   {
@@ -164,11 +131,3 @@ export const MATRIX: MatrixGroup[] = [
     ],
   },
 ];
-
-// Recharges de crédit (modèle Autocalls) : le crédit acheté paie les minutes au-delà du forfait,
-// au tarif « minute supplémentaire » du forfait, toujours plus cher que la minute incluse.
-export const RECHARGES = [39, 89, 159, 299, 725];
-
-export const money = (n: number, digits = 0) => `${n.toLocaleString('fr-FR', { minimumFractionDigits: digits, maximumFractionDigits: digits })} $`;
-export const euro = money; // compatibilité
-export const perMin = (price: number, minutes: number) => money(price / minutes, 2);

@@ -1,5 +1,5 @@
 // Sous-pages modules (doc 112) : chaque module décrit une fonction réelle de l’interface client.
-import type { OfferSlug } from './offers';
+import type { PlanSlug as OfferSlug } from '../../markets';
 
 export type MockKind =
   | 'call' | 'calendar' | 'transcript' | 'knowledge' | 'prompt' | 'flow'
@@ -8,7 +8,7 @@ export type MockKind =
 export interface Module {
   slug: string;
   name: string;
-  family: 'Téléphonie' | 'Automatisation' | 'CRM et données' | 'Messages' | 'Agenda' | 'Pilotage';
+  family: string;
   short: string; // phrase bénéfice (cartes)
   title: string; // hero
   intro: string;

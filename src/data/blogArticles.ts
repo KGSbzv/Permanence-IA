@@ -1,8 +1,12 @@
+/** Catégorie d’article : clé stable, libellé traduit dans c.ui.pages.blog.categories. */
+export type BlogCategory = 'productivite' | 'conformite' | 'cas-client' | 'technique';
+export const BLOG_CATEGORIES: BlogCategory[] = ['productivite', 'conformite', 'cas-client', 'technique'];
+
 export interface BlogArticle {
   slug: string;
   title: string;
   excerpt: string;
-  category: 'Productivité' | 'Conformité' | 'Cas Client' | 'Technique';
+  category: BlogCategory;
   readTime: string;
   date: string;
   author: { name: string; role: string };

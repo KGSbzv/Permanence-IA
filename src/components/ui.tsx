@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, Check, ChevronDown, PhoneCall, Play, Sparkles } from 'lucide-react';
-import { DEMO_URL, GROWTH_LINES, SIGNUP_URL, TRIAL_BADGES } from '@/data/site';
-import { SECTORS } from '@/data/sectors';
+import { DEMO_URL, SIGNUP_URL, SITE } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
+import { useI18n } from '@/i18n';
 
 /* ---------- Mise en page ---------- */
 
@@ -32,14 +32,15 @@ export function Heading({
 /* ---------- Conversion ---------- */
 
 export function TrialBadges({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
+  const { c, market } = useI18n();
   return (
-    <ul className={`flex flex-wrap gap-2 ${className}`} aria-label="Conditions de l’essai">
-      {TRIAL_BADGES.map((b) => (
+    <ul className={`flex flex-wrap gap-2 ${className}`} aria-label={c.ui.components.trialBadges.ariaLabel}>
+      {c.site.trialBadges(market.trial.days, market.trial.minutes).map((b) => (
         <li key={b} className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
           <Check className="h-3.5 w-3.5 text-signal" aria-hidden /> {b}
         </li>
       ))}
-      {GROWTH_LINES.map((g) => (
+      {c.site.growthLines.map((g) => (
         <li key={g} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm font-medium ${dark ? 'border-white/15 text-white/85' : 'border-line text-ink'}`}>
           <ArrowUpRight className="h-3.5 w-3.5 text-signal" aria-hidden /> {g}
         </li>
@@ -50,18 +51,20 @@ export function TrialBadges({ dark = false, className = '' }: { dark?: boolean; 
 
 /** Les trois actions de conversion imposées par le design system (doc 100). */
 export function CTAs({
-  primary = 'Commencer gratuitement', demo = 'Essayer en live notre agent', callback = true,
+  primary, demo, callback = true,
   dark = false, sector, className = '',
 }: { primary?: string; demo?: string; callback?: boolean; dark?: boolean; sector?: string; className?: string }) {
   const { openCallbackModal } = useCallbackModal();
+  const { c } = useI18n();
+  const t = c.ui.components.ctas;
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link href={SIGNUP_URL} className={dark ? 'btn-signal' : 'btn-primary'}>
-          <Sparkles className="h-4 w-4" aria-hidden /> {primary}
+          <Sparkles className="h-4 w-4" aria-hidden /> {primary ?? t.primary}
         </Link>
         <Link href={DEMO_URL} className={dark ? 'btn-light' : 'btn-ghost'}>
-          <Play className="h-4 w-4" aria-hidden /> {demo}
+          <Play className="h-4 w-4" aria-hidden /> {demo ?? t.demo}
         </Link>
       </div>
       {callback && (
@@ -70,7 +73,7 @@ export function CTAs({
           onClick={() => openCallbackModal({ type: 'commercial', sector })}
           className={`inline-flex items-center gap-2 self-start text-[15px] font-semibold underline-offset-4 hover:underline ${dark ? 'text-signal-glow' : 'text-signal-deep'}`}
         >
-          <PhoneCall className="h-4 w-4" aria-hidden /> Laissez votre numéro, on vous rappelle
+          <PhoneCall className="h-4 w-4" aria-hidden /> {t.callback}
         </button>
       )}
     </div>
@@ -80,15 +83,17 @@ export function CTAs({
 /* ---------- Formulaire de rappel (doc 94 : nom, téléphone, secteur, besoin) ---------- */
 
 export function CallbackForm({
-  type = 'commercial', sector = '', compact = false, dark = false, submitLabel = 'Faites-vous rappeler', onDone,
+  type = 'commercial', sector = '', compact = false, dark = false, submitLabel, onDone,
 }: { type?: 'commercial' | 'support' | 'demo'; sector?: string; compact?: boolean; dark?: boolean; submitLabel?: string; onDone?: () => void }) {
+  const { c, market, locale } = useI18n();
+  const t = c.ui.components.callbackForm;
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    if (!f.get('consent')) { setError('Cochez la case pour accepter d’être rappelé.'); return; }
+    if (!f.get('consent')) { setError(t.consentRequired); return; }
     setState('sending'); setError('');
     try {
       const res = await fetch('/api/callback', {
@@ -98,14 +103,14 @@ export function CallbackForm({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'),
           sector: f.get('sector'), note: f.get('note'), slot: f.get('slot') || 'asap',
           consentCall: true, type: type === 'support' ? 'support' : 'commercial',
-          agent: type === 'demo' ? 'Démo live' : undefined,
+          agent: type === 'demo' ? 'Démo live' : undefined, locale,
         }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'La demande n’a pas pu être envoyée.');
+      if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendFailed);
       setState('sent'); onDone?.();
     } catch (err: any) {
-      setState('error'); setError(`${err.message} Réessayez ou écrivez à contact@permanenceia.com.`);
+      setState('error'); setError(`${err.message} ${t.retry(SITE.email)}`);
     }
   }
 
@@ -113,45 +118,46 @@ export function CallbackForm({
   if (state === 'sent') {
     return (
       <div role="status" className={`rounded-xl p-6 ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
-        <p className="font-display text-lg font-semibold">Demande de rappel envoyée</p>
-        <p className="mt-1 text-[15px]">Nous vous rappelons au créneau choisi. Un email de confirmation vous est envoyé si vous l’avez indiqué.</p>
+        <p className="font-display text-lg font-semibold">{t.sentTitle}</p>
+        <p className="mt-1 text-[15px]">{t.sentText}</p>
       </div>
     );
   }
   return (
     <form onSubmit={submit} className="grid gap-4" noValidate={false}>
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
-        <div><label htmlFor="cb-name" className={label}>Nom</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
-        <div><label htmlFor="cb-phone" className={label}>Téléphone</label><input id="cb-phone" name="phone" type="tel" required minLength={8} autoComplete="tel" className="field" /></div>
+        <div><label htmlFor="cb-name" className={label}>{t.name}</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
+        <div><label htmlFor="cb-phone" className={label}>{t.phone}</label><input id="cb-phone" name="phone" type="tel" required minLength={8} autoComplete="tel" className="field" /></div>
         <div>
-          <label htmlFor="cb-sector" className={label}>Secteur</label>
+          <label htmlFor="cb-sector" className={label}>{t.sector}</label>
           <select id="cb-sector" name="sector" defaultValue={sector} className="field">
-            <option value="">Choisir…</option>
-            {SECTORS.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
-            <option value="autre">Autre activité</option>
+            <option value="">{t.choose}</option>
+            {c.sectors.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+            <option value="autre">{t.otherSector}</option>
           </select>
         </div>
         <div>
-          <label htmlFor="cb-slot" className={label}>Quand vous rappeler ?</label>
+          <label htmlFor="cb-slot" className={label}>{t.when}</label>
           <select id="cb-slot" name="slot" className="field" defaultValue="asap">
-            <option value="asap">Dès que possible</option>
-            <option value="Aujourd’hui après-midi">Aujourd’hui après-midi</option>
-            <option value="Demain matin">Demain matin</option>
-            <option value="Demain après-midi">Demain après-midi</option>
+            {/* Les valeurs envoyées à l’API restent fixes ; seuls les libellés changent selon la langue. */}
+            <option value="asap">{t.slots.asap}</option>
+            <option value="Aujourd’hui après-midi">{t.slots.todayAfternoon}</option>
+            <option value="Demain matin">{t.slots.tomorrowMorning}</option>
+            <option value="Demain après-midi">{t.slots.tomorrowAfternoon}</option>
           </select>
         </div>
       </div>
       {!compact && (
-        <div><label htmlFor="cb-email" className={label}>Email <span className="font-normal opacity-70">(pour la confirmation)</span></label><input id="cb-email" name="email" type="email" autoComplete="email" className="field" /></div>
+        <div><label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{t.emailHint}</span></label><input id="cb-email" name="email" type="email" autoComplete="email" className="field" /></div>
       )}
-      <div><label htmlFor="cb-note" className={label}>Votre besoin</label><textarea id="cb-note" name="note" rows={compact ? 2 : 3} className="field" placeholder="Ex. : je rate des appels le soir, je veux automatiser les rendez-vous…" /></div>
+      <div><label htmlFor="cb-note" className={label}>{t.need}</label><textarea id="cb-note" name="note" rows={compact ? 2 : 3} className="field" placeholder={t.needPlaceholder} /></div>
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
         <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
-        <span>J’accepte d’être rappelé au numéro indiqué, y compris par un agent vocal IA de Permanence IA. Mes données servent uniquement à traiter ma demande.</span>
+        <span>{t.consent(market.brand)}</span>
       </label>
       {error && <p role="alert" className={`text-sm font-medium ${dark ? 'text-red-300' : 'text-red-700'}`}>{error}</p>}
       <button type="submit" disabled={state === 'sending'} className={dark ? 'btn-signal' : 'btn-primary'}>
-        <PhoneCall className="h-4 w-4" aria-hidden /> {state === 'sending' ? 'Envoi…' : submitLabel}
+        <PhoneCall className="h-4 w-4" aria-hidden /> {state === 'sending' ? t.sending : submitLabel ?? t.submit}
       </button>
     </form>
   );

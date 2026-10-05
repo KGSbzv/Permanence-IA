@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { Check, X } from 'lucide-react';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { SIGNUP_URL } from '@/data/site';
+import { useI18n } from '@/i18n';
 
 const KEY = 'pia-trial-nudge';
 const WEEK = 7 * 86_400_000;
@@ -26,6 +27,9 @@ export default function TrialNudge() {
   const [open, setOpen] = useState(false);
   const done = useRef(false); // déjà affiché, ou le visiteur a agi pendant cette visite
   const dialog = useRef<HTMLDivElement>(null);
+  const { c, market, num, path } = useI18n();
+  const t = c.ui.components.trialNudge;
+  const signupHref = path(SIGNUP_URL);
 
   const show = useCallback(() => {
     if (done.current || callbackOpen || seenRecently()) return;
@@ -42,7 +46,7 @@ export default function TrialNudge() {
     // les autres clics relancent simplement le délai d’inactivité.
     const acted = (e: Event) => {
       const t = e.target as HTMLElement | null;
-      if (t?.closest(`a[href^="${SIGNUP_URL}"], form, input, textarea, select`)) { done.current = true; window.clearTimeout(idle); } else reset();
+      if (t?.closest(`a[href^="${signupHref}"], form, input, textarea, select`)) { done.current = true; window.clearTimeout(idle); } else reset();
     };
     const exit = (e: MouseEvent) => { if (e.clientY <= 0 && !e.relatedTarget) show(); };
     document.addEventListener('click', acted, true);
@@ -56,7 +60,7 @@ export default function TrialNudge() {
       document.documentElement.removeEventListener('mouseout', exit);
       window.removeEventListener('scroll', reset);
     };
-  }, [pathname, show]);
+  }, [pathname, show, signupHref]);
 
   useEffect(() => {
     if (!open) return;
@@ -76,17 +80,17 @@ export default function TrialNudge() {
         className="w-full max-w-md rounded-t-3xl bg-white p-6 shadow-float sm:rounded-3xl sm:p-8"
       >
         <div className="flex items-start justify-between gap-4">
-          <h2 id="nudge-title" className="font-display text-2xl font-bold">Vos 30 premières minutes sont offertes</h2>
-          <button type="button" onClick={() => setOpen(false)} aria-label="Fermer" className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
+          <h2 id="nudge-title" className="font-display text-2xl font-bold">{t.title(num(market.trial.minutes))}</h2>
+          <button type="button" onClick={() => setOpen(false)} aria-label={t.close} className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
         </div>
-        <p className="mt-2 text-[15px]">Testez votre agent vocal sur vos vrais appels pendant 14 jours, avant de décider.</p>
+        <p className="mt-2 text-[15px]">{t.text(market.trial.days)}</p>
         <ul className="mt-5 space-y-2 text-ink">
-          {['Rien n’est débité pendant l’essai', 'Annulable en un clic depuis votre espace', 'Premier agent prêt en quelques minutes'].map((t) => (
+          {t.points.map((t) => (
             <li key={t} className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-signal" aria-hidden />{t}</li>
           ))}
         </ul>
-        <Link href={SIGNUP_URL} onClick={() => setOpen(false)} className="btn-primary mt-6 w-full">Réclamer mes 30 minutes</Link>
-        <button type="button" onClick={() => { setOpen(false); openCallbackModal({ type: 'commercial' }); }} className="btn-ghost mt-3 w-full">Plutôt être rappelé</button>
+        <Link href={SIGNUP_URL} onClick={() => setOpen(false)} className="btn-primary mt-6 w-full">{t.claim(num(market.trial.minutes))}</Link>
+        <button type="button" onClick={() => { setOpen(false); openCallbackModal({ type: 'commercial' }); }} className="btn-ghost mt-3 w-full">{t.callMeBack}</button>
       </div>
     </div>
   );

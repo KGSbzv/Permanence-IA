@@ -11,21 +11,28 @@ import {
   DemoBlock, EconomyBlock, FinalCTA, GrowthLines, IntegrationsGrid, ModuleCards, PricingCards, SECTOR_ICON,
   SectorCards, SectorVisual, SecurityBlock, Steps,
 } from '@/components/blocks';
-import { SECTORS, Sector } from '@/data/sectors';
+import type { Sector } from '@/i18n/content/fr/sectors';
 import { SITE } from '@/data/site';
-import { offer } from '@/data/offers';
+import { useI18n } from '@/i18n';
+import { fr } from '@/i18n/content/fr';
+
+// Slugs identiques dans toutes les langues : la liste vient du contenu français.
+const SLUGS = fr.sectors.map((s) => s.slug);
 
 export default function SectorPage({ slug }: { slug: string }) {
-  const s = SECTORS.find((x) => x.slug === slug) as Sector;
+  const { c, market, offer, path } = useI18n();
+  const t = c.ui.commerce.sector;
+  const { days, minutes } = market.trial;
+  const s = c.sectors.find((x) => x.slug === slug) as Sector;
   const Icon = SECTOR_ICON[s.slug];
   return (
     <Layout
-      title={`${s.name} : agent vocal IA 24/7 — Permanence IA`}
-      description={`${s.name} : ${s.short.replace(/\.$/, '')}. Essai gratuit 14 jours, 30 minutes incluses, prix HT.`.slice(0, 158)}
-      breadcrumbs={[{ name: 'Secteurs', path: '/secteurs' }, { name: s.name, path: `/secteurs/${s.slug}` }]}
+      title={t.meta.title(s.name, market.brand)}
+      description={t.meta.description(s.name, s.short.replace(/\.$/, ''), days, minutes).slice(0, 158)}
+      breadcrumbs={[{ name: t.breadcrumb, path: '/secteurs' }, { name: s.name, path: `/secteurs/${s.slug}` }]}
       ogImage={s.photo}
       jsonLd={{
-        '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.url}/secteurs/${s.slug}`,
+        '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.url}${path(`/secteurs/${s.slug}`)}`,
         mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
       }}
     >
@@ -41,14 +48,14 @@ export default function SectorPage({ slug }: { slug: string }) {
           </div>
           <div className="relative mx-auto w-full max-w-lg">
             <SectorVisual s={s} className="absolute -right-10 top-0 hidden h-[80%] w-[70%] rounded-3xl sm:block" />
-            <div className="relative pt-10 sm:mr-28 sm:pt-20"><LiveCall title={`Agent ${s.name.toLowerCase()}`} call={s.call} lead={s.lead} /></div>
+            <div className="relative pt-10 sm:mr-28 sm:pt-20"><LiveCall title={t.liveCallTitle(s.name)} call={s.call} lead={s.lead} /></div>
           </div>
         </div>
       </section>
 
       {/* Problème métier : avant / après */}
       <Section>
-        <Heading title="Ce qui change quand l’agent répond à votre place" intro={`${s.targets}. Dans votre métier, chaque appel sans réponse est une demande qui part ailleurs.`} />
+        <Heading title={t.change.title} intro={t.change.intro(s.targets)} />
         <div className="mt-10"><BeforeAfter before={s.problems} after={s.benefits.slice(0, 3)} /></div>
       </Section>
 
@@ -56,7 +63,7 @@ export default function SectorPage({ slug }: { slug: string }) {
       <Section tone="paper">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <Heading title="Ce que l’agent prend en charge pour votre activité" intro="Il pose les questions que vous poseriez, dans un ordre naturel, et vous transmet une demande complète." />
+            <Heading title={t.handles.title} intro={t.handles.intro} />
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">{s.handles.map((h) => <Tick key={h}>{h}</Tick>)}</ul>
           </div>
           <figure>
@@ -68,7 +75,7 @@ export default function SectorPage({ slug }: { slug: string }) {
 
       {/* Bénéfices */}
       <Section>
-        <Heading title={`Ce que ça change pour votre ${s.name === 'Immobilier' ? 'agence' : 'activité'}`} />
+        <Heading title={t.benefitsTitle(s.slug)} />
         <ul className="mt-10 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
           {s.benefits.map((b) => <li key={b} className="border-t-2 border-ink pt-4 font-display text-lg font-semibold text-ink">{b}</li>)}
         </ul>
@@ -76,13 +83,13 @@ export default function SectorPage({ slug }: { slug: string }) {
 
       {/* Comment ça fonctionne */}
       <Section tone="paper">
-        <Heading title="Comment ça fonctionne" />
+        <Heading title={t.how.title} />
         <div className="mt-10"><Steps steps={s.steps} /></div>
       </Section>
 
       {/* Ce que ça inclut */}
       <Section>
-        <Heading title="Ce que ça inclut" intro="Les modules les plus utiles pour votre métier, tous disponibles dans votre espace." />
+        <Heading title={t.includes.title} intro={t.includes.intro} />
         <div className="mt-10"><ModuleCards slugs={s.modules} /></div>
       </Section>
 
@@ -93,7 +100,7 @@ export default function SectorPage({ slug }: { slug: string }) {
       {/* Intégrations */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
-          <Heading title="Intégrations utiles" intro="Votre agenda, votre CRM, vos messageries et votre téléphonie restent les mêmes : l’agent s’y connecte." />
+          <Heading title={t.integrations.title} intro={t.integrations.intro} />
           <IntegrationsGrid max={8} />
         </div>
       </Section>
@@ -102,8 +109,8 @@ export default function SectorPage({ slug }: { slug: string }) {
 
       {/* Prix HT */}
       <Section>
-        <Heading title="Prix HT, sans engagement" intro={`Pour ${s.name.toLowerCase()}, nous recommandons le forfait ${offer(s.offer).name}. Commencez par l’essai gratuit : 14 jours et 30 minutes incluses.`} />
-        <p className="mt-3"><Link href={`/offres/${s.offer}`} className="font-semibold text-signal-deep underline">Voir le détail du forfait {offer(s.offer).name}</Link></p>
+        <Heading title={t.pricing.title} intro={t.pricing.intro(s.name, offer(s.offer).name, days, minutes)} />
+        <p className="mt-3"><Link href={`/offres/${s.offer}`} className="font-semibold text-signal-deep underline">{t.pricing.link(offer(s.offer).name)}</Link></p>
         <div className="mt-10"><PricingCards only={['receptionniste', 'assistant', 'centre-appels']} /></div>
         <GrowthLines className="mt-6" />
       </Section>
@@ -114,26 +121,29 @@ export default function SectorPage({ slug }: { slug: string }) {
       <Section>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <Heading title={`Questions fréquentes — ${s.name}`} />
+            <Heading title={t.faq.title(s.name)} />
             <div className="mt-8"><FaqDark items={s.faq} /></div>
           </div>
           <div className="rounded-3xl bg-paper p-6 sm:p-8">
-            <p className="font-display text-xl font-bold">Contactez-nous, laissez votre numéro, on vous rappelle</p>
-            <p className="mb-5 mt-1 text-[15px]">Un conseiller vous rappelle pour étudier votre cas.</p>
+            <p className="font-display text-xl font-bold">{t.callback.title}</p>
+            <p className="mb-5 mt-1 text-[15px]">{t.callback.text}</p>
             <CallbackForm sector={s.slug} />
           </div>
         </div>
       </Section>
 
       <Section tone="paper">
-        <Heading title="Autres secteurs" />
+        <Heading title={t.others.title} />
         <div className="mt-10"><SectorCards exclude={s.slug} /></div>
       </Section>
 
-      <FinalCTA title="Prêt à ne plus manquer un appel ?" sector={s.slug} />
+      <FinalCTA title={t.finalCta} sector={s.slug} />
     </Layout>
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => ({ paths: SECTORS.map((s) => ({ params: { slug: s.slug } })), fallback: false });
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => ({
+  paths: (locales ?? ['fr']).flatMap((locale) => SLUGS.map((slug) => ({ params: { slug }, locale }))),
+  fallback: false,
+});
 export const getStaticProps: GetStaticProps = async ({ params }) => ({ props: { slug: params!.slug } });

@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Langues : français par défaut (sans préfixe), autres langues sous /en-gb, /en-au, /it, /pl, /nl.
+  // La détection se fait dans src/middleware.ts (langue du navigateur + choix mémorisé).
+  i18n: { locales: ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl'], defaultLocale: 'fr', localeDetection: false },
   images: { unoptimized: true },
   // Autorise l’interface white-label à récupérer les logos et icônes du site.
   async headers() {
