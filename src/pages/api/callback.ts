@@ -51,6 +51,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   };
 
   const [db, mail] = await Promise.allSettled([saveToSupabase(row), notifyByEmail(row)]);
+  if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
+  if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   // Succès seulement si la demande est conservée quelque part.
   if (db.status === 'rejected' && mail.status === 'rejected') {
     return res.status(502).json({ error: 'Impossible d’enregistrer la demande pour le moment.' });
