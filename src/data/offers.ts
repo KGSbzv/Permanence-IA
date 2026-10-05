@@ -39,9 +39,9 @@ export const OFFERS: Offer[] = [
     name: 'Réceptionniste',
     audience: 'Indépendants et petites structures',
     price: 99,
-    minutes: '300 min / mois',
-    minutesCount: 300,
-    perMinute: '0,33 € HT / min',
+    minutes: '350 min / mois',
+    minutesCount: 350,
+    perMinute: '0,28 € HT / min',
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch:
       'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
@@ -53,9 +53,9 @@ export const OFFERS: Offer[] = [
     name: 'Assistant',
     audience: 'Entreprises locales à volume régulier',
     price: 249,
-    minutes: '800 min / mois',
-    minutesCount: 800,
-    perMinute: '0,31 € HT / min',
+    minutes: '1 000 min / mois',
+    minutesCount: 1000,
+    perMinute: '0,25 € HT / min',
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch:
       'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
@@ -68,9 +68,9 @@ export const OFFERS: Offer[] = [
     name: 'Centre d’appels',
     audience: 'Équipes, multi-services et gros volumes',
     price: 499,
-    minutes: '2 000 min / mois',
-    minutesCount: 2000,
-    perMinute: '0,25 € HT / min',
+    minutes: '2 200 min / mois',
+    minutesCount: 2200,
+    perMinute: '0,23 € HT / min',
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch:
       'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
@@ -167,7 +167,7 @@ export const RECHARGES = [
   { minutes: '250 min', minutesCount: 250, price: 89 },
   { minutes: '500 min', minutesCount: 500, price: 159 },
   { minutes: '1 000 min', minutesCount: 1000, price: 299 },
-  { minutes: '2 500 min', minutesCount: 2500, price: 699 },
+  { minutes: '2 500 min', minutesCount: 2500, price: 725 },
 ];
 
 export const perMin = (price: number, minutes: number) => `${(price / minutes).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 3 })} €`;

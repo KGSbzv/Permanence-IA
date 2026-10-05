@@ -325,9 +325,9 @@ export function GrowthBlock() {
     { t: 'Au-delà de 2 500 min régulières', d: 'Nous construisons une offre sur mesure.' },
   ];
   const cases = [
-    { m: '350 min', plan: 'Réceptionniste + une recharge de 100 min', note: 'Dépassement ponctuel : la recharge est la bonne réponse.' },
-    { m: '900 min chaque mois', plan: 'Passez au forfait Centre d’appels', note: 'Vous rechargez tous les mois à 0,39 € la minute. Le forfait supérieur vous donne 2 000 minutes à 0,25 € la minute et de la marge pour grandir.' },
-    { m: '2 500 min régulières', plan: 'Offre sur mesure', note: 'Prix à la minute négocié selon votre volume.' },
+    { m: '400 min ce mois-ci', plan: 'Réceptionniste + une recharge de 100 min', note: '99 € + 39 € = 138 € HT. Un dépassement ponctuel : la recharge suffit.' },
+    { m: '900 min chaque mois', plan: 'Passez au forfait Assistant', note: '249 € HT pour 1 000 min, contre 297 € avec Réceptionniste + recharges. Moins cher, et de la marge.' },
+    { m: '2 500 min régulières', plan: 'Offre sur mesure', note: 'Au-delà du forfait Centre d’appels, nous négocions un prix à la minute adapté à votre volume.' },
   ];
   return (
     <div className="grid gap-10 lg:grid-cols-2">
@@ -361,12 +361,14 @@ export function GrowthBlock() {
 /** Forfait recommandé pour un volume mensuel, selon les règles d’évolution. */
 export function planFor(minutes: number) {
   const [, rec, asst, centre, custom] = OFFERS;
+  // Seuils calculés pour que le forfait supérieur devienne moins cher que forfait + recharges.
   if (minutes > 2500) return { offer: custom, extra: '' };
   if (minutes <= rec.minutesCount) return { offer: rec, extra: '' };
-  if (minutes <= rec.minutesCount + 100) return { offer: rec, extra: ' + une recharge ponctuelle' };
+  if (minutes <= 720) return { offer: rec, extra: ' + recharge ponctuelle' };
   if (minutes <= asst.minutesCount) return { offer: asst, extra: '' };
+  if (minutes <= 1700) return { offer: asst, extra: ' + recharge ponctuelle' };
   if (minutes <= centre.minutesCount) return { offer: centre, extra: '' };
-  return { offer: centre, extra: ' + recharges, ou offre sur mesure' };
+  return { offer: centre, extra: ' + recharge, ou sur mesure si régulier' };
 }
 
 export function EconomyBlock() {
@@ -381,7 +383,7 @@ export function EconomyBlock() {
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
       <div>
-        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,50 € par appel, soit plus de 300 € pour 200 appels. Le forfait Réceptionniste à 99 € HT couvre 300 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
+        <Heading title="Un coût plus prévisible qu’un accueil humain" intro="Dans certaines configurations, un accueil humain revient autour de 1,50 € par appel, soit plus de 300 € pour 200 appels. Le forfait Réceptionniste à 99 € HT couvre 350 minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres." />
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="rounded-2xl border border-line bg-white p-5">
             <p className="font-display font-semibold text-ink">Accueil humain</p>

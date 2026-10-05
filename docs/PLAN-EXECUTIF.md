@@ -9,8 +9,9 @@ capture de l'admin white-label Autocalls (pages et fonctions activables).
 - **Positionnement** : plateforme d'agents vocaux IA qui répondent, qualifient, réservent et rappellent, 24/7.
 - **Message d'essai unique, partout** : « 14 jours d'essai gratuit — 30 minutes incluses — prix HT — sans engagement ».
 - **3 actions de conversion à chaque section** : démarrer l'essai, essayer l'agent en live, laisser son numéro.
-- **Forfaits HT** (validés le 5 octobre 2026) : Découverte 0 € (14 j, 30 min) · Réceptionniste 99 € / 300 min (0,33 €/min) · Assistant 249 € / 800 min (0,31 €/min) · Centre d’appels 499 € / 2 000 min (0,25 €/min) · Sur mesure au-delà de 2 500 min régulières.
-- **Recharges** (dépannage, plus chères que les forfaits) : 100 min 39 € · 250 min 89 € · 500 min 159 € · 1 000 min 299 € · 2 500 min 699 €. Pas de facturation à la minute au-delà du forfait.
+- **Forfaits HT** (validés le 5 octobre 2026) : Découverte 0 € (14 j, 30 min) · Réceptionniste 99 € / 350 min (0,28 €/min) · Assistant 249 € / 1 000 min (0,25 €/min) · Centre d’appels 499 € / 2 200 min (0,23 €/min) · Sur mesure au-delà de 2 500 min régulières.
+- **Recharges** (dépannage, plus chères que les forfaits) : 100 min 39 € · 250 min 89 € · 500 min 159 € · 1 000 min 299 € · 2 500 min 725 €. Pas de facturation à la minute au-delà du forfait.
+- **Seuils de bascule** (forfait supérieur moins cher que forfait + recharges) : ≈ 750 min vers Assistant, ≈ 1 750 min vers Centre d’appels.
 - **Règles d’évolution** : dépassement ponctuel → recharge ; dépassements répétés → forfait supérieur ; recharges fréquentes → alerte « vous payez trop cher » ; au-delà de 2 500 min régulières → sur mesure.
 - **À afficher partout** : 14 jours d’essai gratuit, 30 minutes incluses, prix HT, sans engagement, ajoutez des minutes à tout moment, passez à l’offre supérieure quand votre volume grandit.
 - **Contenu des offres = ce que le client voit réellement dans son interface Autocalls** (pages et fonctions de la capture admin).
