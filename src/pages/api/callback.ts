@@ -9,21 +9,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
 
+  const e164 = toE164(String(phone));
   const row = {
-    name, phone, email: email || null, company: company || null, sector: sector || null,
+    name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
     slot: slot || 'asap', note: note || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent || null, consent_call: true, status: 'pending',
   };
 
   // Rappel automatique : la demande rejoint la campagne d’appels de l’agent concerné (commercial ou support).
   const leadHook = row.type === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
-  const e164 = toE164(String(phone));
   const queueCall = async () => {
     if (!leadHook) throw new Error('webhook de campagne non configuré');
     // Garde-fous contre les appels abusifs : pays desservis seulement, et une seule demande par numéro sur 7 jours.
     if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
     const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
-    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(String(phone))}&created_at=gte.${since}&limit=2`);
+    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=2`);
     if (recent.length > 1) throw new Error('demande déjà en file pour ce numéro');
     const r = await fetch(leadHook, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
