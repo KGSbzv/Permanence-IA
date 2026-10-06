@@ -3,7 +3,7 @@
 // son identité par un code à 6 chiffres envoyé à l’email du compte (personne ne peut lire le compte d’un autre).
 //
 // POST { action: 'send_code', email }        → envoie le code (réponse identique que le compte existe ou non)
-// POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon
+// POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbInsert, dbSelect, esc, sendMail } from '@/lib/server';
