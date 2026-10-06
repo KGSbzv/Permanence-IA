@@ -40,6 +40,21 @@ details[open] > summary.disclosure .disclosure-icon { transform: rotate(180deg);
     max-height: calc(100vh - 100px) !important;
   }
 }
+/* Bulle fermée : sous nos fenêtres (essai z-90, rappel z-100, démo z-80) pour ne pas cacher leurs boutons.
+   Ouverte, elle garde le premier plan. */
+iframe[src*="/web-widget/"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]),
+iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]) {
+  z-index: 70 !important;
+}
+/* Sur téléphone, la bulle fermée (bouton + invitation) est réduite pour ne pas masquer les boutons de la page.
+   La fenêtre ouverte (400px de large ou plein écran) garde sa taille. */
+@media (max-width: 639.98px) {
+  iframe[src*="/web-widget/"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]),
+  iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]) {
+    transform: scale(0.78) !important;
+    transform-origin: right bottom;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

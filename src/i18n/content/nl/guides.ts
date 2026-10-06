@@ -454,7 +454,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'outils-de-l-agent',
     category: 'tools',
-    title: 'De tools van de agent: doorverbinden, gesprek beëindigen, toetsen',
+    title: 'Agenttools: doorverbinden, ophangen, toetsen',
     summary: 'De ingebouwde acties die de agent tijdens het gesprek kan uitvoeren en hoe u ze instelt.',
     sections: [
       {

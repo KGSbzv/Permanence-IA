@@ -454,7 +454,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'outils-de-l-agent',
     category: 'tools',
-    title: 'Gli strumenti dell’agente: trasferimento, fine chiamata, tastiera',
+    title: 'Strumenti dell’agente: trasferimento, fine, tastiera',
     summary: 'Le azioni integrate che l’agente può avviare durante la chiamata e come configurarle.',
     sections: [
       {

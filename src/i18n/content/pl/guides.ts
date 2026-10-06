@@ -454,7 +454,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'outils-de-l-agent',
     category: 'tools',
-    title: 'Narzędzia agenta: przekazanie, zakończenie rozmowy, klawiatura',
+    title: 'Narzędzia agenta: przekazanie, rozłączenie, klawiatura',
     summary: 'Wbudowane akcje, które agent może uruchomić w trakcie rozmowy, i sposób ich konfiguracji.',
     sections: [
       {
