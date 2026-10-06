@@ -19,7 +19,7 @@ function HelpChatPreview() {
       </div>
       <div className="mt-4 space-y-3">
         {t.chat.map((l, i) => (
-          <p key={i} className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] ${l.me ? 'ml-auto bg-signal text-white' : 'bg-paper text-ink'}`}><RichText value={l.text} /></p>
+          <p key={i} className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] ${l.me ? 'ml-auto bg-signal-deep text-white' : 'bg-paper text-ink'}`}><RichText value={l.text} /></p>
         ))}
       </div>
     </div>

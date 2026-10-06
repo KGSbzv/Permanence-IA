@@ -6,12 +6,12 @@ module.exports = {
       colors: {
         // Couleurs tirées du logo Permanence IA
         ink: { DEFAULT: '#0E1B4D', soft: '#22306A' },
-        signal: { DEFAULT: '#0FA3C4', deep: '#0B7F99', soft: '#E2F5FA', glow: '#5AD3EC' },
+        signal: { DEFAULT: '#0FA3C4', deep: '#0A7690', soft: '#E2F5FA', glow: '#5AD3EC' },
         paper: '#F5F8FB',
         slate: { DEFAULT: '#4A5875', light: '#626E86' },
         line: '#DDE5EE',
         night: { DEFAULT: '#0A1233', raised: '#141E47' },
-        ok: '#1E9E6A',
+        ok: '#178256',
         no: '#C8463D',
         // Alias pour les pages héritées (légal, blog)
         navy: { DEFAULT: '#0E1B4D', dark: '#0A1233', light: '#22306A' },

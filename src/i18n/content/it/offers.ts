@@ -87,7 +87,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Strumenti durante la chiamata', detail: 'Azioni eseguite in tempo reale: verificare una disponibilità, consultare una pratica, interrogare il Suo software.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Illimitati', 'sur-mesure': 'Illimitati' } },
       { label: 'Flow builder', detail: 'Scenari visivi senza codice: trigger, condizioni e azioni.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Piattaforma di automazione', detail: 'Oltre 300 strumenti collegabili: CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5.000 esecuzioni / mese', 'centre-appels': '50.000 esecuzioni / mese', 'sur-mesure': 'Su misura' } },
-      { label: 'Connettore AI', detail: 'Inserisce un passaggio di AI nelle Sue automazioni (smistamento, riepilogo, redazione).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Connettore AI', detail: 'Gestisca il Suo spazio da ChatGPT o Claude: creare un agente, leggere le chiamate, avviare azioni.', cells: all(true) },
     ],
   },
   {

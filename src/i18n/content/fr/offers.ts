@@ -97,7 +97,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Outils pendant l’appel', detail: 'Actions déclenchées en direct : vérifier une disponibilité, consulter un dossier, interroger votre logiciel.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Illimités', 'sur-mesure': 'Illimités' } },
       { label: 'Flow builder', detail: 'Scénarios visuels sans code : déclencheurs, conditions et actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Plateforme d’automatisation', detail: 'Plus de 300 outils connectables : CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5 000 exécutions / mois', 'centre-appels': '50 000 exécutions / mois', 'sur-mesure': 'Sur mesure' } },
-      { label: 'Connecteur IA', detail: 'Branche une étape d’IA dans vos automatisations (tri, résumé, rédaction).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Connecteur IA', detail: 'Pilotez votre espace depuis ChatGPT ou Claude : créer un agent, lire vos appels, lancer une action.', cells: all(true) },
     ],
   },
   {

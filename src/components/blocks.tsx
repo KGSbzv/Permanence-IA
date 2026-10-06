@@ -620,7 +620,7 @@ export function EconomyBlock() {
               {g.items.map((f) => (
                 <div key={f.id} className="mt-4">
                   <label htmlFor={f.id} className="flex justify-between gap-4 text-sm text-slate"><span>{f.label}</span><output htmlFor={f.id} className="font-semibold text-ink">{f.show(f.v)}</output></label>
-                  <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0B7F99]" />
+                  <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0A7690]" />
                 </div>
               ))}
             </fieldset>

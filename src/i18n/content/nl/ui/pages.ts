@@ -176,6 +176,9 @@ export const UI_PAGES = {
       'Vermelding „AI-assistent” aan het begin van het gesprek',
       'Opname in- of uitschakelen, met informatie voor de beller',
     ],
+    infraTitle: 'Een oplossing op gecertificeerde infrastructuur',
+    infraIntro: 'Onze oplossing (agents, geplande terugbelgesprekken, routering, website en klantomgeving) draait op de infrastructuur van een gecertificeerde technische leverancier. Die certificeringen zijn van de leverancier; we kozen hem zodat u hetzelfde niveau krijgt.',
+    infraItems: ['Leverancier gecertificeerd volgens ISO/IEC 27001:2022 (informatiebeveiliging) en ISO 9001:2015 (kwaliteit)', 'AES-256-versleuteling van opgeslagen gegevens en TLS tijdens verzending', 'Toegang op basis van rollen, tweestapsverificatie en auditlogs', 'Automatische back-ups en herstel over meerdere zones', 'AVG-conform, instelbare bewaartermijnen en automatische verwijdering', 'Betalingen via Stripe, PCI-DSS niveau 1 gecertificeerd'],
     commitmentsTitle: 'Onze toezeggingen',
     commitments: [
       'De agent stelt zich voor als AI en doet zich niet voor als mens',
@@ -205,63 +208,277 @@ export const UI_PAGES = {
     },
     h1: 'Algemene gebruiks- en verkoopvoorwaarden',
     updated: 'Van toepassing op professionals en bedrijven • Laatst bijgewerkt: 6 oktober 2026',
-    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
-      {
-        title: 'Artikel 1 — Doel van de dienst',
-        body: [
-          { p: ['Deze Algemene Voorwaarden regelen de toegang tot en het gebruik van het softwareplatform en de telefoniediensten met een conversationele agent op basis van kunstmatige intelligentie, die onder het merk ', { strong: brand }, ` worden aangeboden door de vennootschap ${company}.`] },
-          { p: 'Met de dienst kunnen bedrijven de ontvangst van inkomende telefoongesprekken, de kwalificatie van bellers en het gesynchroniseerd inplannen van afspraken uitbesteden, 24 uur per dag en 7 dagen per week.' },
-        ],
-      },
-      {
-        title: 'Artikel 2 — Voorwaarden van de gratis proefperiode van 14 dagen',
-        body: [
-          { p: 'Elke nieuwe klant krijgt bij zijn eerste aanmelding voor een abonnement een gratis proefperiode van veertien (14) opeenvolgende kalenderdagen, inclusief 30 belminuten:' },
-          {
-            ul: [
-              [{ strong: 'Betaalmiddel:' }, ' Bij activering van de proefperiode wordt om een betaalkaart gevraagd. Tijdens de 14 proefdagen wordt geen bedrag afgeschreven. Alle prijzen zijn exclusief belastingen.'],
-              [{ strong: 'Gebruikslimiet:' }, ' Gesprekken zijn tijdens de proefperiode beperkt tot 30 minuten; daarboven worden ze opgeschort tot het abonnement start.'],
-              [{ strong: 'Einde van de proefperiode:' }, ' Na afloop van de 14 dagen start het abonnement op het gekozen pakket en wordt de eerste maandtermijn afgeschreven, tenzij de klant het vóór die datum via zijn klantomgeving heeft opgezegd; in dat geval wordt er geen bedrag afgeschreven.'],
-              [{ strong: 'Redelijk gebruik:' }, ' De gratis proefperiode is beperkt tot één per rechtspersoon / registratienummer.'],
-            ],
-          },
-        ],
-      },
-      {
-        title: 'Artikel 3 — Gratis proefperiode, geen herroepingsrecht en geen terugbetaling',
-        body: [
-          { p: "Overeenkomsten tussen professionele partijen vallen niet onder het herroepingsrecht voor consumenten. Met de gratis proefperiode van 14 dagen kan de klant de dienst testen vóór elke betaling en deze vóór het einde ervan kosteloos opzeggen." },
-          { p: [{ strong: 'Een eenmaal betaalde periode wordt niet terugbetaald' }, ', ook niet gedeeltelijk, omdat de dienst en de minuten vanaf het begin van de periode ter beschikking worden gesteld. Gekocht tegoed (opwaarderingen) wordt evenmin terugbetaald; het vervalt niet. Opzeggen blijft op elk moment mogelijk voor de volgende perioden (artikel 4).'] },
-        ],
-      },
-      {
-        title: 'Artikel 4 — Facturatie, Tarieven & Opzegging',
-        body: [
-          { p: 'De prijzen zijn uitgedrukt in Amerikaanse dollars (USD), exclusief belastingen. De toepasselijke belastingen worden bij betaling automatisch berekend op basis van het land van de klant en zijn status (particulier of bedrijf, met of zonder btw-nummer). Abonnementen worden vooraf betaald, maandelijks of jaarlijks naar keuze van de klant (jaarlijkse facturatie omvat twee maanden gratis), via onze beveiligde betaaldienstverlener Stripe; het abonnement wordt stilzwijgend verlengd voor een periode van dezelfde duur (een maand of een jaar). Bij jaarlijkse facturatie worden de inbegrepen minuten nog steeds elke maand toegekend en is de dienst identiek.' },
-          { p: ['De klant kan zijn abonnement op elk moment en zonder opzegtermijn opzeggen via zijn dashboard ', { strong: appHost }, '. De opzegging gaat in aan het einde van de reeds betaalde periode (de lopende maand of, bij jaarlijkse facturatie, het lopende jaar), zonder terugbetaling van de resterende periode (artikel 3). De klant kan op elk moment van abonnement wisselen en minuten toevoegen door tegoed op te waarderen; gekocht tegoed vervalt niet en wordt gebruikt om de minuten boven het abonnement te betalen, tegen het tarief per extra minuut dat op de pagina Prijzen staat vermeld.'] },
-        ],
-      },
-      {
-        title: 'Artikel 5 — Aansprakelijkheid en aard van de verplichting',
-        body: [
-          { p: [`${brand} heeft een `, { strong: 'inspanningsverplichting' }, ' wat betreft de beschikbaarheid en de technische verwerking van de gespreksstromen. De gebruiker erkent dat generatieve AI-modellen en spraaksynthese af en toe onnauwkeurige of onjuiste antwoorden kunnen geven.'] },
-          { p: `${brand} is in geen geval aansprakelijk voor indirecte bedrijfsschade, gederfde winst of commerciële schade. In alle gevallen is de maximale schadevergoeding uitdrukkelijk beperkt tot het bedrag exclusief belastingen dat de klant heeft betaald in de maand voorafgaand aan de schadeveroorzakende gebeurtenis.` },
-        ],
-      },
-      {
-        title: 'Artikel 6 — Verboden gebruik & Opschorting',
-        body: [
-          { p: `Strikt verboden zijn: ongevraagde telemarketingcampagnes (misbruik in de vorm van spraakspam), frauduleuze activiteiten, lasterlijke, discriminerende of onrechtmatige uitingen. Bij vastgesteld misbruik behoudt ${brand} zich het recht voor de toegang tot de toegewezen lijn zonder schadevergoeding op te schorten.` },
-        ],
-      },
-      {
-        title: 'Artikel 7 — Toepasselijk recht en bevoegde rechter',
-        body: [
-          { p: `Op deze voorwaarden is ${legal.governingLaw} van toepassing. Geschillen over de uitleg of uitvoering ervan worden uitsluitend voorgelegd aan ${legal.court}.` },
-          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
-        ],
-      },
-    ],
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
+      const mail = { a: email, href: `mailto:${email}` };
+      return [
+        {
+          title: 'Artikel 1 — Definities en aanvaarding',
+          body: [
+            { p: ['Deze algemene gebruiks- en verkoopvoorwaarden (de „Voorwaarden”) regelen de toegang tot en het gebruik van de diensten die onder het merk ', { strong: brand }, ` worden aangeboden door ${company}, een Limited Liability Company uit de staat Wyoming (Verenigde Staten), ${ADDRESS} („wij”).`] },
+            {
+              ul: [
+                [{ strong: 'Dienst:' }, ` het softwareplatform, de klantomgeving ${appHost}, de AI-spraak- en chatagents, de webwidget, berichtenkanalen (WhatsApp, sms, Messenger, Instagram), campagnes, automatiseringen, telefoonnummers, SIP-koppeling en alle bijbehorende functies.`],
+                [{ strong: 'Klant:' }, ' het bedrijf of de professional die een account aanmaakt of een abonnement afsluit.'],
+                [{ strong: 'Gebruiker:' }, ' iedere persoon die de Klant toegang geeft tot zijn account.'],
+                [{ strong: 'Klantinhoud:' }, ' de gegevens, instructies (prompts), kennisbanken, bestanden, stemfragmenten, contactlijsten, opnames en berichten die aan de Dienst worden verstrekt of voor de Klant worden gegenereerd.'],
+                [{ strong: 'Ontvangers:' }, ' de personen die de agent van de Klant bellen, of die via die agent worden gebeld of berichten ontvangen.'],
+                [{ strong: 'Tegoed:' }, ' vooruitbetaalde minuten, berichtentegoed en opwaarderingen.'],
+              ],
+            },
+            { p: 'De Dienst is uitsluitend bestemd voor professionals die handelen in de uitoefening van hun beroep of bedrijf; hij wordt niet aan consumenten aangeboden. Door een account aan te maken, het aanvaardingsvakje aan te vinken of de Dienst te gebruiken, aanvaardt de Klant de Voorwaarden. Wie ze aanvaardt, verklaart minstens 18 jaar oud te zijn en bevoegd om de entiteit die hij vertegenwoordigt te binden.' },
+          ],
+        },
+        {
+          title: 'Artikel 2 — Account en beveiliging',
+          body: [
+            {
+              ul: [
+                'De Klant verstrekt juiste en volledige gegevens (naam, registratiegegevens, contactgegevens) en houdt die actueel.',
+                'Hij houdt zijn inloggegevens en API-sleutels geheim, schakelt de beschikbare beveiliging in (waaronder tweestapsverificatie) en is verantwoordelijk voor alle activiteiten via zijn account, ook door zijn Gebruikers, als waren het de zijne.',
+                ['Hij meldt ons onverwijld via ', mail, ' elke onbevoegde toegang of elk vermoed beveiligingsincident.'],
+                'Wij kunnen bewijs van identiteit, adres of bedrijfsactiviteit vragen (met name voor de toewijzing van nummers) en een account dat dit niet verstrekt weigeren, beperken of opschorten.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 3 — Gratis proefperiode, geen herroepingsrecht en geen terugbetaling',
+          body: [
+            { p: 'Bij zijn eerste betaalde abonnement krijgt de Klant een gratis proefperiode van veertien (14) opeenvolgende kalenderdagen, inclusief 30 belminuten, beperkt tot één proefperiode per rechtspersoon, inschrijvingsnummer of betaalmiddel:' },
+            {
+              ul: [
+                [{ strong: 'Betaalmiddel:' }, ' bij activering van de proefperiode wordt een betaalkaart gevraagd. Tijdens de 14 proefdagen wordt niets afgeschreven.'],
+                [{ strong: 'Gebruikslimiet:' }, ' gesprekken zijn tijdens de proefperiode beperkt tot 30 minuten; daarboven worden ze gepauzeerd tot het abonnement start. Sommige functies (nummers, uitgaande campagnes, berichten) kunnen tijdens de proefperiode beperkt zijn.'],
+                [{ strong: 'Einde van de proefperiode:' }, ' na 14 dagen start het gekozen abonnement en wordt de eerste periode (maand of jaar) afgeschreven, tenzij de Klant vóór die datum in de klantomgeving heeft opgezegd; dan wordt niets afgeschreven.'],
+              ],
+            },
+            { p: 'Overeenkomsten tussen professionals kennen geen herroepingsrecht zoals dat voor consumenten geldt. Met de gratis proefperiode kan de Klant de Dienst testen vóór enige betaling en kosteloos opzeggen vóór het einde ervan.' },
+            { p: [{ strong: 'Elke betaalde periode is volledig verschuldigd en wordt niet terugbetaald' }, ', ook niet gedeeltelijk, ook niet bij opzegging, niet-gebruik, overstap naar een lager abonnement, opschorting of sluiting van het account, en ook niet voor het resterende deel van een jaarperiode. Tegoed wordt niet terugbetaald, is niet overdraagbaar en niet inwisselbaar voor geld; gekocht tegoed vervalt niet zolang het account open is en gaat verloren bij sluiting ervan.'] },
+          ],
+        },
+        {
+          title: 'Artikel 4 — Prijzen, facturatie, verlenging en belastingen',
+          body: [
+            {
+              ul: [
+                'Prijzen zijn in Amerikaanse dollars (USD), exclusief belastingen. Toepasselijke belastingen worden bij betaling berekend op basis van het land en de fiscale situatie van de Klant (met of zonder btw-nummer) en komen voor zijn rekening. Moet de Klant bronbelasting inhouden, dan verhoogt hij zijn betaling zodat wij het gefactureerde bedrag ontvangen.',
+                'Abonnementen worden vooruitbetaald, per maand of per jaar naar keuze van de Klant (jaarlijkse facturatie levert twee maanden gratis op), via onze betaaldienstverlener Stripe. Het abonnement wordt stilzwijgend verlengd met een periode van dezelfde duur en de Klant machtigt de bijbehorende terugkerende afschrijvingen. Bij jaarlijkse facturatie worden de inbegrepen minuten elke maand toegekend en is de Dienst identiek.',
+                'Gebruik boven het abonnement (extra minuten, berichten, telefoonnummers, kosten van operators of Meta) wordt van het tegoed afgeschreven of gefactureerd tegen de geldende tarieven op de pagina Prijzen of in de klantomgeving.',
+                ['De Klant kan op elk moment zonder opzegtermijn opzeggen via zijn dashboard ', { strong: appHost }, '. De opzegging gaat in aan het einde van de reeds betaalde periode (de lopende maand of, bij jaarlijkse facturatie, het lopende jaar), zonder terugbetaling (artikel 3). De Klant kan op elk moment van abonnement wisselen of tegoed opwaarderen; de voorwaarden van de wijziging staan in de klantomgeving.'],
+                'Wij kunnen onze prijzen wijzigen met een aankondiging van 30 dagen per e-mail of in de klantomgeving; de nieuwe prijs geldt vanaf de volgende verlenging. Een Klant die niet akkoord gaat, zegt vóór die datum op. Doorberekende kosten van derden (operators, Meta) kunnen wijzigen binnen de termijnen die deze derden opleggen.',
+                'Bij een mislukte of te late betaling kunnen wij de Dienst geheel of gedeeltelijk opschorten tot de betaling is voldaan, zonder verlenging van de periode. Over onbetaalde bedragen is rente verschuldigd van 1,5% per maand of, indien lager, het wettelijk toegestane maximum, vermeerderd met de eventuele wettelijke vergoeding voor incassokosten en de werkelijk gemaakte incassokosten.',
+                'Elke betwisting van een betaling (chargeback) zonder voorafgaande klacht bij ons leidt tot onmiddellijke opschorting van het account; alle verschuldigde bedragen worden direct opeisbaar, vermeerderd met de kosten van de betwisting en de incasso.',
+                'Klachten over een factuur moeten ons binnen 30 dagen na de factuurdatum bereiken; anders geldt de factuur als aanvaard.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 5 — Aanvaardbaar gebruik en verboden inhoud',
+          body: [
+            { p: 'De Klant gebruikt de Dienst in overeenstemming met het toepasselijke recht en de Voorwaarden. Verboden zijn met name:' },
+            {
+              ul: [
+                'elke onrechtmatige, frauduleuze, misleidende of misbruikende activiteit, waaronder phishing en vishing, oplichting en het zich voordoen als een persoon, bedrijf of overheidsinstantie;',
+                'intimidatie, bedreigingen en haatdragende, discriminerende, lasterlijke of gewelddadige inhoud, of inhoud die inbreuk maakt op rechten van derden;',
+                'ongevraagde gesprekken en berichten of massale verzending zonder toestemming, en elke omzeiling van een afmelding;',
+                'gebruik met een hoog risico: het vervangen of bellen van hulpdiensten; medische, juridische, financiële, verzekerings-, krediet-, arbeids- of huisvestingsbeslissingen baseren op de agent zonder gekwalificeerde menselijke controle; incasso buiten het toepasselijke wettelijke kader; geautomatiseerde politieke of verkiezingsgesprekken of -berichten; inhoud voor volwassenen of seksuele inhoud en elke inhoud waarbij minderjarigen betrokken zijn; kansspelen, wapens, drugs of gereguleerde producten zonder vergunning;',
+                'het door de agent verzamelen van bijzondere persoonsgegevens, volledige betaalkaartnummers of officiële identificatienummers zonder rechtsgrond en passende waarborgen;',
+                'het gebruik van stemfragmenten (stemklonen) zonder de voorafgaande, gedocumenteerde en intrekbare toestemming van de persoon wiens stem wordt nagebootst;',
+                'elke aantasting van de beveiliging of integriteit van de Dienst: kwaadaardige code, ongeautoriseerde penetratie- of belastingtests, het omzeilen van limieten, toegang tot accounts van anderen;',
+                'reverse engineering, decompileren of disassembleren (behalve voor zover de wet dit uitdrukkelijk toestaat), geautomatiseerde extractie (scraping), het kopiëren van de Dienst of het gebruik ervan om een concurrerende dienst te bouwen of modellen te trainen;',
+                'het doorverkopen, in sublicentie geven, verhuren, ter beschikking stellen aan derden of onder eigen merk (white label) aanbieden van de Dienst zonder onze voorafgaande schriftelijke toestemming.',
+              ],
+            },
+            { p: 'Zonder enige toezichtplicht kunnen wij het gebruik van de Dienst controleren, inhoud verwijderen, een nummer, campagne of bericht blokkeren, het account opschorten (artikel 13) en samenwerken met operators, platforms en autoriteiten.' },
+          ],
+        },
+        {
+          title: 'Artikel 6 — Naleving bij gesprekken en berichten',
+          body: [
+            { p: [{ strong: 'De Klant is als enige verantwoordelijk voor de rechtmatigheid van zijn gesprekken, campagnes en berichten' }, ' volgens het recht van elk land waar Ontvangers zich bevinden, waaronder de AVG, de regels over direct marketing en elektronische communicatie (ePrivacy) en, als hij personen in de Verenigde Staten benadert, de Telephone Consumer Protection Act (TCPA) en de Telemarketing Sales Rule (TSR). In het bijzonder:'] },
+            {
+              ul: [
+                [{ strong: 'Toestemming:' }, ' vóór elk geautomatiseerd, uitgaand of commercieel gesprek of bericht (spraak, sms, WhatsApp) verkrijgt hij de wettelijk vereiste toestemmingen, bewaart hij het bewijs daarvan en respecteert hij elke afmelding onmiddellijk (trefwoord STOP, mondeling of schriftelijk verzoek).'],
+                [{ strong: 'Belregisters:' }, ' hij raadpleegt en respecteert de toepasselijke registers en regels: de Nederlandse regels (voorafgaande toestemming of een bestaande klantrelatie, Bel-me-niet Register), Bloctel (Frankrijk), TPS en CTPS (Verenigd Koninkrijk), het Do Not Call Register (Australië), het Registro pubblico delle opposizioni (Italië) en de Poolse regels die voorafgaande toestemming voor telemarketing vereisen.'],
+                [{ strong: 'Tijden en frequentie:' }, ' hij respecteert de toegestane beldagen, -tijden en -frequentie.'],
+                [{ strong: 'Nummerweergave:' }, ' hij toont een geldig, aan hem toegewezen nummer, vervalst geen nummers en maakt zich duidelijk bekend.'],
+                [{ strong: 'Transparantie:' }, ' hij laat Ontvangers vanaf het begin van het contact duidelijk weten dat zij met een AI-systeem communiceren (met name op grond van de Europese AI-verordening) en, waar de wet dat vereist, dat het gesprek wordt opgenomen of uitgeschreven, en vraagt hun toestemming wanneer die vereist is.'],
+                [{ strong: 'Platforms:' }, ' hij volgt het beleid van Meta (WhatsApp Business, Messenger, Instagram), waaronder goedkeuring van sjablonen en gespreksvensters, en de regels van operators (registratie van afzenders, alfanumerieke afzender-ID’s). Deze derden kunnen een account of nummer beperken zonder dat wij aansprakelijk zijn.'],
+              ],
+            },
+            { p: 'Telefoonnummers worden ter beschikking gesteld door operators (zoals Twilio): de Klant krijgt ze in gebruik en wordt er geen eigenaar van. Voor toewijzing kunnen documenten over identiteit, adres of bedrijfsactiviteit nodig zijn; de operator of toezichthouder kan een nummer wijzigen of terugnemen. Een nummer kan bij opzegging, langdurige opschorting of niet-betaling worden vrijgegeven en definitief verloren gaan. Het overzetten van een nummer naar een andere aanbieder hangt af van de technische en regelgevende haalbaarheid.' },
+            { p: [{ strong: 'Geen noodoproepen.' }, ' Met de Dienst kunnen geen hulpdiensten worden gebeld (112, 999, 000, 911 enz.) en hij vervangt geen telefoonlijn. De Klant informeert zijn Gebruikers hierover.'] },
+          ],
+        },
+        {
+          title: 'Artikel 7 — Functies op basis van kunstmatige intelligentie',
+          body: [
+            {
+              ul: [
+                'Antwoorden, transcripties, samenvattingen en stemmen worden automatisch gegenereerd en kunnen onjuist, onvolledig of ongepast zijn. De Klant controleert ze voordat hij erop vertrouwt.',
+                'De Klant stelt de instructies, kennisbanken, stemmen, tools en automatiseringen van zijn agents in: hij is verantwoordelijk voor alles wat zijn agent namens hem zegt, belooft of doet (afspraken, prijzen, toezeggingen).',
+                'De Dienst geeft geen medisch, juridisch, financieel, fiscaal of ander professioneel advies, en de Klant mag zijn agent niet zo presenteren.',
+                'AI-modellen, stemmen, talen en aanbieders kunnen veranderen, worden vervangen of verdwijnen; de beschikbaarheid van een bepaald model of een bepaalde stem is niet gegarandeerd.',
+                'Tussen partijen behoort voor de Klant gegenereerde output toe aan de Klant, onder voorbehoud van rechten van derden en onze rechten op de Dienst; output is mogelijk niet uniek.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 8 — Klantgegevens en gegevensbescherming',
+          body: [
+            { p: ['Voor persoonsgegevens van Ontvangers die via de Dienst worden verwerkt, is de Klant verwerkingsverantwoordelijke en treden wij op als verwerker (artikel 28 AVG en gelijkwaardige wetgeving). Dit artikel en het ', { a: 'privacybeleid', href: '/confidentialite' }, ' vormen de verwerkersovereenkomst; een ondertekende overeenkomst kan worden gesloten in het kader van een Maatwerk-abonnement. Wij:'] },
+            {
+              ul: [
+                'verwerken de gegevens uitsluitend op gedocumenteerde instructies van de Klant (de Voorwaarden en zijn instellingen), tenzij de wet anders vereist, en melden het als een instructie ons onrechtmatig lijkt;',
+                'verplichten gemachtigde personen tot geheimhouding;',
+                'nemen passende technische en organisatorische maatregelen;',
+                'schakelen subverwerkers in die in het privacybeleid staan vermeld en waarvoor de Klant algemene toestemming geeft; wijzigingen kondigen wij minstens 15 dagen vooraf aan, en de Klant kan op redelijke gronden bezwaar maken, waarbij zijn enige rechtsmiddel dan opzegging is;',
+                'helpen de Klant in redelijke mate bij verzoeken van betrokkenen, gegevensbeschermingseffectbeoordelingen en datalekken, die wij zonder onredelijke vertraging melden;',
+                'verwijderen de gegevens na afloop van de overeenkomst volgens artikel 13, tenzij de wet bewaring vereist;',
+                'stellen de informatie beschikbaar die nodig is om onze naleving aan te tonen; een audit vindt hoogstens eenmaal per jaar plaats, met redelijke aankondiging, op kosten van de Klant en onder geheimhouding.',
+              ],
+            },
+            { p: 'De Klant garandeert dat hij voor elke verwerking een rechtsgrond heeft, Ontvangers informeert (AI-agent, opname, doeleinden), de vereiste toestemmingen verkrijgt, bijzondere persoonsgegevens alleen laat verwerken als dat noodzakelijk en rechtmatig is, en dat zijn contactlijsten rechtmatig zijn opgebouwd. Het opnemen van gesprekken en de bewaartermijn daarvan worden door de Klant ingesteld.' },
+            { p: 'Wij kunnen geaggregeerde of geanonimiseerde gegevens en gebruiksmetadata gebruiken om de Dienst te exploiteren, te beveiligen en te verbeteren. Wij gebruiken de inhoud van gesprekken en berichten van de Klant niet om onze eigen modellen te trainen.' },
+          ],
+        },
+        {
+          title: 'Artikel 9 — Diensten van derden en integraties',
+          body: [
+            { p: 'De Dienst steunt op of koppelt met derden: telecomoperators, Meta (WhatsApp, Messenger, Instagram), agenda’s, CRM-systemen, automatiseringstools, AI- en betaaldienstverleners. Hun voorwaarden zijn van toepassing en de Klant aanvaardt ze wanneer zij dat vereisen. Door een integratie in te schakelen, machtigt de Klant ons om de nodige gegevens ermee uit te wisselen. Wij hebben geen zeggenschap over deze diensten en zijn niet verantwoordelijk voor hun beschikbaarheid, hun wijzigingen of de verwerking van gegevens die op verzoek van de Klant aan hen worden verstrekt.' },
+          ],
+        },
+        {
+          title: 'Artikel 10 — Intellectuele eigendom',
+          body: [
+            {
+              ul: [
+                `De Dienst, de software, interfaces en documentatie, het merk ${brand} en de logo’s behoren toe aan ons of onze licentiegevers en worden onder meer beschermd door ${legal.copyrightLaw}. Buiten de hieronder beschreven licentie verkrijgt de Klant geen rechten.`,
+                'Wij verlenen de Klant, voor de duur van zijn abonnement, een beperkte, niet-exclusieve, niet-overdraagbare, niet-sublicentieerbare en herroepbare licentie om de Dienst te gebruiken voor zijn interne bedrijfsdoeleinden.',
+                'De Klant behoudt zijn rechten op de Klantinhoud. Hij verleent ons een wereldwijde, kosteloze, niet-exclusieve licentie om deze te hosten, te kopiëren, te verwerken, door te geven en weer te geven, en door onze subverwerkers te laten verwerken, uitsluitend voor zover nodig om de Dienst te leveren, te beveiligen en te ondersteunen en de wet na te leven. Hij garandeert over de nodige rechten te beschikken.',
+                'Suggesties en feedback van de Klant mogen vrij, kosteloos en zonder tijdslimiet worden gebruikt.',
+                'De Klant gebruikt onze merken niet zonder schriftelijke toestemming. Wij mogen de naam en het logo van de Klant als referentie vermelden, tenzij hij daartegen per e-mail bezwaar maakt.',
+                ['Om onrechtmatige inhoud of een inbreuk op auteursrecht te melden, mailt u naar ', mail, ' met vermelding van het werk, de vindplaats van de inhoud, uw contactgegevens en een verklaring te goeder trouw. Wij kunnen de inhoud verwijderen en accounts die herhaaldelijk inbreuk maken opschorten.'],
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 11 — Vertrouwelijkheid',
+          body: [
+            { p: 'Elke partij houdt de niet-openbare informatie die zij van de andere ontvangt vertrouwelijk, gebruikt die alleen voor de uitvoering van de Voorwaarden en beschermt die met redelijke zorg, gedurende de overeenkomst en drie jaar daarna (en voor bedrijfsgeheimen zolang zij geheim blijven). Niet vertrouwelijk is informatie die openbaar is, al bekend was, zelfstandig is ontwikkeld of rechtmatig van een derde is verkregen. Een partij mag informatie bekendmaken als de wet of een autoriteit dat vereist, en stelt de andere partij daarvan op de hoogte voor zover toegestaan.' },
+          ],
+        },
+        {
+          title: 'Artikel 12 — Wijzigingen van de Dienst, bètafuncties en beschikbaarheid',
+          body: [
+            {
+              ul: [
+                'Wij kunnen de Dienst doorontwikkelen, functies toevoegen, wijzigen of schrappen en van dienstverlener wisselen. Waar redelijkerwijs mogelijk kondigen wij het schrappen van een essentiële functie van een betaald abonnement vooraf aan.',
+                'Bèta-, preview- of experimentele functies worden geleverd zoals ze zijn, zonder verplichting, en kunnen op elk moment worden stopgezet.',
+                'Wij hebben een inspanningsverplichting. Er geldt geen gegarandeerd serviceniveau (SLA), tenzij schriftelijk overeengekomen in een Maatwerk-overeenkomst. De Dienst is afhankelijk van internet, operators en onze dienstverleners; gepland onderhoud (zo mogelijk aangekondigd) of spoedonderhoud kan hem onderbreken.',
+                'Redelijk-gebruikslimieten (gelijktijdige gesprekken, doorvoer, volumes) kunnen van toepassing zijn.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 13 — Opschorting en beëindiging',
+          body: [
+            { p: 'Wij kunnen het account geheel of gedeeltelijk opschorten of sluiten, op elk moment, met of zonder voorafgaande kennisgeving en zonder schadevergoeding, bij: schending van de Voorwaarden, niet-betaling of chargeback, een klacht van een operator, Meta, een autoriteit of Ontvangers, vermoeden van fraude, een beveiligingsrisico, een juridisch of reputatierisico, een verzoek van een autoriteit of een vereiste van een van onze dienstverleners. Tijdens de opschorting blijven de bedragen verschuldigd. Een dergelijke sluiting geeft geen recht op enige terugbetaling, ook niet van niet-verstreken vooruitbetaalde perioden.' },
+            {
+              ul: [
+                'De Klant kan op elk moment opzeggen; de opzegging gaat in aan het einde van de betaalde periode (artikel 4).',
+                'Wij kunnen de overeenkomst ook zonder reden beëindigen met een opzegtermijn van 30 dagen; alleen in dat geval betalen wij het niet-verstreken deel van een vooruitbetaalde periode terug.',
+                'Bij het einde van de overeenkomst vervalt de toegang, worden verschuldigde bedragen opeisbaar, kunnen nummers worden vrijgegeven en vervalt het tegoed. De Klant kan zijn gegevens gedurende 30 dagen exporteren vanuit de klantomgeving; daarna worden ze binnen 90 dagen na het einde van de overeenkomst verwijderd, onder voorbehoud van wettelijke bewaarplichten en de normale back-upcyclus.',
+                'Gratis of proefaccounts zonder betaald abonnement die 90 dagen inactief zijn, kunnen na een waarschuwing per e-mail worden gesloten en hun gegevens verwijderd.',
+                'Bepalingen die naar hun aard na beëindiging blijven gelden (verschuldigde bedragen, gegevens, intellectuele eigendom, vertrouwelijkheid, garanties, aansprakelijkheid, vrijwaring, geschillen) blijven van toepassing.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 14 — Uitsluiting van garanties',
+          body: [
+            { p: 'Voor zover de wet dat toestaat, wordt de Dienst geleverd „zoals hij is” en „zoals beschikbaar”. Wij sluiten alle uitdrukkelijke of stilzwijgende garanties uit, waaronder die van verkoopbaarheid, geschiktheid voor een bepaald doel, niet-inbreuk, ononderbroken of foutloze werking, juistheid van door AI gegenereerde inhoud, aflevering van gesprekken en berichten of het behalen van enig commercieel resultaat.' },
+          ],
+        },
+        {
+          title: 'Artikel 15 — Beperking van aansprakelijkheid',
+          body: [
+            {
+              ul: [
+                'Wij zijn niet aansprakelijk voor indirecte schade, gevolgschade, bijzondere schade of punitieve schadevergoedingen, noch voor gederfde winst, omzet, klanten, kansen of goodwill, verlies of beschadiging van gegevens, gemiste gesprekken of afspraken of de kosten van een vervangende dienst, ook niet als wij op de mogelijkheid daarvan zijn gewezen.',
+                'Wij zijn niet aansprakelijk voor schade die voortvloeit uit Klantinhoud, de configuratie van agents, diensten van derden, operators, Meta, internet, overmacht of een tekortkoming van de Klant.',
+                [{ strong: 'Maximum:' }, ' onze totale aansprakelijkheid, uit welken hoofde ook, is beperkt tot het bedrag exclusief belastingen dat de Klant daadwerkelijk heeft betaald voor zijn abonnement over de maand voorafgaand aan de schadeveroorzakende gebeurtenis (bij jaarlijkse facturatie een twaalfde van de jaarprijs) en bedraagt in geen geval meer dan USD 1.000.'],
+                'De Klant erkent dat de prijzen deze risicoverdeling weerspiegelen.',
+              ],
+            },
+            { p: 'Niets in de Voorwaarden sluit een aansprakelijkheid of recht uit of beperkt die, voor zover dat op grond van dwingend recht niet mogelijk is (met name bij opzet of bewuste roekeloosheid, of letselschade).' },
+            ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
+          ],
+        },
+        {
+          title: 'Artikel 16 — Vrijwaring door de Klant',
+          body: [
+            { p: `De Klant verdedigt en vrijwaart ons en onze bestuurders, werknemers, onderaannemers en dienstverleners en stelt hen schadeloos voor alle aanspraken, verliezen, boetes, sancties, veroordelingen en kosten (waaronder redelijke advocaatkosten) die voortvloeien uit: zijn Klantinhoud en de configuratie van zijn agents; zijn gesprekken, berichten en campagnes; het ontbreken van toestemming of het niet respecteren van een afmelding of belregister; elke schending van telecom-, marketing-, AI- of privacywetgeving; elke schending van de Voorwaarden; elke aanspraak van een Ontvanger, Gebruiker, operator, Meta, onze technische platformleverancier of een autoriteit in verband met zijn gebruik. De Klant erkent dat ${company} jegens haar eigen dienstverleners aansprakelijk kan zijn voor tekortkomingen van haar klanten. Wij stellen de Klant op de hoogte van de aanspraak; hij mag geen schikking treffen die ons verplichtingen oplegt zonder onze toestemming.` },
+          ],
+        },
+        {
+          title: 'Artikel 17 — Termijn voor vorderingen',
+          body: [
+            { p: 'Voor zover de wet dat toestaat, moet elke vordering tegen ons worden ingesteld binnen drie (3) maanden na de gebeurtenis waarop zij berust, of na de dag waarop de Klant daarvan kennis kreeg of had moeten krijgen; daarna vervalt de vordering.' },
+          ],
+        },
+        {
+          title: 'Artikel 18 — Toepasselijk recht, arbitrage en afstand van collectieve acties',
+          body: [
+            {
+              ul: [
+                `Op de Voorwaarden is ${legal.governingLaw} van toepassing, met uitsluiting van de conflictregels en van het Weens Koopverdrag (CISG).`,
+                ['Vóór elke procedure stuurt de klagende partij een schriftelijke klacht (aan ons: ', mail, '); partijen zoeken gedurende 30 dagen naar een minnelijke oplossing.'],
+                `Lukt dat niet, dan wordt elk geschil dat voortvloeit uit of verband houdt met de Voorwaarden of de Dienst definitief beslecht door vertrouwelijke, bindende arbitrage onder beheer van de American Arbitration Association (AAA) volgens haar Commercial Arbitration Rules (of, bij een internationaal geschil, door haar International Centre for Dispute Resolution), door één arbiter, met als plaats van arbitrage Cheyenne (Wyoming) en in het Engels. Het vonnis kan worden bekrachtigd en ten uitvoer gelegd door ${legal.court} of door elke bevoegde rechter.`,
+                [{ strong: 'Afstand van collectieve acties:' }, ' geschillen worden uitsluitend individueel beslecht, met uitsluiting van groeps-, collectieve of vertegenwoordigende acties en samengevoegde arbitrages. Wordt deze afstand voor een vordering niet afdwingbaar geacht, dan wordt die vordering door de hieronder genoemde rechter behandeld en niet in arbitrage.'],
+                'Elke partij kan bij elke bevoegde rechter spoedeisende of voorlopige maatregelen vragen (met name om haar intellectuele eigendom of vertrouwelijke informatie te beschermen of misbruik van de Dienst te stoppen), zonder zekerheidstelling voor zover toegestaan. Elke partij kan een individuele vordering instellen bij een rechter voor kleine geschillen binnen diens bevoegdheid, en wij kunnen onbetaalde bedragen invorderen bij elke bevoegde rechter.',
+                `Geschillen die niet aan arbitrage zijn onderworpen, worden uitsluitend voorgelegd aan ${legal.court}.`,
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artikel 19 — Overmacht',
+          body: [
+            { p: 'Geen van de partijen is aansprakelijk voor vertraging of tekortkoming door een gebeurtenis buiten haar redelijke controle: natuurramp, epidemie, oorlog, terrorisme, oproer, staking, overheidsmaatregel, storing bij een operator, internet, het elektriciteitsnet, een datacenter of een cloud- of AI-aanbieder, cyberaanval of een beslissing van Meta of een operator. Betalingsverplichtingen worden niet opgeschort. Duurt de gebeurtenis langer dan 30 dagen, dan kan elke partij het betrokken abonnement met een kennisgeving beëindigen.' },
+          ],
+        },
+        {
+          title: 'Artikel 20 — Overdracht en zeggenschapswijziging',
+          body: [
+            { p: 'Wij mogen de Voorwaarden geheel of gedeeltelijk overdragen, ook bij fusie, overname, reorganisatie of verkoop van activa, zonder toestemming van de Klant en na hem te hebben geïnformeerd, en onze verplichtingen geheel of gedeeltelijk uitbesteden. De Klant mag de Voorwaarden niet overdragen zonder onze voorafgaande schriftelijke toestemming; hij meldt ons elke zeggenschapswijziging, waarna wij kunnen beëindigen als de nieuwe eigenaar een concurrent is of niet door onze controle komt.' },
+          ],
+        },
+        {
+          title: 'Artikel 21 — Algemene bepalingen',
+          body: [
+            {
+              ul: [
+                [{ strong: 'Volledige overeenkomst:' }, ' de Voorwaarden, de pagina Prijzen, de details van het gekozen abonnement, het ', { a: 'privacybeleid', href: '/confidentialite' }, ' en, in voorkomend geval, een ondertekende Maatwerk-overeenkomst vormen de volledige overeenkomst en vervangen alle eerdere afspraken. Inkoopvoorwaarden van de Klant zijn niet van toepassing.'],
+                [{ strong: 'Rangorde:' }, ' een ondertekende Maatwerk-overeenkomst, dan de Voorwaarden, dan het privacybeleid, dan de pagina Prijzen en de documentatie.'],
+                [{ strong: 'Partiële nietigheid en geen afstand:' }, ' een ongeldige bepaling wordt vervangen door de geldige bepaling die het dichtst in de buurt komt en de overige blijven van kracht; het niet uitoefenen van een recht houdt geen afstand daarvan in.'],
+                [{ strong: 'Kennisgevingen:' }, ' wij schrijven naar het e-mailadres van het account of in de klantomgeving; de Klant schrijft ons via ', mail, '. De Klant aanvaardt elektronische communicatie en facturen.'],
+                [{ strong: 'Wijzigingen:' }, ' wij kunnen de Voorwaarden wijzigen; belangrijke wijzigingen worden ten minste 15 dagen vóór de inwerkingtreding per e-mail of op de website aangekondigd, tenzij wettelijke of beveiligingseisen anders vereisen. Voortgezet gebruik geldt als aanvaarding; een Klant die niet akkoord gaat, zegt vóór die datum op.'],
+                [{ strong: 'Taal:' }, ' de Voorwaarden worden in meerdere talen gepubliceerd. Bij verschillen gaat de Engelse versie voor.'],
+                [{ strong: 'Sancties en export:' }, ' de Klant verklaart niet onder economische sancties te vallen en de Dienst niet te gebruiken in een land of ten behoeve van een persoon waarop sancties van toepassing zijn.'],
+                [{ strong: 'Onafhankelijkheid:' }, ' partijen zijn onafhankelijke contractanten; de Voorwaarden scheppen geen rechten voor derden.'],
+                [{ strong: 'Contact:' }, ` ${company}, ${ADDRESS}, Verenigde Staten — `, mail, '.'],
+              ],
+            },
+          ],
+        },
+      ];
+    },
   },
 
   privacy: {
@@ -272,108 +489,174 @@ export const UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Privacybeleid',
     intro: 'Wat we verzamelen, waarom, met wie, hoe lang, en hoe u uw rechten uitoefent.',
-    updated: 'Bijgewerkt: oktober 2026',
+    updated: 'Laatst bijgewerkt: 6 oktober 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
-          title: 'Wie verantwoordelijk is voor uw gegevens',
+          title: 'Wie wij zijn en onze rol',
           body: [
-            { p: [`${brand} is een merk van ${company}, een vennootschap met beperkte aansprakelijkheid geregistreerd in Wyoming (Verenigde Staten), ${ADDRESS}. Contact: `, mail, '.'] },
+            { p: [`${brand} is een merk van ${company}, een Limited Liability Company geregistreerd in de staat Wyoming (Verenigde Staten), ${ADDRESS}. Contact: `, mail, `. Wij verwerken persoonsgegevens in overeenstemming met ${legal.privacyLaw} en andere toepasselijke wetgeving.`] },
             {
               ul: [
-                [{ strong: 'Voor de website, terugbelverzoeken, gesprekken met onze assistenten en het beheer van klantaccounts' }, ` is ${company} verwerkingsverantwoordelijke.`],
-                [{ strong: 'Voor gesprekken en berichten die door de agents van onze klanten worden afgehandeld' }, ' is de klant verwerkingsverantwoordelijke tegenover zijn eigen bellers, en treden wij op als verwerker namens de klant. De klant bepaalt welke gegevens zijn agent verzamelt en waarvoor die worden gebruikt.'],
+                [{ strong: 'Verwerkingsverantwoordelijke:' }, ` voor de website, formulieren en terugbelverzoeken, gesprekken met onze eigen AI-assistenten, klantaccounts, facturatie en onze eigen marketing is ${company} verwerkingsverantwoordelijke.`],
+                [{ strong: 'Verwerker:' }, ' voor gesprekken, berichten en contacten die door de agents van onze klanten worden afgehandeld, is de klant verwerkingsverantwoordelijke ten opzichte van zijn eigen bellers en contacten; wij handelen namens en op instructie van de klant. Bent u benaderd door de agent van een klantbedrijf, wendt u zich dan eerst tot dat bedrijf; wij sturen elk verzoek dat wij ontvangen aan hem door.'],
               ],
             },
           ],
         },
         {
-          title: 'De gegevens die wij verwerken',
+          title: 'Welke gegevens wij verzamelen',
           body: [
             {
               ul: [
-                [{ strong: 'Formulieren op de website' }, ' (terugbellen, demo, begeleiding bij de proefperiode): naam, telefoonnummer, e-mailadres, bedrijf, sector, gewenst tijdslot en uw bericht.'],
-                [{ strong: 'Gesprekken met onze AI-assistenten' }, ' (chatballon op de website, receptionist, commerciële en supportgesprekken, hulp in de klantomgeving): geschreven inhoud, audio-opname van gesproken gesprekken, transcriptie, samenvatting en geëxtraheerde nuttige informatie (behoefte, beoogd abonnement, gemeld probleem).'],
-                [{ strong: 'Klantaccount' }, ': identiteit, e-mailadres, bedrijf, instellingen van uw agents, geschiedenis van gesprekken en berichten, minutenverbruik.'],
-                [{ strong: 'Facturatie' }, ': abonnement, facturen en betaalmiddel. Kaartgegevens worden ingevoerd en bewaard door Stripe; wij hebben er nooit toegang toe.'],
-                [{ strong: 'Technische gegevens' }, ': IP-adres en browsergegevens die nodig zijn voor de werking en beveiliging van de website.'],
+                [{ strong: 'Formulieren op de website' }, ' (terugbellen, demo, begeleiding bij de proefperiode): naam, telefoonnummer, e-mail, bedrijf, sector, gewenst tijdstip, bericht en toestemming.'],
+                [{ strong: 'Gesprekken met onze AI-assistenten' }, ' (chatbubbel op de website, receptioniste, demogesprekken, commerciële en supportterugbelacties, hulp in de klantomgeving): geschreven inhoud, audio-opname van spraakgesprekken, transcriptie, samenvatting en geëxtraheerde informatie (behoefte, overwogen abonnement, gemeld probleem).'],
+                [{ strong: 'Klantaccount' }, ': identiteit en contactgegevens van gebruikers, bedrijfsgegevens, inloggegevens, instellingen en instructies van agents, kennisbanken, contactlijsten, gespreks- en berichtengeschiedenis, verbruik van minuten en tegoed, supportverzoeken.'],
+                [{ strong: 'Gegevens die wij voor onze klanten verwerken' }, ': nummers en namen van bellers of contacten, gespreksinhoud, berichten, opnames, transcripties, afspraken en leadgegevens.'],
+                [{ strong: 'Facturatie' }, ': abonnement, facturen, factuuradres, btw-nummer, betaalstatus. Kaartgegevens worden ingevoerd bij en bewaard door Stripe; wij hebben er nooit toegang toe.'],
+                [{ strong: 'Technische gegevens' }, ': IP-adres, apparaat en browser, verbindings- en beveiligingslogs, cookies.'],
+                [{ strong: 'Gegevens van derden' }, ': door de klant ingeschakelde integraties (agenda’s, CRM, WhatsApp, Messenger, Instagram), gespreks- en berichtmetadata van operators, betaal- en fraudepreventie-informatie van Stripe, en openbare bedrijfsinformatie die wordt gebruikt om een account te verifiëren.'],
               ],
             },
           ],
         },
         {
-          title: 'Waarom en op welke grondslag',
+          title: 'Doeleinden en rechtsgronden',
           body: [
             {
               ul: [
-                [{ strong: 'U terugbellen en uw aanvraag beantwoorden' }, ', ook via een gesprek met onze AI-spraakagent: op basis van uw toestemming, gegeven op het moment van de aanvraag. U kunt die op elk moment intrekken, en de agent respecteert elk verzoek om niet meer gebeld te worden.'],
-                [{ strong: 'De dienst, de gratis proefperiode en support leveren' }, ': uitvoering van de overeenkomst.'],
-                [{ strong: 'Factureren en voldoen aan onze boekhoudkundige en fiscale verplichtingen' }, ': wettelijke verplichting.'],
-                [{ strong: 'Onze assistenten verbeteren en het platform beveiligen' }, ': gerechtvaardigd belang, uitsluitend op basis van onze eigen gesprekken.'],
+                [{ strong: 'U terugbellen en uw verzoek beantwoorden' }, ', ook via een gesprek met onze AI-spraakagent: uw toestemming, gegeven bij het verzoek en op elk moment intrekbaar.'],
+                [{ strong: 'Het leveren van de Dienst, de gratis proefperiode en support' }, ': uitvoering van de overeenkomst of precontractuele maatregelen.'],
+                [{ strong: 'Het verwerken van gegevens van onze klanten namens hen' }, ': hun instructies, op de rechtsgrond die zij bepalen.'],
+                [{ strong: 'Factureren, boekhouden, fiscale verplichtingen en het beantwoorden van verzoeken van autoriteiten' }, ': wettelijke verplichting.'],
+                [{ strong: 'Het platform beveiligen, fraude en misbruik voorkomen, onze voorwaarden handhaven, ons verdedigen in rechte, onze assistenten verbeteren op basis van onze eigen gesprekken en geaggregeerde statistieken' }, ': gerechtvaardigd belang.'],
+                [{ strong: 'Marketing aan bedrijven' }, ': gerechtvaardigd belang, of toestemming waar de wet dat vereist; u kunt altijd bezwaar maken.'],
+                [{ strong: 'Analytische cookies' }, ': uw toestemming.'],
               ],
             },
           ],
         },
         {
-          title: 'AI-agents en opnames',
+          title: 'Kunstmatige intelligentie, opnames en transcripties',
           body: [
-            { p: 'Onze assistenten zijn kunstmatige intelligenties en stellen zich ook als zodanig voor. Gesproken gesprekken worden opgenomen en uitgeschreven om uw aanvraag op te volgen en de kwaliteit van de dienst te waarborgen. Er worden geen besluiten met rechtsgevolgen voor u volledig geautomatiseerd genomen.' },
-            { p: 'Onze klanten die het platform gebruiken, moeten hun eigen bellers informeren over het gebruik van een AI-agent en over de opname, volgens de regels die voor hun activiteit gelden.' },
+            { p: 'Onze assistenten zijn AI-systemen en maken dat ook bekend. Spraakgesprekken worden opgenomen en uitgeschreven; AI-aanbieders maken er samenvattingen van en halen de informatie eruit die nodig is om uw verzoek op te volgen. Er wordt geen besluit met rechtsgevolgen of dat u anderszins in aanmerkelijke mate treft uitsluitend op basis van geautomatiseerde verwerking genomen.' },
+            { p: 'Wij verkopen uw gegevens niet en delen ze niet voor gerichte advertenties. Wij gebruiken de inhoud van gesprekken en berichten van onze klanten niet om onze eigen modellen te trainen. Onze AI-aanbieders verwerken gegevens op basis van een overeenkomst, namens ons.' },
+            { p: 'Klanten die het platform gebruiken, moeten hun eigen bellers en contacten laten weten dat zij met een AI-systeem communiceren en, waar de wet dat vereist, dat het gesprek wordt opgenomen. Zij stellen het opnemen en de bewaartermijn daarvan in.' },
           ],
         },
         {
-          title: 'Onze dienstverleners',
+          title: 'Delen van gegevens en subverwerkers',
           body: [
+            { p: 'Wij delen uw gegevens alleen met ontvangers die ze nodig hebben en die gebonden zijn aan geheimhoudings- en gegevensbeschermingsverplichtingen:' },
             {
               ul: [
-                [{ strong: 'Autocalls' }, ': technisch platform voor de spraakagents, de widgets en de klantomgeving (gesprekken, transcriptie, spraaksynthese, automatiseringen).'],
-                [{ strong: 'Twilio' }, ': telefonieprovider die onze gesprekken routeert, waaronder uitgaande terugbelgesprekken (Amerikaans nummer, Verenigde Staten).'],
-                [{ strong: 'Leveranciers van AI, stemmen en telefonie' }, ' die door dit platform worden gebruikt om gesprekken te begrijpen, te beantwoorden en door te sturen.'],
-                [{ strong: 'Stripe' }, ': abonnementen, betalingen, facturen en belastingberekening (PCI-DSS niveau 1 gecertificeerd).'],
-                [{ strong: 'Supabase' }, ': database voor terugbelverzoeken, aanmeldingen en gespreksverslagen (Verenigde Staten).'],
-                [{ strong: 'Google Cloud (Firebase App Hosting)' }, ': hosting van de website (Verenigde Staten).'],
-                [{ strong: 'Zoho Mail' }, ': verzending van service- en opvolgingsmails.'],
+                [{ strong: 'Onze technische platformleverancier' }, ': spraakagents, widgets, klantomgeving, transcriptie, spraaksynthese en automatiseringen. Deze leverancier is gevestigd in de Europese Unie (Roemenië), is ISO 27001-gecertificeerd en host gegevens in de Europese Economische Ruimte en/of de Verenigde Staten.'],
+                [{ strong: 'Twilio en andere telecomoperators' }, ': routering van gesprekken en sms, telefoonnummers.'],
+                [{ strong: 'Meta' }, ' (WhatsApp, Messenger, Instagram): wanneer de klant deze kanalen gebruikt.'],
+                [{ strong: 'AI-, spraak- en transcriptieaanbieders' }, ': begrijpen, antwoorden, spraaksynthese en transcriptie.'],
+                [{ strong: 'Stripe' }, ': abonnementen, betalingen, facturen en belastingberekening (PCI DSS niveau 1-gecertificeerd).'],
+                [{ strong: 'Supabase' }, ': database van verzoeken, aanmeldingen en gespreksverslagen (Verenigde Staten).'],
+                [{ strong: 'Google Cloud (Firebase)' }, ': hosting van de website (Verenigde Staten).'],
+                [{ strong: 'Zoho' }, ': verzending van service- en opvolgmails.'],
+                [{ strong: 'Door de klant ingeschakelde integraties' }, ' (agenda’s, CRM, automatiseringstools), onze professionele adviseurs, autoriteiten waar de wet dat vereist, en een eventuele overnemende partij bij een fusie of verkoop.'],
               ],
             },
           ],
         },
         {
-          title: 'Doorgifte buiten de Europese Economische Ruimte',
+          title: 'Internationale doorgifte',
           body: [
-            { p: `Meerdere van deze dienstverleners, evenals onze vennootschap, zijn gevestigd in de Verenigde Staten. Doorgifte van persoonsgegevens buiten de Europese Economische Ruimte gebeurt in overeenstemming met ${legal.privacyLaw}: op basis van het EU-VS-kader voor gegevensbescherming (Data Privacy Framework) wanneer de dienstverlener daarbij is aangesloten, en anders op basis van de modelcontractbepalingen (standaardcontractbepalingen) van de Europese Commissie.` },
+            { p: 'Onze vennootschap en verschillende dienstverleners bevinden zich in de Verenigde Staten; onze technische platformleverancier is gevestigd in de Europese Unie en host gegevens in de EER en/of de Verenigde Staten. Doorgiften zijn versleuteld en met waarborgen omkleed:' },
+            {
+              ul: [
+                'Europese Unie en EER: het EU-VS-kader voor gegevensbescherming (Data Privacy Framework) wanneer de ontvanger daaronder gecertificeerd is, anders de modelcontractbepalingen van de Europese Commissie, zo nodig met aanvullende maatregelen.',
+                'Verenigd Koninkrijk: de Britse uitbreiding van dat kader of het Britse addendum bij de modelcontractbepalingen.',
+                'Zwitserland: het Zwitserland-VS-kader of modelcontractbepalingen die door de federale toezichthouder (FDPIC) zijn erkend.',
+                'Australië: wij nemen redelijke, ook contractuele, maatregelen zodat ontvangers in het buitenland informatie verwerken in overeenstemming met de Australian Privacy Principles (APP 8).',
+              ],
+            },
+            { p: ['Een kopie van de toepasselijke waarborgen is op te vragen via ', mail, '.'] },
           ],
         },
         {
-          title: 'Hoe lang wij ze bewaren',
+          title: 'Hoe lang wij gegevens bewaren',
           body: [
             {
               ul: [
                 'Terugbelverzoeken en gesprekken met onze assistenten: 24 maanden na het laatste contact.',
-                'Opnames en transcripties van gesprekken die voor onze klanten zijn afgehandeld: standaard 12 maanden; elke klant kan deze termijn verkorten en zijn gegevens via zijn klantomgeving verwijderen.',
-                'Accountgegevens: gedurende de hele relatie, daarna 3 jaar voor eventuele marketing, tenzij u bezwaar maakt.',
-                'Facturen en boekhoudgegevens: wettelijke termijn (tot 10 jaar).',
+                'Gesprekken, opnames, transcripties, chats en sms die wij voor onze klanten verwerken: standaard 12 maanden; elke klant kan deze termijn verkorten en zijn gegevens verwijderen.',
+                'Leads en contacten verzameld door de agents van onze klanten: standaard 24 maanden, door de klant in te korten.',
+                'Accountgegevens: zolang de overeenkomst loopt, daarna 3 jaar voor marketing, tenzij u bezwaar maakt. De inhoud van het account wordt binnen 90 dagen na het einde van de overeenkomst verwijderd.',
+                'Facturen en boekhoudkundige stukken: 10 jaar.',
+                'Technische en beveiligingslogs: gedurende de beperkte termijn die voor de beveiliging nodig is.',
               ],
             },
+            { p: 'Na afloop van deze termijnen worden de gegevens verwijderd of geanonimiseerd.' },
           ],
         },
         {
           title: 'Beveiliging',
           body: [
-            { p: 'Gegevensverkeer wordt tijdens verzending versleuteld, toegang tot gegevens is beperkt tot de mensen die die nodig hebben en beveiligd met authenticatie, en technische sleutels worden bewaard in beveiligde kluizen voor geheimen. Klanten kunnen tweestapsverificatie inschakelen voor hun klantomgeving.' },
+            { p: 'Gegevens worden versleuteld tijdens overdracht (TLS) en in rust (AES-256). Toegang is rolgebaseerd, beveiligd met authenticatie en vastgelegd in auditlogs; tweestapsverificatie is beschikbaar voor klanten; er worden regelmatig back-ups gemaakt en technische sleutels worden bewaard in kluizen voor geheimen. Onze technische platformleverancier is ISO 27001-gecertificeerd. Omdat geen enkel systeem onfeilbaar is, melden wij datalekken aan de autoriteiten en aan betrokkenen wanneer de wet dat vereist.' },
           ],
         },
         {
-          title: 'Uw rechten',
+          title: 'Uw rechten per land',
           body: [
-            { p: ['U kunt vragen om inzage in uw gegevens, rectificatie, verwijdering, overdraagbaarheid en beperking van de verwerking, bezwaar maken tegen marketing en uw toestemming om teruggebeld te worden intrekken. Mail naar ', mail, ': wij antwoorden binnen een maand.'] },
-            { p: `U kunt ook een klacht indienen bij ${legal.dataAuthority}, of bij de toezichthouder voor gegevensbescherming in het land van de Europese Economische Ruimte waar u woont.` },
+            {
+              ul: [
+                [{ strong: 'Europese Unie en EER' }, ' (waaronder Nederland, Frankrijk, Italië en Polen): inzage, rectificatie, wissing, beperking, overdraagbaarheid, bezwaar (onvoorwaardelijk tegen direct marketing), intrekking van toestemming en het recht om niet te worden onderworpen aan een uitsluitend geautomatiseerd besluit.'],
+                [{ strong: 'Verenigd Koninkrijk' }, ': dezelfde rechten op grond van de UK GDPR en de Data Protection Act 2018.'],
+                [{ strong: 'Zwitserland' }, ': de rechten op grond van de federale wet inzake gegevensbescherming (FADP).'],
+                [{ strong: 'Australië' }, ': rechten op inzage en correctie op grond van de Australian Privacy Principles, en de mogelijkheid om anoniem of onder pseudoniem met ons te communiceren waar dat mogelijk is.'],
+                [{ strong: 'Elders' }, ': de rechten die uw lokale wetgeving biedt.'],
+              ],
+            },
           ],
         },
         {
-          title: 'Cookies',
+          title: 'Uw rechten uitoefenen en klachten',
           body: [
-            { p: ['De website gebruikt geen advertentiecookies. De details staan op de pagina ', { a: 'cookies', href: '/cookies' }, '.'] },
+            { p: ['Mail naar ', mail, ` of schrijf naar ${company}, ${ADDRESS}, Verenigde Staten. Wij kunnen u vragen uw identiteit aan te tonen. Wij antwoorden binnen 30 dagen; bij complexe verzoeken kan deze termijn met twee maanden worden verlengd (u hoort dat dan van ons). Dit is kosteloos, tenzij een verzoek kennelijk ongegrond of buitensporig is. Als wij uw gegevens namens een klant verwerken, sturen wij uw verzoek aan die klant door.`] },
+            { p: `U kunt een klacht indienen bij ${legal.dataAuthority}, of bij de gegevensbeschermingsautoriteit van het land waar u woont of werkt, zoals de CNIL (Frankrijk), de Garante per la protezione dei dati personali (Italië), de UODO (Polen), het ICO (Verenigd Koninkrijk) of de FDPIC (Zwitserland). In Australië dient u eerst bij ons een klacht in: wij reageren binnen 30 dagen, waarna u zich tot het OAIC kunt wenden.` },
+          ],
+        },
+        {
+          title: 'Minderjarigen',
+          body: [
+            { p: 'De Dienst is bestemd voor professionals van 18 jaar of ouder. Hij is niet gericht op minderjarigen en wij verzamelen niet bewust hun gegevens; als wij vernemen dat een minderjarige ons gegevens heeft verstrekt, verwijderen wij die.' },
+          ],
+        },
+        {
+          title: 'Marketing, gesprekken en afmelden',
+          body: [
+            { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, Bloctel, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
+            { p: 'Gesprekken en berichten van onze klanten vallen onder hun verantwoordelijkheid: richt uw bezwaar aan hen; als u contact met ons opneemt, sturen wij het door.' },
+          ],
+        },
+        {
+          title: 'Cookies en „Do Not Track”',
+          body: [
+            { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies. Er worden geen advertentiecookies gebruikt. Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen uw surfgedrag op andere websites niet voor advertentiedoeleinden.'] },
+          ],
+        },
+        {
+          title: 'Links naar websites van derden',
+          body: [
+            { p: 'De website en de Dienst kunnen verwijzen naar websites of diensten van derden (Stripe, Meta, agenda’s, CRM enz.). Daarop is hun eigen privacybeleid van toepassing en wij zijn daarvoor niet verantwoordelijk.' },
+          ],
+        },
+        {
+          title: 'Wijzigingen van dit beleid',
+          body: [
+            { p: 'Wij kunnen dit beleid bijwerken; de datum van de laatste wijziging staat bovenaan de pagina. Belangrijke wijzigingen maken wij per e-mail aan klanten of via een melding op de website bekend.' },
+          ],
+        },
+        {
+          title: 'Contact',
+          body: [
+            { p: [`${company}, ${ADDRESS}, Verenigde Staten — `, mail, '.'] },
           ],
         },
       ];

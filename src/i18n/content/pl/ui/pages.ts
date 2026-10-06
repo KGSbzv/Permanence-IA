@@ -185,6 +185,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Informacja „asystent AI” na początku rozmowy',
       'Nagrywanie włączane lub wyłączane, z informacją dla dzwoniącego',
     ],
+    infraTitle: 'Rozwiązanie zbudowane na certyfikowanej infrastrukturze',
+    infraIntro: 'Nasze rozwiązanie (agenci, zaplanowane oddzwonienia, przekierowania, strona i panel klienta) działa na infrastrukturze certyfikowanego dostawcy technicznego. Certyfikaty należą do dostawcy; wybraliśmy go, aby zapewnić Ci ten sam poziom wymagań.',
+    infraItems: ['Dostawca z certyfikatami ISO/IEC 27001:2022 (bezpieczeństwo informacji) i ISO 9001:2015 (jakość)', 'Szyfrowanie AES-256 danych w spoczynku i TLS w transmisji', 'Dostęp według ról, uwierzytelnianie dwuskładnikowe i dzienniki audytu', 'Automatyczne kopie zapasowe i odtwarzanie w kilku strefach', 'Zgodność z RODO, konfigurowalny okres przechowywania i automatyczne usuwanie', 'Płatności obsługiwane przez Stripe z certyfikatem PCI-DSS poziomu 1'],
     commitmentsTitle: 'Nasze zobowiązania',
     commitments: [
       'Agent przedstawia się jako AI i nie podszywa się pod człowieka',
@@ -214,63 +217,277 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Ogólne Warunki Korzystania i Sprzedaży (Regulamin)',
     updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 6 października 2026',
-    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
-      {
-        title: 'Artykuł 1 — Przedmiot usługi',
-        body: [
-          { p: ['Niniejsze Ogólne Warunki regulują dostęp do platformy oprogramowania i usług telefonicznych realizowanych przez konwersacyjnego agenta sztucznej inteligencji, oferowanych pod marką ', { strong: brand }, ` przez spółkę ${company}.`] },
-          { p: 'Usługa pozwala firmom powierzyć obsługę przychodzących połączeń telefonicznych, kwalifikację rozmówców oraz zsynchronizowane umawianie wizyt 24 godziny na dobę, 7 dni w tygodniu.' },
-        ],
-      },
-      {
-        title: 'Artykuł 2 — Zasady 14-dniowego bezpłatnego okresu próbnego',
-        body: [
-          { p: 'Każdy nowy klient przy pierwszym zakupie pakietu otrzymuje bezpłatny okres próbny trwający czternaście (14) kolejnych dni kalendarzowych, obejmujący 30 minut połączeń:' },
-          {
-            ul: [
-              [{ strong: 'Metoda płatności:' }, ' Przy aktywacji okresu próbnego wymagana jest karta płatnicza. W ciągu 14 dni okresu próbnego nie jest pobierana żadna kwota. Wszystkie ceny są podane netto.'],
-              [{ strong: 'Limit wykorzystania:' }, ' W okresie próbnym połączenia są ograniczone do 30 minut; po przekroczeniu limitu są wstrzymywane do czasu rozpoczęcia subskrypcji.'],
-              [{ strong: 'Koniec okresu próbnego:' }, ' Po upływie 14 dni rozpoczyna się subskrypcja wybranego pakietu i pobierana jest pierwsza opłata miesięczna, chyba że klient anulował ją wcześniej w panelu klienta — wówczas nie jest pobierana żadna kwota.'],
-              [{ strong: 'Uczciwe korzystanie:' }, ' Bezpłatny okres próbny przysługuje tylko raz na podmiot prawny / numer rejestrowy.'],
-            ],
-          },
-        ],
-      },
-      {
-        title: 'Artykuł 3 — Bezpłatny okres próbny, brak prawa odstąpienia i zwrotu płatności',
-        body: [
-          { p: 'Umowy zawierane między przedsiębiorcami nie dają prawa odstąpienia przewidzianego dla konsumentów. Bezpłatny 14-dniowy okres próbny pozwala klientowi przetestować usługę przed jakąkolwiek płatnością i anulować ją bez kosztów przed jego zakończeniem.' },
-          { p: [{ strong: 'Opłacony okres nie podlega zwrotowi' }, ', nawet częściowemu, ponieważ usługa i minuty są udostępniane od początku okresu. Zakupione środki (doładowania) również nie podlegają zwrotowi; nie wygasają. Wypowiedzenie umowy jest możliwe w każdej chwili ze skutkiem na kolejne okresy (artykuł 4).'] },
-        ],
-      },
-      {
-        title: 'Artykuł 4 — Rozliczenia, ceny i wypowiedzenie',
-        body: [
-          { p: 'Ceny są wyrażone w dolarach amerykańskich (USD), netto. Należne podatki są naliczane automatycznie przy płatności w zależności od kraju klienta i jego statusu (osoba prywatna lub firma, z numerem VAT lub bez). Pakiety są opłacane z góry, miesięcznie lub rocznie, według wyboru klienta (rozliczenie roczne obejmuje dwa miesiące gratis), za pośrednictwem naszego bezpiecznego operatora płatności Stripe; subskrypcja odnawia się automatycznie na okres tej samej długości (miesiąc lub rok). Przy rozliczeniu rocznym minuty w pakiecie są nadal przydzielane co miesiąc, a usługa jest identyczna.' },
-          { p: ['Klient może wypowiedzieć subskrypcję w dowolnym momencie i bez okresu wypowiedzenia w swoim panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu (bieżącego miesiąca lub, przy rozliczeniu rocznym, bieżącego roku), bez zwrotu za pozostały okres (artykuł 3). Klient może w dowolnym momencie zmienić pakiet i dokupić minuty, doładowując środki; zakupione środki nie wygasają i służą do opłacania minut ponad limit pakietu, według stawki za dodatkową minutę podanej na stronie Cennik.'] },
-        ],
-      },
-      {
-        title: 'Artykuł 5 — Odpowiedzialność i charakter zobowiązania',
-        body: [
-          { p: [`${brand} jest zobowiązana do `, { strong: 'starannego działania' }, ' w zakresie dostępności i technicznej obsługi ruchu telefonicznego. Użytkownik przyjmuje do wiadomości, że modele generatywnej sztucznej inteligencji i syntezy mowy mogą sporadycznie udzielać odpowiedzi przybliżonych lub nieścisłych.'] },
-          { p: `${brand} w żadnym wypadku nie ponosi odpowiedzialności za pośrednie straty operacyjne, utracone korzyści ani szkody handlowe. W każdym przypadku maksymalna wysokość odszkodowania jest wyraźnie ograniczona do kwoty netto zapłaconej przez klienta w miesiącu poprzedzającym zdarzenie wywołujące szkodę.` },
-        ],
-      },
-      {
-        title: 'Artykuł 6 — Zakazane zastosowania i zawieszenie',
-        body: [
-          { p: `Surowo zabronione są: kampanie niezamówionego telemarketingu (nadużycia w postaci spamu głosowego), działalność oszukańcza, treści zniesławiające, dyskryminujące lub niezgodne z prawem. W razie stwierdzenia nadużycia ${brand} zastrzega sobie prawo do zawieszenia dostępu do dedykowanej linii bez odszkodowania.` },
-        ],
-      },
-      {
-        title: 'Artykuł 7 — Prawo właściwe i sąd właściwy',
-        body: [
-          { p: `Niniejszy regulamin podlega ${legal.governingLaw}. Wszelkie spory dotyczące jego interpretacji lub wykonania rozstrzyga ${legal.court}.` },
-          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
-        ],
-      },
-    ],
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
+      const mail = { a: email, href: `mailto:${email}` };
+      return [
+        {
+          title: 'Artykuł 1 — Definicje i akceptacja',
+          body: [
+            { p: ['Niniejsze ogólne warunki korzystania i sprzedaży („Warunki”) regulują dostęp do usług oferowanych pod marką ', { strong: brand }, ` i korzystanie z nich; usługi świadczy ${company}, spółka typu Limited Liability Company ze stanu Wyoming (Stany Zjednoczone), ${ADDRESS} („my”).`] },
+            {
+              ul: [
+                [{ strong: 'Usługa:' }, ` platforma programowa, panel klienta ${appHost}, głosowi i tekstowi agenci sztucznej inteligencji, widżet na stronę, komunikatory (WhatsApp, SMS, Messenger, Instagram), kampanie, automatyzacje, numery telefonów, połączenie SIP oraz wszelkie powiązane funkcje.`],
+                [{ strong: 'Klient:' }, ' firma lub przedsiębiorca, który zakłada konto lub wykupuje pakiet.'],
+                [{ strong: 'Użytkownik:' }, ' każda osoba upoważniona przez Klienta do dostępu do jego konta.'],
+                [{ strong: 'Treści Klienta:' }, ' dane, instrukcje (prompty), bazy wiedzy, pliki, próbki głosu, listy kontaktów, nagrania i wiadomości przekazane do Usługi lub wygenerowane na rzecz Klienta.'],
+                [{ strong: 'Odbiorcy:' }, ' osoby, które dzwonią do agenta Klienta albo do których agent dzwoni lub wysyła wiadomości.'],
+                [{ strong: 'Kredyty:' }, ' przedpłacone minuty, kredyty na wiadomości i doładowania.'],
+              ],
+            },
+            { p: 'Usługa jest przeznaczona wyłącznie dla przedsiębiorców działających w celach zawodowych; nie jest oferowana konsumentom. Zakładając konto, zaznaczając pole akceptacji lub korzystając z Usługi, Klient akceptuje Warunki. Osoba je akceptująca oświadcza, że ma ukończone 18 lat i jest umocowana do reprezentowania podmiotu, w którego imieniu działa.' },
+          ],
+        },
+        {
+          title: 'Artykuł 2 — Konto i bezpieczeństwo',
+          body: [
+            {
+              ul: [
+                'Klient podaje prawdziwe i pełne informacje (nazwa, dane rejestrowe, dane kontaktowe) i na bieżąco je aktualizuje.',
+                'Zachowuje w poufności dane logowania i klucze API, włącza dostępne zabezpieczenia (w tym uwierzytelnianie dwuskładnikowe) i odpowiada za wszelkie działania wykonane z jego konta, także przez Użytkowników, jak za własne.',
+                ['Niezwłocznie informuje nas pod adresem ', mail, ' o każdym nieuprawnionym dostępie lub podejrzeniu incydentu bezpieczeństwa.'],
+                'Możemy zażądać dokumentów potwierdzających tożsamość, adres lub działalność (w szczególności przy przydzielaniu numerów) oraz odmówić założenia, ograniczyć lub zawiesić konto, jeśli nie zostaną dostarczone.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 3 — Bezpłatny okres próbny, brak prawa odstąpienia i zwrotów',
+          body: [
+            { p: 'Przy pierwszym wykupieniu płatnego pakietu Klient otrzymuje bezpłatny okres próbny trwający czternaście (14) kolejnych dni kalendarzowych, obejmujący 30 minut połączeń, z limitem jednego okresu próbnego na podmiot prawny, numer rejestrowy lub metodę płatności:' },
+            {
+              ul: [
+                [{ strong: 'Metoda płatności:' }, ' przy aktywacji okresu próbnego wymagana jest karta. W ciągu 14 dni próbnych nie pobieramy żadnej opłaty.'],
+                [{ strong: 'Limit użycia:' }, ' w okresie próbnym połączenia są ograniczone do 30 minut; po jego przekroczeniu zostają wstrzymane do rozpoczęcia subskrypcji. Niektóre funkcje (numery, kampanie wychodzące, komunikatory) mogą być w tym czasie ograniczone.'],
+                [{ strong: 'Koniec okresu próbnego:' }, ' po 14 dniach rozpoczyna się wybrany pakiet i pobierana jest opłata za pierwszy okres (miesięczny lub roczny), chyba że Klient wcześniej anulował subskrypcję w panelu klienta — wtedy nie pobieramy żadnej kwoty.'],
+              ],
+            },
+            { p: 'Umowy zawierane między przedsiębiorcami nie przewidują prawa odstąpienia przysługującego konsumentom. Okres próbny pozwala przetestować Usługę przed jakąkolwiek płatnością i bezpłatnie ją anulować przed jego końcem.' },
+            { p: [{ strong: 'Każdy opłacony okres jest należny w całości i nie podlega zwrotowi' }, ', nawet częściowemu, w tym w razie wypowiedzenia, niekorzystania, przejścia na niższy pakiet, zawieszenia lub zamknięcia konta, a także za niewykorzystaną część okresu rocznego. Kredyty nie podlegają zwrotowi, nie są zbywalne i nie można ich wymienić na gotówkę; zakupiony kredyt nie wygasa, dopóki konto jest otwarte, i przepada z chwilą jego zamknięcia.'] },
+          ],
+        },
+        {
+          title: 'Artykuł 4 — Ceny, rozliczenia, odnowienie i podatki',
+          body: [
+            {
+              ul: [
+                'Ceny podane są w dolarach amerykańskich (USD), bez podatków. Należne podatki są naliczane przy płatności w zależności od kraju Klienta i jego statusu podatkowego (z numerem VAT lub bez) i obciążają Klienta. Jeżeli Klient musi pobrać podatek u źródła, powiększa płatność tak, abyśmy otrzymali zafakturowaną kwotę.',
+                'Pakiety są płatne z góry, miesięcznie lub rocznie według wyboru Klienta (rozliczenie roczne daje dwa miesiące gratis), za pośrednictwem naszego operatora płatności Stripe. Subskrypcja odnawia się automatycznie na okres tej samej długości, a Klient upoważnia nas do pobierania cyklicznych płatności. Przy rozliczeniu rocznym minuty w pakiecie są przydzielane co miesiąc, a Usługa jest identyczna.',
+                'Użycie ponad pakiet (dodatkowe minuty, wiadomości, numery telefonów, opłaty naliczane przez operatorów lub Meta) jest pobierane z kredytu lub fakturowane według aktualnych stawek podanych na stronie Cennik lub w panelu klienta.',
+                ['Klient może wypowiedzieć subskrypcję w każdej chwili, bez okresu wypowiedzenia, w panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu (bieżącego miesiąca lub, przy rozliczeniu rocznym, bieżącego roku), bez zwrotu (artykuł 3). Klient może w każdej chwili zmienić pakiet lub doładować kredyt; zasady zmiany są podane w panelu klienta.'],
+                'Możemy zmienić ceny z 30-dniowym wyprzedzeniem, informując e-mailem lub w panelu klienta; nowa cena obowiązuje od następnego odnowienia. Klient, który jej nie akceptuje, wypowiada subskrypcję przed tą datą. Opłaty podmiotów trzecich przenoszone na Klienta (operatorzy, Meta) mogą się zmieniać w terminach narzuconych przez te podmioty.',
+                'W razie nieudanej lub opóźnionej płatności możemy zawiesić całość lub część Usługi do czasu uregulowania należności, bez przedłużania okresu. Od nieopłaconych kwot naliczamy odsetki w wysokości 1,5% miesięcznie lub, jeśli jest niższa, maksymalnej dopuszczalnej stopy, a także ustawową rekompensatę za koszty odzyskiwania należności, jeśli ma zastosowanie, oraz faktycznie poniesione koszty windykacji.',
+                'Każde zakwestionowanie płatności (chargeback) bez wcześniejszej reklamacji skierowanej do nas skutkuje natychmiastowym zawieszeniem konta; wszystkie należności stają się natychmiast wymagalne wraz z kosztami obciążenia zwrotnego i windykacji.',
+                'Reklamacje dotyczące faktury należy zgłosić w ciągu 30 dni od jej wystawienia; w przeciwnym razie fakturę uważa się za zaakceptowaną.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 5 — Dozwolone korzystanie i treści zabronione',
+          body: [
+            { p: 'Klient korzysta z Usługi zgodnie z obowiązującym prawem i Warunkami. W szczególności zabronione są:' },
+            {
+              ul: [
+                'wszelkie działania niezgodne z prawem, oszukańcze, wprowadzające w błąd lub stanowiące nadużycie, w tym phishing i vishing, wyłudzenia oraz podszywanie się pod osobę, firmę lub organ władzy;',
+                'nękanie, groźby oraz treści nienawistne, dyskryminujące, zniesławiające, zawierające przemoc lub naruszające prawa osób trzecich;',
+                'niezamówione połączenia i wiadomości lub masowa wysyłka bez zgody, a także obchodzenie sprzeciwu;',
+                'zastosowania wysokiego ryzyka: zastępowanie służb ratunkowych lub dzwonienie do nich; opieranie na agencie decyzji medycznych, prawnych, finansowych, ubezpieczeniowych, kredytowych, kadrowych lub mieszkaniowych bez nadzoru wykwalifikowanego człowieka; windykacja należności poza obowiązującymi ramami prawnymi; zautomatyzowane połączenia lub wiadomości o charakterze politycznym lub wyborczym; treści dla dorosłych lub seksualne oraz wszelkie treści z udziałem małoletnich; hazard, broń, narkotyki lub produkty regulowane bez zezwolenia;',
+                'zbieranie przez agenta szczególnych kategorii danych, pełnych numerów kart płatniczych lub numerów identyfikacyjnych bez podstawy prawnej i odpowiednich zabezpieczeń;',
+                'wykorzystywanie próbek głosu (klonowanie głosu) bez uprzedniej, udokumentowanej i odwołalnej zgody osoby, której głos jest odtwarzany;',
+                'wszelkie naruszanie bezpieczeństwa lub integralności Usługi: złośliwy kod, nieautoryzowane testy penetracyjne lub obciążeniowe, obchodzenie limitów, dostęp do kont innych klientów;',
+                'inżynieria wsteczna, dekompilacja lub deasemblacja (z wyjątkiem zakresu wyraźnie dozwolonego przez prawo), automatyczne pobieranie danych (scraping), kopiowanie Usługi lub wykorzystywanie jej do tworzenia konkurencyjnej usługi albo trenowania modeli;',
+                'odsprzedaż, sublicencjonowanie, najem, udostępnianie osobom trzecim lub sprzedaż Usługi pod własną marką (white label) bez naszej uprzedniej pisemnej zgody.',
+              ],
+            },
+            { p: 'Bez obowiązku monitorowania możemy weryfikować sposób korzystania z Usługi, usuwać treści, blokować numer, kampanię lub wiadomość, zawiesić konto (artykuł 13) oraz współpracować z operatorami, platformami i organami władzy.' },
+          ],
+        },
+        {
+          title: 'Artykuł 6 — Zgodność połączeń i wiadomości z prawem',
+          body: [
+            { p: [{ strong: 'Klient ponosi wyłączną odpowiedzialność za zgodność swoich połączeń, kampanii i wiadomości' }, ' z prawem każdego kraju, w którym znajdują się Odbiorcy, w tym z RODO, przepisami o marketingu bezpośrednim i komunikacji elektronicznej (ePrivacy), a w razie kontaktu z osobami w Stanach Zjednoczonych — z Telephone Consumer Protection Act (TCPA) i Telemarketing Sales Rule (TSR). W szczególności:'] },
+            {
+              ul: [
+                [{ strong: 'Zgoda:' }, ' przed każdym zautomatyzowanym, wychodzącym lub marketingowym połączeniem lub wiadomością (głos, SMS, WhatsApp) uzyskuje zgody wymagane przez prawo, przechowuje dowody ich udzielenia i niezwłocznie respektuje każdy sprzeciw (słowo STOP, prośba ustna lub pisemna).'],
+                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: polskie przepisy wymagające uprzedniej zgody na marketing telefoniczny, Bloctel (Francja), TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
+                [{ strong: 'Godziny i częstotliwość:' }, ' przestrzega dozwolonych dni, godzin i częstotliwości połączeń.'],
+                [{ strong: 'Identyfikacja:' }, ' prezentuje ważny, przydzielony mu numer, nie podszywa się pod cudze numery i jasno się przedstawia.'],
+                [{ strong: 'Przejrzystość:' }, ' od początku rozmowy wyraźnie informuje Odbiorców, że komunikują się z systemem sztucznej inteligencji (w szczególności zgodnie z unijnym aktem w sprawie sztucznej inteligencji), a jeżeli wymaga tego prawo — że rozmowa jest nagrywana lub transkrybowana, i uzyskuje ich zgodę, gdy jest wymagana.'],
+                [{ strong: 'Platformy:' }, ' przestrzega zasad Meta (WhatsApp Business, Messenger, Instagram), w tym zatwierdzania szablonów i okien rozmów, oraz zasad operatorów (rejestracja nadawców, nadpisy alfanumeryczne). Podmioty te mogą ograniczyć konto lub numer bez naszej odpowiedzialności.'],
+              ],
+            },
+            { p: 'Numery telefonów udostępniają operatorzy (np. Twilio): Klient otrzymuje je do używania i nie staje się ich właścicielem. Przydział numeru może wymagać dokumentów potwierdzających tożsamość, adres lub działalność; operator lub regulator może numer zmienić lub odebrać. Numer może zostać zwolniony i bezpowrotnie utracony w razie wypowiedzenia, długotrwałego zawieszenia lub braku płatności. Przeniesienie numeru do innego operatora zależy od możliwości technicznych i regulacyjnych.' },
+            { p: [{ strong: 'Brak połączeń alarmowych.' }, ' Usługa nie umożliwia połączeń z numerami alarmowymi (112, 999, 997, 911 itp.) i nie zastępuje linii telefonicznej. Klient informuje o tym swoich Użytkowników.'] },
+          ],
+        },
+        {
+          title: 'Artykuł 7 — Funkcje sztucznej inteligencji',
+          body: [
+            {
+              ul: [
+                'Odpowiedzi, transkrypcje, podsumowania i głosy są generowane automatycznie i mogą być nieprawidłowe, niepełne lub niestosowne. Klient sprawdza je, zanim na nich polega.',
+                'Klient konfiguruje instrukcje, bazy wiedzy, głosy, narzędzia i automatyzacje swoich agentów: odpowiada za wszystko, co jego agent mówi, obiecuje lub robi w jego imieniu (wizyty, ceny, zobowiązania).',
+                'Usługa nie świadczy porad medycznych, prawnych, finansowych, podatkowych ani innych porad specjalistycznych, a Klient nie może przedstawiać swojego agenta jako ich źródła.',
+                'Modele, głosy, języki i dostawcy AI mogą się zmieniać, być zastępowani lub wycofywani; dostępność konkretnego modelu lub głosu nie jest gwarantowana.',
+                'W relacji między stronami treści wygenerowane dla Klienta należą do niego, z zastrzeżeniem praw osób trzecich i naszych praw do Usługi; mogą nie być unikalne.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 8 — Dane Klienta i ochrona danych osobowych',
+          body: [
+            { p: ['W odniesieniu do danych osobowych Odbiorców przetwarzanych w ramach Usługi Klient jest administratorem, a my działamy jako podmiot przetwarzający (art. 28 RODO i odpowiednie przepisy). Niniejszy artykuł i ', { a: 'polityka prywatności', href: '/confidentialite' }, ' stanowią umowę powierzenia przetwarzania danych; podpisaną umowę można zawrzeć w ramach pakietu „Na miarę”. My:'] },
+            {
+              ul: [
+                'przetwarzamy dane wyłącznie na udokumentowane polecenie Klienta (Warunki i jego ustawienia), chyba że obowiązek wynika z prawa, i informujemy go, jeśli polecenie wydaje się niezgodne z prawem;',
+                'zobowiązujemy osoby upoważnione do zachowania poufności;',
+                'stosujemy odpowiednie środki techniczne i organizacyjne;',
+                'korzystamy z dalszych podmiotów przetwarzających wymienionych w polityce prywatności, na co Klient udziela ogólnej zgody; o każdej zmianie informujemy z co najmniej 15-dniowym wyprzedzeniem, a Klient może zgłosić uzasadniony sprzeciw, przy czym jego jedynym środkiem jest wówczas wypowiedzenie;',
+                'w rozsądnym zakresie pomagamy Klientowi w obsłudze żądań osób, których dane dotyczą, ocen skutków i naruszeń ochrony danych, o których informujemy bez zbędnej zwłoki;',
+                'usuwamy dane po zakończeniu umowy zgodnie z artykułem 13, chyba że prawo nakazuje ich przechowywanie;',
+                'udostępniamy informacje niezbędne do wykazania zgodności; audyt może odbyć się nie częściej niż raz w roku, z rozsądnym wyprzedzeniem, na koszt Klienta i z zachowaniem poufności.',
+              ],
+            },
+            { p: 'Klient zapewnia, że ma podstawę prawną każdego przetwarzania, informuje Odbiorców (agent AI, nagrywanie, cele), uzyskuje wymagane zgody, powierza przetwarzanie szczególnych kategorii danych tylko wtedy, gdy jest to konieczne i zgodne z prawem, a jego listy kontaktów zostały zebrane legalnie. Nagrywanie rozmów i okres przechowywania nagrań konfiguruje Klient.' },
+            { p: 'Możemy wykorzystywać dane zagregowane lub zanonimizowane oraz metadane użycia do obsługi, zabezpieczania i ulepszania Usługi. Nie wykorzystujemy treści połączeń i wiadomości Klienta do trenowania naszych własnych modeli.' },
+          ],
+        },
+        {
+          title: 'Artykuł 9 — Usługi osób trzecich i integracje',
+          body: [
+            { p: 'Usługa opiera się na podmiotach trzecich lub łączy się z nimi: operatorami telekomunikacyjnymi, Meta (WhatsApp, Messenger, Instagram), kalendarzami, systemami CRM, narzędziami automatyzacji, dostawcami AI i płatności. Obowiązują ich warunki, które Klient akceptuje, jeżeli tego wymagają. Włączając integrację, Klient upoważnia nas do wymiany z nią niezbędnych danych. Nie kontrolujemy tych usług i nie odpowiadamy za ich dostępność, zmiany ani za przetwarzanie danych przekazanych im na żądanie Klienta.' },
+          ],
+        },
+        {
+          title: 'Artykuł 10 — Własność intelektualna',
+          body: [
+            {
+              ul: [
+                `Usługa, jej oprogramowanie, interfejsy i dokumentacja, marka ${brand} i jej logotypy należą do nas lub naszych licencjodawców i podlegają ochronie, w szczególności na podstawie przepisów: ${legal.copyrightLaw}. Klient nie nabywa żadnych praw poza licencją opisaną poniżej.`,
+                'Udzielamy Klientowi, na czas trwania subskrypcji, ograniczonej, niewyłącznej, niezbywalnej, bez prawa sublicencji i odwołalnej licencji na korzystanie z Usługi na jego wewnętrzne potrzeby zawodowe.',
+                'Klient zachowuje prawa do Treści Klienta. Udziela nam ogólnoświatowej, nieodpłatnej i niewyłącznej licencji na ich przechowywanie, kopiowanie, przetwarzanie, przesyłanie i wyświetlanie oraz powierzanie ich przetwarzania naszym podwykonawcom, wyłącznie w zakresie niezbędnym do świadczenia, zabezpieczania i wsparcia Usługi oraz przestrzegania prawa. Zapewnia, że posiada niezbędne prawa.',
+                'Sugestie i opinie Klienta możemy wykorzystywać swobodnie, nieodpłatnie i bez ograniczeń czasowych.',
+                'Klient nie używa naszych znaków towarowych bez pisemnej zgody. Możemy wskazywać nazwę i logo Klienta jako referencję, chyba że sprzeciwi się temu e-mailem.',
+                ['Aby zgłosić treść bezprawną lub naruszenie praw autorskich, napisz na adres ', mail, ', wskazując utwór, lokalizację treści, swoje dane kontaktowe i oświadczenie o działaniu w dobrej wierze. Możemy usunąć treść i zawiesić konta, które wielokrotnie naruszają prawa.'],
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 11 — Poufność',
+          body: [
+            { p: 'Każda ze stron zachowuje w poufności niepubliczne informacje otrzymane od drugiej strony, wykorzystuje je wyłącznie do wykonania Warunków i chroni je z należytą starannością, w czasie trwania umowy i przez trzy lata po jej zakończeniu (a w przypadku tajemnic przedsiębiorstwa — tak długo, jak pozostają tajemnicą). Poufne nie są informacje publiczne, już znane, opracowane niezależnie lub legalnie otrzymane od osoby trzeciej. Strona może ujawnić informacje, jeżeli wymaga tego prawo lub organ władzy, powiadamiając drugą stronę, o ile jest to dozwolone.' },
+          ],
+        },
+        {
+          title: 'Artykuł 12 — Zmiany Usługi, funkcje beta i dostępność',
+          body: [
+            {
+              ul: [
+                'Możemy rozwijać Usługę, dodawać, zmieniać lub wycofywać funkcje oraz zmieniać dostawców. O wycofaniu kluczowej funkcji płatnego pakietu informujemy z wyprzedzeniem, jeżeli jest to rozsądnie możliwe.',
+                'Funkcje beta, wersje zapoznawcze i eksperymentalne są udostępniane w stanie, w jakim są, bez zobowiązań, i mogą zostać wycofane w każdej chwili.',
+                'Naszym zobowiązaniem jest dołożenie należytej staranności. Nie obowiązuje żaden gwarantowany poziom usług (SLA), chyba że uzgodniono go na piśmie w umowie „Na miarę”. Usługa zależy od internetu, operatorów i naszych dostawców; planowane (zapowiadane w miarę możliwości) lub pilne prace konserwacyjne mogą ją przerwać.',
+                'Mogą obowiązywać limity rozsądnego użycia (połączenia równoczesne, przepustowość, wolumeny).',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 13 — Zawieszenie i rozwiązanie umowy',
+          body: [
+            { p: 'Możemy zawiesić lub zamknąć konto w całości lub części w każdej chwili, z uprzedzeniem lub bez, i bez odszkodowania, w razie: naruszenia Warunków, braku płatności lub chargebacku, skargi operatora, Meta, organu władzy lub Odbiorców, podejrzenia oszustwa, zagrożenia bezpieczeństwa, ryzyka prawnego lub wizerunkowego, żądania organu władzy albo wymogu jednego z naszych dostawców. W czasie zawieszenia opłaty pozostają należne. Takie zamknięcie nie uprawnia do żadnego zwrotu, także za niewykorzystane opłacone z góry okresy.' },
+            {
+              ul: [
+                'Klient może wypowiedzieć subskrypcję w każdej chwili; wypowiedzenie jest skuteczne z końcem opłaconego okresu (artykuł 4).',
+                'Możemy również rozwiązać umowę bez podania przyczyny z 30-dniowym wypowiedzeniem; tylko w takim przypadku zwracamy niewykorzystaną część opłaconego z góry okresu.',
+                'Po zakończeniu umowy dostęp wygasa, należności stają się wymagalne, numery mogą zostać zwolnione, a Kredyty przepadają. Klient może eksportować swoje dane z panelu klienta przez 30 dni; następnie dane są usuwane w ciągu 90 dni od zakończenia umowy, z zastrzeżeniem ustawowych obowiązków przechowywania i zwykłego cyklu kopii zapasowych.',
+                'Konta bezpłatne lub próbne bez płatnej subskrypcji, nieaktywne od 90 dni, mogą zostać zamknięte, a ich dane usunięte po ostrzeżeniu wysłanym e-mailem.',
+                'Postanowienia, które ze swej natury obowiązują po zakończeniu umowy (należności, dane, własność intelektualna, poufność, gwarancje, odpowiedzialność, zwolnienie z odpowiedzialności, spory), pozostają w mocy.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 14 — Wyłączenie gwarancji',
+          body: [
+            { p: 'W zakresie dozwolonym przez prawo Usługa jest świadczona „w stanie, w jakim jest” i „w miarę dostępności”. Wyłączamy wszelkie gwarancje i rękojmię, wyraźne lub dorozumiane, w tym co do przydatności handlowej, przydatności do określonego celu, nienaruszania praw, nieprzerwanego lub bezbłędnego działania, poprawności treści generowanych przez AI, doręczenia połączeń i wiadomości lub osiągnięcia jakiegokolwiek wyniku biznesowego.' },
+          ],
+        },
+        {
+          title: 'Artykuł 15 — Ograniczenie odpowiedzialności',
+          body: [
+            {
+              ul: [
+                'Nie odpowiadamy za szkody pośrednie, następcze, szczególne ani karne, ani za utratę zysków, przychodów, klientów, możliwości lub reputacji, utratę lub uszkodzenie danych, nieodebrane połączenia lub utracone wizyty ani koszt usługi zastępczej, nawet jeśli uprzedzono nas o takiej możliwości.',
+                'Nie odpowiadamy za szkody wynikające z Treści Klienta, konfiguracji agentów, usług osób trzecich, operatorów, Meta, internetu, siły wyższej lub naruszenia przez Klienta.',
+                [{ strong: 'Limit:' }, ' nasza łączna odpowiedzialność z wszelkich tytułów jest ograniczona do kwoty netto faktycznie zapłaconej przez Klienta za subskrypcję za miesiąc poprzedzający zdarzenie wywołujące szkodę (przy rozliczeniu rocznym — jednej dwunastej ceny rocznej) i w żadnym wypadku nie przekracza 1000 USD.'],
+                'Klient przyjmuje do wiadomości, że ceny odzwierciedlają taki podział ryzyka.',
+              ],
+            },
+            { p: 'Żadne postanowienie Warunków nie wyłącza ani nie ogranicza odpowiedzialności lub prawa, których nie można wyłączyć ani ograniczyć na mocy bezwzględnie obowiązujących przepisów (w szczególności za szkodę wyrządzoną umyślnie, rażące niedbalstwo lub szkodę na osobie).' },
+            ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
+          ],
+        },
+        {
+          title: 'Artykuł 16 — Zwolnienie z odpowiedzialności przez Klienta',
+          body: [
+            { p: `Klient broni nas, naszych członków zarządu, pracowników, podwykonawców i dostawców, zwalnia nas z odpowiedzialności i naprawia szkody w związku z wszelkimi roszczeniami, stratami, grzywnami, karami, zasądzonymi kwotami i kosztami (w tym uzasadnionymi kosztami obsługi prawnej) wynikającymi z: jego Treści Klienta i konfiguracji jego agentów; jego połączeń, wiadomości i kampanii; braku zgody, nieuwzględnienia sprzeciwu lub rejestru sprzeciwu; jakiegokolwiek naruszenia przepisów telekomunikacyjnych, marketingowych, dotyczących AI lub ochrony danych; naruszenia Warunków; roszczeń Odbiorcy, Użytkownika, operatora, Meta, naszego dostawcy platformy technicznej lub organu władzy związanych z korzystaniem przez Klienta z Usługi. Klient przyjmuje do wiadomości, że ${company} może odpowiadać wobec swoich dostawców za naruszenia swoich klientów. Informujemy Klienta o roszczeniu; nie może on zawrzeć ugody nakładającej na nas obowiązki bez naszej zgody.` },
+          ],
+        },
+        {
+          title: 'Artykuł 17 — Termin dochodzenia roszczeń',
+          body: [
+            { p: 'W zakresie dozwolonym przez prawo wszelkie roszczenia przeciwko nam należy zgłosić w terminie trzech (3) miesięcy od zdarzenia, z którego wynikają, lub od dnia, w którym Klient się o nim dowiedział lub powinien był się dowiedzieć; po tym terminie roszczenie wygasa.' },
+          ],
+        },
+        {
+          title: 'Artykuł 18 — Prawo właściwe, arbitraż i zrzeczenie się powództw zbiorowych',
+          body: [
+            {
+              ul: [
+                `Warunki podlegają ${legal.governingLaw}, z wyłączeniem norm kolizyjnych oraz Konwencji Narodów Zjednoczonych o umowach międzynarodowej sprzedaży towarów.`,
+                ['Przed wszczęciem jakiegokolwiek postępowania strona zgłaszająca roszczenie przesyła pisemną reklamację (do nas: ', mail, '); strony przez 30 dni poszukują polubownego rozwiązania.'],
+                `W braku porozumienia wszelkie spory wynikające z Warunków lub Usługi albo z nimi związane rozstrzyga ostatecznie poufny i wiążący arbitraż prowadzony przez American Arbitration Association (AAA) zgodnie z jej Regulaminem arbitrażu handlowego (a w sporach międzynarodowych — przez jej International Centre for Dispute Resolution), przed jednym arbitrem, z siedzibą w Cheyenne (Wyoming), w języku angielskim. Wyrok arbitrażowy może zatwierdzić i wykonać ${legal.court} lub każdy inny właściwy sąd.`,
+                [{ strong: 'Zrzeczenie się powództw zbiorowych:' }, ' spory są rozstrzygane wyłącznie indywidualnie, z wyłączeniem powództw grupowych, zbiorowych lub przedstawicielskich oraz łączonych postępowań arbitrażowych. Jeżeli zrzeczenie to zostanie uznane za nieskuteczne wobec danego roszczenia, roszczenie to rozpoznaje sąd wskazany poniżej, a nie arbitraż.'],
+                'Każda strona może wystąpić do właściwego sądu o środki pilne lub zabezpieczające (w szczególności w celu ochrony własności intelektualnej lub informacji poufnych albo przerwania nadużyć Usługi), bez składania kaucji w zakresie dozwolonym przez prawo. Każda strona może wnieść indywidualne roszczenie do sądu właściwego dla drobnych spraw, a my możemy dochodzić nieopłaconych należności przed każdym właściwym sądem.',
+                `Spory niepodlegające arbitrażowi rozstrzyga wyłącznie ${legal.court}.`,
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Artykuł 19 — Siła wyższa',
+          body: [
+            { p: 'Żadna ze stron nie odpowiada za opóźnienie lub niewykonanie spowodowane zdarzeniem pozostającym poza jej rozsądną kontrolą: klęską żywiołową, epidemią, wojną, terroryzmem, zamieszkami, strajkiem, decyzją organu władzy, awarią operatora, internetu, sieci energetycznej, centrum danych lub dostawcy chmury bądź AI, cyberatakiem albo decyzją Meta lub operatora. Obowiązki płatnicze nie ulegają zawieszeniu. Jeżeli zdarzenie trwa dłużej niż 30 dni, każda ze stron może wypowiedzieć daną subskrypcję poprzez zawiadomienie.' },
+          ],
+        },
+        {
+          title: 'Artykuł 20 — Przeniesienie praw i zmiana kontroli',
+          body: [
+            { p: 'Możemy przenieść całość lub część praw i obowiązków z Warunków, w tym w razie połączenia, przejęcia, reorganizacji lub zbycia aktywów, bez zgody Klienta, po poinformowaniu go, oraz powierzyć wykonanie naszych obowiązków podwykonawcom. Klient nie może przenieść Warunków bez naszej uprzedniej pisemnej zgody; informuje nas o każdej zmianie kontroli, a my możemy wówczas rozwiązać umowę, jeżeli nowy właściciel jest konkurentem lub nie przejdzie naszej weryfikacji.' },
+          ],
+        },
+        {
+          title: 'Artykuł 21 — Postanowienia ogólne',
+          body: [
+            {
+              ul: [
+                [{ strong: 'Całość porozumienia:' }, ' Warunki, strona Cennik, szczegóły wykupionego pakietu, ', { a: 'polityka prywatności', href: '/confidentialite' }, ' oraz, w stosownych przypadkach, podpisana umowa „Na miarę” stanowią całość porozumienia i zastępują wcześniejsze ustalenia. Ogólne warunki zakupu Klienta nie mają zastosowania.'],
+                [{ strong: 'Pierwszeństwo:' }, ' podpisana umowa „Na miarę”, następnie Warunki, następnie polityka prywatności, następnie strona Cennik i dokumentacja.'],
+                [{ strong: 'Rozdzielność i brak zrzeczenia się:' }, ' nieważne postanowienie zastępuje się najbliższym ważnym postanowieniem, a pozostałe pozostają w mocy; niewykonanie prawa nie oznacza zrzeczenia się go.'],
+                [{ strong: 'Zawiadomienia:' }, ' piszemy na adres e-mail konta lub w panelu klienta; Klient pisze do nas na adres ', mail, '. Klient akceptuje komunikację i faktury w formie elektronicznej.'],
+                [{ strong: 'Zmiany:' }, ' możemy zmieniać Warunki; o istotnych zmianach informujemy e-mailem lub na stronie co najmniej 15 dni przed ich wejściem w życie, chyba że wymogi prawne lub bezpieczeństwa stanowią inaczej. Dalsze korzystanie oznacza akceptację; Klient, który ich nie akceptuje, wypowiada subskrypcję przed tą datą.'],
+                [{ strong: 'Język:' }, ' Warunki są publikowane w kilku językach. W razie rozbieżności rozstrzygająca jest wersja angielska.'],
+                [{ strong: 'Sankcje i eksport:' }, ' Klient oświadcza, że nie podlega sankcjom gospodarczym i nie korzysta z Usługi w kraju objętym sankcjami ani na rzecz osoby objętej sankcjami.'],
+                [{ strong: 'Niezależność:' }, ' strony są niezależnymi kontrahentami; Warunki nie tworzą praw na rzecz osób trzecich.'],
+                [{ strong: 'Kontakt:' }, ` ${company}, ${ADDRESS}, Stany Zjednoczone — `, mail, '.'],
+              ],
+            },
+          ],
+        },
+      ];
+    },
   },
 
   privacy: {
@@ -281,76 +498,94 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Prywatność',
     h1: 'Polityka prywatności',
     intro: 'Jakie dane zbieramy, w jakim celu, komu je przekazujemy, jak długo je przechowujemy i jak możesz skorzystać ze swoich praw.',
-    updated: 'Aktualizacja: październik 2026',
+    updated: 'Ostatnia aktualizacja: 6 października 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
-          title: 'Kto odpowiada za Twoje dane',
+          title: 'Kim jesteśmy i jaka jest nasza rola',
           body: [
-            { p: [`${brand} jest marką firmy ${company}, spółki z ograniczoną odpowiedzialnością zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, `. Dane osobowe przetwarzamy zgodnie z przepisami o ochronie danych: ${legal.privacyLaw}.`] },
+            { p: [`${brand} jest marką firmy ${company}, spółki typu Limited Liability Company zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, `. Dane osobowe przetwarzamy zgodnie z przepisami o ochronie danych: ${legal.privacyLaw}, oraz innymi obowiązującymi przepisami.`] },
             {
               ul: [
-                [{ strong: 'W zakresie strony internetowej, próśb o oddzwonienie, rozmów z naszymi asystentkami i zarządzania kontami klientów' }, ` administratorem danych jest ${company}.`],
-                [{ strong: 'W zakresie połączeń i wiadomości obsługiwanych przez agentów naszych klientów' }, ' administratorem danych wobec swoich rozmówców jest klient, a my działamy jako podmiot przetwarzający w jego imieniu. Klient decyduje, jakie informacje zbiera jego agent i jak są wykorzystywane.'],
+                [{ strong: 'Administrator:' }, ` w odniesieniu do strony internetowej, formularzy i próśb o oddzwonienie, rozmów z naszymi asystentkami AI, kont klientów, rozliczeń i naszego marketingu administratorem jest ${company}.`],
+                [{ strong: 'Podmiot przetwarzający:' }, ' w odniesieniu do połączeń, wiadomości i kontaktów obsługiwanych przez agentów naszych klientów administratorem wobec swoich rozmówców jest klient; działamy w jego imieniu i na jego polecenie. Jeśli skontaktował się z Tobą agent firmy będącej naszym klientem, zwróć się najpierw do niej; przekażemy jej każde otrzymane żądanie.'],
               ],
             },
           ],
         },
         {
-          title: 'Jakie dane przetwarzamy',
+          title: 'Jakie dane zbieramy',
           body: [
             {
               ul: [
-                [{ strong: 'Formularze na stronie' }, ' (oddzwonienie, demo, pomoc przy okresie próbnym): imię i nazwisko, telefon, e-mail, firma, branża, preferowany termin i Twoja wiadomość.'],
-                [{ strong: 'Rozmowy z naszymi asystentkami AI' }, ' (dymek na stronie, recepcjonistka, połączenia handlowe i wsparcia, pomoc w panelu klienta): treść pisemna, nagranie audio rozmów głosowych, transkrypcja, podsumowanie i wyodrębnione przydatne informacje (potrzeba, rozważany pakiet, zgłoszony problem).'],
-                [{ strong: 'Konto klienta' }, ': dane identyfikacyjne, e-mail, firma, ustawienia agentów, historia połączeń i wiadomości, zużycie minut.'],
-                [{ strong: 'Rozliczenia' }, ': pakiet, faktury i metoda płatności. Dane karty są wprowadzane i przechowywane przez Stripe; nigdy nie mamy do nich dostępu.'],
-                [{ strong: 'Dane techniczne' }, ': adres IP i informacje o przeglądarce niezbędne do działania i bezpieczeństwa strony.'],
+                [{ strong: 'Formularze na stronie' }, ' (oddzwonienie, demo, pomoc w okresie próbnym): imię i nazwisko, telefon, e-mail, firma, branża, preferowany termin, wiadomość i zgoda.'],
+                [{ strong: 'Rozmowy z naszymi asystentkami AI' }, ' (dymek na stronie, recepcjonistka, połączenia demonstracyjne, oddzwonienia handlowe i wsparcia, pomoc w panelu klienta): treść pisemna, nagranie audio rozmów głosowych, transkrypcja, podsumowanie i wyodrębnione informacje (potrzeba, rozważany pakiet, zgłoszony problem).'],
+                [{ strong: 'Konto klienta' }, ': tożsamość i dane kontaktowe użytkowników, informacje o firmie, dane logowania, ustawienia i instrukcje agentów, bazy wiedzy, listy kontaktów, historia połączeń i wiadomości, zużycie minut i kredytów, zgłoszenia do wsparcia.'],
+                [{ strong: 'Dane przetwarzane dla naszych klientów' }, ': numery i nazwiska dzwoniących lub kontaktów, treść połączeń, wiadomości, nagrania, transkrypcje, wizyty i karty potencjalnych klientów.'],
+                [{ strong: 'Rozliczenia' }, ': pakiet, faktury, adres rozliczeniowy, numer VAT, status płatności. Dane karty są wprowadzane i przechowywane przez Stripe; nigdy nie mamy do nich dostępu.'],
+                [{ strong: 'Dane techniczne' }, ': adres IP, urządzenie i przeglądarka, logi połączeń i bezpieczeństwa, pliki cookie.'],
+                [{ strong: 'Dane otrzymane od podmiotów trzecich' }, ': integracje włączone przez klienta (kalendarze, CRM, WhatsApp, Messenger, Instagram), metadane połączeń i wiadomości od operatorów, informacje o płatnościach i zapobieganiu oszustwom od Stripe oraz publiczne informacje o firmach wykorzystywane do weryfikacji konta.'],
               ],
             },
           ],
         },
         {
-          title: 'W jakim celu i na jakiej podstawie',
+          title: 'Cele i podstawy prawne',
           body: [
             {
               ul: [
-                [{ strong: 'Oddzwonienie i odpowiedź na Twoje zgłoszenie' }, ', także przez połączenie od naszego agenta głosowego AI: na podstawie Twojej zgody, wyrażonej przy składaniu zgłoszenia. Możesz ją wycofać w każdej chwili, a agent respektuje każdą prośbę o zaprzestanie kontaktu telefonicznego.'],
-                [{ strong: 'Świadczenie usługi, bezpłatnego okresu próbnego i wsparcia' }, ': wykonanie umowy.'],
-                [{ strong: 'Wystawianie faktur i wypełnianie obowiązków księgowych i podatkowych' }, ': obowiązek prawny.'],
-                [{ strong: 'Ulepszanie naszych asystentek i zabezpieczanie platformy' }, ': prawnie uzasadniony interes, wyłącznie na podstawie naszych własnych rozmów.'],
+                [{ strong: 'Oddzwonienie i odpowiedź na Twoją prośbę' }, ', także przez połączenie naszego agenta głosowego AI: Twoja zgoda, wyrażona przy składaniu prośby i odwołalna w każdej chwili.'],
+                [{ strong: 'Świadczenie Usługi, okresu próbnego i wsparcia' }, ': wykonanie umowy lub działania przed jej zawarciem.'],
+                [{ strong: 'Przetwarzanie danych naszych klientów w ich imieniu' }, ': ich polecenia, na podstawie prawnej przez nich określonej.'],
+                [{ strong: 'Fakturowanie, księgowość, obowiązki podatkowe i odpowiedzi na żądania organów' }, ': obowiązek prawny.'],
+                [{ strong: 'Zabezpieczenie platformy, zapobieganie oszustwom i nadużyciom, egzekwowanie naszych warunków, obrona przed roszczeniami, ulepszanie naszych asystentek na podstawie naszych własnych rozmów i zagregowanych statystyk' }, ': prawnie uzasadniony interes.'],
+                [{ strong: 'Marketing skierowany do firm' }, ': prawnie uzasadniony interes lub zgoda, jeśli wymaga jej prawo; możesz w każdej chwili wnieść sprzeciw.'],
+                [{ strong: 'Analityczne pliki cookie' }, ': Twoja zgoda.'],
               ],
             },
           ],
         },
         {
-          title: 'Agenci AI i nagrania',
+          title: 'Sztuczna inteligencja, nagrania i transkrypcje',
           body: [
-            { p: 'Nasze asystentki są sztuczną inteligencją i tak się przedstawiają. Rozmowy głosowe są nagrywane i transkrybowane w celu obsługi Twojego zgłoszenia i zapewnienia jakości usługi. Żadna decyzja wywołująca wobec Ciebie skutki prawne nie jest podejmowana w sposób w pełni zautomatyzowany.' },
-            { p: 'Klienci korzystający z platformy muszą informować swoich rozmówców o korzystaniu z agenta AI i o nagrywaniu, zgodnie z przepisami mającymi zastosowanie do ich działalności.' },
+            { p: 'Nasze asystentki są systemami sztucznej inteligencji i tak się przedstawiają. Rozmowy głosowe są nagrywane i transkrybowane; dostawcy AI przygotowują ich podsumowania i wyodrębniają informacje potrzebne do obsługi Twojej prośby. Żadna decyzja wywołująca skutki prawne lub w podobny sposób istotnie na Ciebie wpływająca nie jest podejmowana wyłącznie w sposób zautomatyzowany.' },
+            { p: 'Nie sprzedajemy Twoich danych ani nie udostępniamy ich w celach reklamy ukierunkowanej. Nie wykorzystujemy treści połączeń i wiadomości naszych klientów do trenowania naszych własnych modeli. Nasi dostawcy AI przetwarzają dane na podstawie umowy, w naszym imieniu.' },
+            { p: 'Klienci korzystający z platformy muszą informować swoich rozmówców, że komunikują się z systemem AI, a jeżeli wymaga tego prawo — że rozmowa jest nagrywana. To oni konfigurują nagrywanie i okres przechowywania nagrań.' },
           ],
         },
         {
-          title: 'Nasi dostawcy',
+          title: 'Udostępnianie danych i podmioty przetwarzające',
           body: [
+            { p: 'Twoje dane przekazujemy wyłącznie odbiorcom, którzy ich potrzebują, związanym zobowiązaniami do poufności i ochrony danych:' },
             {
               ul: [
-                [{ strong: 'Autocalls' }, ': platforma techniczna agentów głosowych, widżetów i panelu klienta (połączenia, transkrypcja, synteza mowy, automatyzacje).'],
-                [{ strong: 'Twilio' }, ': operator telefoniczny, który obsługuje nasze połączenia, w tym oddzwonienia (numer amerykański, Stany Zjednoczone).'],
-                [{ strong: 'Dostawcy AI, głosu i telefonii' }, ' wykorzystywani przez tę platformę do rozumienia, odpowiadania i kierowania połączeń.'],
-                [{ strong: 'Stripe' }, ': subskrypcje, płatności, faktury i naliczanie podatków (certyfikat PCI-DSS poziomu 1).'],
-                [{ strong: 'Supabase' }, ': baza danych próśb o oddzwonienie, rejestracji i podsumowań rozmów (Stany Zjednoczone).'],
-                [{ strong: 'Google Cloud (Firebase App Hosting)' }, ': hosting strony (Stany Zjednoczone).'],
-                [{ strong: 'Zoho Mail' }, ': wysyłka e-maili serwisowych i informacyjnych.'],
+                [{ strong: 'Nasz dostawca platformy technicznej' }, ': agenci głosowi, widżety, panel klienta, transkrypcja, synteza mowy i automatyzacje. Dostawca ten ma siedzibę w Unii Europejskiej (Rumunia), posiada certyfikat ISO 27001 i przechowuje dane w Europejskim Obszarze Gospodarczym i/lub w Stanach Zjednoczonych.'],
+                [{ strong: 'Twilio i inni operatorzy telekomunikacyjni' }, ': kierowanie połączeń i SMS-ów, numery telefonów.'],
+                [{ strong: 'Meta' }, ' (WhatsApp, Messenger, Instagram): gdy klient korzysta z tych kanałów.'],
+                [{ strong: 'Dostawcy AI, głosu i transkrypcji' }, ': rozumienie, odpowiadanie, synteza mowy i transkrypcja.'],
+                [{ strong: 'Stripe' }, ': subskrypcje, płatności, faktury i obliczanie podatków (certyfikat PCI DSS poziomu 1).'],
+                [{ strong: 'Supabase' }, ': baza danych próśb, rejestracji i podsumowań rozmów (Stany Zjednoczone).'],
+                [{ strong: 'Google Cloud (Firebase)' }, ': hosting strony (Stany Zjednoczone).'],
+                [{ strong: 'Zoho' }, ': wysyłka e-maili serwisowych i kontaktowych.'],
+                [{ strong: 'Integracje włączone przez klienta' }, ' (kalendarze, CRM, narzędzia automatyzacji), nasi doradcy zawodowi, organy władzy, gdy wymaga tego prawo, oraz ewentualny nabywca w razie połączenia lub sprzedaży.'],
               ],
             },
           ],
         },
         {
-          title: 'Przekazywanie danych poza Europejski Obszar Gospodarczy',
+          title: 'Przekazywanie danych za granicę',
           body: [
-            { p: 'Kilku z tych dostawców, a także nasza spółka, ma siedzibę w Stanach Zjednoczonych. Przekazywanie danych poza Europejski Obszar Gospodarczy odbywa się na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską lub, w stosownych przypadkach, Ram ochrony danych UE-USA (EU-U.S. Data Privacy Framework), jeśli dostawca do nich przystąpił.' },
+            { p: 'Nasza spółka i kilku dostawców znajdują się w Stanach Zjednoczonych; nasz dostawca platformy technicznej ma siedzibę w Unii Europejskiej i przechowuje dane w EOG i/lub w Stanach Zjednoczonych. Przekazywanie danych jest szyfrowane i zabezpieczone:' },
+            {
+              ul: [
+                'Unia Europejska i EOG: Ramy ochrony danych UE–USA, jeżeli odbiorca jest nimi objęty, a w przeciwnym razie standardowe klauzule umowne Komisji Europejskiej, w razie potrzeby z dodatkowymi środkami.',
+                'Wielka Brytania: brytyjskie rozszerzenie tych ram lub brytyjski aneks do standardowych klauzul umownych.',
+                'Szwajcaria: ramy Szwajcaria–USA lub standardowe klauzule umowne uznane przez federalnego komisarza ds. ochrony danych (FDPIC).',
+                'Australia: podejmujemy rozsądne kroki, także umowne, aby odbiorcy za granicą przetwarzali informacje zgodnie z Australian Privacy Principles (APP 8).',
+              ],
+            },
+            { p: ['Kopię stosowanych zabezpieczeń można otrzymać, pisząc na adres ', mail, '.'] },
           ],
         },
         {
@@ -359,30 +594,78 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Prośby o oddzwonienie i rozmowy z naszymi asystentkami: 24 miesiące od ostatniego kontaktu.',
-                'Nagrania i transkrypcje połączeń obsługiwanych dla naszych klientów: domyślnie 12 miesięcy; każdy klient może skrócić ten okres i usunąć swoje dane w panelu klienta.',
-                'Dane konta: przez cały okres współpracy, a następnie 3 lata na potrzeby ewentualnego marketingu, chyba że zgłosisz sprzeciw.',
-                'Faktury i dane księgowe: przez okres wymagany prawem (do 10 lat).',
+                'Połączenia, nagrania, transkrypcje, czaty i SMS-y przetwarzane dla naszych klientów: domyślnie 12 miesięcy; każdy klient może skrócić ten okres i usunąć swoje dane.',
+                'Potencjalni klienci i kontakty zebrane przez agentów naszych klientów: domyślnie 24 miesiące, klient może ten okres skrócić.',
+                'Dane konta: przez czas trwania umowy, a następnie 3 lata w celach marketingowych, chyba że wniesiesz sprzeciw. Zawartość konta jest usuwana w ciągu 90 dni od zakończenia umowy.',
+                'Faktury i dokumenty księgowe: 10 lat.',
+                'Logi techniczne i bezpieczeństwa: przez ograniczony czas niezbędny dla bezpieczeństwa.',
               ],
             },
+            { p: 'Po upływie tych okresów dane są usuwane lub anonimizowane.' },
           ],
         },
         {
           title: 'Bezpieczeństwo',
           body: [
-            { p: 'Przesyłane dane są szyfrowane, dostęp do danych mają wyłącznie osoby, które go potrzebują, i jest on chroniony uwierzytelnianiem, a klucze techniczne są przechowywane w sejfach na sekrety. Klienci mogą włączyć uwierzytelnianie dwuskładnikowe w swoim panelu.' },
+            { p: 'Dane są szyfrowane podczas przesyłania (TLS) i w spoczynku (AES-256). Dostęp jest przydzielany według ról, chroniony uwierzytelnianiem i rejestrowany w logach audytowych; klienci mogą włączyć uwierzytelnianie dwuskładnikowe; regularnie wykonujemy kopie zapasowe, a klucze techniczne przechowujemy w sejfach na sekrety. Nasz dostawca platformy technicznej posiada certyfikat ISO 27001. Ponieważ żaden system nie jest niezawodny, zgłaszamy naruszenia ochrony danych organom i osobom, których dotyczą, gdy wymaga tego prawo.' },
           ],
         },
         {
-          title: 'Twoje prawa',
+          title: 'Twoje prawa w zależności od kraju',
           body: [
-            { p: ['Możesz zażądać dostępu do swoich danych, ich sprostowania, usunięcia, przeniesienia, ograniczenia przetwarzania, sprzeciwić się marketingowi i wycofać zgodę na kontakt telefoniczny. Napisz na adres ', mail, ': odpowiemy w ciągu miesiąca.'] },
-            { p: `Masz również prawo wnieść skargę do organu nadzorczego: ${legal.dataAuthority}.` },
+            {
+              ul: [
+                [{ strong: 'Unia Europejska i EOG' }, ' (w tym Polska, Francja, Włochy i Niderlandy): dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie, sprzeciw (bezwarunkowy wobec marketingu bezpośredniego), wycofanie zgody oraz prawo do niepodlegania decyzji opartej wyłącznie na zautomatyzowanym przetwarzaniu.'],
+                [{ strong: 'Wielka Brytania' }, ': te same prawa na podstawie UK GDPR i Data Protection Act 2018.'],
+                [{ strong: 'Szwajcaria' }, ': prawa przewidziane w federalnej ustawie o ochronie danych (FADP).'],
+                [{ strong: 'Australia' }, ': prawo dostępu i sprostowania na podstawie Australian Privacy Principles oraz możliwość kontaktu z nami anonimowo lub pod pseudonimem, gdy jest to możliwe.'],
+                [{ strong: 'Inne kraje' }, ': prawa przewidziane w Twoim prawie lokalnym.'],
+              ],
+            },
           ],
         },
         {
-          title: 'Pliki cookie',
+          title: 'Wykonywanie praw i skargi',
           body: [
-            { p: ['Strona nie używa reklamowych plików cookie. Szczegóły znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '.'] },
+            { p: ['Napisz na adres ', mail, ` lub do ${company}, ${ADDRESS}, Stany Zjednoczone. Możemy poprosić o potwierdzenie tożsamości. Odpowiadamy w ciągu 30 dni; w przypadku złożonych żądań termin może zostać przedłużony o dwa miesiące (poinformujemy Cię o tym). Złożenie żądania jest bezpłatne, chyba że jest ono ewidentnie nieuzasadnione lub nadmierne. Jeżeli przetwarzamy Twoje dane w imieniu klienta, przekazujemy mu Twoje żądanie.`] },
+            { p: `Możesz wnieść skargę do organu nadzorczego: ${legal.dataAuthority}, albo do organu ochrony danych w kraju, w którym mieszkasz lub pracujesz, np. CNIL (Francja), Garante per la protezione dei dati personali (Włochy), Autoriteit Persoonsgegevens (Niderlandy), ICO (Wielka Brytania) lub FDPIC (Szwajcaria). W Australii najpierw złóż skargę do nas: odpowiadamy w ciągu 30 dni, a następnie możesz zwrócić się do OAIC.` },
+          ],
+        },
+        {
+          title: 'Osoby niepełnoletnie',
+          body: [
+            { p: 'Usługa jest przeznaczona dla przedsiębiorców, którzy ukończyli 18 lat. Nie jest skierowana do osób niepełnoletnich i świadomie nie zbieramy ich danych; jeżeli dowiemy się, że osoba niepełnoletnia przekazała nam dane, usuniemy je.' },
+          ],
+        },
+        {
+          title: 'Marketing, połączenia i rezygnacja',
+          body: [
+            { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (Bloctel, TPS/CTPS, Do Not Call Register, Registro delle opposizioni itp.).'] },
+            { p: 'Za połączenia i wiadomości wysyłane przez naszych klientów odpowiadają oni sami: skieruj do nich swój sprzeciw; jeżeli skontaktujesz się z nami, przekażemy go.' },
+          ],
+        },
+        {
+          title: 'Pliki cookie i „Do Not Track”',
+          body: [
+            { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie. Nie używa plików cookie reklamowych. Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; nie śledzimy Twojej aktywności na innych stronach w celach reklamowych.'] },
+          ],
+        },
+        {
+          title: 'Linki do stron osób trzecich',
+          body: [
+            { p: 'Strona i Usługa mogą zawierać odnośniki do stron lub usług osób trzecich (Stripe, Meta, kalendarze, CRM itp.). Obowiązują ich własne polityki prywatności, za które nie odpowiadamy.' },
+          ],
+        },
+        {
+          title: 'Zmiany niniejszej polityki',
+          body: [
+            { p: 'Możemy aktualizować niniejszą politykę; data ostatniej aktualizacji znajduje się u góry strony. O istotnych zmianach informujemy klientów e-mailem lub komunikatem na stronie.' },
+          ],
+        },
+        {
+          title: 'Kontakt',
+          body: [
+            { p: [`${company}, ${ADDRESS}, Stany Zjednoczone — `, mail, '.'] },
           ],
         },
       ];

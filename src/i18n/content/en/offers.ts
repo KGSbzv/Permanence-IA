@@ -87,7 +87,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Mid-call tools', detail: 'Live actions: check availability, look up a record, query your software.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
       { label: 'Flow builder', detail: 'Visual no-code scenarios: triggers, conditions and actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Automation platform', detail: 'Over 300 tools you can connect: CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5,000 runs / month', 'centre-appels': '50,000 runs / month', 'sur-mesure': 'Custom' } },
-      { label: 'AI connector', detail: 'Adds an AI step to your automations (sorting, summarising, drafting).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'AI connector', detail: 'Run your account from ChatGPT or Claude: create an agent, review calls, trigger actions.', cells: all(true) },
     ],
   },
   {

@@ -40,7 +40,11 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
-      <p className="truncate bg-ink px-4 py-1.5 text-center text-[12px] font-medium text-white sm:whitespace-normal sm:text-[13px]">{c.site.trialLine(market.trial.days, market.trial.minutes)}</p>
+      <p className="bg-ink px-4 py-1.5 text-center text-[12px] font-medium text-white sm:text-[13px]">
+        {/* Version courte sur mobile (deux badges), phrase complète à partir de la tablette. */}
+        <span className="sm:hidden">{c.site.trialBadges(market.trial.days, market.trial.minutes).slice(0, 2).join(' — ')}</span>
+        <span className="hidden sm:inline">{c.site.trialLine(market.trial.days, market.trial.minutes)}</span>
+      </p>
       <div ref={ref} className="wrap flex h-16 items-center gap-6">
         <Logo height={40} />
         <nav aria-label={t.mainNav} className="hidden flex-1 items-center gap-1 lg:flex">

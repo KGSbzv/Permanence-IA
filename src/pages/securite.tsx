@@ -16,6 +16,14 @@ export default function Securite() {
         </div>
       </section>
       <Section><SecurityBlock /></Section>
+      <Section tone="night">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+          <Heading dark title={t.infraTitle} intro={t.infraIntro} />
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {t.infraItems.map((s) => <li key={s} className="rounded-2xl bg-white/5 p-4 text-[15px] text-white/85 ring-1 ring-white/10">{s}</li>)}
+          </ul>
+        </div>
+      </Section>
       <Section tone="paper">
         <div className="grid gap-12 lg:grid-cols-2">
           <div>

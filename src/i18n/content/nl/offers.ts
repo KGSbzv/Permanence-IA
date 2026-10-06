@@ -87,7 +87,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Tools tijdens het gesprek', detail: 'Live uitgevoerde acties: beschikbaarheid controleren, een dossier opzoeken, uw software raadplegen.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
       { label: 'Flow builder', detail: 'Visuele scenario’s zonder code: triggers, voorwaarden en acties.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Automatiseringsplatform', detail: 'Meer dan 300 koppelbare tools: CRM, Google Sheets, Slack, e-mail…', cells: { decouverte: false, receptionniste: false, assistant: '5.000 runs / maand', 'centre-appels': '50.000 runs / maand', 'sur-mesure': 'Op maat' } },
-      { label: 'AI-connector', detail: 'Voeg een AI-stap toe aan uw automatiseringen (sorteren, samenvatten, schrijven).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'AI-connector', detail: 'Beheer uw account vanuit ChatGPT of Claude: een agent maken, gesprekken bekijken, acties starten.', cells: all(true) },
     ],
   },
   {

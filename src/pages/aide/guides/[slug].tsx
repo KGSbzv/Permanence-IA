@@ -23,6 +23,10 @@ export default function GuidePage({ slug }: { slug: string }) {
   const title = fill(g.title);
   const category = t.categories[g.category];
   const related = g.related.map((s) => c.guides.list.find((x) => x.slug === s)).filter((x): x is Guide => Boolean(x));
+  // Titre de page ≤ 60 caractères : on raccourcit le suffixe, puis on le retire si nécessaire.
+  const fullTitle = t.meta.title(title, market.brand);
+  const shortTitle = `${title} · ${market.brand}`;
+  const metaTitle = fullTitle.length <= 60 ? fullTitle : shortTitle.length <= 60 ? shortTitle : title;
   const crumbs = [
     { name: help.breadcrumb, path: '/aide' },
     { name: t.breadcrumb, path: '/aide#guides' },
@@ -31,7 +35,7 @@ export default function GuidePage({ slug }: { slug: string }) {
 
   return (
     <Layout
-      title={t.meta.title(title, market.brand)}
+      title={metaTitle}
       description={fill(g.summary).slice(0, 158)}
       breadcrumbs={crumbs}
       jsonLd={{
