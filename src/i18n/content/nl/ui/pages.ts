@@ -328,6 +328,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Autocalls' }, ': technisch platform voor de spraakagents, de widgets en de klantomgeving (gesprekken, transcriptie, spraaksynthese, automatiseringen).'],
+                [{ strong: 'Twilio' }, ': telefonieprovider die onze gesprekken routeert, waaronder uitgaande terugbelgesprekken (Amerikaans nummer, Verenigde Staten).'],
                 [{ strong: 'Leveranciers van AI, stemmen en telefonie' }, ' die door dit platform worden gebruikt om gesprekken te begrijpen, te beantwoorden en door te sturen.'],
                 [{ strong: 'Stripe' }, ': abonnementen, betalingen, facturen en belastingberekening (PCI-DSS niveau 1 gecertificeerd).'],
                 [{ strong: 'Supabase' }, ': database voor terugbelverzoeken, aanmeldingen en gespreksverslagen (Verenigde Staten).'],

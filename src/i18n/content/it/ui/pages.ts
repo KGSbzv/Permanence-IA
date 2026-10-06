@@ -328,6 +328,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Autocalls' }, ': piattaforma tecnica degli agenti vocali, dei widget e dell’area clienti (chiamate, trascrizione, sintesi vocale, automazioni).'],
+                [{ strong: 'Twilio' }, ': operatore telefonico che instrada le nostre chiamate, comprese le richiamate in uscita (numero statunitense, Stati Uniti).'],
                 [{ strong: 'Fornitori di AI, voce e telefonia' }, ' utilizzati da questa piattaforma per comprendere, rispondere e instradare le chiamate.'],
                 [{ strong: 'Stripe' }, ': abbonamenti, pagamenti, fatture e calcolo delle imposte (certificato PCI-DSS livello 1).'],
                 [{ strong: 'Supabase' }, ': database delle richieste di richiamata, delle registrazioni e dei resoconti delle conversazioni (Stati Uniti).'],

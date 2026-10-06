@@ -328,6 +328,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Autocalls' }, ': technical platform for the voice agents, widgets and customer area (calls, transcription, speech synthesis, automations).'],
+                [{ strong: 'Twilio' }, ': telephone carrier that routes our calls, including outbound callbacks (US number, United States).'],
                 [{ strong: 'AI, voice and telephony providers' }, ' used by this platform to understand, respond to and route calls.'],
                 [{ strong: 'Stripe' }, ': subscriptions, payments, invoices and tax calculation (PCI-DSS Level 1 certified).'],
                 [{ strong: 'Supabase' }, ': database for callback requests, sign-ups and conversation reports (United States).'],

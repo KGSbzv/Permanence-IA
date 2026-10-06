@@ -337,6 +337,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Autocalls' }, ': platforma techniczna agentów głosowych, widżetów i panelu klienta (połączenia, transkrypcja, synteza mowy, automatyzacje).'],
+                [{ strong: 'Twilio' }, ': operator telefoniczny, który obsługuje nasze połączenia, w tym oddzwonienia (numer amerykański, Stany Zjednoczone).'],
                 [{ strong: 'Dostawcy AI, głosu i telefonii' }, ' wykorzystywani przez tę platformę do rozumienia, odpowiadania i kierowania połączeń.'],
                 [{ strong: 'Stripe' }, ': subskrypcje, płatności, faktury i naliczanie podatków (certyfikat PCI-DSS poziomu 1).'],
                 [{ strong: 'Supabase' }, ': baza danych próśb o oddzwonienie, rejestracji i podsumowań rozmów (Stany Zjednoczone).'],

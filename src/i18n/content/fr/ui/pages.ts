@@ -343,6 +343,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Autocalls' }, ' : plateforme technique des agents vocaux, des widgets et de l’espace client (appels, transcription, synthèse vocale, automatisations).'],
+                [{ strong: 'Twilio' }, ' : opérateur téléphonique qui achemine nos appels, notamment les rappels sortants (numéro américain, États-Unis).'],
                 [{ strong: 'Fournisseurs d’IA, de voix et de téléphonie' }, ' utilisés par cette plateforme pour comprendre, répondre et acheminer les appels.'],
                 [{ strong: 'Stripe' }, ' : abonnements, paiements, factures et calcul des taxes (certifié PCI-DSS niveau 1).'],
                 [{ strong: 'Supabase' }, ' : base de données des demandes de rappel, inscriptions et comptes rendus d’échanges (États-Unis).'],
