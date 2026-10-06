@@ -102,6 +102,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `AI receptionist pricing — plans and top-ups · ${brand}`,
       /** One plan in the description: `price` and `minutes` already formatted. */
+      annualOffer: (name: string) => `${name} (annual billing)`,
       plan: (name: string, price: string, minutes: string) => `${name} ${price}/${minutes} min`,
       description: (plans: string[], days: number, minutes: number) =>
         `AI receptionist plans excl. tax: ${plans.join(', ')}. Try it free for ${days} days, ${minutes} min included.`,
@@ -140,6 +141,7 @@ export const UI_COMMERCE = {
     eyebrow: (name: string, audience: string) => `${name} plan · ${audience}`,
     demo: 'Try our agent live',
     perMonth: 'excl. tax / month',
+    orAnnual: (price: string) => `or ${price} / year excl. tax (2 months free)`,
     perMinuteLine: (perMinute: string) => `that’s ${perMinute} within the plan`,
     facts: {
       minutes: 'Included minutes',

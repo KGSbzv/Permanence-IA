@@ -1,5 +1,5 @@
 // Sections réutilisables des pages (docs 94, 95, 113, 114).
-import React, { useMemo, useState } from 'react';
+import React, { createContext, useContext, useId, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   Activity, ArrowUpRight, BarChart3, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
@@ -193,10 +193,54 @@ export function SectorCards({ exclude }: { exclude?: string }) {
 
 /* ---------- Tarifs ---------- */
 
-function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
+/* Facturation mensuelle ou annuelle : état partagé entre les cartes et le comparatif d’une même page. */
+export type Billing = 'monthly' | 'annual';
+type BillingState = { billing: Billing; setBilling: (b: Billing) => void };
+const BillingContext = createContext<BillingState | null>(null);
+
+/** Partage le choix mensuel / annuel entre les blocs tarifaires de la page (cartes, comparatif). */
+export function BillingProvider({ children }: { children: React.ReactNode }) {
+  const [billing, setBilling] = useState<Billing>('monthly');
+  const value = useMemo(() => ({ billing, setBilling }), [billing]);
+  return <BillingContext.Provider value={value}>{children}</BillingContext.Provider>;
+}
+
+/** État partagé si un BillingProvider englobe le bloc, sinon état local (mensuel par défaut). */
+function useBilling(): BillingState {
+  const shared = useContext(BillingContext);
+  const [billing, setBilling] = useState<Billing>('monthly');
+  return shared ?? { billing, setBilling };
+}
+
+/** Sélecteur Mensuel / Annuel : groupe de boutons radio natifs (flèches du clavier, lecteurs d’écran). */
+export function BillingToggle({ billing, setBilling, className = '' }: BillingState & { className?: string }) {
+  const { c } = useI18n();
+  const t = c.ui.components.pricingCards;
+  const name = useId();
+  const options: { value: Billing; label: string }[] = [{ value: 'monthly', label: t.monthly }, { value: 'annual', label: t.annual }];
+  return (
+    <fieldset className={`flex justify-center ${className}`}>
+      <legend className="sr-only">{t.billing}</legend>
+      <div className="inline-flex flex-wrap justify-center gap-1 rounded-full border border-line bg-white p-1 shadow-card">
+        {options.map((opt) => (
+          <label key={opt.value} className="relative cursor-pointer">
+            <input type="radio" name={name} value={opt.value} checked={billing === opt.value} onChange={() => setBilling(opt.value)} className="peer sr-only" />
+            <span className="flex min-h-[44px] items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-slate transition peer-checked:bg-ink peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-signal peer-focus-visible:ring-offset-2">
+              {opt.label}
+              {opt.value === 'annual' && <span className="rounded-full bg-signal-soft px-2 py-0.5 text-xs font-semibold text-signal-deep">{t.twoMonthsFree}</span>}
+            </span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function PriceTag({ o, light = false, billing = 'monthly' }: { o: Offer; light?: boolean; billing?: Billing }) {
   const { c, market, money } = useI18n();
   const t = c.ui.components.pricingCards;
-  const amount = o.price === null ? o.priceLabel : money(o.price);
+  const annual = billing === 'annual' && o.annual ? o.annual : undefined;
+  const amount = o.price === null ? o.priceLabel : annual ? money(annual.monthly, 2) : money(o.price);
   return (
     <div>
       {/* Montant chiffré en grand ; libellé textuel (« sur devis ») plus petit pour tenir sur une ligne. */}
@@ -204,6 +248,12 @@ function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
       <p className={`mt-1.5 text-sm ${light ? 'text-white/70' : 'text-slate'}`}>
         {o.price === 0 ? t.daysFree(market.trial.days) : o.price === null ? t.negotiated : c.offerLabels.perMonth}
       </p>
+      {annual && (
+        <>
+          <p className={`text-xs ${light ? 'text-white/70' : 'text-slate'}`}>{t.billedYearly(money(annual.price))}</p>
+          <p className={`mt-1 text-xs font-semibold ${light ? 'text-signal-glow' : 'text-signal-deep'}`}>{t.save(money(annual.saving))}</p>
+        </>
+      )}
     </div>
   );
 }
@@ -211,29 +261,38 @@ function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
 export function PricingCards({ only }: { only?: Offer['slug'][] }) {
   const { c, market, offers, money } = useI18n();
   const t = c.ui.components.pricingCards;
+  const { billing, setBilling } = useBilling();
   const list = only ? offers.filter((o) => only.includes(o.slug)) : offers;
+  const hasAnnual = list.some((o) => o.annual);
   // Chaque carte est une sous-grille (7 rangées) : nom, public, prix, minutes, points forts, bouton et lien
   // restent alignés d’une carte à l’autre, même quand un libellé passe sur deux lignes (NL, PL).
   return (
-    <div className={`grid gap-4 md:grid-cols-2 ${list.length >= 5 ? 'xl:grid-cols-5' : list.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
-      {list.map((o) => (
-        <div key={o.slug} className={`relative row-span-7 grid grid-rows-subgrid gap-y-0 rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
-          {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
-          <p className={`font-display text-lg font-bold leading-snug ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
-          <p className="mt-1 text-sm">{o.audience}</p>
-          <div className="mt-4"><PriceTag o={o} light={o.featured} /></div>
-          <div className="mt-3">
-            <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
-            {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(o.perMinute)}</p>}
-            {!!o.price && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.phoneNumber(money(market.phoneNumberFrom, 2))}</p>}
-          </div>
-          <ul className="mt-4 space-y-2 text-[14px]">
-            {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
-          </ul>
-          <Link href={o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}`} className={`mt-6 self-end ${o.featured ? 'btn-signal' : 'btn-ghost'} whitespace-normal text-center text-sm leading-tight`}>{o.cta}</Link>
-          <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>{t.details}</Link>
-        </div>
-      ))}
+    <div>
+      {hasAnnual && <BillingToggle billing={billing} setBilling={setBilling} className="mb-8" />}
+      <div className={`grid gap-4 md:grid-cols-2 ${list.length >= 5 ? 'xl:grid-cols-5' : list.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
+        {list.map((o) => {
+          const annual = billing === 'annual' && o.annual;
+          const plan = o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}${annual ? '&billing=annual' : ''}`;
+          return (
+            <div key={o.slug} className={`relative row-span-7 grid grid-rows-subgrid gap-y-0 rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
+              {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
+              <p className={`font-display text-lg font-bold leading-snug ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
+              <p className="mt-1 text-sm">{o.audience}</p>
+              <div className="mt-4"><PriceTag o={o} light={o.featured} billing={billing} /></div>
+              <div className="mt-3">
+                <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
+                {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(annual ? annual.perMinute : o.perMinute)}</p>}
+                {!!o.price && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.phoneNumber(money(market.phoneNumberFrom, 2))}</p>}
+              </div>
+              <ul className="mt-4 space-y-2 text-[14px]">
+                {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
+              </ul>
+              <Link href={plan} className={`mt-6 self-end ${o.featured ? 'btn-signal' : 'btn-ghost'} whitespace-normal text-center text-sm leading-tight`}>{o.cta}</Link>
+              <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>{t.details}</Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -260,13 +319,20 @@ function CellView({ v, t }: { v: Cell; t: { included: string; notIncluded: strin
 export function MatrixTable() {
   const { c, market, offers, money } = useI18n();
   const t = c.ui.components.matrix;
+  const billedYearly = c.ui.components.pricingCards.billedYearly;
+  const annualMode = useContext(BillingContext)?.billing === 'annual';
   const [open, setOpen] = useState(false);
   const groups = open ? c.matrix : c.matrix.slice(0, 1);
   const moduleCount = c.matrix.reduce((n, g) => n + g.rows.length, 0);
   const head = 'sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4';
   const priceRows: { label: string; cell: (o: Offer) => React.ReactNode }[] = [
-    { label: t.pricePerMonth, cell: (o) => (o.price === null ? o.priceLabel : money(o.price)) },
-    { label: t.includedMinutes, cell: (o) => <>{o.minutes}{o.perMinute && <span className="block font-normal text-signal-deep">{o.perMinute}</span>}</> },
+    {
+      label: annualMode ? t.pricePerMonthAnnual : t.pricePerMonth,
+      cell: (o) => (o.price === null ? o.priceLabel : annualMode && o.annual
+        ? <>{money(o.annual.monthly, 2)}<span className="block font-normal text-slate">{billedYearly(money(o.annual.price))}</span></>
+        : money(o.price)),
+    },
+    { label: t.includedMinutes, cell: (o) => <>{o.minutes}{o.perMinute && <span className="block font-normal text-signal-deep">{annualMode && o.annual ? o.annual.perMinute : o.perMinute}</span>}</> },
     { label: t.extraMinute, cell: (o) => (o.extraMinute ? money(o.extraMinute, 2) : '—') },
     { label: t.phoneNumber, cell: (o) => (o.price ? t.phoneNumberFrom(money(market.phoneNumberFrom, 2)) : '—') },
   ];

@@ -148,6 +148,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Tarifs standard téléphonique IA, prix HT · ${brand}`,
       /** Un plan dans la description : `price` et `minutes` déjà formatés. */
+      annualOffer: (name: string) => `${name} (facturation annuelle)`,
       plan: (name: string, price: string, minutes: string) => `${name} ${price}`,
       description: (plans: string[], days: number, minutes: number) =>
         `Standard téléphonique IA : ${plans.join(', ')} HT/mois, sans engagement. Testez ${days} jours gratuitement.`,
@@ -187,6 +188,7 @@ export const UI_COMMERCE = {
     eyebrow: (name: string, audience: string) => `Forfait ${name} · ${audience}`,
     demo: 'Essayer en live notre agent',
     perMonth: 'HT / mois',
+    orAnnual: (price: string) => `ou ${price} HT / an (2 mois offerts)`,
     perMinuteLine: (perMinute: string) => `soit ${perMinute} dans le forfait`,
     facts: {
       minutes: 'Minutes incluses',

@@ -25,6 +25,17 @@ export interface Offer extends OfferText {
   perMinute?: string;
   extraMinute?: number;
   featured?: boolean;
+  /** Facturation annuelle (payée d’avance) ; absente pour l’essai et le sur-mesure. */
+  annual?: {
+    /** Prix annuel HT. */
+    price: number;
+    /** Équivalent mensuel (prix annuel / 12). */
+    monthly: number;
+    /** Économie sur un an par rapport à 12 mensualités. */
+    saving: number;
+    /** Coût réel d’une minute du forfait en annuel, libellé. */
+    perMinute: string;
+  };
 }
 
 const PLAN_ORDER: PlanSlug[] = ['decouverte', 'receptionniste', 'assistant', 'centre-appels', 'sur-mesure'];
@@ -47,7 +58,10 @@ export function getI18n(rawLocale: unknown) {
     const base = { ...text, slug, price: p.price, minutesCount: p.minutes, extraMinute: p.extraMinute, featured: slug === 'assistant' };
     if (p.price === 0) return { ...base, priceLabel: money(0), minutes: L.trialMinutes(num(p.minutes), market.trial.days) };
     if (p.price === null) return { ...base, priceLabel: L.onQuote, minutes: L.customVolume };
-    return { ...base, minutes: L.minutesPerMonth(num(p.minutes)), perMinute: L.perMinute(perMin(p.price, p.minutes)) };
+    const annual = p.annualPrice
+      ? { price: p.annualPrice, monthly: p.annualPrice / 12, saving: p.price * 12 - p.annualPrice, perMinute: L.perMinute(perMin(p.annualPrice / 12, p.minutes)) }
+      : undefined;
+    return { ...base, minutes: L.minutesPerMonth(num(p.minutes)), perMinute: L.perMinute(perMin(p.price, p.minutes)), annual };
   });
   const offer = (slug: PlanSlug) => offers.find((o) => o.slug === slug)!;
 

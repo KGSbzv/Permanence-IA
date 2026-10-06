@@ -219,7 +219,7 @@ export const UI_PAGES = {
       description: (brand: string) => `Consultez les conditions générales d’utilisation et de vente applicables aux forfaits et services de standard téléphonique IA ${brand}.`,
     },
     h1: 'Conditions Générales d’Utilisation & de Vente (CGU/CGV)',
-    updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 29 septembre 2026',
+    updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 6 octobre 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Article 1 — Objet du service',
@@ -252,8 +252,8 @@ export const UI_PAGES = {
       {
         title: 'Article 4 — Facturation, Tarifs & Résiliation',
         body: [
-          { p: "Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées automatiquement au paiement selon le pays du client et sa situation fiscale (avec ou sans numéro de TVA). Les règlements sont opérés mensuellement via notre prestataire de paiement sécurisé Stripe ; l'abonnement est reconduit tacitement chaque mois." },
-          { p: ['Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord ', { strong: appHost }, '. La résiliation prendra effet au terme de la période mensuelle déjà acquittée. Le client peut changer de forfait à tout moment et ajouter des minutes par une recharge de crédit ; le crédit acheté ne périme pas et sert à payer les minutes au-delà du forfait, au tarif de minute supplémentaire indiqué sur la page Tarifs.'] },
+          { p: "Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées automatiquement au paiement selon le pays du client et sa situation fiscale (avec ou sans numéro de TVA). Les forfaits sont payables d'avance, mensuellement ou annuellement au choix du client (la facturation annuelle offre deux mois), via notre prestataire de paiement sécurisé Stripe ; l'abonnement est reconduit tacitement pour une période de même durée (un mois ou un an). En facturation annuelle, les minutes incluses restent attribuées chaque mois et le service est identique." },
+          { p: ['Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord ', { strong: appHost }, '. La résiliation prendra effet au terme de la période déjà acquittée (le mois ou, en facturation annuelle, l’année en cours), sans remboursement de la période restante (article 3). Le client peut changer de forfait à tout moment et ajouter des minutes par une recharge de crédit ; le crédit acheté ne périme pas et sert à payer les minutes au-delà du forfait, au tarif de minute supplémentaire indiqué sur la page Tarifs.'] },
         ],
       },
       {

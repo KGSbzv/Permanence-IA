@@ -17,6 +17,11 @@ export interface PlanPricing {
   minutes: number;
   /** Prix HT d’une minute au-delà du forfait (payée par le crédit). */
   extraMinute?: number;
+  /**
+   * Prix annuel HT (payé d’avance, « 2 mois offerts ») ; absent = pas de facturation annuelle.
+   * Les minutes restent attribuées chaque mois (`minutes`), le prix de la minute supplémentaire ne change pas.
+   */
+  annualPrice?: number;
 }
 
 /**
@@ -70,9 +75,9 @@ export interface Market {
 // Grille commune actuelle, recopiée dans chaque marché pour pouvoir diverger plus tard.
 const basePlans = (): Record<PlanSlug, PlanPricing> => ({
   decouverte: { price: 0, minutes: 30 },
-  receptionniste: { price: 99, minutes: 350, extraMinute: 0.39 },
-  assistant: { price: 249, minutes: 1000, extraMinute: 0.36 },
-  'centre-appels': { price: 499, minutes: 2300, extraMinute: 0.32 },
+  receptionniste: { price: 99, minutes: 350, extraMinute: 0.39, annualPrice: 990 },
+  assistant: { price: 249, minutes: 1000, extraMinute: 0.36, annualPrice: 2490 },
+  'centre-appels': { price: 499, minutes: 2300, extraMinute: 0.32, annualPrice: 4990 },
   'sur-mesure': { price: null, minutes: 2500 },
 });
 const baseRecharges = () => [39, 89, 159, 299, 725];

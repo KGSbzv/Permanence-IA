@@ -204,7 +204,7 @@ export const UI_PAGES = {
       description: (brand: string) => `The terms and conditions of use and sale that apply to ${brand} AI receptionist and phone answering plans and services.`,
     },
     h1: 'Terms and Conditions of Use and Sale',
-    updated: 'Applicable to professionals and businesses • Last updated: 29 September 2026',
+    updated: 'Applicable to professionals and businesses • Last updated: 6 October 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Article 1 — Purpose of the service',
@@ -237,8 +237,8 @@ export const UI_PAGES = {
       {
         title: 'Article 4 — Billing, prices and termination',
         body: [
-          { p: 'Prices are stated in US dollars (USD), excluding tax. Applicable taxes are calculated automatically at payment based on the customer’s country and status (individual or business, with or without a VAT number). Payments are made monthly through our secure payment provider Stripe; the subscription renews automatically each month.' },
-          { p: ['The customer may cancel their subscription at any time and without notice from their dashboard at ', { strong: appHost }, '. Cancellation takes effect at the end of the monthly period already paid for. The customer may change plan at any time and add minutes with a credit top-up; credit purchased never expires and is used to pay for minutes beyond the plan, at the extra-minute rate shown on the Pricing page.'] },
+          { p: 'Prices are stated in US dollars (USD), excluding tax. Applicable taxes are calculated automatically at payment based on the customer’s country and status (individual or business, with or without a VAT number). Plans are paid in advance, monthly or annually at the customer’s choice (annual billing includes two months free), through our secure payment provider Stripe; the subscription renews automatically for a period of the same length (one month or one year). On annual billing, included minutes are still allocated each month and the service is the same.' },
+          { p: ['The customer may cancel their subscription at any time and without notice from their dashboard at ', { strong: appHost }, '. Cancellation takes effect at the end of the period already paid for (the current month or, on annual billing, the current year), with no refund of the remaining period (Article 3). The customer may change plan at any time and add minutes with a credit top-up; credit purchased never expires and is used to pay for minutes beyond the plan, at the extra-minute rate shown on the Pricing page.'] },
         ],
       },
       {

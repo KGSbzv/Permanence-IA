@@ -155,6 +155,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Prezzi dell’assistente telefonico AI · ${brand}`,
       /** Un piano nella descrizione: `price` e `minutes` già formattati. */
+      annualOffer: (name: string) => `${name} (fatturazione annuale)`,
       plan: (name: string, price: string, minutes: string) => `${name} ${price}/mese`,
       description: (plans: string[], days: number, minutes: number) =>
         `Assistente telefonico AI: ${plans.join(', ')}, IVA esclusa. Provi gratis ${days} giorni, ${minutes} min inclusi.`,
@@ -193,6 +194,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     eyebrow: (name: string, audience: string) => `Piano ${name} · ${audience}`,
     demo: 'Provi dal vivo il nostro agente',
     perMonth: 'IVA esclusa / mese',
+    orAnnual: (price: string) => `oppure ${price} IVA esclusa / anno (2 mesi gratis)`,
     perMinuteLine: (perMinute: string) => `pari a ${perMinute} nel piano`,
     facts: {
       minutes: 'Minuti inclusi',

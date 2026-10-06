@@ -139,6 +139,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Cennik asystenta głosowego AI — pakiety netto · ${brand}`,
       /** Jeden pakiet w opisie: `price` i `minutes` już sformatowane. */
+      annualOffer: (name: string) => `${name} (rozliczenie roczne)`,
       plan: (name: string, price: string, mins: string) => `${name} ${price} netto / ${mins} min`,
       description: (plans: string[], d: number, m: number) =>
         `${plans.join(', ')}. Wypróbuj: ${days(d)} za darmo, ${minutes(m)} w cenie.`,
@@ -177,6 +178,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     eyebrow: (name: string, audience: string) => `Pakiet ${name} · ${audience}`,
     demo: 'Wypróbuj naszego agenta na żywo',
     perMonth: 'netto / mies.',
+    orAnnual: (price: string) => `lub ${price} netto / rok (2 miesiące gratis)`,
     perMinuteLine: (perMinute: string) => `czyli ${perMinute} w pakiecie`,
     facts: {
       minutes: 'Minuty w cenie',

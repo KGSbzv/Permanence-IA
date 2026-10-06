@@ -45,8 +45,12 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
         '@graph': [
           ...(o.price !== null ? [{
             '@type': 'Product', name: t.productName(market.brand, o.name), description: o.pitch, brand: { '@type': 'Brand', name: market.brand },
-            offers: { '@type': 'Offer', price: o.price, priceCurrency: market.currency, url,
-              priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: market.currency, unitText: 'MONTH', valueAddedTaxIncluded: false } },
+            offers: [
+              { '@type': 'Offer', name: o.name, price: o.price, priceCurrency: market.currency, url,
+                priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: market.currency, unitText: 'MONTH', valueAddedTaxIncluded: false } },
+              ...(o.annual ? [{ '@type': 'Offer', name: c.ui.commerce.tarifs.meta.annualOffer(o.name), price: o.annual.price, priceCurrency: market.currency, url,
+                priceSpecification: { '@type': 'UnitPriceSpecification', price: o.annual.price, priceCurrency: market.currency, unitText: 'YEAR', valueAddedTaxIncluded: false } }] : []),
+            ],
           }] : []),
           { '@type': 'FAQPage', mainEntity: c.faq.pricing.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
         ],
@@ -67,6 +71,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
           <div className="rounded-3xl border border-line bg-white p-7 shadow-card">
             <p className="font-display text-lg font-bold">{o.name}</p>
             <p className="mt-3 font-display text-4xl font-bold text-ink">{price}<span className="ml-1 text-base font-medium text-slate">{o.price ? t.perMonth : ''}</span></p>
+            {o.annual && <p className="mt-1 text-sm font-semibold text-signal-deep">{t.orAnnual(money(o.annual.price))}</p>}
             {o.perMinute && <p className="mt-1 text-sm">{t.perMinuteLine(o.perMinute)}</p>}
             <dl className="mt-6 space-y-3 border-t border-line pt-5 text-[15px]">
               <div className="flex justify-between gap-4"><dt>{t.facts.minutes}</dt><dd className="font-semibold text-ink">{o.minutes}</dd></div>

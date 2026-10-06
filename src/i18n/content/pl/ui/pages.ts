@@ -213,7 +213,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string) => `Zapoznaj się z ogólnymi warunkami korzystania i sprzedaży dotyczącymi pakietów i usług telefonicznej recepcji AI ${brand}.`,
     },
     h1: 'Ogólne Warunki Korzystania i Sprzedaży (Regulamin)',
-    updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 29 września 2026',
+    updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 6 października 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Artykuł 1 — Przedmiot usługi',
@@ -246,8 +246,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: 'Artykuł 4 — Rozliczenia, ceny i wypowiedzenie',
         body: [
-          { p: 'Ceny są wyrażone w dolarach amerykańskich (USD), netto. Należne podatki są naliczane automatycznie przy płatności w zależności od kraju klienta i jego statusu (osoba prywatna lub firma, z numerem VAT lub bez). Płatności są realizowane co miesiąc za pośrednictwem naszego bezpiecznego operatora płatności Stripe; subskrypcja odnawia się automatycznie co miesiąc.' },
-          { p: ['Klient może wypowiedzieć subskrypcję w dowolnym momencie i bez okresu wypowiedzenia w swoim panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu miesięcznego. Klient może w dowolnym momencie zmienić pakiet i dokupić minuty, doładowując środki; zakupione środki nie wygasają i służą do opłacania minut ponad limit pakietu, według stawki za dodatkową minutę podanej na stronie Cennik.'] },
+          { p: 'Ceny są wyrażone w dolarach amerykańskich (USD), netto. Należne podatki są naliczane automatycznie przy płatności w zależności od kraju klienta i jego statusu (osoba prywatna lub firma, z numerem VAT lub bez). Pakiety są opłacane z góry, miesięcznie lub rocznie, według wyboru klienta (rozliczenie roczne obejmuje dwa miesiące gratis), za pośrednictwem naszego bezpiecznego operatora płatności Stripe; subskrypcja odnawia się automatycznie na okres tej samej długości (miesiąc lub rok). Przy rozliczeniu rocznym minuty w pakiecie są nadal przydzielane co miesiąc, a usługa jest identyczna.' },
+          { p: ['Klient może wypowiedzieć subskrypcję w dowolnym momencie i bez okresu wypowiedzenia w swoim panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu (bieżącego miesiąca lub, przy rozliczeniu rocznym, bieżącego roku), bez zwrotu za pozostały okres (artykuł 3). Klient może w dowolnym momencie zmienić pakiet i dokupić minuty, doładowując środki; zakupione środki nie wygasają i służą do opłacania minut ponad limit pakietu, według stawki za dodatkową minutę podanej na stronie Cennik.'] },
         ],
       },
       {

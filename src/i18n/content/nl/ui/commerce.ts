@@ -148,6 +148,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Prijzen AI-telefoonassistent — abonnementen · ${brand}`,
       /** Eén abonnement in de beschrijving: `price` en `minutes` zijn al opgemaakt. */
+      annualOffer: (name: string) => `${name} (jaarlijkse facturatie)`,
       plan: (name: string, price: string, minutes: string) => `${name} ${price} (${minutes} min)`,
       description: (plans: string[], days: number, minutes: number) =>
         `AI-telefoonassistent: ${plans.join(', ')} per maand excl. btw. Probeer ${days} dagen gratis.`,
@@ -186,6 +187,7 @@ export const UI_COMMERCE = {
     eyebrow: (name: string, audience: string) => `Abonnement ${name} · ${audience}`,
     demo: 'Probeer onze agent live',
     perMonth: 'excl. btw / maand',
+    orAnnual: (price: string) => `of ${price} excl. btw / jaar (2 maanden gratis)`,
     perMinuteLine: (perMinute: string) => `oftewel ${perMinute} binnen het abonnement`,
     facts: {
       minutes: 'Inbegrepen minuten',

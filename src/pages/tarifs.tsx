@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
+import { BillingProvider, EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
@@ -23,15 +23,26 @@ export default function Tarifs() {
         '@graph': [
           {
             '@type': 'Product', name: market.brand, brand: { '@type': 'Brand', name: market.brand }, url: `${SITE.url}${path('/tarifs')}`,
-            offers: offers.filter((o) => o.price !== null).map((o) => ({
-              '@type': 'Offer', name: o.name, price: o.price, priceCurrency: market.currency, url: `${SITE.url}${path(`/offres/${o.slug}`)}`,
-              priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: market.currency, unitText: 'MONTH', valueAddedTaxIncluded: false },
-            })),
+            offers: offers.filter((o) => o.price !== null).flatMap((o) => {
+              const url = `${SITE.url}${path(`/offres/${o.slug}`)}`;
+              const monthly = {
+                '@type': 'Offer', name: o.name, price: o.price, priceCurrency: market.currency, url,
+                priceSpecification: { '@type': 'UnitPriceSpecification', price: o.price, priceCurrency: market.currency, unitText: 'MONTH', valueAddedTaxIncluded: false },
+              };
+              // Facturation annuelle (2 mois offerts), payée d’avance.
+              const annual = o.annual && {
+                '@type': 'Offer', name: t.meta.annualOffer(o.name), price: o.annual.price, priceCurrency: market.currency, url,
+                priceSpecification: { '@type': 'UnitPriceSpecification', price: o.annual.price, priceCurrency: market.currency, unitText: 'YEAR', valueAddedTaxIncluded: false },
+              };
+              return annual ? [monthly, annual] : [monthly];
+            }),
           },
           { '@type': 'FAQPage', mainEntity: c.faq.pricing.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
         ],
       }}
     >
+      {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}
+      <BillingProvider>
       <section className="bg-paper">
         <div className="wrap py-14 text-center lg:py-20">
           <Heading as="h1" center title={t.hero.title} intro={t.hero.intro(days, minutes)} />
@@ -45,6 +56,7 @@ export default function Tarifs() {
         <Heading title={t.matrix.title} intro={t.matrix.intro} />
         <div className="mt-10"><MatrixTable /></div>
       </Section>
+      </BillingProvider>
 
       <Section tone="paper"><IncludedStack /></Section>
 

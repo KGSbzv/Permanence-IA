@@ -204,7 +204,7 @@ export const UI_PAGES = {
       description: (brand: string) => `Lees de algemene gebruiks- en verkoopvoorwaarden die van toepassing zijn op de abonnementen en diensten van de AI-telefoniedienst van ${brand}.`,
     },
     h1: 'Algemene gebruiks- en verkoopvoorwaarden',
-    updated: 'Van toepassing op professionals en bedrijven • Laatst bijgewerkt: 29 september 2026',
+    updated: 'Van toepassing op professionals en bedrijven • Laatst bijgewerkt: 6 oktober 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Artikel 1 — Doel van de dienst',
@@ -237,8 +237,8 @@ export const UI_PAGES = {
       {
         title: 'Artikel 4 — Facturatie, Tarieven & Opzegging',
         body: [
-          { p: 'De prijzen zijn uitgedrukt in Amerikaanse dollars (USD), exclusief belastingen. De toepasselijke belastingen worden bij betaling automatisch berekend op basis van het land van de klant en zijn status (particulier of bedrijf, met of zonder btw-nummer). Betalingen verlopen maandelijks via onze beveiligde betaaldienstverlener Stripe; het abonnement wordt elke maand stilzwijgend verlengd.' },
-          { p: ['De klant kan zijn abonnement op elk moment en zonder opzegtermijn opzeggen via zijn dashboard ', { strong: appHost }, '. De opzegging gaat in aan het einde van de reeds betaalde maandperiode. De klant kan op elk moment van abonnement wisselen en minuten toevoegen door tegoed op te waarderen; gekocht tegoed vervalt niet en wordt gebruikt om de minuten boven het abonnement te betalen, tegen het tarief per extra minuut dat op de pagina Prijzen staat vermeld.'] },
+          { p: 'De prijzen zijn uitgedrukt in Amerikaanse dollars (USD), exclusief belastingen. De toepasselijke belastingen worden bij betaling automatisch berekend op basis van het land van de klant en zijn status (particulier of bedrijf, met of zonder btw-nummer). Abonnementen worden vooraf betaald, maandelijks of jaarlijks naar keuze van de klant (jaarlijkse facturatie omvat twee maanden gratis), via onze beveiligde betaaldienstverlener Stripe; het abonnement wordt stilzwijgend verlengd voor een periode van dezelfde duur (een maand of een jaar). Bij jaarlijkse facturatie worden de inbegrepen minuten nog steeds elke maand toegekend en is de dienst identiek.' },
+          { p: ['De klant kan zijn abonnement op elk moment en zonder opzegtermijn opzeggen via zijn dashboard ', { strong: appHost }, '. De opzegging gaat in aan het einde van de reeds betaalde periode (de lopende maand of, bij jaarlijkse facturatie, het lopende jaar), zonder terugbetaling van de resterende periode (artikel 3). De klant kan op elk moment van abonnement wisselen en minuten toevoegen door tegoed op te waarderen; gekocht tegoed vervalt niet en wordt gebruikt om de minuten boven het abonnement te betalen, tegen het tarief per extra minuut dat op de pagina Prijzen staat vermeld.'] },
         ],
       },
       {

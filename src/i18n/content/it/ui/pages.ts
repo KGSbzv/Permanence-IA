@@ -204,7 +204,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string) => `Consulti le condizioni generali di utilizzo e di vendita applicabili ai piani e ai servizi di centralino telefonico AI ${brand}.`,
     },
     h1: 'Condizioni generali di utilizzo e di vendita',
-    updated: 'Applicabili a professionisti e aziende • Ultimo aggiornamento: 29 settembre 2026',
+    updated: 'Applicabili a professionisti e aziende • Ultimo aggiornamento: 6 ottobre 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Articolo 1 — Oggetto del servizio',
@@ -237,8 +237,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: 'Articolo 4 — Fatturazione, prezzi e recesso',
         body: [
-          { p: 'I prezzi sono espressi in dollari USA (USD), al netto delle imposte. Le imposte applicabili sono calcolate automaticamente al momento del pagamento in base al paese del cliente e al suo status (privato o azienda, con o senza partita IVA). I pagamenti sono effettuati mensilmente tramite il nostro fornitore di pagamenti sicuri Stripe; l’abbonamento si rinnova tacitamente ogni mese.' },
-          { p: ['Il cliente può recedere dall’abbonamento in qualsiasi momento e senza preavviso dalla propria dashboard ', { strong: appHost }, '. Il recesso ha effetto al termine del periodo mensile già pagato. Il cliente può cambiare piano in qualsiasi momento e aggiungere minuti tramite una ricarica di credito; il credito acquistato non scade e serve a pagare i minuti oltre il piano, alla tariffa per minuto extra indicata nella pagina Prezzi.'] },
+          { p: 'I prezzi sono espressi in dollari USA (USD), al netto delle imposte. Le imposte applicabili sono calcolate automaticamente al momento del pagamento in base al paese del cliente e al suo status (privato o azienda, con o senza partita IVA). I piani sono pagati in anticipo, mensilmente o annualmente a scelta del cliente (la fatturazione annuale include due mesi gratuiti), tramite il nostro fornitore di pagamenti sicuri Stripe; l’abbonamento si rinnova tacitamente per un periodo di pari durata (un mese o un anno). Con la fatturazione annuale, i minuti inclusi restano assegnati ogni mese e il servizio è identico.' },
+          { p: ['Il cliente può recedere dall’abbonamento in qualsiasi momento e senza preavviso dalla propria dashboard ', { strong: appHost }, '. Il recesso ha effetto al termine del periodo già pagato (il mese o, con la fatturazione annuale, l’anno in corso), senza rimborso del periodo residuo (articolo 3). Il cliente può cambiare piano in qualsiasi momento e aggiungere minuti tramite una ricarica di credito; il credito acquistato non scade e serve a pagare i minuti oltre il piano, alla tariffa per minuto extra indicata nella pagina Prezzi.'] },
         ],
       },
       {
