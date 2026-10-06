@@ -117,7 +117,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telefonia',
     rows: [
-      { label: 'Numery telefonów', detail: 'Dedykowane numery kupowane w panelu klienta, płatne co miesiąc, zależnie od kraju.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Numery telefonów', detail: 'Dedykowane numery kupowane w panelu klienta, płatne co miesiąc, zależnie od kraju.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Indywidualnie' } },
       { label: 'Połączenie SIP', detail: 'Zachowaj swoje numery i centralę: połączenie SIP, import z Twilio lub Telnyx.', cells: all(true) },
       { label: 'Twój własny numer komórkowy jako nadawca', detail: 'Zweryfikuj swój numer, aby wyświetlał się przy połączeniach wychodzących.', cells: paid(true) },
       { label: 'Lista blokad', detail: 'Numery, do których agent nigdy nie dzwoni.', cells: all(true) },

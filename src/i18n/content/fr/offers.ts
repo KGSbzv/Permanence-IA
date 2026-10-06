@@ -120,7 +120,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Téléphonie',
     rows: [
-      { label: 'Numéros de téléphone', detail: 'Numéros dédiés achetés depuis votre espace, facturés au mois selon le pays.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Numéros de téléphone', detail: 'Numéros dédiés achetés depuis votre espace, facturés au mois selon le pays.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Sur mesure' } },
       { label: 'Connexion SIP', detail: 'Gardez vos numéros et votre standard : connexion SIP, import Twilio ou Telnyx.', cells: all(true) },
       { label: 'Votre propre mobile en présentation', detail: 'Vérifiez votre numéro pour qu’il s’affiche lors des appels sortants.', cells: paid(true) },
       { label: 'Liste de blocage', detail: 'Numéros que l’agent n’appelle jamais.', cells: all(true) },

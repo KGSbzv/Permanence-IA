@@ -110,7 +110,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telefonie',
     rows: [
-      { label: 'Telefoonnummers', detail: 'Eigen nummers die u in uw klantomgeving koopt, per maand gefactureerd afhankelijk van het land.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Op maat' } },
+      { label: 'Telefoonnummers', detail: 'Eigen nummers die u in uw klantomgeving koopt, per maand gefactureerd afhankelijk van het land.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Op maat' } },
       { label: 'SIP-koppeling', detail: 'Behoud uw nummers en telefooncentrale: SIP-koppeling, import via Twilio of Telnyx.', cells: all(true) },
       { label: 'Uw eigen mobiele nummer als nummerweergave', detail: 'Verifieer uw nummer zodat het bij uitgaande gesprekken wordt weergegeven.', cells: paid(true) },
       { label: 'Blokkeerlijst', detail: 'Nummers die de agent nooit belt.', cells: all(true) },
