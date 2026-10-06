@@ -23,14 +23,37 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number) =>
     title: 'Standard téléphonique IA pour garage auto',
     description: (days) => `Standard téléphonique pour garage : rendez-vous atelier et demandes de devis préparés sans interrompre le comptoir. Testez ${days} jours gratuitement.`,
   },
+  'Kinés et paramédical': {
+    title: 'Secrétariat kiné et paramédical par IA',
+    description: (days) => `Secrétariat téléphonique pour kinés, ostéopathes et paramédicaux : rendez-vous et reports gérés pendant vos séances. Testez ${days} jours gratuitement.`,
+  },
+  'Cliniques vétérinaires': {
+    title: 'Standard téléphonique vétérinaire IA',
+    description: (days) => `Standard téléphonique pour clinique vétérinaire : urgences orientées, rendez-vous pris, rappels de vaccins. Testez ${days} jours gratuitement.`,
+  },
+  'Salons de coiffure et barbiers': {
+    title: 'Prise de RDV coiffeur et barbier 24/7',
+    description: (days) => `Prise de rendez-vous par téléphone pour salon de coiffure et barbier : l’agent IA réserve pendant que vous coupez. Testez ${days} jours gratuitement.`,
+  },
   'Beauté et bien-être': {
-    title: 'Prise de RDV salon de coiffure et institut',
-    description: (days) => `Prise de rendez-vous par téléphone pour salon de coiffure et institut, même en pleine prestation. Testez ${days} jours gratuitement.`,
+    title: 'Prise de RDV institut de beauté et spa',
+    description: (days) => `Prise de rendez-vous pour institut de beauté, spa et onglerie : soins réservés par téléphone pendant vos soins. Testez ${days} jours gratuitement.`,
   },
   'Restaurants et hôtellerie': {
     title: 'Réservation restaurant par téléphone 24/7',
     description: (days) => `Réservation restaurant par téléphone, même en plein service : tables, allergies et questions clients gérées. Testez ${days} jours gratuitement.`,
   },
+  'Avocats et experts-comptables': {
+    title: 'Permanence téléphonique avocat et comptable',
+    description: (days) => `Permanence téléphonique pour cabinet d’avocats et d’expertise comptable : appels filtrés, dossiers qualifiés. Testez ${days} jours gratuitement.`,
+  },
+};
+
+/** Lieu de travail par secteur, pour « Ce que ça change pour votre … ». */
+const SECTOR_PLACE: Record<string, string> = {
+  immobilier: 'agence', 'dentaire-cliniques': 'cabinet', 'kines-paramedical': 'cabinet', 'cliniques-veterinaires': 'clinique',
+  automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'institut', 'restaurants-hotellerie': 'établissement',
+  'avocats-experts-comptables': 'cabinet',
 };
 
 const MODULE_SEO_TITLE: Record<string, string> = {
@@ -101,7 +124,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Des agents adaptés à votre métier',
-      intro: 'Six secteurs où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
+      intro: 'Dix métiers où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
       link: 'Tous les secteurs',
     },
     integrations: {
@@ -212,15 +235,15 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Secrétariat téléphonique IA par métier · ${brand}`,
-      description: 'Artisans, cabinets dentaires, agences immobilières, garages, salons, restaurants : un secrétariat téléphonique IA pour votre métier. Trouvez le vôtre.',
+      description: 'Artisans, dentistes, kinés, vétérinaires, agences, garages, coiffeurs, instituts, restaurants, avocats : un secrétariat téléphonique IA par métier.',
     },
     hero: {
       title: 'Un secrétariat téléphonique IA adapté à votre métier',
-      intro: 'Nous avons retenu six secteurs où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet dentaire, l’agent pose les bonnes questions.',
+      intro: 'Nous avons retenu dix métiers où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet de kiné, du salon de coiffure au cabinet d’avocats, l’agent pose les bonnes questions.',
     },
     other: {
       title: 'Votre activité n’est pas dans la liste ?',
-      intro: 'Cabinets juridiques, e-commerce, recrutement, tourisme : l’agent se configure pour tout métier qui reçoit des appels. Parlons de votre cas.',
+      intro: 'Auto-écoles, salles de sport, e-commerce, recrutement, tourisme : l’agent se configure pour tout métier qui reçoit des appels. Parlons de votre cas.',
       primary: 'Commencer gratuitement',
       demo: 'Essayer en live notre agent',
     },
@@ -243,8 +266,8 @@ export const UI_COMMERCE = {
       title: 'Ce que l’agent prend en charge pour votre activité',
       intro: 'Il pose les questions que vous poseriez, dans un ordre naturel, et vous transmet une demande complète.',
     },
-    /** Titre des bénéfices : « agence » pour l’immobilier, « activité » ailleurs. */
-    benefitsTitle: (slug: string) => `Ce que ça change pour votre ${slug === 'immobilier' ? 'agence' : 'activité'}`,
+    /** Titre des bénéfices : le lieu du métier (agence, cabinet, salon…), « activité » par défaut. */
+    benefitsTitle: (slug: string) => `Ce que ça change pour votre ${SECTOR_PLACE[slug] ?? 'activité'}`,
     how: { title: 'Comment ça fonctionne' },
     includes: { title: 'Ce que ça inclut', intro: 'Les modules les plus utiles pour votre métier, tous disponibles dans votre espace.' },
     integrations: {
@@ -301,6 +324,7 @@ export const UI_COMMERCE = {
   },
 
   integrations: {
+    tools: { title: 'Plus de 300 outils via les automatisations', intro: 'Avec la plateforme d’automatisation (dès le forfait Assistant), chaque appel peut alimenter vos outils : email, messagerie d’équipe, CRM, boutique, paiement, tableurs. En voici quelques-uns.' },
     meta: {
       title: (brand: string) => `Intégrations agent vocal IA : agenda et CRM · ${brand}`,
       description: 'Connectez votre agent vocal IA à Google Agenda, Outlook, Calendly, HubSpot, Zoho, WhatsApp, SIP et plus de 300 outils sans code. Voyez la liste.',

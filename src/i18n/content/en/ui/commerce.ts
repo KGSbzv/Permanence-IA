@@ -4,6 +4,28 @@
 //
 // Titles with a highlighted keyword are split into { before, kw, after }: `kw` is shown in colour.
 
+// SEO title per sector (see docs/seo/keywords-en.md), found from the display name. Keep it at
+// 45 characters or fewer so the " · Brand" suffix stays within 60. Unknown names fall back to a generic title.
+const SECTOR_SEO_TITLE: Record<string, string> = {
+  'Home services': 'AI receptionist for trades, 24/7',
+  'Dental practices and clinics': 'AI receptionist for dental practices',
+  'Physio and allied health': 'AI receptionist for physios & allied health',
+  'Veterinary practices': 'AI receptionist for vet clinics',
+  'Real estate': 'AI receptionist for estate agents',
+  'Garages and automotive': 'AI receptionist for garages',
+  'Hair salons and barbers': 'AI receptionist for hair salons & barbers',
+  'Beauty and wellbeing': 'AI receptionist for beauty salons & spas',
+  'Restaurants and hospitality': 'AI phone bookings for restaurants',
+  'Law firms and accountants': 'AI receptionist for law firms & accountants',
+};
+
+/** Workplace per sector, for "What it changes for your …". */
+const SECTOR_PLACE: Record<string, string> = {
+  immobilier: 'agency', 'dentaire-cliniques': 'practice', 'kines-paramedical': 'clinic', 'cliniques-veterinaires': 'practice',
+  automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'salon', 'restaurants-hotellerie': 'venue',
+  'avocats-experts-comptables': 'firm',
+};
+
 export const UI_COMMERCE = {
   home: {
     meta: {
@@ -56,7 +78,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents tailored to your trade',
-      intro: 'Six sectors where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
+      intro: 'Ten trades where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
       link: 'All sectors',
     },
     integrations: {
@@ -166,15 +188,15 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `AI receptionists by industry · ${brand}`,
-      description: 'An AI receptionist for trades, dental practices, estate agents, garages, salons and restaurants, set up for your industry. Try it free.',
+      description: 'AI receptionist for trades, dentists, physios, vets, estate agents, garages, hair and beauty salons, restaurants, law firms and accountants.',
     },
     hero: {
       title: 'An AI receptionist tailored to your trade',
-      intro: 'We have chosen six sectors where calls come in when teams are busy, and where every missed enquiry costs a customer.',
+      intro: 'We have chosen ten trades where calls come in when teams are busy, and where every missed enquiry costs a customer. From a plumber’s emergency line to a physio clinic’s front desk, from the barber shop to the law firm, the agent asks the right questions.',
     },
     other: {
       title: 'Your business isn’t on the list?',
-      intro: 'Law firms, e-commerce, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
+      intro: 'Driving schools, gyms, e-commerce, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
       primary: 'Start for free',
       demo: 'Try our agent live',
     },
@@ -182,7 +204,7 @@ export const UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name} AI receptionist · ${brand}`,
+      title: (name: string, brand: string) => `${SECTOR_SEO_TITLE[name] ?? `${name} AI receptionist`} · ${brand}`,
       /** `short` is the sector's short sentence (it already carries the sector keyword), without a final full stop. `name` is kept for the shared signature. */
       description: (name: string, short: string, days: number, minutes: number) =>
         `${short}. Try it free for ${days} days, ${minutes} min included.`,
@@ -197,8 +219,8 @@ export const UI_COMMERCE = {
       title: 'What the agent handles for your business',
       intro: 'It asks the questions you would ask, in a natural order, and sends you a complete request.',
     },
-    /** Benefits title: "agency" for real estate, "business" elsewhere. */
-    benefitsTitle: (slug: string) => `What it changes for your ${slug === 'immobilier' ? 'agency' : 'business'}`,
+    /** Benefits title: the trade's workplace (agency, practice, salon…), "business" by default. */
+    benefitsTitle: (slug: string) => `What it changes for your ${SECTOR_PLACE[slug] ?? 'business'}`,
     how: { title: 'How it works' },
     includes: { title: 'What’s included', intro: 'The most useful modules for your trade, all available in your customer area.' },
     integrations: {
@@ -255,6 +277,7 @@ export const UI_COMMERCE = {
   },
 
   integrations: {
+    tools: { title: '300+ tools through automations', intro: 'With the automation platform (from the Assistant plan), every call can feed your tools: email, team chat, CRM, online shop, payments, spreadsheets. Here are a few.' },
     meta: {
       title: (brand: string) => `AI receptionist integrations: CRM, calendar · ${brand}`,
       description: 'Connect your AI receptionist to Google Calendar, Outlook, Calendly, HubSpot, Zoho, WhatsApp, SIP and over 300 tools without code. See all integrations.',

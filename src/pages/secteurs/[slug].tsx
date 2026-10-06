@@ -3,6 +3,7 @@ import Link from 'next/link';
 // ce que ça inclut, intégrations, économie, sécurité, FAQ métier, preuve visuelle, CTA final.
 import React from 'react';
 import type { GetStaticPaths, GetStaticProps } from 'next';
+import { Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
 import LiveCall from '@/components/LiveCall';
 import { BeforeAfter, PortalPreview } from '@/components/extras';
@@ -24,13 +25,13 @@ export default function SectorPage({ slug }: { slug: string }) {
   const t = c.ui.commerce.sector;
   const { days, minutes } = market.trial;
   const s = c.sectors.find((x) => x.slug === slug) as Sector;
-  const Icon = SECTOR_ICON[s.slug];
+  const Icon = SECTOR_ICON[s.slug] || Sparkles;
   return (
     <Layout
       title={t.meta.title(s.name, market.brand)}
       description={t.meta.description(s.name, s.short.replace(/\.$/, ''), days, minutes).slice(0, 158)}
       breadcrumbs={[{ name: t.breadcrumb, path: '/secteurs' }, { name: s.name, path: `/secteurs/${s.slug}` }]}
-      ogImage={s.photo}
+      ogImage={s.photo || undefined}
       jsonLd={{
         '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.url}${path(`/secteurs/${s.slug}`)}`,
         mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),

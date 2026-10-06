@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowUpRight, BarChart3, BellRing, Bot, CalendarCheck, Check, Clock, FileText, Headphones, Layers,
-  MessageCircle, Mic, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneOutgoing, RefreshCw, Search,
+  MessageCircle, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneOutgoing, RefreshCw, Search,
   ShieldCheck, Sparkles, Target, UserCheck, Users, Wand2,
 } from 'lucide-react';
 import LiveCall from './LiveCall';
@@ -12,69 +12,6 @@ import Mock, { Wave } from './Mock';
 import { Heading, Photo } from './ui';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
-
-/* ---------- Démo dans le hero : l’agent vous appelle (pas de numéro public) ---------- */
-
-export function HeroDemo() {
-  const { c, locale } = useI18n();
-  const t = c.ui.components.heroDemo;
-  // Langue de démo proposée par défaut : celle du site (ordre de la liste : fr, en, es, de, it, pt, ar, nl, pl).
-  const defaultLang = { fr: 0, 'en-gb': 1, 'en-au': 1, it: 4, nl: 7, pl: 8 }[locale] ?? 1;
-  const [lang, setLang] = useState(t.langs[defaultLang] ?? t.langs[1]);
-  const [voice, setVoice] = useState(t.voices[0]);
-  const [sector, setSector] = useState(c.sectors[0].slug);
-  const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-  const [error, setError] = useState('');
-
-  async function submit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    if (!f.get('consent')) { setError(t.consentRequired); return; }
-    setState('sending'); setError('');
-    try {
-      const res = await fetch('/api/callback', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Démo live', locale, note: `Démo live — langue : ${lang} — voix : ${voice}` }),
-      });
-      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendFailed); }
-      setState('sent');
-    } catch (err: any) { setState('error'); setError(err.message); }
-  }
-
-  const sel = 'w-full rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-[14px] text-white focus:border-signal-glow focus:outline-none';
-  return (
-    <div className="rounded-3xl bg-night p-5 text-white shadow-float sm:p-6">
-      <div className="flex items-center justify-between">
-        <p className="flex items-center gap-2 font-display font-semibold"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-signal"><Mic className="h-4 w-4" aria-hidden /></span>{t.title}</p>
-        <span className="flex items-center gap-1.5 text-xs text-white/60"><span className="h-2 w-2 rounded-full bg-ok" aria-hidden />{t.available}</span>
-      </div>
-      {state === 'sent' ? (
-        <div role="status" className="mt-5 rounded-2xl bg-white/10 p-5">
-          <p className="font-display text-lg font-semibold">{t.sentTitle}</p>
-          <p className="mt-1 text-sm text-white/75">{t.sentText(c.sectors.find((s) => s.slug === sector)?.name.toLowerCase() ?? '', lang.toLowerCase())}</p>
-        </div>
-      ) : (
-        <form onSubmit={submit} className="mt-5 grid gap-3">
-        {/* Champ piège invisible pour les robots (ne pas remplir) */}
-        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-          <p className="text-[15px] text-white/80">{t.intro}</p>
-          <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-white/60">{t.lang}<select value={lang} onChange={(e) => setLang(e.target.value)} className={`${sel} mt-1`}>{t.langs.map((l) => <option key={l} className="text-ink">{l}</option>)}</select></label>
-            <label className="text-xs text-white/60">{t.voice}<select value={voice} onChange={(e) => setVoice(e.target.value)} className={`${sel} mt-1`}>{t.voices.map((v) => <option key={v} className="text-ink">{v}</option>)}</select></label>
-            <label className="col-span-2 text-xs text-white/60">{t.sector}<select value={sector} onChange={(e) => setSector(e.target.value)} className={`${sel} mt-1`}>{c.sectors.map((s) => <option key={s.slug} value={s.slug} className="text-ink">{s.name}</option>)}</select></label>
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <input name="name" required placeholder={t.firstName} autoComplete="given-name" aria-label={t.firstName} className={sel} />
-            <input name="phone" type="tel" required minLength={8} placeholder={t.phone} autoComplete="tel" aria-label={t.phone} className={sel} />
-          </div>
-          <label className="flex items-start gap-2 text-xs text-white/70"><input type="checkbox" name="consent" className="mt-0.5 h-4 w-4 accent-[#0FA3C4]" />{t.consent}</label>
-          {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
-          <button type="submit" disabled={state === 'sending'} className="btn-signal"><PhoneCall className="h-4 w-4" aria-hidden />{state === 'sending' ? t.sending : t.submit}</button>
-        </form>
-      )}
-    </div>
-  );
-}
 
 /* ---------- Bandeau défilant ---------- */
 
@@ -168,6 +105,16 @@ export function AgentTeam() {
 
 /* ---------- Voyez l’agent en action : un onglet par secteur ---------- */
 
+// Secteur sans photo : grande icône du métier sur fond doux.
+function ShowcaseFallback({ slug }: { slug: string }) {
+  const Icon = SECTOR_ICON[slug] || Sparkles;
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-signal-soft via-white to-paper">
+      <Icon className="h-24 w-24 text-signal/30" aria-hidden />
+    </div>
+  );
+}
+
 export function SectorShowcase() {
   const { c } = useI18n();
   const t = c.ui.components.sectorShowcase;
@@ -203,7 +150,7 @@ export function SectorShowcase() {
       <div className="relative">
         <div ref={list} onScroll={measure} role="tablist" aria-label={t.chooseSector} className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:thin]">
           {c.sectors.map((x, i) => {
-            const Icon = SECTOR_ICON[x.slug];
+            const Icon = SECTOR_ICON[x.slug] || Sparkles;
             const on = x.slug === active;
             return (
               <button key={x.slug} ref={(el) => { tabs.current[i] = el; }} role="tab" id={`${base}-tab-${x.slug}`} aria-selected={on} aria-controls={`${base}-panel`}
@@ -219,7 +166,7 @@ export function SectorShowcase() {
       </div>
       <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${s.slug}`} className="mt-8 grid items-center gap-10 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-3xl">
-          <div className="aspect-[3/2]"><Photo key={s.photo} src={s.photo} alt={s.photoAlt} fallback={<div className="h-full w-full bg-signal-soft" />} /></div>
+          <div className="aspect-[3/2]"><Photo key={s.slug} src={s.photo} alt={s.photoAlt} fallback={<ShowcaseFallback slug={s.slug} />} /></div>
           <p className="absolute inset-x-4 bottom-4 rounded-xl bg-white/90 px-4 py-3 text-[14px] text-ink backdrop-blur">{s.caption}</p>
         </div>
         <div>

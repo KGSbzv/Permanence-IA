@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import { Heading, Section } from '@/components/ui';
+import { GuideIndex } from '@/components/Guides';
 import { LOGIN_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
@@ -49,7 +50,12 @@ export default function Aide() {
         </div>
       </section>
 
-      <Section>
+      <Section id="guides">
+        <Heading title={c.guides.ui.indexTitle} intro={c.guides.ui.indexIntro} />
+        <GuideIndex />
+      </Section>
+
+      <Section tone="paper">
         <h2 className="font-display text-2xl font-bold">{t.tasksTitle}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {tasks.map((task) => (
@@ -63,7 +69,7 @@ export default function Aide() {
         </div>
       </Section>
 
-      <Section tone="paper">
+      <Section>
         <h2 className="font-display text-2xl font-bold">{t.menuTitle}</h2>
         <div className="mt-8 overflow-x-auto rounded-2xl border border-line bg-white">
           <table className="w-full text-left text-[15px]">
@@ -81,7 +87,7 @@ export default function Aide() {
         </div>
       </Section>
 
-      <Section>
+      <Section tone="paper">
         <h2 className="font-display text-2xl font-bold">{t.glossaryTitle}</h2>
         <dl className="mt-8 grid gap-6 md:grid-cols-2">
           {glossary.map((g) => (

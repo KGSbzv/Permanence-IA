@@ -39,12 +39,18 @@ Bestanden: `ui/commerce.ts` (C), `ui/pages.ts` (P), `sectors.ts` (S), `modules.t
 
 | Slug | Hoofdzoekwoord | Secundair | Waar verwerkt |
 |---|---|---|---|
-| `services-a-domicile` | telefoonservice installateur | telefonische bereikbaarheid loodgieter / elektricien | C `SECTOR_SEO['Service aan huis']`; S `subtitle`, FAQ-antwoord 3 (telefonische bereikbaarheid) |
-| `dentaire-cliniques` | telefoonservice tandarts | telefonisch bereikbaar praktijk, kliniek | C `SECTOR_SEO['Tandartsen en klinieken']`; S H1 `title` + `subtitle` |
-| `immobilier` | telefonische bereikbaarheid makelaar | telefoonservice makelaar, bezichtigingen | C `SECTOR_SEO.Vastgoed`; S `subtitle` |
-| `automobile` | afspraak garage telefonisch | telefoonservice garage | C `SECTOR_SEO['Garages en autobedrijven']`; S `subtitle` |
-| `beaute-bien-etre` | telefoonservice kapsalon | schoonheidssalon, afspraak kapper telefonisch | C `SECTOR_SEO['Beauty en wellness']`; S H1 `title`, `subtitle`, FAQ-antwoord 1 |
+| `services-a-domicile` | telefoonservice installateur | telefonische bereikbaarheid loodgieter / elektricien, spoed avond en weekend | C `SECTOR_SEO['Service aan huis']`; S `subtitle`, FAQ 2 (avond/weekend), FAQ-antwoord 4 (telefonische bereikbaarheid) |
+| `dentaire-cliniques` | telefoonservice tandarts | telefonisch bereikbaar tandartspraktijk, mondzorg, orthodontist | C `SECTOR_SEO['Tandartsen en klinieken']`; S H1 `title` + `subtitle`, FAQ 3 (praktijksoftware) |
+| `kines-paramedical` | telefoonservice fysiotherapeut | fysiotherapiepraktijk, osteopaat, logopedist, verwijzing, gezondheidscentrum | C `SECTOR_SEO['Fysiotherapie en paramedisch']`; S `subtitle`, `targets`, FAQ 3 |
+| `cliniques-veterinaires` | telefoonservice dierenartspraktijk | dierenkliniek, spoeddienst dierenarts, vaccinatieherinnering | C `SECTOR_SEO.Dierenartspraktijken`; S `subtitle`, `problems`, FAQ 2 |
+| `immobilier` | telefonische bereikbaarheid makelaar | telefoonservice makelaar, bezichtigingen, leads Funda | C `SECTOR_SEO.Vastgoed`; S `subtitle`, `problems[1]`, FAQ 3 |
+| `automobile` | afspraak garage telefonisch | telefoonservice garage, APK | C `SECTOR_SEO['Garages en autobedrijven']`; S `subtitle`, `handles` |
+| `salons-de-coiffure` | telefoonservice kapsalon | afspraak kapper telefonisch, barbershop, barbier | C `SECTOR_SEO['Kappers en barbiers']`; S H1 `title`, `subtitle`, FAQ 2 (barbershop) |
+| `beaute-bien-etre` | telefoonservice schoonheidssalon | spa, nagelstudio, wimpers, afspraak schoonheidsspecialiste | C `SECTOR_SEO['Beauty en wellness']`; S `subtitle`, `targets` (kapsalons verhuisd naar `salons-de-coiffure`) |
 | `restaurants-hotellerie` | reserveringen restaurant telefoon | telefonisch reserveren hotel | C `SECTOR_SEO['Horeca en hotels']`; S `subtitle` |
+| `avocats-experts-comptables` | telefoonservice advocaat | advocatenkantoor, accountantskantoor, administratiekantoor, intakegesprek, aangifteperiode | C `SECTOR_SEO['Advocaten en accountants']`; S `subtitle`, `problems[2]` |
+
+De `/nl/secteurs`-index noemt de tien branches in `sectorsIndex.meta.description` en `hero.intro`.
 
 ## Modulepagina's (`/nl/fonctionnalites/…`)
 

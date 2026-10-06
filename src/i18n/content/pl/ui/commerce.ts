@@ -27,8 +27,24 @@ const SECTOR_SEO_TITLE: Record<string, string> = {
   'Stomatologia i kliniki': 'Rejestracja pacjentów przez telefon 24/7',
   'Nieruchomości': 'Obsługa telefoniczna biura nieruchomości',
   'Warsztaty i motoryzacja': 'Umawianie wizyt w warsztacie samochodowym',
-  'Uroda i wellness': 'Umawianie wizyt w salonie kosmetycznym 24/7',
+  'Fizjoterapia i gabinety terapeutyczne': 'Wirtualna recepcjonistka dla fizjoterapeutów',
+  'Gabinety weterynaryjne': 'Wirtualna recepcjonistka dla weterynarza',
+  'Salony fryzjerskie i barberzy': 'Zapisy do fryzjera i barbera przez telefon',
+  'Uroda i wellness': 'Umawianie wizyt: gabinet kosmetyczny i spa',
   'Restauracje i hotele': 'Rezerwacje telefoniczne: restauracje i hotele',
+  'Kancelarie i biura rachunkowe': 'Sekretariat kancelarii i biura rachunkowego',
+};
+/** Tytuł korzyści według branży (pełne zdania, żeby zachować poprawną odmianę); brak klucza → „Twojej firmy”. */
+const SECTOR_BENEFITS_TITLE: Record<string, string> = {
+  immobilier: 'Co to zmienia dla Twojego biura',
+  'dentaire-cliniques': 'Co to zmienia dla Twojego gabinetu',
+  'kines-paramedical': 'Co to zmienia dla Twojego gabinetu',
+  'cliniques-veterinaires': 'Co to zmienia dla Twojej lecznicy',
+  automobile: 'Co to zmienia dla Twojego warsztatu',
+  'salons-de-coiffure': 'Co to zmienia dla Twojego salonu',
+  'beaute-bien-etre': 'Co to zmienia dla Twojego gabinetu',
+  'restaurants-hotellerie': 'Co to zmienia dla Twojej restauracji lub hotelu',
+  'avocats-experts-comptables': 'Co to zmienia dla Twojej kancelarii lub biura',
 };
 /** SEO: tytuł meta strony funkcji według nazwy modułu (klucz = `name` z modules.ts). */
 const FEATURE_SEO_TITLE: Record<string, string> = {
@@ -99,7 +115,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenci dopasowani do Twojej branży',
-      intro: 'Sześć branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
+      intro: 'Dziesięć branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
       link: 'Wszystkie branże',
     },
     integrations: {
@@ -209,15 +225,15 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Asystent głosowy AI dla firm z każdej branży · ${brand}`,
-      description: 'Gabinety stomatologiczne, biura nieruchomości, warsztaty, salony, restauracje, hotele i fachowcy: asystent głosowy AI dopasowany do Twojej branży.',
+      description: 'Fachowcy, dentyści, fizjoterapeuci, weterynarze, biura nieruchomości, warsztaty, fryzjerzy, salony urody, restauracje, kancelarie: asystent głosowy AI.',
     },
     hero: {
       title: 'Asystent głosowy AI dopasowany do Twojej branży',
-      intro: 'Wybraliśmy sześć branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient.',
+      intro: 'Wybraliśmy dziesięć branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient. Od zgłoszeń awarii u fachowca po rejestrację w gabinecie fizjoterapii, od salonu fryzjerskiego po kancelarię: agent zadaje właściwe pytania.',
     },
     other: {
       title: 'Twojej branży nie ma na liście?',
-      intro: 'Kancelarie prawne, e-commerce, rekrutacja, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
+      intro: 'Szkoły jazdy, siłownie i kluby fitness, e-commerce, rekrutacja, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
       primary: 'Zacznij za darmo',
       demo: 'Wypróbuj naszego agenta na żywo',
     },
@@ -240,8 +256,8 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       title: 'Czym agent zajmuje się w Twojej firmie',
       intro: 'Zadaje te same pytania co Ty, w naturalnej kolejności, i przekazuje Ci kompletne zgłoszenie.',
     },
-    /** Tytuł korzyści: „agencji” dla nieruchomości, „firmy” w pozostałych branżach. */
-    benefitsTitle: (slug: string) => `Co to zmienia dla Twojej ${slug === 'immobilier' ? 'agencji' : 'firmy'}`,
+    /** Tytuł korzyści według miejsca pracy w danej branży (biuro, gabinet, warsztat…); domyślnie „firmy”. */
+    benefitsTitle: (slug: string) => SECTOR_BENEFITS_TITLE[slug] ?? 'Co to zmienia dla Twojej firmy',
     how: { title: 'Jak to działa' },
     includes: { title: 'Co obejmuje', intro: 'Najprzydatniejsze moduły dla Twojej branży, wszystkie dostępne w Twoim panelu.' },
     integrations: {
@@ -298,6 +314,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   },
 
   integrations: {
+    tools: { title: 'Ponad 300 narzędzi dzięki automatyzacjom', intro: 'Dzięki platformie automatyzacji (od pakietu Asystent) każda rozmowa może zasilać Twoje narzędzia: e-mail, komunikator zespołu, CRM, sklep internetowy, płatności, arkusze. Oto kilka z nich.' },
     meta: {
       title: (brand: string) => `Integracje — kalendarz, CRM, WhatsApp, SIP · ${brand}`,
       description: 'Połącz asystenta głosowego AI z Kalendarzem Google, Outlookiem, Cal.com, Calendly, HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',

@@ -224,7 +224,8 @@ export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
 
 export function Photo({ src, alt, className = '', fallback }: { src: string; alt: string; className?: string; fallback: React.ReactNode }) {
   const [failed, setFailed] = useState(false);
-  if (failed) return <>{fallback}</>;
+  // Pas de photo (src vide) : l’illustration s’affiche directement, sans image cassée au premier rendu.
+  if (failed || !src) return <>{fallback}</>;
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={src} alt={alt} loading="lazy" onError={() => setFailed(true)} className={`h-full w-full object-cover ${className}`} />;
 }

@@ -2,8 +2,8 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
-  ArrowUpRight, BarChart3, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
-  Lock, Mail, MessageSquare, Minus, MonitorSmartphone, Network, Phone, X, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
+  Activity, ArrowUpRight, BarChart3, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
+  Lock, Mail, MessageSquare, Minus, MonitorSmartphone, Network, PawPrint, Phone, X, Scale, Scissors, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
   UtensilsCrossed, Workflow, Wrench,
 } from 'lucide-react';
 import { MODULES as FR_MODULES } from '@/i18n/content/fr/modules';
@@ -14,6 +14,7 @@ import { BRAND_MARKS } from '@/data/brandMarks';
 import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
+import LiveDemo from './LiveDemo';
 
 /* ---------- Icônes ---------- */
 
@@ -23,7 +24,9 @@ const FAMILY_ICON: Record<string, React.ElementType> = {
 };
 const familyIcon = (slug: string) => FAMILY_ICON[FR_MODULES.find((m) => m.slug === slug)?.family ?? ''] || Sparkles;
 export const SECTOR_ICON: Record<string, React.ElementType> = {
-  'services-a-domicile': Wrench, 'dentaire-cliniques': Stethoscope, immobilier: Home, automobile: Car, 'beaute-bien-etre': Sparkles, 'restaurants-hotellerie': UtensilsCrossed,
+  'services-a-domicile': Wrench, 'dentaire-cliniques': Stethoscope, 'kines-paramedical': Activity, 'cliniques-veterinaires': PawPrint,
+  immobilier: Home, automobile: Car, 'salons-de-coiffure': Scissors, 'beaute-bien-etre': Sparkles, 'restaurants-hotellerie': UtensilsCrossed,
+  'avocats-experts-comptables': Scale,
 };
 
 /* ---------- Ce que l’agent sait faire ---------- */
@@ -135,29 +138,15 @@ export function DemoBlock({ sector }: { sector?: string }) {
   const t = c.ui.components.demoBlock;
   return (
     <Section tone="night" id="demo">
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-12">
+        <Heading dark title={t.title} />
         <div>
-          <Heading dark title={t.title} intro={t.intro} />
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <Link href={DEMO_URL} className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10 hover:bg-white/10">
-              <Phone className="h-6 w-6 text-signal-glow" aria-hidden />
-              <p className="mt-3 font-display font-semibold text-white">{t.launchTitle}</p>
-              <p className="mt-1 text-sm">{t.launchText}</p>
-            </Link>
-            <div className="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10">
-              <UserCheck className="h-6 w-6 text-signal-glow" aria-hidden />
-              <p className="mt-3 font-display font-semibold text-white">{t.callbackTitle}</p>
-              <p className="mt-1 text-sm">{t.callbackText}</p>
-            </div>
-          </div>
-          <TrialBadges dark className="mt-8" />
-        </div>
-        <div className="rounded-3xl bg-white p-6 text-slate sm:p-8">
-          <p className="font-display text-xl font-bold">{t.formTitle}</p>
-          <p className="mb-5 mt-1 text-[15px]">{t.formText}</p>
-          <CallbackForm type="demo" sector={sector} compact submitLabel={t.submit} />
+          <p className="max-w-prose text-lg text-white/70">{t.intro}</p>
+          <TrialBadges dark className="mt-5" />
         </div>
       </div>
+      {/* Démo live : le secteur de la page est présélectionné */}
+      <div className="mt-10"><LiveDemo sector={sector} showHeader={false} /></div>
     </Section>
   );
 }
@@ -180,10 +169,13 @@ export function SectorVisual({ s, className = '' }: { s: Sector; className?: str
 
 export function SectorCards({ exclude }: { exclude?: string }) {
   const { c } = useI18n();
+  const list = c.sectors.filter((s) => s.slug !== exclude);
+  // Grille sans carte isolée : 10 secteurs → 2 rangées de 5 ; 9 (page d’un secteur) → 3 rangées de 3.
+  const cols = list.length % 5 === 0 ? 'lg:grid-cols-5' : 'lg:grid-cols-3';
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {c.sectors.filter((s) => s.slug !== exclude).map((s) => {
-        const Icon = SECTOR_ICON[s.slug];
+    <div className={`grid gap-5 sm:grid-cols-2 ${cols}`}>
+      {list.map((s) => {
+        const Icon = SECTOR_ICON[s.slug] || Sparkles;
         return (
           <Link key={s.slug} href={`/secteurs/${s.slug}`} className="group overflow-hidden rounded-2xl border border-line bg-white hover:border-ink">
             <SectorVisual s={s} className="aspect-[3/2]" />
@@ -329,10 +321,10 @@ export function MatrixTable() {
 type StackItem = { name: string; mark?: keyof typeof BRAND_MARKS; icon?: React.ElementType };
 // Fournisseurs réellement disponibles dans l’espace client (listes de modèles, voix et transcriptions de la plateforme).
 const STACK: Record<string, StackItem[]> = {
-  llm: [{ name: 'OpenAI GPT-5' }, { name: 'Anthropic Claude', mark: 'anthropic' }, { name: 'Google Gemini', mark: 'gemini' }, { name: 'Meta Llama', mark: 'meta' }],
-  s2s: [{ name: 'OpenAI Realtime' }, { name: 'Gemini Live', mark: 'gemini' }],
-  tts: [{ name: 'ElevenLabs', mark: 'elevenlabs' }, { name: 'Cartesia' }, { name: 'Microsoft Azure' }, { name: 'Inworld' }],
-  stt: [{ name: 'Deepgram', mark: 'deepgram' }, { name: 'ElevenLabs Scribe', mark: 'elevenlabs' }, { name: 'Gladia' }, { name: 'Soniox' }, { name: 'Microsoft Azure' }],
+  llm: [{ name: 'OpenAI GPT-5', mark: 'openai' }, { name: 'Anthropic Claude', mark: 'anthropic' }, { name: 'Google Gemini', mark: 'gemini' }, { name: 'Meta Llama', mark: 'meta' }],
+  s2s: [{ name: 'OpenAI Realtime', mark: 'openai' }, { name: 'Gemini Live', mark: 'gemini' }],
+  tts: [{ name: 'ElevenLabs', mark: 'elevenlabs' }, { name: 'Cartesia' }, { name: 'Microsoft Azure', mark: 'azure' }, { name: 'Inworld' }],
+  stt: [{ name: 'Deepgram', mark: 'deepgram' }, { name: 'ElevenLabs Scribe', mark: 'elevenlabs' }, { name: 'Gladia' }, { name: 'Soniox' }, { name: 'Microsoft Azure', mark: 'azure' }],
   channels: [{ name: 'phone', icon: Phone }, { name: 'sip', icon: Network }, { name: 'WhatsApp', mark: 'whatsapp' }, { name: 'Messenger', mark: 'messenger' }, { name: 'Instagram', mark: 'instagram' }, { name: 'email', icon: Mail }, { name: 'widget', icon: MonitorSmartphone }],
 };
 
@@ -643,14 +635,44 @@ export function VoicesNumbers() {
 
 /* ---------- Intégrations ---------- */
 
+// Logo de chaque intégration, dans l’ordre de la liste française (identique dans toutes les langues).
+const INTEGRATION_LOGO: (keyof typeof BRAND_MARKS | null)[] = [
+  'googlecalendar', 'outlook', 'caldotcom', 'calendly', 'hubspot', 'zoho', null, 'googlesheets',
+  'whatsapp', 'instagram', 'messenger', null, 'twilio', null, null, null,
+];
+
 export function IntegrationsGrid({ max }: { max?: number }) {
   const { c } = useI18n();
   return (
     <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {c.integrations.slice(0, max).map((i) => (
+      {c.integrations.slice(0, max).map((i, idx) => {
+        const logo = INTEGRATION_LOGO[idx] ? BRAND_MARKS[INTEGRATION_LOGO[idx]!] : undefined;
+        return (
         <li key={i.name} className="flex items-center gap-3 rounded-xl border border-line bg-white p-4">
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white" style={{ background: i.color }} aria-hidden>{i.mark}</span>
+          {logo
+            ? <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-paper" aria-hidden><svg viewBox="0 0 24 24" className="h-5 w-5" fill={logo.hex}><path d={logo.path} /></svg></span>
+            : <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white" style={{ background: i.color }} aria-hidden>{i.mark}</span>}
           <div className="min-w-0"><p className="break-words font-semibold text-ink">{i.name}</p><p className="line-clamp-2 break-words text-[13px] leading-snug text-slate" title={i.text}>{i.text}</p></div>
+        </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+/** Quelques-uns des outils connectables via la plateforme d’automatisation (plus de 300). */
+const AUTOMATION_TOOLS: [keyof typeof BRAND_MARKS, string][] = [
+  ['gmail', 'Gmail'], ['slack', 'Slack'], ['salesforce', 'Salesforce'], ['shopify', 'Shopify'], ['stripe', 'Stripe'],
+  ['notion', 'Notion'], ['airtable', 'Airtable'], ['mailchimp', 'Mailchimp'], ['wordpress', 'WordPress'], ['zapier', 'Zapier'],
+];
+
+export function AutomationLogos() {
+  return (
+    <ul className="flex flex-wrap gap-2">
+      {AUTOMATION_TOOLS.map(([k, name]) => (
+        <li key={k} className="flex items-center gap-2 rounded-xl border border-line bg-white py-2 pl-2 pr-3.5">
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-paper" aria-hidden><svg viewBox="0 0 24 24" className="h-4 w-4" fill={BRAND_MARKS[k].hex}><path d={BRAND_MARKS[k].path} /></svg></span>
+          <span className="text-[14px] font-medium text-ink">{name}</span>
         </li>
       ))}
     </ul>

@@ -24,14 +24,43 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
     title: 'Prenotazione officina automatica 24/7',
     description: (days) => `Prenotazione officina al telefono, 24/7: l’agente AI fissa gli appuntamenti e prepara i preventivi senza disturbare il banco. Provi gratis ${days} giorni.`,
   },
-  'Bellezza e benessere': {
-    title: 'Prenotazioni per centro estetico e salone',
-    description: (days) => `Prenotazioni telefoniche automatiche per parrucchieri, centri estetici e spa: agenda piena e promemoria via messaggio. Provi gratis ${days} giorni.`,
+  'Fisioterapia e professioni sanitarie': {
+    title: 'Receptionist virtuale per fisioterapisti',
+    description: (days) => `Receptionist virtuale per fisioterapisti, osteopati e studi sanitari: sedute prenotate e spostate durante il lavoro. Provi gratis ${days} giorni.`,
+  },
+  'Cliniche veterinarie': {
+    title: 'Centralino AI per clinica veterinaria',
+    description: (days) => `Centralino AI per clinica veterinaria: urgenze indirizzate secondo il Suo protocollo, visite prenotate, richiami vaccinali. Provi gratis ${days} giorni.`,
+  },
+  'Parrucchieri e barbieri': {
+    title: 'Receptionist virtuale per parrucchieri',
+    description: (days) => `Receptionist virtuale per parrucchieri e barbieri: l’agente AI prenota al telefono mentre Lei taglia. Provi gratis ${days} giorni.`,
+  },
+  'Estetica e benessere': {
+    title: 'Prenotazioni per centro estetico e spa',
+    description: (days) => `Prenotazioni telefoniche per centro estetico, spa e nail bar: trattamenti prenotati mentre Lei è in cabina. Provi gratis ${days} giorni.`,
   },
   'Ristoranti e hotel': {
     title: 'Prenotazioni ristorante al telefono con l’AI',
     description: (days, minutes) => `Prenotazioni ristorante e hotel al telefono gestite dall’AI, senza interrompere il servizio. Provi gratis ${days} giorni, ${minutes} minuti inclusi.`,
   },
+  'Avvocati e commercialisti': {
+    title: 'Centralino AI per avvocati e commercialisti',
+    description: (days) => `Centralino AI per studi legali e commercialisti: chiamate filtrate, nuove pratiche qualificate, consulenze fissate. Provi gratis ${days} giorni.`,
+  },
+};
+
+/** Titolo dei vantaggi per settore («Cosa cambia per il Suo studio…»), con l’accordo corretto. */
+const SECTOR_BENEFITS_TITLE: Record<string, string> = {
+  immobilier: 'Cosa cambia per la Sua agenzia',
+  'dentaire-cliniques': 'Cosa cambia per il Suo studio',
+  'kines-paramedical': 'Cosa cambia per il Suo studio',
+  'cliniques-veterinaires': 'Cosa cambia per la Sua clinica',
+  automobile: 'Cosa cambia per la Sua officina',
+  'salons-de-coiffure': 'Cosa cambia per il Suo salone',
+  'beaute-bien-etre': 'Cosa cambia per il Suo centro',
+  'restaurants-hotellerie': 'Cosa cambia per il Suo locale',
+  'avocats-experts-comptables': 'Cosa cambia per il Suo studio',
 };
 
 const FEATURE_SEO: Record<string, string> = {
@@ -102,7 +131,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenti adatti al Suo settore',
-      intro: 'Sei settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
+      intro: 'Dieci settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
       link: 'Tutti i settori',
     },
     integrations: {
@@ -212,15 +241,15 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Assistente telefonico AI per settore · ${brand}`,
-      description: 'Assistente telefonico intelligente per artigiani, studi dentistici, agenzie immobiliari, officine, saloni, ristoranti e hotel. Scopra il Suo settore.',
+      description: 'Assistente telefonico AI per artigiani, dentisti, fisioterapisti, veterinari, agenzie, officine, parrucchieri, centri estetici, ristoranti, avvocati.',
     },
     hero: {
       title: 'Un agente vocale adatto alla Sua attività',
-      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto sei settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente.',
+      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto dieci settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente: dall’idraulico allo studio di fisioterapia, dal parrucchiere allo studio legale, l’agente pone le domande giuste.',
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',
-      intro: 'Studi legali, e-commerce, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
+      intro: 'Autoscuole, palestre, e-commerce, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
       primary: 'Inizi gratis',
       demo: 'Provi dal vivo il nostro agente',
     },
@@ -243,8 +272,8 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       title: 'Cosa gestisce l’agente per la Sua attività',
       intro: 'Pone le domande che porrebbe Lei, in un ordine naturale, e Le invia una richiesta completa.',
     },
-    /** Titolo dei vantaggi: «agenzia» per l’immobiliare, «attività» altrove. */
-    benefitsTitle: (slug: string) => `Cosa cambia per la Sua ${slug === 'immobilier' ? 'agenzia' : 'attività'}`,
+    /** Titolo dei vantaggi: il luogo di lavoro (agenzia, studio, salone…), «attività» di default. */
+    benefitsTitle: (slug: string) => SECTOR_BENEFITS_TITLE[slug] ?? 'Cosa cambia per la Sua attività',
     how: { title: 'Come funziona' },
     includes: { title: 'Cosa include', intro: 'I moduli più utili per il Suo settore, tutti disponibili nella Sua area clienti.' },
     integrations: {
@@ -301,6 +330,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   },
 
   integrations: {
+    tools: { title: 'Oltre 300 strumenti con le automazioni', intro: 'Con la piattaforma di automazione (dal piano Assistant), ogni chiamata può alimentare i vostri strumenti: email, chat del team, CRM, negozio online, pagamenti, fogli di calcolo. Eccone alcuni.' },
     meta: {
       title: (brand: string) => `Integrazioni — calendario, CRM, WhatsApp, SIP · ${brand}`,
       description: 'Colleghi l’assistente telefonico AI a Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP e oltre 300 strumenti senza codice.',

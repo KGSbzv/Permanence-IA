@@ -1,6 +1,7 @@
 // Nederlandse content (Nederland): exact dezelfde structuur als de Franse bron (gecontroleerd via `typeof fr`).
 import type { fr } from '../fr';
 import { FAQ_GENERAL, FAQ_PRICING } from './faq';
+import { GUIDES, GUIDES_UI } from './guides';
 import { HELP_GLOSSARY, HELP_MENU, HELP_TASKS } from './help';
 import { INTEGRATIONS } from './integrations';
 import { MODULES } from './modules';
@@ -20,6 +21,7 @@ export const nl: typeof fr = {
   modules: MODULES,
   faq: { general: FAQ_GENERAL, pricing: FAQ_PRICING },
   help: { menu: HELP_MENU, tasks: HELP_TASKS, glossary: HELP_GLOSSARY },
+  guides: { ui: GUIDES_UI, list: GUIDES },
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES },
 };

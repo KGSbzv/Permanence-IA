@@ -1,14 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
+import LiveDemo from '@/components/LiveDemo';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Photo, Section, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
 import {
-  Benefits, DemoBlock, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IncludedStack, IntegrationsGrid, PricingCards,
+  Benefits, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IncludedStack, IntegrationsGrid, PricingCards,
   SectorCards, SecurityBlock, Steps, VoicesNumbers,
 } from '@/components/blocks';
 import {
-  AgentTeam, HeroDemo, IndustryMarquee, LanguageMarquee, Lifecycle, PlatformGrid, PortalPreview, SectorShowcase, UseCaseTabs,
+  AgentTeam, IndustryMarquee, LanguageMarquee, Lifecycle, PlatformGrid, PortalPreview, SectorShowcase, UseCaseTabs,
 } from '@/components/extras';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
@@ -26,21 +27,18 @@ export default function Home() {
       jsonLd={{ '@context': 'https://schema.org', '@type': 'Organization', name: market.brand, url: SITE.url, email: SITE.email, logo: `${SITE.url}/icon-512.png`, legalName: SITE.company,
         contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, availableLanguage: ['French', 'English'] } }}
     >
-      {/* Hero : promesse + démo live réelle (l’agent vous appelle) */}
+      {/* Hero : promesse + démo live réelle (navigateur ou appel sur votre téléphone) */}
       <section className="overflow-hidden bg-paper">
-        <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-20">
-          <div>
+        <div className="wrap py-14 lg:py-20">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-12">
             <h1 className="text-hero font-extrabold"><Kw t={t.hero.title} /></h1>
-            <p className="mt-6 max-w-prose text-lg">{t.hero.intro}</p>
-            <TrialBadges className="mt-6" />
-            <CTAs className="mt-8" />
-          </div>
-          <div className="relative mx-auto w-full max-w-lg">
-            <div className="absolute -right-12 -top-6 hidden h-[78%] w-[66%] overflow-hidden rounded-3xl sm:block">
-              <Photo src="/photos/hero.jpg" alt={t.hero.photoAlt} fallback={<div className="h-full w-full bg-signal-soft" />} />
+            <div>
+              <p className="max-w-prose text-lg">{t.hero.intro}</p>
+              <TrialBadges className="mt-5" />
+              <CTAs className="mt-6" />
             </div>
-            <div className="relative sm:mr-24 sm:pt-28"><HeroDemo /></div>
           </div>
+          <div className="mt-10 lg:mt-12"><LiveDemo /></div>
         </div>
         <div className="pb-10"><IndustryMarquee /></div>
       </section>
@@ -91,8 +89,6 @@ export default function Home() {
         <Heading center title={t.useCases.title} intro={t.useCases.intro} />
         <div className="mt-10"><UseCaseTabs /></div>
       </Section>
-
-      <DemoBlock />
 
       {/* Plateforme complète */}
       <Section>

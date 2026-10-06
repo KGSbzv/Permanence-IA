@@ -23,14 +23,37 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
     title: 'Telefoonservice garage: afspraken met AI',
     description: (days) => `Klanten maken telefonisch een afspraak bij uw garage: voertuig, klacht en tijdslot vastgelegd zonder de balie te storen. Probeer ${days} dagen gratis.`,
   },
+  'Fysiotherapie en paramedisch': {
+    title: 'Telefoonservice fysiotherapeut met AI',
+    description: (days) => `Telefoonservice voor fysiotherapeuten, osteopaten en paramedici: afspraken en verplaatsingen geregeld tijdens uw behandelingen. Probeer ${days} dagen gratis.`,
+  },
+  Dierenartspraktijken: {
+    title: 'Telefoonservice dierenartspraktijk met AI',
+    description: (days) => `Telefoonservice voor uw dierenartspraktijk: spoed doorverwezen, afspraken ingepland, vaccinatieherinneringen. Probeer ${days} dagen gratis.`,
+  },
+  'Kappers en barbiers': {
+    title: 'Telefoonservice kapsalon en barbershop',
+    description: (days) => `Telefonisch afspraken maken bij uw kapsalon of barbershop: de AI-agent boekt terwijl u knipt, ook op zaterdag. Probeer ${days} dagen gratis.`,
+  },
   'Beauty en wellness': {
-    title: 'Telefoonservice kapsalon en schoonheidssalon',
-    description: (days) => `Telefoonservice voor kapsalons en schoonheidssalons: afspraken geboekt terwijl u met klanten bezig bent, ook buiten openingstijden. Probeer ${days} dagen gratis.`,
+    title: 'Telefoonservice schoonheidssalon en spa',
+    description: (days) => `Telefoonservice voor schoonheidssalons, spa’s en nagelstudio’s: behandelingen geboekt terwijl u in de behandelkamer staat. Probeer ${days} dagen gratis.`,
   },
   'Horeca en hotels': {
     title: 'Telefonische reserveringen voor uw restaurant',
     description: (days, minutes) => `Reserveringen voor uw restaurant of hotel telefonisch aangenomen door AI, zonder de service te onderbreken. Probeer ${days} dagen gratis, ${minutes} min inbegrepen.`,
   },
+  'Advocaten en accountants': {
+    title: 'Telefoonservice advocaat en accountant',
+    description: (days) => `Telefoonservice voor advocatenkantoren en accountants: telefoontjes gefilterd, nieuwe zaken gekwalificeerd. Probeer ${days} dagen gratis.`,
+  },
+};
+
+/** Werkplek per sector, voor „Wat het verandert voor uw …”. */
+const SECTOR_PLACE: Record<string, string> = {
+  immobilier: 'kantoor', 'dentaire-cliniques': 'praktijk', 'kines-paramedical': 'praktijk', 'cliniques-veterinaires': 'praktijk',
+  automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'salon', 'restaurants-hotellerie': 'zaak',
+  'avocats-experts-comptables': 'kantoor',
 };
 
 const FEATURE_SEO: Record<string, string> = {
@@ -101,7 +124,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents afgestemd op uw vak',
-      intro: 'Zes sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
+      intro: 'Tien sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
       link: 'Alle sectoren',
     },
     integrations: {
@@ -211,15 +234,15 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Telefoonservice met AI per branche · ${brand}`,
-      description: 'Telefoonservice voor installateurs, tandartsen, makelaars, garages, salons en horeca: een AI-telefoonassistent afgestemd op uw vak. Kies uw branche.',
+      description: 'Installateurs, tandartsen, fysio’s, dierenartsen, makelaars, garages, kappers, salons, horeca, advocaten: telefoonservice met AI per branche.',
     },
     hero: {
       title: 'Een AI-telefoonassistent afgestemd op uw vak',
-      intro: 'We hebben zes sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant.',
+      intro: 'We hebben tien sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant. Van de loodgieter op een klus tot de fysiotherapiepraktijk, van de kapsalon tot het advocatenkantoor: de agent stelt de juiste vragen.',
     },
     other: {
       title: 'Staat uw branche er niet tussen?',
-      intro: 'Advocatenkantoren, e-commerce, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
+      intro: 'Rijscholen, sportscholen, e-commerce, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
       primary: 'Gratis starten',
       demo: 'Probeer onze agent live',
     },
@@ -242,8 +265,8 @@ export const UI_COMMERCE = {
       title: 'Wat de agent voor uw bedrijf afhandelt',
       intro: 'Hij stelt de vragen die u zelf zou stellen, in een natuurlijke volgorde, en stuurt u een volledige aanvraag.',
     },
-    /** Titel van de voordelen: „kantoor” voor vastgoed, „bedrijf” elders. */
-    benefitsTitle: (slug: string) => `Wat het verandert voor uw ${slug === 'immobilier' ? 'kantoor' : 'bedrijf'}`,
+    /** Titel van de voordelen: de werkplek van het vak (kantoor, praktijk, salon…), „bedrijf” als standaard. */
+    benefitsTitle: (slug: string) => `Wat het verandert voor uw ${SECTOR_PLACE[slug] ?? 'bedrijf'}`,
     how: { title: 'Hoe het werkt' },
     includes: { title: 'Wat erbij hoort', intro: 'De handigste modules voor uw vak, allemaal beschikbaar in uw klantomgeving.' },
     integrations: {
@@ -300,6 +323,7 @@ export const UI_COMMERCE = {
   },
 
   integrations: {
+    tools: { title: 'Meer dan 300 tools via automatiseringen', intro: 'Met het automatiseringsplatform (vanaf het Assistent-abonnement) voedt elk gesprek uw tools: e-mail, teamchat, CRM, webshop, betalingen, spreadsheets. Hier zijn er een paar.' },
     meta: {
       title: (brand: string) => `Integraties — agenda, CRM, WhatsApp, SIP · ${brand}`,
       description: 'Koppel uw AI-telefoonassistent aan Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP en meer dan 300 tools, zonder code.',

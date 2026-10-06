@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
 import { CTAs, Heading, Section, TrialBadges } from '@/components/ui';
-import { FeatureRow, FinalCTA, IntegrationsGrid } from '@/components/blocks';
+import { AutomationLogos, FeatureRow, FinalCTA, IncludedStack, IntegrationsGrid } from '@/components/blocks';
 import { useI18n } from '@/i18n';
 
 const Kw = ({ t }: { t: { before: string; kw: string; after: string } }) => <>{t.before}<span className="kw">{t.kw}</span>{t.after}</>;
@@ -20,6 +20,11 @@ export default function Integrations() {
         </div>
       </section>
       <Section><IntegrationsGrid /></Section>
+      <Section tone="paper">
+        <Heading title={t.tools.title} intro={t.tools.intro} />
+        <div className="mt-8"><AutomationLogos /></div>
+      </Section>
+      <Section><IncludedStack /></Section>
       <Section tone="paper">
         <FeatureRow
           title={<Kw t={t.flow.title} />}

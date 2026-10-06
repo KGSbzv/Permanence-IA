@@ -19,6 +19,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     ...offers.map((o) => `/offres/${o.slug}`),
     ...c.sectors.map((s) => `/secteurs/${s.slug}`),
     ...c.modules.map((m) => `/fonctionnalites/${m.slug}`),
+    ...c.guides.list.map((g) => `/aide/guides/${g.slug}`),
   ];
   const alternates = (p: string) =>
     LOCALES.map((l) => `<xhtml:link rel="alternate" hreflang="${MARKETS[l].hreflang}" href="${url(l, p)}"/>`).join('') +

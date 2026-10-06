@@ -30,14 +30,20 @@ File: `C` = `src/i18n/content/it/ui/commerce.ts`, `P` = `ui/pages.ts`, `S` = `se
 Title e description per settore definiti in `SECTOR_SEO` (C, chiave = nome italiano del settore,
 fallback al formato generico). Primaria anche nel `subtitle` (intro sotto l’H1) in S.
 
-| Slug | Primaria | Secondarie |
-|---|---|---|
-| services-a-domicile | assistente telefonico AI per artigiani | idraulici, elettricisti, urgenze fuori orario |
-| dentaire-cliniques | receptionist virtuale per studio dentistico | assistente telefonico AI, clinica |
-| immobilier | centralino per agenzia immobiliare | qualificazione acquirenti / inquilini |
-| automobile | prenotazione officina | prenotazione al telefono 24/7, preventivi |
-| beaute-bien-etre | prenotazioni centro estetico / salone | prenotazioni telefoniche automatiche, parrucchieri, spa |
-| restaurants-hotellerie | prenotazioni ristorante al telefono | hotel |
+| Slug | Primaria | Secondarie | Dove è integrata |
+|---|---|---|---|
+| services-a-domicile | assistente telefonico AI per artigiani | idraulici, elettricisti, urgenze fuori orario | C `SECTOR_SEO`, S `subtitle` |
+| dentaire-cliniques | receptionist virtuale per studio dentistico | assistente telefonico AI, ortodonzia, poliambulatorio | C `SECTOR_SEO`, S `subtitle` |
+| kines-paramedical | receptionist virtuale per fisioterapisti | studio di fisioterapia, osteopati, logopedisti, poliambulatori | C `SECTOR_SEO`, S `subtitle`, `targets` |
+| cliniques-veterinaires | centralino AI per clinica veterinaria | ambulatorio veterinario, richiami vaccinali, pronto soccorso veterinario | C `SECTOR_SEO`, S `subtitle`, FAQ |
+| immobilier | centralino AI per agenzia immobiliare | qualificazione acquirenti / inquilini, contatti dai portali | C `SECTOR_SEO`, S `subtitle` |
+| automobile | prenotazione officina | centralino AI per officina, preventivi, gommisti | C `SECTOR_SEO`, S `subtitle` |
+| salons-de-coiffure | receptionist virtuale per parrucchieri | barbieri, barber shop, prenotazioni telefoniche automatiche | C `SECTOR_SEO`, S `subtitle` |
+| beaute-bien-etre | prenotazioni per centro estetico e spa | receptionist virtuale, nail bar, estetiste (parrucchieri spostati su salons-de-coiffure) | C `SECTOR_SEO`, S `subtitle` |
+| restaurants-hotellerie | prenotazioni ristorante al telefono | hotel, B&B, agriturismi | C `SECTOR_SEO`, S `subtitle` |
+| avocats-experts-comptables | centralino AI per avvocati e commercialisti | studi legali, consulenti del lavoro, studio commercialista | C `SECTOR_SEO`, S `subtitle`, `targets` |
+
+Dieci pagine di settore; `/it/secteurs` (C `sectorsIndex.meta.description`) elenca i dieci mestieri.
 
 ## Funzionalità (`/it/fonctionnalites/[slug]`)
 

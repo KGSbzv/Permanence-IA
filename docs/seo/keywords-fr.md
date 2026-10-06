@@ -36,10 +36,16 @@ Titres et descriptions par secteur et par module : `SECTOR_SEO` et `MODULE_SEO_T
 | Dentaire et cliniques | secrétariat dentaire | secrétariat médical, prise de rendez-vous cabinet dentaire, nouveaux patients | C `SECTOR_SEO` ; S `subtitle`, FAQ « plusieurs praticiens » |
 | Immobilier | accueil téléphonique agence immobilière | qualification acheteurs / vendeurs / locataires, gestion locative, visites | C `SECTOR_SEO` ; S `subtitle` |
 | Garages et automobile | standard téléphonique garage | prise de rendez-vous garage, rendez-vous atelier, relance de devis | C `SECTOR_SEO` ; S `subtitle`, FAQ « diagnostic » |
-| Beauté et bien-être | prise de rendez-vous salon de coiffure | prise de RDV institut de beauté, rappel de rendez-vous, réservation WhatsApp | C `SECTOR_SEO` ; S `subtitle` |
+| Kinés et paramédical (`kines-paramedical`) | secrétariat kiné | secrétariat téléphonique ostéopathe, secrétariat paramédical, prise de rendez-vous kinésithérapeute, maison de santé | C `SECTOR_SEO` ; S `subtitle`, FAQ « logiciel de rendez-vous » |
+| Cliniques vétérinaires (`cliniques-veterinaires`) | standard téléphonique vétérinaire | accueil clinique vétérinaire, urgence vétérinaire, rappel de vaccins, ASV | C `SECTOR_SEO` ; S `subtitle`, FAQ « rappels de vaccins », « nuit et week-end » |
+| Salons de coiffure et barbiers (`salons-de-coiffure`) | prise de rendez-vous coiffeur | prise de RDV salon de coiffure, barbier, barber shop, rendez-vous non honorés | C `SECTOR_SEO` ; S `subtitle`, FAQ « durée », « sans rendez-vous » |
+| Beauté et bien-être | prise de rendez-vous institut de beauté | prise de RDV spa, onglerie, esthéticienne, réservation WhatsApp | C `SECTOR_SEO` ; S `subtitle`. Ne vise plus la coiffure (page dédiée ci-dessus) |
 | Restaurants et hôtellerie | réservation restaurant par téléphone | réservation hôtel, liste d’attente, accueil multilingue | C `SECTOR_SEO` ; S `subtitle`, FAQ « disponibilités » |
+| Avocats et experts-comptables (`avocats-experts-comptables`) | permanence téléphonique avocat | secrétariat juridique, accueil téléphonique cabinet d’expertise comptable, filtrage des appels, premier rendez-vous | C `SECTOR_SEO` ; S `subtitle`, FAQ « confidentialité », « relance des clients » |
 
 Le H1 de chaque secteur (`title`) reste le message métier ; le mot-clé principal est dans le sous-titre affiché juste en dessous.
+
+Partage coiffure / beauté : `salons-de-coiffure` couvre coiffeurs, barbiers et coloristes ; `beaute-bien-etre` couvre instituts, spas, esthétique, ongles, cils, épilation et massages. Les deux pages ne visent pas la même requête. Le titre des bénéfices nomme le lieu du métier (`SECTOR_PLACE` dans `commerce.ts`).
 
 ## Pages fonctionnalités `/fonctionnalites/*`
 
@@ -63,4 +69,4 @@ Description meta des modules : `short` + forfait minimum + « essai gratuit N jo
 
 ## Vérification
 
-`npx tsc --noEmit -p .` passe. Toutes les pages FR du serveur de dev (accueil, tarifs, 5 offres, recharges, 7 pages secteurs, 14 pages fonctionnalités, intégrations, démo, contact, FAQ, essai, aide, à propos, sécurité, pages légales) : titres de 32 à 60 caractères, descriptions de 55 à 155 caractères.
+`npx tsc --noEmit -p .` passe. Toutes les pages FR du serveur de dev (accueil, tarifs, 5 offres, recharges, 11 pages secteurs (index + 10), 14 pages fonctionnalités, intégrations, démo, contact, FAQ, essai, aide, à propos, sécurité, pages légales) : titres de 32 à 60 caractères, descriptions de 55 à 155 caractères.

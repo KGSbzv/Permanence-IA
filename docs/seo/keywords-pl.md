@@ -17,7 +17,7 @@ Tytuły meta stron branż i funkcji pochodzą z map `SECTOR_SEO_TITLE` / `FEATUR
 | `/pl/tarifs` | cennik asystenta głosowego AI | pakiety netto, bezpłatny okres próbny | C `tarifs.meta.title`, `tarifs.hero.title`, opis z CTA „Wypróbuj” |
 | `/pl/offres/*` | (nazwa pakietu + cena) | wypróbuj za darmo | C `offer.metaDescription` (CTA); tytuły pakietów w `offers.ts` bez zmian |
 | `/pl/offres/recharges` | doładowania minut | asystent głosowy AI | C `recharges.meta.title` |
-| `/pl/secteurs` | asystent głosowy AI dla firm | gabinety stomatologiczne, biura nieruchomości, warsztaty, salony, restauracje | C `sectorsIndex.meta`, `sectorsIndex.hero.title` |
+| `/pl/secteurs` | asystent głosowy AI dla firm | dziesięć branż: fachowcy, dentyści, fizjoterapeuci, weterynarze, biura nieruchomości, warsztaty, fryzjerzy, salony urody, restauracje, kancelarie | C `sectorsIndex.meta`, `sectorsIndex.hero` |
 | `/pl/fonctionnalites` | automatyczna obsługa połączeń | wirtualna recepcjonistka, umawianie wizyt przez telefon, kwalifikacja leadów | C `featuresIndex.meta`, `featuresIndex.hero.title` |
 | `/pl/integrations` | integracje asystenta głosowego AI | Kalendarz Google, Outlook, Calendly, HubSpot, SIP | C `integrations.meta.description` (skrócony do ≤ 155) |
 | `/pl/demo` | demo asystenta głosowego AI | na żywo, bezpłatnie | P `demo.meta`, `demo.h1` |
@@ -33,14 +33,19 @@ Tytuły meta stron branż i funkcji pochodzą z map `SECTOR_SEO_TITLE` / `FEATUR
 
 | Slug | Fraza główna (tytuł meta) | Frazy poboczne | Gdzie |
 |---|---|---|---|
-| `services-a-domicile` | obsługa telefoniczna zgłoszeń (dla fachowców) | hydraulik, elektryk, firmy remontowe, pilne zgłoszenia | C mapa tytułów; S `short` (opis meta), `subtitle` |
-| `dentaire-cliniques` | rejestracja pacjentów (przez telefon) | gabinet stomatologiczny, klinika, potwierdzanie wizyt | C mapa; S `short`, `title` (H1), `subtitle`, FAQ 2 |
-| `immobilier` | obsługa telefoniczna biura nieruchomości | kwalifikacja kupujących i najemców | C mapa; S `short`, `subtitle` |
-| `automobile` | umawianie wizyt w warsztacie samochodowym | wyceny, informacje o pojeździe | C mapa; S `short`, `title` (H1), `subtitle` |
-| `beaute-bien-etre` | umawianie wizyt w salonie kosmetycznym | salon fryzjerski, kalendarz | C mapa; S `short`, `subtitle` |
-| `restaurants-hotellerie` | rezerwacje telefoniczne (restauracja, hotel) | pytania gości, serwis | C mapa; S `short`, `subtitle` |
+| `services-a-domicile` | obsługa telefoniczna zgłoszeń (dla fachowców) | hydraulik, elektryk, ślusarz, firmy remontowe, pilne zgłoszenia, wieczorem i w weekend | C mapa tytułów; S `short` (opis meta), `subtitle`, FAQ 1–2 |
+| `dentaire-cliniques` | rejestracja pacjentów (przez telefon) | gabinet stomatologiczny, wirtualna recepcjonistka, ortodonta, potwierdzanie wizyt, ból zęba | C mapa; S `short`, `title` (H1), `subtitle`, FAQ 1–3 |
+| `kines-paramedical` | wirtualna recepcjonistka dla fizjoterapeutów | rejestracja do fizjoterapeuty, gabinet fizjoterapii, rehabilitacja, osteopata, logopeda, skierowanie | C mapa; S `short`, `subtitle`, `targets`, FAQ 2–3 |
+| `cliniques-veterinaires` | wirtualna recepcjonistka dla weterynarza | gabinet weterynaryjny, lecznica, dyżur, szczepienia przypominające, technik weterynarii | C mapa; S `short`, `subtitle`, FAQ 2–3 |
+| `immobilier` | obsługa telefoniczna biura nieruchomości | kwalifikacja kupujących i najemców, leady z portali, pośrednik | C mapa; S `short`, `subtitle`, FAQ 3 |
+| `automobile` | umawianie wizyt w warsztacie samochodowym | wyceny, wymiana opon, przegląd, informacje o pojeździe | C mapa; S `short`, `title` (H1), `subtitle` |
+| `salons-de-coiffure` | zapisy do fryzjera i barbera (przez telefon) | salon fryzjerski, barber shop, koloryzacja, odrosty, strzyżenie, broda | C mapa; S `short`, `subtitle`, `handles`, FAQ 1–2 |
+| `beaute-bien-etre` | umawianie wizyt: gabinet kosmetyczny i spa | salon urody, stylizacja paznokci, rzęsy, depilacja, vouchery (bez fryzjerów — mają własną stronę) | C mapa; S `short`, `subtitle`, `targets` |
+| `restaurants-hotellerie` | rezerwacje telefoniczne (restauracja, hotel) | pytania gości, serwis, goście z zagranicy | C mapa; S `short`, `subtitle` |
+| `avocats-experts-comptables` | sekretariat telefoniczny dla kancelarii | kancelaria adwokacka i radcowska, biuro rachunkowe, doradca podatkowy, konsultacja, PIT/JPK | C mapa; S `short` (biuro rachunkowe), `subtitle`, FAQ 4 |
 
-Opis meta branży = `short` + „Wypróbuj za darmo: X dni, Y minut w cenie.” (nazwa branży już nie jest powtarzana).
+Opis meta branży = `short` + „Wypróbuj za darmo: X dni, Y minut w cenie.” (nazwa branży już nie jest powtarzana); `short` ≤ 108 znaków, żeby opis zmieścił się w 155.
+Tytuł sekcji korzyści: mapa `SECTOR_BENEFITS_TITLE` w C (biuro, gabinet, lecznica, warsztat, salon, restauracja lub hotel, kancelaria lub biuro).
 
 ## Funkcje (`/pl/fonctionnalites/[slug]`)
 
