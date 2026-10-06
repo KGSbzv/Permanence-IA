@@ -3,13 +3,15 @@ import Layout from '@/components/Layout';
 import LiveCall from '@/components/LiveCall';
 import LiveDemo from '@/components/LiveDemo';
 import { Heading, Section, TrialBadges } from '@/components/ui';
-import { FinalCTA, SectorCards, Steps, VoicesNumbers } from '@/components/blocks';
+import { FinalCTA, Steps, VoicesNumbers } from '@/components/blocks';
+import ScenarioExplorer, { LIVE_DEMO_ID, useLiveDemoSector } from '@/components/ScenarioExplorer';
 import { useI18n } from '@/i18n';
 
 export default function Demo() {
   const { c, market } = useI18n();
   const t = c.ui.pages.demo;
   const s = c.sectors[1];
+  const { sector, trySector } = useLiveDemoSector();
   return (
     <Layout title={t.meta.title(market.brand)} description={t.meta.description}>
       <section className="bg-night text-white/75">
@@ -21,7 +23,7 @@ export default function Demo() {
               <TrialBadges dark className="mt-5" />
             </div>
           </div>
-          <div className="mt-10 lg:mt-12"><LiveDemo /></div>
+          <div id={LIVE_DEMO_ID} tabIndex={-1} className="mt-10 scroll-mt-24 outline-none lg:mt-12"><LiveDemo sector={sector} /></div>
         </div>
       </section>
       <Section>
@@ -34,7 +36,7 @@ export default function Demo() {
         </div>
       </Section>
       <Section tone="paper"><VoicesNumbers /></Section>
-      <Section><Heading title={t.scenariosTitle} /><div className="mt-10"><SectorCards /></div></Section>
+      <Section><Heading title={t.scenariosTitle} /><div className="mt-10"><ScenarioExplorer onTry={trySector} /></div></Section>
       <FinalCTA />
     </Layout>
   );

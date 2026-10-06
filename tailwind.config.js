@@ -38,12 +38,17 @@ module.exports = {
         pulsering: { '0%': { boxShadow: '0 0 0 0 rgba(15,163,196,.45)' }, '100%': { boxShadow: '0 0 0 14px rgba(15,163,196,0)' } },
         wave: { '0%,100%': { transform: 'scaleY(.35)' }, '50%': { transform: 'scaleY(1)' } },
         marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+        // Explorateur de scénarios : la photo du métier se dévoile, puis la carte d’appel glisse en place.
+        stage: { from: { opacity: '0', transform: 'scale(1.06)', clipPath: 'inset(0 0 0 18% round 18px)' }, to: { opacity: '1', transform: 'none', clipPath: 'inset(0 0 0 0 round 18px)' } },
+        dock: { from: { opacity: '0', transform: 'translateX(24px)' }, to: { opacity: '1', transform: 'none' } },
       },
       animation: {
         rise: 'rise .45s ease-out both',
         pulsering: 'pulsering 1.8s ease-out infinite',
         wave: 'wave 1.1s ease-in-out infinite',
         marquee: 'marquee 40s linear infinite',
+        stage: 'stage .7s cubic-bezier(.2,.7,.2,1) both',
+        dock: 'dock .5s cubic-bezier(.2,.7,.2,1) .18s both',
       },
     },
   },

@@ -9,8 +9,9 @@ import {
   SectorCards, SecurityBlock, Steps, VoicesNumbers,
 } from '@/components/blocks';
 import {
-  AgentTeam, IndustryMarquee, LanguageMarquee, Lifecycle, PlatformGrid, PortalPreview, SectorShowcase, UseCaseTabs,
+  AgentTeam, IndustryMarquee, LanguageMarquee, Lifecycle, PlatformGrid, PortalPreview, UseCaseTabs,
 } from '@/components/extras';
+import ScenarioExplorer, { LIVE_DEMO_ID, useLiveDemoSector } from '@/components/ScenarioExplorer';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
@@ -20,6 +21,7 @@ export default function Home() {
   const { c, market } = useI18n();
   const t = c.ui.commerce.home;
   const { days, minutes } = market.trial;
+  const { sector, trySector } = useLiveDemoSector();
   return (
     <Layout
       title={t.meta.title(market.brand)}
@@ -38,7 +40,7 @@ export default function Home() {
               <CTAs className="mt-6" />
             </div>
           </div>
-          <div className="mt-10 lg:mt-12"><LiveDemo /></div>
+          <div id={LIVE_DEMO_ID} tabIndex={-1} className="mt-10 scroll-mt-24 outline-none lg:mt-12"><LiveDemo sector={sector} /></div>
         </div>
         <div className="pb-10"><IndustryMarquee /></div>
       </section>
@@ -48,7 +50,7 @@ export default function Home() {
       {/* Voyez l’agent en action */}
       <Section tone="paper">
         <Heading title={t.showcase.title} intro={t.showcase.intro} />
-        <div className="mt-10"><SectorShowcase /></div>
+        <div className="mt-10"><ScenarioExplorer onTry={trySector} /></div>
       </Section>
 
       <Section>

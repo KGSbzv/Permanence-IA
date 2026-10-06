@@ -23,6 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const b = req.body || {};
   const { consentCall, type, locale } = b;
   const name = clip(b.name, 120), phone = clip(b.phone, 32), email = clip(b.email, 160), company = clip(b.company, 160);
+  // Voix choisie dans la démo : seule la valeur exacte « male » est transmise (sinon voix féminine par défaut).
+  const voice = b.voice === 'male' ? 'male' as const : undefined;
   const sector = clip(b.sector, 80), slot = clip(b.slot, 120), note = clip(b.note, 1500), agent = clip(b.agent, 120);
   // Accepte true ou "true" (les outils des agents envoient des chaînes).
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
@@ -70,6 +72,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // call_at (UTC) : l’automatisation attend ce moment avant d’ajouter le contact à la campagne.
       body: JSON.stringify({
         name, phone: e164, company: company || '', sector: sector || '', call_at: callAt.toISOString(),
+        // Les automatisations Autocalls basculent sur la campagne de la voix masculine quand body.voice === 'male'.
+        ...(voice ? { voice } : {}),
         note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
       }),
     });

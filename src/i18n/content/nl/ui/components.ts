@@ -363,7 +363,9 @@ export const UI_COMPONENTS = {
     sentTitle: 'Aanvraag ontvangen',
     sentText: (name: string) => `${name} belt u binnen enkele minuten tijdens de openingstijden (maandag tot en met zaterdag, 9.00–19.00 uur). Houd uw telefoon bij de hand.`,
     again: 'Opnieuw proberen',
-    portraitAlt: (name: string, accent: string) => `${name}, AI-spraakagent (${accent})`,
+    portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'mannelijke' : 'vrouwelijke'} AI-spraakagent (${accent})`,
+    voiceLabel: 'Stem',
+    voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'mannenstem' : 'vrouwenstem'}`,
   },
 
   industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbiers', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
@@ -384,13 +386,22 @@ export const UI_COMPONENTS = {
     title: 'Stel uw team van AI-agents samen',
     intro: 'Elke agent heeft een duidelijke rol. Activeer de agents die uw bedrijf nodig heeft; ze delen dezelfde geschiedenis en dezelfde informatie.',
     custom: 'Een specifiek scenario nodig? Wij stellen een agent op maat in.',
-    virtualNote: 'Jade, Emma, Katie en hun collega’s zijn virtuele AI-agents: hun gezichten zijn gegenereerde illustraties, geen echte mensen.',
+    virtualNote: 'Jade, Daan, Katie en hun collega’s zijn virtuele AI-agents: hun gezichten zijn gegenereerde illustraties, geen echte mensen.',
   },
 
   sectorShowcase: {
     chooseSector: 'Kies een sector',
     agentFor: (sectorLower: string) => `Agent voor ${sectorLower}`,
     seeSolution: (sectorLower: string) => `Bekijk de oplossing voor ${sectorLower}`,
+  },
+
+  scenarioExplorer: {
+    chooseTrade: 'Kies uw branche',
+    answering: (agentName: string) => `${agentName} neemt op`,
+    replay: 'Gesprek opnieuw afspelen',
+    benefitsTitle: 'Wat het voor u verandert',
+    planLabel: 'Aanbevolen pakket',
+    tryLive: 'Probeer dit scenario live',
   },
 
   useCaseTabs: {

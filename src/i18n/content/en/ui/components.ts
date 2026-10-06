@@ -367,7 +367,9 @@ export const UI_COMPONENTS = {
     sentTitle: 'Request received',
     sentText: (name: string) => `${name} calls you within minutes during opening hours (Monday to Saturday, 9am to 7pm). Keep your phone close.`,
     again: 'Try again',
-    portraitAlt: (name: string, accent: string) => `${name}, AI voice agent (${accent})`,
+    portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'male' : 'female'} AI voice agent (${accent})`,
+    voiceLabel: 'Voice',
+    voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'male' : 'female'} voice`,
   },
 
   industryMarquee: ['Plumbers', 'Electricians', 'Dental practices', 'Clinics', 'Estate agents', 'Property management', 'Garages', 'Body shops', 'Hair salons', 'Barbers', 'Beauty salons', 'Restaurants', 'Hotels', 'Law firms', 'Accountants', 'E-commerce', 'Physios', 'Osteopaths', 'Vets'],
@@ -388,13 +390,22 @@ export const UI_COMPONENTS = {
     title: 'Build your team of AI agents',
     intro: 'Each agent has a specific role. Turn on the ones your business needs; they share the same history and the same information.',
     custom: 'Need a particular scenario? We set up a custom agent.',
-    virtualNote: 'Jade, Emma, Katie and their colleagues are virtual AI agents: their faces are generated illustrations, not real people.',
+    virtualNote: 'Jade, Daan, Katie and their colleagues are virtual AI agents: their faces are generated illustrations, not real people.',
   },
 
   sectorShowcase: {
     chooseSector: 'Choose a sector',
     agentFor: (sectorLower: string) => `${cap(sectorLower)} agent`,
     seeSolution: (sectorLower: string) => `See the ${sectorLower} solution`,
+  },
+
+  scenarioExplorer: {
+    chooseTrade: 'Choose a trade',
+    answering: (agentName: string) => `${agentName} picks up`,
+    replay: 'Replay the call',
+    benefitsTitle: 'What changes for you',
+    planLabel: 'Recommended plan',
+    tryLive: 'Try this scenario live',
   },
 
   useCaseTabs: {

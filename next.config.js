@@ -11,7 +11,6 @@ const nextConfig = {
     return [
       { source: '/logo/:path*', headers: cors },
       { source: '/agents/:path*', headers: cors },
-      { source: '/tpl/:path*', headers: cors },
       { source: '/icon-:size.png', headers: cors },
     ];
   },

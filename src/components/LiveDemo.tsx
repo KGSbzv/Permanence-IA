@@ -6,8 +6,7 @@ import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
-import { MARKETS } from '@/i18n/markets';
-import { PERSONAS } from '@/data/personas';
+import { GENDERS, VOICES, type Gender } from '@/data/personas';
 
 /** Nom de chaque langue dans sa propre langue (identique sur toutes les versions du site). */
 const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands' };
@@ -274,7 +273,7 @@ function AssistantDialog({ src, title, closeLabel, onClose }: { src: string; tit
 /* ---------- Widget ---------- */
 
 export default function LiveDemo({ sector: initialSector, showHeader = true, headingLevel = 'h2' }: {
-  /** Secteur présélectionné (pages secteur). */
+  /** Secteur présélectionné (pages secteur, explorateur de scénarios) ; un changement de valeur le resélectionne. */
   sector?: string;
   /** Titre et introduction dans la carte (masqués quand la section a déjà son titre). */
   showHeader?: boolean;
@@ -285,6 +284,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
   const uid = useId().replace(/:/g, '');
   const [role, setRole] = useState(0);
   const [lang, setLang] = useState<Locale>(locale);
+  const [gender, setGender] = useState<Gender>('female');
   const [sector, setSector] = useState(initialSector && c.sectors.some((s) => s.slug === initialSector) ? initialSector : c.sectors[0].slug);
   const [mode, setMode] = useState<'browser' | 'phone'>('browser');
   const [state, setState] = useState<'idle' | 'busy' | 'sent' | 'error'>('idle');
@@ -292,9 +292,11 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
   const [dialog, setDialog] = useState<string | null>(null);
 
   useEffect(() => { setLang(locale); }, [locale]);
+  // Présélection pilotée par la page (explorateur de scénarios, lien /demo?sector=…) : chaque nouveau secteur reçu est appliqué.
+  useEffect(() => { if (initialSector && c.sectors.some((s) => s.slug === initialSector)) setSector(initialSector); }, [initialSector, c.sectors]);
 
-  // Une seule voix réelle par langue : celle de l’agent du marché (prénom et portrait).
-  const persona = PERSONAS[lang];
+  // Deux voix réelles par langue (féminine et masculine), chacune avec son prénom, son portrait et son assistant.
+  const persona = VOICES[lang][gender];
   const voice = persona.name;
   const sectorName = c.sectors.find((s) => s.slug === sector)?.name ?? '';
   const hue = HUES[role];
@@ -306,7 +308,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
   async function openBrowser() {
     setState('busy'); setError('');
     try {
-      const id = MARKETS[lang].widgetAssistantId;
+      const id = persona.widgetAssistantId;
       const res = await fetch(`${SITE.appUrl}/api/widget-config?assistant_id=${encodeURIComponent(id)}`);
       if (!res.ok) throw new Error();
       const cfg = await res.json();
@@ -328,8 +330,8 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined,
-          type: 'commercial', agent: 'Démo live', locale: lang,
-          note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — secteur : ${sectorName}`,
+          type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
+          note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — voix : ${voice} — secteur : ${sectorName}`,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
@@ -354,7 +356,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
             {/* Visage de l'agent au cœur de l'orbe : la sphère colorée en devient le liseré, les ondes l'entourent. */}
             <div className="absolute left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full shadow-[0_10px_40px_rgba(5,10,30,.55)]" style={{ width: 'min(41cqw, 41cqh)' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img key={lang} src={persona.photo} alt={t.portraitAlt(voice, t.accents[lang])} width={200} height={200} decoding="async"
+              <img key={persona.photo} src={persona.photo} alt={t.portraitAlt(voice, t.accents[lang], gender === 'male')} width={200} height={200} decoding="async"
                 className="h-full w-full animate-rise object-cover motion-reduce:animate-none" />
               <span aria-hidden className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,.18),inset_0_-14px_28px_rgba(10,18,51,.35)]" />
             </div>
@@ -405,12 +407,44 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 <label key={l} className="cursor-pointer">
                   <input type="radio" name={`${uid}-lang`} value={l} checked={lang === l} onChange={() => setLang(l)} className="peer sr-only" />
                   <span className={`flex items-center gap-1.5 rounded-full py-1 pl-1 pr-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={PERSONAS[l].photo} alt="" width={24} height={24} loading="lazy" className={`h-6 w-6 shrink-0 rounded-full object-cover ${lang === l ? '' : 'opacity-80'}`} />
+                    <span aria-hidden className="flex shrink-0 -space-x-2">
+                      {GENDERS.map((g) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={g} src={VOICES[l][g].photo} alt="" width={24} height={24} loading="lazy"
+                          className={`h-6 w-6 rounded-full object-cover ring-2 ${lang === l ? 'ring-signal-glow' : 'opacity-80 ring-night'}`} />
+                      ))}
+                    </span>
                     {NATIVE[l]}
                   </span>
                 </label>
               ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="mt-5">
+            <legend className={legend}>{t.voiceLabel}</legend>
+            <div className="grid grid-cols-2 gap-2">
+              {GENDERS.map((g) => {
+                const p = VOICES[lang][g];
+                const on = gender === g;
+                return (
+                  <label key={g} className="cursor-pointer">
+                    <input type="radio" name={`${uid}-voice`} value={g} checked={on} onChange={() => setGender(g)} className="peer sr-only" />
+                    <span className={`flex items-center gap-2 rounded-2xl p-1.5 pr-2.5 ring-1 sm:gap-3 sm:p-2 sm:pr-3 transition-colors ${on ? 'bg-white/[.09] ring-signal-glow' : 'ring-white/15 hover:bg-white/[.04] hover:ring-white/40'} ${focusRing}`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.photo} alt="" width={44} height={44} loading="lazy"
+                        className={`h-9 w-9 shrink-0 rounded-full object-cover ring-2 sm:h-11 sm:w-11 ${on ? 'ring-signal-glow' : 'opacity-75 ring-transparent'}`} />
+                      <span className={`min-w-0 truncate text-[14.5px] font-semibold leading-tight sm:text-[15px] ${on ? 'text-white' : 'text-white/70'}`}>
+                        <span aria-hidden>{p.name}</span>
+                        <span className="sr-only">{t.voiceOption(p.name, g === 'male')}</span>
+                      </span>
+                      <span aria-hidden className={`ml-auto flex h-4 w-4 shrink-0 items-center sm:h-5 sm:w-5 justify-center rounded-full ring-2 ${on ? 'bg-signal-glow ring-signal-glow' : 'ring-white/30'}`}>
+                        {on && <span className="h-2 w-2 rounded-full bg-night" />}
+                      </span>
+                    </span>
+                  </label>
+                );
+              })}
             </div>
           </fieldset>
 
