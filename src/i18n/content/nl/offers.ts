@@ -65,7 +65,7 @@ export const OFFER_LABELS = {
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
-// Limieten overgenomen uit de beheeromgeving van de klantomgeving (abonnementen Receptionist 1646, Assistant 1647, Call Centre 1648
+// Limieten overgenomen uit de beheeromgeving van de klantomgeving (abonnementen Receptionist 1646, Assistant 1647, Call Centre 1650
 // en proefperiode): elke wijziging van een abonnement in de beheeromgeving moet hier worden doorgevoerd, en omgekeerd.
 export const MATRIX: MatrixGroup[] = [
   {

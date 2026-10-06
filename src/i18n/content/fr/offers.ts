@@ -75,7 +75,7 @@ export interface MatrixGroup { group: string; rows: MatrixRow[] }
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
-// Limites relevées dans l’admin de l’espace client (forfaits Receptionist 1646, Assistant 1647, Call Centre 1648
+// Limites relevées dans l’admin de l’espace client (forfaits Receptionist 1646, Assistant 1647, Call Centre 1650
 // et essai) : toute modification d’un forfait dans l’admin doit être reportée ici, et inversement.
 export const MATRIX: MatrixGroup[] = [
   {

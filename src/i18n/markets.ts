@@ -72,13 +72,13 @@ const basePlans = (): Record<PlanSlug, PlanPricing> => ({
   decouverte: { price: 0, minutes: 30 },
   receptionniste: { price: 99, minutes: 350, extraMinute: 0.39 },
   assistant: { price: 249, minutes: 1000, extraMinute: 0.36 },
-  'centre-appels': { price: 499, minutes: 2200, extraMinute: 0.32 },
+  'centre-appels': { price: 499, minutes: 2300, extraMinute: 0.32 },
   'sur-mesure': { price: null, minutes: 2500 },
 });
 const baseRecharges = () => [39, 89, 159, 299, 725];
 // Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL).
 const SALES_WIDGET = '2841fa2d-1fed-4fbc-b832-28b954d049a6';
-const SHARED = { currency: 'USD' as const, phoneNumberFrom: 5.99, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1648 } };
+const SHARED = { currency: 'USD' as const, phoneNumberFrom: 5.99, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 } };
 
 export const MARKETS: Record<Locale, Market> = {
   fr: {

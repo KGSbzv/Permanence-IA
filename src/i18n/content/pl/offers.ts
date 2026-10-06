@@ -72,7 +72,7 @@ export const OFFER_LABELS = {
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
-// Limity odczytane w panelu administracyjnym panelu klienta (pakiety Receptionist 1646, Assistant 1647, Call Centre 1648
+// Limity odczytane w panelu administracyjnym panelu klienta (pakiety Receptionist 1646, Assistant 1647, Call Centre 1650
 // i okres próbny): każdą zmianę pakietu w panelu administracyjnym trzeba przenieść tutaj i odwrotnie.
 export const MATRIX: MatrixGroup[] = [
   {

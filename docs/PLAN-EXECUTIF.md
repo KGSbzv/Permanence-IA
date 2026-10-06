@@ -10,7 +10,7 @@ capture de l'admin white-label Autocalls (pages et fonctions activables).
 - **Message d'essai unique, partout** : « 14 jours d'essai gratuit — 30 minutes incluses — prix HT — sans engagement ».
 - **3 actions de conversion à chaque section** : démarrer l'essai, essayer l'agent en live, laisser son numéro.
 - **Devise : dollars US (USD) sur tout le projet** (site et white-label Autocalls), décision du 5 octobre 2026.
-- **Forfaits HT** : Découverte 0 $ (14 j, 30 min) · Réceptionniste 99 $ / 350 min (0,28 $/min) · Assistant 249 $ / 1 000 min (0,25 $/min) · Centre d’appels 499 $ / 2 200 min (0,23 $/min) · Sur mesure au-delà de 2 500 min régulières.
+- **Forfaits HT** : Découverte 0 $ (14 j, 30 min) · Réceptionniste 99 $ / 350 min (0,28 $/min) · Assistant 249 $ / 1 000 min (0,25 $/min) · Centre d’appels 499 $ / 2 300 min (0,22 $/min) · Sur mesure au-delà de 2 500 min régulières.
 - **Recharges de crédit** (modèle Autocalls) : 39 $, 89 $, 159 $, 299 $, 725 $. Minute supplémentaire : 0,39 $ (Réceptionniste), 0,36 $ (Assistant), 0,32 $ (Centre d’appels), toujours plus chère que la minute incluse.
 - **Seuils de bascule** (forfait supérieur moins cher que forfait + recharges) : ≈ 735 min vers Assistant, ≈ 1 690 min vers Centre d’appels.
 - **Règles d’évolution** : dépassement ponctuel → recharge ; dépassements répétés → forfait supérieur ; recharges fréquentes → alerte « vous payez trop cher » ; au-delà de 2 500 min régulières → sur mesure.

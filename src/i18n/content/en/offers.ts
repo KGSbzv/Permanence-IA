@@ -65,7 +65,7 @@ export const OFFER_LABELS = {
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
-// Limits taken from the customer-area admin (Receptionist 1646, Assistant 1647, Call Centre 1648 plans
+// Limits taken from the customer-area admin (Receptionist 1646, Assistant 1647, Call Centre 1650 plans
 // and the trial): any change to a plan in the admin must be reflected here, and vice versa.
 export const MATRIX: MatrixGroup[] = [
   {

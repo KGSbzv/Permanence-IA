@@ -65,7 +65,7 @@ export const OFFER_LABELS: typeof FR_OFFER_LABELS = {
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
 const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
-// Limiti rilevati nell’admin dell’area clienti (piani Receptionist 1646, Assistant 1647, Call Centre 1648
+// Limiti rilevati nell’admin dell’area clienti (piani Receptionist 1646, Assistant 1647, Call Centre 1650
 // e prova): ogni modifica di un piano nell’admin va riportata qui, e viceversa.
 export const MATRIX: MatrixGroup[] = [
   {
