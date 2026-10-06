@@ -319,6 +319,7 @@ export function RechargeTables() {
             ))}
           </tbody>
         </table>
+        <p className="mt-3 text-sm text-slate-light">{c.site.rechargeFreeAmount}</p>
       </div>
       <div className="rounded-2xl bg-ink p-6 text-white/80">
         <h3 className="text-h3 font-semibold text-white">{t.cheaperTitle}</h3>

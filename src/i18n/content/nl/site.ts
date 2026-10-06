@@ -6,4 +6,5 @@ export const SITE_TEXT = {
   priceNote: 'Prijzen in Amerikaanse dollars (USD), exclusief belastingen — lokale belastingen komen erbij indien van toepassing. Een eigen telefoonnummer is optioneel en wordt per maand gefactureerd.',
   skipToContent: 'Naar de inhoud',
   languageLabel: 'Taal',
+  rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
 };

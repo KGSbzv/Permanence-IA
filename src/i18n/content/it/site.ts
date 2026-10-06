@@ -8,4 +8,5 @@ export const SITE_TEXT: typeof FR_SITE_TEXT = {
   priceNote: 'Prezzi in dollari USA (USD), IVA esclusa — eventuali imposte locali in aggiunta. Numero di telefono dedicato opzionale, fatturato mensilmente.',
   skipToContent: 'Vai al contenuto',
   languageLabel: 'Lingua',
+  rechargeFreeAmount: 'L’importo è libero: lo inserisca nella Sua area clienti (Add credits). Gli importi sopra sono esempi.',
 };

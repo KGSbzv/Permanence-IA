@@ -6,4 +6,5 @@ export const SITE_TEXT = {
   priceNote: 'Prices in US dollars (USD), excl. tax — local taxes added where applicable. A dedicated phone number is optional and billed monthly.',
   skipToContent: 'Skip to content',
   languageLabel: 'Language',
+  rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',
 };

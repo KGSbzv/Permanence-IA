@@ -16,4 +16,5 @@ export const SITE_TEXT = {
   priceNote: 'Ceny w dolarach amerykańskich (USD), netto — lokalne podatki doliczane, jeśli mają zastosowanie. Dedykowany numer telefonu dostępny opcjonalnie, płatny co miesiąc.',
   skipToContent: 'Przejdź do treści',
   languageLabel: 'Język',
+  rechargeFreeAmount: 'Kwotę wybierasz sam: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
 };

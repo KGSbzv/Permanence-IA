@@ -6,4 +6,5 @@ export const SITE_TEXT = {
   priceNote: 'Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables. Numéro de téléphone dédié en option, facturé au mois.',
   skipToContent: 'Aller au contenu',
   languageLabel: 'Langue',
+  rechargeFreeAmount: 'Le montant est libre : saisissez-le dans votre espace (Add credits). Les montants ci-dessus sont des exemples.',
 };
