@@ -32,6 +32,13 @@ export default function Layout({ children, title, description, ogImage = '/og-im
   const { openCallbackModal } = useCallbackModal();
   const { locale, market, c, path: localePath } = useI18n();
   const t = c.ui.components.layout;
+  // Langue du site mémorisée pour tout le domaine : l’espace client (app.permanenceia.com) la lit
+  // pour que Lucie accueille le client dans la langue du site d’où il vient.
+  React.useEffect(() => {
+    try {
+      document.cookie = `pia_lang=${locale}; domain=.permanenceia.com; path=/; max-age=31536000; samesite=lax; secure`;
+    } catch { /* cookies bloqués : l’espace client utilisera la langue du navigateur */ }
+  }, [locale]);
   // asPath ne contient pas le préfixe de langue.
   const path = asPath.split('?')[0].split('#')[0] || '/';
   const url = localeUrl(locale, path);
