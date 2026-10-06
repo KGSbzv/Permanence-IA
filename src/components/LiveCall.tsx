@@ -1,8 +1,8 @@
 // Élément signature du site : un appel qui se déroule puis devient une fiche exploitable.
 // Une seule animation orchestrée ; tout est affiché d’emblée si l’utilisateur réduit les animations.
 import React, { useEffect, useRef, useState } from 'react';
-import { CheckCircle2, Mic } from 'lucide-react';
-import { Bubble, Wave } from './Mock';
+import { CheckCircle2 } from 'lucide-react';
+import { AgentFace, Bubble, Wave } from './Mock';
 import { useI18n } from '@/i18n';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function LiveCall({ title, call, lead, leadTitle }: Props) {
-  const { c } = useI18n();
+  const { c, persona } = useI18n();
   const t = c.ui.components.liveCall;
   const total = call.length + 1; // les répliques puis la fiche
   const [step, setStep] = useState(total);
@@ -41,10 +41,10 @@ export default function LiveCall({ title, call, lead, leadTitle }: Props) {
       <div className="rounded-3xl border border-line bg-white p-5 shadow-float">
         <div className="flex items-center justify-between rounded-2xl bg-night px-4 py-3 text-white">
           <div className="flex items-center gap-3">
-            <span className={`flex h-10 w-10 items-center justify-center rounded-full bg-signal ${done ? '' : 'animate-pulsering'}`}><Mic className="h-4 w-4" aria-hidden /></span>
+            <span className={`flex h-10 w-10 shrink-0 rounded-full ${done ? '' : 'animate-pulsering'}`}><AgentFace className="h-10 w-10 ring-2 ring-signal" /></span>
             <div>
               <p className="text-sm font-semibold">{title ?? t.title}</p>
-              <p className="text-xs text-white/60">{done ? t.ended : t.ongoing}</p>
+              <p className="text-xs text-white/60"><span className="font-medium text-white/85">{persona.name}</span> · {done ? t.ended : t.ongoing}</p>
             </div>
           </div>
           {!done && <Wave bars={14} />}

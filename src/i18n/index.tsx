@@ -7,6 +7,7 @@ import { CONTENT } from './content';
 import { DEFAULT_LOCALE, LANG_OF, asLocale, type Locale } from './locales';
 import { MARKETS, type Market, type PlanSlug } from './markets';
 import type { OfferText } from './content/fr/offers';
+import { PERSONAS } from '@/data/personas';
 
 export type Content = typeof fr;
 export type { Locale, Market, PlanSlug };
@@ -53,7 +54,9 @@ export function getI18n(rawLocale: unknown) {
   /** Chemin interne dans la langue courante (les <Link> de Next le font déjà ; utile pour <a href>). */
   const path = (p: string) => (locale === DEFAULT_LOCALE ? p : `/${locale}${p === '/' ? '' : p}`);
 
-  return { locale, market, c, num, money, perMin, offers, offer, path };
+  // Agent IA du marché (prénom et portrait), utilisé partout où le site montre « l’agent ».
+  const persona = PERSONAS[locale];
+  return { locale, market, persona, c, num, money, perMin, offers, offer, path };
 }
 
 export type I18n = ReturnType<typeof getI18n>;

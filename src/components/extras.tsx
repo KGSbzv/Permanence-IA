@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
-  ArrowUpRight, BarChart3, BellRing, Bot, CalendarCheck, Check, Clock, FileText, Headphones, Layers,
+  ArrowUpRight, BarChart3, BellRing, CalendarCheck, Check, Clock, FileText, Headphones, Layers,
   MessageCircle, PhoneCall, PhoneForwarded, PhoneIncoming, PhoneOutgoing, RefreshCw, Search,
   ShieldCheck, Sparkles, Target, UserCheck, Users, Wand2,
 } from 'lucide-react';
@@ -12,6 +12,7 @@ import Mock, { Wave } from './Mock';
 import { Heading, Photo } from './ui';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
+import { TEAM_PERSONAS } from '@/data/personas';
 
 /* ---------- Bandeau défilant ---------- */
 
@@ -53,7 +54,8 @@ const AGENT_STYLE = [
 
 function useAgents() {
   const { c } = useI18n();
-  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i] }));
+  // Chaque rôle a son personnage (prénom et visage), le même dans toutes les langues.
+  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i], persona: TEAM_PERSONAS[i] }));
 }
 
 export function AgentOrbit() {
@@ -71,8 +73,16 @@ export function AgentOrbit() {
         const angle = (i / AGENTS.length) * 2 * Math.PI - Math.PI / 2;
         return (
           <div key={a.name} className="absolute -translate-x-1/2 -translate-y-1/2 text-center" style={{ left: `${50 + r * Math.cos(angle)}%`, top: `${50 + r * Math.sin(angle)}%` }}>
-            <span className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white shadow-card ring-4 ring-white`}><a.icon className="h-6 w-6" /></span>
-            <span className="mx-auto mt-1.5 block w-max max-w-[7rem] whitespace-normal sm:max-w-[8rem] rounded-xl bg-white px-2 py-0.5 text-center text-[11px] font-semibold leading-tight text-ink shadow-card">{a.name}</span>
+            {/* Visage du personnage ; la pastille de couleur rappelle son rôle. */}
+            <span className="relative mx-auto block h-14 w-14 sm:h-16 sm:w-16">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={a.persona.photo} alt="" width={64} height={64} loading="lazy" className="h-full w-full rounded-full object-cover shadow-card ring-4 ring-white" />
+              <span className={`absolute -bottom-0.5 -right-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-3 w-3" /></span>
+            </span>
+            <span className="mx-auto mt-1.5 block w-max max-w-[7rem] whitespace-normal rounded-xl bg-white px-2 py-1 text-center leading-tight shadow-card sm:max-w-[8rem]">
+              <span className="block font-display text-[12px] font-bold text-ink">{a.persona.name}</span>
+              <span className="block text-[10.5px] font-medium text-slate">{a.name}</span>
+            </span>
           </div>
         );
       })}
@@ -92,12 +102,21 @@ export function AgentTeam() {
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {AGENTS.map((a) => (
             <Link key={a.name} href={a.href} className="group flex gap-3 rounded-2xl border border-line bg-white p-4 hover:border-ink">
-              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white`}><a.icon className="h-5 w-5" aria-hidden /></span>
-              <span><span className="block font-display font-semibold text-ink group-hover:underline">{a.name}</span><span className="block text-[14px] leading-snug">{a.role}</span></span>
+              <span className="relative h-11 w-11 shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={a.persona.photo} alt="" width={44} height={44} loading="lazy" className="h-full w-full rounded-full object-cover" />
+                <span className={`absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-2.5 w-2.5" aria-hidden /></span>
+              </span>
+              <span>
+                <span className="block font-display font-semibold leading-tight text-ink group-hover:underline">{a.persona.name}<span className="sr-only">,</span></span>
+                <span className="block text-[13px] font-semibold leading-tight text-signal-deep">{a.name}</span>
+                <span className="mt-1 block text-[14px] leading-snug">{a.role}</span>
+              </span>
             </Link>
           ))}
         </div>
         <p className="mt-4 text-sm text-slate-light">{t.custom}</p>
+        <p className="mt-1.5 text-xs text-slate-light">{t.virtualNote}</p>
       </div>
     </div>
   );
@@ -225,7 +244,7 @@ export function UseCaseTabs() {
 /* ---------- Plateforme complète (grille de fonctions avec mini-visuels) ---------- */
 
 export function PlatformGrid() {
-  const { c } = useI18n();
+  const { c, persona } = useI18n();
   const t = c.ui.components.platformGrid;
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -250,7 +269,10 @@ export function PlatformGrid() {
         <p className="font-display text-lg font-bold text-ink">{t.transferTitle}</p>
         <p className="mt-1 text-[15px]">{t.transferText}</p>
         <div className="mt-6 flex items-center justify-between rounded-2xl bg-white p-4 shadow-card" aria-hidden>
-          <span className="flex items-center gap-2 text-sm font-semibold text-ink"><Bot className="h-5 w-5 text-signal" />{t.aiAgent}</span>
+          <span className="flex items-center gap-2 text-sm font-semibold text-ink">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={persona.photo} alt="" width={28} height={28} loading="lazy" className="h-7 w-7 rounded-full object-cover" />{t.aiAgent}
+          </span>
           <Wave bars={10} />
           <span className="flex items-center gap-2 text-sm font-semibold text-ink"><Users className="h-5 w-5 text-ok" />{t.yourTeam}</span>
         </div>

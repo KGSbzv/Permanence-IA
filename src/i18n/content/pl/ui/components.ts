@@ -374,6 +374,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sentTitle: 'Zgłoszenie przyjęte',
     sentText: (name: string) => `${name} zadzwoni w ciągu kilku minut w godzinach pracy (od poniedziałku do soboty, 9:00–19:00). Miej telefon pod ręką.`,
     again: 'Spróbuj ponownie',
+    portraitAlt: (name: string, accent: string) => `${name}, agentka głosowa AI (${accent})`,
   },
 
   industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
@@ -394,6 +395,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: 'Zbuduj swój zespół agentów AI',
     intro: 'Każdy agent ma określoną rolę. Włącz tych, których potrzebuje Twoja firma; korzystają z tej samej historii i tych samych informacji.',
     custom: 'Potrzebujesz nietypowego scenariusza? Skonfigurujemy agenta na miarę.',
+    virtualNote: 'Jade, Emma, Katie i ich koleżanki to wirtualne agentki AI: ich twarze to wygenerowane ilustracje, a nie prawdziwe osoby.',
   },
 
   sectorShowcase: {

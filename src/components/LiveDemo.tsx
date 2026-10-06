@@ -7,9 +7,8 @@ import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
 import { MARKETS } from '@/i18n/markets';
+import { PERSONAS } from '@/data/personas';
 
-/** Une seule voix réelle par langue (celle des agents de chaque marché). */
-const VOICES: Record<Locale, string> = { fr: 'Jade', 'en-gb': 'Katie', 'en-au': 'Charlotte', it: 'Manuela', pl: 'Lena', nl: 'Emma' };
 /** Nom de chaque langue dans sa propre langue (identique sur toutes les versions du site). */
 const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands' };
 /** Libellés internes de la note (lus par l'équipe et l'agent de la campagne, en français). */
@@ -294,7 +293,9 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
 
   useEffect(() => { setLang(locale); }, [locale]);
 
-  const voice = VOICES[lang];
+  // Une seule voix réelle par langue : celle de l’agent du marché (prénom et portrait).
+  const persona = PERSONAS[lang];
+  const voice = persona.name;
   const sectorName = c.sectors.find((s) => s.slug === sector)?.name ?? '';
   const hue = HUES[role];
   const Heading = headingLevel;
@@ -348,7 +349,16 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         <div className="relative order-first min-h-[300px] overflow-hidden bg-[radial-gradient(120%_90%_at_50%_40%,#141E47_0%,#0A1233_70%)] sm:min-h-[380px] lg:order-last lg:min-h-full">
           {/* Cercles concentriques : la ligne qui reste ouverte */}
           <div aria-hidden className="absolute inset-0 opacity-40 [background:repeating-radial-gradient(circle_at_50%_44%,transparent_0_46px,rgba(90,211,236,.08)_47px,transparent_48px)]" />
-          <div className="absolute inset-x-0 top-0 bottom-[30%] sm:bottom-[26%]"><BigOrb hue={hue} energy={dialog || state === 'busy' ? 1 : state === 'sent' ? 0.7 : 0.25} /></div>
+          <div className="absolute inset-x-0 top-0 bottom-[30%] [container-type:size] sm:bottom-[26%]">
+            <BigOrb hue={hue} energy={dialog || state === 'busy' ? 1 : state === 'sent' ? 0.7 : 0.25} />
+            {/* Visage de l'agent au cœur de l'orbe : la sphère colorée en devient le liseré, les ondes l'entourent. */}
+            <div className="absolute left-1/2 top-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full shadow-[0_10px_40px_rgba(5,10,30,.55)]" style={{ width: 'min(41cqw, 41cqh)' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img key={lang} src={persona.photo} alt={t.portraitAlt(voice, t.accents[lang])} width={200} height={200} decoding="async"
+                className="h-full w-full animate-rise object-cover motion-reduce:animate-none" />
+              <span aria-hidden className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,.18),inset_0_-14px_28px_rgba(10,18,51,.35)]" />
+            </div>
+          </div>
           <p className="absolute left-5 top-5 flex items-center gap-2 text-[13px] text-white/70">
             <span className="relative flex h-2 w-2" aria-hidden><span className="absolute inset-0 animate-ping rounded-full bg-ok/70 motion-reduce:animate-none" /><span className="relative h-2 w-2 rounded-full bg-ok" /></span>
             {t.stageLabel}
@@ -394,7 +404,9 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
               {LOCALES.map((l) => (
                 <label key={l} className="cursor-pointer">
                   <input type="radio" name={`${uid}-lang`} value={l} checked={lang === l} onChange={() => setLang(l)} className="peer sr-only" />
-                  <span className={`block rounded-full px-3 py-1.5 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
+                  <span className={`flex items-center gap-1.5 rounded-full py-1 pl-1 pr-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={PERSONAS[l].photo} alt="" width={24} height={24} loading="lazy" className={`h-6 w-6 shrink-0 rounded-full object-cover ${lang === l ? '' : 'opacity-80'}`} />
                     {NATIVE[l]}
                   </span>
                 </label>

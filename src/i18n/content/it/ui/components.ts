@@ -365,6 +365,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sentTitle: 'Richiesta ricevuta',
     sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00 – 19:00). Tenga il telefono a portata di mano.`,
     again: 'Fare un’altra prova',
+    portraitAlt: (name: string, accent: string) => `${name}, agente vocale IA (${accent})`,
   },
 
   industryMarquee: ['Idraulici', 'Elettricisti', 'Studi dentistici', 'Cliniche', 'Agenzie immobiliari', 'Gestione affitti', 'Officine', 'Carrozzerie', 'Parrucchieri', 'Barbieri', 'Centri estetici', 'Ristoranti', 'Hotel', 'Avvocati', 'Commercialisti', 'E-commerce', 'Fisioterapisti', 'Osteopati', 'Veterinari'],
@@ -385,6 +386,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: 'Costruisca il Suo team di agenti AI',
     intro: 'Ogni agente ha un ruolo preciso. Attivi quelli di cui la Sua azienda ha bisogno; condividono la stessa cronologia e le stesse informazioni.',
     custom: 'Le serve uno scenario particolare? Configuriamo un agente su misura.',
+    virtualNote: 'Jade, Emma, Katie e le loro colleghe sono agenti IA virtuali: i volti sono illustrazioni generate, non persone reali.',
   },
 
   sectorShowcase: {

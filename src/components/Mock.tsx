@@ -1,7 +1,7 @@
 // Maquettes produit codées (cartes d’interface) : la « preuve visuelle » de chaque fonction.
 import React from 'react';
 import {
-  Bot, CalendarCheck, CheckCircle2, FileText, Globe, Link2, MessageCircle, Mic, Phone,
+  CalendarCheck, CheckCircle2, FileText, Globe, Link2, MessageCircle, Mic, Phone,
   PhoneForwarded, PhoneOutgoing, Send, Sparkles, User, Workflow, Zap,
 } from 'lucide-react';
 import type { MockKind } from '@/i18n/content/fr/modules';
@@ -23,13 +23,20 @@ export function Wave({ bars = 18, className = '' }: { bars?: number; className?:
   );
 }
 
+/** Portrait rond de l’agent IA du marché (visage illustratif, décoratif : le nom est écrit à côté). */
+export function AgentFace({ className = 'h-7 w-7' }: { className?: string }) {
+  const { persona } = useI18n();
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src={persona.photo} alt="" width={40} height={40} loading="lazy" className={`shrink-0 rounded-full object-cover ${className}`} />;
+}
+
 export function Bubble({ who, children }: { who: 'agent' | 'client'; children: React.ReactNode }) {
   const agent = who === 'agent';
   return (
     <div className={`flex gap-2 ${agent ? '' : 'flex-row-reverse'}`}>
-      <span className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${agent ? 'bg-ink text-white' : 'bg-paper text-slate'}`}>
-        {agent ? <Bot className="h-3.5 w-3.5" aria-hidden /> : <User className="h-3.5 w-3.5" aria-hidden />}
-      </span>
+      {agent ? <AgentFace className="mt-0.5 h-7 w-7" /> : (
+        <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-paper text-slate"><User className="h-3.5 w-3.5" aria-hidden /></span>
+      )}
       <p className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-[14px] leading-snug ${agent ? 'rounded-tl-sm bg-signal-soft text-ink' : 'rounded-tr-sm bg-paper text-ink'}`}>{children}</p>
     </div>
   );
@@ -37,12 +44,13 @@ export function Bubble({ who, children }: { who: 'agent' | 'client'; children: R
 
 function CallMock() {
   const t = useT().call;
+  const { persona } = useI18n();
   return (
     <Card>
       <div className="flex items-center justify-between rounded-xl bg-night px-4 py-3 text-white">
         <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 animate-pulsering items-center justify-center rounded-full bg-signal"><Mic className="h-4 w-4" aria-hidden /></span>
-          <div><p className="text-sm font-semibold">{t.agent}</p><p className="text-xs text-white/60">{t.meta}</p></div>
+          <span className="flex h-9 w-9 shrink-0 animate-pulsering rounded-full motion-reduce:animate-none"><AgentFace className="h-9 w-9" /></span>
+          <div><p className="text-sm font-semibold">{persona.name} <span className="font-normal text-white/70">{t.agent}</span></p><p className="text-xs text-white/60">{t.meta}</p></div>
         </div>
         <Wave bars={12} />
       </div>
