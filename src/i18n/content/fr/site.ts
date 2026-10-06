@@ -6,5 +6,6 @@ export const SITE_TEXT = {
   priceNote: (numberFrom: string) => `Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables. Acquisition d’un numéro dédié à partir de ${numberFrom} HT par mois, selon le pays.`,
   skipToContent: 'Aller au contenu',
   languageLabel: 'Langue',
+  payg: (rate: string) => `Pas encore prêt pour un forfait ? Payez à la consommation : ${rate} HT la minute, sans abonnement. Vous ajoutez du crédit quand vous voulez (Add credits) ; il n’expire pas. Un forfait revient moins cher dès que vos appels sont réguliers.`,
   rechargeFreeAmount: 'Le montant est libre : saisissez-le dans votre espace (Add credits). Les montants ci-dessus sont des exemples.',
 };

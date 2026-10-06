@@ -16,5 +16,6 @@ export const SITE_TEXT = {
   priceNote: (numberFrom: string) => `Ceny w dolarach amerykańskich (USD), netto — lokalne podatki doliczane, jeśli mają zastosowanie. Zakup dedykowanego numeru od ${numberFrom} netto miesięcznie, zależnie od kraju.`,
   skipToContent: 'Przejdź do treści',
   languageLabel: 'Język',
+  payg: (rate: string) => `Nie potrzebujesz jeszcze pakietu? Płać za użycie: ${rate} netto za minutę, bez abonamentu. Doładowujesz kredyt, kiedy chcesz (Add credits); nie wygasa. Pakiet wychodzi taniej, gdy połączenia są regularne.`,
   rechargeFreeAmount: 'Kwotę wybierasz sam: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
 };

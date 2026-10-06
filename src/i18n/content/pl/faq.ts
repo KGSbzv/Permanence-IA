@@ -24,6 +24,7 @@ export const FAQ_GENERAL: QA[] = [
 ];
 
 export const FAQ_PRICING: QA[] = [
+  { q: 'Czy mogę płacić za użycie, bez pakietu?', a: 'Tak. Załóż konto, a potem doładowuj kredyt, kiedy chcesz (Add credits): minuta kosztuje 0,39 $ netto, bez abonamentu, a kredyt nie wygasa. Masz wtedy te same funkcje co w pakiecie Recepcjonistka (1 agent, 2 jednoczesne połączenia, 1 numer). Gdy połączenia są regularne, pakiet wychodzi taniej: od 0,28 $ do 0,22 $ za minutę.' },
   { q: 'Co się dzieje po wykorzystaniu 30 minut próbnych?', a: '30 minut to limit okresu próbnego: po jego wyczerpaniu połączenia są wstrzymane do końca okresu próbnego lub do rozpoczęcia subskrypcji. Po 14 dniach wybrany pakiet zostaje uruchomiony, chyba że anulujesz go w panelu klienta.' },
   { q: 'Czy ceny są podane netto?', a: 'Tak, wszystkie ceny są podane netto (bez VAT). Lokalne podatki są doliczane, jeśli mają zastosowanie.' },
   { q: 'Co się dzieje, gdy przekroczę limit minut?', a: 'W każdej chwili możesz dokupić minuty doładowaniem, aby przetrwać intensywniejszy miesiąc. Jeśli regularnie przekraczasz limit, wyższy pakiet wychodzi taniej za minutę: poinformujemy Cię o tym.' },

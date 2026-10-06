@@ -293,6 +293,7 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
           );
         })}
       </div>
+      <p className="mt-6 text-center text-sm text-slate">{c.site.payg(money(market.paygMinute, 2))}</p>
     </div>
   );
 }

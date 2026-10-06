@@ -26,6 +26,7 @@ export const FAQ_GENERAL: QA[] = [
 ];
 
 export const FAQ_PRICING: QA[] = [
+  { q: 'Can I pay as I go, without a plan?', a: 'Yes. Create your account, then add credit whenever you like (Add credits): calls cost $0.39 excl. tax per minute, with no subscription, and credit never expires. You get the same features as the Receptionist plan (1 agent, 2 concurrent calls, 1 number). As soon as your calls are regular, a plan costs less: from $0.28 down to $0.22 a minute.' },
   { q: 'What happens after the 30 trial minutes?', a: 'The 30 minutes are the cap for the trial period: once reached, calls stop until the trial ends or until you start your subscription. At the end of the 14 days, your chosen plan starts, unless you have cancelled it from your customer area.' },
   { q: 'Are prices excl. tax?', a: 'Yes, all prices are shown excluding tax. Local taxes are added where they apply.' },
   { q: 'What happens if I go over my minutes?', a: 'You can add minutes at any time with a top-up, to cover a busy month. If you regularly go over, the next plan up works out cheaper per minute: we will let you know.' },

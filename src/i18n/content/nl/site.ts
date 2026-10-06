@@ -6,5 +6,6 @@ export const SITE_TEXT = {
   priceNote: (numberFrom: string) => `Prijzen in Amerikaanse dollars (USD), exclusief belastingen — lokale belastingen komen erbij indien van toepassing. Een eigen nummer is verkrijgbaar vanaf ${numberFrom} excl. btw per maand, afhankelijk van het land.`,
   skipToContent: 'Naar de inhoud',
   languageLabel: 'Taal',
+  payg: (rate: string) => `Nog niet klaar voor een abonnement? Betaal per gebruik: ${rate} excl. btw per minuut, zonder abonnement. U vult credit aan wanneer u wilt (Add credits); het vervalt niet. Een abonnement is goedkoper zodra u regelmatig gebeld wordt.`,
   rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
 };

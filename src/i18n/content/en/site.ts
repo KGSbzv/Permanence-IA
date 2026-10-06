@@ -6,5 +6,6 @@ export const SITE_TEXT = {
   priceNote: (numberFrom: string) => `Prices in US dollars (USD), excl. tax — local taxes added where applicable. Dedicated number from ${numberFrom} excl. tax per month, depending on the country.`,
   skipToContent: 'Skip to content',
   languageLabel: 'Language',
+  payg: (rate: string) => `Not ready for a plan? Pay as you go: ${rate} excl. tax per minute, no subscription. Add credit whenever you like (Add credits); it never expires. A plan costs less as soon as your calls are regular.`,
   rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',
 };

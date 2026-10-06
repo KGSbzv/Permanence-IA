@@ -24,6 +24,7 @@ export const FAQ_GENERAL: QA[] = [
 ];
 
 export const FAQ_PRICING: QA[] = [
+  { q: 'Puis-je payer à la consommation, sans forfait ?', a: 'Oui. Créez votre compte, puis ajoutez du crédit quand vous voulez (Add credits) : la minute est à 0,39 $ HT, sans abonnement, et le crédit n’expire pas. Vous avez alors les mêmes fonctions que le forfait Réceptionniste (1 agent, 2 appels simultanés, 1 numéro). Dès que vos appels sont réguliers, un forfait revient moins cher : de 0,28 $ à 0,22 $ la minute.' },
   { q: 'Que se passe-t-il après les 30 minutes d’essai ?', a: 'Les 30 minutes sont le plafond de la période d’essai : une fois atteintes, les appels s’arrêtent jusqu’à la fin de l’essai ou jusqu’à ce que vous démarriez votre abonnement. À la fin des 14 jours, le forfait choisi démarre, sauf si vous l’avez annulé depuis votre espace.' },
   { q: 'Les prix sont-ils HT ?', a: 'Oui, tous les prix sont affichés hors taxes. Les taxes locales s’ajoutent si elles s’appliquent.' },
   { q: 'Que se passe-t-il si je dépasse mes minutes ?', a: 'Vous ajoutez des minutes à tout moment avec une recharge, pour dépanner un mois chargé. Si vous dépassez régulièrement, le forfait supérieur revient moins cher à la minute : nous vous le signalons.' },
