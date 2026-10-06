@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import LiveDemo from '@/components/LiveDemo';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
 import {
   Benefits, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IncludedStack, IntegrationsGrid, PricingCards,
   SectorCards, SecurityBlock, Steps, VoicesNumbers,
@@ -32,6 +32,7 @@ export default function Home() {
       {/* Hero : promesse + démo live réelle (navigateur ou appel sur votre téléphone) */}
       <section className="overflow-hidden bg-paper">
         <div className="wrap py-14 lg:py-20">
+          <TalkNowPill href={`#${LIVE_DEMO_ID}`} className="mb-6" />
           <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-12">
             <h1 className="text-hero font-extrabold"><Kw t={t.hero.title} /></h1>
             <div>

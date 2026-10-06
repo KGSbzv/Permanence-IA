@@ -17,5 +17,7 @@ export const SITE_TEXT = {
   skipToContent: 'Przejdź do treści',
   languageLabel: 'Język',
   payg: (rate: string) => `Nie potrzebujesz jeszcze pakietu? Płać za użycie: ${rate} netto za minutę, bez abonamentu. Doładowujesz kredyt, kiedy chcesz (Add credits); nie wygasa. Pakiet wychodzi taniej, gdy połączenia są regularne.`,
+  talkNow: 'Porozmawiaj z naszym agentem teraz',
+  talkNowSub: 'Demo na żywo, bezpłatnie, bez rejestracji',
   rechargeFreeAmount: 'Kwotę wybierasz sam: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
 };

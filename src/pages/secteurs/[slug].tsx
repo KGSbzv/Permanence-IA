@@ -7,7 +7,7 @@ import { Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
 import LiveCall from '@/components/LiveCall';
 import { AgentTeam, BeforeAfter, PortalPreview } from '@/components/extras';
-import { CTAs, CallbackForm, FaqDark, Heading, Section, Tick, TrialBadges } from '@/components/ui';
+import { CTAs, CallbackForm, FaqDark, Heading, Section, TalkNowPill, Tick, TrialBadges } from '@/components/ui';
 import {
   BillingProvider, DemoBlock, EconomyBlock, FinalCTA, GrowthLines, IncludedStack, IntegrationsGrid, MatrixTable,
   ModuleCards, PricingCards, SECTOR_ICON,
@@ -43,6 +43,7 @@ export default function SectorPage({ slug }: { slug: string }) {
       <section className="overflow-hidden bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-20">
           <div>
+            <TalkNowPill className="mb-5" />
             <p className="inline-flex items-center gap-2 font-display text-sm font-semibold text-signal-deep"><Icon className="h-4 w-4" aria-hidden />{s.name}</p>
             <h1 className="mt-3 text-hero font-extrabold">{s.title}</h1>
             <p className="mt-5 max-w-prose text-lg">{s.subtitle}</p>

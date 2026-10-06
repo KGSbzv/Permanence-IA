@@ -4,7 +4,7 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { Check, X } from 'lucide-react';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
 import {
   BillingProvider, DemoBlock, EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, ModuleCards, PricingCards,
   RechargeTables, SecurityBlock,
@@ -62,6 +62,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:py-20">
           <div>
+            <TalkNowPill className="mb-5" />
             <p className="font-display text-sm font-semibold text-signal-deep">{t.eyebrow(o.name, o.audience)}</p>
             <h1 className="mt-3 text-hero font-extrabold">{o.title}</h1>
             <p className="mt-5 max-w-prose text-lg">{o.pitch}</p>

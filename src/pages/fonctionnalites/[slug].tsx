@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Section, Tick, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, Tick, TrialBadges } from '@/components/ui';
 import {
   BillingProvider, DemoBlock, EconomyBlock, FinalCTA, IncludedStack, MatrixTable, ModuleCards, PricingCards, SecurityBlock, Steps,
 } from '@/components/blocks';
@@ -36,6 +36,7 @@ export default function ModulePage({ slug }: { slug: string }) {
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.15fr_1fr] lg:items-center lg:py-20">
           <div>
+            <TalkNowPill className="mb-5" />
             <p className="font-display text-sm font-semibold text-signal-deep">{t.eyebrow(m.family, m.name)}</p>
             <h1 className="mt-3 text-hero font-extrabold">{m.title}</h1>
             <p className="mt-5 max-w-prose text-lg">{m.intro}</p>

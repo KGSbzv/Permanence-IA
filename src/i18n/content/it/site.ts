@@ -9,5 +9,7 @@ export const SITE_TEXT: typeof FR_SITE_TEXT = {
   skipToContent: 'Vai al contenuto',
   languageLabel: 'Lingua',
   payg: (rate: string) => `Non è ancora pronto per un piano? Paghi a consumo: ${rate} IVA esclusa al minuto, senza abbonamento. Aggiunge credito quando vuole (Add credits); non scade. Un piano costa meno appena le chiamate sono regolari.`,
+  talkNow: 'Parli subito con il nostro agente',
+  talkNowSub: 'Demo dal vivo, gratuita, senza registrazione',
   rechargeFreeAmount: 'L’importo è libero: lo inserisca nella Sua area clienti (Add credits). Gli importi sopra sono esempi.',
 };

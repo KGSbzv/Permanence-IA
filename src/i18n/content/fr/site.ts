@@ -7,5 +7,7 @@ export const SITE_TEXT = {
   skipToContent: 'Aller au contenu',
   languageLabel: 'Langue',
   payg: (rate: string) => `Pas encore prêt pour un forfait ? Payez à la consommation : ${rate} HT la minute, sans abonnement. Vous ajoutez du crédit quand vous voulez (Add credits) ; il n’expire pas. Un forfait revient moins cher dès que vos appels sont réguliers.`,
+  talkNow: 'Parlez à notre agent maintenant',
+  talkNowSub: 'Démo live, gratuite, sans inscription',
   rechargeFreeAmount: 'Le montant est libre : saisissez-le dans votre espace (Add credits). Les montants ci-dessus sont des exemples.',
 };

@@ -7,5 +7,7 @@ export const SITE_TEXT = {
   skipToContent: 'Skip to content',
   languageLabel: 'Language',
   payg: (rate: string) => `Not ready for a plan? Pay as you go: ${rate} excl. tax per minute, no subscription. Add credit whenever you like (Add credits); it never expires. A plan costs less as soon as your calls are regular.`,
+  talkNow: 'Talk to our agent right now',
+  talkNowSub: 'Live demo, free, no sign-up',
   rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',
 };

@@ -1,7 +1,7 @@
 import React, { useId, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ArrowUpRight, Check, ChevronDown, PhoneCall, Play, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
 import { DEMO_URL, SIGNUP_URL, SITE } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
@@ -34,6 +34,29 @@ export function Heading({
 
 /** Au plus trois pastilles sur mobile ; les suivantes apparaissent à partir de sm. */
 const MOBILE_BADGES = 3;
+
+/** Petite bannière « Parlez à notre agent maintenant » : mène à la démo live de la page (ancre). */
+export function TalkNowPill({ href = '#demo', className = '' }: { href?: string; className?: string }) {
+  const { c } = useI18n();
+  return (
+    <div className={className}>
+    <a
+      href={href}
+      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-signal/30 bg-white py-1.5 pl-1.5 pr-4 text-sm shadow-sm ring-4 ring-signal/10 transition hover:border-signal hover:ring-signal/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-signal"
+    >
+      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-signal text-white">
+        <span className="absolute inset-0 animate-ping rounded-full bg-signal/40" aria-hidden />
+        <Mic className="relative h-3.5 w-3.5" aria-hidden />
+      </span>
+      <span className="min-w-0 leading-tight">
+        <span className="block font-semibold text-ink">{c.site.talkNow}</span>
+        <span className="block truncate text-xs text-slate">{c.site.talkNowSub}</span>
+      </span>
+      <ArrowUpRight className="h-4 w-4 shrink-0 rotate-90 text-signal-deep transition group-hover:translate-y-0.5" aria-hidden />
+    </a>
+    </div>
+  );
+}
 
 export function TrialBadges({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
   const { c, market } = useI18n();
