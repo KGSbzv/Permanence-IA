@@ -1,41 +1,70 @@
 Proces: terugbellen, opvolging en support (PermanenceAI)
 
+0. Wie we zijn
+- PermanenceAI (www.permanenceia.com) levert AI-spraak- en chatagents onder eigen label (white label) aan het mkb: telefonische bereikbaarheid 24 uur per dag, afspraken inplannen, aanvragen kwalificeren, opvolging en support.
+- PermanenceAI is een merk van SINAY STRATEGIC LLC, een vennootschap geregistreerd in de staat Wyoming (Verenigde Staten). Schriftelijk contact: contact@permanenceia.com.
+- Onze agents zijn kunstmatige intelligentie en stellen zich ook zo voor. Direct aan het begin van elk gesprek zegt de agent dat hij een AI-assistent is en dat het gesprek wordt opgenomen.
+- De website bestaat in meerdere versies: Frankrijk en Franstalige landen, Verenigd Koninkrijk, Australië, Italië, Polen, Nederland en Israël (Hebreeuws). De prijzen zijn overal gelijk, in Amerikaanse dollars exclusief btw.
+- Onze eigen lijnen: in Israël wordt 02-376-7085 (+972 2-376-7085) 24 uur per dag beantwoord door onze Hebreeuwstalige AI-agent. Op de andere markten loopt het contact via de live demo op de website, de chat- en spraakbubbel (widget), het terugbelverzoek, Messenger en e-mail.
+
 1. Wat de agent ontvangt bij een terugbelverzoek
 - Als iemand op www.permanenceia.com om terugbellen vraagt (verkoop, demo of support), ontvangt het uitgaande gesprek: customer_name (naam), company (bedrijf), sector (branche, bij verkoopverzoeken) en request_note (toelichting).
-- request_note bevat de behoefte of het probleem en, als de persoon er een koos, de vermelding "Créneau souhaité : …" met het gewenste moment (in het Frans).
-- De agent gaat uit van deze informatie en vraagt niet opnieuw naar wat al bekend is.
+- request_note bevat de beschreven behoefte of het probleem en, als de persoon er een koos, de vermelding "Créneau souhaité : …" (Frans voor "gewenst tijdstip") met het moment dat de persoon voorkeur heeft.
+- De agent gaat uit van deze informatie en vraagt niet opnieuw naar wat al bekend is. Hij opent het gesprek door het echte verzoek te noemen ("U heeft ons gevraagd u terug te bellen over…").
+- Terugbelgesprekken gaan alleen naar mensen die erom gevraagd hebben: het zijn geen verkoopgesprekken (telemarketing).
 
 2. Terugbellen op een precies tijdstip
-- Als de persoon op een bepaald moment gebeld wil worden, vraagt de agent naar dag, datum, tijd en tijdzone (standaard Nederlandse tijd) en herhaalt die één keer ter bevestiging.
+- Als de persoon op een bepaald moment gebeld wil worden, vraagt de agent naar dag, datum, tijd en tijdzone (standaard de tijd van het land van de persoon) en herhaalt die één keer ter bevestiging.
 - De agent legt het tijdstip vast in gewone woorden (bijvoorbeeld "donderdag 9 oktober om 14.30 uur Nederlandse tijd") en, bij verkoopterugbelverzoeken, ook in ISO 8601 met de tijdzoneverschuiving (bijvoorbeeld 2026-10-09T14:30:00+02:00). Het terugbelgesprek wordt dan automatisch op dat moment ingepland, binnen de beltijden van de campagne.
+- Het telefoonnummer wordt in internationaal formaat genoteerd (+33…, +44…, +61…, +39…, +48…, +31…, +972…) en cijfer voor cijfer herhaald. De agent vraagt ook het e-mailadres en de uitdrukkelijke toestemming van de persoon om teruggebeld te worden.
 - Als de persoon op het moment van bellen niet kan, stelt de agent een nieuw precies tijdstip voor en legt dat vast.
 
 3. Opvolging na elk gesprek
-- Elk gesprek wordt opgenomen, samengevat en de nuttige gegevens worden eruit gehaald (resultaat, interesse, afgesproken tijdstip, behoefte, ernst van een probleem).
+- Elk gesprek wordt opgenomen, samengevat en de nuttige gegevens worden eruit gehaald (resultaat van het gesprek, interesse, overwogen abonnement, afgesproken tijdstip, behoefte, ernst van een probleem).
 - De resultaten gaan per e-mail naar het PermanenceAI-team en worden toegevoegd aan het CRM.
 - Mogelijke resultaten van een verkoopterugbelgesprek: demo of proefperiode afgesproken, terugbellen, niet geïnteresseerd, niet meer bellen, verkeerd contact. Support: opgelost, ticket aangemaakt, terugbellen, verkeerd contact, niet meer bellen.
-- Bij geen antwoord (of een verbroken verbinding of voicemail) probeert de campagne het tot 3 keer opnieuw.
-- Wie weigert of vraagt niet meer gebeld te worden, komt op de belblokkeringslijst (blacklist) en wordt niet meer gebeld.
-- Verkeerd nummer of verkeerde persoon: de agent verontschuldigt zich, doet geen verkooppraatje en beëindigt het gesprek.
+- Bij geen antwoord (of een verbroken verbinding of voicemail) probeert de campagne het tot 3 keer opnieuw. Op een voicemail spreekt de agent hooguit één kort bericht in, zonder persoonlijke details, of helemaal geen.
+- Wie weigert of vraagt niet meer gebeld te worden, komt op de blokkeerlijst (blacklist) en wordt niet meer gebeld.
+- Verkeerd nummer of verkeerde persoon: de agent verontschuldigt zich, presenteert het aanbod niet en beëindigt het gesprek.
 
-4. Support
-- De agent stelt stap voor stap een diagnose, één controle tegelijk, op basis van de kennisbank.
+4. Support en escalatie
+- De agent stelt stap voor stap een diagnose, één controle tegelijk, op basis van de kennisbank en de handleidingen van de klantomgeving.
+- Bij PermanenceAI bestaat geen live doorverbinding naar een mens. Escalatie gaat op twee manieren: een terugbelverzoek door een adviseur, of een supportticket. In beide gevallen schrijft de agent een samenvatting van drie zinnen (wie, welk probleem, wat al is geprobeerd of wat er verwacht wordt).
+- Niet verwarren: de agents die onze klanten voor hun eigen bedrijf instellen, kunnen gesprekken wél doorverbinden naar het team van de klant (tool "Call transfer", inbegrepen in alle abonnementen).
 - Is het probleem niet opgelost (of gaat het om een bug, facturatie of het account), dan maakt de agent een supportticket aan met beschrijving, ernst (blokkerend, hinderlijk, klein) en een terugbelmoment; het team krijgt een e-mail.
-- Als de persoon een mens wil spreken, maakt de agent een ticket aan zodat een adviseur terugbelt.
-- De agent belooft nooit terugbetalingen, tegoeden of kortingen: zulke verzoeken gaan via een ticket naar het team.
+- Als de persoon een mens wil spreken, gaat de agent niet in discussie: hij maakt een ticket of terugbelverzoek aan zodat een adviseur terugbelt, en zegt dat duidelijk.
+- De agent belooft nooit een terugbetaling, tegoed, korting of commercieel gebaar: zulke verzoeken gaan via een ticket naar het team.
 - Schriftelijk contact: contact@permanenceia.com.
 
-5. Klantomgeving (app.permanenceia.com)
-- Interface in het Engels, met een ingebouwde meertalige hulpassistent die klanten in hun eigen taal begeleidt.
-- Google-, Outlook-, Cal.com- en Calendly-agenda's zijn koppelbaar in alle abonnementen.
-- Nummers: een eigen nummer kopen (vanaf $5,99 per maand, afhankelijk van het land) of het huidige nummer behouden (doorschakelen, importeren, SIP).
-- SIP en WhatsApp beschikbaar in alle betaalde abonnementen.
-- Automatiseringen vanaf het abonnement Assistent.
+5. Het klantdossier inzien
+- Om het dossier van een bestaande klant in te zien, vraagt de agent het e-mailadres van het account, stuurt een 6-cijferige code naar dat adres en leest het dossier pas nadat de persoon de juiste code heeft gegeven.
+- Het dossier toont: resterende en verbruikte minuten, abonnement of proefstatus, agents, nummers, recente gesprekken en eerdere verzoeken.
+- De agent spreekt nooit gevoelige gegevens hardop uit: wachtwoord, kaartnummer, API-sleutels, volledig adres, gedetailleerde inhoud van gesprekken van derden. Hij geeft en wijzigt geen enkel wachtwoord.
+- Zonder geslaagde verificatie beantwoordt de agent alleen algemene vragen.
 
-6. Abonnementen (Amerikaanse dollars, exclusief btw)
-- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39.
-- Assistent: $249 per maand, 1.000 minuten. Extra minuut $0,36.
-- Callcenter: $499 per maand, 2.300 minuten. Extra minuut $0,32.
-- Maatwerk: boven 2.500 minuten.
-- Gratis proefperiode van 14 dagen met 30 minuten: er wordt een kaart gevraagd, tijdens de proefperiode wordt niets afgeschreven.
-- Op elk moment opzegbaar; reeds betaalde periodes worden niet terugbetaald.
+6. Klantomgeving (app.permanenceia.com)
+- Interface in het Engels, met een ingebouwde meertalige hulpassistent (bubbel rechtsonder) die de klant in zijn eigen taal begeleidt, schriftelijk of gesproken. De Help-pagina van de website vertaalt elk menu en biedt stapsgewijze handleidingen.
+- Inloggen met e-mail en wachtwoord, of met een Google- of LinkedIn-account.
+- Google-, Outlook-, Cal.com- en Calendly-agenda's zijn koppelbaar in alle abonnementen.
+- Nummers: een eigen nummer kopen in de klantomgeving (vanaf $5,99 excl. btw per maand, afhankelijk van het land; de exacte prijs wordt vóór aankoop getoond). Beschikbare landen: Verenigde Staten, Canada, Verenigd Koninkrijk, Australië, Italië, Nederland, Polen, Denemarken, Finland, Roemenië, Israël, Zuid-Afrika. Het nummer is niet bij het abonnement inbegrepen.
+- Frans nummer of het huidige nummer behouden: doorschakelen bij de provider, import via Twilio of Telnyx, of een SIP-koppeling (alle abonnementen).
+- WhatsApp, sms, Messenger en Instagram in alle abonnementen, betaald met berichtcredits (100 credits = $1, een geschreven AI-antwoord ≈ 2 credits).
+- Uitgaande campagnes, flow builder, automatiseringen en gekloonde stem vanaf het abonnement Assistent.
+
+7. Abonnementen (Amerikaanse dollars, exclusief btw)
+- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39. 1 agent, 2 gelijktijdige gesprekken, 1 nummer, 1 kennisbank.
+- Assistent: $249 per maand, 1.000 minuten. Extra minuut $0,36. 3 agents, 5 gelijktijdige gesprekken, 3 nummers, 3 campagnes, automatiseringen (5.000 runs per maand), 1 gekloonde stem, 1.000 berichtcredits per maand.
+- Callcenter: $499 per maand, 2.300 minuten. Extra minuut $0,32. Onbeperkt agents, campagnes en kennisbanken, 20 gelijktijdige gesprekken, 10 nummers, 3 gekloonde stemmen, 50.000 automatiseringen per maand, eigen dashboards, prioriteitssupport, 3.000 berichtcredits per maand.
+- Maatwerk: boven 2.500 minuten structureel, op offerte (onderhandelde minuutprijs, meerdere vestigingen, SLA).
+- Jaarlijkse facturatie: $990, $2.490 of $4.990 per jaar, dus 2 maanden gratis, vooraf betaald; minuten worden elke maand toegekend, de prijs van een extra minuut blijft gelijk.
+- Betalen naar gebruik, zonder abonnement: $0,39 per minuut, tegoed zonder vervaldatum, dezelfde functies als Receptionist.
+- Tegoed opwaarderen: $39, $89, $159, $299 of $725.
+- Geen opstartkosten, geen verplichting.
+- Gratis proefperiode van 14 dagen met 30 minuten: er wordt een kaart gevraagd, tijdens de proefperiode wordt niets afgeschreven; kosteloos opzeggen vóór het einde. Eén proefperiode per bedrijf of betaalmiddel.
+- Op elk moment opzegbaar in de klantomgeving (Billing info); de opzegging gaat in aan het einde van de al betaalde periode. Betaalde periodes en tegoeden worden niet terugbetaald.
+
+8. Belregels en compliance
+- Nederland: telemarketing naar consumenten mag alleen met hun voorafgaande toestemming of binnen een bestaande klantrelatie (en dan alleen voor eigen, vergelijkbare producten of diensten). Een terugbelverzoek, een afspraak die bevestigd moet worden of de opvolging van een lopende dienst blijven mogelijk.
+- Frankrijk: sinds 11 augustus 2026 vereist telefonische verkoop aan consumenten hun voorafgaande toestemming (Bloctel bestaat niet meer).
+- AVG: verwerkersovereenkomst (DPA) op verzoek, recht op verwijdering (gesprek, opname en transcriptie worden op verzoek verwijderd), standaard bewaartermijn van 12 maanden, instelbaar door de klant. Versleuteling met TLS en AES-256, ISO 27001-gecertificeerde dienstverlener. In Nederland is de Autoriteit Persoonsgegevens de toezichthouder.
+- Noodgevallen: de agent vervangt nooit de hulpdiensten. Hij zegt het lokale alarmnummer te bellen: Nederland 112, Frankrijk 112 of 15, Verenigd Koninkrijk 999, Australië 000, Italië en Polen 112, Israël 101 (ambulance), 100 (politie), 102 (brandweer).

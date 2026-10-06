@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Business plan PermanenceAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm; }
+  :root { --ink:#0E1B4D; --signal:#0FA3C4; --soft:#E3F4F8; --line:#D9E1EA; --slate:#4A5878; --ok:#1E8E5A; --warn:#B7791F; --bad:#C0392B; }
+  * { box-sizing: border-box; }
+  body { font-family: Figtree, system-ui, sans-serif; color: var(--ink); font-size: 10.5pt; line-height: 1.5; margin: 0; background: #fff; }
+  h1, h2, h3 { font-family: Poppins, system-ui, sans-serif; line-height: 1.2; margin: 0; }
+  h1 { font-size: 24pt; }
+  h2 { break-after: avoid; page-break-after: avoid; font-size: 15pt; margin: 22px 0 10px; padding-top: 6px; border-top: 2px solid var(--soft); }
+  h3 { break-after: avoid; font-size: 11.5pt; margin: 14px 0 6px; }
+  p { margin: 6px 0; }
+  ul { margin: 6px 0; padding-left: 18px; }
+  li { margin: 3px 0; }
+  .cover { background: var(--ink); color: #fff; border-radius: 14px; padding: 28px 30px; margin-bottom: 18px; }
+  .cover .tag { color: #9FE3F2; font-weight: 600; font-size: 10pt; }
+  .cover p { color: #D6E2F5; max-width: 150mm; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0 4px; }
+  .kpi { background: var(--soft); border-radius: 10px; padding: 10px 12px; }
+  .kpi b { display: block; font-family: Poppins, sans-serif; font-size: 15pt; }
+  .kpi span { font-size: 8.5pt; color: var(--slate); }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 4px; font-size: 9.5pt; page-break-inside: avoid; }
+  th, td { border-bottom: 1px solid var(--line); padding: 5px 7px; text-align: left; vertical-align: top; }
+  th { background: var(--soft); font-weight: 700; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  tr.total td { font-weight: 700; border-top: 2px solid var(--ink); }
+  .real { background: #F2FAFC; font-weight: 700; }
+  .note { font-size: 8.8pt; color: var(--slate); }
+  .box { border: 1px solid var(--line); border-left: 4px solid var(--signal); border-radius: 8px; padding: 10px 12px; margin: 10px 0; page-break-inside: avoid; }
+  .box.warn { border-left-color: var(--warn); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pill { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 8.5pt; font-weight: 700; }
+  .ok { background: #E3F5EC; color: var(--ok); } .mid { background: #FDF3E1; color: var(--warn); } .low { background: #FBE7E5; color: var(--bad); }
+  footer { margin-top: 18px; font-size: 8.5pt; color: var(--slate); border-top: 1px solid var(--line); padding-top: 8px; }
+  .pb { page-break-before: always; }
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="tag">PermanenceAI · Permanence IA — SINAY STRATEGIC LLC</div>
+  <h1 style="margin-top:6px">Business plan de lancement</h1>
+  <p>Agents vocaux IA pour PME, en libre-service, sur 7 marchés et 6 langues (français, anglais Royaume-Uni et Australie, italien, polonais, néerlandais, hébreu). Projection sur 36 mois, en dollars US, version du 6 octobre 2026.</p>
+</section>
+
+<div class="kpis">
+  <div class="kpi"><b>35–40 k$</b><span>budget à prévoir jusqu'au break-even (réserve incluse)</span></div>
+  <div class="kpi"><b>Mois 7</b><span>premier mois rentable (scénario réaliste)</span></div>
+  <div class="kpi"><b>Mois 11</b><span>mise de départ récupérée (réaliste)</span></div>
+  <div class="kpi"><b>329 k$</b><span>bénéfice net année 2 (réaliste)</span></div>
+</div>
+
+<h2>1. Le modèle économique</h2>
+<ul>
+  <li><b>Offre :</b> paiement à la consommation (0,39 $/min) et trois forfaits mensuels : Réceptionniste 99 $ (350 min), Assistant 249 $ (1 000 min), Centre d'appels 499 $ (2 300 min). Annuel : 2 mois offerts. Essai 14 jours / 30 min avec carte. Sans frais de mise en service, sans engagement.</li>
+  <li><b>Revenu moyen par client :</b> environ <b>141 $/mois</b>, en supposant 20 % à la consommation, 55 % Réceptionniste, 20 % Assistant, 5 % Centre d'appels.</li>
+  <li><b>Coût d'un client :</b> minutes à 0,09 $ (consommation de 60 % des minutes incluses), frais de paiement Stripe ≈ 4,5 %, support ≈ 6 $/mois.</li>
+  <li><b>Marge par client :</b> environ <b>98 $/mois, soit 70 %</b>.</li>
+</ul>
+
+<table>
+  <tr><th>Frais fixes</th><th class="n">Montant</th></tr>
+  <tr><td>Plateforme agence (marque blanche)</td><td class="n">419 $/mois</td></tr>
+  <tr><td>Hébergement, e-mail, numéros de l'entreprise, comptabilité, LLC, outils</td><td class="n">≈ 330 $/mois</td></tr>
+  <tr><td>Freelance support et opérations (à partir du mois 4)</td><td class="n">1 500 $/mois</td></tr>
+  <tr><td>Dépenses uniques : relecture juridique UE / Royaume-Uni / Israël, vidéos et visuels publicitaires, tests</td><td class="n">≈ 8 000 $</td></tr>
+</table>
+
+<h2>2. Où faire de la publicité, et sous quelle forme</h2>
+<div class="grid2">
+  <div class="box">
+    <h3>Google Search — 60 à 70 % du budget</h3>
+    <p>Le canal principal : la personne cherche déjà une solution. Chaque annonce mène à la page du métier concerné.</p>
+    <ul>
+      <li>FR : « secrétariat téléphonique », « permanence téléphonique », « standard téléphonique » + métier</li>
+      <li>EN : « answering service », « virtual receptionist »</li>
+      <li>HE : <span dir="rtl" style="unicode-bidi:isolate">מענה טלפוני לעסקים</span> ; <span dir="rtl" style="unicode-bidi:isolate">מזכירה טלפונית</span></li>
+      <li>À éviter 6 mois : « agent vocal IA » et termes génériques</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Facebook et Instagram — 20 à 30 %</h3>
+    <p>Vidéo courte de démonstration (« appelez, c'est elle qui répond »), ciblage des gérants de petites entreprises par zone, et reciblage des visiteurs non inscrits.</p>
+    <h3>Microsoft Ads (Bing) — environ 10 %</h3>
+    <p>Clics moins chers, clientèle de gérants plus âgés.</p>
+    <h3>LinkedIn — reciblage seulement</h3>
+    <p>Le clic coûte 6 à 10 $.</p>
+  </div>
+</div>
+
+<h3>Ordre de lancement et budget publicitaire</h3>
+<table>
+  <tr><th>Marché</th><th>Début</th><th class="n">Coût par clic estimé</th><th class="n">Budget pub/mois</th></tr>
+  <tr><td>France (+ Belgique, Suisse)</td><td>Mois 1</td><td class="n">3,5 $</td><td class="n">3 000 $</td></tr>
+  <tr><td>Israël</td><td>Mois 1</td><td class="n">2,3 $</td><td class="n">1 500 $</td></tr>
+  <tr><td>Royaume-Uni</td><td>Mois 1</td><td class="n">5,0 $</td><td class="n">2 000 $</td></tr>
+  <tr><td>Italie</td><td>Mois 4</td><td class="n">2,2 $</td><td class="n">1 500 $</td></tr>
+  <tr><td>Pays-Bas</td><td>Mois 4</td><td class="n">3,5 $</td><td class="n">1 200 $</td></tr>
+  <tr><td>Australie</td><td>Mois 7</td><td class="n">3,8 $</td><td class="n">1 200 $</td></tr>
+  <tr><td>Pologne</td><td>Mois 7</td><td class="n">1,1 $</td><td class="n">700 $</td></tr>
+  <tr class="total"><td colspan="3">Total en régime de croisière</td><td class="n">11 100 $/mois</td></tr>
+</table>
+<p class="note">Les deux premiers mois de chaque marché tournent à 50 % du budget, le temps de tester les annonces. Entonnoir supposé : 4 à 4,5 % des clics deviennent une inscription à l'essai, 22 à 33 % des essais deviennent payants selon le marché, +30 % de coût d'acquisition pour le reciblage et les visuels.</p>
+
+<h2>3. Résultats sur trois scénarios</h2>
+<table>
+  <tr><th></th><th class="n">Prudent</th><th class="n real">Réaliste</th><th class="n">Optimiste</th></tr>
+  <tr><td>Conversion (vs hypothèse de base)</td><td class="n">× 0,6</td><td class="n real">× 1</td><td class="n">× 1,25</td></tr>
+  <tr><td>Clients perdus par mois</td><td class="n">8 %</td><td class="n real">5 %</td><td class="n">3,5 %</td></tr>
+  <tr><td>Premier mois rentable</td><td class="n">Mois 13</td><td class="n real">Mois 7</td><td class="n">Mois 5</td></tr>
+  <tr><td>Mise de départ récupérée (break-even cumulé)</td><td class="n">Mois 26</td><td class="n real">Mois 11</td><td class="n">Mois 8</td></tr>
+  <tr><td><b>Trésorerie nécessaire jusqu'au break-even</b></td><td class="n">≈ 59 000 $</td><td class="n real">≈ 22 000 $</td><td class="n">≈ 15 000 $</td></tr>
+  <tr><td>Clients à 12 mois</td><td class="n">152</td><td class="n real">286</td><td class="n">380</td></tr>
+  <tr><td>Clients à 24 mois</td><td class="n">243</td><td class="n real">517</td><td class="n">738</td></tr>
+  <tr><td>Résultat mensuel à 24 mois</td><td class="n">6 500 $</td><td class="n real">36 400 $</td><td class="n">64 900 $</td></tr>
+  <tr class="total"><td>Bénéfice net de l'année 2</td><td class="n">45 000 $</td><td class="n real">329 000 $</td><td class="n">587 000 $</td></tr>
+  <tr><td>Cumul à 36 mois</td><td class="n">85 000 $</td><td class="n real">877 000 $</td><td class="n">1,63 M$</td></tr>
+</table>
+
+<div class="box warn">
+  <b>Budget conseillé : 35 000 à 40 000 $</b>, réserve de sécurité comprise.<br>
+  <b>Règle d'arrêt :</b> si, après 2 000 $ dépensés dans un marché, un client y coûte plus de 450 $ à acquérir, on met ce marché en pause et on retravaille les annonces avant de continuer. Ce garde-fou évite de glisser vers le scénario prudent.
+</div>
+
+<h2>4. Bénéfice net de l'année 2 par langue</h2>
+<table>
+  <tr><th>Langue / marché</th><th class="n">Coût d'acquisition (réaliste)</th><th class="n">Prudent</th><th class="n real">Réaliste</th><th class="n">Optimiste</th><th>Potentiel</th></tr>
+  <tr><td>Français</td><td class="n">306 $</td><td class="n">19 800 $</td><td class="n real">99 300 $</td><td class="n">172 600 $</td><td><span class="pill ok">Fort</span></td></tr>
+  <tr><td>Hébreu (Israël)</td><td class="n">221 $</td><td class="n">20 600 $</td><td class="n real">75 600 $</td><td class="n">126 300 $</td><td><span class="pill ok">Fort</span></td></tr>
+  <tr><td>Italien</td><td class="n">227 $</td><td class="n">14 500 $</td><td class="n real">58 600 $</td><td class="n">98 000 $</td><td><span class="pill ok">Bon</span></td></tr>
+  <tr><td>Anglais (Royaume-Uni)</td><td class="n">492 $</td><td class="n">300 $</td><td class="n real">34 900 $</td><td class="n">66 900 $</td><td><span class="pill low">Risqué</span></td></tr>
+  <tr><td>Néerlandais</td><td class="n">316 $</td><td class="n">6 200 $</td><td class="n real">34 200 $</td><td class="n">59 300 $</td><td><span class="pill mid">Moyen</span></td></tr>
+  <tr><td>Polonais</td><td class="n">144 $</td><td class="n">8 000 $</td><td class="n real">29 000 $</td><td class="n">47 300 $</td><td><span class="pill mid">Moyen</span></td></tr>
+  <tr><td>Anglais (Australie)</td><td class="n">333 $</td><td class="n">2 700 $</td><td class="n real">24 600 $</td><td class="n">43 700 $</td><td><span class="pill mid">Moyen</span></td></tr>
+</table>
+<p class="note">Montants après publicité, avant les frais fixes communs (≈ 27 000 $ par an en année 2).</p>
+<ul>
+  <li><b>Français et hébreu :</b> les meilleurs paris. Clics abordables, bon marché, peu de concurrents dans la langue.</li>
+  <li><b>Royaume-Uni :</b> le plus risqué, à cause du prix du clic. À surveiller de près.</li>
+  <li><b>Pologne :</b> revenu par client plus faible ; les prix en dollars sont élevés pour le marché local.</li>
+</ul>
+
+<h2 class="pb">5. Ce que « net » veut dire, et les limites</h2>
+<ul>
+  <li><b>Net</b> = après publicité, coûts de la plateforme, frais de paiement, support et frais fixes. <b>Avant votre impôt personnel</b>, et sans votre rémunération.</li>
+  <li><b>Fiscalité :</b> une LLC du Wyoming détenue par un non-Américain ne paie en général pas d'impôt fédéral américain sans activité aux États-Unis ; l'impôt est dû dans le pays de résidence. La déclaration américaine annuelle (Form 5472 + 1120 pro forma) reste obligatoire, avec une amende de 25 000 $ en cas d'oubli. À valider avec un comptable.</li>
+  <li><b>Estimations de démarrage :</b> les vrais chiffres viendront après 4 à 6 semaines de publicité (coût par inscription, part des essais qui deviennent payants). Le modèle sera recalé à ce moment-là.</li>
+  <li><b>Coût de la plateforme à confirmer :</b> 419 $/mois et 0,09 $ la minute ont été supposés, d'après le guide du fournisseur.</li>
+</ul>
+
+<footer>
+  Sources des repères de marché : WebFX et Visionary Marketing (coûts par clic Google 2025-2026), Total Product Marketing (services aux entreprises), Adamigo (CPM Meta par pays), Userpilot et Flint (conversion des essais avec carte), UserJot (taux de perte des PME).<br>
+  PermanenceAI / Permanence IA est une marque de SINAY STRATEGIC LLC, 1603 Capitol Ave Suite 413G-2408, Cheyenne WY 82001, USA. Document interne, estimations non contractuelles.
+</footer>
+</body>
+</html>

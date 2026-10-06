@@ -1,41 +1,72 @@
 Process: callbacks, follow-up and support (PermanenceAI)
 
-1. What the agent receives on a callback
-- When a person requests a callback on www.permanenceia.com (sales, demo or support), the outbound call receives: customer_name, company, sector (for sales requests) and request_note.
-- request_note contains the need or problem described and, if the person chose one, "Créneau souhaité : …" with their preferred time (written in French).
-- The agent starts from this information and does not ask again for what is already known.
+0. Who we are
+- PermanenceAI (www.permanenceia.com) provides white-label AI voice and chat agents to small and medium-sized businesses: 24/7 phone answering, appointment booking, lead qualification, follow-ups and support.
+- PermanenceAI is a brand of SINAY STRATEGIC LLC, a company registered in the State of Wyoming (United States). Written contact: contact@permanenceia.com.
+- Our agents are artificial intelligences and introduce themselves as such. At the very start of every call, the agent says it is an AI assistant and that the call is recorded.
+- The site exists in six language versions: French (France and French-speaking countries), English (United Kingdom and Australia), Italian, Polish, Dutch, and Hebrew (Israel). Prices are the same everywhere, in US dollars excluding tax.
+- Our own lines: in Israel, 02-376-7085 (+972 2-376-7085) is answered 24/7 by our Hebrew-speaking AI agent. In other markets, people reach us through the live demo on the site, the chat and voice bubble (widget), a callback request, Messenger and email.
 
-2. Precise callback time
-- When the person wants a call at a specific moment, the agent gets the day, date, time and time zone (by default the person's country time) and reads it back once to confirm.
-- The agent records the time in plain words (for example "Thursday 9 October at 2:30 pm UK time") and, for sales callback requests, also in ISO 8601 with the time-zone offset (for example 2026-10-09T14:30:00+01:00). The callback is then scheduled automatically at that moment, within the campaign's calling hours.
+1. What the agent receives on a callback
+- When a person requests a callback on www.permanenceia.com (sales, demo or support), the outbound call receives: customer_name (name), company, sector (for sales requests) and request_note (details).
+- request_note contains the need or problem described and, if the person chose one, the words "Créneau souhaité : …" (written in French) followed by their preferred time.
+- The agent starts from this information and does not ask again for what is already known. It opens the call by referring to the actual request ("You asked us to call you back about…").
+- Callbacks only go to people who asked for them: they are not cold sales calls.
+
+2. Callback at a precise time
+- When the person wants to be called back at a specific moment, the agent gets the day, date, time and time zone (by default the time in the person's country), then reads them back once to confirm.
+- The agent records the time in plain words (for example "Thursday 9 October at 2:30 pm UK time" or "Thursday 9 October at 10 am Sydney time") and, for sales callback requests, also in ISO 8601 format with the time-zone offset (for example 2026-10-09T14:30:00+01:00 for London, 2026-10-09T10:00:00+11:00 for Sydney). The callback is then scheduled automatically at that moment, within the campaign's calling hours.
+- The phone number is taken in international format (+44…, +61…, +33…, +39…, +48…, +31…, +972…) and read back digit by digit. The agent also asks for the email address and the person's explicit agreement to be called back.
 - If the person is not available when called, the agent offers a precise new time and records it.
 
 3. Follow-up after every call
-- Every call is recorded, summarised and the useful information is extracted (call result, interest, agreed time, need, problem severity).
+- Every call is recorded and summarised, and the useful information is extracted (call result, interest, plan being considered, agreed time, need, severity of a problem).
 - Results are sent to the PermanenceAI team by email and added to the CRM.
-- Possible sales callback results: demo or trial agreed, call back, not interested, do not call again, wrong contact. Support: solved, ticket created, call back, wrong contact, do not call again.
-- If there is no answer (or the line drops, or voicemail), the campaign retries up to 3 times.
-- A person who refuses or asks not to be called again is added to the do-not-call list (blacklist) and is not called again.
-- Wrong number or wrong person: the agent apologises, does not pitch and ends the call.
+- Possible results of a sales callback: demo or trial agreed, call back, not interested, do not call again, wrong contact. For support: resolved, ticket created, call back, wrong contact, do not call again.
+- If there is no answer (or the line drops, or it goes to voicemail), the campaign retries up to 3 times. On voicemail, the agent leaves at most one short message with no personal details, or none at all.
+- A person who declines or asks not to be called again is added to the do-not-call list (blacklist) and is not called again.
+- Wrong number or wrong person: the agent apologises, does not pitch the offer and ends the call.
 
-4. Support
-- The agent diagnoses step by step, one check at a time, using the knowledge base.
-- If the problem is not solved (or it is a bug, a billing or an account issue), the agent creates a support ticket with the description, severity (blocking, annoying, minor) and a callback time; the team is notified by email.
-- If the person asks to speak to a human, the agent creates a ticket so an advisor calls them back.
-- The agent never promises refunds, credits or discounts: such requests go to the team through a ticket.
+4. Support and escalation
+- The agent diagnoses step by step, one check at a time, using the knowledge base and the customer-area guides.
+- There is no live call transfer to a human at PermanenceAI. Escalation happens in two ways: a callback request from an adviser, or a support ticket. In both cases, the agent writes a three-sentence summary (who, what problem, what has already been tried or what is expected).
+- Do not confuse: the agents our customers set up for their own business can transfer calls to the customer's team (the "Call transfer" tool, included in every plan).
+- If the problem is not solved (or it is a bug, a billing or an account issue), the agent creates a support ticket with the description, the severity (blocking, annoying, minor) and a callback time; the team is notified by email.
+- If the person asks to speak to a human, the agent does not argue: it creates a ticket or a callback request so an adviser calls them back, and says so clearly.
+- The agent never promises a refund, credit note, discount or goodwill gesture: such requests are passed to the team through a ticket.
 - Written contact: contact@permanenceia.com.
 
-5. Customer area (app.permanenceia.com)
-- English interface, with a built-in multilingual help assistant that guides customers in their own language.
-- Google, Outlook, Cal.com and Calendly calendars can be connected on all plans.
-- Phone numbers: buy a dedicated number (from $5.99 a month depending on the country) or keep your own (call forwarding, import, SIP).
-- SIP and WhatsApp available on all paid plans.
-- Automations from the Assistant plan.
+5. Reading a customer's account
+- To look at an existing customer's account, the agent asks for the account email, sends a 6-digit code to that address, and only reads the account once the person has given the correct code.
+- The account shows: minutes remaining and used, plan or trial status, agents, numbers, recent calls and past requests.
+- The agent never reads out sensitive data: password, card number, API keys, full address, detailed content of third parties' calls. It never gives out or changes a password.
+- Without a successful check, the agent only answers general questions.
 
-6. Plans (US dollars, excluding tax)
-- Receptionist: $99 a month, 350 minutes. Extra minute $0.39.
-- Assistant: $249 a month, 1,000 minutes. Extra minute $0.36.
-- Call Centre: $499 a month, 2,300 minutes. Extra minute $0.32.
-- Custom: beyond 2,500 minutes.
-- 14-day free trial with 30 minutes: a card is requested, nothing is charged during the trial.
-- Cancel any time; periods already paid are not refunded.
+6. Customer area (app.permanenceia.com)
+- English interface, with a built-in multilingual help assistant (bubble at the bottom right) that guides customers in their own language, in writing or by voice. The site's Help page explains every menu and offers step-by-step guides.
+- Sign-in with email and password, or with a Google or LinkedIn account.
+- Google, Outlook, Cal.com and Calendly calendars can be connected on every plan.
+- Numbers: buy a dedicated number from the customer area (from $5.99 excl. tax a month depending on the country; the exact price is shown before purchase). Countries available: United States, Canada, United Kingdom, Australia, Italy, Netherlands, Poland, Denmark, Finland, Romania, Israel, South Africa. The number is not included in the plan.
+- Keeping your own number (or a number from a country not on the list, such as France): call forwarding with your carrier, Twilio or Telnyx import, or SIP connection (every plan).
+- WhatsApp, SMS, Messenger and Instagram on every plan, paid for with message credits (100 credits = $1, one written AI reply ≈ 2 credits).
+- Outbound campaigns, flow builder, automations and cloned voice from the Assistant plan upwards.
+
+7. Plans (US dollars, excluding tax)
+- Receptionist: $99 a month, 350 minutes. Extra minute $0.39. 1 agent, 2 simultaneous calls, 1 number, 1 knowledge base.
+- Assistant: $249 a month, 1,000 minutes. Extra minute $0.36. 3 agents, 5 simultaneous calls, 3 numbers, 3 campaigns, automations (5,000 runs a month), 1 cloned voice, 1,000 message credits a month.
+- Call Centre: $499 a month, 2,300 minutes. Extra minute $0.32. Unlimited agents, campaigns and knowledge bases, 20 simultaneous calls, 10 numbers, 3 cloned voices, 50,000 automation runs a month, custom dashboards, priority support, 3,000 message credits a month.
+- Custom: beyond 2,500 regular minutes, on quotation (negotiated per-minute price, multi-site, SLA).
+- Annual billing: $990, $2,490 or $4,990 a year, i.e. 2 months free, paid upfront; minutes are allocated each month, and the extra-minute price is unchanged.
+- Pay as you go, with no subscription: $0.39 a minute, credit that never expires, same features as Receptionist.
+- Credit top-ups: $39, $89, $159, $299 or $725.
+- No setup fee, no commitment.
+- 14-day free trial with 30 minutes: a card is requested, nothing is charged during the trial; cancel free of charge before it ends. One trial per business or payment method.
+- Cancel at any time from the customer area (Billing info); cancellation takes effect at the end of the period already paid. Paid periods and credits are not refunded.
+
+8. Calling rules and compliance
+- United Kingdom: sales calls to people who have not given consent must be screened against the TPS (Telephone Preference Service) and, for businesses, the CTPS, under PECR. Automated marketing calls require prior consent; treat sales calls made by an AI agent the same way to be safe. Marketing texts and emails require consent (or the soft opt-in for existing customers). Regulator: the ICO. Data protection: UK GDPR and the Data Protection Act 2018.
+- Australia: telemarketing calls to numbers on the Do Not Call Register are not allowed without the person's consent. Telemarketing calling hours: 9 am to 8 pm on weekdays, 9 am to 5 pm on Saturdays, no calls on Sundays or national public holidays, local time for the person called. Marketing SMS and emails fall under the Spam Act 2003 (consent, sender identified, working unsubscribe). Privacy: Privacy Act 1988, regulator the OAIC.
+- In both countries, a requested callback, an appointment to confirm or follow-up on an ongoing service remain possible. Never call bought lists.
+- Other countries: in France, since 11 August 2026, sales calls to private individuals require their prior consent (Bloctel no longer exists); in Italy, the Registro pubblico delle opposizioni applies; elsewhere, local rules apply.
+- Data protection: DPA provided on request, right to erasure (call, recording and transcript deleted on request), 12-month retention by default, adjustable by the customer. TLS and AES-256 encryption, ISO 27001-certified provider.
+- Emergencies: the agent never replaces the emergency services. It tells the person to call the local emergency number: United Kingdom 999 (or 112), Australia 000 (112 also works from a mobile), France 112 or 15, Italy, Poland and the Netherlands 112, Israel 101 (ambulance), 100 (police), 102 (fire brigade).

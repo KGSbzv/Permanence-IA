@@ -1,41 +1,70 @@
 Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 
+0. Kim jesteśmy
+- PermanenceAI (www.permanenceia.com) dostarcza małym i średnim firmom głosowych i konwersacyjnych agentów AI w modelu white label: obsługę telefonów całą dobę, umawianie wizyt, kwalifikację zapytań, ponowne kontakty i wsparcie.
+- PermanenceAI to marka spółki SINAY STRATEGIC LLC, zarejestrowanej w stanie Wyoming (Stany Zjednoczone). Kontakt pisemny: contact@permanenceia.com.
+- Nasi agenci są sztuczną inteligencją i tak się przedstawiają. Na samym początku każdej rozmowy agent mówi, że jest asystentem AI i że rozmowa jest nagrywana.
+- Strona istnieje w kilku wersjach: Francja i kraje francuskojęzyczne, Wielka Brytania, Australia, Włochy, Polska, Holandia oraz Izrael (po hebrajsku). Ceny są wszędzie takie same, w dolarach amerykańskich, bez podatku.
+- Nasze własne linie: w Izraelu numer 02-376-7085 (+972 2-376-7085) odbiera całą dobę nasza agentka AI mówiąca po hebrajsku. Na pozostałych rynkach kontakt odbywa się przez demo na żywo na stronie, dymek czatu i rozmowy głosowej (widżet), prośbę o oddzwonienie, Messengera i e-mail.
+
 1. Co agent otrzymuje przy oddzwonieniu
 - Gdy ktoś prosi o oddzwonienie na www.permanenceia.com (sprzedaż, demonstracja lub wsparcie), połączenie wychodzące otrzymuje: customer_name (imię i nazwisko), company (firma), sector (branża, przy zapytaniach sprzedażowych) i request_note (szczegóły).
-- request_note zawiera opis potrzeby lub problemu oraz, jeśli osoba wybrała termin, dopisek "Créneau souhaité : …" z preferowaną godziną (zapisany po francusku).
-- Agent zaczyna od tych informacji i nie pyta ponownie o to, co już wiadomo.
+- request_note zawiera opis potrzeby lub problemu oraz, jeśli osoba wybrała termin, dopisek "Créneau souhaité : …" (po francusku: "preferowany termin") z momentem, który jej odpowiada.
+- Agent zaczyna od tych informacji i nie pyta ponownie o to, co już wiadomo. Rozmowę otwiera, przypominając rzeczywistą prośbę ("Prosili Państwo o oddzwonienie w sprawie…").
+- Oddzwonienia dotyczą wyłącznie osób, które o nie poprosiły: nie są to połączenia akwizycyjne.
 
 2. Oddzwonienie o konkretnej godzinie
-- Gdy osoba chce rozmawiać w konkretnym momencie, agent ustala dzień, datę, godzinę i strefę czasową (domyślnie czas polski) i powtarza je raz do potwierdzenia.
-- Agent zapisuje termin słownie (np. "czwartek 9 października o 14:30 czasu polskiego"), a przy prośbach o oddzwonienie sprzedażowe także w formacie ISO 8601 z przesunięciem strefy (np. 2026-10-09T14:30:00+02:00). Oddzwonienie jest wtedy automatycznie zaplanowane na ten moment, w godzinach dzwonienia kampanii.
+- Gdy osoba chce, by oddzwonić do niej w konkretnym momencie, agent ustala dzień, datę, godzinę i strefę czasową (domyślnie czas kraju tej osoby), a następnie raz je powtarza do potwierdzenia.
+- Agent zapisuje termin słownie (np. "czwartek 9 października o 14:30 czasu polskiego"), a przy prośbach o oddzwonienie sprzedażowe także w formacie ISO 8601 z przesunięciem strefy czasowej (np. 2026-10-09T14:30:00+02:00). Oddzwonienie jest wtedy automatycznie zaplanowane na ten moment, w godzinach dzwonienia kampanii.
+- Numer telefonu zapisuje się w formacie międzynarodowym (+33…, +44…, +61…, +39…, +48…, +31…, +972…) i powtarza cyfra po cyfrze. Agent prosi też o adres e-mail i o wyraźną zgodę osoby na oddzwonienie.
 - Jeśli osoba nie może rozmawiać w chwili połączenia, agent proponuje nowy konkretny termin i go zapisuje.
 
 3. Dalsze kroki po każdej rozmowie
-- Każda rozmowa jest nagrywana, podsumowywana, a przydatne informacje są wyodrębniane (wynik rozmowy, zainteresowanie, ustalony termin, potrzeba, waga problemu).
-- Wyniki trafiają do zespołu PermanenceAI e-mailem i do CRM.
-- Możliwe wyniki oddzwonienia sprzedażowego: demonstracja lub test ustalony, oddzwonić, niezainteresowany, nie dzwonić więcej, błędny kontakt. Wsparcie: rozwiązane, utworzono zgłoszenie, oddzwonić, błędny kontakt, nie dzwonić więcej.
-- Jeśli nikt nie odbiera (albo połączenie zostanie przerwane lub odbierze poczta głosowa), kampania ponawia próbę do 3 razy.
-- Osoba, która odmawia lub prosi, by więcej nie dzwonić, trafia na listę zastrzeżonych numerów (blacklist) i nie jest już wywoływana.
+- Każda rozmowa jest nagrywana, podsumowywana, a przydatne informacje są wyodrębniane (wynik rozmowy, zainteresowanie, rozważany pakiet, ustalony termin, potrzeba, waga problemu).
+- Wyniki trafiają do zespołu PermanenceAI e-mailem i są dodawane do CRM.
+- Możliwe wyniki oddzwonienia sprzedażowego: ustalona demonstracja lub okres próbny, oddzwonić, niezainteresowany, nie dzwonić więcej, błędny kontakt. Wsparcie: rozwiązane, utworzono zgłoszenie, oddzwonić, błędny kontakt, nie dzwonić więcej.
+- Jeśli nikt nie odbiera (albo połączenie zostanie przerwane lub odbierze poczta głosowa), kampania ponawia próbę do 3 razy. Na poczcie głosowej agent zostawia najwyżej jedną krótką wiadomość, bez danych osobowych, albo nie zostawia żadnej.
+- Osoba, która odmawia lub prosi, by więcej do niej nie dzwonić, trafia na listę blokad (blacklist) i nie otrzymuje już połączeń.
 - Błędny numer lub niewłaściwa osoba: agent przeprasza, nie przedstawia oferty i kończy rozmowę.
 
-4. Wsparcie
-- Agent diagnozuje problem krok po kroku, jedna czynność naraz, korzystając z bazy wiedzy.
+4. Wsparcie i eskalacja
+- Agent diagnozuje problem krok po kroku, jedna czynność naraz, korzystając z bazy wiedzy i przewodników z panelu klienta.
+- W PermanenceAI nie ma przełączania rozmowy na żywo do człowieka. Eskalacja odbywa się na dwa sposoby: prośba o oddzwonienie przez doradcę albo zgłoszenie do wsparcia (ticket). W obu przypadkach agent sporządza podsumowanie w trzech zdaniach (kto, jaki problem, co już sprawdzono lub czego osoba oczekuje).
+- Nie mylić: agenci, których nasi klienci konfigurują dla własnej firmy, mogą przełączać rozmowy do zespołu klienta (narzędzie "Call transfer", dostępne we wszystkich pakietach).
 - Jeśli problem nie zostanie rozwiązany (albo dotyczy błędu, rozliczeń lub konta), agent tworzy zgłoszenie z opisem, wagą (blokujący, uciążliwy, drobny) i terminem oddzwonienia; zespół otrzymuje powiadomienie e-mailem.
-- Jeśli osoba chce rozmawiać z człowiekiem, agent tworzy zgłoszenie, aby doradca oddzwonił.
-- Agent nigdy nie obiecuje zwrotów, rekompensat ani rabatów: takie prośby trafiają do zespołu przez zgłoszenie.
+- Jeśli osoba prosi o rozmowę z człowiekiem, agent nie dyskutuje: tworzy zgłoszenie lub prośbę o oddzwonienie, aby doradca oddzwonił, i jasno to mówi.
+- Agent nigdy nie obiecuje zwrotu pieniędzy, noty uznaniowej, rabatu ani gestu handlowego: takie prośby trafiają do zespołu przez zgłoszenie.
 - Kontakt pisemny: contact@permanenceia.com.
 
-5. Panel klienta (app.permanenceia.com)
-- Interfejs po angielsku, z wbudowanym wielojęzycznym asystentem pomocy, który prowadzi klienta w jego języku.
-- Kalendarze Google, Outlook, Cal.com i Calendly można podłączyć w każdym pakiecie.
-- Numery: zakup dedykowanego numeru (od 5,99 $ miesięcznie, zależnie od kraju) lub zachowanie własnego (przekierowanie, import, SIP).
-- SIP i WhatsApp dostępne we wszystkich płatnych pakietach.
-- Automatyzacje od pakietu Asystent.
+5. Wgląd w kartę klienta
+- Aby sprawdzić kartę istniejącego klienta, agent prosi o adres e-mail konta, wysyła na ten adres 6-cyfrowy kod i odczytuje kartę dopiero wtedy, gdy osoba poda prawidłowy kod.
+- Karta zawiera: pozostałe i wykorzystane minuty, pakiet lub status okresu próbnego, agentów, numery, ostatnie rozmowy i wcześniejsze zgłoszenia.
+- Agent nigdy nie odczytuje na głos danych wrażliwych: hasła, numeru karty, kluczy API, pełnego adresu, szczegółowej treści rozmów osób trzecich. Nie podaje ani nie zmienia żadnego hasła.
+- Bez udanej weryfikacji agent odpowiada tylko na pytania ogólne.
 
-6. Pakiety (dolary amerykańskie, bez VAT)
-- Recepcjonistka: 99 $ miesięcznie, 350 minut. Dodatkowa minuta 0,39 $.
-- Asystent: 249 $ miesięcznie, 1000 minut. Dodatkowa minuta 0,36 $.
-- Call center: 499 $ miesięcznie, 2300 minut. Dodatkowa minuta 0,32 $.
-- Na miarę: powyżej 2500 minut.
-- Bezpłatny okres próbny 14 dni z 30 minutami: wymagana jest karta, w trakcie testu nic nie jest pobierane.
-- Rezygnacja w dowolnym momencie; opłacone okresy nie podlegają zwrotowi.
+6. Panel klienta (app.permanenceia.com)
+- Interfejs po angielsku, z wbudowanym wielojęzycznym asystentem pomocy (dymek w prawym dolnym rogu), który prowadzi klienta w jego języku, pisemnie lub głosowo. Strona Pomoc na naszej witrynie tłumaczy każde menu i zawiera przewodniki krok po kroku.
+- Logowanie e-mailem i hasłem albo kontem Google lub LinkedIn.
+- Kalendarze Google, Outlook, Cal.com i Calendly można podłączyć w każdym pakiecie.
+- Numery: zakup dedykowanego numeru w panelu (od 5,99 $ netto miesięcznie, zależnie od kraju; dokładna cena jest wyświetlana przed zakupem). Dostępne kraje: Stany Zjednoczone, Kanada, Wielka Brytania, Australia, Włochy, Holandia, Polska, Dania, Finlandia, Rumunia, Izrael, Republika Południowej Afryki. Numer nie jest wliczony w pakiet.
+- Numer francuski lub zachowanie własnego numeru: przekierowanie połączeń u operatora, import z Twilio lub Telnyx albo połączenie SIP (wszystkie pakiety).
+- WhatsApp, SMS, Messenger i Instagram we wszystkich pakietach, opłacane kredytami na wiadomości (100 kredytów = 1 $, jedna pisemna odpowiedź AI ≈ 2 kredyty).
+- Kampanie wychodzące, flow builder, automatyzacje i sklonowany głos od pakietu Asystent.
+
+7. Pakiety (dolary amerykańskie, bez podatku)
+- Recepcjonistka: 99 $ miesięcznie, 350 minut. Dodatkowa minuta 0,39 $. 1 agent, 2 jednoczesne połączenia, 1 numer, 1 baza wiedzy.
+- Asystent: 249 $ miesięcznie, 1000 minut. Dodatkowa minuta 0,36 $. 3 agentów, 5 jednoczesnych połączeń, 3 numery, 3 kampanie, automatyzacje (5000 uruchomień miesięcznie), 1 sklonowany głos, 1000 kredytów na wiadomości miesięcznie.
+- Call center: 499 $ miesięcznie, 2300 minut. Dodatkowa minuta 0,32 $. Agenci, kampanie i bazy wiedzy bez limitu, 20 jednoczesnych połączeń, 10 numerów, 3 sklonowane głosy, 50 000 automatyzacji miesięcznie, własne pulpity, priorytetowe wsparcie, 3000 kredytów na wiadomości miesięcznie.
+- Na miarę: powyżej 2500 minut regularnie, wycena indywidualna (negocjowana cena za minutę, wiele lokalizacji, SLA).
+- Rozliczenie roczne: 990 $, 2490 $ lub 4990 $ rocznie, czyli 2 miesiące gratis, płatne z góry; minuty przydzielane co miesiąc, cena dodatkowej minuty bez zmian.
+- Płatność za zużycie, bez abonamentu: 0,39 $ za minutę, kredyt bez daty ważności, te same funkcje co Recepcjonistka.
+- Doładowania kredytu: 39, 89, 159, 299 lub 725 $.
+- Brak opłaty za uruchomienie, brak zobowiązania.
+- Bezpłatny okres próbny 14 dni z 30 minutami: wymagana jest karta, w trakcie okresu próbnego nic nie jest pobierane; rezygnacja bez kosztów przed jego końcem. Jeden okres próbny na firmę lub metodę płatności.
+- Rezygnacja w dowolnym momencie w panelu (Billing info); skuteczna z końcem już opłaconego okresu. Opłacone okresy i kredyty nie podlegają zwrotowi.
+
+8. Zasady dzwonienia i zgodność z przepisami
+- Polska: marketing bezpośredni przez telefon wymaga uprzedniej zgody osoby, do której się dzwoni. Oddzwonienie, o które ktoś poprosił, potwierdzenie wizyty lub kontakt w sprawie trwającej usługi pozostają możliwe.
+- Francja: od 11 sierpnia 2026 telefoniczna akwizycja wobec konsumentów wymaga ich uprzedniej zgody (rejestr Bloctel przestał istnieć).
+- RODO: umowa powierzenia przetwarzania danych (DPA) na życzenie, prawo do usunięcia danych (rozmowa, nagranie i transkrypcja usuwane na żądanie), domyślny okres przechowywania 12 miesięcy, regulowany przez klienta. Szyfrowanie TLS i AES-256, dostawca z certyfikatem ISO 27001. W Polsce organem nadzorczym jest Prezes Urzędu Ochrony Danych Osobowych (UODO).
+- Nagłe wypadki: agent nigdy nie zastępuje służb ratunkowych. Mówi, by zadzwonić pod lokalny numer alarmowy: Polska 112, Francja 112 lub 15, Wielka Brytania 999, Australia 000, Włochy i Holandia 112, Izrael 101 (pogotowie), 100 (policja), 102 (straż pożarna).

@@ -4,7 +4,8 @@ import path from 'path';
 import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
-const DOCS = ['fr', 'en', 'it', 'pl', 'nl', 'he'];
+// Une fiche par fichier de src/data/kb : processus (fr.txt…) et parcours / situations (fr-situations.txt…).
+const DOCS = fs.readdirSync(path.join(process.cwd(), 'src/data/kb')).filter((f) => f.endsWith('.txt')).map((f) => f.replace(/\.txt$/, ''));
 
 export default function KbDoc({ text }: { text: string }) {
   const [title, ...rest] = text.split('\n');

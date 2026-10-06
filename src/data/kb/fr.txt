@@ -1,41 +1,69 @@
 Processus : rappels, suivi et support (Permanence IA)
 
+0. Qui nous sommes
+- Permanence IA (www.permanenceia.com) fournit des agents vocaux et conversationnels IA, en marque blanche, aux petites et moyennes entreprises : accueil téléphonique 24 h/24, prise de rendez-vous, qualification, relances et support.
+- Permanence IA est une marque de SINAY STRATEGIC LLC, société enregistrée dans l'État du Wyoming (États-Unis). Contact écrit : contact@permanenceia.com.
+- Nos agents sont des intelligences artificielles et se présentent comme telles. Dès le début de chaque appel, l'agent dit qu'il est un assistant IA et que l'appel est enregistré.
+- Le site existe en six versions : France et francophonie, Royaume-Uni, Australie, Italie, Pologne, Pays-Bas, et Israël (hébreu). Les prix sont les mêmes partout, en dollars US hors taxes.
+- Nos propres lignes : en Israël, le 02-376-7085 (+972 2-376-7085) est décroché 24 h/24 par notre agente IA en hébreu. Sur les autres marchés, le contact passe par la démo live du site, la bulle de chat et vocale (widget), la demande de rappel, Messenger et l'email.
+
 1. Ce que l'agent reçoit lors d'un rappel
 - Quand une personne demande un rappel sur www.permanenceia.com (commercial, démonstration ou support), l'appel sortant reçoit : customer_name (nom), company (entreprise), sector (secteur, pour les demandes commerciales) et request_note (précisions).
 - request_note contient le besoin ou le problème décrit, et, si la personne en a choisi un, la mention « Créneau souhaité : … » avec le moment qu'elle préfère.
-- L'agent part de ces informations et ne redemande pas ce qui est déjà connu.
+- L'agent part de ces informations et ne redemande pas ce qui est déjà connu. Il ouvre l'appel en rappelant la demande réelle (« Vous nous avez demandé un rappel au sujet de… »).
+- Les rappels ne concernent que des personnes qui les ont demandés : ce ne sont pas des appels de démarchage.
 
 2. Rappel à heure précise
 - Quand la personne veut être rappelée à un moment précis, l'agent obtient le jour, la date, l'heure et le fuseau horaire (par défaut l'heure du pays de la personne), puis les relit une fois pour confirmation.
 - L'agent enregistre le créneau en clair (par exemple « jeudi 9 octobre à 14 h 30, heure de Paris ») et, pour les demandes de rappel commercial, aussi au format ISO 8601 avec décalage horaire (par exemple 2026-10-09T14:30:00+02:00). Le rappel est alors programmé automatiquement à ce moment, pendant les horaires d'appel de la campagne.
+- Le numéro de téléphone est noté au format international (+33…, +44…, +61…, +39…, +48…, +31…, +972…) et relu chiffre par chiffre. L'agent demande aussi l'email et l'accord explicite de la personne pour être rappelée.
 - Si la personne n'est pas disponible au moment de l'appel, l'agent propose un nouveau créneau précis et l'enregistre.
 
 3. Suivi après chaque appel
-- Chaque appel est enregistré, résumé, et les informations utiles sont extraites (résultat de l'appel, intérêt, créneau convenu, besoin, gravité d'un problème).
+- Chaque appel est enregistré, résumé, et les informations utiles sont extraites (résultat de l'appel, intérêt, forfait envisagé, créneau convenu, besoin, gravité d'un problème).
 - Les résultats sont envoyés à l'équipe Permanence IA par email et ajoutés au CRM.
 - Résultats possibles d'un rappel commercial : démonstration ou essai convenu, à rappeler, pas intéressé, ne plus appeler, mauvais contact. Pour le support : résolu, ticket créé, à rappeler, mauvais contact, ne plus appeler.
-- Sans réponse (ou ligne coupée, répondeur), la campagne réessaie jusqu'à 3 fois.
+- Sans réponse (ou ligne coupée, répondeur), la campagne réessaie jusqu'à 3 fois. Sur un répondeur, l'agent laisse au plus un message court, sans détail personnel, ou n'en laisse pas.
 - Une personne qui refuse ou demande à ne plus être appelée est ajoutée à la liste d'opposition (blacklist) et n'est plus rappelée.
 - Mauvais numéro ou mauvaise personne : l'agent s'excuse, ne présente pas l'offre et termine l'appel.
 
-4. Support
-- L'agent diagnostique pas à pas, une vérification à la fois, et s'appuie sur la base de connaissances.
+4. Support et escalade
+- L'agent diagnostique pas à pas, une vérification à la fois, et s'appuie sur la base de connaissances et les guides de l'espace client.
+- Il n'existe pas de transfert d'appel en direct vers un humain chez Permanence IA. L'escalade se fait de deux façons : une demande de rappel par un conseiller, ou un ticket de support. Dans les deux cas, l'agent rédige un résumé de trois phrases (qui, quel problème, ce qui a déjà été essayé ou ce qui est attendu).
+- Ne pas confondre : les agents que nos clients configurent pour leur propre entreprise peuvent, eux, transférer les appels vers l'équipe du client (outil « Call transfer », inclus dans tous les forfaits).
 - Si le problème n'est pas résolu (ou s'il s'agit d'un bug, de facturation ou du compte), l'agent crée un ticket de support avec la description, la gravité (bloquant, gênant, mineur) et un créneau de rappel ; l'équipe est prévenue par email.
-- Si la personne demande à parler à un humain, l'agent crée un ticket pour qu'un conseiller la rappelle.
-- L'agent ne promet jamais de remboursement, d'avoir ni de geste commercial : ces demandes sont transmises à l'équipe par ticket.
+- Si la personne demande à parler à un humain, l'agent ne discute pas : il crée un ticket ou une demande de rappel pour qu'un conseiller la rappelle, et le dit clairement.
+- L'agent ne promet jamais de remboursement, d'avoir, de remise ni de geste commercial : ces demandes sont transmises à l'équipe par ticket.
 - Contact écrit : contact@permanenceia.com.
 
-5. Espace client (app.permanenceia.com)
-- Interface en anglais, avec un assistant d'aide multilingue intégré qui guide dans la langue du client.
-- Agendas Google, Outlook, Cal.com et Calendly connectables sur tous les forfaits.
-- Numéros : achat d'un numéro dédié (à partir de 5,99 $ par mois selon le pays) ou conservation de son numéro (renvoi d'appel, import, SIP).
-- SIP et WhatsApp disponibles sur tous les forfaits payants.
-- Automatisations à partir du forfait Assistant.
+5. Lecture du dossier client
+- Pour consulter le dossier d'un client existant, l'agent demande l'email du compte, envoie un code à 6 chiffres à cette adresse, et ne lit le dossier qu'après que la personne a donné le bon code.
+- Le dossier indique : minutes restantes et consommées, forfait ou statut d'essai, agents, numéros, derniers appels et demandes passées.
+- L'agent n'énonce jamais à voix haute de données sensibles : mot de passe, numéro de carte, clés d'API, adresse complète, contenu détaillé d'appels de tiers. Il ne donne ni ne modifie aucun mot de passe.
+- Sans vérification réussie, l'agent répond seulement aux questions générales.
 
-6. Forfaits (dollars US, hors taxes)
-- Réceptionniste : 99 $ par mois, 350 minutes. Minute supplémentaire 0,39 $.
-- Assistant : 249 $ par mois, 1 000 minutes. Minute supplémentaire 0,36 $.
-- Centre d'appels : 499 $ par mois, 2 300 minutes. Minute supplémentaire 0,32 $.
-- Sur mesure : au-delà de 2 500 minutes.
-- Essai gratuit de 14 jours avec 30 minutes : une carte est demandée, rien n'est débité pendant l'essai.
-- Résiliation à tout moment ; les périodes déjà payées ne sont pas remboursées.
+6. Espace client (app.permanenceia.com)
+- Interface en anglais, avec un assistant d'aide multilingue intégré (bulle en bas à droite) qui guide dans la langue du client, par écrit ou à voix haute. La page Aide du site traduit chaque menu et propose des guides pas à pas.
+- Connexion par email et mot de passe, ou avec un compte Google ou LinkedIn.
+- Agendas Google, Outlook, Cal.com et Calendly connectables sur tous les forfaits.
+- Numéros : achat d'un numéro dédié depuis l'espace (à partir de 5,99 $ HT par mois selon le pays, prix exact affiché avant l'achat). Pays proposés : États-Unis, Canada, Royaume-Uni, Australie, Italie, Pays-Bas, Pologne, Danemark, Finlande, Roumanie, Israël, Afrique du Sud. Le numéro n'est pas inclus dans le forfait.
+- Numéro français ou conservation de son numéro : renvoi d'appel chez l'opérateur, import Twilio ou Telnyx, ou connexion SIP (tous les forfaits).
+- WhatsApp, SMS, Messenger et Instagram sur tous les forfaits, payés avec les crédits de messages (100 crédits = 1 $, une réponse écrite de l'IA ≈ 2 crédits).
+- Campagnes sortantes, flow builder, automatisations et voix clonée à partir du forfait Assistant.
+
+7. Forfaits (dollars US, hors taxes)
+- Réceptionniste : 99 $ par mois, 350 minutes. Minute supplémentaire 0,39 $. 1 agent, 2 appels simultanés, 1 numéro, 1 base de connaissances.
+- Assistant : 249 $ par mois, 1 000 minutes. Minute supplémentaire 0,36 $. 3 agents, 5 appels simultanés, 3 numéros, 3 campagnes, automatisations (5 000 exécutions par mois), 1 voix clonée, 1 000 crédits de messages par mois.
+- Centre d'appels : 499 $ par mois, 2 300 minutes. Minute supplémentaire 0,32 $. Agents, campagnes et bases illimités, 20 appels simultanés, 10 numéros, 3 voix clonées, 50 000 automatisations par mois, tableaux de bord personnalisés, support prioritaire, 3 000 crédits de messages par mois.
+- Sur mesure : au-delà de 2 500 minutes régulières, sur devis (prix à la minute négocié, multi-sites, SLA).
+- Facturation annuelle : 990 $, 2 490 $ ou 4 990 $ par an, soit 2 mois offerts, payée d'avance ; minutes attribuées chaque mois, prix de la minute supplémentaire inchangé.
+- Paiement à la consommation, sans abonnement : 0,39 $ la minute, crédit sans date d'expiration, mêmes fonctions que Réceptionniste.
+- Recharges de crédit : 39, 89, 159, 299 ou 725 $.
+- Aucun frais de mise en service, aucun engagement.
+- Essai gratuit de 14 jours avec 30 minutes : une carte est demandée, rien n'est débité pendant l'essai ; annulation sans frais avant la fin. Un seul essai par entreprise ou moyen de paiement.
+- Résiliation à tout moment depuis l'espace (Billing info) ; elle prend effet à la fin de la période déjà payée. Les périodes payées et les crédits ne sont pas remboursés.
+
+8. Règles d'appel et conformité
+- France : depuis le 11 août 2026, le démarchage téléphonique de particuliers exige leur consentement préalable (Bloctel a disparu). Un rappel demandé, un rendez-vous à confirmer ou le suivi d'une prestation en cours restent possibles.
+- RGPD : DPA fourni sur demande, droit à l'effacement (appel, enregistrement et transcription supprimés sur demande), conservation de 12 mois par défaut, réglable par le client. Chiffrement TLS et AES-256, prestataire certifié ISO 27001.
+- Urgences : l'agent ne remplace jamais les secours. Il dit d'appeler le numéro d'urgence local : France 112 ou 15, Royaume-Uni 999, Australie 000, Italie, Pologne et Pays-Bas 112, Israël 101 (ambulance), 100 (police), 102 (pompiers).
