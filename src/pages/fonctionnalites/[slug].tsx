@@ -4,8 +4,11 @@ import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
-import { CTAs, Heading, Section, Tick, TrialBadges } from '@/components/ui';
-import { FinalCTA, ModuleCards, Steps } from '@/components/blocks';
+import { CTAs, FaqDark, Heading, Section, Tick, TrialBadges } from '@/components/ui';
+import {
+  BillingProvider, DemoBlock, EconomyBlock, FinalCTA, IncludedStack, MatrixTable, ModuleCards, PricingCards, SecurityBlock, Steps,
+} from '@/components/blocks';
+import { AgentTeam } from '@/components/extras';
 import type { Module } from '@/i18n/content/fr/modules';
 import { useI18n } from '@/i18n';
 import { fr } from '@/i18n/content/fr';
@@ -16,6 +19,8 @@ const SLUGS = fr.modules.map((m) => m.slug);
 export default function ModulePage({ slug }: { slug: string }) {
   const { c, market, offer, money } = useI18n();
   const t = c.ui.commerce.feature;
+  const home = c.ui.commerce.home;
+  const tm = c.ui.commerce.tarifs.matrix;
   const MODULES = c.modules;
   const m = MODULES.find((x) => x.slug === slug) as Module;
   const from = offer(m.from);
@@ -52,7 +57,7 @@ export default function ModulePage({ slug }: { slug: string }) {
             <p className="mt-2 text-[15px]">{from.price ? t.from.priceLine(money(from.price), from.minutes) : from.minutes}</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link href={`/offres/${from.slug}`} className="btn-primary text-sm">{t.from.offerLink(from.name)}</Link>
-              <Link href="/tarifs#comparatif" className="btn-ghost text-sm">{t.from.compare}</Link>
+              <Link href="#comparatif" className="btn-ghost text-sm">{t.from.compare}</Link>
             </div>
           </div>
         </div>
@@ -77,7 +82,39 @@ export default function ModulePage({ slug }: { slug: string }) {
         </div>
       </Section>
 
+      {/* Chaque landing reçoit sa propre publicité : démo, agents, prix, comparatif, « tout inclus », sécurité et FAQ y sont présents. */}
+      <DemoBlock />
+
+      <Section tone="paper"><AgentTeam /></Section>
+
+      {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}
+      <BillingProvider>
+      <Section id="tarifs">
+        <Heading center title={home.pricing.title} intro={home.pricing.intro} />
+        <div className="mt-12"><PricingCards /></div>
+        <p className="mt-6 text-center text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p>
+      </Section>
+
+      <Section tone="paper" id="comparatif">
+        <Heading title={tm.title} intro={tm.intro} />
+        <div className="mt-10"><MatrixTable /></div>
+      </Section>
+      </BillingProvider>
+
+      <Section><EconomyBlock /></Section>
+
+      <Section tone="paper"><IncludedStack /></Section>
+
+      <Section><SecurityBlock /></Section>
+
       <Section tone="paper">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
+          <div><Heading title={home.faq.title} intro={home.faq.intro} /><CTAs className="mt-8" /></div>
+          <FaqDark items={[...c.faq.general.slice(0, 6), c.faq.pricing[2], c.faq.general[c.faq.general.length - 1]]} />
+        </div>
+      </Section>
+
+      <Section>
         <Heading title={t.more.title} />
         <div className="mt-10"><ModuleCards slugs={more} /></div>
       </Section>

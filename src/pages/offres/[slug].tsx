@@ -5,7 +5,10 @@ import { Check, X } from 'lucide-react';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { EconomyBlock, FinalCTA, GrowthBlock, ModuleCards, PricingCards, RechargeTables } from '@/components/blocks';
+import {
+  BillingProvider, DemoBlock, EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, ModuleCards, PricingCards,
+  RechargeTables, SecurityBlock,
+} from '@/components/blocks';
 import { SIGNUP_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import type { PlanSlug as OfferSlug } from '@/i18n/markets';
@@ -95,7 +98,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
                 </li>
               ))}
             </ul>
-            <Link href="/tarifs#comparatif" className="mt-8 inline-block font-semibold text-signal-deep hover:underline">{t.included.compare}</Link>
+            <Link href="#comparatif" className="mt-8 inline-block font-semibold text-signal-deep hover:underline">{t.included.compare}</Link>
           </div>
           <div className="lg:pt-24"><Mock kind={MOCK[slug]} /></div>
         </div>
@@ -105,6 +108,9 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
         <Heading title={t.modules.title} />
         <div className="mt-10"><ModuleCards slugs={MODULES_BY_OFFER[slug]} /></div>
       </Section>
+
+      {/* Chaque landing reçoit sa propre publicité : démo, comparatif, « tout inclus » et sécurité y sont présents. */}
+      <DemoBlock />
 
       {o.perMinute && (
         <>
@@ -118,12 +124,24 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
 
       <Section><EconomyBlock /></Section>
 
+      {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}
+      <BillingProvider>
       <Section tone="paper">
         <Heading title={t.others.title} />
         <div className="mt-10"><PricingCards only={offers.filter((x) => x.slug !== slug).map((x) => x.slug)} /></div>
       </Section>
 
-      <Section>
+      <Section id="comparatif">
+        <Heading title={c.ui.commerce.tarifs.matrix.title} intro={c.ui.commerce.tarifs.matrix.intro} />
+        <div className="mt-10"><MatrixTable /></div>
+      </Section>
+      </BillingProvider>
+
+      <Section tone="paper"><IncludedStack /></Section>
+
+      <Section><SecurityBlock /></Section>
+
+      <Section tone="paper">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div><Heading title={t.faq.title} /><CTAs className="mt-8" /></div>
           <FaqDark items={c.faq.pricing} />

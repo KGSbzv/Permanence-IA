@@ -6,10 +6,11 @@ import type { GetStaticPaths, GetStaticProps } from 'next';
 import { Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
 import LiveCall from '@/components/LiveCall';
-import { BeforeAfter, PortalPreview } from '@/components/extras';
+import { AgentTeam, BeforeAfter, PortalPreview } from '@/components/extras';
 import { CTAs, CallbackForm, FaqDark, Heading, Section, Tick, TrialBadges } from '@/components/ui';
 import {
-  DemoBlock, EconomyBlock, FinalCTA, GrowthLines, IntegrationsGrid, ModuleCards, PricingCards, SECTOR_ICON,
+  BillingProvider, DemoBlock, EconomyBlock, FinalCTA, GrowthLines, IncludedStack, IntegrationsGrid, MatrixTable,
+  ModuleCards, PricingCards, SECTOR_ICON,
   SectorCards, SectorVisual, SecurityBlock, Steps,
 } from '@/components/blocks';
 import type { Sector } from '@/i18n/content/fr/sectors';
@@ -21,8 +22,9 @@ import { fr } from '@/i18n/content/fr';
 const SLUGS = fr.sectors.map((s) => s.slug);
 
 export default function SectorPage({ slug }: { slug: string }) {
-  const { c, market, offer, path } = useI18n();
+  const { c, market, offer, path, money } = useI18n();
   const t = c.ui.commerce.sector;
+  const tm = c.ui.commerce.tarifs.matrix;
   const { days, minutes } = market.trial;
   const s = c.sectors.find((x) => x.slug === slug) as Sector;
   const Icon = SECTOR_ICON[s.slug] || Sparkles;
@@ -98,6 +100,9 @@ export default function SectorPage({ slug }: { slug: string }) {
 
       <DemoBlock sector={s.slug} />
 
+      {/* Les agents (visages et voix) : chaque landing est autonome, elle reçoit sa propre publicité. */}
+      <Section tone="paper"><AgentTeam /></Section>
+
       {/* Intégrations */}
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-center">
@@ -109,12 +114,23 @@ export default function SectorPage({ slug }: { slug: string }) {
       <Section tone="paper"><EconomyBlock /></Section>
 
       {/* Prix HT */}
+      {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}
+      <BillingProvider>
       <Section>
         <Heading title={t.pricing.title} intro={t.pricing.intro(s.name, offer(s.offer).name, days, minutes)} />
         <p className="mt-3"><Link href={`/offres/${s.offer}`} className="font-semibold text-signal-deep underline">{t.pricing.link(offer(s.offer).name)}</Link></p>
         <div className="mt-10"><PricingCards only={['receptionniste', 'assistant', 'centre-appels']} /></div>
         <GrowthLines className="mt-6" />
+        <p className="mt-4 text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p>
       </Section>
+
+      <Section tone="paper" id="comparatif">
+        <Heading title={tm.title} intro={tm.intro} />
+        <div className="mt-10"><MatrixTable /></div>
+      </Section>
+      </BillingProvider>
+
+      <Section><IncludedStack /></Section>
 
       <Section tone="paper"><SecurityBlock /></Section>
 
