@@ -6,25 +6,49 @@
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbSelect, esc, sendMail } from '@/lib/server';
+import { dbInsert, dbSelect, esc, sendMail } from '@/lib/server';
 
 const API = 'https://app.autocalls.ai/api';
-const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes
+const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes ; 6 chiffres, 5 essais par heure et par email
 
-// Limites par instance : 10 requêtes par adresse IP et 3 codes par email, par tranche de 15 minutes.
+// Limites en mémoire (par instance), en complément des compteurs persistants plus bas.
 const hits = new Map<string, number[]>();
 function tooMany(key: string, max: number) {
   const now = Date.now();
   const recent = (hits.get(key) || []).filter((t) => now - t < 15 * 60_000);
   recent.push(now);
+  hits.delete(key);
   hits.set(key, recent);
-  if (hits.size > 5000) hits.clear();
+  // Éviction des plus anciennes entrées seulement (jamais de remise à zéro globale).
+  while (hits.size > 5000) hits.delete(hits.keys().next().value as string);
   return recent.length > max;
 }
 
+/** Compteurs persistants partagés par toutes les instances (table call_events), sur la dernière heure. */
+const emailKey = (email: string) => createHmac('sha256', codeSecret()).update(`id|${email}`).digest('hex').slice(0, 32);
+async function countEvents(kind: string, email: string) {
+  const since = new Date(Date.now() - 3600_000).toISOString();
+  const rows = await dbSelect<{ id: string }>('call_events', `select=id&kind=eq.${kind}&external_id=eq.${emailKey(email)}&created_at=gte.${since}&limit=20`);
+  return rows.length;
+}
+const logEvent = (kind: string, email: string) => dbInsert('call_events', { kind, external_id: emailKey(email) }).catch(() => undefined);
+
+/** Secret dédié aux codes, distinct du jeton des webhooks ; sans lui, la route refuse de fonctionner. */
+function codeSecret() {
+  const s = process.env.ACCOUNT_CODE_SECRET;
+  if (!s || s.length < 32) throw new Error('ACCOUNT_CODE_SECRET absente ou trop courte');
+  return s;
+}
+
+/** Adresse du client : avant-dernière valeur de X-Forwarded-For (la dernière est ajoutée par le répartiteur Google). */
+function clientIp(req: NextApiRequest) {
+  const parts = String(req.headers['x-forwarded-for'] || '').split(',').map((x) => x.trim()).filter(Boolean);
+  return parts.length >= 2 ? parts[parts.length - 2] : parts[0] || req.socket.remoteAddress || '';
+}
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 function codeFor(email: string, slot: number) {
-  const secret = process.env.WEBHOOK_TOKEN || '';
-  const n = createHmac('sha256', secret).update(`lucie|${email}|${slot}`).digest().readUInt32BE(0) % 1_000_000;
+  const n = createHmac('sha256', codeSecret()).update(`lucie|${email}|${slot}`).digest().readUInt32BE(0) % 1_000_000;
   return String(n).padStart(6, '0');
 }
 function codeIsValid(email: string, code: string) {
@@ -86,7 +110,7 @@ async function accountSummary(user: PlatformUser) {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
-  const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+  const ip = clientIp(req);
   if (tooMany(`ip:${ip}`, 10)) return res.status(429).json({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
 
   const b = req.body || {};
@@ -95,9 +119,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     if (b.action === 'send_code') {
-      if (tooMany(`mail:${email}`, 3)) return res.status(429).json({ message: 'Trop de codes demandés pour cette adresse : réessayez dans 15 minutes.' });
-      const user = await findUser(email);
-      if (user) {
+      // Réponse identique et en temps constant, que l’adresse ait un compte ou non (pas d’énumération).
+      const started = Date.now();
+      const work = (async () => {
+        if (tooMany(`mail:${email}`, 3) || (await countEvents('otp_send', email)) >= 3) return;
+        const user = await findUser(email);
+        if (!user) return;
+        await logEvent('otp_send', email);
         const code = codeFor(email, Math.floor(Date.now() / WINDOW_MS));
         await sendMail(
           email,
@@ -105,14 +133,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           `Bonjour,\n\nVotre code pour que Lucie consulte votre compte Permanence IA : ${code}\nIl est valable 10 minutes. Si vous n’avez rien demandé, ignorez cet email.\n\nYour code so Lucie can look at your PermanenceAI account: ${code} (valid for 10 minutes).`,
           `<p>Bonjour,</p><p>Votre code pour que Lucie consulte votre compte Permanence IA :</p><p style="font-size:28px;font-weight:bold;letter-spacing:4px">${esc(code)}</p><p>Il est valable 10 minutes. Si vous n’avez rien demandé, ignorez cet email.</p><hr><p>Your code so Lucie can look at your PermanenceAI account: <b>${esc(code)}</b> (valid for 10 minutes).</p>`,
         );
-      }
-      // Même réponse dans tous les cas : on ne révèle pas si l’adresse a un compte.
-      return res.status(200).json({ message: 'Si cette adresse correspond à un compte, un code à 6 chiffres vient d’y être envoyé. Demandez-le à la personne.' });
+      })().catch((e) => console.error('[agent-account] send_code:', e.message));
+      await Promise.race([work, sleep(6000)]);
+      await sleep(Math.max(0, 6000 - (Date.now() - started)));
+      return res.status(200).json({ message: 'Si cette adresse correspond à un compte, un code à 6 chiffres vient d’y être envoyé (vérifier aussi les spams). Demandez-le à la personne.' });
     }
 
     if (b.action === 'lookup') {
-      if (tooMany(`try:${email}`, 5)) return res.status(429).json({ message: 'Trop d’essais : demandez un nouveau code dans 15 minutes.' });
-      if (!codeIsValid(email, String(b.code || ''))) return res.status(200).json({ verified: false, message: 'Code incorrect ou expiré : proposez d’envoyer un nouveau code.' });
+      // Verrou persistant : au plus 5 essais par heure et par email, toutes instances confondues.
+      if (tooMany(`try:${email}`, 5) || (await countEvents('otp_fail', email)) >= 5) {
+        return res.status(429).json({ verified: false, message: 'Trop d’essais : le dossier est verrouillé pendant une heure. Continuez sans dossier ou créez un ticket.' });
+      }
+      if (!codeIsValid(email, String(b.code || ''))) {
+        await logEvent('otp_fail', email);
+        return res.status(200).json({ verified: false, message: 'Code incorrect ou expiré : proposez d’envoyer un nouveau code.' });
+      }
       const user = await findUser(email);
       if (!user) return res.status(200).json({ verified: false, message: 'Aucun compte avec cette adresse : demandez l’email utilisé à l’inscription.' });
 
