@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { BillingProvider, EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
+import { BillingProvider, EconomyBlock, FinalCTA, HumanVsAi, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
@@ -62,13 +62,15 @@ export default function Tarifs() {
 
       <Section><EconomyBlock /></Section>
 
-      <Section tone="paper" id="recharges">
+      <Section tone="paper"><HumanVsAi /></Section>
+
+      <Section id="recharges">
         <Heading title={t.recharges.title} intro={t.recharges.intro} />
         <div className="mt-10"><RechargeTables /></div>
         <Link href="/offres/recharges" className="mt-6 inline-block font-semibold text-signal-deep hover:underline">{t.recharges.link}</Link>
       </Section>
 
-      <Section><GrowthBlock /></Section>
+      <Section tone="paper"><GrowthBlock /></Section>
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">

@@ -199,6 +199,22 @@ export const MODULES: Module[] = [
     integrations: ['Qualsiasi sito web', 'WordPress', 'Webflow'],
     from: 'decouverte', mock: 'widget',
   },
+  {
+    slug: 'relance-anciens-clients', name: 'Richiamo dei clienti inattivi', family: 'Automazione',
+    short: 'I Suoi clienti inattivi richiamati per fissare un nuovo appuntamento: fatturato che è già nel Suo archivio.',
+    title: 'Faccia tornare i clienti che non La chiamano da tempo',
+    intro: 'Il Suo archivio contiene clienti soddisfatti che si sono semplicemente dimenticati di tornare: controllo annuale, manutenzione, tagliando, taglio, trattamento. L’agente li richiama uno per uno, ricorda l’ultimo servizio, propone due orari precisi e prenota. Richiama solo i Suoi clienti, con cui ha già un rapporto.',
+    uses: ['Far tornare i clienti assenti da 6 a 18 mesi', 'Riempire i vuoti in agenda', 'Sollecitare i preventivi rimasti senza risposta', 'Proporre la manutenzione di stagione'],
+    steps: [
+      { title: 'Scelga i clienti', text: 'Esportazione dal Suo gestionale o dal calendario: nome, telefono, ultimo servizio.' },
+      { title: 'Approvi il messaggio', text: 'Un motivo reale per chiamare, un’eventuale offerta, due orari proposti.' },
+      { title: 'L’agente chiama', text: 'Negli orari consentiti, con richiami limitati e lista di esclusione.' },
+      { title: 'Lei conta gli appuntamenti', text: 'Ogni esito viene registrato: appuntamento, da richiamare, non interessato.' },
+    ],
+    cases: ['Controllo dentistico annuale', 'Manutenzione di caldaia o climatizzatore', 'Tagliando auto', 'Clienti di un salone assenti da tre mesi', 'Preventivi senza risposta'],
+    integrations: ['Importazione contatti', 'Calendario', 'CRM', 'Lista di esclusione'],
+    from: 'assistant', mock: 'campaign',
+  },
 ];
 
 export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slug);

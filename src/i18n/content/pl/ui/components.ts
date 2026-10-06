@@ -178,7 +178,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   demoBlock: {
     title: 'Wypróbuj naszego agenta na żywo już teraz',
-    intro: 'Porozmawiaj z agentem w przeglądarce lub zostaw numer, aby otrzymać połączenie demonstracyjne dopasowane do Twojej branży.',
+    intro: 'Porozmawiaj z agentem w przeglądarce albo niech zadzwoni na Twój własny telefon: 30 sekund wystarczy, by ocenić głos i to, jak obsługuje zgłoszenie z Twojej branży.',
     launchTitle: 'Uruchom demo na żywo',
     launchText: 'Prawdziwa rozmowa, bez instalacji.',
     callbackTitle: 'Zamów oddzwonienie',
@@ -312,13 +312,32 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     cta: 'Wypróbuj za darmo',
   },
 
+  humanVsAi: {
+    title: 'Uczciwe porównanie z etatem w recepcji',
+    intro: 'Osoba w recepcji jest bezcenna. Ma też swój koszt, godziny pracy i odbiera tylko jedno połączenie naraz. Oto porównanie, punkt po punkcie.',
+    caption: 'Porównanie pełnego etatu w recepcji z agentem AI',
+    human: 'Recepcja na pełny etat',
+    ai: 'Agent AI',
+    rows: [
+      { label: 'Koszt miesięczny', human: 'Co najmniej płaca minimalna (4806 zł brutto miesięcznie w 2026 r.), plus koszty pracodawcy (ZUS)', ai: 'Od {from} netto miesięcznie (350 min) lub {payg} za minutę bez abonamentu' },
+      { label: 'Godziny pracy', human: '40 godz. tygodniowo', ai: '24/7 (168 godz. tygodniowo)' },
+      { label: 'Połączenia jednocześnie', human: 'Jedno', ai: 'Kilka równolegle' },
+      { label: 'Języki', human: 'Jeden, czasem dwa', ai: 'Ponad 80, z natywnymi głosami' },
+      { label: 'Wdrożenie', human: 'Rekrutacja, potem kilka tygodni szkolenia', ai: 'Kilka minut; instrukcje można zmienić w każdej chwili' },
+      { label: 'Urlopy i nieobecności', human: 'Trzeba znaleźć zastępstwo', ai: 'Brak' },
+      { label: 'Powtarzalność', human: 'Zależna od obciążenia i pory dnia', ai: 'Te same zasady przy każdym połączeniu' },
+      { label: 'Notatki po rozmowie', human: 'Ręczne, gdy jest czas', ai: 'Podsumowanie, transkrypcja i dane wyodrębniane automatycznie' },
+    ],
+    note: 'Człowiek pozostaje niezbędny w delikatnych sprawach: agent przekazuje mu podsumowanie i organizuje oddzwonienie. Wielu klientów zachowuje recepcję i powierza agentowi nadmiar połączeń, przerwę obiadową, wieczory i weekendy. Bez opłaty aktywacyjnej, bez zobowiązań.',
+  },
+
   security: {
     items: [
       { title: 'Zgody i rezygnacje', text: 'Zgoda na oddzwonienie, obsługa odmów, dozwolone godziny połączeń i lista wykluczeń.' },
       { title: 'Ochrona danych', text: 'Szyfrowanie podczas przesyłania, dostęp chroniony kontem i konfigurowalny okres przechowywania.' },
       { title: 'Rozliczalność', text: 'Historia połączeń, transkrypcje i dziennik działań dla każdego konta.' },
       { title: 'Kontrola dostępu', text: 'Każdy klient ma własny, zabezpieczony panel; agent ma dostęp tylko do informacji, które mu przekażesz.' },
-      { title: 'Przygotowanie do wymogów prawnych', text: 'Narzędzia do stosowania RODO: obowiązek informacyjny, prawo dostępu, usuwanie, okres przechowywania.' },
+      { title: 'Przygotowanie do wymogów prawnych', text: 'Narzędzia do stosowania RODO: obowiązek informacyjny, prawo dostępu, usuwanie połączeń i nagrań, okres przechowywania. Umowa powierzenia przetwarzania danych (DPA) na życzenie.' },
       { title: 'Infrastruktura', text: 'Platforma hostowana u uznanych dostawców chmury, z kopiami zapasowymi i monitoringiem.' },
     ],
     title: 'Bezpieczeństwo i zgodność Twoich połączeń AI',
@@ -386,7 +405,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, głos ${male ? 'męski' : 'żeński'}`,
   },
 
-  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
+  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Brokerzy', 'Zarządcy wspólnot', 'Medycyna estetyczna', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
 
   // Ta sama kolejność co flagi komponentu.
   languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki'],

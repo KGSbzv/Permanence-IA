@@ -199,6 +199,22 @@ export const MODULES: Module[] = [
     integrations: ['Any website', 'WordPress', 'Webflow'],
     from: 'decouverte', mock: 'widget',
   },
+  {
+    slug: 'relance-anciens-clients', name: 'Lapsed customer win-back', family: 'Automation',
+    short: 'Inactive customers called back to rebook: revenue that is already sitting in your customer list.',
+    title: 'Bring back customers you haven’t heard from in a while',
+    intro: 'Your customer list is full of happy customers who simply forgot to come back: annual check-up, service, MOT, haircut, treatment. The agent calls them one by one, reminds them of their last visit, offers two specific slots and books. You only call your own customers, people you already have a relationship with.',
+    uses: ['Win back customers who haven’t visited in 6 to 18 months', 'Fill gaps in your schedule', 'Follow up quotes that got no reply', 'Offer seasonal servicing'],
+    steps: [
+      { title: 'Choose the customers', text: 'An export from your software or calendar: name, phone, last service.' },
+      { title: 'Approve the message', text: 'A genuine reason to call, an optional offer, two suggested slots.' },
+      { title: 'The agent calls', text: 'During permitted hours, with limited retries and an exclusion list.' },
+      { title: 'You count the bookings', text: 'Every outcome is logged: booked, call back later, not interested.' },
+    ],
+    cases: ['Annual dental check-up', 'Boiler or air-conditioning service', 'Car service or MOT', 'Salon clients who haven’t been in for three months', 'Unanswered quotes'],
+    integrations: ['Contact import', 'Calendar', 'CRM', 'Exclusion list'],
+    from: 'assistant', mock: 'campaign',
+  },
 ];
 
 export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slug);

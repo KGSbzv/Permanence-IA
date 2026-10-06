@@ -33,6 +33,10 @@ const SECTOR_SEO_TITLE: Record<string, string> = {
   'Uroda i wellness': 'Umawianie wizyt: gabinet kosmetyczny i spa',
   'Restauracje i hotele': 'Rezerwacje telefoniczne: restauracje i hotele',
   'Kancelarie i biura rachunkowe': 'Sekretariat kancelarii i biura rachunkowego',
+  'E-commerce': 'Obsługa klienta sklepu internetowego 24/7',
+  'Brokerzy ubezpieczeniowi i kredytowi': 'Obsługa telefoniczna dla brokerów i doradców',
+  'Zarządzanie najmem i wspólnotami': 'Zgłoszenia najemców i mieszkańców 24/7',
+  'Medycyna i chirurgia estetyczna': 'Rejestracja pacjentów kliniki medycyny estetycznej',
 };
 /** Tytuł korzyści według branży (pełne zdania, żeby zachować poprawną odmianę); brak klucza → „Twojej firmy”. */
 const SECTOR_BENEFITS_TITLE: Record<string, string> = {
@@ -45,6 +49,10 @@ const SECTOR_BENEFITS_TITLE: Record<string, string> = {
   'beaute-bien-etre': 'Co to zmienia dla Twojego gabinetu',
   'restaurants-hotellerie': 'Co to zmienia dla Twojej restauracji lub hotelu',
   'avocats-experts-comptables': 'Co to zmienia dla Twojej kancelarii lub biura',
+  'e-commerce': 'Co to zmienia dla Twojego sklepu',
+  'courtiers-assurance-credit': 'Co to zmienia dla Twojego biura',
+  'gestion-locative': 'Co to zmienia dla Twojej firmy zarządzającej',
+  'medecine-esthetique': 'Co to zmienia dla Twojej kliniki',
 };
 /** SEO: tytuł meta strony funkcji według nazwy modułu (klucz = `name` z modules.ts). */
 const FEATURE_SEO_TITLE: Record<string, string> = {
@@ -115,7 +123,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenci dopasowani do Twojej branży',
-      intro: 'Dziesięć branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
+      intro: 'Czternaście branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
       link: 'Wszystkie branże',
     },
     integrations: {
@@ -231,7 +239,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Asystent głosowy AI dopasowany do Twojej branży',
-      intro: 'Wybraliśmy dziesięć branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient. Od zgłoszeń awarii u fachowca po rejestrację w gabinecie fizjoterapii, od salonu fryzjerskiego po kancelarię: agent zadaje właściwe pytania.',
+      intro: 'Wybraliśmy czternaście branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient. Od zgłoszeń awarii u fachowca po rejestrację w gabinecie fizjoterapii, od salonu fryzjerskiego po kancelarię: agent zadaje właściwe pytania.',
     },
     other: {
       title: 'Twojej branży nie ma na liście?',
@@ -267,7 +275,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       intro: 'Twój kalendarz, CRM, komunikatory i telefonia pozostają bez zmian: agent się z nimi łączy.',
     },
     pricing: {
-      title: 'Ceny netto, bez zobowiązań',
+      title: 'Ceny netto, bez zobowiązań i bez opłaty aktywacyjnej',
       intro: (sectorName: string, offerName: string, d: number, m: number) =>
         `Dla branży „${sectorName.toLowerCase()}” polecamy pakiet ${offerName}. Zacznij od bezpłatnego okresu próbnego: ${days(d)} i ${minutes(m)} w cenie.`,
       link: (offerName: string) => `Zobacz szczegóły pakietu ${offerName}`,

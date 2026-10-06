@@ -167,7 +167,7 @@ export const UI_COMPONENTS = {
 
   demoBlock: {
     title: 'Essayez en live notre agent maintenant',
-    intro: 'Parlez à l’agent depuis votre navigateur, ou laissez votre numéro pour recevoir un appel de démonstration adapté à votre secteur.',
+    intro: 'Parlez à l’agent depuis votre navigateur, ou faites-le sonner sur votre propre téléphone : 30 secondes suffisent pour juger la voix et la façon dont il traite une demande de votre secteur.',
     launchTitle: 'Lancer la démo live',
     launchText: 'Une conversation réelle, sans installation.',
     callbackTitle: 'Me faire rappeler',
@@ -301,13 +301,32 @@ export const UI_COMPONENTS = {
     cta: 'Essayer gratuitement',
   },
 
+  humanVsAi: {
+    title: 'La comparaison honnête avec un poste d’accueil',
+    intro: 'Une personne à l’accueil est précieuse. Elle a aussi un coût, des horaires, et ne prend qu’un appel à la fois. Voici la comparaison, ligne par ligne.',
+    caption: 'Comparaison entre un poste d’accueil à temps plein et l’agent IA',
+    human: 'Poste d’accueil à temps plein',
+    ai: 'Agent IA',
+    rows: [
+      { label: 'Coût mensuel', human: 'Au moins le SMIC (1 867 € brut par mois en 2026), plus les charges patronales', ai: 'Dès {from} HT par mois (350 min), ou {payg} la minute sans abonnement' },
+      { label: 'Heures couvertes', human: '35 h par semaine', ai: '24 h/24, 7 j/7 (168 h par semaine)' },
+      { label: 'Appels en même temps', human: 'Un seul', ai: 'Plusieurs en parallèle' },
+      { label: 'Langues', human: 'Une, parfois deux', ai: 'Plus de 80, avec des voix natives' },
+      { label: 'Mise en route', human: 'Recrutement, puis plusieurs semaines de formation', ai: 'Quelques minutes ; consignes modifiables à tout moment' },
+      { label: 'Congés et absences', human: 'À remplacer', ai: 'Aucun' },
+      { label: 'Régularité', human: 'Variable selon la charge et l’heure', ai: 'Les mêmes règles à chaque appel' },
+      { label: 'Notes après l’appel', human: 'Manuelles, quand on a le temps', ai: 'Résumé, transcription et données extraites automatiquement' },
+    ],
+    note: 'Un humain reste indispensable pour les cas sensibles : l’agent lui transmet un résumé et organise le rappel. Beaucoup de clients gardent leur accueil et confient à l’agent les débordements, la pause déjeuner, le soir et le week-end. Sans frais de mise en service, sans engagement.',
+  },
+
   security: {
     items: [
       { title: 'Consentement et opt-out', text: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
       { title: 'Protection des données', text: 'Chiffrement en transit, accès protégé par compte et durée de conservation configurable.' },
       { title: 'Traçabilité', text: 'Historique des appels, transcriptions et journal des actions pour chaque compte.' },
       { title: 'Contrôle des accès', text: 'Chaque client dispose de son espace sécurisé ; l’agent n’accède qu’aux informations que vous lui donnez.' },
-      { title: 'Préparation réglementaire', text: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression, rétention.' },
+      { title: 'Préparation réglementaire', text: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression des appels et enregistrements, rétention. Accord de traitement des données (DPA) sur demande.' },
       { title: 'Infrastructure', text: 'Plateforme hébergée chez des fournisseurs cloud reconnus, avec sauvegardes et surveillance.' },
     ],
     title: 'Sécurité et conformité pour vos appels IA',
@@ -375,7 +394,7 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, voix ${male ? 'masculine' : 'féminine'}`,
   },
 
-  industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Kinés', 'Ostéopathes', 'Vétérinaires'],
+  industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Médecine esthétique', 'Kinés', 'Ostéopathes', 'Vétérinaires'],
 
   // Même ordre que les drapeaux du composant.
   languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Belgique', 'Suisse', 'Québécois', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois'],

@@ -174,7 +174,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Lista di esclusione per le chiamate in uscita',
       'Fasce orarie di chiamata consentite',
       'Avviso «assistente AI» all’inizio della chiamata',
-      'Registrazione attivabile o meno, con informativa al chiamante',
+      'Registrazione attivabile o meno, annunciata al chiamante all’inizio della chiamata',
+      'Parole o argomenti che l’agente non deve mai affrontare (preventivi con cifre, diagnosi, consulenza)',
     ],
     infraTitle: 'Una soluzione costruita su un’infrastruttura certificata',
     infraIntro: 'La nostra soluzione (agenti, richiamate programmate, instradamento, sito e area clienti) funziona sull’infrastruttura di un fornitore tecnico certificato. Le certificazioni sono del fornitore; lo abbiamo scelto per offrirLe lo stesso livello di rigore.',
@@ -186,6 +187,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Nessuna diagnosi medica, legale o finanziaria da parte dell’agente',
       'I Suoi dati non vengono mai venduti: sono utilizzati per fornire e migliorare il servizio',
       'Supporto per adattare le Sue informative',
+      'Accordo sul trattamento dei dati (DPA) fornito su semplice richiesta',
+      'Diritto alla cancellazione: una chiamata, la sua registrazione e la sua trascrizione vengono eliminate su richiesta',
+      'L’agente annuncia la registrazione della chiamata; chi non è d’accordo può scriverci',
+      'Campagne in uscita: Lei conserva la prova della base giuridica (rapporto con il cliente o consenso); in Italia rispetta il Registro pubblico delle opposizioni, esteso anche ai numeri di cellulare; in Francia, dall’11 agosto 2026, il telemarketing richiede il consenso preventivo della persona',
     ],
     rights: ['Per qualsiasi domanda o richiesta di esercizio dei diritti: ', { a: 'informativa sulla privacy', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -300,7 +305,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Consenso:' }, ' prima di qualsiasi chiamata o messaggio automatizzato, in uscita o promozionale (voce, SMS, WhatsApp), ottiene i consensi richiesti dalla legge, ne conserva la prova e rispetta immediatamente ogni opposizione (parola STOP, richiesta orale o scritta).'],
-                [{ strong: 'Registri delle opposizioni:' }, ' consulta e rispetta i registri applicabili: Registro pubblico delle opposizioni (Italia), Bloctel (Francia), TPS e CTPS (Regno Unito), Do Not Call Register (Australia), le norme polacche che richiedono il consenso preventivo al telemarketing e le norme olandesi (consenso preventivo o rapporto commerciale esistente, Bel-me-niet Register).'],
+                [{ strong: 'Registri delle opposizioni:' }, ' rispetta le regole e i registri applicabili: Registro pubblico delle opposizioni (Italia, esteso anche ai numeri di cellulare), in Francia consenso preventivo espresso della persona al telemarketing dall’11 agosto 2026 (articolo L223-1 del Code de la consommation), TPS e CTPS (Regno Unito), Do Not Call Register (Australia), le norme polacche che richiedono il consenso preventivo al telemarketing e le norme olandesi (consenso preventivo o rapporto commerciale esistente, Bel-me-niet Register).'],
                 [{ strong: 'Orari e frequenza:' }, ' rispetta i giorni, gli orari e le frequenze di chiamata consentiti.'],
                 [{ strong: 'Identificazione:' }, ' presenta un numero valido a lui assegnato, non falsifica numeri e si identifica chiaramente.'],
                 [{ strong: 'Trasparenza:' }, ' informa chiaramente i Destinatari, fin dall’inizio dell’interazione, che stanno interagendo con un sistema di intelligenza artificiale (in particolare ai sensi del regolamento europeo sull’IA) e, ove la legge lo richieda, che la chiamata è registrata o trascritta, raccogliendo il loro consenso quando necessario.'],
@@ -631,7 +636,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Marketing, chiamate e opposizione',
           body: [
-            { p: ['La chiamiamo soltanto su Sua richiesta o con il Suo accordo, e il nostro agente si presenta come un’IA. In qualsiasi momento può dire che non desidera più essere chiamato, rispondere STOP a un SMS, usare il link di disiscrizione di un’email o scrivere a ', mail, ': La inseriremo nella nostra lista interna di opposizione. Per il nostro marketing rispettiamo i registri delle opposizioni applicabili (Registro pubblico delle opposizioni, Bloctel, TPS/CTPS, Do Not Call Register…).'] },
+            { p: ['La chiamiamo soltanto su Sua richiesta o con il Suo accordo, e il nostro agente si presenta come un’IA. In qualsiasi momento può dire che non desidera più essere chiamato, rispondere STOP a un SMS, usare il link di disiscrizione di un’email o scrivere a ', mail, ': La inseriremo nella nostra lista interna di opposizione. Per il nostro marketing rispettiamo i registri delle opposizioni applicabili (Registro pubblico delle opposizioni, TPS/CTPS, Do Not Call Register…).'] },
             { p: 'Le chiamate e i messaggi inviati dai nostri clienti sono di loro responsabilità: rivolga loro la Sua opposizione; se ci contatta, la trasmetteremo.' },
           ],
         },

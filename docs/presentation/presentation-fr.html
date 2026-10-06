@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Permanence IA — Présentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=block" rel="stylesheet">
+<style>
+/* Couleurs et polices du site (tailwind.config.js) */
+:root{
+  --ink:#0E1B4D; --ink-soft:#22306A;
+  --signal:#0FA3C4; --signal-deep:#0A7690; --signal-soft:#E2F5FA; --glow:#5AD3EC;
+  --paper:#F5F8FB; --slate:#4A5875; --slate-light:#626E86; --line:#DDE5EE;
+  --night:#0A1233; --night-raised:#141E47; --ok:#178256; --no:#C8463D;
+}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Figtree',system-ui,sans-serif;color:var(--ink);font-size:28px;line-height:1.4}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;padding:104px 140px 150px;background:#fff;page-break-after:always;break-after:page}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.slide.paper{background:var(--paper)}
+.slide.dark{background:var(--night);color:#fff}
+h1,h2,h3{font-family:'Poppins',system-ui,sans-serif;letter-spacing:-0.025em;font-weight:700}
+h2{font-size:72px;line-height:1.06;max-width:1500px}
+h3{font-size:32px;line-height:1.2;letter-spacing:-0.01em}
+.hl{color:var(--signal)}
+.dark .hl{color:var(--glow)}
+.eyebrow{font-family:'Figtree';font-weight:700;font-size:21px;letter-spacing:.18em;text-transform:uppercase;color:var(--signal-deep);display:flex;align-items:center;gap:18px;margin-bottom:30px}
+.eyebrow::before{content:"";width:44px;height:3px;border-radius:2px;background:var(--signal)}
+.dark .eyebrow{color:var(--glow)}
+.lead{font-size:30px;line-height:1.45;color:var(--slate);max-width:1300px;margin-top:26px}
+.dark .lead{color:#C4CCE4}
+.muted{color:var(--slate)}
+.small{font-size:22px;line-height:1.45}
+.foot{position:absolute;left:140px;right:140px;bottom:46px;display:flex;align-items:center;justify-content:space-between;font-size:20px;color:var(--slate-light);border-top:1px solid var(--line);padding-top:22px}
+.dark .foot{border-top-color:rgba(255,255,255,.12);color:#9AA6C8}
+.foot img{height:40px;width:auto;display:block}
+.foot .pg{font-family:'Poppins';font-weight:600;letter-spacing:.04em}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:38px 40px;box-shadow:0 1px 2px rgba(14,27,77,.06),0 14px 34px -18px rgba(14,27,77,.22)}
+.dark .card{background:var(--night-raised);border-color:rgba(255,255,255,.08);box-shadow:none}
+.pill{display:inline-flex;align-items:center;gap:10px;background:var(--signal-soft);color:var(--signal-deep);font-weight:700;font-size:19px;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:8px 18px}
+.num{font-family:'Poppins';font-weight:700;color:var(--signal);font-size:26px;min-width:40px;flex:none}
+.nw{white-space:nowrap}
+.grid{display:grid;gap:30px}
+.chip{display:inline-flex;align-items:center;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:12px 24px;font-weight:600;font-size:24px;color:var(--ink)}
+ul.check{list-style:none}
+ul.check li{position:relative;padding-left:44px;margin:12px 0;font-size:26px;line-height:1.38}
+ul.check li::before{content:"";position:absolute;left:0;top:9px;width:24px;height:24px;border-radius:50%;background:var(--signal-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%230A7690' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/24px no-repeat}
+ul.dash{list-style:none}
+ul.dash li{position:relative;padding-left:34px;margin:12px 0;font-size:26px;line-height:1.38}
+ul.dash li::before{content:"";position:absolute;left:4px;top:18px;width:14px;height:3px;border-radius:2px;background:var(--slate-light)}
+.waves{position:absolute;display:flex;align-items:center;gap:14px}
+.waves i{display:block;width:14px;border-radius:7px;background:var(--signal)}
+.arrow{color:var(--signal);font-family:'Poppins';font-weight:700;font-size:40px;align-self:center}
+.tiles .card{padding:44px 44px;min-height:200px}.tiles h3{font-size:34px}.tiles p.small{font-size:24px}
+</style>
+</head>
+<body>
+
+<!-- 1. Couverture -->
+<section class="slide dark" style="padding:0">
+  <div style="position:absolute;right:-260px;top:-180px;width:1100px;height:1100px;border-radius:50%;border:2px solid rgba(90,211,236,.10)"></div>
+  <div style="position:absolute;right:-120px;top:-40px;width:820px;height:820px;border-radius:50%;border:2px solid rgba(90,211,236,.14)"></div>
+  <div style="position:absolute;right:20px;top:100px;width:540px;height:540px;border-radius:50%;border:2px solid rgba(90,211,236,.20)"></div>
+  <div class="waves" style="right:228px;top:290px;opacity:.9">
+    <i style="height:60px;opacity:.5"></i><i style="height:110px;opacity:.7"></i><i style="height:170px"></i><i style="height:120px;opacity:.8"></i><i style="height:200px"></i><i style="height:90px;opacity:.7"></i><i style="height:140px;opacity:.85"></i><i style="height:60px;opacity:.5"></i>
+  </div>
+  <div style="position:absolute;left:140px;top:120px"><img src="assets/logo-dark.png" alt="Permanence IA" style="height:118px;width:auto"></div>
+  <div style="position:absolute;left:140px;bottom:200px;max-width:1150px">
+    <div class="pill" style="background:rgba(90,211,236,.12);color:var(--glow)"><span style="width:12px;height:12px;border-radius:50%;background:var(--glow)"></span>Agent disponible · 24 h/24 · 7 j/7</div>
+    <h1 style="font-size:96px;line-height:1.04;margin-top:36px">L’agent vocal IA qui répond à <span class="hl">chaque appel</span>, 24&nbsp;h/24</h1>
+    <p class="lead" style="font-size:32px;margin-top:34px">Accueil téléphonique, prise de rendez-vous et qualification des demandes, dans votre langue et à votre nom.</p>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;bottom:64px;display:flex;justify-content:space-between;font-size:22px;color:#9AA6C8">
+    <span style="font-weight:600;color:#fff">www.permanenceia.com</span><span>Présentation commerciale · 2026</span>
+  </div>
+</section>
+
+<!-- 2. Le problème -->
+<section class="slide">
+  <div class="eyebrow">Le problème</div>
+  <h2>Votre téléphone sonne quand vous ne pouvez pas <span class="hl">décrocher</span></h2>
+  <p class="lead">Vous êtes avec un client, sur un chantier, au volant ou en famille. Celui qui appelle ne laisse pas toujours de message&nbsp;: il compose le numéro suivant.</p>
+  <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:64px">
+    <div class="card"><div class="num">01</div><h3 style="margin-top:14px">Pendant vos rendez-vous</h3><p class="small muted" style="margin-top:12px">Vous êtes concentré sur le client présent. Le suivant attend, puis raccroche.</p></div>
+    <div class="card"><div class="num">02</div><h3 style="margin-top:14px">Sur le terrain</h3><p class="small muted" style="margin-top:12px">Chantier, intervention, déplacement&nbsp;: impossible de répondre correctement.</p></div>
+    <div class="card"><div class="num">03</div><h3 style="margin-top:14px">Le soir et le <span class="nw">week-end</span></h3><p class="small muted" style="margin-top:12px">Beaucoup de clients appellent après leur journée, quand vous avez fermé.</p></div>
+    <div class="card" style="background:var(--ink);border-color:var(--ink);color:#fff"><div class="num" style="color:var(--glow)">04</div><h3 style="margin-top:14px">La messagerie ne rappelle pas</h3><p class="small" style="margin-top:12px;color:#C4CCE4">Un message vocal, c’est une demande en attente. Pendant ce temps, un concurrent répond.</p></div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">02</span></div>
+</section>
+
+<!-- 3. Le coût de l'inaction -->
+<section class="slide paper">
+  <div class="eyebrow">Le coût de l’inaction</div>
+  <h2>Faites le calcul avec <span class="hl">vos chiffres</span></h2>
+  <div class="grid" style="grid-template-columns:1.15fr 1fr;margin-top:56px;gap:40px">
+    <div class="card" style="padding:46px 48px">
+      <div class="pill">La formule</div>
+      <div style="display:flex;align-items:stretch;gap:18px;margin-top:34px">
+        <div style="flex:1;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-family:Poppins;font-weight:700;font-size:28px;line-height:1.2">Appels manqués</div><div class="small muted">par semaine</div></div>
+        <div class="arrow">×</div>
+        <div style="flex:.6;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-family:Poppins;font-weight:700;font-size:28px;line-height:1.2">4,3</div><div class="small muted">semaines par mois</div></div>
+        <div class="arrow">×</div>
+        <div style="flex:1;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-family:Poppins;font-weight:700;font-size:28px;line-height:1.2">Valeur d’un client</div><div class="small muted">ce que rapporte une demande</div></div>
+      </div>
+      <div style="margin-top:28px;background:var(--ink);color:#fff;border-radius:16px;padding:24px 30px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:26px;font-weight:600">=&nbsp; Perte mensuelle</span><span style="font-family:Poppins;font-weight:700;font-size:30px;color:var(--glow)">? €</span>
+      </div>
+      <p class="small muted" style="margin-top:28px">Remplacez chaque case par vos propres valeurs. Comptez seulement les appels que vous n’avez pas pu prendre ni rappeler à temps.</p>
+    </div>
+    <div class="card" style="padding:46px 48px;border:2px solid var(--signal)">
+      <div class="pill" style="background:var(--signal);color:#fff">Exemple</div>
+      <div style="margin-top:30px;font-size:28px" class="muted">10 appels / semaine × 4,3 × 150&nbsp;€</div>
+      <div style="font-family:Poppins;font-weight:800;font-size:92px;line-height:1.05;letter-spacing:-.03em;margin-top:10px">6&nbsp;450&nbsp;€</div>
+      <div style="font-size:26px;font-weight:600">de chiffre d’affaires en jeu chaque mois</div>
+      <div style="border-top:1px solid var(--line);margin:30px 0 24px"></div>
+      <div class="small muted">En récupérer seulement la moitié&nbsp;:</div>
+      <div style="font-family:Poppins;font-weight:700;font-size:54px;color:var(--signal-deep);margin-top:4px">3&nbsp;225&nbsp;€ <span style="font-size:28px;font-weight:600">par mois</span></div>
+      <p class="small muted" style="margin-top:12px">Chiffres d’illustration, pas une moyenne de marché.</p>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span>Calculez-le sur <b style="color:var(--signal-deep)">permanenceia.com/tarifs</b></span><span class="pg">03</span></div>
+</section>
+
+<!-- 4. La solution -->
+<section class="slide">
+  <div class="grid" style="grid-template-columns:1fr 1.1fr;gap:90px;height:100%">
+    <div style="align-self:center;margin-top:-40px">
+      <div class="eyebrow">La solution</div>
+      <h2 style="font-size:80px">Votre <span class="hl">collègue IA</span> au téléphone</h2>
+      <p class="lead" style="font-size:31px">Il répond à votre nom, avec vos informations et vos consignes. Il s’occupe des appels courants, et vous gardez la main sur ce qui compte.</p>
+      <div class="pill" style="margin-top:44px"><span style="width:12px;height:12px;border-radius:50%;background:var(--signal)"></span>En ligne 24 h/24, 7 j/7</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;justify-content:center;margin-top:-30px">
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:28px 34px"><span class="num">01</span><div><h3>Décroche immédiatement</h3><p class="small muted" style="margin-top:6px">Aucun appel ne tombe sur la messagerie, de jour comme de nuit.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:28px 34px"><span class="num">02</span><div><h3>Prend les rendez-vous dans votre agenda</h3><p class="small muted" style="margin-top:6px">Il consulte vos disponibilités et réserve le créneau.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:28px 34px"><span class="num">03</span><div><h3>Qualifie les demandes</h3><p class="small muted" style="margin-top:6px">Nom, coordonnées, besoin, urgence&nbsp;: les bonnes questions, dans le bon ordre.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:28px 34px"><span class="num">04</span><div><h3>Répond aux questions fréquentes</h3><p class="small muted" style="margin-top:6px">Horaires, tarifs, zone d’intervention, documents à apporter.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:28px 34px"><span class="num">05</span><div><h3>Vous envoie un résumé</h3><p class="small muted" style="margin-top:6px">Après chaque appel, l’essentiel en quelques lignes.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">04</span></div>
+</section>
+
+<!-- 5. Une voix naturelle -->
+<section class="slide dark">
+  <div class="eyebrow">Une voix naturelle</div>
+  <h2>Une vraie conversation, <span class="hl">dans la langue de vos clients</span></h2>
+  <p class="lead">Chaque langue a ses voix natives, féminines et masculines. L’agent écoute, se laisse interrompre et reprend le fil, comme un interlocuteur attentif.</p>
+  <div class="grid" style="grid-template-columns:1.25fr 1fr;gap:44px;margin-top:56px">
+    <div class="card">
+      <div class="small" style="color:var(--glow);font-weight:700;letter-spacing:.12em;text-transform:uppercase">Voix natives</div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:24px">
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Français</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Anglais (Royaume-Uni)</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Anglais (Australie)</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Italien</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Polonais</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">Néerlandais</span>
+        <span class="chip" style="background:var(--glow);color:var(--night);border-color:var(--glow)">+ de 80 langues disponibles</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card" style="padding:28px 34px"><h3>Gère les interruptions</h3><p class="small" style="color:#C4CCE4;margin-top:6px">Le client coupe la parole, change d’avis&nbsp;: l’agent s’adapte.</p></div>
+      <div class="card" style="padding:28px 34px"><h3>Plusieurs appels en parallèle</h3><p class="small" style="color:#C4CCE4;margin-top:6px">Personne n’entend de tonalité occupée aux heures de pointe.</p></div>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-dark.png" alt="Permanence IA"><span class="pg">05</span></div>
+</section>
+
+<!-- 6. La comparaison honnête -->
+<section class="slide paper">
+  <div class="eyebrow">Accueil humain ou agent IA</div>
+  <h2>La comparaison <span class="hl">honnête</span></h2>
+  <p class="lead">Un poste d’accueil est précieux. Il est aussi coûteux, limité en heures et ne prend qu’un appel à la fois. Voici ce qui change quand l’agent IA répond en premier.</p>
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:48px">
+    <div class="card" style="padding:40px 46px">
+      <div class="small muted" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase">Poste d’accueil à temps plein (France)</div>
+      <div style="font-family:Poppins;font-weight:700;font-size:44px;margin-top:14px;line-height:1.15">Au moins le SMIC</div>
+      <div class="small muted">1&nbsp;867&nbsp;€ brut par mois en 2026, plus les charges patronales</div>
+      <ul class="dash" style="margin-top:22px">
+        <li>35 heures par semaine</li>
+        <li>Congés et absences à remplacer</li>
+        <li>Un appel à la fois</li>
+        <li>Plusieurs semaines de formation</li>
+      </ul>
+    </div>
+    <div class="card" style="padding:40px 46px;border:2px solid var(--signal)">
+      <div class="small" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--signal-deep)">Agent IA Permanence IA</div>
+      <div style="font-family:Poppins;font-weight:700;font-size:44px;margin-top:14px;line-height:1.15">Dès 99&nbsp;$&nbsp;HT par mois</div>
+      <div class="small muted">350 minutes incluses, ou 0,39&nbsp;$ la minute sans abonnement</div>
+      <ul class="check" style="margin-top:22px">
+        <li>24 h/24 et 7 j/7, soit 168 heures par semaine</li>
+        <li>Plusieurs appels simultanés</li>
+        <li>Modifiable en quelques minutes</li>
+        <li>Résumé et transcription de chaque appel</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span style="max-width:1300px;text-align:center">Un humain reste indispensable pour les cas sensibles&nbsp;: l’agent lui transmet un résumé et organise le rappel.</span><span class="pg">06</span></div>
+</section>
+
+<!-- 7. Tableau ligne par ligne -->
+<section class="slide">
+  <div class="eyebrow">Côte à côte</div>
+  <h2 style="font-size:64px">Ce qui compte, <span class="hl">ligne par ligne</span></h2>
+  <table style="width:100%;border-collapse:separate;border-spacing:0;margin-top:40px;font-size:24px;line-height:1.3">
+    <thead>
+      <tr style="text-align:left">
+        <th style="width:26%;padding:0 24px 16px 0"></th>
+        <th style="width:37%;padding:0 24px 16px;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)">Poste d’accueil</th>
+        <th style="width:37%;padding:16px 24px;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--ink);border-radius:16px 16px 0 0">Agent IA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="rl">Coût mensuel</td><td class="hu">Au moins 1&nbsp;867&nbsp;€ brut + charges patronales</td><td class="ai">Dès 99&nbsp;$ HT, ou 0,39&nbsp;$ la minute</td></tr>
+      <tr><td class="rl">Heures couvertes</td><td class="hu">35 h par semaine</td><td class="ai">168 h par semaine, 24 h/24 et 7 j/7</td></tr>
+      <tr><td class="rl">Congés et absences</td><td class="hu">À remplacer ou à reporter</td><td class="ai">Toujours en ligne</td></tr>
+      <tr><td class="rl">Appels simultanés</td><td class="hu">Un à la fois</td><td class="ai">Plusieurs en parallèle</td></tr>
+      <tr><td class="rl">Mise en route</td><td class="hu">Plusieurs semaines de formation</td><td class="ai">Configuration guidée, testée sur votre téléphone</td></tr>
+      <tr><td class="rl">Changer une consigne</td><td class="hu">Réunion, note, rappel à l’équipe</td><td class="ai">Modifiable en quelques minutes</td></tr>
+      <tr><td class="rl">Trace des appels</td><td class="hu">Notes prises à la main</td><td class="ai">Résumé et transcription de chaque appel</td></tr>
+      <tr><td class="rl">Cas sensibles</td><td class="hu"><b style="color:var(--ok)">Le point fort de l’humain</b></td><td class="ai" style="border-bottom:2px solid var(--ink);border-radius:0 0 16px 16px">Transmet un résumé et organise le rappel</td></tr>
+    </tbody>
+  </table>
+  <style>
+    td.rl{padding:15px 24px 15px 0;font-weight:700;border-top:1px solid var(--line)}
+    td.hu{padding:15px 24px;color:var(--slate);border-top:1px solid var(--line)}
+    td.ai{padding:15px 24px;font-weight:600;background:var(--signal-soft);border-top:1px solid #C9E8F1;border-left:2px solid var(--ink);border-right:2px solid var(--ink)}
+  </style>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span>SMIC 2026 pour 35 h hebdomadaires. Prix de l’agent en dollars US hors taxes.</span><span class="pg">07</span></div>
+</section>
+
+<!-- 8. Cas d'usage 1 -->
+<section class="slide paper">
+  <div class="eyebrow">Cas d’usage 1 · Appels entrants</div>
+  <h2>Les appels manqués, <span class="hl">en pilote automatique</span></h2>
+  <p class="lead">Chaque appel que vous ne pouvez pas prendre est accueilli, compris et transformé en action concrète.</p>
+  <div style="display:flex;gap:14px;margin-top:70px;align-items:stretch">
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">1</div><h3 style="margin-top:12px;font-size:29px">Le client appelle</h3><p class="small muted" style="margin-top:10px">Pendant un rendez-vous, le soir ou le <span class="nw">week-end</span>.</p></div>
+    <div class="arrow">›</div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">2</div><h3 style="margin-top:12px;font-size:29px">L’agent décroche à votre nom</h3><p class="small muted" style="margin-top:10px">Immédiatement, avec votre message d’accueil.</p></div>
+    <div class="arrow">›</div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">3</div><h3 style="margin-top:12px;font-size:29px">Il recueille l’essentiel</h3><p class="small muted" style="margin-top:10px">Nom, téléphone et objet de la demande.</p></div>
+    <div class="arrow">›</div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">4</div><h3 style="margin-top:12px;font-size:29px">Il réserve ou programme</h3><p class="small muted" style="margin-top:10px">Un rendez-vous dans votre agenda, ou votre rappel.</p></div>
+    <div class="arrow">›</div>
+    <div class="card" style="flex:1;padding:32px 28px;background:var(--ink);border-color:var(--ink);color:#fff"><div class="num" style="color:var(--glow)">5</div><h3 style="margin-top:12px;font-size:29px">Vous recevez la fiche</h3><p class="small" style="margin-top:10px;color:#C4CCE4">Pas un message vocal à écouter&nbsp;: une demande claire.</p></div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">08</span></div>
+</section>
+
+<!-- 9. Cas d'usage 2 -->
+<section class="slide">
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:90px">
+    <div>
+      <div class="eyebrow">Cas d’usage 2 · Rendez-vous</div>
+      <h2 style="font-size:66px">La prise de <span class="nw">rendez-vous</span>,<br><span class="hl nw">sans y toucher</span></h2>
+      <p class="lead" style="font-size:29px">L’agent consulte votre agenda en temps réel, propose deux créneaux précis et confirme celui que le client choisit.</p>
+      <div class="small muted" style="margin-top:44px;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Agendas connectés</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:16px">
+        <span class="chip">Google Agenda</span><span class="chip">Outlook</span><span class="chip">Cal.com</span><span class="chip">Calendly</span>
+      </div>
+    </div>
+    <div class="card" style="padding:40px 40px;background:var(--paper);align-self:start;margin-top:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill">Appel en cours</span><span class="small muted">Exemple de conversation</span></div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:28px;font-size:25px;line-height:1.38">
+        <div style="align-self:flex-end;max-width:82%;background:var(--ink);color:#fff;border-radius:20px 20px 6px 20px;padding:16px 22px">Bonjour, je voudrais un rendez-vous la semaine prochaine.</div>
+        <div style="align-self:flex-start;max-width:86%;background:#fff;border:1px solid var(--line);border-radius:20px 20px 20px 6px;padding:16px 22px">Bien sûr. Je peux vous proposer mardi à 14&nbsp;h ou jeudi à 9&nbsp;h&nbsp;30. Lequel vous convient&nbsp;?</div>
+        <div style="align-self:flex-end;max-width:82%;background:var(--ink);color:#fff;border-radius:20px 20px 6px 20px;padding:16px 22px">Jeudi, c’est parfait.</div>
+        <div style="align-self:flex-start;max-width:86%;background:#fff;border:1px solid var(--line);border-radius:20px 20px 20px 6px;padding:16px 22px">C’est réservé&nbsp;: jeudi à 9&nbsp;h&nbsp;30. Vous recevez la confirmation dans un instant.</div>
+      </div>
+      <div style="margin-top:24px;display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--signal);border-radius:14px;padding:16px 20px;font-size:22px">
+        <span style="width:14px;height:14px;border-radius:50%;background:var(--ok)"></span><b>Ajouté à votre agenda</b><span class="muted">· jeudi 9 h 30 · nouveau client</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">09</span></div>
+</section>
+
+<!-- 10. Cas d'usage 3 -->
+<section class="slide paper">
+  <div class="eyebrow">Cas d’usage 3 · Appels sortants</div>
+  <h2>Relancez vos devis et <span class="hl">vos anciens clients</span></h2>
+  <p class="lead">Avec les campagnes sortantes, l’agent appelle pour vous, au bon moment, et note la réponse de chaque contact.</p>
+  <div class="pill" style="margin-top:30px">Forfait Assistant</div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:40px">
+    <div class="card"><div class="num">01</div><h3 style="margin-top:14px">Devis sans réponse</h3><p class="small muted" style="margin-top:12px">48 h après l’envoi, l’agent rappelle, répond aux questions et propose la suite.</p></div>
+    <div class="card"><div class="num">02</div><h3 style="margin-top:14px">Entretien saisonnier</h3><p class="small muted" style="margin-top:12px">Chaudière, climatisation, véhicule, contrôle annuel&nbsp;: un rappel au bon moment, avec prise de rendez-vous.</p></div>
+    <div class="card"><div class="num">03</div><h3 style="margin-top:14px">Clients inactifs</h3><p class="small muted" style="margin-top:12px">Reprendre contact avec ceux qui ne sont pas revenus depuis longtemps.</p></div>
+  </div>
+  <div style="margin-top:34px;display:flex;gap:18px;align-items:center;font-size:23px;color:var(--slate)">
+    <span style="flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:19px">i</span>
+    Uniquement des contacts avec qui vous avez une relation ou un consentement. Les personnes qui refusent sont ajoutées à la liste d’exclusion.
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">10</span></div>
+</section>
+
+<!-- 11. Votre parcours -->
+<section class="slide">
+  <div class="eyebrow">Votre activité</div>
+  <h2 style="font-size:64px">Votre parcours <span class="hl">en 5 cases</span></h2>
+  <p class="lead" style="font-size:28px">Remplissez ces cases avec un appel typique de votre activité&nbsp;: c’est la base de la configuration de votre agent.</p>
+  <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:22px;margin-top:46px">
+    <div class="card fill"><div class="num">1</div><h3>Déclencheur</h3><p class="small muted">Qui appelle, et pourquoi&nbsp;?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">2</div><h3>Accueil</h3><p class="small muted">Que doit dire l’agent en décrochant&nbsp;?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">3</div><h3>Conversation</h3><p class="small muted">Quelles questions poser, quelles réponses donner&nbsp;?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">4</div><h3>Action</h3><p class="small muted">Rendez-vous, rappel, transfert, devis&nbsp;?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">5</div><h3>Suivi</h3><p class="small muted">Qui reçoit le résumé, et que se passe-t-il ensuite&nbsp;?</p><div class="lines"></div></div>
+  </div>
+  <style>
+    .fill{padding:30px 28px;height:470px;display:flex;flex-direction:column}
+    .fill h3{margin-top:10px;font-size:30px}
+    .fill p{margin-top:8px;min-height:96px}
+    .fill .lines{flex:1;margin-top:18px;background:repeating-linear-gradient(to bottom,transparent 0 50px,var(--line) 50px 52px)}
+  </style>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span>Vous pouvez aussi l’apporter tel quel&nbsp;: l’assistant de configuration vous guide.</span><span class="pg">11</span></div>
+</section>
+
+<!-- 12. Chaque appel, chaque détail -->
+<section class="slide paper">
+  <div class="eyebrow">Inclus</div>
+  <h2>Chaque appel, <span class="hl">chaque détail</span></h2>
+  <p class="lead">Tout ce qui s’est dit est retrouvable, lisible et exploitable, sans réécouter une seule messagerie.</p>
+  <div class="grid tiles" style="grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px">
+    <div class="card"><h3>Transcription</h3><p class="small muted" style="margin-top:10px">Le texte intégral de la conversation, mot à mot.</p></div>
+    <div class="card"><h3>Enregistrement</h3><p class="small muted" style="margin-top:10px">L’audio de l’appel, à réécouter en cas de doute.</p></div>
+    <div class="card"><h3>Résumé</h3><p class="small muted" style="margin-top:10px">L’essentiel en quelques lignes, envoyé après l’appel.</p></div>
+    <div class="card"><h3>Données extraites</h3><p class="small muted" style="margin-top:10px">Nom, téléphone, demande, urgence&nbsp;: des champs prêts à l’emploi.</p></div>
+    <div class="card"><h3>Statistiques</h3><p class="small muted" style="margin-top:10px">Volume d’appels, durées, motifs, résultats.</p></div>
+    <div class="card" style="border:2px solid var(--signal)"><h3>Voix clonée</h3><p class="small muted" style="margin-top:10px">L’agent parle avec votre voix, avec votre accord. Forfait Assistant.</p></div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">12</span></div>
+</section>
+
+<!-- 13. Intégrations -->
+<section class="slide">
+  <div class="eyebrow">Intégrations</div>
+  <h2>Il se branche sur <span class="hl">vos outils</span></h2>
+  <p class="lead">Les rendez-vous, les contacts et les résumés arrivent là où vous travaillez déjà.</p>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px">
+    <div class="card int"><div class="lab">Agendas</div><div class="chips"><span class="chip">Google Agenda</span><span class="chip">Outlook</span><span class="chip">Cal.com</span><span class="chip">Calendly</span></div></div>
+    <div class="card int"><div class="lab">CRM</div><div class="chips"><span class="chip">HubSpot</span><span class="chip">Pipedrive</span><span class="chip">Salesforce</span></div></div>
+    <div class="card int"><div class="lab">Équipe</div><div class="chips"><span class="chip">Slack</span><span class="chip">Teams</span></div></div>
+    <div class="card int"><div class="lab">Messageries</div><div class="chips"><span class="chip">WhatsApp</span><span class="chip">Messenger</span><span class="chip">SMS</span></div></div>
+    <div class="card int"><div class="lab">E-commerce</div><div class="chips"><span class="chip">Shopify</span></div></div>
+    <div class="card int" style="background:var(--ink);border-color:var(--ink);color:#fff"><div class="lab" style="color:var(--glow)">Automatisations · forfait Assistant</div><div class="chips"><span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)">Webhooks</span><span class="chip" style="background:var(--glow);border-color:var(--glow);color:var(--night)">+ de 300 outils</span></div></div>
+  </div>
+  <style>
+    .int{padding:34px 34px;min-height:200px}
+    .int .lab{font-weight:700;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal-deep)}
+    .int .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .int .chip{font-size:22px;padding:10px 20px}
+  </style>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">13</span></div>
+</section>
+
+<!-- 14. Mise en route -->
+<section class="slide paper">
+  <div class="eyebrow">Mise en route</div>
+  <h2>En ligne <span class="hl">sans projet informatique</span></h2>
+  <p class="lead">Vous avancez à votre rythme, depuis votre navigateur. L’assistant de configuration vous accompagne à chaque étape.</p>
+  <div style="position:relative;margin-top:64px">
+    <div style="position:absolute;left:40px;right:40px;top:39px;height:3px;background:var(--line)"></div>
+    <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:26px;position:relative">
+      <div class="step"><div class="dot">0</div><div class="lab">Jour 0</div><h3>Inscription</h3><p class="small muted">Essai gratuit de 14 jours avec 30 minutes d’appels.</p></div>
+      <div class="step"><div class="dot">1</div><div class="lab">Étape 1</div><h3>Décrivez votre activité</h3><p class="small muted">L’assistant de configuration vous guide.</p></div>
+      <div class="step"><div class="dot">2</div><div class="lab">Étape 2</div><h3>Testez l’agent</h3><p class="small muted">Il vous appelle sur votre propre téléphone.</p></div>
+      <div class="step"><div class="dot">3</div><div class="lab">Étape 3</div><h3>Branchez votre ligne</h3><p class="small muted">Renvoi d’appel sur <span class="nw">non-réponse</span> ou occupation, ou numéro dédié.</p></div>
+      <div class="step"><div class="dot" style="background:var(--ink);border-color:var(--ink);color:#fff">✓</div><div class="lab">Étape 4</div><h3>En ligne</h3><p class="small muted">Vos appels sont pris en charge, jour et nuit.</p></div>
+    </div>
+  </div>
+  <style>
+    .step .dot{width:80px;height:80px;border-radius:50%;background:#fff;border:3px solid var(--signal);display:flex;align-items:center;justify-content:center;font-family:Poppins;font-weight:700;font-size:32px;color:var(--signal-deep)}
+    .step .lab{margin-top:24px;font-weight:700;font-size:19px;letter-spacing:.12em;text-transform:uppercase;color:var(--signal-deep)}
+    .step h3{margin-top:8px;font-size:30px}
+    .step p{margin-top:10px}
+  </style>
+  <div style="margin-top:56px;display:flex;gap:16px">
+    <span class="pill" style="font-size:21px;padding:12px 24px">Sans frais de mise en service</span>
+    <span class="pill" style="font-size:21px;padding:12px 24px">Sans engagement</span>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">14</span></div>
+</section>
+
+<!-- 15. Tarifs -->
+<section class="slide" style="padding-top:88px">
+  <div class="eyebrow">Tarifs</div>
+  <h2 style="font-size:60px">Des forfaits clairs, <span class="hl">en dollars US hors taxes</span></h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr 1.08fr 1fr;gap:24px;margin-top:40px;align-items:stretch">
+    <div class="card plan">
+      <div class="nm">À la consommation</div>
+      <div class="pr">0,39&nbsp;$<span>/min</span></div>
+      <div class="sub">Sans abonnement</div>
+      <ul class="check"><li>Vous payez les minutes utilisées</li><li>Idéal pour démarrer petit</li></ul>
+    </div>
+    <div class="card plan">
+      <div class="nm">Réceptionniste</div>
+      <div class="pr">99&nbsp;$<span>/mois</span></div>
+      <div class="sub">350 minutes · 1 agent</div>
+      <ul class="check"><li>Agenda connecté</li><li>Transfert vers votre équipe</li><li>Minute supp. 0,39&nbsp;$</li></ul>
+    </div>
+    <div class="card plan" style="border:2.5px solid var(--signal);position:relative">
+      <span class="pill" style="position:absolute;top:-20px;left:40px;background:var(--signal);color:#fff">Le plus choisi</span>
+      <div class="nm">Assistant</div>
+      <div class="pr">249&nbsp;$<span>/mois</span></div>
+      <div class="sub">1&nbsp;000 minutes · 3 agents</div>
+      <ul class="check"><li>Campagnes et automatisations</li><li>1 voix clonée</li><li>1&nbsp;000 crédits de messages</li><li>Minute supp. 0,36&nbsp;$</li></ul>
+    </div>
+    <div class="card plan">
+      <div class="nm">Centre d’appels</div>
+      <div class="pr">499&nbsp;$<span>/mois</span></div>
+      <div class="sub">2&nbsp;300 minutes</div>
+      <ul class="check"><li>Tout Assistant, sans limite d’agents</li><li>20 appels simultanés</li><li>Minute supp. 0,32&nbsp;$</li></ul>
+    </div>
+  </div>
+  <style>
+    .plan{padding:34px 32px 26px}
+    .plan .nm{font-family:Poppins;font-weight:700;font-size:27px}
+    .plan .pr{font-family:Poppins;font-weight:800;font-size:60px;letter-spacing:-.03em;margin-top:10px;line-height:1.05}
+    .plan .pr span{font-size:24px;font-weight:600;color:var(--slate);letter-spacing:0;margin-left:4px}
+    .plan .sub{font-size:22px;font-weight:600;color:var(--signal-deep);margin-top:6px}
+    .plan ul{margin-top:16px;border-top:1px solid var(--line);padding-top:8px}
+    .plan ul li{font-size:21px;margin:9px 0;padding-left:36px}
+    .plan ul li::before{width:22px;height:22px;top:3px;background-size:22px}
+  </style>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:28px">
+    <div class="note"><b>Annuel</b> : 2 mois offerts</div>
+    <div class="note"><b>Numéro dédié</b> en option, dès 5,99&nbsp;$/mois</div>
+    <div class="note"><b>Essai 14 jours</b>, 30 min : rien n’est débité pendant l’essai</div>
+    <div class="note"><b>Sans frais</b> de mise en service, sans engagement</div>
+  </div>
+  <style>.note{background:var(--paper);border-radius:14px;padding:16px 22px;font-size:21px;line-height:1.35;color:var(--slate)} .note b{color:var(--ink)}</style>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span>Détails et comparatif complet sur permanenceia.com/tarifs</span><span class="pg">15</span></div>
+</section>
+
+<!-- 16. Numéros -->
+<section class="slide paper">
+  <div class="eyebrow">Numéros de téléphone</div>
+  <h2>Gardez votre numéro. <span class="hl">Ou prenez-en un nouveau.</span></h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:64px">
+    <div class="card" style="padding:46px 50px;border:2px solid var(--signal)">
+      <div class="pill">Option A</div>
+      <h3 style="font-size:40px;margin-top:24px">Gardez le vôtre</h3>
+      <p class="muted" style="margin-top:14px;font-size:26px">Activez le renvoi d’appel de votre ligne vers l’agent, sur <span class="nw">non-réponse</span> ou en cas d’occupation.</p>
+      <ul class="check" style="margin-top:20px"><li>Vous continuez à décrocher quand vous êtes disponible</li><li>Rien ne change sur vos cartes de visite</li><li>Désactivable à tout moment depuis votre téléphone</li></ul>
+    </div>
+    <div class="card" style="padding:46px 50px">
+      <div class="pill" style="background:var(--paper);color:var(--slate)">Option B</div>
+      <h3 style="font-size:40px;margin-top:24px">Prenez-en un nouveau</h3>
+      <p class="muted" style="margin-top:14px;font-size:26px">Un numéro dédié, choisi selon le pays, pour une nouvelle ligne, une campagne ou un site secondaire.</p>
+      <ul class="check" style="margin-top:20px"><li>Dès 5,99&nbsp;$ par mois selon le pays</li><li>Idéal pour séparer vos activités</li></ul>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">16</span></div>
+</section>
+
+<!-- 17. Sécurité et conformité -->
+<section class="slide">
+  <div class="eyebrow">Sécurité et conformité</div>
+  <h2>Transparent avec vos clients, <span class="hl">rigoureux avec leurs données</span></h2>
+  <div class="grid" style="grid-template-columns:1fr 1.25fr 0.85fr;gap:30px;margin-top:60px">
+    <div class="card" style="padding:40px 40px">
+      <div class="pill">AI Act</div>
+      <h3 style="margin-top:20px">Transparence dès le début</h3>
+      <ul class="check" style="margin-top:14px"><li>L’agent annonce qu’il est une IA</li><li>Il indique que l’appel est enregistré</li></ul>
+    </div>
+    <div class="card" style="padding:40px 40px">
+      <div class="pill">RGPD</div>
+      <h3 style="margin-top:20px">Vos données sous contrôle</h3>
+      <ul class="check" style="margin-top:14px"><li>Durée de conservation configurable</li><li>Suppression d’un appel et de son enregistrement sur demande</li><li>Liste d’exclusion pour les appels sortants</li><li>Accord de traitement des données (DPA) sur demande</li></ul>
+    </div>
+    <div class="card" style="padding:40px 40px">
+      <div class="pill">Paiements</div>
+      <h3 style="margin-top:20px">Sécurisés par Stripe</h3>
+      <p class="small muted" style="margin-top:14px">Abonnements et paiements par carte gérés par Stripe.</p>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span>Détails dans la politique de confidentialité sur permanenceia.com</span><span class="pg">17</span></div>
+</section>
+
+<!-- 18. Objections -->
+<section class="slide paper">
+  <div class="eyebrow">Questions fréquentes</div>
+  <h2 style="font-size:62px">Vos questions, <span class="hl">nos réponses</span></h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px">
+    <div class="card qa"><h3>«&nbsp;Ça sonne robot&nbsp;?&nbsp;»</h3><p>Voix native dans votre langue, gestion des interruptions. Le plus simple&nbsp;: écoutez la démo live.</p></div>
+    <div class="card qa"><h3>«&nbsp;Mes clients veulent un humain.&nbsp;»</h3><p>L’agent répond tout de suite, puis transfère l’appel à votre équipe ou organise votre rappel avec un résumé.</p></div>
+    <div class="card qa"><h3>«&nbsp;J’ai déjà un secrétariat.&nbsp;»</h3><p>L’agent prend le relais quand la ligne est occupée, le soir, le <span class="nw">week-end</span> et aux heures de pointe.</p></div>
+    <div class="card qa"><h3>«&nbsp;Je ne veux pas changer de numéro.&nbsp;»</h3><p>Inutile&nbsp;: un renvoi d’appel sur <span class="nw">non-réponse</span> ou occupation suffit.</p></div>
+    <div class="card qa"><h3>«&nbsp;C’est long à mettre en place&nbsp;?&nbsp;»</h3><p>Vous décrivez votre activité, l’assistant vous guide, vous testez sur votre téléphone. Sans frais de mise en service.</p></div>
+    <div class="card qa"><h3>«&nbsp;Et si je veux arrêter&nbsp;?&nbsp;»</h3><p>Sans engagement. Vous désactivez le renvoi et votre ligne fonctionne comme avant.</p></div>
+  </div>
+  <style>.qa{padding:38px 38px;min-height:250px}.qa h3{font-size:29px;color:var(--ink)}.qa p{margin-top:14px;font-size:25px;line-height:1.42;color:var(--slate)}</style>
+  <div class="foot"><img src="assets/logo-light.png" alt="Permanence IA"><span class="pg">18</span></div>
+</section>
+
+<!-- 19. Essayez maintenant -->
+<section class="slide dark">
+  <div class="grid" style="grid-template-columns:1.3fr 1fr;gap:100px;align-items:center;height:100%;margin-top:-30px">
+    <div>
+      <div class="eyebrow">Démo live</div>
+      <h2 style="font-size:96px">Essayez <span class="hl">maintenant</span></h2>
+      <p class="lead" style="font-size:34px;margin-top:34px">Parlez à notre agent sur <b style="color:#fff">permanenceia.com</b>&nbsp;: démo live, gratuite, sans inscription. Ou faites-le sonner sur votre propre téléphone.</p>
+      <div style="display:flex;gap:16px;margin-top:44px;flex-wrap:wrap">
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:21px;padding:12px 24px">Gratuit</span>
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:21px;padding:12px 24px">Sans inscription</span>
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:21px;padding:12px 24px">En français</span>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#fff;border-radius:32px;padding:44px;width:520px;margin:0 auto;box-shadow:0 0 0 10px rgba(90,211,236,.15)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 31" shape-rendering="crispEdges" style="width:432px;height:432px;display:block"><path fill="#FFFFFF" d="M0 0h31v31H0z"/><path stroke="#0E1B4D" d="M1 1.5h7m1 0h1m4 0h1m2 0h5m1 0h7M1 2.5h1m5 0h1m1 0h1m1 0h2m2 0h1m2 0h1m4 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m3 0h1m1 0h3m3 0h3m1 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h1m4 0h2m2 0h1m4 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m2 0h3m3 0h3m1 0h1m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m2 0h2m1 0h1m1 0h1m4 0h2m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m1 0h2m2 0h1m1 0h5M1 9.5h1m1 0h2m1 0h3m1 0h1m4 0h4m1 0h1m2 0h1m2 0h1m1 0h2M3 10.5h1m1 0h2m1 0h1m1 0h2m1 0h1m4 0h4m1 0h3m3 0h1M1 11.5h1m1 0h2m2 0h1m1 0h5m3 0h1m1 0h1m1 0h1m2 0h2m1 0h2M1 12.5h1m3 0h2m3 0h2m1 0h4m4 0h1m1 0h3m3 0h1M3 13.5h3m1 0h2m9 0h1m1 0h1m5 0h2M2 14.5h3m1 0h1m1 0h1m2 0h1m1 0h6m1 0h1m2 0h2m2 0h3M1 15.5h1m2 0h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m1 0h6m1 0h3M2 16.5h2m1 0h1m2 0h7m1 0h2m3 0h1m2 0h2m2 0h1M3 17.5h1m1 0h1m1 0h1m1 0h5m2 0h1m2 0h1m1 0h2m2 0h2m1 0h1M5 18.5h1m2 0h1m3 0h1m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h3M1 19.5h1m2 0h4m1 0h1m1 0h1m4 0h3m3 0h1m1 0h1m2 0h1M3 20.5h2m3 0h1m1 0h1m1 0h2m3 0h4m2 0h1m3 0h1M2 21.5h3m1 0h4m1 0h4m2 0h3m1 0h7M9 22.5h1m4 0h2m1 0h3m1 0h1m3 0h5M1 23.5h7m1 0h1m2 0h3m3 0h4m1 0h1m1 0h2m1 0h1M1 24.5h1m5 0h1m1 0h5m5 0h1m1 0h1m3 0h2m1 0h1M1 25.5h1m1 0h3m1 0h1m2 0h1m2 0h1m1 0h2m1 0h2m1 0h5m1 0h1M1 26.5h1m1 0h3m1 0h1m1 0h4m1 0h4m2 0h3m2 0h2m2 0h1M1 27.5h1m1 0h3m1 0h1m1 0h4m1 0h1m3 0h3m3 0h1m2 0h1m1 0h1M1 28.5h1m5 0h1m4 0h2m1 0h1m5 0h1m1 0h2m1 0h1m1 0h1M1 29.5h7m1 0h1m4 0h1m5 0h3m3 0h1m1 0h1"/></svg>
+      </div>
+      <div style="margin-top:28px;font-size:24px;color:#C4CCE4">Scannez pour lancer la démo<br><b style="color:#fff">permanenceia.com/#demo-live</b></div>
+    </div>
+  </div>
+  <div class="foot"><img src="assets/logo-dark.png" alt="Permanence IA"><span class="pg">19</span></div>
+</section>
+
+<!-- 20. Contact -->
+<section class="slide dark" style="padding:0">
+  <div style="position:absolute;right:-260px;bottom:-320px;width:1100px;height:1100px;border-radius:50%;border:2px solid rgba(90,211,236,.10)"></div>
+  <div style="position:absolute;right:-120px;bottom:-180px;width:820px;height:820px;border-radius:50%;border:2px solid rgba(90,211,236,.14)"></div>
+  <div style="position:absolute;left:140px;top:120px"><img src="assets/logo-dark.png" alt="Permanence IA" style="height:100px;width:auto"></div>
+  <div style="position:absolute;left:140px;top:340px;max-width:1300px">
+    <div class="eyebrow">Contact</div>
+    <h2 style="font-size:88px">Chaque appel mérite <span class="hl">une réponse</span></h2>
+    <div style="display:flex;gap:80px;margin-top:56px;font-size:30px">
+      <div><div class="small" style="color:#9AA6C8;font-weight:700;letter-spacing:.12em;text-transform:uppercase">Site</div><div style="font-weight:700;margin-top:6px">www.permanenceia.com</div></div>
+      <div><div class="small" style="color:#9AA6C8;font-weight:700;letter-spacing:.12em;text-transform:uppercase">E-mail</div><div style="font-weight:700;margin-top:6px">contact@permanenceia.com</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:30px;margin-top:60px">
+      <span style="display:inline-block;background:var(--signal);color:#fff;font-family:Poppins;font-weight:700;font-size:32px;border-radius:14px;padding:24px 44px">Commencez gratuitement</span>
+      <span style="font-size:26px;color:#C4CCE4">permanenceia.com/essai-gratuit · 14 jours · 30 minutes offertes</span>
+    </div>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;bottom:52px;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;font-size:19px;color:#8792B5;display:flex;justify-content:space-between">
+    <span>Permanence IA est une marque de SINAY STRATEGIC LLC (Wyoming, États-Unis)</span><span style="font-family:Poppins;font-weight:600">20</span>
+  </div>
+</section>
+
+</body>
+</html>

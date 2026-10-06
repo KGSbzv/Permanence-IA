@@ -171,7 +171,7 @@ export const UI_COMPONENTS = {
 
   demoBlock: {
     title: 'Try our agent live now',
-    intro: 'Talk to the agent from your browser, or leave your number to receive a demo call tailored to your sector.',
+    intro: 'Talk to the agent from your browser, or have it ring your own phone: 30 seconds is enough to judge the voice and how it handles an enquiry from your sector.',
     launchTitle: 'Start the live demo',
     launchText: 'A real conversation, nothing to install.',
     callbackTitle: 'Call me back',
@@ -305,13 +305,32 @@ export const UI_COMPONENTS = {
     cta: 'Try it free',
   },
 
+  humanVsAi: {
+    title: 'An honest comparison with a receptionist',
+    intro: 'A person on reception is valuable. They also come with a cost and set hours, and they can only take one call at a time. Here is the comparison, line by line.',
+    caption: 'Comparison between a full-time receptionist and the AI agent',
+    human: 'Full-time receptionist',
+    ai: 'AI agent',
+    rows: [
+      { label: 'Monthly cost', human: 'At least the national minimum wage, plus employer costs', ai: 'From {from} excl. tax per month (350 min), or {payg} per minute with no subscription' },
+      { label: 'Hours covered', human: 'Around 35 to 40 hours a week', ai: '24/7 (168 hours a week)' },
+      { label: 'Simultaneous calls', human: 'One', ai: 'Several in parallel' },
+      { label: 'Languages', human: 'One, sometimes two', ai: 'Over 80, with native voices' },
+      { label: 'Getting started', human: 'Recruitment, then several weeks of training', ai: 'A few minutes; instructions can be changed at any time' },
+      { label: 'Holidays and absences', human: 'Need cover', ai: 'None' },
+      { label: 'Consistency', human: 'Varies with workload and time of day', ai: 'The same rules on every call' },
+      { label: 'Notes after the call', human: 'Written by hand, when there is time', ai: 'Summary, transcript and extracted data, automatically' },
+    ],
+    note: 'A person is still essential for sensitive cases: the agent passes them a summary and arranges the callback. Many customers keep their receptionist and hand the agent overflow calls, lunch breaks, evenings and weekends. No setup fee, no commitment.',
+  },
+
   security: {
     items: [
       { title: 'Consent and opt-out', text: 'Consent to callbacks, handling of refusals, permitted calling hours and an exclusion list.' },
       { title: 'Data protection', text: 'Encryption in transit, account-protected access and configurable retention periods.' },
       { title: 'Traceability', text: 'Call history, transcripts and an activity log for every account.' },
       { title: 'Access control', text: 'Each customer has their own secure area; the agent only accesses the information you give it.' },
-      { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion, retention.' },
+      { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion of calls and recordings, retention. Data processing agreement (DPA) on request.' },
       { title: 'Infrastructure', text: 'Platform hosted with established cloud providers, with backups and monitoring.' },
     ],
     title: 'Security and compliance for your AI calls',
@@ -379,7 +398,7 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'male' : 'female'} voice`,
   },
 
-  industryMarquee: ['Plumbers', 'Electricians', 'Dental practices', 'Clinics', 'Estate agents', 'Property management', 'Garages', 'Body shops', 'Hair salons', 'Barbers', 'Beauty salons', 'Restaurants', 'Hotels', 'Law firms', 'Accountants', 'E-commerce', 'Physios', 'Osteopaths', 'Vets'],
+  industryMarquee: ['Plumbers', 'Electricians', 'Dental practices', 'Clinics', 'Estate agents', 'Property management', 'Garages', 'Body shops', 'Hair salons', 'Barbers', 'Beauty salons', 'Restaurants', 'Hotels', 'Law firms', 'Accountants', 'E-commerce', 'Brokers', 'Block management', 'Aesthetic clinics', 'Physios', 'Osteopaths', 'Vets'],
 
   // Same order as the component's flags.
   languageMarquee: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Dutch', 'Belgian French', 'Swiss French', 'Québécois', 'Arabic', 'Polish', 'Romanian', 'Turkish', 'Swedish'],

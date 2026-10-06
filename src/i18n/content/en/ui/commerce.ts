@@ -23,7 +23,8 @@ const SECTOR_SEO_TITLE: Record<string, string> = {
 const SECTOR_PLACE: Record<string, string> = {
   immobilier: 'agency', 'dentaire-cliniques': 'practice', 'kines-paramedical': 'clinic', 'cliniques-veterinaires': 'practice',
   automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'salon', 'restaurants-hotellerie': 'venue',
-  'avocats-experts-comptables': 'firm',
+  'avocats-experts-comptables': 'firm', 'e-commerce': 'shop', 'courtiers-assurance-credit': 'brokerage',
+  'gestion-locative': 'agency', 'medecine-esthetique': 'clinic',
 };
 
 export const UI_COMMERCE = {
@@ -78,7 +79,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents tailored to your trade',
-      intro: 'Ten trades where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
+      intro: 'Fourteen trades where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
       link: 'All sectors',
     },
     integrations: {
@@ -194,7 +195,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'An AI receptionist tailored to your trade',
-      intro: 'We have chosen ten trades where calls come in when teams are busy, and where every missed enquiry costs a customer. From a plumber’s emergency line to a physio clinic’s front desk, from the barber shop to the law firm, the agent asks the right questions.',
+      intro: 'We have chosen fourteen trades where calls come in when teams are busy, and where every missed enquiry costs a customer. From a plumber’s emergency line to a physio clinic’s front desk, from the barber shop to the law firm, the agent asks the right questions.',
     },
     other: {
       title: 'Your business isn’t on the list?',
@@ -230,7 +231,7 @@ export const UI_COMMERCE = {
       intro: 'Your calendar, CRM, messaging and telephony stay the same: the agent connects to them.',
     },
     pricing: {
-      title: 'Prices excl. tax, no commitment',
+      title: 'Prices excl. tax, no commitment, no setup fee',
       intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
         `For the ${sectorName.toLowerCase()} sector, we recommend the ${offerName} plan. Start with the free trial: ${days} days and ${minutes} minutes included.`,
       link: (offerName: string) => `See the ${offerName} plan details`,

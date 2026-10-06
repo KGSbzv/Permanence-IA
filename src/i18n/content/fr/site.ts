@@ -1,7 +1,7 @@
 // Messages transverses (bandeau d’essai, badges, note de prix). Les chiffres viennent du marché.
 export const SITE_TEXT = {
-  trialLine: (days: number, minutes: number) => `${days} jours d’essai gratuit — ${minutes} minutes incluses — prix HT — sans engagement`,
-  trialBadges: (days: number, minutes: number) => [`${days} jours d’essai gratuit`, `${minutes} minutes incluses`, 'Rien n’est débité pendant l’essai', 'Sans engagement'],
+  trialLine: (days: number, minutes: number) => `${days} jours d’essai gratuit — ${minutes} minutes incluses — prix HT — sans engagement ni frais de mise en service`,
+  trialBadges: (days: number, minutes: number) => [`${days} jours d’essai gratuit`, `${minutes} minutes incluses`, 'Rien n’est débité pendant l’essai', 'Sans engagement', 'Sans frais de mise en service'],
   growthLines: ['Ajoutez des minutes à tout moment', 'Passez à l’offre supérieure quand votre volume grandit'],
   priceNote: (numberFrom: string) => `Prix en dollars US (USD), hors taxes — taxes locales en sus si applicables. Acquisition d’un numéro dédié à partir de ${numberFrom} HT par mois, selon le pays.`,
   skipToContent: 'Aller au contenu',

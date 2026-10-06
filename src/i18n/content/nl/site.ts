@@ -1,7 +1,7 @@
 // Algemene meldingen (proefbalk, badges, prijsnotitie). De cijfers komen uit de markt.
 export const SITE_TEXT = {
-  trialLine: (days: number, minutes: number) => `${days} dagen gratis proberen — ${minutes} minuten inbegrepen — prijzen excl. btw — geen verplichtingen`,
-  trialBadges: (days: number, minutes: number) => [`${days} dagen gratis proberen`, `${minutes} minuten inbegrepen`, 'Niets afgeschreven tijdens de proefperiode', 'Geen verplichtingen'],
+  trialLine: (days: number, minutes: number) => `${days} dagen gratis proberen — ${minutes} minuten inbegrepen — prijzen excl. btw — geen verplichtingen of opstartkosten`,
+  trialBadges: (days: number, minutes: number) => [`${days} dagen gratis proberen`, `${minutes} minuten inbegrepen`, 'Niets afgeschreven tijdens de proefperiode', 'Geen verplichtingen', 'Geen opstartkosten'],
   growthLines: ['Voeg op elk moment minuten toe', 'Stap over op een groter abonnement wanneer uw volume groeit'],
   priceNote: (numberFrom: string) => `Prijzen in Amerikaanse dollars (USD), exclusief belastingen — lokale belastingen komen erbij indien van toepassing. Een eigen nummer is verkrijgbaar vanaf ${numberFrom} excl. btw per maand, afhankelijk van het land.`,
   skipToContent: 'Naar de inhoud',

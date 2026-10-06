@@ -982,4 +982,159 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
+  // ---------- Ajouts (playbook) : renvoi d’appel, règles d’appel sortant, vérifications, suivi mensuel ----------
+  {
+    slug: 'renvoi-d-appel',
+    category: 'phone',
+    title: 'Garder votre numéro avec le renvoi d’appel',
+    summary: 'Faire décrocher l’agent seulement quand vous ne répondez pas, quand vous êtes occupé ou en dehors des horaires, sans changer de numéro.',
+    plan: 'Tous les forfaits. Le renvoi est facturé par votre opérateur.',
+    sections: [
+      {
+        title: 'Le principe',
+        text: 'Vous gardez votre numéro sur vos cartes de visite, votre site et vos annonces. Chez votre opérateur, vous activez un renvoi vers le numéro de l’agent : tous vos appels, ou seulement ceux que vous ne prenez pas. Rien ne change pour vos clients.',
+      },
+      {
+        title: 'Les codes de renvoi sur un mobile',
+        text: 'Sur la plupart des mobiles et des opérateurs, tapez le code puis le numéro de l’agent au format international, terminé par # et la touche d’appel :',
+        list: [
+          'Si vous ne répondez pas : **61*numéro de l’agent# (vous pouvez souvent ajouter le délai avant renvoi, par exemple **61*numéro**20#).',
+          'Si votre ligne est occupée : **67*numéro de l’agent#',
+          'Si votre téléphone est éteint ou hors réseau : **62*numéro de l’agent#',
+          'Tous les appels, tout le temps : **21*numéro de l’agent#',
+          'Pour désactiver : ##61#, ##67#, ##62# ou ##21#, ou ##002# pour tout annuler.',
+        ],
+      },
+      {
+        title: 'Sur une ligne fixe ou une box',
+        steps: [
+          'Ouvrez l’espace client de votre opérateur (ou le menu de votre standard).',
+          'Cherchez « renvoi d’appel » ou « transfert d’appel ».',
+          'Choisissez le type de renvoi (sur non-réponse, sur occupation ou permanent) et saisissez le numéro de l’agent.',
+          'Enregistrez, puis appelez votre numéro depuis un autre téléphone pour vérifier.',
+        ],
+      },
+      {
+        title: 'Le bon réglage selon votre activité',
+        list: [
+          'Vous voulez garder la main : renvoi sur non-réponse (après 15 à 20 secondes) et sur occupation.',
+          'Le soir et le week-end : renvoi permanent à la fermeture, désactivé à l’ouverture (certains standards le programment).',
+          'Pics d’appels : le renvoi sur occupation suffit, l’agent prend les appels en parallèle.',
+        ],
+        tip: 'Le renvoi est facturé par votre opérateur comme un appel vers le numéro de l’agent : vérifiez votre forfait, surtout si ce numéro est à l’étranger. Pour un numéro local, vous pouvez aussi importer vos numéros Twilio ou Telnyx ou connecter votre standard en SIP.',
+      },
+    ],
+    related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
+  },
+  {
+    slug: 'qui-peut-on-appeler',
+    category: 'outbound',
+    title: 'Qui pouvez-vous faire appeler par votre agent ?',
+    summary: 'Les règles à respecter avant une campagne d’appels sortants : consentement, relation client, horaires, opposition et transparence.',
+    plan: 'Campagnes : à partir du forfait Assistant. Ce guide est informatif et ne remplace pas un conseil juridique.',
+    sections: [
+      {
+        title: 'La règle d’or',
+        text: 'Appelez uniquement des personnes avec qui vous avez une raison légitime et démontrable de parler : elles vous ont demandé un rappel, elles ont accepté d’être contactées, ou l’appel concerne un contrat ou un service en cours avec vous. Gardez la preuve de cette base (formulaire, date, canal).',
+      },
+      {
+        title: 'En France',
+        list: [
+          'Depuis le 11 août 2026, le démarchage téléphonique de particuliers exige leur consentement préalable, libre et explicite (article L223-1 du Code de la consommation) ; Bloctel a disparu. C’est à vous de prouver ce consentement.',
+          'Un rappel demandé par la personne, un rendez-vous à confirmer ou un suivi lié à une prestation en cours ne sont pas du démarchage : ils restent possibles.',
+          'Fichiers achetés ou récupérés sur des annuaires et des portails : à proscrire pour les particuliers sans consentement prouvé.',
+          'Entre professionnels, informez la personne et respectez immédiatement toute demande d’opposition.',
+        ],
+      },
+      {
+        title: 'Dans les autres pays',
+        list: [
+          'Royaume-Uni : vérifiez les registres TPS et CTPS et appliquez le PECR et le UK GDPR.',
+          'Australie : vérifiez le Do Not Call Register et le Spam Act pour les messages.',
+          'Italie : Registro pubblico delle opposizioni. Pologne : consentement préalable au marketing téléphonique. Pays-Bas : consentement préalable ou relation client existante.',
+          'En cas de doute, appliquez la règle la plus stricte.',
+        ],
+      },
+      {
+        title: 'Pendant l’appel',
+        list: [
+          'L’agent dit dès le début qu’il est une IA et que l’appel est enregistré.',
+          'Il donne la raison réelle de l’appel (« vous nous aviez demandé un rappel le… »).',
+          'Si la personne ne veut plus être appelée, ajoutez son numéro au menu « Blacklist » : il sera exclu de toutes les campagnes.',
+          'Appelez à des heures raisonnables, en semaine, à l’heure locale du contact.',
+        ],
+        tip: 'Avant d’importer un fichier, notez sa source, la date de la relation et la base légale. En cas de contrôle, c’est cette fiche qui vous protège.',
+      },
+    ],
+    related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
+  },
+  {
+    slug: 'verifier-avant-mise-en-ligne',
+    category: 'start',
+    title: 'Les 12 vérifications avant de mettre votre agent en ligne',
+    summary: 'Une liste de contrôle à suivre avant d’ouvrir la ligne : elle évite la plupart des problèmes de la première semaine.',
+    plan: 'Tous les forfaits.',
+    sections: [
+      {
+        title: 'Testez sur un vrai téléphone',
+        text: 'Appelez l’agent depuis votre mobile (pas depuis les haut-parleurs de l’ordinateur), comme le ferait un client. Faites tester aussi une personne qui ne connaît pas le projet.',
+      },
+      {
+        title: 'La liste de contrôle',
+        steps: [
+          'Le message d’accueil cite votre entreprise, dit que c’est une IA et pose une seule question claire.',
+          'Le nom de votre entreprise est bien prononcé (sinon, écrivez-le phonétiquement dans les consignes).',
+          'Un rendez-vous pris au téléphone apparaît dans votre agenda en moins d’une minute.',
+          'Vous recevez bien le résumé de l’appel (email ou tableau de bord).',
+          'La demande « je veux parler à quelqu’un » déclenche le transfert ou la prise de rappel prévue.',
+          'Un mot d’urgence de votre métier (fuite, douleur, panne) déclenche la consigne prévue.',
+          'Le comportement hors horaires correspond à ce que vous voulez.',
+          'L’agent ne donne ni prix, ni garantie, ni conseil que vous n’avez pas validés.',
+          'Il répond juste aux 5 questions qu’on vous pose le plus souvent.',
+          'L’annonce de l’enregistrement est présente si les appels sont enregistrés.',
+          'Les numéros à ne pas appeler sont dans la « Blacklist » avant toute campagne.',
+          'Vous avez réécouté trois enregistrements complets et vous êtes d’accord avec le ton.',
+        ],
+        tip: 'Notez ce qui ne va pas, corrigez les consignes ou la base de connaissances, puis refaites seulement les tests concernés.',
+      },
+    ],
+    related: ['tester-son-agent', 'message-d-accueil', 'consignes-system-prompt'],
+  },
+  {
+    slug: 'point-mensuel',
+    category: 'results',
+    title: 'Faire le point chaque mois en 20 minutes',
+    summary: 'Les quatre chiffres à regarder, les appels à réécouter et les réglages à revoir pour que votre agent reste bon dans la durée.',
+    plan: 'Tous les forfaits.',
+    sections: [
+      {
+        title: 'Les 4 chiffres qui comptent',
+        list: [
+          'Nombre d’appels traités par l’agent.',
+          'Demandes qualifiées (avec un besoin réel et des coordonnées).',
+          'Rendez-vous pris ou rappels programmés.',
+          'Valeur estimée : rendez-vous × valeur moyenne d’un client.',
+        ],
+        text: 'Les minutes consommées servent à suivre votre forfait, pas à mesurer le résultat : regardez d’abord ce que les appels ont rapporté.',
+      },
+      {
+        title: 'Réécoutez 10 appels',
+        steps: [
+          'Menu « Calls » : prenez 10 appels au hasard du mois.',
+          'Pour chacun : la demande a-t-elle été comprise ? la bonne action a-t-elle été faite ? le ton vous convient-il ?',
+          'Ne corrigez les consignes que si le même problème revient au moins deux fois.',
+        ],
+      },
+      {
+        title: 'Vérifiez ce qui casse en silence',
+        list: [
+          'L’agenda est toujours connecté (un calendrier renommé ou supprimé coupe la réservation).',
+          'Les automatisations et webhooks tournent sans erreur.',
+          'Vos horaires, prix et congés sont à jour dans la base de connaissances.',
+        ],
+        tip: 'Bloquez 20 minutes le premier jour ouvré de chaque mois. Un agent revu régulièrement reste précis ; un agent oublié dérive.',
+      },
+    ],
+    related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],
+  },
 ];

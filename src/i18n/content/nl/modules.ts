@@ -199,6 +199,22 @@ export const MODULES: Module[] = [
     integrations: ['Elke website', 'WordPress', 'Webflow'],
     from: 'decouverte', mock: 'widget',
   },
+  {
+    slug: 'relance-anciens-clients', name: 'Oud-klanten terugwinnen', family: 'Automatisering',
+    short: 'Inactieve klanten teruggebeld om weer een afspraak te maken: omzet die al in uw klantenbestand ligt.',
+    title: 'Haal klanten terug die u al lang niet meer gebeld hebben',
+    intro: 'Uw klantenbestand zit vol tevreden klanten die simpelweg vergeten zijn terug te komen: jaarlijkse controle, onderhoud, APK, knipbeurt, behandeling. De agent belt ze een voor een, herinnert ze aan hun laatste bezoek, stelt twee concrete tijdstippen voor en boekt. U belt alleen uw eigen klanten, met wie u al een klantrelatie hebt.',
+    uses: ['Klanten terughalen die 6 tot 18 maanden niet zijn geweest', 'Gaten in de planning vullen', 'Onbeantwoorde offertes opvolgen', 'Seizoensonderhoud aanbieden'],
+    steps: [
+      { title: 'Kies de klanten', text: 'Export uit uw software of agenda: naam, telefoonnummer, laatste behandeling of dienst.' },
+      { title: 'Keur het bericht goed', text: 'Een echte reden om te bellen, eventueel een aanbod, twee voorgestelde tijdstippen.' },
+      { title: 'De agent belt', text: 'Op toegestane tijden, met beperkt aantal pogingen en een uitsluitingslijst.' },
+      { title: 'U telt de afspraken', text: 'Elk resultaat wordt vastgelegd: afspraak, terugbellen, geen interesse.' },
+    ],
+    cases: ['Jaarlijkse tandartscontrole', 'Onderhoud van cv-ketel of airco', 'Onderhoudsbeurt of APK van de auto', 'Klanten van een salon die drie maanden niet zijn geweest', 'Onbeantwoorde offertes'],
+    integrations: ['Contacten importeren', 'Agenda', 'CRM', 'Uitsluitingslijst'],
+    from: 'assistant', mock: 'campaign',
+  },
 ];
 
 export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slug);

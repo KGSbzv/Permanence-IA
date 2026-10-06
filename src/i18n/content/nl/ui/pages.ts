@@ -174,7 +174,8 @@ export const UI_PAGES = {
       'Uitsluitingslijst voor uitgaande gesprekken',
       'Toegestane beltijden',
       'Vermelding „AI-assistent” aan het begin van het gesprek',
-      'Opname in- of uitschakelen, met informatie voor de beller',
+      'Opname in- of uitschakelen, aan het begin van het gesprek aan de beller gemeld',
+      'Woorden of onderwerpen die de agent nooit mag aansnijden (prijsopgaven, diagnoses, advies)',
     ],
     infraTitle: 'Een oplossing op gecertificeerde infrastructuur',
     infraIntro: 'Onze oplossing (agents, geplande terugbelgesprekken, routering, website en klantomgeving) draait op de infrastructuur van een gecertificeerde technische leverancier. Die certificeringen zijn van de leverancier; we kozen hem zodat u hetzelfde niveau krijgt.',
@@ -186,6 +187,10 @@ export const UI_PAGES = {
       'Geen medische, juridische of financiële diagnose door de agent',
       'Uw gegevens worden nooit verkocht; ze worden gebruikt om de dienst te leveren en te verbeteren',
       'Begeleiding bij het aanpassen van uw privacyverklaringen',
+      'Verwerkersovereenkomst (DPA) op eenvoudig verzoek',
+      'Recht op verwijdering: een gesprek, de opname en de transcriptie worden op verzoek gewist',
+      'De agent meldt dat het gesprek wordt opgenomen; wie dat niet wil, kan ons in plaats daarvan schrijven',
+      'Uitgaande campagnes: u bewaart het bewijs van de grondslag (klantrelatie of toestemming); in Nederland is voor telemarketing aan consumenten sinds 1 juli 2021 voorafgaande toestemming of een bestaande klantrelatie nodig, in Frankrijk sinds 11 augustus 2026 voorafgaande toestemming',
     ],
     rights: ['Voor vragen of om uw rechten uit te oefenen: ', { a: 'privacybeleid', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -300,7 +305,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Toestemming:' }, ' vóór elk geautomatiseerd, uitgaand of commercieel gesprek of bericht (spraak, sms, WhatsApp) verkrijgt hij de wettelijk vereiste toestemmingen, bewaart hij het bewijs daarvan en respecteert hij elke afmelding onmiddellijk (trefwoord STOP, mondeling of schriftelijk verzoek).'],
-                [{ strong: 'Belregisters:' }, ' hij raadpleegt en respecteert de toepasselijke registers en regels: de Nederlandse regels (voorafgaande toestemming of een bestaande klantrelatie, Bel-me-niet Register), Bloctel (Frankrijk), TPS en CTPS (Verenigd Koninkrijk), het Do Not Call Register (Australië), het Registro pubblico delle opposizioni (Italië) en de Poolse regels die voorafgaande toestemming voor telemarketing vereisen.'],
+                [{ strong: 'Belregisters:' }, ' hij raadpleegt en respecteert de toepasselijke registers en regels: de Nederlandse regels (voorafgaande toestemming of een bestaande klantrelatie, Bel-me-niet Register), in Frankrijk de uitdrukkelijke voorafgaande toestemming voor telemarketing sinds 11 augustus 2026 (artikel L223-1 van de Code de la consommation), TPS en CTPS (Verenigd Koninkrijk), het Do Not Call Register (Australië), het Registro pubblico delle opposizioni (Italië) en de Poolse regels die voorafgaande toestemming voor telemarketing vereisen.'],
                 [{ strong: 'Tijden en frequentie:' }, ' hij respecteert de toegestane beldagen, -tijden en -frequentie.'],
                 [{ strong: 'Nummerweergave:' }, ' hij toont een geldig, aan hem toegewezen nummer, vervalst geen nummers en maakt zich duidelijk bekend.'],
                 [{ strong: 'Transparantie:' }, ' hij laat Ontvangers vanaf het begin van het contact duidelijk weten dat zij met een AI-systeem communiceren (met name op grond van de Europese AI-verordening) en, waar de wet dat vereist, dat het gesprek wordt opgenomen of uitgeschreven, en vraagt hun toestemming wanneer die vereist is.'],
@@ -631,7 +636,7 @@ export const UI_PAGES = {
         {
           title: 'Marketing, gesprekken en afmelden',
           body: [
-            { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, Bloctel, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
+            { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, voorafgaande toestemming in Frankrijk, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
             { p: 'Gesprekken en berichten van onze klanten vallen onder hun verantwoordelijkheid: richt uw bezwaar aan hen; als u contact met ons opneemt, sturen wij het door.' },
           ],
         },

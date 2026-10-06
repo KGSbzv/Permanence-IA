@@ -955,4 +955,167 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
+  // ---------- Additions (playbook): call forwarding, outbound calling rules, pre-launch checks, monthly review ----------
+  {
+    slug: 'renvoi-d-appel',
+    category: 'phone',
+    title: 'Keep your number with call forwarding',
+    summary: 'Have the agent answer only when you don’t pick up, when you’re busy or outside opening hours, without changing your number.',
+    plan: 'All plans. Forwarding is charged by your phone provider.',
+    sections: [
+      {
+        title: 'How it works',
+        text: 'You keep the number on your business cards, website and listings. With your phone provider, you set up forwarding to the agent’s number: all your calls, or only the ones you don’t take. Nothing changes for your customers.',
+      },
+      {
+        title: 'Forwarding codes on a mobile',
+        text: 'On most mobiles and networks, dial the code followed by the agent’s number in international format, ending with # and the call key (some networks use their own codes: check with yours):',
+        list: [
+          'When you don’t answer: **61*agent’s number# (you can often add the delay before forwarding, for example **61*number**20#).',
+          'When your line is busy: **67*agent’s number#',
+          'When your phone is off or out of coverage: **62*agent’s number#',
+          'All calls, all the time: **21*agent’s number#',
+          'To switch off: ##61#, ##67#, ##62# or ##21#, or ##002# to cancel everything.',
+        ],
+      },
+      {
+        title: 'On a landline or office phone system',
+        steps: [
+          'Open your provider’s online account (or your phone system’s menu).',
+          'Look for "call forwarding" or "call divert".',
+          'Choose the type of forwarding (no answer, busy or always) and enter the agent’s number.',
+          'Save, then call your number from another phone to check.',
+        ],
+      },
+      {
+        title: 'The right setting for your business',
+        list: [
+          'You want to stay in control: forward on no answer (after 15 to 20 seconds) and when busy.',
+          'Evenings and weekends: forward all calls when you close, switch it off when you open (some phone systems can schedule this).',
+          'Call peaks: forwarding when busy is enough, the agent takes calls in parallel.',
+        ],
+        tip: 'Your provider charges forwarding like a call to the agent’s number: check your tariff, especially if that number is abroad. For a local number, you can also import your Twilio or Telnyx numbers or connect your phone system over SIP.',
+      },
+    ],
+    related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
+  },
+  {
+    slug: 'qui-peut-on-appeler',
+    category: 'outbound',
+    title: 'Who can your agent call?',
+    summary: 'The rules to follow before an outbound call campaign: consent, customer relationship, calling hours, opt-outs and transparency.',
+    plan: 'Campaigns: from the Assistant plan. This guide is for information only and is not legal advice.',
+    sections: [
+      {
+        title: 'The golden rule',
+        text: 'Only call people you have a legitimate, provable reason to speak to: they asked for a callback, they agreed to be contacted, or the call is about a contract or service they have with you. Keep proof of that basis (form, date, channel).',
+      },
+      {
+        title: 'In the United Kingdom',
+        list: [
+          'Screen your numbers against the TPS (individuals) and the CTPS (businesses) before any marketing call, unless the person has specifically agreed to calls from you.',
+          'Apply PECR and UK GDPR: identify your business, give a valid number to call back, and honour any objection immediately.',
+          'A callback the person asked for, an appointment to confirm or a follow-up on an ongoing service is not cold calling.',
+          'Bought lists and numbers scraped from directories are best avoided.',
+        ],
+      },
+      {
+        title: 'In Australia',
+        list: [
+          'Check the Do Not Call Register before telemarketing calls, unless the person has consented to hear from you.',
+          'Follow the Telemarketing and Research Calls Industry Standard: permitted calling hours, identifying your business, ending the call when asked.',
+          'For SMS and other electronic messages, the Spam Act applies: consent, sender identification and a working unsubscribe.',
+        ],
+      },
+      {
+        title: 'In other countries',
+        list: [
+          'France: since 11 August 2026, telephone marketing to consumers requires their prior, free and explicit consent (Article L223-1 of the French Consumer Code), and it is up to you to prove it.',
+          'Italy: Registro pubblico delle opposizioni. Poland: prior consent to telephone marketing. Netherlands: prior consent or an existing customer relationship.',
+          'If in doubt, apply the strictest rule.',
+        ],
+      },
+      {
+        title: 'During the call',
+        list: [
+          'The agent says at the start that it is an AI and that the call is recorded.',
+          'It gives the real reason for the call ("you asked us to call you back on…").',
+          'If the person no longer wants to be called, add their number to the "Blacklist" menu: it will be excluded from every campaign.',
+          'Call at reasonable times, on weekdays, in the contact’s local time.',
+        ],
+        tip: 'Before importing a list, note its source, the date of the relationship and the lawful basis. If you are ever audited, that record is what protects you.',
+      },
+    ],
+    related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
+  },
+  {
+    slug: 'verifier-avant-mise-en-ligne',
+    category: 'start',
+    title: '12 checks before putting your agent live',
+    summary: 'A checklist to run through before opening the line: it prevents most first-week problems.',
+    plan: 'All plans.',
+    sections: [
+      {
+        title: 'Test on a real phone',
+        text: 'Call the agent from your mobile (not through your computer speakers), just as a customer would. Also ask someone who doesn’t know the project to test it.',
+      },
+      {
+        title: 'The checklist',
+        steps: [
+          'The greeting names your business, says it is an AI and asks one clear question.',
+          'Your business name is pronounced correctly (if not, spell it phonetically in the instructions).',
+          'An appointment booked by phone shows up in your calendar within a minute.',
+          'You receive the call summary (email or dashboard).',
+          'Asking "I want to speak to someone" triggers the transfer or callback you set up.',
+          'An urgent keyword from your trade (leak, pain, breakdown) triggers the instruction you set.',
+          'Out-of-hours behaviour matches what you want.',
+          'The agent gives no price, guarantee or advice you haven’t approved.',
+          'It answers your 5 most common questions correctly.',
+          'The recording announcement is there if calls are recorded.',
+          'Numbers not to call are in the "Blacklist" before any campaign.',
+          'You have listened to three full recordings and you are happy with the tone.',
+        ],
+        tip: 'Note what isn’t right, fix the instructions or the knowledge base, then rerun only the tests concerned.',
+      },
+    ],
+    related: ['tester-son-agent', 'message-d-accueil', 'consignes-system-prompt'],
+  },
+  {
+    slug: 'point-mensuel',
+    category: 'results',
+    title: 'A 20-minute monthly review',
+    summary: 'The four figures to check, the calls to listen back to and the settings to review so your agent stays sharp over time.',
+    plan: 'All plans.',
+    sections: [
+      {
+        title: 'The 4 figures that matter',
+        list: [
+          'Number of calls handled by the agent.',
+          'Qualified enquiries (a real need and contact details).',
+          'Appointments booked or callbacks scheduled.',
+          'Estimated value: appointments × average customer value.',
+        ],
+        text: 'Minutes used tell you about your plan, not your results: look first at what the calls brought in.',
+      },
+      {
+        title: 'Listen back to 10 calls',
+        steps: [
+          '"Calls" menu: pick 10 random calls from the month.',
+          'For each one: was the request understood? was the right action taken? are you happy with the tone?',
+          'Only change the instructions if the same problem comes up at least twice.',
+        ],
+      },
+      {
+        title: 'Check what breaks silently',
+        list: [
+          'The calendar is still connected (a renamed or deleted calendar stops bookings).',
+          'Automations and webhooks are running without errors.',
+          'Your opening hours, prices and holidays are up to date in the knowledge base.',
+        ],
+        tip: 'Block out 20 minutes on the first working day of each month. An agent that is reviewed regularly stays accurate; a forgotten one drifts.',
+      },
+    ],
+    related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],
+  },
 ];
+

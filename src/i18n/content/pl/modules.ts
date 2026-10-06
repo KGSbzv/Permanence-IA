@@ -197,6 +197,22 @@ export const MODULES: Module[] = [
     integrations: ['Każda strona WWW', 'WordPress', 'Webflow'],
     from: 'decouverte', mock: 'widget',
   },
+  {
+    slug: 'relance-anciens-clients', name: 'Powroty dawnych klientów', family: 'Automatyzacja',
+    short: 'Nieaktywni klienci zapraszani telefonicznie na kolejną wizytę: przychód, który już czeka w Twojej bazie.',
+    title: 'Odzyskaj klientów, którzy dawno się nie odzywali',
+    intro: 'W Twojej bazie są zadowoleni klienci, którzy po prostu zapomnieli wrócić: coroczna kontrola, serwis, przegląd, strzyżenie, zabieg. Agent dzwoni do nich po kolei, przypomina ostatnią usługę, proponuje dwa konkretne terminy i od razu rezerwuje. Dzwonisz wyłącznie do własnych klientów, z którymi już masz relację.',
+    uses: ['Odzyskanie klientów nieobecnych od 6 do 18 miesięcy', 'Wypełnienie luk w grafiku', 'Przypomnienie o wycenach bez odpowiedzi', 'Zaproszenie na sezonowy serwis'],
+    steps: [
+      { title: 'Wybierz klientów', text: 'Eksport z Twojego programu lub kalendarza: imię i nazwisko, telefon, ostatnia usługa.' },
+      { title: 'Zatwierdź treść', text: 'Prawdziwy powód telefonu, ewentualna oferta, dwa proponowane terminy.' },
+      { title: 'Agent dzwoni', text: 'W dozwolonych godzinach, z ograniczoną liczbą ponowień i listą wykluczeń.' },
+      { title: 'Liczysz wizyty', text: 'Każdy wynik jest zapisywany: wizyta, oddzwonić, brak zainteresowania.' },
+    ],
+    cases: ['Coroczna kontrola stomatologiczna', 'Serwis kotła lub klimatyzacji', 'Przegląd samochodu', 'Klientki salonu nieobecne od trzech miesięcy', 'Wyceny bez odpowiedzi'],
+    integrations: ['Import kontaktów', 'Kalendarz', 'CRM', 'Lista wykluczeń'],
+    from: 'assistant', mock: 'campaign',
+  },
 ];
 
 export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slug);

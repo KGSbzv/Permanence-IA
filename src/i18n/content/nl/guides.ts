@@ -955,4 +955,161 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
+  // ---------- Toevoegingen: doorschakelen, regels voor uitgaand bellen, controles, maandelijkse check ----------
+  {
+    slug: 'renvoi-d-appel',
+    category: 'phone',
+    title: 'Uw eigen nummer houden met doorschakelen',
+    summary: 'Laat de agent alleen opnemen als u niet opneemt, in gesprek bent of buiten openingstijden, zonder van nummer te wisselen.',
+    plan: 'Alle abonnementen. Doorschakelen wordt gefactureerd door uw provider.',
+    sections: [
+      {
+        title: 'Het principe',
+        text: 'U houdt uw nummer op uw visitekaartjes, website en advertenties. Bij uw provider schakelt u door naar het nummer van de agent: al uw gesprekken, of alleen de gesprekken die u niet aanneemt. Voor uw klanten verandert er niets.',
+      },
+      {
+        title: 'Doorschakelcodes op een mobiele telefoon',
+        text: 'Bij de meeste toestellen en providers toetst u de code, dan het nummer van de agent in internationaal formaat, gevolgd door # en de beltoets:',
+        list: [
+          'Als u niet opneemt: **61*nummer van de agent# (vaak kunt u de wachttijd toevoegen, bijvoorbeeld **61*nummer**20#).',
+          'Als u in gesprek bent: **67*nummer van de agent#',
+          'Als uw telefoon uit staat of geen bereik heeft: **62*nummer van de agent#',
+          'Alle gesprekken, altijd: **21*nummer van de agent#',
+          'Uitschakelen: ##61#, ##67#, ##62# of ##21#, of ##002# om alles te annuleren.',
+        ],
+      },
+      {
+        title: 'Op een vaste lijn of telefooncentrale',
+        steps: [
+          'Open de online omgeving van uw provider (of het menu van uw telefooncentrale).',
+          'Zoek naar “doorschakelen” of “doorverbinden”.',
+          'Kies het type doorschakeling (bij geen gehoor, bij bezet of altijd) en vul het nummer van de agent in.',
+          'Sla op en bel daarna uw nummer vanaf een andere telefoon om het te controleren.',
+        ],
+      },
+      {
+        title: 'De juiste instelling voor uw bedrijf',
+        list: [
+          'U wilt zelf blijven opnemen: doorschakelen bij geen gehoor (na 15 tot 20 seconden) en bij bezet.',
+          '’s Avonds en in het weekend: altijd doorschakelen na sluitingstijd, uitschakelen bij opening (sommige centrales plannen dit automatisch).',
+          'Piekmomenten: doorschakelen bij bezet is genoeg, de agent neemt gesprekken parallel aan.',
+        ],
+        tip: 'Uw provider rekent doorschakelen af als een gesprek naar het nummer van de agent: controleer uw bundel, zeker als dat nummer in het buitenland staat. Voor een lokaal nummer kunt u ook uw Twilio- of Telnyx-nummers importeren of uw telefooncentrale via SIP koppelen.',
+      },
+    ],
+    related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
+  },
+  {
+    slug: 'qui-peut-on-appeler',
+    category: 'outbound',
+    title: 'Wie mag uw agent bellen?',
+    summary: 'De regels voor een uitgaande belcampagne: toestemming, klantrelatie, beltijden, bezwaar en transparantie.',
+    plan: 'Campagnes: vanaf het Assistent-abonnement. Deze gids is informatief en vervangt geen juridisch advies.',
+    sections: [
+      {
+        title: 'De gouden regel',
+        text: 'Bel alleen mensen met wie u een legitieme en aantoonbare reden hebt om te spreken: ze hebben om een terugbelverzoek gevraagd, ze hebben ingestemd met contact, of het gesprek gaat over een lopend contract of een lopende dienst bij u. Bewaar het bewijs van die grondslag (formulier, datum, kanaal).',
+      },
+      {
+        title: 'In Nederland',
+        list: [
+          'Sinds 1 juli 2021 mag u consumenten alleen telefonisch benaderen voor marketing als ze daar vooraf toestemming voor hebben gegeven, of als ze al klant bij u zijn (of in de afgelopen drie jaar waren). Het Bel-me-niet Register is daarmee niet meer de hoofdregel.',
+          'Bij een bestaande klantrelatie: bel alleen over vergelijkbare producten of diensten, en bied in elk gesprek de mogelijkheid om bezwaar te maken.',
+          'Een terugbelverzoek van de persoon zelf, een afspraak bevestigen of opvolging van een lopende dienst is geen telemarketing: dat blijft mogelijk.',
+          'Gekochte bestanden of nummers uit gidsen en portalen: niet gebruiken voor consumenten zonder aantoonbare toestemming.',
+          'De AVG blijft van toepassing op alle gegevens die u verwerkt. Toezicht: de Autoriteit Persoonsgegevens (privacy) en de ACM (telemarketing).',
+        ],
+      },
+      {
+        title: 'In andere landen',
+        list: [
+          'Frankrijk: sinds 11 augustus 2026 is voorafgaande, uitdrukkelijke toestemming van consumenten verplicht voor telemarketing; Bloctel bestaat niet meer.',
+          'Verenigd Koninkrijk: controleer de registers TPS en CTPS en pas de PECR en de UK GDPR toe.',
+          'Australië: controleer het Do Not Call Register en de Spam Act voor berichten.',
+          'Italië: Registro pubblico delle opposizioni. Polen: voorafgaande toestemming voor telemarketing.',
+          'Twijfelt u, pas dan de strengste regel toe.',
+        ],
+      },
+      {
+        title: 'Tijdens het gesprek',
+        list: [
+          'De agent zegt meteen aan het begin dat hij een AI is en dat het gesprek wordt opgenomen.',
+          'Hij noemt de echte reden van het gesprek (“u vroeg ons op … om terug te bellen”).',
+          'Wil iemand niet meer gebeld worden, zet het nummer dan in het menu “Blacklist”: het wordt uitgesloten van alle campagnes.',
+          'Bel op redelijke tijden, op werkdagen, in de lokale tijd van het contact.',
+        ],
+        tip: 'Noteer voordat u een bestand importeert de bron, de datum van de klantrelatie en de grondslag. Bij een controle is dat overzicht uw bescherming.',
+      },
+    ],
+    related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
+  },
+  {
+    slug: 'verifier-avant-mise-en-ligne',
+    category: 'start',
+    title: 'De 12 controles voordat uw agent live gaat',
+    summary: 'Een checklist om af te werken voordat u de lijn openzet: zo voorkomt u de meeste problemen in de eerste week.',
+    plan: 'Alle abonnementen.',
+    sections: [
+      {
+        title: 'Test op een echte telefoon',
+        text: 'Bel de agent vanaf uw mobiel (niet via de luidsprekers van uw computer), zoals een klant dat zou doen. Laat ook iemand testen die het project niet kent.',
+      },
+      {
+        title: 'De checklist',
+        steps: [
+          'De begroeting noemt uw bedrijf, zegt dat het een AI is en stelt één duidelijke vraag.',
+          'De naam van uw bedrijf wordt goed uitgesproken (zo niet, schrijf hem fonetisch in de instructies).',
+          'Een telefonisch geboekte afspraak staat binnen een minuut in uw agenda.',
+          'U ontvangt de samenvatting van het gesprek (e-mail of dashboard).',
+          'De vraag “ik wil iemand spreken” leidt tot het ingestelde doorverbinden of terugbelverzoek.',
+          'Een spoedwoord uit uw vak (lekkage, pijn, storing) leidt tot de ingestelde instructie.',
+          'Het gedrag buiten openingstijden is zoals u wilt.',
+          'De agent geeft geen prijzen, garanties of adviezen die u niet hebt goedgekeurd.',
+          'Hij beantwoordt de 5 vragen die u het vaakst krijgt correct.',
+          'De melding van opname is aanwezig als gesprekken worden opgenomen.',
+          'Nummers die niet gebeld mogen worden, staan in de “Blacklist” vóór elke campagne.',
+          'U hebt drie volledige opnames teruggeluisterd en bent tevreden over de toon.',
+        ],
+        tip: 'Noteer wat niet goed gaat, pas de instructies of de kennisbank aan en herhaal alleen de betreffende tests.',
+      },
+    ],
+    related: ['tester-son-agent', 'message-d-accueil', 'consignes-system-prompt'],
+  },
+  {
+    slug: 'point-mensuel',
+    category: 'results',
+    title: 'Elke maand in 20 minuten de balans opmaken',
+    summary: 'De vier cijfers om te bekijken, de gesprekken om terug te luisteren en de instellingen om na te lopen, zodat uw agent goed blijft.',
+    plan: 'Alle abonnementen.',
+    sections: [
+      {
+        title: 'De 4 cijfers die tellen',
+        list: [
+          'Aantal gesprekken afgehandeld door de agent.',
+          'Gekwalificeerde aanvragen (met een echte vraag en contactgegevens).',
+          'Geboekte afspraken of geplande terugbelverzoeken.',
+          'Geschatte waarde: afspraken × gemiddelde waarde van een klant.',
+        ],
+        text: 'Verbruikte minuten zijn om uw abonnement te volgen, niet om het resultaat te meten: kijk eerst naar wat de gesprekken hebben opgeleverd.',
+      },
+      {
+        title: 'Luister 10 gesprekken terug',
+        steps: [
+          'Menu “Calls”: kies willekeurig 10 gesprekken van de maand.',
+          'Bij elk gesprek: is de vraag begrepen? is de juiste actie uitgevoerd? bevalt de toon u?',
+          'Pas de instructies alleen aan als hetzelfde probleem minstens twee keer terugkomt.',
+        ],
+      },
+      {
+        title: 'Controleer wat stilletjes kapotgaat',
+        list: [
+          'De agenda is nog gekoppeld (een hernoemde of verwijderde agenda stopt het boeken).',
+          'Automatiseringen en webhooks draaien zonder fouten.',
+          'Uw openingstijden, prijzen en vakanties zijn actueel in de kennisbank.',
+        ],
+        tip: 'Blok 20 minuten op de eerste werkdag van elke maand. Een agent die regelmatig wordt nagelopen, blijft scherp; een vergeten agent raakt uit koers.',
+      },
+    ],
+    related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],
+  },
 ];

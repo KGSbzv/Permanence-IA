@@ -955,4 +955,159 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
+  // ---------- Aggiunte (playbook): inoltro di chiamata, regole per le chiamate in uscita, verifiche, controllo mensile ----------
+  {
+    slug: 'renvoi-d-appel',
+    category: 'phone',
+    title: 'Mantenere il Suo numero con l’inoltro di chiamata',
+    summary: 'Far rispondere l’agente solo quando Lei non risponde, quando è occupato o fuori orario, senza cambiare numero.',
+    plan: 'Tutti i piani. L’inoltro viene addebitato dal Suo operatore.',
+    sections: [
+      {
+        title: 'Il principio',
+        text: 'Il Suo numero resta sui biglietti da visita, sul sito e negli annunci. Presso il Suo operatore attiva un inoltro verso il numero dell’agente: tutte le chiamate, oppure solo quelle a cui non risponde. Per i Suoi clienti non cambia nulla.',
+      },
+      {
+        title: 'I codici di inoltro sul cellulare',
+        text: 'Con la maggior parte dei cellulari e degli operatori, digiti il codice seguito dal numero dell’agente in formato internazionale, poi # e il tasto di chiamata:',
+        list: [
+          'Se non risponde: **61*numero dell’agente# (spesso può aggiungere il ritardo prima dell’inoltro, per esempio **61*numero**20#).',
+          'Se la linea è occupata: **67*numero dell’agente#',
+          'Se il telefono è spento o non raggiungibile: **62*numero dell’agente#',
+          'Tutte le chiamate, sempre: **21*numero dell’agente#',
+          'Per disattivare: ##61#, ##67#, ##62# o ##21#, oppure ##002# per annullare tutto.',
+        ],
+      },
+      {
+        title: 'Su una linea fissa o un modem',
+        steps: [
+          'Apra l’area clienti del Suo operatore (o il menu del Suo centralino).',
+          'Cerchi «inoltro di chiamata» o «trasferimento di chiamata».',
+          'Scelga il tipo di inoltro (su mancata risposta, su occupato o permanente) e inserisca il numero dell’agente.',
+          'Salvi, poi chiami il Suo numero da un altro telefono per verificare.',
+        ],
+      },
+      {
+        title: 'L’impostazione giusta per la Sua attività',
+        list: [
+          'Vuole restare Lei al telefono: inoltro su mancata risposta (dopo 15–20 secondi) e su occupato.',
+          'Sera e fine settimana: inoltro permanente alla chiusura, disattivato all’apertura (alcuni centralini lo programmano).',
+          'Picchi di chiamate: basta l’inoltro su occupato, l’agente gestisce le chiamate in parallelo.',
+        ],
+        tip: 'L’inoltro viene addebitato dal Suo operatore come una chiamata verso il numero dell’agente: verifichi la Sua tariffa, soprattutto se il numero è estero. Per un numero locale può anche importare i Suoi numeri Twilio o Telnyx oppure collegare il Suo centralino via SIP.',
+      },
+    ],
+    related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
+  },
+  {
+    slug: 'qui-peut-on-appeler',
+    category: 'outbound',
+    title: 'Chi può far chiamare dal Suo agente?',
+    summary: 'Le regole da rispettare prima di una campagna di chiamate in uscita: consenso, rapporto con il cliente, orari, opposizione e trasparenza.',
+    plan: 'Campagne: dal piano Assistant. Questa guida è informativa e non sostituisce una consulenza legale.',
+    sections: [
+      {
+        title: 'La regola d’oro',
+        text: 'Chiami solo persone con cui ha un motivo legittimo e dimostrabile per parlare: Le hanno chiesto di essere richiamate, hanno accettato di essere contattate, oppure la chiamata riguarda un contratto o un servizio in corso con Lei. Conservi la prova di questa base (modulo, data, canale).',
+      },
+      {
+        title: 'In Italia',
+        list: [
+          'Prima di chiamare per finalità commerciali, verifichi i numeri nel Registro pubblico delle opposizioni, che oggi copre anche i numeri di cellulare: chi è iscritto non può essere chiamato senza un Suo consenso specifico.',
+          'Serve una base giuridica valida ai sensi del GDPR (consenso libero, specifico e documentato, oppure un rapporto contrattuale in corso), e la prova spetta a Lei.',
+          'Una richiamata chiesta dalla persona, un appuntamento da confermare o un follow-up legato a un servizio in corso non sono telemarketing: restano possibili.',
+          'Liste acquistate o ricavate da elenchi e portali: da evitare. Il Garante per la protezione dei dati personali sanziona regolarmente il telemarketing senza consenso.',
+        ],
+      },
+      {
+        title: 'Negli altri Paesi',
+        list: [
+          'Francia: dall’11 agosto 2026 il telemarketing verso i privati richiede il loro consenso preventivo, libero ed esplicito.',
+          'Regno Unito: verifichi i registri TPS e CTPS e applichi il PECR e lo UK GDPR. Australia: Do Not Call Register e Spam Act per i messaggi.',
+          'Polonia: consenso preventivo al marketing telefonico. Paesi Bassi: consenso preventivo o rapporto commerciale esistente.',
+          'In caso di dubbio, applichi la regola più severa.',
+        ],
+      },
+      {
+        title: 'Durante la chiamata',
+        list: [
+          'L’agente dice fin dall’inizio di essere un’IA e che la chiamata è registrata.',
+          'Indica il motivo reale della chiamata («ci aveva chiesto di essere richiamato il…»).',
+          'Se la persona non vuole più essere chiamata, aggiunga il suo numero al menu «Blacklist»: sarà escluso da tutte le campagne.',
+          'Chiami in orari ragionevoli, nei giorni feriali, secondo l’ora locale del contatto.',
+        ],
+        tip: 'Prima di importare una lista, annoti la fonte, la data del rapporto e la base giuridica. In caso di controllo, è questa scheda a tutelarLa.',
+      },
+    ],
+    related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
+  },
+  {
+    slug: 'verifier-avant-mise-en-ligne',
+    category: 'start',
+    title: 'Le 12 verifiche prima di mettere online il Suo agente',
+    summary: 'Una lista di controllo da seguire prima di aprire la linea: evita la maggior parte dei problemi della prima settimana.',
+    plan: 'Tutti i piani.',
+    sections: [
+      {
+        title: 'Provi da un telefono vero',
+        text: 'Chiami l’agente dal Suo cellulare (non dagli altoparlanti del computer), come farebbe un cliente. Lo faccia provare anche a una persona che non conosce il progetto.',
+      },
+      {
+        title: 'La lista di controllo',
+        steps: [
+          'Il messaggio di benvenuto cita la Sua azienda, dice che si tratta di un’IA e pone una sola domanda chiara.',
+          'Il nome della Sua azienda è pronunciato correttamente (altrimenti lo scriva in modo fonetico nelle istruzioni).',
+          'Un appuntamento preso al telefono compare nel Suo calendario in meno di un minuto.',
+          'Riceve il riepilogo della chiamata (email o dashboard).',
+          'La richiesta «voglio parlare con qualcuno» attiva il trasferimento o la richiamata prevista.',
+          'Una parola d’urgenza del Suo mestiere (perdita, dolore, guasto) attiva l’istruzione prevista.',
+          'Il comportamento fuori orario corrisponde a ciò che vuole.',
+          'L’agente non dà prezzi, garanzie o consigli che Lei non ha approvato.',
+          'Risponde correttamente alle 5 domande che Le fanno più spesso.',
+          'L’avviso di registrazione è presente se le chiamate vengono registrate.',
+          'I numeri da non chiamare sono nella «Blacklist» prima di qualsiasi campagna.',
+          'Ha riascoltato tre registrazioni complete e il tono La convince.',
+        ],
+        tip: 'Annoti ciò che non va, corregga le istruzioni o la base di conoscenza, poi ripeta solo le prove interessate.',
+      },
+    ],
+    related: ['tester-son-agent', 'message-d-accueil', 'consignes-system-prompt'],
+  },
+  {
+    slug: 'point-mensuel',
+    category: 'results',
+    title: 'Fare il punto ogni mese in 20 minuti',
+    summary: 'I quattro numeri da guardare, le chiamate da riascoltare e le impostazioni da rivedere perché il Suo agente resti valido nel tempo.',
+    plan: 'Tutti i piani.',
+    sections: [
+      {
+        title: 'I 4 numeri che contano',
+        list: [
+          'Numero di chiamate gestite dall’agente.',
+          'Richieste qualificate (con un’esigenza reale e i recapiti).',
+          'Appuntamenti fissati o richiamate programmate.',
+          'Valore stimato: appuntamenti × valore medio di un cliente.',
+        ],
+        text: 'I minuti consumati servono a seguire il Suo piano, non a misurare il risultato: guardi prima ciò che le chiamate hanno portato.',
+      },
+      {
+        title: 'Riascolti 10 chiamate',
+        steps: [
+          'Menu «Calls history»: scelga 10 chiamate a caso del mese.',
+          'Per ciascuna: la richiesta è stata capita? è stata fatta l’azione giusta? il tono Le va bene?',
+          'Corregga le istruzioni solo se lo stesso problema si ripete almeno due volte.',
+        ],
+      },
+      {
+        title: 'Verifichi ciò che si rompe in silenzio',
+        list: [
+          'Il calendario è sempre collegato (un calendario rinominato o eliminato interrompe le prenotazioni).',
+          'Automazioni e webhook funzionano senza errori.',
+          'Orari, prezzi e chiusure sono aggiornati nella base di conoscenza.',
+        ],
+        tip: 'Si riservi 20 minuti il primo giorno lavorativo di ogni mese. Un agente rivisto regolarmente resta preciso; un agente dimenticato perde colpi.',
+      },
+    ],
+    related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],
+  },
 ];

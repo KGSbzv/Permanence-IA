@@ -174,7 +174,8 @@ export const UI_PAGES = {
       'Exclusion list for outbound calls',
       'Permitted calling hours',
       '“AI assistant” statement at the start of the call',
-      'Recording on or off, with the caller informed',
+      'Recording on or off, announced to the caller at the start of the call',
+      'Words or topics the agent must never raise (priced quotes, diagnosis, advice)',
     ],
     infraTitle: 'A solution built on certified infrastructure',
     infraIntro: 'Our solution (agents, scheduled callbacks, routing, website and customer area) runs on the infrastructure of a certified technical provider. These certifications are the provider’s; we chose it so you get the same standard.',
@@ -186,6 +187,10 @@ export const UI_PAGES = {
       'No medical, legal or financial diagnosis by the agent',
       'Your data is never sold; it is used to provide and improve the service',
       'Help adapting your privacy notices',
+      'Data processing agreement (DPA) provided on request',
+      'Right to erasure: a call, its recording and its transcript are deleted on request',
+      'The agent announces that the call is recorded; anyone who objects can write to us instead',
+      'Outbound campaigns: you keep proof of your lawful basis (existing customer relationship or consent) and screen numbers against the TPS and CTPS in the UK or the Do Not Call Register in Australia',
     ],
     rights: ['For any question or to exercise your rights: ', { a: 'privacy policy', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -300,7 +305,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Consent:' }, ' before any automated, outbound or marketing call or message (voice, SMS, WhatsApp), it obtains the consents required by law, keeps proof of them and honours any opt-out immediately (STOP keyword, spoken or written request).'],
-                [{ strong: 'Do-not-call registers:' }, ' it checks and respects the applicable registers: Bloctel (France), TPS and CTPS (United Kingdom), the Do Not Call Register (Australia), the Registro pubblico delle opposizioni (Italy), Polish rules requiring prior consent to telephone marketing, and Dutch rules (prior consent or an existing customer relationship, Bel-me-niet Register).'],
+                [{ strong: 'Do-not-call registers:' }, ' it respects the applicable rules and registers: in France, the person’s prior express consent to telephone marketing since 11 August 2026 (Article L223-1 of the French Consumer Code), TPS and CTPS (United Kingdom), the Do Not Call Register (Australia), the Registro pubblico delle opposizioni (Italy), Polish rules requiring prior consent to telephone marketing, and Dutch rules (prior consent or an existing customer relationship, Bel-me-niet Register).'],
                 [{ strong: 'Hours and frequency:' }, ' it respects the permitted calling days, hours and frequency.'],
                 [{ strong: 'Caller ID:' }, ' it presents a valid number assigned to it, does not spoof numbers and identifies itself clearly.'],
                 [{ strong: 'Transparency:' }, ' it clearly informs Recipients, from the start of the interaction, that they are dealing with an artificial intelligence system (in particular under the EU AI Act) and, where the law requires, that the call is recorded or transcribed, and obtains their agreement where required.'],
@@ -631,7 +636,7 @@ export const UI_PAGES = {
         {
           title: 'Marketing, calls and opting out',
           body: [
-            { p: ['We only call you at your request or with your agreement, and our agent introduces itself as an AI. At any time you can say you no longer wish to be called, reply STOP to an SMS, use the unsubscribe link in an email or write to ', mail, ': we will add you to our internal suppression list. For our own marketing, we respect the applicable do-not-call registers (TPS/CTPS, Do Not Call Register, Bloctel, Registro delle opposizioni, etc.).'] },
+            { p: ['We only call you at your request or with your agreement, and our agent introduces itself as an AI. At any time you can say you no longer wish to be called, reply STOP to an SMS, use the unsubscribe link in an email or write to ', mail, ': we will add you to our internal suppression list. For our own marketing, we respect the applicable do-not-call registers (TPS/CTPS, Do Not Call Register, prior consent in France, Registro delle opposizioni, etc.).'] },
             { p: 'Calls and messages sent by our customers are their responsibility: please send your objection to them; if you contact us, we will pass it on.' },
           ],
         },

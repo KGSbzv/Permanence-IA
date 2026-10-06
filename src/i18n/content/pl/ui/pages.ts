@@ -183,7 +183,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Lista wykluczeń dla połączeń wychodzących',
       'Dozwolone godziny połączeń',
       'Informacja „asystent AI” na początku rozmowy',
-      'Nagrywanie włączane lub wyłączane, z informacją dla dzwoniącego',
+      'Nagrywanie włączane lub wyłączane, ogłaszane dzwoniącemu na początku rozmowy',
+      'Słowa lub tematy, których agent nigdy nie porusza (wyceny, diagnozy, porady)',
     ],
     infraTitle: 'Rozwiązanie zbudowane na certyfikowanej infrastrukturze',
     infraIntro: 'Nasze rozwiązanie (agenci, zaplanowane oddzwonienia, przekierowania, strona i panel klienta) działa na infrastrukturze certyfikowanego dostawcy technicznego. Certyfikaty należą do dostawcy; wybraliśmy go, aby zapewnić Ci ten sam poziom wymagań.',
@@ -195,6 +196,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Agent nie stawia diagnoz medycznych, prawnych ani finansowych',
       'Twoje dane nigdy nie są sprzedawane; służą do świadczenia i ulepszania usługi',
       'Pomoc w dostosowaniu klauzul informacyjnych',
+      'Umowa powierzenia przetwarzania danych (DPA) na każde życzenie',
+      'Prawo do usunięcia danych: połączenie, jego nagranie i transkrypcja są usuwane na żądanie',
+      'Agent informuje o nagrywaniu rozmowy; osoba, która się nie zgadza, może zamiast tego napisać do nas',
+      'Kampanie wychodzące: zachowujesz dowód podstawy prawnej (relacja z klientem lub zgoda); w Polsce marketing telefoniczny wymaga uprzedniej zgody abonenta (Prawo komunikacji elektronicznej, RODO), a we Francji taki wymóg obowiązuje od 11 sierpnia 2026 r.',
     ],
     rights: ['W razie pytań lub w celu skorzystania ze swoich praw: ', { a: 'polityka prywatności', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -309,7 +314,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Zgoda:' }, ' przed każdym zautomatyzowanym, wychodzącym lub marketingowym połączeniem lub wiadomością (głos, SMS, WhatsApp) uzyskuje zgody wymagane przez prawo, przechowuje dowody ich udzielenia i niezwłocznie respektuje każdy sprzeciw (słowo STOP, prośba ustna lub pisemna).'],
-                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: polskie przepisy wymagające uprzedniej zgody na marketing telefoniczny, Bloctel (Francja), TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
+                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: polskie przepisy wymagające uprzedniej zgody na marketing telefoniczny (Prawo komunikacji elektronicznej), we Francji uprzednia, wyraźna zgoda osoby na telemarketing od 11 sierpnia 2026 r. (art. L223-1 francuskiego Kodeksu konsumenckiego), TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
                 [{ strong: 'Godziny i częstotliwość:' }, ' przestrzega dozwolonych dni, godzin i częstotliwości połączeń.'],
                 [{ strong: 'Identyfikacja:' }, ' prezentuje ważny, przydzielony mu numer, nie podszywa się pod cudze numery i jasno się przedstawia.'],
                 [{ strong: 'Przejrzystość:' }, ' od początku rozmowy wyraźnie informuje Odbiorców, że komunikują się z systemem sztucznej inteligencji (w szczególności zgodnie z unijnym aktem w sprawie sztucznej inteligencji), a jeżeli wymaga tego prawo — że rozmowa jest nagrywana lub transkrybowana, i uzyskuje ich zgodę, gdy jest wymagana.'],
@@ -640,7 +645,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Marketing, połączenia i rezygnacja',
           body: [
-            { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (Bloctel, TPS/CTPS, Do Not Call Register, Registro delle opposizioni itp.).'] },
+            { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (uprzednia zgoda we Francji, TPS/CTPS, Do Not Call Register, Registro delle opposizioni itp.).'] },
             { p: 'Za połączenia i wiadomości wysyłane przez naszych klientów odpowiadają oni sami: skieruj do nich swój sprzeciw; jeżeli skontaktujesz się z nami, przekażemy go.' },
           ],
         },

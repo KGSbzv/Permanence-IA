@@ -7,8 +7,7 @@ import Mock from '@/components/Mock';
 import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
 import {
   BillingProvider, DemoBlock, EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, ModuleCards, PricingCards,
-  RechargeTables, SecurityBlock,
-} from '@/components/blocks';
+  RechargeTables, SecurityBlock, HumanVsAi } from '@/components/blocks';
 import { SIGNUP_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import type { PlanSlug as OfferSlug } from '@/i18n/markets';
@@ -123,7 +122,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
         </>
       )}
 
-      <Section><EconomyBlock /></Section>
+      <Section><EconomyBlock /><div className="mt-20"><HumanVsAi /></div></Section>
 
       {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}
       <BillingProvider>

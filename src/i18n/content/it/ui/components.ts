@@ -169,7 +169,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   demoBlock: {
     title: 'Provi subito dal vivo il nostro agente',
-    intro: 'Parli con l’agente dal Suo browser, oppure lasci il Suo numero per ricevere una chiamata dimostrativa adatta al Suo settore.',
+    intro: 'Parli con l’agente dal Suo browser, oppure lo faccia squillare sul Suo telefono: bastano 30 secondi per giudicare la voce e il modo in cui gestisce una richiesta del Suo settore.',
     launchTitle: 'Avvii la demo dal vivo',
     launchText: 'Una conversazione reale, senza installare nulla.',
     callbackTitle: 'Mi faccia richiamare',
@@ -303,13 +303,32 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     cta: 'Provi gratis',
   },
 
+  humanVsAi: {
+    title: 'Il confronto onesto con una postazione di reception',
+    intro: 'Una persona alla reception è preziosa. Ha però un costo, degli orari, e risponde a una sola chiamata alla volta. Ecco il confronto, voce per voce.',
+    caption: 'Confronto tra una postazione di reception a tempo pieno e l’agente AI',
+    human: 'Reception a tempo pieno',
+    ai: 'Agente AI',
+    rows: [
+      { label: 'Costo mensile', human: 'Almeno la retribuzione minima del CCNL applicabile, più contributi e TFR', ai: 'Da {from} IVA esclusa al mese (350 min), oppure {payg} al minuto senza abbonamento' },
+      { label: 'Ore coperte', human: '40 ore a settimana', ai: '24 ore su 24, 7 giorni su 7 (168 ore a settimana)' },
+      { label: 'Chiamate simultanee', human: 'Una sola', ai: 'Più chiamate in parallelo' },
+      { label: 'Lingue', human: 'Una, a volte due', ai: 'Oltre 80, con voci native' },
+      { label: 'Avvio', human: 'Selezione, poi diverse settimane di formazione', ai: 'Pochi minuti; istruzioni modificabili in qualsiasi momento' },
+      { label: 'Ferie e assenze', human: 'Da sostituire', ai: 'Nessuna' },
+      { label: 'Costanza', human: 'Variabile secondo il carico e l’orario', ai: 'Le stesse regole a ogni chiamata' },
+      { label: 'Note dopo la chiamata', human: 'Manuali, quando c’è tempo', ai: 'Riepilogo, trascrizione e dati estratti automaticamente' },
+    ],
+    note: 'Una persona resta indispensabile per i casi delicati: l’agente le passa un riepilogo e organizza la richiamata. Molti clienti mantengono la loro reception e affidano all’agente i picchi, la pausa pranzo, la sera e il fine settimana. Nessun costo di attivazione, nessun vincolo.',
+  },
+
   security: {
     items: [
       { title: 'Consenso e opt-out', text: 'Consenso alla richiamata, gestione dei rifiuti, fasce orarie di chiamata consentite e lista di esclusione.' },
       { title: 'Protezione dei dati', text: 'Crittografia in transito, accesso protetto da account e periodo di conservazione configurabile.' },
       { title: 'Tracciabilità', text: 'Cronologia delle chiamate, trascrizioni e registro delle attività per ogni account.' },
       { title: 'Controllo degli accessi', text: 'Ogni cliente dispone della propria area protetta; l’agente accede solo alle informazioni che Lei gli fornisce.' },
-      { title: 'Preparazione normativa', text: 'Strumenti per applicare il GDPR: informativa, diritto di accesso, cancellazione, conservazione.' },
+      { title: 'Preparazione normativa', text: 'Strumenti per applicare il GDPR: informativa, diritto di accesso, cancellazione di chiamate e registrazioni, conservazione. Accordo sul trattamento dei dati (DPA) su richiesta.' },
       { title: 'Infrastruttura', text: 'Piattaforma ospitata presso fornitori cloud affermati, con backup e monitoraggio.' },
     ],
     title: 'Sicurezza e conformità per le Sue chiamate AI',
@@ -377,7 +396,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, voce ${male ? 'maschile' : 'femminile'}`,
   },
 
-  industryMarquee: ['Idraulici', 'Elettricisti', 'Studi dentistici', 'Cliniche', 'Agenzie immobiliari', 'Gestione affitti', 'Officine', 'Carrozzerie', 'Parrucchieri', 'Barbieri', 'Centri estetici', 'Ristoranti', 'Hotel', 'Avvocati', 'Commercialisti', 'E-commerce', 'Fisioterapisti', 'Osteopati', 'Veterinari'],
+  industryMarquee: ['Idraulici', 'Elettricisti', 'Studi dentistici', 'Cliniche', 'Agenzie immobiliari', 'Gestione affitti', 'Officine', 'Carrozzerie', 'Parrucchieri', 'Barbieri', 'Centri estetici', 'Ristoranti', 'Hotel', 'Avvocati', 'Commercialisti', 'E-commerce', 'Broker', 'Amministratori di condominio', 'Medicina estetica', 'Fisioterapisti', 'Osteopati', 'Veterinari'],
 
   // Stesso ordine delle bandiere del componente.
   languageMarquee: ['Francese', 'Inglese', 'Spagnolo', 'Tedesco', 'Italiano', 'Portoghese', 'Olandese', 'Belgio', 'Svizzera', 'Québec', 'Arabo', 'Polacco', 'Rumeno', 'Turco', 'Svedese'],

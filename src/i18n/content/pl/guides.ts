@@ -955,4 +955,160 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
+  // ---------- Dodatki: przekierowanie, zasady połączeń wychodzących, kontrola, przegląd miesięczny ----------
+  {
+    slug: 'renvoi-d-appel',
+    category: 'phone',
+    title: 'Zachowaj swój numer dzięki przekierowaniu połączeń',
+    summary: 'Agent odbiera tylko wtedy, gdy nie odbierasz, gdy linia jest zajęta lub poza godzinami pracy, bez zmiany numeru.',
+    plan: 'Wszystkie pakiety. Przekierowanie rozlicza Twój operator.',
+    sections: [
+      {
+        title: 'Jak to działa',
+        text: 'Twój numer zostaje na wizytówkach, stronie i w ogłoszeniach. U operatora włączasz przekierowanie na numer agenta: wszystkich połączeń albo tylko tych, których nie odbierasz. Dla Twoich klientów nic się nie zmienia.',
+      },
+      {
+        title: 'Kody przekierowania w komórce',
+        text: 'U większości operatorów i w większości telefonów wpisz kod, a potem numer agenta w formacie międzynarodowym, zakończony # i przyciskiem połączenia:',
+        list: [
+          'Gdy nie odbierasz: **61*numer agenta# (często możesz dodać czas do przekierowania, np. **61*numer**20#).',
+          'Gdy linia jest zajęta: **67*numer agenta#',
+          'Gdy telefon jest wyłączony lub poza zasięgiem: **62*numer agenta#',
+          'Wszystkie połączenia, zawsze: **21*numer agenta#',
+          'Wyłączenie: ##61#, ##67#, ##62# lub ##21#, albo ##002#, aby anulować wszystkie.',
+        ],
+      },
+      {
+        title: 'Na linii stacjonarnej lub w centrali',
+        steps: [
+          'Otwórz panel klienta u operatora (lub menu centrali).',
+          'Znajdź opcję „przekierowanie połączeń”.',
+          'Wybierz rodzaj przekierowania (gdy nie odbieram, gdy zajęte lub stałe) i wpisz numer agenta.',
+          'Zapisz, a potem zadzwoń na swój numer z innego telefonu, aby sprawdzić działanie.',
+        ],
+      },
+      {
+        title: 'Właściwe ustawienie dla Twojej firmy',
+        list: [
+          'Chcesz odbierać sam: przekierowanie przy braku odpowiedzi (po 15–20 sekundach) i przy zajętej linii.',
+          'Wieczory i weekendy: stałe przekierowanie po zamknięciu, wyłączane przy otwarciu (niektóre centrale pozwalają to zaprogramować).',
+          'Szczyty połączeń: wystarczy przekierowanie przy zajętej linii, agent odbiera kilka połączeń równolegle.',
+        ],
+        tip: 'Operator rozlicza przekierowanie jak połączenie na numer agenta: sprawdź swój abonament, zwłaszcza jeśli ten numer jest zagraniczny. Aby mieć lokalny numer, możesz też zaimportować numery z Twilio lub Telnyx albo podłączyć centralę przez SIP.',
+      },
+    ],
+    related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
+  },
+  {
+    slug: 'qui-peut-on-appeler',
+    category: 'outbound',
+    title: 'Do kogo może dzwonić Twój agent?',
+    summary: 'Zasady, których trzeba przestrzegać przed kampanią połączeń wychodzących: zgoda, relacja z klientem, godziny, sprzeciw i przejrzystość.',
+    plan: 'Kampanie: od pakietu Asystent. Ten przewodnik ma charakter informacyjny i nie zastępuje porady prawnej.',
+    sections: [
+      {
+        title: 'Złota zasada',
+        text: 'Dzwoń wyłącznie do osób, z którymi masz uzasadniony i możliwy do wykazania powód rozmowy: poprosiły o oddzwonienie, zgodziły się na kontakt albo połączenie dotyczy trwającej umowy lub usługi. Zachowaj dowód tej podstawy (formularz, data, kanał).',
+      },
+      {
+        title: 'W Polsce',
+        list: [
+          'Marketing bezpośredni przez telefon, w tym z użyciem automatycznych systemów wywołujących, wymaga uprzedniej zgody abonenta lub użytkownika (Prawo komunikacji elektronicznej, wcześniej Prawo telekomunikacyjne). Ciężar udowodnienia zgody spoczywa na Tobie.',
+          'Dane kontaktowe przetwarzasz zgodnie z RODO: podstawa prawna, obowiązek informacyjny, prawo sprzeciwu. Organem nadzorczym jest Prezes UODO.',
+          'Oddzwonienie, o które ktoś poprosił, potwierdzenie wizyty czy kontakt w ramach trwającej usługi to nie marketing: są dozwolone.',
+          'Bazy kupione lub zebrane z katalogów i portali: nie używaj ich bez udokumentowanej zgody.',
+        ],
+      },
+      {
+        title: 'W innych krajach',
+        list: [
+          'Francja: od 11 sierpnia 2026 r. telemarketing skierowany do konsumentów wymaga ich uprzedniej, wyraźnej zgody (art. L223-1 Kodeksu konsumenckiego); rejestr Bloctel przestał działać.',
+          'Wielka Brytania: sprawdź rejestry TPS i CTPS oraz stosuj PECR i UK GDPR.',
+          'Australia: sprawdź Do Not Call Register, a przy wiadomościach Spam Act.',
+          'Włochy: Registro pubblico delle opposizioni. Holandia: uprzednia zgoda lub istniejąca relacja z klientem.',
+          'W razie wątpliwości stosuj najsurowszą zasadę.',
+        ],
+      },
+      {
+        title: 'W trakcie rozmowy',
+        list: [
+          'Agent od początku mówi, że jest AI i że rozmowa jest nagrywana.',
+          'Podaje prawdziwy powód połączenia („prosił Pan o oddzwonienie dnia…”).',
+          'Jeśli ktoś nie chce więcej telefonów, dodaj jego numer w menu „Blacklist”: zostanie wykluczony ze wszystkich kampanii.',
+          'Dzwoń w rozsądnych godzinach, w dni powszednie, według czasu lokalnego kontaktu.',
+        ],
+        tip: 'Przed importem pliku zapisz jego źródło, datę nawiązania relacji i podstawę prawną. W razie kontroli to właśnie ta notatka Cię chroni.',
+      },
+    ],
+    related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
+  },
+  {
+    slug: 'verifier-avant-mise-en-ligne',
+    category: 'start',
+    title: '12 kontroli przed uruchomieniem agenta',
+    summary: 'Lista kontrolna do przejścia przed otwarciem linii: pozwala uniknąć większości problemów pierwszego tygodnia.',
+    plan: 'Wszystkie pakiety.',
+    sections: [
+      {
+        title: 'Testuj na prawdziwym telefonie',
+        text: 'Zadzwoń do agenta ze swojej komórki (nie przez głośniki komputera), tak jak zrobiłby to klient. Poproś też o test osobę, która nie zna projektu.',
+      },
+      {
+        title: 'Lista kontrolna',
+        steps: [
+          'Powitanie podaje nazwę firmy, mówi, że to AI, i zadaje jedno jasne pytanie.',
+          'Nazwa Twojej firmy jest dobrze wymawiana (jeśli nie, zapisz ją fonetycznie w instrukcjach).',
+          'Wizyta umówiona przez telefon pojawia się w kalendarzu w mniej niż minutę.',
+          'Otrzymujesz podsumowanie rozmowy (e-mailem lub na pulpicie).',
+          'Prośba „chcę rozmawiać z człowiekiem” uruchamia przewidziane przekazanie lub oddzwonienie.',
+          'Słowo oznaczające pilną sprawę w Twojej branży (wyciek, ból, awaria) uruchamia przewidzianą instrukcję.',
+          'Zachowanie poza godzinami pracy jest takie, jak chcesz.',
+          'Agent nie podaje cen, gwarancji ani porad, których nie zatwierdziłeś.',
+          'Poprawnie odpowiada na 5 pytań, które słyszysz najczęściej.',
+          'Informacja o nagrywaniu jest obecna, jeśli rozmowy są nagrywane.',
+          'Numery, do których nie wolno dzwonić, są w „Blacklist” przed każdą kampanią.',
+          'Przesłuchałeś trzy pełne nagrania i ton Ci odpowiada.',
+        ],
+        tip: 'Zanotuj, co nie działa, popraw instrukcje lub bazę wiedzy, a potem powtórz tylko odpowiednie testy.',
+      },
+    ],
+    related: ['tester-son-agent', 'message-d-accueil', 'consignes-system-prompt'],
+  },
+  {
+    slug: 'point-mensuel',
+    category: 'results',
+    title: 'Miesięczny przegląd w 20 minut',
+    summary: 'Cztery liczby do sprawdzenia, rozmowy do przesłuchania i ustawienia do przejrzenia, aby agent pozostał dobry na dłużej.',
+    plan: 'Wszystkie pakiety.',
+    sections: [
+      {
+        title: '4 liczby, które się liczą',
+        list: [
+          'Liczba połączeń obsłużonych przez agenta.',
+          'Zakwalifikowane zgłoszenia (z realną potrzebą i danymi kontaktowymi).',
+          'Umówione wizyty lub zaplanowane oddzwonienia.',
+          'Szacowana wartość: wizyty × średnia wartość klienta.',
+        ],
+        text: 'Zużyte minuty służą do kontroli pakietu, a nie do mierzenia efektów: najpierw sprawdź, co połączenia przyniosły.',
+      },
+      {
+        title: 'Przesłuchaj 10 rozmów',
+        steps: [
+          'Menu „Calls history”: wybierz 10 losowych rozmów z miesiąca.',
+          'Przy każdej: czy zgłoszenie zostało zrozumiane? czy wykonano właściwe działanie? czy ton Ci odpowiada?',
+          'Poprawiaj instrukcje tylko wtedy, gdy ten sam problem powtarza się co najmniej dwa razy.',
+        ],
+      },
+      {
+        title: 'Sprawdź, co psuje się po cichu',
+        list: [
+          'Kalendarz jest nadal połączony (zmiana nazwy lub usunięcie kalendarza wyłącza rezerwacje).',
+          'Automatyzacje i webhooki działają bez błędów.',
+          'Godziny, ceny i urlopy w bazie wiedzy są aktualne.',
+        ],
+        tip: 'Zarezerwuj 20 minut w pierwszy dzień roboczy każdego miesiąca. Regularnie przeglądany agent pozostaje precyzyjny; zapomniany — z czasem się rozjeżdża.',
+      },
+    ],
+    related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],
+  },
 ];

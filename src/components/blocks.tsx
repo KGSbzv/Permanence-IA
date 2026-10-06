@@ -2,7 +2,7 @@
 import React, { createContext, useContext, useId, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
-  Activity, ArrowUpRight, BarChart3, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
+  Activity, ArrowUpRight, BarChart3, Building2, HeartPulse, Landmark, ShoppingBag, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
   Lock, Mail, MessageSquare, Minus, MonitorSmartphone, Network, PawPrint, Phone, X, Scale, Scissors, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
   UtensilsCrossed, Workflow, Wrench,
 } from 'lucide-react';
@@ -26,7 +26,8 @@ const familyIcon = (slug: string) => FAMILY_ICON[FR_MODULES.find((m) => m.slug =
 export const SECTOR_ICON: Record<string, React.ElementType> = {
   'services-a-domicile': Wrench, 'dentaire-cliniques': Stethoscope, 'kines-paramedical': Activity, 'cliniques-veterinaires': PawPrint,
   immobilier: Home, automobile: Car, 'salons-de-coiffure': Scissors, 'beaute-bien-etre': Sparkles, 'restaurants-hotellerie': UtensilsCrossed,
-  'avocats-experts-comptables': Scale,
+  'avocats-experts-comptables': Scale, 'e-commerce': ShoppingBag, 'courtiers-assurance-credit': Landmark,
+  'gestion-locative': Building2, 'medecine-esthetique': HeartPulse,
 };
 
 /* ---------- Ce que l’agent sait faire ---------- */
@@ -655,6 +656,43 @@ export function EconomyBlock() {
         </div>
       </form>
       <p className="mt-4 max-w-prose text-sm text-slate-light">{t.assumptions(WRAP_UP, CONVERSION)}</p>
+    </div>
+  );
+}
+
+/* ---------- Comparaison honnête : poste d’accueil / agent IA ---------- */
+
+export function HumanVsAi() {
+  const { c, market, offer, money } = useI18n();
+  const t = c.ui.components.humanVsAi;
+  const fill = (text: string) => text
+    .replace('{from}', money(offer('receptionniste').price ?? 0))
+    .replace('{payg}', money(market.paygMinute, 2));
+  return (
+    <div>
+      <Heading title={t.title} intro={t.intro} />
+      <div className="mt-10 overflow-x-auto rounded-2xl border border-line bg-white">
+        <table className="w-full min-w-[640px] text-left text-[15px]">
+          <caption className="sr-only">{t.caption}</caption>
+          <thead>
+            <tr className="border-b border-line">
+              <th scope="col" className="p-4"><span className="sr-only">{t.caption}</span></th>
+              <th scope="col" className="p-4 font-display font-semibold text-slate">{t.human}</th>
+              <th scope="col" className="bg-signal-soft p-4 font-display font-semibold text-ink">{t.ai}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {t.rows.map((r) => (
+              <tr key={r.label} className="border-b border-line last:border-0">
+                <th scope="row" className="p-4 font-medium text-ink">{r.label}</th>
+                <td className="p-4">{fill(r.human)}</td>
+                <td className="bg-signal-soft/60 p-4 font-semibold text-ink">{fill(r.ai)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="mt-4 max-w-prose text-sm text-slate-light">{t.note}</p>
     </div>
   );
 }

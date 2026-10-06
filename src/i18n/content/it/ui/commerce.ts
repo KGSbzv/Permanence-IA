@@ -61,6 +61,10 @@ const SECTOR_BENEFITS_TITLE: Record<string, string> = {
   'beaute-bien-etre': 'Cosa cambia per il Suo centro',
   'restaurants-hotellerie': 'Cosa cambia per il Suo locale',
   'avocats-experts-comptables': 'Cosa cambia per il Suo studio',
+  'e-commerce': 'Cosa cambia per il Suo negozio online',
+  'courtiers-assurance-credit': 'Cosa cambia per la Sua agenzia',
+  'gestion-locative': 'Cosa cambia per la Sua società di gestione',
+  'medecine-esthetique': 'Cosa cambia per il Suo studio',
 };
 
 const FEATURE_SEO: Record<string, string> = {
@@ -131,7 +135,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenti adatti al Suo settore',
-      intro: 'Dieci settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
+      intro: 'Quattordici settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
       link: 'Tutti i settori',
     },
     integrations: {
@@ -247,7 +251,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Un agente vocale adatto alla Sua attività',
-      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto dieci settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente: dall’idraulico allo studio di fisioterapia, dal parrucchiere allo studio legale, l’agente pone le domande giuste.',
+      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto quattordici settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente: dall’idraulico allo studio di fisioterapia, dal parrucchiere allo studio legale, l’agente pone le domande giuste.',
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',
@@ -283,7 +287,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       intro: 'Il Suo calendario, il Suo CRM, la Sua messaggistica e la Sua telefonia restano gli stessi: l’agente vi si collega.',
     },
     pricing: {
-      title: 'Prezzi IVA esclusa, senza vincoli',
+      title: 'Prezzi IVA esclusa, senza vincoli né costi di attivazione',
       intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
         `Per il settore ${sectorName.toLowerCase()}, consigliamo il piano ${offerName}. Inizi con la prova gratuita: ${days} giorni e ${minutes} minuti inclusi.`,
       link: (offerName: string) => `Veda i dettagli del piano ${offerName}`,

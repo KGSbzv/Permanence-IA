@@ -53,7 +53,8 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number) =>
 const SECTOR_PLACE: Record<string, string> = {
   immobilier: 'agence', 'dentaire-cliniques': 'cabinet', 'kines-paramedical': 'cabinet', 'cliniques-veterinaires': 'clinique',
   automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'institut', 'restaurants-hotellerie': 'établissement',
-  'avocats-experts-comptables': 'cabinet',
+  'avocats-experts-comptables': 'cabinet', 'e-commerce': 'boutique', 'courtiers-assurance-credit': 'cabinet',
+  'gestion-locative': 'agence', 'medecine-esthetique': 'cabinet',
 };
 
 const MODULE_SEO_TITLE: Record<string, string> = {
@@ -124,7 +125,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Des agents adaptés à votre métier',
-      intro: 'Dix métiers où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
+      intro: 'Quatorze métiers où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
       link: 'Tous les secteurs',
     },
     integrations: {
@@ -241,7 +242,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Un secrétariat téléphonique IA adapté à votre métier',
-      intro: 'Nous avons retenu dix métiers où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet de kiné, du salon de coiffure au cabinet d’avocats, l’agent pose les bonnes questions.',
+      intro: 'Nous avons retenu quatorze métiers où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet de kiné, du salon de coiffure au cabinet d’avocats, l’agent pose les bonnes questions.',
     },
     other: {
       title: 'Votre activité n’est pas dans la liste ?',
@@ -277,7 +278,7 @@ export const UI_COMMERCE = {
       intro: 'Votre agenda, votre CRM, vos messageries et votre téléphonie restent les mêmes : l’agent s’y connecte.',
     },
     pricing: {
-      title: 'Prix HT, sans engagement',
+      title: 'Prix HT, sans engagement ni frais de mise en service',
       intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
         `Pour ${sectorName.toLowerCase()}, nous recommandons le forfait ${offerName}. Commencez par l’essai gratuit : ${days} jours et ${minutes} minutes incluses.`,
       link: (offerName: string) => `Voir le détail du forfait ${offerName}`,

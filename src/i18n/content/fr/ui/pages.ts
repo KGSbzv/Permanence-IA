@@ -189,7 +189,8 @@ export const UI_PAGES = {
       'Liste d’exclusion pour les appels sortants',
       'Plages horaires d’appel autorisées',
       'Mention « assistant IA » en début d’appel',
-      'Enregistrement activable ou non, avec information de l’appelant',
+      'Enregistrement activable ou non, annoncé à l’appelant en début d’appel',
+      'Mots ou sujets que l’agent ne doit jamais aborder (devis chiffrés, diagnostic, conseil)',
     ],
     infraTitle: 'Une solution construite sur une infrastructure certifiée',
     infraIntro: 'Notre solution (agents, rappels programmés, routage, site et espace client) fonctionne sur l’infrastructure d’un prestataire technique certifié. Ces certifications sont les siennes ; nous les choisissons pour vous offrir le même niveau d’exigence.',
@@ -201,6 +202,10 @@ export const UI_PAGES = {
       'Aucun diagnostic médical, juridique ou financier par l’agent',
       'Vos données ne sont jamais vendues : elles servent à fournir et à améliorer le service',
       'Accompagnement pour adapter vos mentions d’information',
+      'Accord de traitement des données (DPA) fourni sur simple demande',
+      'Droit à l’effacement : un appel, son enregistrement et sa transcription sont supprimés sur demande',
+      'L’agent annonce l’enregistrement de l’appel ; une personne qui refuse peut nous écrire à la place',
+      'Campagnes sortantes : vous gardez la preuve de la base légale (relation client ou consentement) ; en France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026',
     ],
     rights: ['Pour toute question ou demande d’exercice de droits : ', { a: 'politique de confidentialité', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -315,7 +320,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Consentement :' }, ' il obtient, avant tout appel ou message automatisé, sortant ou commercial (voix, SMS, WhatsApp), les consentements exigés par la loi, en conserve la preuve et respecte immédiatement toute opposition (mot STOP, demande orale ou écrite).'],
-                [{ strong: 'Listes d’opposition :' }, ' il consulte et respecte les registres applicables : Bloctel (France), TPS et CTPS (Royaume-Uni), Do Not Call Register (Australie), Registro pubblico delle opposizioni (Italie), règles polonaises exigeant le consentement préalable au démarchage téléphonique, règles néerlandaises (consentement préalable ou relation client existante, Bel-me-niet Register).'],
+                [{ strong: 'Listes d’opposition :' }, ' il respecte les règles et registres applicables : en France, consentement préalable exprès de la personne au démarchage téléphonique depuis le 11 août 2026 (article L223-1 du Code de la consommation), TPS et CTPS (Royaume-Uni), Do Not Call Register (Australie), Registro pubblico delle opposizioni (Italie), règles polonaises exigeant le consentement préalable au démarchage téléphonique, règles néerlandaises (consentement préalable ou relation client existante, Bel-me-niet Register).'],
                 [{ strong: 'Horaires et fréquence :' }, ' il respecte les jours, heures et fréquences d’appel autorisés.'],
                 [{ strong: 'Identification :' }, ' il présente un numéro valide qui lui est attribué, n’usurpe aucun numéro et s’identifie clairement.'],
                 [{ strong: 'Transparence :' }, ' il informe clairement les Destinataires, dès le début de l’échange, qu’ils interagissent avec un système d’intelligence artificielle (conformément notamment au règlement européen sur l’IA) et, lorsque la loi l’exige, que l’appel est enregistré ou transcrit, et recueille leur accord lorsqu’il est requis.'],
@@ -646,7 +651,7 @@ export const UI_PAGES = {
         {
           title: 'Prospection, appels et désinscription',
           body: [
-            { p: ['Nous ne vous appelons qu’à votre demande ou avec votre accord, et notre agent se présente comme une IA. Vous pouvez à tout moment dire que vous ne souhaitez plus être appelé, répondre STOP à un SMS, utiliser le lien de désinscription d’un email ou écrire à ', mail, ' : nous vous inscrivons sur notre liste d’opposition interne. Pour notre propre prospection, nous respectons les listes d’opposition au démarchage applicables (Bloctel, TPS/CTPS, Do Not Call Register, Registro delle opposizioni…).'] },
+            { p: ['Nous ne vous appelons qu’à votre demande ou avec votre accord, et notre agent se présente comme une IA. Vous pouvez à tout moment dire que vous ne souhaitez plus être appelé, répondre STOP à un SMS, utiliser le lien de désinscription d’un email ou écrire à ', mail, ' : nous vous inscrivons sur notre liste d’opposition interne. Pour notre propre prospection, nous respectons les listes d’opposition au démarchage applicables (consentement préalable en France, TPS/CTPS, Do Not Call Register, Registro delle opposizioni…).'] },
             { p: 'Les appels et messages envoyés par nos clients relèvent de leur responsabilité : adressez-leur votre opposition ; nous la leur transmettrons si vous nous contactez.' },
           ],
         },

@@ -53,7 +53,8 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
 const SECTOR_PLACE: Record<string, string> = {
   immobilier: 'kantoor', 'dentaire-cliniques': 'praktijk', 'kines-paramedical': 'praktijk', 'cliniques-veterinaires': 'praktijk',
   automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'salon', 'restaurants-hotellerie': 'zaak',
-  'avocats-experts-comptables': 'kantoor',
+  'avocats-experts-comptables': 'kantoor', 'e-commerce': 'webshop', 'courtiers-assurance-credit': 'kantoor',
+  'gestion-locative': 'kantoor', 'medecine-esthetique': 'kliniek',
 };
 
 const FEATURE_SEO: Record<string, string> = {
@@ -124,7 +125,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents afgestemd op uw vak',
-      intro: 'Tien sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
+      intro: 'Veertien sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
       link: 'Alle sectoren',
     },
     integrations: {
@@ -240,7 +241,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Een AI-telefoonassistent afgestemd op uw vak',
-      intro: 'We hebben tien sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant. Van de loodgieter op een klus tot de fysiotherapiepraktijk, van de kapsalon tot het advocatenkantoor: de agent stelt de juiste vragen.',
+      intro: 'We hebben veertien sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant. Van de loodgieter op een klus tot de fysiotherapiepraktijk, van de kapsalon tot het advocatenkantoor: de agent stelt de juiste vragen.',
     },
     other: {
       title: 'Staat uw branche er niet tussen?',
@@ -276,7 +277,7 @@ export const UI_COMMERCE = {
       intro: 'Uw agenda, uw CRM, uw berichtenapps en uw telefonie blijven hetzelfde: de agent koppelt ermee.',
     },
     pricing: {
-      title: 'Prijzen excl. btw, geen verplichtingen',
+      title: 'Prijzen excl. btw, geen verplichtingen of opstartkosten',
       intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
         `Voor ${sectorName.toLowerCase()} raden wij het abonnement ${offerName} aan. Begin met de gratis proefperiode: ${days} dagen en ${minutes} minuten inbegrepen.`,
       link: (offerName: string) => `Bekijk de details van het abonnement ${offerName}`,

@@ -216,6 +216,22 @@ export const MODULES: Module[] = [
     integrations: ['Tout site web', 'WordPress', 'Webflow'],
     from: 'decouverte', mock: 'widget',
   },
+  {
+    slug: 'relance-anciens-clients', name: 'Relance des anciens clients', family: 'Automatisation',
+    short: 'Vos clients inactifs rappelés pour reprendre rendez-vous : un chiffre d’affaires qui dort déjà dans votre fichier.',
+    title: 'Faites revenir les clients qui ne vous ont pas appelé depuis longtemps',
+    intro: 'Votre fichier contient des clients satisfaits qui ont simplement oublié de revenir : contrôle annuel, entretien, révision, coupe, soin. L’agent les rappelle un par un, leur rappelle votre dernière prestation, propose deux créneaux précis et réserve. Vous ne rappelez que vos propres clients, avec qui vous êtes déjà en relation.',
+    uses: ['Faire revenir les clients absents depuis 6 à 18 mois', 'Remplir les creux du planning', 'Relancer les devis restés sans réponse', 'Proposer l’entretien de saison'],
+    steps: [
+      { title: 'Choisissez les clients', text: 'Export de votre logiciel ou de votre agenda : nom, téléphone, dernière prestation.' },
+      { title: 'Validez le message', text: 'Une raison réelle d’appeler, une offre éventuelle, deux créneaux proposés.' },
+      { title: 'L’agent appelle', text: 'Aux horaires autorisés, avec relances limitées et liste d’exclusion.' },
+      { title: 'Vous comptez les rendez-vous', text: 'Chaque résultat est noté : rendez-vous, à rappeler, pas intéressé.' },
+    ],
+    cases: ['Contrôle dentaire annuel', 'Entretien de chaudière ou de climatisation', 'Révision automobile', 'Clientes d’un salon absentes depuis trois mois', 'Devis sans réponse'],
+    integrations: ['Import de contacts', 'Agenda', 'CRM', 'Liste d’exclusion'],
+    from: 'assistant', mock: 'campaign',
+  },
 ];
 
 export const moduleBySlug = (slug: string) => MODULES.find((m) => m.slug === slug);

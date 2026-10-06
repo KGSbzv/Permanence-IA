@@ -167,7 +167,7 @@ export const UI_COMPONENTS = {
 
   demoBlock: {
     title: 'Probeer onze agent nu live',
-    intro: 'Praat vanuit uw browser met de agent, of laat uw nummer achter voor een demonstratiegesprek dat past bij uw sector.',
+    intro: 'Praat vanuit uw browser met de agent, of laat hem uw eigen telefoon bellen: in 30 seconden hoort u hoe de stem klinkt en hoe hij een aanvraag uit uw sector afhandelt.',
     launchTitle: 'Start de live demo',
     launchText: 'Een echt gesprek, zonder installatie.',
     callbackTitle: 'Bel mij terug',
@@ -301,13 +301,32 @@ export const UI_COMPONENTS = {
     cta: 'Gratis proberen',
   },
 
+  humanVsAi: {
+    title: 'De eerlijke vergelijking met een receptionist',
+    intro: 'Een receptionist is waardevol. Maar die heeft ook een prijs, vaste werktijden en neemt maar één gesprek tegelijk aan. Hier is de vergelijking, regel voor regel.',
+    caption: 'Vergelijking tussen een fulltime receptionist en de AI-agent',
+    human: 'Fulltime receptionist',
+    ai: 'AI-agent',
+    rows: [
+      { label: 'Kosten per maand', human: 'Minstens het wettelijk minimumloon, plus werkgeverslasten', ai: 'Vanaf {from} excl. btw per maand (350 min), of {payg} per minuut zonder abonnement' },
+      { label: 'Bereikbaar', human: '36 tot 40 uur per week', ai: '24/7 (168 uur per week)' },
+      { label: 'Gesprekken tegelijk', human: 'Eén', ai: 'Meerdere tegelijk' },
+      { label: 'Talen', human: 'Eén, soms twee', ai: 'Meer dan 80, met native stemmen' },
+      { label: 'Opstarten', human: 'Werving, daarna weken inwerken', ai: 'Een paar minuten; instructies op elk moment aan te passen' },
+      { label: 'Vakantie en ziekte', human: 'Vervanging nodig', ai: 'Geen' },
+      { label: 'Consistentie', human: 'Wisselend, afhankelijk van drukte en tijdstip', ai: 'Bij elk gesprek dezelfde regels' },
+      { label: 'Notities na het gesprek', human: 'Handmatig, als er tijd voor is', ai: 'Samenvatting, transcriptie en gegevens automatisch vastgelegd' },
+    ],
+    note: 'Voor gevoelige situaties blijft een mens onmisbaar: de agent geeft een samenvatting door en plant het terugbelverzoek in. Veel klanten houden hun receptie en laten de agent de drukte, de lunchpauze, de avond en het weekend opvangen. Geen opstartkosten, geen verplichtingen.',
+  },
+
   security: {
     items: [
       { title: 'Toestemming en afmelden', text: 'Toestemming voor terugbellen, afhandeling van weigeringen, toegestane beltijden en uitsluitingslijst.' },
       { title: 'Gegevensbescherming', text: 'Versleuteling tijdens verzending, toegang beveiligd per account en instelbare bewaartermijn.' },
       { title: 'Traceerbaarheid', text: 'Gespreksgeschiedenis, transcripties en activiteitenlogboek voor elk account.' },
       { title: 'Toegangsbeheer', text: 'Elke klant heeft een eigen beveiligde omgeving; de agent heeft alleen toegang tot de informatie die u hem geeft.' },
-      { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering, bewaartermijn.' },
+      { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering van gesprekken en opnames, bewaartermijn. Verwerkersovereenkomst (DPA) op aanvraag.' },
       { title: 'Infrastructuur', text: 'Platform gehost bij erkende cloudproviders, met back-ups en monitoring.' },
     ],
     title: 'Beveiliging en compliance voor uw AI-gesprekken',
@@ -375,7 +394,7 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'mannenstem' : 'vrouwenstem'}`,
   },
 
-  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbiers', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
+  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbiers', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Esthetische klinieken', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
 
   // Zelfde volgorde als de vlaggen van de component.
   languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'België', 'Zwitserland', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds'],
