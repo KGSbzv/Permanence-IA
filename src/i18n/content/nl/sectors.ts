@@ -98,8 +98,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Eerste afspraak of vervolg van een behandelreeks', 'Klacht en eventuele verwijzing', 'Behandelaar en praktijklocatie', 'Beschikbaarheid voor een reeks behandelingen', 'Verplaatsen en annuleren', 'Praktische vragen: tarieven, vergoeding door de zorgverzekeraar, bereikbaarheid, wat mee te nemen', 'Spoedvragen doorverwezen volgens uw instructie'],
     benefits: ['Behandelingen zonder telefonische onderbreking', 'Elk telefoontje afgehandeld, geen voicemail meer om ’s avonds terug te bellen', 'Herinnering de dag ervoor vanaf het Assistent-abonnement, plekken eerder vrij', 'Nieuwe patiënten ook buiten openingstijden ingepland', 'Een samenvatting van elke aanvraag in uw dashboard'],
-    photo: '',
-    photoAlt: 'Fysiotherapeut die een patiënt begeleidt bij revalidatie van de knie',
+    photo: '/photos/kines-paramedical.jpg',
+    photoAlt: 'Fysiotherapeut die de knie van een patiënte onderzoekt',
     caption: 'U blijft geconcentreerd op de behandeling. De AI-agent plant afspraken in, beantwoordt praktische vragen en laat u een samenvatting achter.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'campagnes-sortantes', 'whatsapp-messages', 'base-de-connaissances', 'reporting'],
     steps: [
@@ -138,8 +138,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Diersoort, leeftijd en naam van het dier', 'Consult, vaccinatie, operatie of controle', 'Beschreven klachten en spoed volgens uw protocol', 'Bestaande klant of nieuw baasje', 'Afspraak bij de juiste dierenarts', 'Uitslagen, herhaalrecepten en voerbestellingen doorgegeven', 'Openingstijden, spoeddienst en bereikbaarheid'],
     benefits: ['Paraveterinairen minder onderbroken aan de balie', 'Spoed direct herkend en doorgegeven volgens uw protocol', 'Automatische vaccinatieherinneringen en controles vanaf het Assistent-abonnement', 'Afspraken ook buiten openingstijden ingepland', 'Vragen om uitslagen en herhaalrecepten gebundeld voor het team'],
-    photo: '',
-    photoAlt: 'Dierenarts die een hond onderzoekt op de behandeltafel',
+    photo: '/photos/cliniques-veterinaires.jpg',
+    photoAlt: 'Dierenarts die een golden retriever onderzoekt met de eigenaar',
     caption: 'Terwijl het team behandelt, noteert de AI-agent welk dier het betreft, schat de spoed in volgens uw protocol en bereidt de afspraak voor.',
     modules: ['receptionniste-ia', 'prise-de-rendez-vous', 'campagnes-sortantes', 'whatsapp-messages', 'flow-builder', 'reporting'],
     steps: [
@@ -257,8 +257,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Behandeling: knippen, kleuren, uitgroei, highlights, balayage, föhnen, baard trimmen', 'Duur volgens behandeling en haarlengte', 'Gewenste kapper of barbier', 'Nieuwe of vaste klant', 'Eerste vrije plek of vaste datum', 'Verplaatsen en annuleren', 'Prijslijst, openingstijden en bereikbaarheid'],
     benefits: ['Afspraken geboekt zonder de schaar neer te leggen', 'Elk telefoontje beantwoord, ook op een drukke zaterdag', 'Herinnering de dag ervoor vanaf het Assistent-abonnement, minder vergeten afspraken', 'De juiste duur: een kleuring komt nooit in een knipslot terecht', 'Klanten bij de juiste kapper of barbier'],
-    photo: '',
-    photoAlt: 'Kapster die een klant knipt in een kapsalon',
+    photo: '/photos/salons-de-coiffure.jpg',
+    photoAlt: 'Kapster die het haar van een klant föhnt in een lichte salon',
     caption: 'Terwijl u aan de stoel staat, neemt de AI-agent op, plant de juiste duur in en boekt het tijdslot.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'whatsapp-messages', 'campagnes-sortantes', 'widget-web', 'base-de-connaissances'],
     steps: [
@@ -376,8 +376,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Bestaande cliënt of nieuwe zaak', 'Rechtsgebied of dienst: familie, arbeid, vastgoed, belastingen, onderneming starten', 'Korte schets van de situatie en termijn (zitting, deadline, aangifte)', 'Intakegesprek inplannen', 'Bericht voor de partner of medewerker die het dossier behandelt', 'Acquisitie weggefilterd', 'Praktische vragen: tarief van het intakegesprek, mee te nemen stukken, bereikbaarheid'],
     benefits: ['Geen onderbrekingen meer tijdens besprekingen of zittingen', 'Acquisitie gefilterd, nuttige telefoontjes met context doorgegeven', 'Meerdere gesprekken tegelijk afgehandeld in drukke periodes', 'Nieuwe zaken gekwalificeerd vóór het eerste gesprek', 'Een duidelijk bericht per telefoontje, bij de juiste persoon'],
-    photo: '',
-    photoAlt: 'Advocate aan de telefoon op haar kantoor, met een open dossier op het bureau',
+    photo: '/photos/avocats-experts-comptables.jpg',
+    photoAlt: 'Advocaat die een dossier doorneemt met een cliënte',
     caption: 'Terwijl u pleit of een cliënt ontvangt, filtert de AI-agent het telefoontje, kwalificeert de nieuwe zaak en plant het gesprek in.',
     modules: ['receptionniste-ia', 'qualification-des-leads', 'prise-de-rendez-vous', 'base-de-connaissances', 'support-client', 'reporting'],
     steps: [

@@ -119,8 +119,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Premier rendez-vous ou suite d’une série de séances', 'Motif et prescription éventuelle', 'Praticien et lieu de consultation', 'Disponibilités pour une série de séances', 'Reports et annulations', 'Questions pratiques : tarifs, remboursement, accès, documents à apporter', 'Orientation des demandes urgentes selon votre consigne'],
     benefits: ['Des séances sans interruption téléphonique', 'Chaque appel traité, plus de messagerie à rappeler le soir', 'Rappel la veille dès le forfait Assistant, créneaux libérés plus tôt', 'Nouveaux patients pris en charge hors horaires', 'Un résumé de chaque demande dans votre tableau de bord'],
-    photo: '',
-    photoAlt: 'Kinésithérapeute accompagnant un patient en rééducation du genou',
+    photo: '/photos/kines-paramedical.jpg',
+    photoAlt: 'Kinésithérapeute examinant le genou d’une patiente',
     caption: 'Vous restez concentré sur la séance. L’agent IA prend les rendez-vous, répond aux questions pratiques et vous laisse un résumé.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'campagnes-sortantes', 'whatsapp-messages', 'base-de-connaissances', 'reporting'],
     steps: [
@@ -159,8 +159,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Espèce, âge et nom de l’animal', 'Consultation, vaccin, chirurgie ou contrôle', 'Symptômes décrits et urgence selon votre protocole', 'Client de la clinique ou nouveau propriétaire', 'Créneau avec le bon vétérinaire', 'Demandes de résultats, de renouvellement et d’aliments à transmettre', 'Horaires, garde et accès'],
     benefits: ['Des ASV moins interrompues à l’accueil', 'Urgences repérées et transmises tout de suite selon votre protocole', 'Rappels de vaccins et de suivis automatiques dès le forfait Assistant', 'Rendez-vous pris hors horaires', 'Demandes de résultats et de renouvellement regroupées pour l’équipe'],
-    photo: '',
-    photoAlt: 'Vétérinaire examinant un chien sur la table de consultation',
+    photo: '/photos/cliniques-veterinaires.jpg',
+    photoAlt: 'Vétérinaire examinant un golden retriever avec sa propriétaire',
     caption: 'Pendant que l’équipe soigne, l’agent IA identifie l’animal, évalue l’urgence selon votre protocole et prépare le rendez-vous.',
     modules: ['receptionniste-ia', 'prise-de-rendez-vous', 'campagnes-sortantes', 'whatsapp-messages', 'flow-builder', 'reporting'],
     steps: [
@@ -278,8 +278,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Prestation : coupe, couleur, mèches, balayage, brushing, barbe', 'Durée selon la prestation et la longueur', 'Coiffeur ou barbier souhaité', 'Nouveau client ou habitué', 'Premier créneau libre ou date précise', 'Reports et annulations', 'Tarifs affichés, horaires et accès'],
     benefits: ['Rendez-vous pris sans lâcher les ciseaux', 'Chaque appel décroché, même le samedi en plein rush', 'Rappel la veille dès le forfait Assistant pour limiter les oublis', 'Durées respectées : une couleur n’est jamais calée sur un créneau de coupe', 'Clients orientés vers le bon coiffeur ou barbier'],
-    photo: '',
-    photoAlt: 'Coiffeuse réalisant une coupe dans un salon',
+    photo: '/photos/salons-de-coiffure.jpg',
+    photoAlt: 'Coiffeuse réalisant un brushing dans un salon lumineux',
     caption: 'Pendant que vous êtes au fauteuil, l’agent IA prend l’appel, prévoit la bonne durée de prestation et réserve le créneau.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'whatsapp-messages', 'campagnes-sortantes', 'widget-web', 'base-de-connaissances'],
     steps: [
@@ -397,8 +397,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Client du cabinet ou nouveau dossier', 'Domaine : famille, travail, immobilier, fiscalité, création d’entreprise', 'Résumé de la situation et échéance (audience, délai, déclaration)', 'Rendez-vous de première consultation', 'Message pour l’associé ou le collaborateur en charge', 'Filtrage du démarchage', 'Questions pratiques : honoraires de première consultation, pièces à apporter, accès'],
     benefits: ['Plus d’interruption en rendez-vous ou en audience', 'Démarchage filtré, appels utiles transmis avec le contexte', 'Plusieurs appels traités en même temps pendant les échéances', 'Nouveaux dossiers qualifiés avant le premier rendez-vous', 'Un message clair pour chaque appel, adressé au bon interlocuteur'],
-    photo: '',
-    photoAlt: 'Avocate au téléphone dans son cabinet, un dossier ouvert sur le bureau',
+    photo: '/photos/avocats-experts-comptables.jpg',
+    photoAlt: 'Avocate étudiant un dossier avec une cliente',
     caption: 'Pendant que vous plaidez ou recevez un client, l’agent IA filtre l’appel, qualifie le nouveau dossier et pose le rendez-vous.',
     modules: ['receptionniste-ia', 'qualification-des-leads', 'prise-de-rendez-vous', 'base-de-connaissances', 'support-client', 'reporting'],
     steps: [

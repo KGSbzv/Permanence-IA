@@ -96,8 +96,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Pierwsza wizyta czy kontynuacja cyklu zabiegów', 'Powód wizyty i ewentualne skierowanie', 'Terapeuta i miejsce przyjęć', 'Dostępność na cały cykl zabiegów', 'Zmiany terminów i odwołania', 'Pytania praktyczne: cennik, wizyta prywatna czy na NFZ, dojazd, dokumenty do zabrania', 'Kierowanie pilnych zgłoszeń według Twojej instrukcji'],
     benefits: ['Zabiegi bez przerw na telefon', 'Każde połączenie obsłużone, bez oddzwaniania wieczorem', 'Przypomnienie dzień wcześniej od pakietu Asystent, terminy zwalniane szybciej', 'Nowi pacjenci zapisani także po godzinach', 'Podsumowanie każdego zgłoszenia na Twoim pulpicie'],
-    photo: '',
-    photoAlt: 'Fizjoterapeuta prowadzący rehabilitację kolana pacjenta',
+    photo: '/photos/kines-paramedical.jpg',
+    photoAlt: 'Fizjoterapeuta badający kolano pacjentki',
     caption: 'Skupiasz się na terapii. Agent AI umawia wizyty, odpowiada na praktyczne pytania i zostawia Ci podsumowanie.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'campagnes-sortantes', 'whatsapp-messages', 'base-de-connaissances', 'reporting'],
     steps: [
@@ -136,8 +136,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Gatunek, wiek i imię zwierzęcia', 'Konsultacja, szczepienie, zabieg czy kontrola', 'Opisane objawy i pilność według Twojego protokołu', 'Stały klient czy nowy opiekun', 'Termin u właściwego lekarza weterynarii', 'Prośby o wyniki, kontynuację leczenia i karmę do przekazania zespołowi', 'Godziny otwarcia, dyżur i dojazd'],
     benefits: ['Technicy weterynarii rzadziej odrywani na recepcji', 'Pilne przypadki rozpoznane i od razu przekazane według Twojego protokołu', 'Automatyczne przypomnienia o szczepieniach i kontrolach od pakietu Asystent', 'Wizyty umawiane także po godzinach', 'Prośby o wyniki i kontynuację leczenia zebrane w jednym miejscu dla zespołu'],
-    photo: '',
-    photoAlt: 'Lekarz weterynarii badający psa na stole w gabinecie',
+    photo: '/photos/cliniques-veterinaires.jpg',
+    photoAlt: 'Weterynarz badająca golden retrievera z właścicielką',
     caption: 'Gdy zespół leczy, agent AI ustala, o jakie zwierzę chodzi, ocenia pilność według Twojego protokołu i przygotowuje wizytę.',
     modules: ['receptionniste-ia', 'prise-de-rendez-vous', 'campagnes-sortantes', 'whatsapp-messages', 'flow-builder', 'reporting'],
     steps: [
@@ -255,8 +255,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Usługa: strzyżenie, koloryzacja, odrosty, pasemka, balayage, modelowanie, broda', 'Czas trwania zależny od usługi i długości włosów', 'Wybrany fryzjer lub barber', 'Nowy czy stały klient', 'Pierwszy wolny termin lub konkretna data', 'Zmiany terminów i odwołania', 'Cennik, godziny otwarcia i dojazd'],
     benefits: ['Wizyty umawiane bez odkładania nożyczek', 'Każdy telefon odebrany, nawet w sobotnim szczycie', 'Przypomnienie dzień wcześniej od pakietu Asystent, mniej zapomnianych wizyt', 'Właściwy czas trwania: koloryzacja nigdy nie trafia w okienko na strzyżenie', 'Klienci kierowani do właściwego fryzjera lub barbera'],
-    photo: '',
-    photoAlt: 'Fryzjerka strzyżąca klientkę w salonie',
+    photo: '/photos/salons-de-coiffure.jpg',
+    photoAlt: 'Fryzjerka modelująca włosy klientki w jasnym salonie',
     caption: 'Gdy pracujesz przy fotelu, agent AI odbiera telefon, rezerwuje odpowiedni czas na usługę i wpisuje wizytę do grafiku.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'whatsapp-messages', 'campagnes-sortantes', 'widget-web', 'base-de-connaissances'],
     steps: [
@@ -374,8 +374,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Stały klient czy nowa sprawa', 'Dziedzina: sprawy rodzinne, prawo pracy, nieruchomości, podatki, zakładanie firmy', 'Opis sytuacji i terminy (rozprawa, termin procesowy, rozliczenie)', 'Umówienie pierwszej konsultacji', 'Wiadomość dla osoby prowadzącej sprawę: wspólnika, adwokata, radcy lub księgowej', 'Filtrowanie akwizycji', 'Pytania praktyczne: koszt pierwszej porady, dokumenty do zabrania, dojazd'],
     benefits: ['Koniec przerw w trakcie spotkań i rozpraw', 'Akwizycja odfiltrowana, ważne telefony przekazane z kontekstem', 'Kilka połączeń obsługiwanych jednocześnie w okresie rozliczeń', 'Nowe sprawy zakwalifikowane przed pierwszą konsultacją', 'Czytelna wiadomość po każdym telefonie, do właściwej osoby'],
-    photo: '',
-    photoAlt: 'Prawniczka rozmawiająca przez telefon w kancelarii, z otwartymi aktami na biurku',
+    photo: '/photos/avocats-experts-comptables.jpg',
+    photoAlt: 'Prawniczka omawiająca dokumenty z klientką',
     caption: 'Gdy jesteś na sali rozpraw lub przyjmujesz klienta, agent AI filtruje połączenie, kwalifikuje nową sprawę i umawia konsultację.',
     modules: ['receptionniste-ia', 'qualification-des-leads', 'prise-de-rendez-vous', 'base-de-connaissances', 'support-client', 'reporting'],
     steps: [

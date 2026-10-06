@@ -98,8 +98,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['First appointment or continuing a course of treatment', 'Reason for visit and any referral', 'Practitioner and clinic location', 'Availability for a course of sessions', 'Rescheduling and cancellations', 'Practical questions: fees, insurance cover, access, what to bring', 'Urgent requests directed according to your instructions'],
     benefits: ['Sessions without phone interruptions', 'Every call handled, no more voicemails to return in the evening', 'Reminders the day before from the Assistant plan, so slots are freed up earlier', 'New patients looked after out of hours', 'A summary of every request in your dashboard'],
-    photo: '',
-    photoAlt: 'Physiotherapist helping a patient with knee rehabilitation',
+    photo: '/photos/kines-paramedical.jpg',
+    photoAlt: 'Physiotherapist examining a patient’s knee',
     caption: 'You stay focused on the session. The AI agent books appointments, answers practical questions and leaves you a summary.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'campagnes-sortantes', 'whatsapp-messages', 'base-de-connaissances', 'reporting'],
     steps: [
@@ -138,8 +138,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Species, age and name of the animal', 'Consultation, vaccination, surgery or check-up', 'Symptoms described and urgency according to your protocol', 'Existing client or new owner', 'Slot with the right vet', 'Requests for results, repeat prescriptions and food to pass on', 'Opening hours, out-of-hours cover and directions'],
     benefits: ['Fewer interruptions for vet nurses at reception', 'Emergencies spotted and passed on straight away according to your protocol', 'Automatic vaccination and check-up reminders from the Assistant plan', 'Appointments booked out of hours', 'Results and repeat prescription requests grouped for the team'],
-    photo: '',
-    photoAlt: 'Vet examining a dog on the consultation table',
+    photo: '/photos/cliniques-veterinaires.jpg',
+    photoAlt: 'Vet examining a golden retriever with its owner',
     caption: 'While the team treats patients, the AI agent identifies the animal, assesses urgency according to your protocol and prepares the appointment.',
     modules: ['receptionniste-ia', 'prise-de-rendez-vous', 'campagnes-sortantes', 'whatsapp-messages', 'flow-builder', 'reporting'],
     steps: [
@@ -257,8 +257,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Service: cut, colour, highlights, balayage, blow-dry, beard', 'Duration based on the service and hair length', 'Preferred stylist or barber', 'New or regular client', 'First available slot or a specific date', 'Rescheduling and cancellations', 'Listed prices, opening hours and directions'],
     benefits: ['Appointments booked without putting the scissors down', 'Every call answered, even in the Saturday rush', 'Reminders the day before from the Assistant plan to cut no-shows', 'Durations respected: a colour is never squeezed into a cut slot', 'Clients matched with the right stylist or barber'],
-    photo: '',
-    photoAlt: 'Hairdresser giving a haircut in a salon',
+    photo: '/photos/salons-de-coiffure.jpg',
+    photoAlt: 'Hairdresser blow-drying a client’s hair in a bright salon',
     caption: 'While you are at the chair, the AI agent takes the call, allows the right time for the service and books the slot.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'whatsapp-messages', 'campagnes-sortantes', 'widget-web', 'base-de-connaissances'],
     steps: [
@@ -376,8 +376,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Existing client or new matter', 'Area: family, employment, property, tax, setting up a business', 'Summary of the situation and deadline (hearing, time limit, tax return)', 'Initial consultation booking', 'Message for the partner or fee earner in charge', 'Cold call screening', 'Practical questions: initial consultation fees, documents to bring, directions'],
     benefits: ['No more interruptions in meetings or in court', 'Cold calls screened, useful calls passed on with their context', 'Several calls handled at once around tax deadlines', 'New matters qualified before the first appointment', 'A clear message for every call, sent to the right person'],
-    photo: '',
-    photoAlt: 'Lawyer on the phone in her office, with a file open on the desk',
+    photo: '/photos/avocats-experts-comptables.jpg',
+    photoAlt: 'Lawyer reviewing a file with a client',
     caption: 'While you are in court or with a client, the AI agent screens the call, qualifies the new matter and books the appointment.',
     modules: ['receptionniste-ia', 'qualification-des-leads', 'prise-de-rendez-vous', 'base-de-connaissances', 'support-client', 'reporting'],
     steps: [

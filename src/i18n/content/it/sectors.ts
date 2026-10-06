@@ -98,8 +98,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Prima visita o prosecuzione di un ciclo di sedute', 'Motivo ed eventuale prescrizione medica', 'Professionista e sede dello studio', 'Disponibilità per un ciclo di sedute', 'Spostamenti e disdette', 'Domande pratiche: tariffe, fattura per detrazione o fondo sanitario, come arrivare, documenti da portare', 'Indirizzamento delle richieste urgenti secondo le Sue istruzioni'],
     benefits: ['Sedute senza interruzioni telefoniche', 'Ogni chiamata gestita, niente più segreteria da richiamare la sera', 'Promemoria il giorno prima dal piano Assistant, slot liberati in tempo', 'Nuovi pazienti presi in carico anche fuori orario', 'Un riepilogo di ogni richiesta nella Sua dashboard'],
-    photo: '',
-    photoAlt: 'Fisioterapista che segue un paziente durante la riabilitazione del ginocchio',
+    photo: '/photos/kines-paramedical.jpg',
+    photoAlt: 'Fisioterapista che esamina il ginocchio di una paziente',
     caption: 'Lei resta concentrato sulla seduta. L’agente AI fissa gli appuntamenti, risponde alle domande pratiche e Le lascia un riepilogo.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'campagnes-sortantes', 'whatsapp-messages', 'base-de-connaissances', 'reporting'],
     steps: [
@@ -138,8 +138,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Specie, età e nome dell’animale', 'Visita, vaccino, intervento chirurgico o controllo', 'Sintomi descritti e urgenza secondo il Suo protocollo', 'Cliente della clinica o nuovo proprietario', 'Appuntamento con il veterinario giusto', 'Richieste di esiti, ricette e alimenti da inoltrare', 'Orari, reperibilità e come arrivare'],
     benefits: ['Assistenti veterinari meno interrotti in accettazione', 'Urgenze riconosciute e inoltrate subito secondo il Suo protocollo', 'Richiami vaccinali e controlli automatici dal piano Assistant', 'Appuntamenti fissati anche fuori orario', 'Richieste di esiti e ricette raccolte per il team'],
-    photo: '',
-    photoAlt: 'Veterinaria che visita un cane sul tavolo dell’ambulatorio',
+    photo: '/photos/cliniques-veterinaires.jpg',
+    photoAlt: 'Veterinaria che visita un golden retriever con la proprietaria',
     caption: 'Mentre il team cura gli animali, l’agente AI identifica il paziente, valuta l’urgenza secondo il Suo protocollo e prepara l’appuntamento.',
     modules: ['receptionniste-ia', 'prise-de-rendez-vous', 'campagnes-sortantes', 'whatsapp-messages', 'flow-builder', 'reporting'],
     steps: [
@@ -257,8 +257,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Servizio: taglio, piega, colore, ricrescita, meches, colpi di sole, balayage, barba', 'Durata in base al servizio e alla lunghezza', 'Parrucchiere o barbiere preferito', 'Nuovo cliente o cliente abituale', 'Primo slot libero o data precisa', 'Spostamenti e disdette', 'Listino prezzi, orari e come arrivare'],
     benefits: ['Appuntamenti presi senza lasciare le forbici', 'Ogni chiamata ha risposta, anche il sabato nel pieno del lavoro', 'Promemoria il giorno prima dal piano Assistant per ridurre le dimenticanze', 'Durate rispettate: un colore non finisce mai nello slot di un taglio', 'Clienti indirizzati al parrucchiere o al barbiere giusto'],
-    photo: '',
-    photoAlt: 'Parrucchiera che esegue un taglio in un salone',
+    photo: '/photos/salons-de-coiffure.jpg',
+    photoAlt: 'Parrucchiera che fa la piega a una cliente in un salone luminoso',
     caption: 'Mentre Lei è alla poltrona, l’agente AI risponde, calcola la durata del servizio e prenota lo slot.',
     modules: ['prise-de-rendez-vous', 'receptionniste-ia', 'whatsapp-messages', 'campagnes-sortantes', 'widget-web', 'base-de-connaissances'],
     steps: [
@@ -376,8 +376,8 @@ export const SECTORS: Sector[] = [
     ],
     handles: ['Cliente dello studio o nuova pratica', 'Materia: famiglia, lavoro, immobili, fisco, avvio d’impresa', 'Sintesi della situazione e scadenza (udienza, termine, dichiarazione)', 'Appuntamento per la prima consulenza', 'Messaggio per il socio o il collaboratore di riferimento', 'Filtro delle chiamate commerciali', 'Domande pratiche: costo della prima consulenza, documenti da portare, come arrivare'],
     benefits: ['Niente più interruzioni in riunione o in udienza', 'Proposte commerciali filtrate, chiamate utili inoltrate con il contesto', 'Più chiamate gestite in contemporanea sotto scadenza', 'Nuove pratiche qualificate prima del primo appuntamento', 'Un messaggio chiaro per ogni chiamata, alla persona giusta'],
-    photo: '',
-    photoAlt: 'Avvocata al telefono nel suo studio, con un fascicolo aperto sulla scrivania',
+    photo: '/photos/avocats-experts-comptables.jpg',
+    photoAlt: 'Avvocata che esamina una pratica con una cliente',
     caption: 'Mentre Lei è in udienza o riceve un cliente, l’agente AI filtra la chiamata, qualifica la nuova pratica e fissa l’appuntamento.',
     modules: ['receptionniste-ia', 'qualification-des-leads', 'prise-de-rendez-vous', 'base-de-connaissances', 'support-client', 'reporting'],
     steps: [
