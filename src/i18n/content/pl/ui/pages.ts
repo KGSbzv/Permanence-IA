@@ -237,10 +237,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         ],
       },
       {
-        title: 'Artykuł 3 — Prawo odstąpienia i 14-dniowa Gwarancja Spokoju',
+        title: 'Artykuł 3 — Bezpłatny okres próbny, brak prawa odstąpienia i zwrotu płatności',
         body: [
-          { p: [`Niezależnie od uprawnień wynikających z przepisów prawa, ${brand} przyznaje w ramach polityki handlowej `, { strong: 'gwarancję pełnego zwrotu w ciągu 14 dni' }, ' od pierwszego płatnego zakupu.'] },
-          { p: ['Po zwykłym zgłoszeniu e-mailem na adres ', { strong: email }, ' w ciągu 14 dni od pierwszej płatności cała opłata miesięczna jest zwracana bez podawania przyczyny.'] },
+          { p: 'Umowy zawierane między przedsiębiorcami nie dają prawa odstąpienia przewidzianego dla konsumentów. Bezpłatny 14-dniowy okres próbny pozwala klientowi przetestować usługę przed jakąkolwiek płatnością i anulować ją bez kosztów przed jego zakończeniem.' },
+          { p: [{ strong: 'Opłacony okres nie podlega zwrotowi' }, ', nawet częściowemu, ponieważ usługa i minuty są udostępniane od początku okresu. Zakupione środki (doładowania) również nie podlegają zwrotowi; nie wygasają. Wypowiedzenie umowy jest możliwe w każdej chwili ze skutkiem na kolejne okresy (artykuł 4).'] },
         ],
       },
       {

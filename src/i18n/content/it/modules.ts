@@ -107,7 +107,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Riepilogo dell’appuntamento', 'Lista d’attesa', 'Risposte ai messaggi'],
     integrations: ['WhatsApp', 'SMS', 'Messenger', 'Instagram'],
-    from: 'assistant', mock: 'whatsapp',
+    from: 'receptionniste', mock: 'whatsapp',
   },
   {
     slug: 'base-de-connaissances', name: 'Base di conoscenza', family: 'CRM e dati',
@@ -167,7 +167,7 @@ export const MODULES: Module[] = [
     ],
     cases: ['Inoltro dal centralino', 'Linee per sede', 'Numeri internazionali'],
     integrations: ['SIP', 'Twilio', 'Telnyx'],
-    from: 'assistant', mock: 'numbers',
+    from: 'receptionniste', mock: 'numbers',
   },
   {
     slug: 'reporting', name: 'Report', family: 'Monitoraggio',

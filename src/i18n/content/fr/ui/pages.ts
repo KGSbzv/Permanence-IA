@@ -243,10 +243,10 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: 'Article 3 — Droit de rétractation & Garantie Sérénité 14 jours',
+        title: 'Article 3 — Essai gratuit, absence de rétractation et de remboursement',
         body: [
-          { p: [`Bien que les contrats conclus entre professionnels ne bénéficient pas légalement du droit de rétractation consommateur, ${brand} accorde à titre commercial une `, { strong: 'garantie de remboursement intégral sous 14 jours' }, ' suivant la première souscription payante.'] },
-          { p: ['Sur simple notification par email à ', { strong: email }, " dans les 14 jours suivant le premier paiement, l'intégralité de la mensualité est remboursée sans justification."] },
+          { p: "Les contrats conclus entre professionnels ne bénéficient pas du droit de rétractation prévu pour les consommateurs. L'essai gratuit de 14 jours permet au client de tester le service avant tout paiement et de l'annuler sans frais avant son terme." },
+          { p: [{ strong: 'Une fois une période payée, celle-ci n’est pas remboursable' }, ", même partiellement, le service et les minutes étant mis à disposition dès le début de la période. Le crédit acheté (recharges) n'est pas remboursable non plus ; il ne périme pas. La résiliation reste possible à tout moment pour les périodes suivantes (article 4)."] },
         ],
       },
       {

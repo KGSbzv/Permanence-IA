@@ -317,8 +317,8 @@ export const UI_COMMERCE = {
     },
     api: {
       title: { before: 'Webhooks et API pour ', kw: 'vos systèmes', after: '' },
-      text: 'Avec le forfait Centre d’appels, recevez chaque fin d’appel et ses données extraites dans vos propres systèmes, ou pilotez l’agent depuis votre logiciel.',
-      points: ['Webhook après chaque appel', 'Variables extraites : résultat, intérêt, créneau', 'Outils MCP pour vos assistants'],
+      text: 'Sur tous les forfaits, recevez chaque fin d’appel et ses données extraites dans vos propres systèmes, ou pilotez l’agent depuis votre logiciel.',
+      points: ['Webhook après chaque appel', 'Variables extraites : résultat, intérêt, créneau', 'Outils pendant l’appel, dès le forfait Assistant'],
     },
   },
 };

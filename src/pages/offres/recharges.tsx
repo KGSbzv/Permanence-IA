@@ -19,7 +19,7 @@ export default function Recharges() {
           <TrialBadges className="mt-6" />
         </div>
       </section>
-      <Section><RechargeTables /><p className="mt-4 text-sm text-slate-light">{c.site.priceNote}</p></Section>
+      <Section><RechargeTables /><p className="mt-4 text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p></Section>
       <Section tone="paper">
         <Heading title={t.how.title} />
         <div className="mt-10">

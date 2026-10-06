@@ -22,7 +22,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Add credits', label: 'Add credit', text: 'Buy a minute top-up; credit never expires.' },
   { en: 'Billing info', label: 'Billing', text: 'Payment method, invoices, subscription and cancellation.' },
   { en: 'Limits', label: 'Limits', text: 'What your plan allows: agents, simultaneous calls, features.' },
-  { en: 'API Keys', label: 'API keys', text: 'Connect your own software (Call Centre plan).' },
+  { en: 'API Keys', label: 'API keys', text: 'Connect your own software (all plans).' },
   { en: 'My profile / Security', label: 'Profile / Security', text: 'Your details, password and two-factor authentication.' },
 ];
 
@@ -51,7 +51,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'The simplest way: buy a number in Get new phone number, then select it in the agent (General → Phone number).',
       'To keep your current number: ask your carrier to forward calls to this new number.',
-      'If you already have Twilio, Telnyx or a SIP phone system: go to Your phone numbers, then import or SIP (Assistant plan and above).',
+      'If you already have Twilio, Telnyx or a SIP phone system: go to Your phone numbers, then import or SIP (all plans).',
     ],
   },
   {

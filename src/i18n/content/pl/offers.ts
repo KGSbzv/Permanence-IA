@@ -27,23 +27,23 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Recepcjonistka AI, która odbiera każde połączenie, całą dobę',
     pitch: 'Pakiet Recepcjonistka przejmuje połączenia, odpowiada na częste pytania, umawia wizyty i przekazuje Ci czytelne podsumowanie każdego zgłoszenia. Proste wdrożenie, bez komplikacji.',
     cta: 'Wybierz Recepcjonistkę',
-    highlights: ['Recepcjonistka AI 24/7', 'Podłączony kalendarz', 'Widżet oddzwaniania na stronę', 'Przekazanie rozmowy człowiekowi'],
+    highlights: ['Recepcjonistka AI 24/7', 'Podłączony kalendarz', 'Widżet na stronę, SMS i WhatsApp', 'Przekazanie rozmowy człowiekowi', '2 jednoczesne połączenia'],
   },
   assistant: {
     name: 'Asystent',
     audience: 'Lokalne firmy z regularną liczbą połączeń',
     title: 'Asystent AI, który kwalifikuje, przypomina i automatyzuje obsługę zgłoszeń',
-    pitch: 'Pakiet Asystent dodaje kwalifikację leadów, kampanie przypominające, wiadomości SMS i WhatsApp, flow builder oraz Twoje własne numery przez SIP, aby zamieniać więcej zapytań w klientów.',
+    pitch: 'Pakiet Asystent dodaje trzech agentów, kampanie przypominające, flow builder połączony z ponad 300 narzędziami oraz sklonowany głos, aby zamieniać więcej zapytań w klientów.',
     cta: 'Wybierz Asystenta',
-    highlights: ['Wszystko z pakietu Recepcjonistka', 'Flow builder i automatyzacje', 'Kampanie i leady', 'SMS, WhatsApp i Instagram', 'Twoje numery przez SIP'],
+    highlights: ['Wszystko z pakietu Recepcjonistka', '3 agentów, 5 jednoczesnych połączeń', 'Flow builder i automatyzacje', 'Kampanie przypominające', '1 sklonowany głos'],
   },
   'centre-appels': {
     name: 'Call center',
     audience: 'Zespoły, wiele działów i duże wolumeny',
     title: 'Kompletne call center AI do obsługi recepcji, wizyt i wsparcia',
-    pitch: 'Pakiet Call center łączy wielu agentów, szczegółowe raporty, role, zaawansowaną bazę wiedzy, API i priorytetowe wsparcie, z najniższą ceną za minutę.',
+    pitch: 'Pakiet Call center znosi limity: nielimitowani agenci i kampanie, 20 jednoczesnych połączeń, własne pulpity, priorytetowe wsparcie i najniższa cena za minutę.',
     cta: 'Wybierz Call center',
-    highlights: ['Wszystko z pakietu Asystent', 'Wielu agentów i role', 'Szczegółowe raporty', 'API, webhooki i narzędzia MCP', 'Priorytetowe wsparcie', '3000 kredytów na wiadomości w cenie (30 $)'],
+    highlights: ['Wszystko z pakietu Asystent', 'Nielimitowani agenci i kampanie', '20 jednoczesnych połączeń', 'Własne pulpity', 'Priorytetowe wsparcie', '3000 kredytów na wiadomości w cenie (30 $)'],
   },
   'sur-mesure': {
     name: 'Na miarę',
@@ -70,61 +70,67 @@ export const OFFER_LABELS = {
 // Macierz funkcji: każdy wiersz odpowiada stronie lub funkcji w panelu klienta.
 // Wartości: true = w cenie, false = niedostępne, tekst = poziom.
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
+const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
+// Limity odczytane w panelu administracyjnym panelu klienta (pakiety Receptionist 1646, Assistant 1647, Call Centre 1648
+// i okres próbny): każdą zmianę pakietu w panelu administracyjnym trzeba przenieść tutaj i odwrotnie.
 export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agenci i połączenia',
     rows: [
-      { label: 'Asystenci głosowi AI', detail: 'Agenci do połączeń przychodzących i wychodzących', cells: { decouverte: '1 testowy', receptionniste: '1', assistant: '3', 'centre-appels': 'Wielu agentów', 'sur-mesure': 'Na miarę' } },
-      { label: 'Historia połączeń', detail: 'Nagrania, transkrypcje, podsumowania', cells: { ...all(true), decouverte: 'Ograniczona' } },
-      { label: 'Rozmowy', detail: 'Rozmowy pisemne i głosowe w jednym miejscu', cells: all(true) },
-      { label: 'Przekazanie rozmowy człowiekowi', detail: 'Przełączenie do Twojego zespołu', cells: all(true) },
-      { label: 'Głosy wielojęzyczne', detail: 'Wykrywanie języków dodatkowych', cells: all(true) },
+      { label: 'Agenci głosowi AI', detail: 'Liczba agentów, których możesz utworzyć, do połączeń przychodzących lub wychodzących.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
+      { label: 'Jednoczesne połączenia', detail: 'Połączenia obsługiwane w tym samym czasie: nikt nie czeka, nawet w godzinach szczytu.', cells: { decouverte: '1', receptionniste: '2', assistant: '5', 'centre-appels': '20', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Historia połączeń', detail: 'Nagrania, transkrypcje i podsumowania każdej rozmowy.', cells: all(true) },
+      { label: 'Przekazanie rozmowy człowiekowi', detail: 'Agent przełącza rozmowę do Twojego zespołu, gdy jest to potrzebne.', cells: all(true) },
+      { label: 'Języki dodatkowe', detail: 'Agent rozpoznaje język dzwoniącego i odpowiada w jego języku.', cells: all(true) },
+      { label: 'Sklonowane głosy', detail: 'Głos utworzony na podstawie nagrania Twojego głosu.', cells: { decouverte: false, receptionniste: false, assistant: '1', 'centre-appels': '3', 'sur-mesure': 'Indywidualnie' } },
     ],
   },
   {
     group: 'Konfiguracja agenta',
     rows: [
-      { label: 'Edytor promptów AI', detail: 'Zachowanie, ton, zasady', cells: { decouverte: 'Podgląd', receptionniste: 'Uproszczony', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Baza wiedzy', detail: 'PDF, strony WWW, procedury', cells: { decouverte: 'Podstawowa', receptionniste: 'Podstawowa', assistant: true, 'centre-appels': 'Zaawansowana', 'sur-mesure': 'Zaawansowana' } },
-      { label: 'Flow builder', detail: 'Wizualne scenariusze bez kodu', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Zaawansowany', 'sur-mesure': 'Zaawansowany' } },
-      { label: 'Automatyzacje', detail: 'Ponad 300 narzędzi do podłączenia', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Edytor promptów AI', detail: 'Asystent pisania ustawia zachowanie, ton i zasady agenta.', cells: all(true) },
+      { label: 'Bazy wiedzy', detail: 'PDF-y, strony WWW i procedury, z których agent korzysta w trakcie rozmowy.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
+      { label: 'Narzędzia w trakcie rozmowy', detail: 'Akcje uruchamiane na żywo: sprawdzenie dostępności, wgląd w kartę klienta, zapytanie do Twojego oprogramowania.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
+      { label: 'Flow builder', detail: 'Wizualne scenariusze bez kodu: wyzwalacze, warunki i akcje.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Platforma automatyzacji', detail: 'Ponad 300 narzędzi do podłączenia: CRM, Google Sheets, Slack, e-mail…', cells: { decouverte: false, receptionniste: false, assistant: '5 000 uruchomień / mies.', 'centre-appels': '50 000 uruchomień / mies.', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Konektor AI', detail: 'Dodaje krok AI do Twoich automatyzacji (sortowanie, podsumowanie, redagowanie).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
     group: 'Kalendarz i pozyskiwanie zgłoszeń',
     rows: [
-      { label: 'Integracja z kalendarzem', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
-      { label: 'Widżet na stronę', detail: 'Oddzwonienie i rozmowa z Twojej strony', cells: all(true) },
-      { label: 'Identyfikacja dzwoniącego', detail: 'Przycisk caller ID', cells: { ...all(true), decouverte: false } },
-      { label: 'Leady i wstępna kwalifikacja', detail: 'Uporządkowane karty potencjalnych klientów', cells: { decouverte: false, receptionniste: 'Podstawowe', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Integracja z kalendarzem', detail: 'Google, Outlook, Cal.com, Calendly: agent rezerwuje terminy w Twoim kalendarzu.', cells: all(true) },
+      { label: 'Widżet na stronę', detail: 'Przycisk połączenia i oddzwonienia do umieszczenia na Twojej stronie.', cells: all(true) },
+      { label: 'Leady', detail: 'Karty potencjalnych klientów tworzone na podstawie rozmów.', cells: all(true) },
     ],
   },
   {
     group: 'Wiadomości i kampanie',
     rows: [
-      { label: 'Kampanie wychodzące', detail: 'Przypomnienia, potwierdzenia, ponowne kontakty', cells: { decouverte: false, receptionniste: false, assistant: 'Z limitami', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Historia SMS', detail: 'Wysłane wiadomości i odpowiedzi', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'WhatsApp', detail: 'Nadawcy i szablony', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Messenger i Instagram', detail: 'Kanały wiadomości', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Kampanie wychodzące', detail: 'Ponowne kontakty, potwierdzenia i przypomnienia realizowane automatycznie przez telefon.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
+      { label: 'SMS i WhatsApp', detail: 'Korespondencja pisemna w jednym miejscu, opłacana kredytami na wiadomości.', cells: all(true) },
+      { label: 'Messenger i Instagram', detail: 'Wiadomości z mediów społecznościowych w tej samej skrzynce.', cells: all(true) },
+      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na pisemne odpowiedzi AI.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Indywidualnie' } },
     ],
   },
   {
     group: 'Telefonia',
     rows: [
-      { label: 'Dedykowany numer', detail: 'Opcja płatna co miesiąc, zależnie od kraju', cells: { decouverte: false, receptionniste: 'Opcjonalnie', assistant: 'Opcjonalnie', 'centre-appels': 'Opcjonalnie', 'sur-mesure': 'Opcjonalnie' } },
-      { label: 'Integracja SIP', detail: 'Twoje numery i Twoja centrala', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Lista blokad', detail: 'Numery wykluczone z połączeń', cells: { ...all(true), decouverte: false } },
+      { label: 'Numery telefonów', detail: 'Dedykowane numery kupowane w panelu klienta, płatne co miesiąc, zależnie od kraju.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Połączenie SIP', detail: 'Zachowaj swoje numery i centralę: połączenie SIP, import z Twilio lub Telnyx.', cells: all(true) },
+      { label: 'Twój własny numer komórkowy jako nadawca', detail: 'Zweryfikuj swój numer, aby wyświetlał się przy połączeniach wychodzących.', cells: paid(true) },
+      { label: 'Lista blokad', detail: 'Numery, do których agent nigdy nie dzwoni.', cells: all(true) },
     ],
   },
   {
-    group: 'Zarządzanie i zespół',
+    group: 'Zarządzanie i integracje',
     rows: [
-      { label: 'Szczegółowe raporty', detail: 'Wolumeny, czas trwania, konwersje', cells: { decouverte: false, receptionniste: 'Pulpit', assistant: 'Pulpit', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Role i uprawnienia', detail: 'Dostęp dla każdego członka zespołu', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'API, webhooki i narzędzia MCP', detail: 'Połączenie z Twoimi systemami', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Zasady dla wielu lokalizacji i SLA', detail: 'Wiele placówek', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
-      { label: 'Wsparcie', detail: 'Pomoc i opieka', cells: { decouverte: 'Materiały', receptionniste: 'Standardowe', assistant: 'Standardowe', 'centre-appels': 'Priorytetowe', 'sur-mesure': 'Dedykowane' } },
+      { label: 'Statystyki połączeń', detail: 'Wolumeny, czas trwania i wyniki na Twoim pulpicie.', cells: all(true) },
+      { label: 'Własne pulpity', detail: 'Twoje własne wskaźniki, zbudowane na podstawie danych z rozmów.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'API i webhooki', detail: 'Otrzymuj każde zakończenie rozmowy w swoich systemach lub steruj agentem z poziomu swojego oprogramowania.', cells: all(true) },
+      { label: 'Zasady dla wielu lokalizacji i SLA', detail: 'Wiele placówek, zobowiązania dotyczące poziomu usług.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
+      { label: 'Wsparcie', detail: 'Pomoc i opieka naszego zespołu.', cells: { decouverte: 'Materiały', receptionniste: 'Standardowe', assistant: 'Standardowe', 'centre-appels': 'Priorytetowe', 'sur-mesure': 'Dedykowane' } },
     ],
   },
 ];

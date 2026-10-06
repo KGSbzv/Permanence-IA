@@ -228,10 +228,10 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: 'Artikel 3 — Tevredenheidsgarantie 14 dagen',
+        title: 'Artikel 3 — Gratis proefperiode, geen herroepingsrecht en geen terugbetaling',
         body: [
-          { p: [`Naast uw wettelijke rechten biedt ${brand} uit commerciële overweging een `, { strong: 'garantie op volledige terugbetaling binnen 14 dagen' }, ' na de eerste betaalde aanmelding.'] },
-          { p: ['Na een eenvoudige melding per e-mail aan ', { strong: email }, ' binnen 14 dagen na de eerste betaling wordt de volledige maandtermijn zonder opgave van redenen terugbetaald.'] },
+          { p: "Overeenkomsten tussen professionele partijen vallen niet onder het herroepingsrecht voor consumenten. Met de gratis proefperiode van 14 dagen kan de klant de dienst testen vóór elke betaling en deze vóór het einde ervan kosteloos opzeggen." },
+          { p: [{ strong: 'Een eenmaal betaalde periode wordt niet terugbetaald' }, ', ook niet gedeeltelijk, omdat de dienst en de minuten vanaf het begin van de periode ter beschikking worden gesteld. Gekocht tegoed (opwaarderingen) wordt evenmin terugbetaald; het vervalt niet. Opzeggen blijft op elk moment mogelijk voor de volgende perioden (artikel 4).'] },
         ],
       },
       {

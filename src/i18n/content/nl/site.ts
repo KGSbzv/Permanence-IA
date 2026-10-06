@@ -3,7 +3,7 @@ export const SITE_TEXT = {
   trialLine: (days: number, minutes: number) => `${days} dagen gratis proberen — ${minutes} minuten inbegrepen — prijzen excl. btw — geen verplichtingen`,
   trialBadges: (days: number, minutes: number) => [`${days} dagen gratis proberen`, `${minutes} minuten inbegrepen`, 'Niets afgeschreven tijdens de proefperiode', 'Geen verplichtingen'],
   growthLines: ['Voeg op elk moment minuten toe', 'Stap over op een groter abonnement wanneer uw volume groeit'],
-  priceNote: 'Prijzen in Amerikaanse dollars (USD), exclusief belastingen — lokale belastingen komen erbij indien van toepassing. Een eigen telefoonnummer is optioneel en wordt per maand gefactureerd.',
+  priceNote: (numberFrom: string) => `Prijzen in Amerikaanse dollars (USD), exclusief belastingen — lokale belastingen komen erbij indien van toepassing. Een eigen nummer is verkrijgbaar vanaf ${numberFrom} excl. btw per maand, afhankelijk van het land.`,
   skipToContent: 'Naar de inhoud',
   languageLabel: 'Taal',
   rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',

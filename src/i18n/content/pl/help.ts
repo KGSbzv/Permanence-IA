@@ -20,7 +20,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Add credits', label: 'Doładowanie środków', text: 'Zakup doładowania minut; środki nie wygasają.' },
   { en: 'Billing info', label: 'Rozliczenia', text: 'Metoda płatności, faktury, subskrypcja i anulowanie.' },
   { en: 'Limits', label: 'Limity', text: 'Co obejmuje Twój pakiet: agenci, połączenia równoczesne, funkcje.' },
-  { en: 'API Keys', label: 'Klucze API', text: 'Podłączanie własnego oprogramowania (pakiet Call center).' },
+  { en: 'API Keys', label: 'Klucze API', text: 'Podłączanie własnego oprogramowania (wszystkie pakiety).' },
   { en: 'My profile / Security', label: 'Profil / Bezpieczeństwo', text: 'Twoje dane, hasło i uwierzytelnianie dwuskładnikowe.' },
 ];
 
@@ -49,7 +49,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'Najprościej: kup numer w Get new phone number, a następnie wybierz go w ustawieniach agenta (General → Phone number).',
       'Aby zachować obecny numer: włącz u swojego operatora przekierowanie połączeń na nowy numer.',
-      'Masz już Twilio, Telnyx lub centralę SIP: Your phone numbers, następnie import lub SIP (od pakietu Asystent).',
+      'Masz już Twilio, Telnyx lub centralę SIP: Your phone numbers, następnie import lub SIP (wszystkie pakiety).',
     ],
   },
   {

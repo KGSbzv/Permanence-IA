@@ -3,13 +3,14 @@ import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowUpRight, BarChart3, CalendarDays, Car, Check, Database, Globe2, Home, KeyRound, Languages,
-  Lock, MessageSquare, Minus, Phone, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
+  Lock, Mail, MessageSquare, Minus, MonitorSmartphone, Network, Phone, X, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
   UtensilsCrossed, Workflow, Wrench,
 } from 'lucide-react';
 import { MODULES as FR_MODULES } from '@/i18n/content/fr/modules';
 import type { Sector } from '@/i18n/content/fr/sectors';
 import type { Cell } from '@/i18n/content/fr/offers';
 import { DEMO_URL, SIGNUP_URL } from '@/data/site';
+import { BRAND_MARKS } from '@/data/brandMarks';
 import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
@@ -216,7 +217,7 @@ function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
 }
 
 export function PricingCards({ only }: { only?: Offer['slug'][] }) {
-  const { c, offers } = useI18n();
+  const { c, market, offers, money } = useI18n();
   const t = c.ui.components.pricingCards;
   const list = only ? offers.filter((o) => only.includes(o.slug)) : offers;
   // Chaque carte est une sous-grille (7 rangées) : nom, public, prix, minutes, points forts, bouton et lien
@@ -232,6 +233,7 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
           <div className="mt-3">
             <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
             {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(o.perMinute)}</p>}
+            {!!o.price && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.phoneNumber(money(market.phoneNumberFrom, 2))}</p>}
           </div>
           <ul className="mt-4 space-y-2 text-[14px]">
             {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
@@ -254,47 +256,125 @@ export function GrowthLines({ dark = false, className = '' }: { dark?: boolean; 
 }
 
 function CellView({ v, t }: { v: Cell; t: { included: string; notIncluded: string } }) {
-  if (v === true) return <Check className="mx-auto h-4 w-4 text-signal" aria-label={t.included} />;
-  if (v === false) return <Minus className="mx-auto h-4 w-4 text-slate-light" strokeWidth={2.5} aria-label={t.notIncluded} />;
-  return <span className="text-[13px] font-medium text-ink">{v}</span>;
+  if (v === true) return <span className="mx-auto flex h-6 w-6 items-center justify-center rounded-full bg-ok/10"><Check className="h-4 w-4 text-ok" strokeWidth={3} aria-label={t.included} /></span>;
+  if (v === false) return <span className="mx-auto flex h-6 w-6 items-center justify-center rounded-full bg-no/10"><X className="h-4 w-4 text-no" strokeWidth={3} aria-label={t.notIncluded} /></span>;
+  return <span className="text-[13px] font-semibold text-ink">{v}</span>;
 }
 
+/**
+ * Comparatif des forfaits : prix et minutes toujours visibles, puis le premier groupe de modules ;
+ * le bouton déplie tous les modules. Les limites reprennent celles de l’admin de l’espace client.
+ */
 export function MatrixTable() {
-  const { c, offers, money } = useI18n();
+  const { c, market, offers, money } = useI18n();
   const t = c.ui.components.matrix;
+  const [open, setOpen] = useState(false);
+  const groups = open ? c.matrix : c.matrix.slice(0, 1);
+  const moduleCount = c.matrix.reduce((n, g) => n + g.rows.length, 0);
+  const head = 'sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4';
+  const priceRows: { label: string; cell: (o: Offer) => React.ReactNode }[] = [
+    { label: t.pricePerMonth, cell: (o) => (o.price === null ? o.priceLabel : money(o.price)) },
+    { label: t.includedMinutes, cell: (o) => <>{o.minutes}{o.perMinute && <span className="block font-normal text-signal-deep">{o.perMinute}</span>}</> },
+    { label: t.extraMinute, cell: (o) => (o.extraMinute ? money(o.extraMinute, 2) : '—') },
+    { label: t.phoneNumber, cell: (o) => (o.price ? t.phoneNumberFrom(money(market.phoneNumberFrom, 2)) : '—') },
+  ];
   return (
-    // Défilement dans les deux sens dans le cadre : en-tête et première colonne restent visibles.
-    <div className="max-h-[80vh] overflow-auto rounded-2xl border border-line bg-white">
-      <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[14px] [&_tbody_tr>*]:border-b [&_tbody_tr>*]:border-line">
-        <caption className="sr-only">{t.caption}</caption>
-        <thead className="sticky top-0 z-20 bg-white">
-          <tr>
-            <th scope="col" className="sticky left-0 z-10 w-36 border-b border-line bg-white p-3 font-display sm:w-auto sm:p-4 text-sm font-semibold text-ink">{t.inYourInterface}</th>
-            {offers.map((o) => <th key={o.slug} scope="col" className={`border-b border-line p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'bg-white text-ink'}`}>{o.name}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="bg-paper">
-            <th scope="row" className="sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4">{t.pricePerMonth}</th>
-            {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.price === null ? o.priceLabel : money(o.price)}</td>)}
-          </tr>
-          <tr className="bg-paper">
-            <th scope="row" className="sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4">{t.includedMinutes}</th>
-            {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}{o.perMinute && <span className="block font-normal text-slate-light">{o.perMinute}</span>}</td>)}
-          </tr>
-          {c.matrix.map((g) => (
-            <React.Fragment key={g.group}>
-              <tr><th colSpan={offers.length + 1} scope="colgroup" className="bg-paper px-4 pb-2 pt-5 text-left font-display text-sm font-semibold text-ink"><span className="sticky left-4">{g.group}</span></th></tr>
-              {g.rows.map((r) => (
-                <tr key={r.label}>
-                  <th scope="row" className="sticky left-0 z-10 bg-white p-3 font-normal sm:p-4"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] text-slate-light">{r.detail}</span></th>
-                  {offers.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} t={t} /></td>)}
-                </tr>
-              ))}
-            </React.Fragment>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      <div className={`${open ? 'max-h-[80vh]' : ''} overflow-auto rounded-2xl border border-line bg-white`}>
+        <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[14px] [&_tbody_tr>*]:border-b [&_tbody_tr>*]:border-line">
+          <caption className="sr-only">{t.caption}</caption>
+          <thead className="sticky top-0 z-20 bg-white">
+            <tr>
+              <th scope="col" className="sticky left-0 z-10 w-36 border-b border-line bg-white p-3 font-display text-sm font-semibold text-ink sm:w-auto sm:p-4">{t.inYourInterface}</th>
+              {offers.map((o) => <th key={o.slug} scope="col" className={`border-b border-line p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'bg-white text-ink'}`}>{o.name}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {priceRows.map((r) => (
+              <tr key={r.label} className="bg-paper">
+                <th scope="row" className={head}>{r.label}</th>
+                {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{r.cell(o)}</td>)}
+              </tr>
+            ))}
+            {groups.map((g) => (
+              <React.Fragment key={g.group}>
+                <tr><th colSpan={offers.length + 1} scope="colgroup" className="bg-white px-4 pb-2 pt-6 text-left font-display text-sm font-semibold text-ink"><span className="sticky left-4">{g.group}</span></th></tr>
+                {g.rows.map((r) => (
+                  <tr key={r.label}>
+                    <th scope="row" className="sticky left-0 z-10 max-w-[18rem] bg-white p-3 font-normal sm:p-4"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] leading-snug text-slate-light">{r.detail}</span></th>
+                    {offers.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} t={t} /></td>)}
+                  </tr>
+                ))}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+        <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate">
+          <li className="flex items-center gap-2"><CellView v t={t} />{t.legendIncluded}</li>
+          <li className="flex items-center gap-2"><CellView v={false} t={t} />{t.legendNotIncluded}</li>
+          <li>{t.legendLimit}</li>
+        </ul>
+        <button type="button" aria-expanded={open} onClick={() => setOpen(!open)} className="btn-ghost text-sm">
+          {open ? t.showLess : t.showAll(moduleCount)}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Tout est inclus : modèles, voix, transcription et canaux, sans clé API ---------- */
+
+type StackItem = { name: string; mark?: keyof typeof BRAND_MARKS; icon?: React.ElementType };
+// Fournisseurs réellement disponibles dans l’espace client (listes de modèles, voix et transcriptions de la plateforme).
+const STACK: Record<string, StackItem[]> = {
+  llm: [{ name: 'OpenAI GPT-5' }, { name: 'Anthropic Claude', mark: 'anthropic' }, { name: 'Google Gemini', mark: 'gemini' }, { name: 'Meta Llama', mark: 'meta' }],
+  s2s: [{ name: 'OpenAI Realtime' }, { name: 'Gemini Live', mark: 'gemini' }],
+  tts: [{ name: 'ElevenLabs', mark: 'elevenlabs' }, { name: 'Cartesia' }, { name: 'Microsoft Azure' }, { name: 'Inworld' }],
+  stt: [{ name: 'Deepgram', mark: 'deepgram' }, { name: 'ElevenLabs Scribe', mark: 'elevenlabs' }, { name: 'Gladia' }, { name: 'Soniox' }, { name: 'Microsoft Azure' }],
+  channels: [{ name: 'phone', icon: Phone }, { name: 'sip', icon: Network }, { name: 'WhatsApp', mark: 'whatsapp' }, { name: 'Messenger', mark: 'messenger' }, { name: 'Instagram', mark: 'instagram' }, { name: 'email', icon: Mail }, { name: 'widget', icon: MonitorSmartphone }],
+};
+
+function StackChip({ item, label }: { item: StackItem; label: string }) {
+  const mark = item.mark ? BRAND_MARKS[item.mark] : undefined;
+  const Icon = item.icon;
+  return (
+    <li className="flex items-center gap-2.5 rounded-xl border border-line bg-white py-2 pl-2 pr-3.5">
+      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-paper" aria-hidden>
+        {mark ? <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill={mark.hex}><path d={mark.path} /></svg>
+          : Icon ? <Icon className="h-[18px] w-[18px] text-signal-deep" />
+            : <span className="font-display text-sm font-bold text-ink">{label.charAt(0)}</span>}
+      </span>
+      <span className="text-[14px] font-medium text-ink">{label}</span>
+    </li>
+  );
+}
+
+export function IncludedStack() {
+  const { c } = useI18n();
+  const t = c.ui.components.includedStack;
+  const names = t.channelNames as Record<string, string>;
+  return (
+    <div>
+      <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <Heading title={t.title} intro={t.intro} />
+        <ul className="space-y-2">
+          {t.noKeys.map((k) => <li key={k} className="flex items-center gap-2 font-medium text-ink"><Check className="h-4 w-4 text-ok" strokeWidth={3} aria-hidden />{k}</li>)}
+        </ul>
+      </div>
+      <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        {t.groups.map((g) => (
+          <div key={g.key} className={g.key === 'channels' ? 'md:col-span-2' : ''}>
+            <h3 className="font-display text-lg font-semibold text-ink">{g.title}</h3>
+            <p className="mt-1 text-[15px]">{g.text}</p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {(STACK[g.key] ?? []).map((it) => <StackChip key={it.name} item={it} label={names[it.name] ?? it.name} />)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className="mt-8 max-w-prose text-xs text-slate-light">{t.note}</p>
     </div>
   );
 }
@@ -414,66 +494,99 @@ export function planFor(minutes: number, i18n: Pick<ReturnType<typeof getI18n>, 
   return { offer: centre, extra: t.rechargeOrCustom };
 }
 
-// Hypothèse indicative d’accueil humain : coût par appel et durée moyenne d’un appel.
-const SAMPLE_COST = 1.7, SAMPLE_DURATION = 2;
+// Hypothèses du calculateur, affichées sous les résultats.
+const WRAP_UP = 1; // minutes de traitement après chaque appel pour un employé (notes, saisie)
+const CONVERSION = 20; // % des appels manqués rattrapés qui deviennent clients
 
+/** Forfait le moins cher pour un volume donné : prix du forfait + minutes au-delà, au tarif de la minute supplémentaire. */
+export function cheapestPlan(minutes: number, offers: Offer[]) {
+  return offers
+    .filter((o) => o.price && o.extraMinute)
+    .map((o) => {
+      const extra = Math.max(0, Math.ceil(minutes - o.minutesCount));
+      return { offer: o, extra, total: (o.price ?? 0) + extra * (o.extraMinute ?? 0) };
+    })
+    .sort((a, b) => a.total - b.total)[0];
+}
+
+/** Calculateur de retour sur investissement : volume d’appels → forfait, prix réel à la minute, économie et bénéfice. */
 export function EconomyBlock() {
-  const i18n = useI18n();
-  const { c, market, offer, money, num } = i18n;
-  const rec = offer('receptionniste');
-  // Exemple cohérent avec le calculateur : le volume par défaut (appels × durée) tient dans les minutes
-  // du forfait Réceptionniste du marché (ex. 350 min / 2 min → 150 appels, arrondi à la cinquantaine).
-  const sampleCalls = Math.max(50, Math.floor(rec.minutesCount / SAMPLE_DURATION / 50) * 50);
-  const [calls, setCalls] = useState(sampleCalls);
-  const [cost, setCost] = useState(SAMPLE_COST);
-  const [duration, setDuration] = useState(SAMPLE_DURATION);
+  const { c, market, offers, offer, money, num } = useI18n();
   const t = c.ui.components.economy;
-  const human = calls * cost;
-  const minutes = calls * duration;
-  const { offer: plan, extra } = useMemo(() => planFor(minutes, i18n), [minutes, i18n]);
-  // Montant sans décimales inutiles (ex. « 1,7 $ »), dans la devise et le format du marché.
-  const amount = (n: number) => new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'narrowSymbol', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(n);
-  const value = (n: number) => n.toLocaleString(market.numberLocale);
+  const [calls, setCalls] = useState(300);
+  const [duration, setDuration] = useState(3);
+  const [hourly, setHourly] = useState(25);
+  const [missed, setMissed] = useState(20);
+  const [value, setValue] = useState(150);
+
+  const minutes = Math.round(calls * duration);
+  const best = useMemo(() => cheapestPlan(minutes, offers), [minutes, offers]);
+  const custom = offer('sur-mesure');
+  const perMinute = minutes > 0 ? best.total / minutes : 0;
+  const human = (calls * (duration + WRAP_UP) / 60) * hourly;
+  const savings = human - best.total;
+  const missedCalls = Math.round((calls * missed) / 100);
+  const recovered = missedCalls * (CONVERSION / 100) * value;
+  const benefit = savings + recovered;
+  const ratio = (human + recovered) / best.total;
+
+  const fields = [
+    { group: t.yourCalls, items: [
+      { id: 'roi-calls', label: t.callsPerMonth, v: calls, set: setCalls, min: 20, max: 3000, step: 10, show: (n: number) => num(n) },
+      { id: 'roi-dur', label: t.avgDuration, v: duration, set: setDuration, min: 1, max: 10, step: 0.5, show: (n: number) => `${n.toLocaleString(market.numberLocale)}${t.min}` },
+    ] },
+    { group: t.yourCosts, items: [
+      { id: 'roi-hourly', label: t.hourlyCost, v: hourly, set: setHourly, min: 10, max: 60, step: 1, show: (n: number) => `${money(n)}${t.perHour}` },
+      { id: 'roi-missed', label: t.missedRate, v: missed, set: setMissed, min: 0, max: 50, step: 5, show: (n: number) => `${n} %` },
+      { id: 'roi-value', label: t.customerValue, v: value, set: setValue, min: 0, max: 2000, step: 10, show: (n: number) => money(n) },
+    ] },
+  ];
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
-      <div>
-        <Heading title={t.title} intro={t.intro(money(SAMPLE_COST, 2), money(Math.floor((SAMPLE_COST * sampleCalls) / 100) * 100), num(sampleCalls), rec.name, money(rec.price ?? 0), num(rec.minutesCount))} />
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-line bg-white p-5">
-            <p className="font-display font-semibold text-ink">{t.humanTitle}</p>
-            <ul className="mt-3 space-y-1.5 text-[14px]">{t.humanPoints.map((p) => <li key={p}>{p}</li>)}</ul>
-          </div>
-          <div className="rounded-2xl border border-ink bg-ink p-5 text-white/80">
-            <p className="font-display font-semibold text-white">{market.brand}</p>
-            <ul className="mt-3 space-y-1.5 text-[14px]">{t.aiPoints.map((p) => <li key={p}>{p}</li>)}</ul>
-          </div>
+    <div>
+      <Heading title={t.title} intro={t.intro} />
+      <form className="mt-10 grid overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-[1fr_1.1fr]" onSubmit={(e) => e.preventDefault()} aria-label={t.calculator}>
+        <div className="space-y-8 p-6 sm:p-8">
+          {fields.map((g) => (
+            <fieldset key={g.group}>
+              <legend className="font-display font-semibold text-ink">{g.group}</legend>
+              {g.items.map((f) => (
+                <div key={f.id} className="mt-4">
+                  <label htmlFor={f.id} className="flex justify-between gap-4 text-sm text-slate"><span>{f.label}</span><output htmlFor={f.id} className="font-semibold text-ink">{f.show(f.v)}</output></label>
+                  <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0B7F99]" />
+                </div>
+              ))}
+            </fieldset>
+          ))}
         </div>
-        <p className="mt-4 text-sm text-slate-light">{t.disclaimer}</p>
-      </div>
 
-      <form className="rounded-3xl border border-line bg-paper p-6 sm:p-8" onSubmit={(e) => e.preventDefault()} aria-label={t.calculator}>
-        <p className="font-display text-xl font-bold">{t.calculateTitle}</p>
-        {[
-          { id: 'calls', label: t.callsPerMonth, v: calls, set: setCalls, min: 20, max: 2000, step: 10, show: value },
-          { id: 'cost', label: t.costPerCall, v: cost, set: setCost, min: 0.5, max: 5, step: 0.1, show: amount },
-          { id: 'dur', label: t.avgDuration, v: duration, set: setDuration, min: 1, max: 8, step: 0.5, show: (n: number) => `${value(n)}${t.min}` },
-        ].map((f) => (
-          <div key={f.id} className="mt-5">
-            <label htmlFor={f.id} className="flex justify-between text-sm font-semibold text-ink"><span>{f.label}</span><output htmlFor={f.id}>{f.show(f.v)}</output></label>
-            <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0FA3C4]" />
+        <div className="bg-ink p-6 text-white/75 sm:p-8" aria-live="polite">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-5 border-b border-white/10 pb-6">
+            <div><p className="text-sm">{t.minutesMonth}</p><p className="font-display text-2xl font-bold text-white">{num(minutes)}</p></div>
+            <div><p className="text-sm">{t.effectivePerMinute}</p><p className="font-display text-2xl font-bold text-signal-glow">{money(perMinute, 3)}</p></div>
+            <div className="col-span-2">
+              <p className="text-sm">{t.bestPlan}</p>
+              <p className="font-display text-xl font-bold text-white">{best.offer.name} — {money(best.total)}{t.perMonth}</p>
+              {best.extra > 0 && <p className="text-sm">{t.withExtra(num(best.extra), money(best.offer.extraMinute ?? 0, 2))}</p>}
+              {minutes > custom.minutesCount && <p className="text-sm text-signal-glow">{t.customAbove(num(custom.minutesCount))}</p>}
+            </div>
           </div>
-        ))}
-        <div className="mt-6 grid grid-cols-2 gap-3">
-          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">{t.humanCost}</p><p className="font-display text-2xl font-bold text-ink">{money(human)}</p></div>
-          <div className="rounded-xl bg-white p-4"><p className="text-xs text-slate">{t.callVolume}</p><p className="font-display text-2xl font-bold text-ink">{num(minutes)}{t.min}</p></div>
-        </div>
-        <div className="mt-3 rounded-xl bg-ink p-4 text-white">
-          <p className="text-xs text-white/60">{t.suitedPlan}</p>
-          <p className="font-display text-lg font-bold">{plan.name}{plan.price ? t.perMonth(money(plan.price)) : ''}{extra}</p>
-          <p className="text-xs text-white/60">{plan.minutes}</p>
+          <dl className="space-y-3 py-6 text-[15px]">
+            <div className="flex justify-between gap-4"><dt>{t.humanCost}</dt><dd className="font-semibold text-white">{money(human)}{t.perMonth}</dd></div>
+            <div className="flex justify-between gap-4"><dt>{t.planCost(best.offer.name)}</dt><dd className="font-semibold text-white">− {money(best.total)}</dd></div>
+            <div className="flex justify-between gap-4 border-t border-white/10 pt-3"><dt>{t.savings}</dt><dd className="font-semibold text-white">{money(savings)}</dd></div>
+            {savings < 0 && <p className="text-sm">{t.noSavings}</p>}
+            <div className="flex justify-between gap-4"><dt>{t.recovered}<span className="block text-sm text-white/55">{t.recoveredDetail(num(missedCalls))}</span></dt><dd className="font-semibold text-white">+ {money(recovered)}</dd></div>
+          </dl>
+          <div className="rounded-2xl bg-white/[.06] p-5">
+            <p className="text-sm">{t.netBenefit}</p>
+            <p className="font-display text-[2.5rem] font-bold leading-tight text-white">{money(benefit)}<span className="text-lg font-semibold text-white/60">{t.perMonth}</span></p>
+            {ratio > 1 && <p className="mt-1 text-sm text-signal-glow">{t.roi(ratio.toLocaleString(market.numberLocale, { maximumFractionDigits: 1 }))}</p>}
+          </div>
+          <Link href={SIGNUP_URL} className="btn-signal mt-6 w-full justify-center">{t.cta}</Link>
         </div>
       </form>
+      <p className="mt-4 max-w-prose text-sm text-slate-light">{t.assumptions(WRAP_UP, CONVERSION)}</p>
     </div>
   );
 }
@@ -547,7 +660,7 @@ export function IntegrationsGrid({ max }: { max?: number }) {
 /* ---------- CTA final ---------- */
 
 export function FinalCTA({ title, sector }: { title?: string; sector?: string }) {
-  const { c, market } = useI18n();
+  const { c, market, money } = useI18n();
   const t = c.ui.components.finalCta;
   return (
     <Section tone="paper">
@@ -563,7 +676,7 @@ export function FinalCTA({ title, sector }: { title?: string; sector?: string })
           <CallbackForm compact sector={sector} />
         </div>
       </div>
-      <p className="mt-6 text-center text-sm text-slate-light">{c.site.priceNote}</p>
+      <p className="mt-6 text-center text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p>
     </Section>
   );
 }

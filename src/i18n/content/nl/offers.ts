@@ -20,23 +20,23 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-receptionist die elk gesprek aanneemt, 24 uur per dag',
     pitch: 'Met het Receptionist-abonnement worden uw gesprekken aangenomen, veelgestelde vragen beantwoord, afspraken ingepland en ontvangt u van elke aanvraag een duidelijke samenvatting. Eenvoudig in te stellen, zonder gedoe.',
     cta: 'Kies Receptionist',
-    highlights: ['AI-receptionist 24/7', 'Gekoppelde agenda', 'Webwidget voor terugbellen', 'Doorverbinden naar een medewerker'],
+    highlights: ['AI-receptionist 24/7', 'Gekoppelde agenda', 'Webwidget, sms en WhatsApp', 'Doorverbinden naar een medewerker', '2 gelijktijdige gesprekken'],
   },
   assistant: {
     name: 'Assistent',
     audience: 'Lokale bedrijven met een vast belvolume',
     title: 'Een AI-assistent die uw aanvragen kwalificeert, opvolgt en automatiseert',
-    pitch: 'Het Assistent-abonnement voegt leadkwalificatie, opvolgcampagnes, sms- en WhatsApp-berichten, de flow builder en uw eigen nummers via SIP toe, zodat u meer aanvragen omzet in klanten.',
+    pitch: 'Het Assistent-abonnement voegt drie agents, opvolgcampagnes, de flow builder gekoppeld aan meer dan 300 tools en een gekloonde stem toe, zodat u meer aanvragen omzet in klanten.',
     cta: 'Kies Assistent',
-    highlights: ['Alles van Receptionist', 'Flow builder en automatiseringen', 'Campagnes en leads', 'Sms, WhatsApp en Instagram', 'Uw eigen nummers via SIP'],
+    highlights: ['Alles van Receptionist', '3 agents, 5 gelijktijdige gesprekken', 'Flow builder en automatiseringen', 'Opvolgcampagnes', '1 gekloonde stem'],
   },
   'centre-appels': {
     name: 'Callcenter',
     audience: 'Teams, meerdere afdelingen en grote volumes',
     title: 'Een volledig AI-callcenter voor ontvangst, afspraken en support',
-    pitch: 'Het Callcenter-abonnement combineert meerdere agents, uitgebreide rapporten, rollen, de geavanceerde kennisbank, API’s en prioriteitssupport, met de laagste prijs per minuut.',
+    pitch: 'Het Callcenter-abonnement heft de limieten op: onbeperkt agents en campagnes, 20 gelijktijdige gesprekken, eigen dashboards, prioriteitssupport en de laagste prijs per minuut.',
     cta: 'Kies Callcenter',
-    highlights: ['Alles van Assistent', 'Meerdere agents en rollen', 'Uitgebreide rapporten', 'API, webhooks en MCP-tools', 'Prioriteitssupport', '3.000 berichtcredits inbegrepen ($ 30)'],
+    highlights: ['Alles van Assistent', 'Onbeperkt agents en campagnes', '20 gelijktijdige gesprekken', 'Eigen dashboards', 'Prioriteitssupport', '3.000 berichtcredits inbegrepen ($ 30)'],
   },
   'sur-mesure': {
     name: 'Maatwerk',
@@ -63,61 +63,67 @@ export const OFFER_LABELS = {
 // Functiematrix: elke regel komt overeen met een pagina of functie in de klantomgeving.
 // Waarden: true = inbegrepen, false = niet inbegrepen, tekst = niveau.
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
+const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
+// Limieten overgenomen uit de beheeromgeving van de klantomgeving (abonnementen Receptionist 1646, Assistant 1647, Call Centre 1648
+// en proefperiode): elke wijziging van een abonnement in de beheeromgeving moet hier worden doorgevoerd, en omgekeerd.
 export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agents en gesprekken',
     rows: [
-      { label: 'AI-spraakassistenten', detail: 'Inkomende en uitgaande agents', cells: { decouverte: '1 testagent', receptionniste: '1', assistant: '3', 'centre-appels': 'Meerdere agents', 'sur-mesure': 'Maatwerk' } },
-      { label: 'Gespreksgeschiedenis', detail: 'Opnames, transcripties, samenvattingen', cells: { ...all(true), decouverte: 'Beperkt' } },
-      { label: 'Conversaties', detail: 'Geschreven en gesproken contact op één plek', cells: all(true) },
-      { label: 'Doorverbinden naar een medewerker', detail: 'Overdracht naar uw team', cells: all(true) },
-      { label: 'Meertalige stemmen', detail: 'Herkenning van extra talen', cells: all(true) },
+      { label: 'AI-spraakagents', detail: 'Aantal agents dat u kunt aanmaken, inkomend of uitgaand.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
+      { label: 'Gelijktijdige gesprekken', detail: 'Gesprekken die tegelijk worden afgehandeld: niemand hoeft te wachten, ook niet op piekmomenten.', cells: { decouverte: '1', receptionniste: '2', assistant: '5', 'centre-appels': '20', 'sur-mesure': 'Op maat' } },
+      { label: 'Gespreksgeschiedenis', detail: 'Opnames, transcripties en samenvattingen van elk gesprek.', cells: all(true) },
+      { label: 'Doorverbinden naar een medewerker', detail: 'De agent verbindt het gesprek door naar uw team wanneer dat nodig is.', cells: all(true) },
+      { label: 'Extra talen', detail: 'De agent herkent de taal van de beller en antwoordt in diens taal.', cells: all(true) },
+      { label: 'Gekloonde stemmen', detail: 'Een stem die is gemaakt op basis van een opname van uw eigen stem.', cells: { decouverte: false, receptionniste: false, assistant: '1', 'centre-appels': '3', 'sur-mesure': 'Op maat' } },
     ],
   },
   {
     group: 'Instellingen van de agent',
     rows: [
-      { label: 'AI-prompteditor', detail: 'Gedrag, toon, regels', cells: { decouverte: 'Kennismaking', receptionniste: 'Vereenvoudigd', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Kennisbank', detail: 'Pdf’s, webpagina’s, procedures', cells: { decouverte: 'Basis', receptionniste: 'Basis', assistant: true, 'centre-appels': 'Geavanceerd', 'sur-mesure': 'Geavanceerd' } },
-      { label: 'Flow builder', detail: 'Visuele scenario’s zonder code', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Geavanceerd', 'sur-mesure': 'Geavanceerd' } },
-      { label: 'Automatiseringen', detail: 'Meer dan 300 koppelbare tools', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'AI-prompteditor', detail: 'Een schrijfassistent stelt het gedrag, de toon en de regels van de agent in.', cells: all(true) },
+      { label: 'Kennisbanken', detail: 'Pdf’s, webpagina’s en procedures die de agent tijdens het gesprek raadpleegt.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
+      { label: 'Tools tijdens het gesprek', detail: 'Live uitgevoerde acties: beschikbaarheid controleren, een dossier opzoeken, uw software raadplegen.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
+      { label: 'Flow builder', detail: 'Visuele scenario’s zonder code: triggers, voorwaarden en acties.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Automatiseringsplatform', detail: 'Meer dan 300 koppelbare tools: CRM, Google Sheets, Slack, e-mail…', cells: { decouverte: false, receptionniste: false, assistant: '5.000 runs / maand', 'centre-appels': '50.000 runs / maand', 'sur-mesure': 'Op maat' } },
+      { label: 'AI-connector', detail: 'Voeg een AI-stap toe aan uw automatiseringen (sorteren, samenvatten, schrijven).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
-    group: 'Agenda en leadcaptatie',
+    group: 'Agenda en vastleggen',
     rows: [
-      { label: 'Agendakoppeling', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
-      { label: 'Webwidget', detail: 'Terugbellen en bellen vanaf uw website', cells: all(true) },
-      { label: 'Nummerherkenning', detail: 'Caller ID-knop', cells: { ...all(true), decouverte: false } },
-      { label: 'Leads en voorkwalificatie', detail: 'Gestructureerde prospectkaarten', cells: { decouverte: false, receptionniste: 'Basis', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Agenda-integratie', detail: 'Google, Outlook, Cal.com, Calendly: de agent boekt rechtstreeks in uw agenda.', cells: all(true) },
+      { label: 'Webwidget', detail: 'Bel- en terugbelknop voor op uw website.', cells: all(true) },
+      { label: 'Leads', detail: 'Prospectkaarten die op basis van gesprekken worden aangemaakt.', cells: all(true) },
     ],
   },
   {
     group: 'Berichten en campagnes',
     rows: [
-      { label: 'Uitgaande campagnes', detail: 'Opvolging, bevestigingen, herinneringen', cells: { decouverte: false, receptionniste: false, assistant: 'Begrensd', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Sms-geschiedenis', detail: 'Verzonden berichten en antwoorden', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'WhatsApp', detail: 'Afzenders en templates', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Messenger en Instagram', detail: 'Berichtenkanalen', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Uitgaande campagnes', detail: 'Opvolging, bevestigingen en herinneringen die automatisch worden gebeld.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
+      { label: 'Sms en WhatsApp', detail: 'Geschreven contact op één plek, betaald met berichtcredits.', cells: all(true) },
+      { label: 'Messenger en Instagram', detail: 'Berichten van sociale netwerken in dezelfde inbox.', cells: all(true) },
+      { label: 'Inbegrepen berichtcredits', detail: 'Maandelijks gratis credits voor de geschreven antwoorden van de AI.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3.000 ($ 30)', 'sur-mesure': 'Op maat' } },
     ],
   },
   {
     group: 'Telefonie',
     rows: [
-      { label: 'Eigen nummer', detail: 'Optie, per maand gefactureerd, afhankelijk van het land', cells: { decouverte: false, receptionniste: 'Optioneel', assistant: 'Optioneel', 'centre-appels': 'Optioneel', 'sur-mesure': 'Optioneel' } },
-      { label: 'SIP-koppeling', detail: 'Uw nummers en uw telefooncentrale', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Blokkeerlijst', detail: 'Nummers die niet gebeld worden', cells: { ...all(true), decouverte: false } },
+      { label: 'Telefoonnummers', detail: 'Eigen nummers die u in uw klantomgeving koopt, per maand gefactureerd afhankelijk van het land.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Op maat' } },
+      { label: 'SIP-koppeling', detail: 'Behoud uw nummers en telefooncentrale: SIP-koppeling, import via Twilio of Telnyx.', cells: all(true) },
+      { label: 'Uw eigen mobiele nummer als nummerweergave', detail: 'Verifieer uw nummer zodat het bij uitgaande gesprekken wordt weergegeven.', cells: paid(true) },
+      { label: 'Blokkeerlijst', detail: 'Nummers die de agent nooit belt.', cells: all(true) },
     ],
   },
   {
-    group: 'Sturing en team',
+    group: 'Sturing en integraties',
     rows: [
-      { label: 'Uitgebreide rapporten', detail: 'Volumes, gespreksduur, conversies', cells: { decouverte: false, receptionniste: 'Dashboard', assistant: 'Dashboard', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Rollen en rechten', detail: 'Toegang per teamlid', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'API, webhooks en MCP-tools', detail: 'Koppeling met uw systemen', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Regels voor meerdere vestigingen en SLA', detail: 'Meerdere vestigingen', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
-      { label: 'Support', detail: 'Begeleiding', cells: { decouverte: 'Hulpbronnen', receptionniste: 'Standaard', assistant: 'Standaard', 'centre-appels': 'Prioriteit', 'sur-mesure': 'Persoonlijk' } },
+      { label: 'Gespreksstatistieken', detail: 'Volumes, duur en resultaten op uw dashboard.', cells: all(true) },
+      { label: 'Eigen dashboards', detail: 'Uw eigen indicatoren, samengesteld uit de gegevens van uw gesprekken.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'API en webhooks', detail: 'Ontvang elk afgerond gesprek in uw systemen, of stuur de agent aan vanuit uw software.', cells: all(true) },
+      { label: 'Regels voor meerdere vestigingen en SLA', detail: 'Meerdere vestigingen, serviceafspraken.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
+      { label: 'Support', detail: 'Begeleiding door ons team.', cells: { decouverte: 'Hulpbronnen', receptionniste: 'Standaard', assistant: 'Standaard', 'centre-appels': 'Prioriteit', 'sur-mesure': 'Persoonlijk' } },
     ],
   },
 ];

@@ -314,8 +314,8 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     api: {
       title: { before: 'Webhooki i API dla ', kw: 'Twoich systemów', after: '' },
-      text: 'W pakiecie Call center otrzymujesz każde zakończenie rozmowy wraz z wyodrębnionymi danymi we własnych systemach lub sterujesz agentem z poziomu swojego oprogramowania.',
-      points: ['Webhook po każdej rozmowie', 'Wyodrębnione zmienne: wynik, zainteresowanie, termin', 'Narzędzia MCP dla Twoich asystentów'],
+      text: 'We wszystkich pakietach otrzymujesz każde zakończenie rozmowy wraz z wyodrębnionymi danymi we własnych systemach lub sterujesz agentem z poziomu swojego oprogramowania.',
+      points: ['Webhook po każdej rozmowie', 'Wyodrębnione zmienne: wynik, zainteresowanie, termin', 'Narzędzia w trakcie rozmowy, od pakietu Asystent'],
     },
   },
 };

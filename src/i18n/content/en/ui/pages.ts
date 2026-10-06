@@ -228,10 +228,10 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: 'Article 3 — 14-day Peace of Mind Guarantee',
+        title: 'Article 3 — Free trial, no cancellation right and no refunds',
         body: [
-          { p: [`In addition to any rights you have by law, ${brand} offers, as a commercial gesture, a `, { strong: 'full refund guarantee within 14 days' }, ' of the first paid subscription.'] },
-          { p: ['On simple notification by email to ', { strong: email }, ' within 14 days of the first payment, the full monthly fee is refunded with no reason required.'] },
+          { p: 'Contracts concluded between businesses do not carry the cancellation (cooling-off) right that applies to consumers. The 14-day free trial lets the customer test the service before any payment and cancel it at no cost before it ends.' },
+          { p: [{ strong: 'Once a period has been paid for, it is non-refundable' }, ', even in part, as the service and minutes are made available from the start of the period. Purchased credit (top-ups) is not refundable either; it never expires. The customer may cancel at any time for subsequent periods (Article 4). Nothing in this article limits any rights the customer has under applicable law that cannot be excluded.'] },
         ],
       },
       {

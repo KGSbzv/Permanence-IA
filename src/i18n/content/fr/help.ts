@@ -23,7 +23,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Add credits', label: 'Ajouter du crédit', text: 'Acheter une recharge de minutes ; le crédit ne périme pas.' },
   { en: 'Billing info', label: 'Facturation', text: 'Moyen de paiement, factures, abonnement et annulation.' },
   { en: 'Limits', label: 'Limites', text: 'Ce que votre forfait autorise : agents, appels simultanés, fonctions.' },
-  { en: 'API Keys', label: 'Clés API', text: 'Connecter vos propres logiciels (forfait Centre d’appels).' },
+  { en: 'API Keys', label: 'Clés API', text: 'Connecter vos propres logiciels (tous les forfaits).' },
   { en: 'My profile / Security', label: 'Profil / Sécurité', text: 'Vos informations, mot de passe et double authentification.' },
 ];
 
@@ -52,7 +52,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'Le plus simple : achetez un numéro dans Get new phone number, puis dans l’agent (General → Phone number) sélectionnez-le.',
       'Pour garder votre numéro actuel : activez chez votre opérateur un renvoi d’appel vers ce nouveau numéro.',
-      'Vous avez déjà Twilio, Telnyx ou un standard SIP : Your phone numbers, puis import ou SIP (forfait Assistant et plus).',
+      'Vous avez déjà Twilio, Telnyx ou un standard SIP : Your phone numbers, puis import ou SIP (tous les forfaits).',
     ],
   },
   {

@@ -317,8 +317,8 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     api: {
       title: { before: 'Webhook e API per ', kw: 'i Suoi sistemi', after: '' },
-      text: 'Con il piano Call Center, riceva ogni fine chiamata e i relativi dati estratti nei Suoi sistemi, oppure gestisca l’agente dal Suo software.',
-      points: ['Webhook dopo ogni chiamata', 'Variabili estratte: esito, interesse, fascia oraria', 'Strumenti MCP per i Suoi assistenti'],
+      text: 'Su tutti i piani, riceva ogni fine chiamata e i relativi dati estratti nei Suoi sistemi, oppure gestisca l’agente dal Suo software.',
+      points: ['Webhook dopo ogni chiamata', 'Variabili estratte: esito, interesse, fascia oraria', 'Strumenti durante la chiamata, dal piano Assistant'],
     },
   },
 };

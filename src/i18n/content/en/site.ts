@@ -3,7 +3,7 @@ export const SITE_TEXT = {
   trialLine: (days: number, minutes: number) => `${days}-day free trial — ${minutes} minutes included — prices excl. tax — no commitment`,
   trialBadges: (days: number, minutes: number) => [`${days}-day free trial`, `${minutes} minutes included`, 'Nothing charged during the trial', 'No commitment'],
   growthLines: ['Add minutes at any time', 'Move up a plan when your volume grows'],
-  priceNote: 'Prices in US dollars (USD), excl. tax — local taxes added where applicable. A dedicated phone number is optional and billed monthly.',
+  priceNote: (numberFrom: string) => `Prices in US dollars (USD), excl. tax — local taxes added where applicable. Dedicated number from ${numberFrom} excl. tax per month, depending on the country.`,
   skipToContent: 'Skip to content',
   languageLabel: 'Language',
   rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',

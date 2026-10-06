@@ -316,8 +316,8 @@ export const UI_COMMERCE = {
     },
     api: {
       title: { before: 'Webhooks en API voor ', kw: 'uw systemen', after: '' },
-      text: 'Met het Callcenter-abonnement ontvangt u na elk gesprek de geëxtraheerde gegevens in uw eigen systemen, of stuurt u de agent aan vanuit uw software.',
-      points: ['Webhook na elk gesprek', 'Geëxtraheerde variabelen: resultaat, interesse, tijdslot', 'MCP-tools voor uw assistenten'],
+      text: 'In alle abonnementen ontvangt u na elk gesprek de geëxtraheerde gegevens in uw eigen systemen, of stuurt u de agent aan vanuit uw software.',
+      points: ['Webhook na elk gesprek', 'Geëxtraheerde variabelen: resultaat, interesse, tijdslot', 'Tools tijdens het gesprek, vanaf het Assistent-abonnement'],
     },
   },
 };

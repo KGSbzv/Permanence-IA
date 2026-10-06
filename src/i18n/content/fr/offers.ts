@@ -26,23 +26,23 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
     cta: 'Choisir Réceptionniste',
-    highlights: ['Réceptionniste IA 24/7', 'Agenda connecté', 'Widget web de rappel', 'Transfert vers un humain'],
+    highlights: ['Réceptionniste IA 24/7', 'Agenda connecté', 'Widget web, SMS et WhatsApp', 'Transfert vers un humain', '2 appels simultanés'],
   },
   assistant: {
     name: 'Assistant',
     audience: 'Entreprises locales à volume régulier',
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
-    pitch: 'Le forfait Assistant ajoute la qualification des leads, les campagnes de relance, les messages SMS et WhatsApp, le flow builder et vos propres numéros via SIP, pour convertir plus de demandes.',
+    pitch: 'Le forfait Assistant ajoute trois agents, les campagnes de relance, le flow builder relié à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
-    highlights: ['Tout Réceptionniste', 'Flow builder et automatisations', 'Campagnes et leads', 'SMS, WhatsApp et Instagram', 'Vos numéros via SIP'],
+    highlights: ['Tout Réceptionniste', '3 agents, 5 appels simultanés', 'Flow builder et automatisations', 'Campagnes de relance', '1 voix clonée'],
   },
   'centre-appels': {
     name: 'Centre d’appels',
     audience: 'Équipes, multi-services et gros volumes',
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
-    pitch: 'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
+    pitch: 'Le forfait Centre d’appels lève les limites : agents et campagnes illimités, 20 appels simultanés, tableaux de bord personnalisés, support prioritaire et le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
-    highlights: ['Tout Assistant', 'Multi-agents et rôles', 'Rapports détaillés', 'API, webhooks et outils MCP', 'Support prioritaire', '3 000 crédits de messages inclus (30 $)'],
+    highlights: ['Tout Assistant', 'Agents et campagnes illimités', '20 appels simultanés', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages inclus (30 $)'],
   },
   'sur-mesure': {
     name: 'Sur mesure',
@@ -73,61 +73,67 @@ export interface MatrixRow { label: string; detail: string; cells: Record<PlanSl
 export interface MatrixGroup { group: string; rows: MatrixRow[] }
 
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
+const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
+// Limites relevées dans l’admin de l’espace client (forfaits Receptionist 1646, Assistant 1647, Call Centre 1648
+// et essai) : toute modification d’un forfait dans l’admin doit être reportée ici, et inversement.
 export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agents et appels',
     rows: [
-      { label: 'Assistants vocaux IA', detail: 'Agents entrants et sortants', cells: { decouverte: '1 de test', receptionniste: '1', assistant: '3', 'centre-appels': 'Multi-agents', 'sur-mesure': 'Sur mesure' } },
-      { label: 'Historique des appels', detail: 'Enregistrements, transcriptions, résumés', cells: { ...all(true), decouverte: 'Limité' } },
-      { label: 'Conversations', detail: 'Échanges écrits et vocaux centralisés', cells: all(true) },
-      { label: 'Transfert vers un humain', detail: 'Bascule vers votre équipe', cells: all(true) },
-      { label: 'Voix multilingues', detail: 'Langues secondaires détectées', cells: all(true) },
+      { label: 'Agents vocaux IA', detail: 'Nombre d’agents que vous pouvez créer, entrants ou sortants.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Illimités', 'sur-mesure': 'Illimités' } },
+      { label: 'Appels simultanés', detail: 'Appels traités en même temps : personne n’attend, même aux heures de pointe.', cells: { decouverte: '1', receptionniste: '2', assistant: '5', 'centre-appels': '20', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Historique des appels', detail: 'Enregistrements, transcriptions et résumés de chaque appel.', cells: all(true) },
+      { label: 'Transfert vers un humain', detail: 'L’agent bascule l’appel vers votre équipe quand c’est nécessaire.', cells: all(true) },
+      { label: 'Langues secondaires', detail: 'L’agent détecte la langue de l’appelant et lui répond dans sa langue.', cells: all(true) },
+      { label: 'Voix clonées', detail: 'Une voix créée à partir d’un enregistrement de la vôtre.', cells: { decouverte: false, receptionniste: false, assistant: '1', 'centre-appels': '3', 'sur-mesure': 'Sur mesure' } },
     ],
   },
   {
     group: 'Configuration de l’agent',
     rows: [
-      { label: 'Éditeur de prompts IA', detail: 'Comportement, ton, règles', cells: { decouverte: 'Aperçu', receptionniste: 'Simplifié', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Base de connaissances', detail: 'PDF, pages web, procédures', cells: { decouverte: 'Basique', receptionniste: 'Basique', assistant: true, 'centre-appels': 'Avancée', 'sur-mesure': 'Avancée' } },
-      { label: 'Flow builder', detail: 'Scénarios visuels sans code', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Avancé', 'sur-mesure': 'Avancé' } },
-      { label: 'Automatisations', detail: 'Plus de 300 outils connectables', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Éditeur de prompts IA', detail: 'Un assistant de rédaction règle le comportement, le ton et les règles de l’agent.', cells: all(true) },
+      { label: 'Bases de connaissances', detail: 'PDF, pages web et procédures que l’agent consulte pendant l’appel.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
+      { label: 'Outils pendant l’appel', detail: 'Actions déclenchées en direct : vérifier une disponibilité, consulter un dossier, interroger votre logiciel.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Illimités', 'sur-mesure': 'Illimités' } },
+      { label: 'Flow builder', detail: 'Scénarios visuels sans code : déclencheurs, conditions et actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Plateforme d’automatisation', detail: 'Plus de 300 outils connectables : CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5 000 exécutions / mois', 'centre-appels': '50 000 exécutions / mois', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Connecteur IA', detail: 'Branche une étape d’IA dans vos automatisations (tri, résumé, rédaction).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
     group: 'Agenda et capture',
     rows: [
-      { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
-      { label: 'Widget web', detail: 'Rappel et appel depuis votre site', cells: all(true) },
-      { label: 'Identification de l’appelant', detail: 'Bouton caller ID', cells: { ...all(true), decouverte: false } },
-      { label: 'Leads et préqualification', detail: 'Fiches prospects structurées', cells: { decouverte: false, receptionniste: 'Basique', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly : l’agent réserve dans votre agenda.', cells: all(true) },
+      { label: 'Widget web', detail: 'Bouton d’appel et de rappel à poser sur votre site.', cells: all(true) },
+      { label: 'Leads', detail: 'Fiches prospects créées à partir des appels.', cells: all(true) },
     ],
   },
   {
     group: 'Messages et campagnes',
     rows: [
-      { label: 'Campagnes sortantes', detail: 'Relances, confirmations, rappels', cells: { decouverte: false, receptionniste: false, assistant: 'Encadrées', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Historique SMS', detail: 'Envois et réponses', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'WhatsApp', detail: 'Expéditeurs et templates', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Messenger et Instagram', detail: 'Canaux de messagerie', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Campagnes sortantes', detail: 'Relances, confirmations et rappels appelés automatiquement.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
+      { label: 'SMS et WhatsApp', detail: 'Échanges écrits centralisés, payés avec les crédits de messages.', cells: all(true) },
+      { label: 'Messenger et Instagram', detail: 'Messages des réseaux sociaux dans la même boîte.', cells: all(true) },
+      { label: 'Crédits de messages inclus', detail: 'Crédits offerts chaque mois pour les réponses écrites de l’IA.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Sur mesure' } },
     ],
   },
   {
     group: 'Téléphonie',
     rows: [
-      { label: 'Numéro dédié', detail: 'Option facturée au mois, selon le pays', cells: { decouverte: false, receptionniste: 'En option', assistant: 'En option', 'centre-appels': 'En option', 'sur-mesure': 'En option' } },
-      { label: 'Intégration SIP', detail: 'Vos numéros et votre standard', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Liste de blocage', detail: 'Numéros exclus des appels', cells: { ...all(true), decouverte: false } },
+      { label: 'Numéros de téléphone', detail: 'Numéros dédiés achetés depuis votre espace, facturés au mois selon le pays.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Connexion SIP', detail: 'Gardez vos numéros et votre standard : connexion SIP, import Twilio ou Telnyx.', cells: all(true) },
+      { label: 'Votre propre mobile en présentation', detail: 'Vérifiez votre numéro pour qu’il s’affiche lors des appels sortants.', cells: paid(true) },
+      { label: 'Liste de blocage', detail: 'Numéros que l’agent n’appelle jamais.', cells: all(true) },
     ],
   },
   {
-    group: 'Pilotage et équipe',
+    group: 'Pilotage et intégrations',
     rows: [
-      { label: 'Rapports détaillés', detail: 'Volumes, durées, conversions', cells: { decouverte: false, receptionniste: 'Tableau de bord', assistant: 'Tableau de bord', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Rôles et permissions', detail: 'Accès par membre de l’équipe', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'API, webhooks et outils MCP', detail: 'Connexion à vos systèmes', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Règles multi-sites et SLA', detail: 'Plusieurs établissements', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
-      { label: 'Support', detail: 'Accompagnement', cells: { decouverte: 'Ressources', receptionniste: 'Standard', assistant: 'Standard', 'centre-appels': 'Prioritaire', 'sur-mesure': 'Dédié' } },
+      { label: 'Statistiques des appels', detail: 'Volumes, durées et résultats sur votre tableau de bord.', cells: all(true) },
+      { label: 'Tableaux de bord personnalisés', detail: 'Vos propres indicateurs, composés à partir des données de vos appels.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'API et webhooks', detail: 'Recevez chaque fin d’appel dans vos systèmes, ou pilotez l’agent depuis votre logiciel.', cells: all(true) },
+      { label: 'Règles multi-sites et SLA', detail: 'Plusieurs établissements, engagements de service.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
+      { label: 'Support', detail: 'Accompagnement par notre équipe.', cells: { decouverte: 'Ressources', receptionniste: 'Standard', assistant: 'Standard', 'centre-appels': 'Prioritaire', 'sur-mesure': 'Dédié' } },
     ],
   },
 ];

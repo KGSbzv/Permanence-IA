@@ -228,10 +228,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         ],
       },
       {
-        title: 'Articolo 3 — Garanzia Serenità 14 giorni',
+        title: 'Articolo 3 — Prova gratuita, assenza di recesso e di rimborso',
         body: [
-          { p: [`Oltre ai diritti previsti dalla legge, ${brand} concede a titolo commerciale una `, { strong: 'garanzia di rimborso integrale entro 14 giorni' }, ' dalla prima sottoscrizione a pagamento.'] },
-          { p: ['Con una semplice comunicazione via email a ', { strong: email }, ' entro 14 giorni dal primo pagamento, l’intera mensilità viene rimborsata senza necessità di motivazione.'] },
+          { p: 'I contratti conclusi tra professionisti non beneficiano del diritto di recesso previsto per i consumatori. La prova gratuita di 14 giorni consente al cliente di testare il servizio prima di qualsiasi pagamento e di annullarlo senza costi prima della sua scadenza.' },
+          { p: [{ strong: 'Una volta pagato, un periodo non è rimborsabile' }, ', nemmeno parzialmente, poiché il servizio e i minuti sono messi a disposizione fin dall’inizio del periodo. Anche il credito acquistato (ricariche) non è rimborsabile; non scade. La disdetta resta possibile in qualsiasi momento per i periodi successivi (articolo 4).'] },
         ],
       },
       {

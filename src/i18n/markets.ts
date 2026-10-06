@@ -57,7 +57,7 @@ export interface Market {
   plans: Record<PlanSlug, PlanPricing>;
   /** Montants des recharges de crédit proposées. */
   recharges: number[];
-  /** Prix d’appel indicatif d’un numéro dédié (par mois), affiché comme « à partir de ». */
+  /** Prix de vente minimum d’un numéro dédié (par mois), affiché « à partir de » : coût Autocalls + 2 $. */
   phoneNumberFrom: number;
   trial: { days: number; minutes: number };
   legal: MarketLegal;
@@ -78,7 +78,7 @@ const basePlans = (): Record<PlanSlug, PlanPricing> => ({
 const baseRecharges = () => [39, 89, 159, 299, 725];
 // Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL).
 const SALES_WIDGET = '2841fa2d-1fed-4fbc-b832-28b954d049a6';
-const SHARED = { currency: 'USD' as const, phoneNumberFrom: 3.99, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1648 } };
+const SHARED = { currency: 'USD' as const, phoneNumberFrom: 5.99, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1648 } };
 
 export const MARKETS: Record<Locale, Market> = {
   fr: {

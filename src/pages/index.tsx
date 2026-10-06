@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
 import { CTAs, FaqDark, Heading, Photo, Section, TrialBadges } from '@/components/ui';
 import {
-  Benefits, DemoBlock, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IntegrationsGrid, PricingCards,
+  Benefits, DemoBlock, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IncludedStack, IntegrationsGrid, PricingCards,
   SectorCards, SecurityBlock, Steps, VoicesNumbers,
 } from '@/components/blocks';
 import {
@@ -149,7 +149,9 @@ export default function Home() {
 
       <Section><EconomyBlock /></Section>
 
-      <Section tone="paper"><SecurityBlock /></Section>
+      <Section tone="paper"><IncludedStack /></Section>
+
+      <Section><SecurityBlock /></Section>
 
       {/* FAQ */}
       <Section>

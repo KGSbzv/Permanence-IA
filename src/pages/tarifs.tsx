@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { EconomyBlock, FinalCTA, GrowthBlock, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
+import { EconomyBlock, FinalCTA, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
@@ -37,15 +37,18 @@ export default function Tarifs() {
           <Heading as="h1" center title={t.hero.title} intro={t.hero.intro(days, minutes)} />
           <TrialBadges className="mt-6 justify-center" />
           <div className="mt-12 text-left"><PricingCards /></div>
-          <p className="mt-6 text-sm text-slate-light">{c.site.priceNote} {t.hero.moreMinutes}</p>
+          <p className="mt-6 text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))} {t.hero.moreMinutes}</p>
         </div>
       </section>
 
       <Section id="comparatif">
         <Heading title={t.matrix.title} intro={t.matrix.intro} />
         <div className="mt-10"><MatrixTable /></div>
-
       </Section>
+
+      <Section tone="paper"><IncludedStack /></Section>
+
+      <Section><EconomyBlock /></Section>
 
       <Section tone="paper" id="recharges">
         <Heading title={t.recharges.title} intro={t.recharges.intro} />
@@ -54,8 +57,6 @@ export default function Tarifs() {
       </Section>
 
       <Section><GrowthBlock /></Section>
-
-      <Section tone="paper"><EconomyBlock /></Section>
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">

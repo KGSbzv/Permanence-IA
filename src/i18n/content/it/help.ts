@@ -22,7 +22,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Add credits', label: 'Aggiungere credito', text: 'Acquistare una ricarica di minuti; il credito non scade.' },
   { en: 'Billing info', label: 'Fatturazione', text: 'Metodo di pagamento, fatture, abbonamento e annullamento.' },
   { en: 'Limits', label: 'Limiti', text: 'Cosa consente il Suo piano: agenti, chiamate simultanee, funzioni.' },
-  { en: 'API Keys', label: 'Chiavi API', text: 'Collegare i Suoi software (piano Call Center).' },
+  { en: 'API Keys', label: 'Chiavi API', text: 'Collegare i Suoi software (tutti i piani).' },
   { en: 'My profile / Security', label: 'Profilo / Sicurezza', text: 'I Suoi dati, la password e l’autenticazione a due fattori.' },
 ];
 
@@ -51,7 +51,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'La soluzione più semplice: acquisti un numero in Get new phone number, poi lo selezioni nell’agente (General → Phone number).',
       'Per mantenere il Suo numero attuale: attivi presso il Suo operatore un inoltro di chiamata verso questo nuovo numero.',
-      'Se ha già Twilio, Telnyx o un centralino SIP: Your phone numbers, poi importazione o SIP (piano Assistant e superiori).',
+      'Se ha già Twilio, Telnyx o un centralino SIP: Your phone numbers, poi importazione o SIP (tutti i piani).',
     ],
   },
   {

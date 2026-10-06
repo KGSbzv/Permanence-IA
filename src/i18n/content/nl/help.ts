@@ -22,7 +22,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Add credits', label: 'Tegoed toevoegen', text: 'Een opwaardering van minuten kopen; het tegoed vervalt niet.' },
   { en: 'Billing info', label: 'Facturatie', text: 'Betaalmethode, facturen, abonnement en opzegging.' },
   { en: 'Limits', label: 'Limieten', text: 'Wat uw abonnement toestaat: agents, gelijktijdige gesprekken, functies.' },
-  { en: 'API Keys', label: 'API-sleutels', text: 'Uw eigen software koppelen (Callcenter-abonnement).' },
+  { en: 'API Keys', label: 'API-sleutels', text: 'Uw eigen software koppelen (alle abonnementen).' },
   { en: 'My profile / Security', label: 'Profiel / Beveiliging', text: 'Uw gegevens, wachtwoord en tweestapsverificatie.' },
 ];
 
@@ -51,7 +51,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'De eenvoudigste manier: koop een nummer via Get new phone number en selecteer het in de agent (General → Phone number).',
       'Wilt u uw huidige nummer behouden? Stel bij uw provider een doorschakeling naar dit nieuwe nummer in.',
-      'Hebt u al Twilio, Telnyx of een SIP-centrale: Your phone numbers, daarna import of SIP (Assistent-abonnement en hoger).',
+      'Hebt u al Twilio, Telnyx of een SIP-centrale: Your phone numbers, daarna import of SIP (alle abonnementen).',
     ],
   },
   {

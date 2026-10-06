@@ -12,6 +12,7 @@ module.exports = {
         line: '#DDE5EE',
         night: { DEFAULT: '#0A1233', raised: '#141E47' },
         ok: '#1E9E6A',
+        no: '#C8463D',
         // Alias pour les pages héritées (légal, blog)
         navy: { DEFAULT: '#0E1B4D', dark: '#0A1233', light: '#22306A' },
         primary: { DEFAULT: '#0FA3C4', hover: '#0B7F99' },

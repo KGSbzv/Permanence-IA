@@ -271,8 +271,8 @@ export const UI_COMMERCE = {
     },
     api: {
       title: { before: 'Webhooks and API for ', kw: 'your systems', after: '' },
-      text: 'With the Call Centre plan, receive every completed call and its extracted data in your own systems, or control the agent from your software.',
-      points: ['Webhook after every call', 'Extracted variables: outcome, interest, time slot', 'MCP tools for your assistants'],
+      text: 'On every plan, receive every completed call and its extracted data in your own systems, or control the agent from your software.',
+      points: ['Webhook after every call', 'Extracted variables: outcome, interest, time slot', 'Mid-call tools, from the Assistant plan'],
     },
   },
 };

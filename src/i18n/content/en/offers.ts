@@ -20,23 +20,23 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI receptionist that answers every call, 24/7',
     pitch: 'The Receptionist plan picks up your calls, answers common questions, books appointments and sends you a clear summary of every request. Simple to set up, no complexity.',
     cta: 'Choose Receptionist',
-    highlights: ['24/7 AI receptionist', 'Connected calendar', 'Web callback widget', 'Transfer to a person'],
+    highlights: ['24/7 AI receptionist', 'Connected calendar', 'Web widget, SMS and WhatsApp', 'Transfer to a person', '2 concurrent calls'],
   },
   assistant: {
     name: 'Assistant',
     audience: 'Local businesses with steady call volume',
     title: 'An AI assistant that qualifies, follows up and automates your enquiries',
-    pitch: 'The Assistant plan adds lead qualification, follow-up campaigns, SMS and WhatsApp messages, the flow builder and your own numbers via SIP, so you convert more enquiries.',
+    pitch: 'The Assistant plan adds three agents, follow-up campaigns, the flow builder connected to over 300 tools and a cloned voice, so you convert more enquiries.',
     cta: 'Choose Assistant',
-    highlights: ['Everything in Receptionist', 'Flow builder and automations', 'Campaigns and leads', 'SMS, WhatsApp and Instagram', 'Your numbers via SIP'],
+    highlights: ['Everything in Receptionist', '3 agents, 5 concurrent calls', 'Flow builder and automations', 'Follow-up campaigns', '1 cloned voice'],
   },
   'centre-appels': {
     name: 'Call Centre',
     audience: 'Teams, multiple departments and high volumes',
     title: 'A complete AI call centre to organise reception, bookings and support',
-    pitch: 'The Call Centre plan brings together multiple agents, detailed reports, roles, the advanced knowledge base, APIs and priority support, with the best per-minute price.',
+    pitch: 'The Call Centre plan removes the limits: unlimited agents and campaigns, 20 concurrent calls, custom dashboards, priority support and the best per-minute price.',
     cta: 'Choose Call Centre',
-    highlights: ['Everything in Assistant', 'Multiple agents and roles', 'Detailed reports', 'API, webhooks and MCP tools', 'Priority support', '3,000 message credits included ($30)'],
+    highlights: ['Everything in Assistant', 'Unlimited agents and campaigns', '20 concurrent calls', 'Custom dashboards', 'Priority support', '3,000 message credits included ($30)'],
   },
   'sur-mesure': {
     name: 'Custom',
@@ -63,61 +63,67 @@ export const OFFER_LABELS = {
 // Feature matrix: each row matches a page or feature in the customer interface.
 // Values: true = included, false = not included, text = level.
 const all = (v: Cell): Record<PlanSlug, Cell> => ({ decouverte: v, receptionniste: v, assistant: v, 'centre-appels': v, 'sur-mesure': v });
+const paid = (v: Cell): Record<PlanSlug, Cell> => ({ ...all(v), decouverte: false });
 
+// Limits taken from the customer-area admin (Receptionist 1646, Assistant 1647, Call Centre 1648 plans
+// and the trial): any change to a plan in the admin must be reflected here, and vice versa.
 export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agents and calls',
     rows: [
-      { label: 'AI voice assistants', detail: 'Inbound and outbound agents', cells: { decouverte: '1 test agent', receptionniste: '1', assistant: '3', 'centre-appels': 'Multiple agents', 'sur-mesure': 'Custom' } },
-      { label: 'Call history', detail: 'Recordings, transcripts, summaries', cells: { ...all(true), decouverte: 'Limited' } },
-      { label: 'Conversations', detail: 'Written and voice exchanges in one place', cells: all(true) },
-      { label: 'Transfer to a person', detail: 'Hand over to your team', cells: all(true) },
-      { label: 'Multilingual voices', detail: 'Secondary languages detected', cells: all(true) },
+      { label: 'AI voice agents', detail: 'Number of agents you can create, inbound or outbound.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
+      { label: 'Concurrent calls', detail: 'Calls handled at the same time: nobody waits, even at peak hours.', cells: { decouverte: '1', receptionniste: '2', assistant: '5', 'centre-appels': '20', 'sur-mesure': 'Custom' } },
+      { label: 'Call history', detail: 'Recordings, transcripts and summaries of every call.', cells: all(true) },
+      { label: 'Transfer to a person', detail: 'The agent hands the call over to your team when needed.', cells: all(true) },
+      { label: 'Secondary languages', detail: 'The agent detects the caller’s language and replies in it.', cells: all(true) },
+      { label: 'Cloned voices', detail: 'A voice created from a recording of your own.', cells: { decouverte: false, receptionniste: false, assistant: '1', 'centre-appels': '3', 'sur-mesure': 'Custom' } },
     ],
   },
   {
     group: 'Agent setup',
     rows: [
-      { label: 'AI prompt editor', detail: 'Behaviour, tone, rules', cells: { decouverte: 'Preview', receptionniste: 'Simplified', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Knowledge base', detail: 'PDFs, web pages, procedures', cells: { decouverte: 'Basic', receptionniste: 'Basic', assistant: true, 'centre-appels': 'Advanced', 'sur-mesure': 'Advanced' } },
-      { label: 'Flow builder', detail: 'Visual no-code scenarios', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Advanced', 'sur-mesure': 'Advanced' } },
-      { label: 'Automations', detail: 'Over 300 tools you can connect', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'AI prompt editor', detail: 'A writing assistant sets the agent’s behaviour, tone and rules.', cells: all(true) },
+      { label: 'Knowledge bases', detail: 'PDFs, web pages and procedures the agent refers to during the call.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
+      { label: 'Mid-call tools', detail: 'Live actions: check availability, look up a record, query your software.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
+      { label: 'Flow builder', detail: 'Visual no-code scenarios: triggers, conditions and actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Automation platform', detail: 'Over 300 tools you can connect: CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5,000 runs / month', 'centre-appels': '50,000 runs / month', 'sur-mesure': 'Custom' } },
+      { label: 'AI connector', detail: 'Adds an AI step to your automations (sorting, summarising, drafting).', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
   },
   {
     group: 'Calendar and capture',
     rows: [
-      { label: 'Calendar integration', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
-      { label: 'Web widget', detail: 'Callback and calls from your website', cells: all(true) },
-      { label: 'Caller identification', detail: 'Caller ID button', cells: { ...all(true), decouverte: false } },
-      { label: 'Leads and pre-qualification', detail: 'Structured prospect records', cells: { decouverte: false, receptionniste: 'Basic', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Calendar integration', detail: 'Google, Outlook, Cal.com, Calendly: the agent books straight into your calendar.', cells: all(true) },
+      { label: 'Web widget', detail: 'Call and callback button to add to your website.', cells: all(true) },
+      { label: 'Leads', detail: 'Prospect records created from your calls.', cells: all(true) },
     ],
   },
   {
     group: 'Messages and campaigns',
     rows: [
-      { label: 'Outbound campaigns', detail: 'Follow-ups, confirmations, reminders', cells: { decouverte: false, receptionniste: false, assistant: 'With limits', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'SMS history', detail: 'Messages sent and replies', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'WhatsApp', detail: 'Senders and templates', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Messenger and Instagram', detail: 'Messaging channels', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Outbound campaigns', detail: 'Follow-ups, confirmations and reminders called automatically.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
+      { label: 'SMS and WhatsApp', detail: 'Written conversations in one place, paid for with message credits.', cells: all(true) },
+      { label: 'Messenger and Instagram', detail: 'Social media messages in the same inbox.', cells: all(true) },
+      { label: 'Message credits included', detail: 'Free credits every month for the AI’s written replies.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3,000 ($30)', 'sur-mesure': 'Custom' } },
     ],
   },
   {
     group: 'Telephony',
     rows: [
-      { label: 'Dedicated number', detail: 'Optional, billed monthly, depends on the country', cells: { decouverte: false, receptionniste: 'Optional', assistant: 'Optional', 'centre-appels': 'Optional', 'sur-mesure': 'Optional' } },
-      { label: 'SIP integration', detail: 'Your numbers and your phone system', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Block list', detail: 'Numbers excluded from calls', cells: { ...all(true), decouverte: false } },
+      { label: 'Phone numbers', detail: 'Dedicated numbers bought from your customer area, billed monthly depending on the country.', cells: { decouverte: false, receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Custom' } },
+      { label: 'SIP connection', detail: 'Keep your numbers and phone system: SIP connection, Twilio or Telnyx import.', cells: all(true) },
+      { label: 'Your own mobile as caller ID', detail: 'Verify your number so it is displayed on outbound calls.', cells: paid(true) },
+      { label: 'Block list', detail: 'Numbers the agent never calls.', cells: all(true) },
     ],
   },
   {
-    group: 'Management and team',
+    group: 'Management and integrations',
     rows: [
-      { label: 'Detailed reports', detail: 'Volumes, durations, conversions', cells: { decouverte: false, receptionniste: 'Dashboard', assistant: 'Dashboard', 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Roles and permissions', detail: 'Access for each team member', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'API, webhooks and MCP tools', detail: 'Connect to your systems', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Multi-site rules and SLA', detail: 'Several locations', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
-      { label: 'Support', detail: 'Help and guidance', cells: { decouverte: 'Resources', receptionniste: 'Standard', assistant: 'Standard', 'centre-appels': 'Priority', 'sur-mesure': 'Dedicated' } },
+      { label: 'Call statistics', detail: 'Volumes, durations and outcomes on your dashboard.', cells: all(true) },
+      { label: 'Custom dashboards', detail: 'Your own KPIs, built from your call data.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'API and webhooks', detail: 'Receive every completed call in your systems, or drive the agent from your software.', cells: all(true) },
+      { label: 'Multi-site rules and SLA', detail: 'Several locations, service-level commitments.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': false, 'sur-mesure': true } },
+      { label: 'Support', detail: 'Help and guidance from our team.', cells: { decouverte: 'Resources', receptionniste: 'Standard', assistant: 'Standard', 'centre-appels': 'Priority', 'sur-mesure': 'Dedicated' } },
     ],
   },
 ];

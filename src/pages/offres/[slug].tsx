@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { Check, Minus } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { FinalCTA, GrowthBlock, ModuleCards, PricingCards, RechargeTables } from '@/components/blocks';
+import { EconomyBlock, FinalCTA, GrowthBlock, ModuleCards, PricingCards, RechargeTables } from '@/components/blocks';
 import { SIGNUP_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import type { PlanSlug as OfferSlug } from '@/i18n/markets';
@@ -73,7 +73,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
               <div className="flex justify-between gap-4"><dt>{t.facts.more}</dt><dd className="text-right font-semibold text-ink">{o.slug === 'sur-mesure' ? t.facts.moreCustom : t.facts.moreDefault}</dd></div>
               <div className="flex justify-between gap-4"><dt>{t.facts.commitment}</dt><dd className="font-semibold text-ink">{t.facts.commitmentValue}</dd></div>
             </dl>
-            <p className="mt-5 text-xs text-slate-light">{c.site.priceNote}</p>
+            <p className="mt-5 text-xs text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p>
           </div>
         </div>
       </section>
@@ -85,7 +85,7 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
             <ul className="mt-8 grid gap-x-8 gap-y-3 sm:grid-cols-2">
               {included.map((i) => (
                 <li key={i.label} className={`flex gap-2.5 text-[15px] ${i.v === false ? 'text-slate-light' : 'text-ink'}`}>
-                  {i.v === false ? <Minus className="mt-1 h-4 w-4 shrink-0" aria-label={t.included.notIncluded} /> : <Check className="mt-1 h-4 w-4 shrink-0 text-signal" aria-label={t.included.includedLabel} />}
+                  {i.v === false ? <X className="mt-1 h-4 w-4 shrink-0 text-no" strokeWidth={3} aria-label={t.included.notIncluded} /> : <Check className="mt-1 h-4 w-4 shrink-0 text-ok" strokeWidth={3} aria-label={t.included.includedLabel} />}
                   <span>{i.label}{typeof i.v === 'string' && <span className="text-slate"> — {i.v}</span>}</span>
                 </li>
               ))}
@@ -111,12 +111,14 @@ export default function OfferPage({ slug }: { slug: OfferSlug }) {
         </>
       )}
 
-      <Section>
+      <Section><EconomyBlock /></Section>
+
+      <Section tone="paper">
         <Heading title={t.others.title} />
         <div className="mt-10"><PricingCards only={offers.filter((x) => x.slug !== slug).map((x) => x.slug)} /></div>
       </Section>
 
-      <Section tone="paper">
+      <Section>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.6fr]">
           <div><Heading title={t.faq.title} /><CTAs className="mt-8" /></div>
           <FaqDark items={c.faq.pricing} />
