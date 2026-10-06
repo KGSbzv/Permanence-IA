@@ -29,3 +29,5 @@ env:
     value: smtp.zoho.com
   - variable: NOTIFY_EMAIL
     value: contact@permanenceia.com
+  - variable: AUTOCALLS_API_KEY
+    secret: AUTOCALLS_API_KEY
