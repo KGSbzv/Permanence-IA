@@ -10,6 +10,7 @@ const nextConfig = {
     const cors = [{ key: 'Access-Control-Allow-Origin', value: 'https://app.autocalls.ai' }];
     return [
       { source: '/logo/:path*', headers: cors },
+      { source: '/agents/:path*', headers: cors },
       { source: '/icon-:size.png', headers: cors },
     ];
   },
