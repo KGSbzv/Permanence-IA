@@ -54,7 +54,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string) => `Funzionamento, centralino e SIP, calendario, WhatsApp, GDPR, prova e prezzi: tutte le risposte sull’assistente telefonico AI ${brand}.`,
     },
     h1: 'Domande frequenti',
-    intro: 'Tutto sull’assistente telefonico AI, dalla segreteria al centralino virtuale. Non trova la risposta? Lasci il Suo numero, un consulente La richiama.',
+    intro: 'Tutto sull’assistente telefonico AI, dal centralino virtuale alle prenotazioni automatiche. Non trova la risposta? Lasci il Suo numero, un consulente La richiama.',
     general: 'La piattaforma',
     pricing: 'Prezzi e prova',
   },
@@ -83,7 +83,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     login: 'Accedi',
     sentTitle: 'La Sua richiesta è stata registrata',
     sentText: 'Un consulente La richiama per configurare con Lei il Suo primo agente.',
-    sentCta: 'Creare subito il mio account',
+    sentCta: 'Creare il mio account gratuito',
     formTitle: 'Preferisce essere accompagnato?',
     formIntro: 'Lasci i Suoi recapiti: un consulente La richiama per avviare la prova insieme a Lei.',
     name: 'Nome e cognome',
@@ -107,7 +107,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     termsRequired: 'Accetti le condizioni per essere richiamato.',
     sendError: 'Non è stato possibile inviare la registrazione.',
     sending: 'Invio…',
-    submit: 'Essere richiamato',
+    submit: 'Richieda una richiamata',
   },
 
   help: {
@@ -117,11 +117,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     breadcrumb: 'Aiuto',
     h1: 'Guida alla Sua area clienti',
-    intro: 'La Sua area clienti è in inglese. Questa guida traduce ogni menu e La accompagna passo passo. All’interno dell’area clienti, anche l’assistente di supporto (bolla in basso a destra) risponde in italiano, per iscritto o a voce.',
+    intro: 'La Sua area clienti è in inglese. Questa guida traduce ogni menu e La accompagna passo passo. All’interno dell’area clienti, anche l’assistente di supporto (bolla in basso a destra) risponde nella Sua lingua, italiano compreso, per iscritto o a voce.',
     openSpace: 'Apri la mia area clienti',
     chatLabel: 'Esempio di conversazione con l’assistente di supporto',
     chatTitle: (brand: string) => `Aiuto ${brand}`,
-    chatMode: 'In italiano · per iscritto o a voce',
+    chatMode: 'Nella Sua lingua · per iscritto o a voce',
     chat: [
       { me: true, text: 'Dove aggiungo dei minuti?' },
       { text: ['In alto a destra, apra il menu del Suo profilo e clicchi su ', { b: 'Add credits' }, ' (aggiungere credito). Scelga una ricarica: il credito non scade.'] },
@@ -163,7 +163,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Assistente telefonico AI conforme al GDPR · ${brand}`,
-      description: (brand: string) => `Consenso, opt-out, crittografia, conservazione configurabile e ruoli: come l’assistente telefonico AI ${brand} protegge i dati delle Sue chiamate.`,
+      description: (brand: string) => `Consenso, opt-out, crittografia in transito e conservazione configurabile: come l’assistente AI ${brand} protegge i dati delle Sue chiamate.`,
     },
     h1: 'Sicurezza e conformità delle Sue chiamate AI',
     intro: 'Le chiamate gestite dal Suo assistente telefonico AI contengono dati personali. Ecco le protezioni attive e le impostazioni a Sua disposizione per rispettare il GDPR.',
@@ -179,9 +179,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     commitmentsTitle: 'I nostri impegni',
     commitments: [
       'L’agente si presenta come un’AI e non si fa passare per una persona',
-      'Nessuna chiamata in uscita senza il consenso preventivo del contatto',
+      'Le Sue campagne devono chiamare solo i contatti che hanno dato il consenso; una lista di esclusione integrata esclude gli altri',
       'Nessuna diagnosi medica, legale o finanziaria da parte dell’agente',
-      'Dati utilizzati esclusivamente per fornire il servizio',
+      'I Suoi dati non vengono mai venduti: sono utilizzati per fornire e migliorare il servizio',
       'Supporto per adattare le Sue informative',
     ],
     rights: ['Per qualsiasi domanda o richiesta di esercizio dei diritti: ', { a: 'informativa sulla privacy', href: '/confidentialite' }, '.'] as Rich,
@@ -410,8 +410,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           {
             ul: [
               [{ strong: 'Piattaforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Regione di hosting: us-east4 (Virginia del Nord, Stati Uniti).'],
-              [{ strong: 'Database e archiviazione:' }, ' Supabase Inc., infrastrutture situate nell’Unione europea (Regione AWS EU-WEST-1, Dublino, Irlanda).'],
-              [{ strong: 'Rete telefonica e sintesi vocale:' }, ' infrastruttura di telefonia vocale cloud certificata conforme agli standard europei di telecomunicazione.'],
+              [{ strong: 'Database e archiviazione:' }, ' Supabase Inc., infrastrutture situate negli Stati Uniti (Regione AWS us-east-1, Virginia).'],
             ],
           },
         ],
@@ -421,7 +420,6 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         body: [
           { p: ['Il marchio ', { strong: brand }, `, il logo (la bolla in attesa, le onde vocali e il punto di disponibilità), nonché l’insieme delle linee grafiche, dei testi, degli script conversazionali, delle infografiche e dei codici sorgente presenti sul sito sono di proprietà esclusiva di ${company}.`] },
           { p: `Qualsiasi riproduzione, distribuzione, modifica o utilizzo senza previo accordo scritto è severamente vietato e costituisce una violazione sanzionata ai sensi della ${legal.copyrightLaw}.` },
-          { note: 'La dicitura Autocalls White-Label Architecture rientra nella licenza tecnologica concessa da Autocalls Inc.' },
         ],
       },
       {
@@ -479,6 +477,6 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     ctaEyebrow: 'Passi all’azione',
     ctaTitle: 'Pronto a dotare la Sua azienda di un centralino AI?',
     ctaText: (days: number, minutes: number) => `Provi da oggi il nostro agente vocale in condizioni reali per ${days} giorni, con ${minutes} minuti inclusi e senza vincoli.`,
-    ctaButton: 'Inizi la prova gratuita',
+    ctaButton: 'Inizi gratis',
   },
 };

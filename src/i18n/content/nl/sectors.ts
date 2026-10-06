@@ -29,7 +29,7 @@ export const SECTORS: Sector[] = [
       { title: 'U belt terug of gaat erheen', text: 'Met alle informatie bij de hand.' },
     ],
     offer: 'assistant',
-    ctas: ['14 dagen gratis proberen', 'Bekijk hoe aanvragen worden gekwalificeerd'],
+    ctas: ['Gratis starten', 'Bekijk hoe aanvragen worden gekwalificeerd'],
     call: [
       { who: 'client', text: 'Goedendag, ik heb een lekkage onder de gootsteen, het loopt flink.' },
       { who: 'agent', text: 'Dat begrijp ik. Hebt u de watertoevoer kunnen afsluiten?' },
@@ -68,7 +68,7 @@ export const SECTORS: Sector[] = [
       { title: 'De dag ervoor bevestigt de agent', text: 'Telefonisch of per bericht, en geeft het tijdslot vrij als dat nodig is.' },
     ],
     offer: 'assistant',
-    ctas: ['Start de gratis proefperiode', 'Vraag een demonstratie aan'],
+    ctas: ['Gratis starten', 'Vraag een demonstratie aan'],
     call: [
       { who: 'client', text: 'Goedendag, ik wil graag een afspraak voor een gebitsreiniging.' },
       { who: 'agent', text: 'Graag. Bent u al patiënt bij de praktijk?' },
@@ -107,7 +107,7 @@ export const SECTORS: Sector[] = [
       { title: 'De opvolging gaat automatisch', text: 'Contact na de bezichtiging en het CRM bijgewerkt.' },
     ],
     offer: 'assistant',
-    ctas: ['Test de vastgoedagent', 'Claim mijn 30 minuten'],
+    ctas: ['Gratis starten', 'Bekijk de live demo'],
     call: [
       { who: 'client', text: 'Ik bel over het driekamerappartement met balkon, is dat nog beschikbaar?' },
       { who: 'agent', text: 'Ja. Zoekt u een woning om zelf te bewonen of als belegging?' },
@@ -146,7 +146,7 @@ export const SECTORS: Sector[] = [
       { title: 'De klant krijgt een herinnering', text: 'Bevestiging en herinnering vóór de afspraak.' },
     ],
     offer: 'assistant',
-    ctas: ['Bekijk de garagedemo', 'Optimaliseer mijn werkplaats'],
+    ctas: ['Gratis starten', 'Bekijk de live demo'],
     call: [
       { who: 'client', text: 'Ik hoor al twee dagen een geluid bij het remmen.' },
       { who: 'agent', text: 'Dat noteer ik. Wat is het model en het bouwjaar van de auto?' },
@@ -182,10 +182,10 @@ export const SECTORS: Sector[] = [
       { title: 'De klant belt of stuurt een bericht', text: 'Telefonisch, via WhatsApp of vanaf uw website.' },
       { title: 'De agent adviseert', text: 'Behandeling, duur, medewerker.' },
       { title: 'De afspraak wordt geboekt', text: 'In uw online agenda.' },
-      { title: 'De dag ervoor gaat de herinnering eruit', text: 'Per bericht, met de mogelijkheid om te verplaatsen.' },
+      { title: 'De dag ervoor gaat de herinnering eruit', text: 'Per bericht (vanaf het Assistent-abonnement), met de mogelijkheid om te verplaatsen.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Vul mijn agenda', 'Begin gratis'],
+    ctas: ['Gratis starten', 'Bekijk de live demo'],
     call: [
       { who: 'client', text: 'Goedendag, ik wil graag zaterdag knippen en föhnen.' },
       { who: 'agent', text: 'Graag. Hebt u een voorkeur voor een kapster?' },
@@ -224,7 +224,7 @@ export const SECTORS: Sector[] = [
       { title: 'Uw team wordt ingelicht', text: 'Alleen als er actie nodig is.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Automatiseer mijn reserveringen', 'Vraag een demonstratie aan'],
+    ctas: ['Gratis starten', 'Vraag een demonstratie aan'],
     call: [
       { who: 'client', text: 'Hebt u vanavond rond 20.00 uur een tafel voor vier?' },
       { who: 'agent', text: 'Ja, om 20.15 uur op het terras of om 20.30 uur binnen.' },

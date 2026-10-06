@@ -7,8 +7,8 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 export const UI_COMPONENTS = {
   layout: {
     home: 'Home',
-    freeTrial: 'Free trial',
-    callMeBack: 'Request a callback',
+    freeTrial: 'Start for free',
+    callMeBack: 'Get a call back',
   },
 
   navbar: {
@@ -43,7 +43,7 @@ export const UI_COMPONENTS = {
     startFree: 'Start for free',
     login: 'Log in',
     gdpr: 'Built-in data protection tools',
-    encryption: 'Encryption in transit and at rest',
+    encryption: 'Encryption in transit',
     cols: {
       platform: 'Platform',
       allFeatures: 'All features',
@@ -82,9 +82,9 @@ export const UI_COMPONENTS = {
     title: (minutes: string) => `Your first ${minutes} minutes are free`,
     close: 'Close',
     text: (days: number) => `Test your voice agent on your real calls for ${days} days before you decide.`,
-    points: ['Nothing is charged during the trial', 'Cancel in one click from your customer area', 'First agent ready in a few minutes'],
-    claim: (minutes: string) => `Claim my ${minutes} minutes`,
-    callMeBack: 'I’d rather have a callback',
+    points: ['Card requested at activation, nothing charged during the trial', 'Cancel from your customer area', 'First agent ready in a few minutes'],
+    claim: (_minutes: string) => 'Start for free',
+    callMeBack: 'Get a call back',
   },
 
   liveCall: {
@@ -102,11 +102,11 @@ export const UI_COMPONENTS = {
   ctas: {
     primary: 'Start for free',
     demo: 'Try our agent live',
-    callback: 'Leave your number and we’ll call you back',
+    callback: 'Get a call back',
   },
 
   callbackForm: {
-    submit: 'Request a callback',
+    submit: 'Get a call back',
     consentRequired: 'Tick the box to agree to be called back.',
     sendFailed: 'Your request could not be sent.',
     retry: (email: string) => `Please try again or email ${email}.`,
@@ -231,7 +231,7 @@ export const UI_COMPONENTS = {
     case3Plan: 'Custom plan',
     case3Note: (plan: string) => `Beyond the ${plan} plan, we negotiate a per-minute price suited to your volume.`,
     title: 'Add minutes or change plan, at the right time',
-    intro: 'You never pay more per minute than you need to: we tell you when a top-up is enough and when the next plan up works out better.',
+    intro: 'We tell you when a top-up is enough and when the next plan up becomes cheaper.',
     customerAt: 'A customer at',
   },
 
@@ -243,7 +243,7 @@ export const UI_COMPONENTS = {
   economy: {
     title: 'A more predictable cost than a human receptionist',
     intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
-      `In some setups, a human receptionist costs around ${costPerCall} per call, or more than ${totalCost} for ${calls} calls. The ${plan} plan at ${price} excl. tax covers ${minutes} minutes a month, with 24/7 availability. Compare with your own figures.`,
+      `Example: in some setups, a human receptionist may cost around ${costPerCall} per call, or more than ${totalCost} for ${calls} calls. The ${plan} plan at ${price} excl. tax covers ${minutes} minutes a month, with 24/7 availability. Compare with your own figures.`,
     humanTitle: 'Human receptionist',
     humanPoints: ['Office hours', 'Variable cost: salary, employer costs, cover', 'Calls missed at peak times'],
     aiPoints: ['Available 24/7', 'Clear plan, prices excl. tax', 'Several calls in parallel'],
@@ -263,7 +263,7 @@ export const UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Consent and opt-out', text: 'Consent to callbacks, handling of refusals, permitted calling hours and an exclusion list.' },
-      { title: 'Data protection', text: 'Encryption in transit and at rest, role-based access and configurable retention periods.' },
+      { title: 'Data protection', text: 'Encryption in transit, role-based access (Call Centre plan) and configurable retention periods.' },
       { title: 'Traceability', text: 'Call history, transcripts and an activity log for every account.' },
       { title: 'Access control', text: 'Roles and permissions for each team member with the Call Centre plan.' },
       { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion, retention.' },
@@ -287,7 +287,7 @@ export const UI_COMPONENTS = {
 
   finalCta: {
     title: 'Ready to automate your calls?',
-    primary: 'Start my free trial',
+    primary: 'Start for free',
     demo: 'See the live demo',
     advisorTitle: 'Talk to an adviser',
     advisorText: 'Leave your number: we will call you back to answer your questions.',
@@ -493,7 +493,7 @@ export const UI_COMPONENTS = {
     widget: {
       question: 'Got a question? Let’s talk.',
       talk: 'Talk to the agent',
-      callback: 'Request a callback',
+      callback: 'Get a call back',
     },
     whatsapp: {
       title: 'WhatsApp · Confirmation',
@@ -503,7 +503,7 @@ export const UI_COMPONENTS = {
     campaign: {
       title: 'Campaigns',
       rows: [['Week 42 confirmations', 'In progress', '68%'], ['September quote follow-up', 'Completed', '41%'], ['Inactive customers', 'Scheduled', '—']],
-      note: 'Sample figures · calls only to contacts who have given consent',
+      note: 'Sample figures · campaigns must only call contacts who have agreed',
     },
     lead: {
       title: 'Qualified request',

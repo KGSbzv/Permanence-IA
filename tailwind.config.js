@@ -8,7 +8,7 @@ module.exports = {
         ink: { DEFAULT: '#0E1B4D', soft: '#22306A' },
         signal: { DEFAULT: '#0FA3C4', deep: '#0B7F99', soft: '#E2F5FA', glow: '#5AD3EC' },
         paper: '#F5F8FB',
-        slate: { DEFAULT: '#4A5875', light: '#7A869E' },
+        slate: { DEFAULT: '#4A5875', light: '#626E86' },
         line: '#DDE5EE',
         night: { DEFAULT: '#0A1233', raised: '#141E47' },
         ok: '#1E9E6A',

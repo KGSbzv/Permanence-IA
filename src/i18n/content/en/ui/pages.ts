@@ -107,7 +107,7 @@ export const UI_PAGES = {
     termsRequired: 'Accept the terms to be called back.',
     sendError: 'Your sign-up could not be sent.',
     sending: 'Sending…',
-    submit: 'Request a callback',
+    submit: 'Get a call back',
   },
 
   help: {
@@ -117,11 +117,11 @@ export const UI_PAGES = {
     },
     breadcrumb: 'Help',
     h1: 'Help with your customer area',
-    intro: 'Your customer area is in English. This guide explains each menu and walks you through it step by step. Inside the customer area, the help assistant (bubble at the bottom right) also answers your questions, in writing or out loud.',
+    intro: 'Your customer area is in English. This guide explains each menu and walks you through it step by step. Inside the customer area, the help assistant (bubble at the bottom right) also answers your questions in your language, in writing or out loud.',
     openSpace: 'Open my customer area',
     chatLabel: 'Example conversation with the help assistant',
     chatTitle: (brand: string) => `${brand} help`,
-    chatMode: 'In English · text or voice',
+    chatMode: 'In your language · text or voice',
     chat: [
       { me: true, text: 'Where do I add minutes?' },
       { text: ['At the top right, open your profile menu and click ', { b: 'Add credits' }, '. Choose a top-up: credit never expires.'] },
@@ -179,9 +179,9 @@ export const UI_PAGES = {
     commitmentsTitle: 'Our commitments',
     commitments: [
       'The agent introduces itself as an AI and does not pretend to be a person',
-      'No outbound call without the contact’s prior consent',
+      'Your campaigns must only call contacts who have agreed; a built-in blocklist excludes the others',
       'No medical, legal or financial diagnosis by the agent',
-      'Data used only to provide the service',
+      'Your data is never sold; it is used to provide and improve the service',
       'Help adapting your privacy notices',
     ],
     rights: ['For any question or to exercise your rights: ', { a: 'privacy policy', href: '/confidentialite' }, '.'] as Rich,
@@ -410,8 +410,7 @@ export const UI_PAGES = {
           {
             ul: [
               [{ strong: 'Front-end platform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Hosting region: us-east4 (Northern Virginia, United States).'],
-              [{ strong: 'Databases and storage:' }, ' Supabase Inc., infrastructure located within the European Union (AWS region EU-WEST-1, Dublin, Ireland).'],
-              [{ strong: 'Telephone network and speech synthesis:' }, ' Cloud voice telephony infrastructure certified as compliant with European telecommunications standards.'],
+              [{ strong: 'Databases and storage:' }, ' Supabase Inc., infrastructure located in the United States (AWS region us-east-1, Virginia).'],
             ],
           },
         ],
@@ -421,7 +420,6 @@ export const UI_PAGES = {
         body: [
           { p: ['The ', { strong: brand }, ` brand, the logo (the standby bubble, the sound waves and the availability dot), and all visual identity, text, conversation scripts, infographics and source code on the website are the exclusive property of ${company}.`] },
           { p: `Any reproduction, distribution, modification or use without prior written consent is strictly prohibited and constitutes infringement under ${legal.copyrightLaw}.` },
-          { note: 'The Autocalls White-Label Architecture mention falls under the technology licence granted by Autocalls Inc.' },
         ],
       },
       {
@@ -479,6 +477,6 @@ export const UI_PAGES = {
     ctaEyebrow: 'Take action',
     ctaTitle: 'Ready to give your business an AI receptionist?',
     ctaText: (days: number, minutes: number) => `Test our voice agent in real conditions from today, for ${days} days, with ${minutes} minutes included and no commitment.`,
-    ctaButton: 'Start the free trial',
+    ctaButton: 'Start for free',
   },
 };

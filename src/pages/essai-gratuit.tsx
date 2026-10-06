@@ -28,11 +28,11 @@ export default function EssaiGratuit() {
         // Champs destinés à l’équipe (back-office) : restent en français quelle que soit la langue du site.
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'), company: f.get('company'),
-          sector: f.get('sector'), consentCall: true, type: 'commercial', agent: 'Accompagnement essai', locale,
+          sector: f.get('sector'), consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
           note: `Demande d’accompagnement à l’essai — offre ${f.get('plan')} — ${f.get('company') || ''}`,
         }),
       });
-      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || t.sendError);
+      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendError); }
       setState('sent');
     } catch (err: any) { setState('error'); setError(err.message); }
   }
@@ -40,11 +40,14 @@ export default function EssaiGratuit() {
   return (
     <Layout title={t.meta.title(days, minutes, market.brand)} description={t.meta.description(days, minutes, market.brand)}>
       <section className="bg-paper">
-        <div className="wrap grid gap-12 py-14 lg:grid-cols-[1fr_1.1fr] lg:py-20">
+        {/* Mobile : titre, puis création du compte, puis détails ; desktop : deux colonnes. */}
+        <div className="wrap grid gap-x-12 gap-y-8 py-14 lg:grid-cols-[1fr_1.1fr] lg:grid-rows-[auto_1fr] lg:py-20">
           <div>
             <Heading as="h1" title={t.h1(minutes)} intro={t.intro(days)} />
             <TrialBadges className="mt-6" />
-            <ul className="mt-8 space-y-3 text-ink">
+          </div>
+          <div className="order-3 lg:order-none lg:col-start-1 lg:row-start-2">
+            <ul className="space-y-3 text-ink">
               {t.points(days).map((p) => (
                 <li key={p} className="flex gap-3"><Check className="mt-1 h-4 w-4 text-signal" aria-hidden />{p}</li>
               ))}
@@ -54,7 +57,7 @@ export default function EssaiGratuit() {
               <img src="/logo/auth-light.jpg" alt="" aria-hidden className="w-full" />
             </div>
           </div>
-          <div className="grid content-start gap-6">
+          <div className="order-2 grid content-start gap-6 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
             <p className="font-display text-xl font-bold">{t.createTitle}</p>
             <ol className="mt-4 space-y-2 text-ink">
@@ -72,6 +75,8 @@ export default function EssaiGratuit() {
               </div>
             ) : (
               <form onSubmit={submit} className="grid gap-4">
+        {/* Champ piège invisible pour les robots (ne pas remplir) */}
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
                 <p className="font-display text-xl font-bold">{t.formTitle}</p>
                 <p className="-mt-2 text-sm">{t.formIntro}</p>
                 <div className="grid gap-4 sm:grid-cols-2">

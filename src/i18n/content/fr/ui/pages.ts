@@ -132,7 +132,7 @@ export const UI_PAGES = {
     },
     breadcrumb: 'Aide',
     h1: 'Aide de votre espace client',
-    intro: 'Votre espace client s’affiche en anglais. Ce guide traduit chaque menu et vous accompagne pas à pas. Dans l’espace, l’assistante d’aide (bulle en bas à droite) répond aussi en français, par écrit ou à voix haute.',
+    intro: 'Votre espace client s’affiche en anglais. Ce guide traduit chaque menu et vous accompagne pas à pas. Dans l’espace, l’assistante d’aide (bulle en bas à droite) répond dans votre langue, par écrit ou à voix haute.',
     openSpace: 'Ouvrir mon espace',
     chatLabel: 'Exemple d’échange avec l’assistante d’aide',
     chatTitle: (brand: string) => `Aide ${brand}`,
@@ -178,7 +178,7 @@ export const UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Sécurité et RGPD de l’agent vocal IA · ${brand}`,
-      description: (brand: string) => `Consentement, opt-out, chiffrement, rétention configurable : comment ${brand} protège les données de vos appels et vous aide à respecter le RGPD.`,
+      description: (brand: string) => `Consentement, opt-out, chiffrement en transit, rétention configurable : comment ${brand} protège les données de vos appels, dans le respect du RGPD.`,
     },
     h1: 'Sécurité et conformité de vos appels IA',
     intro: 'Vos appels contiennent des données personnelles. Voici les protections en place et les réglages dont vous disposez pour respecter le RGPD.',
@@ -194,9 +194,9 @@ export const UI_PAGES = {
     commitmentsTitle: 'Nos engagements',
     commitments: [
       'L’agent se présente comme une IA et ne se fait pas passer pour un humain',
-      'Aucun appel sortant sans consentement préalable du contact',
+      'Vos campagnes n’appellent que des contacts qui l’ont accepté ; une liste d’exclusion intégrée écarte les autres',
       'Aucun diagnostic médical, juridique ou financier par l’agent',
-      'Données utilisées uniquement pour fournir le service',
+      'Vos données ne sont jamais vendues : elles servent à fournir et à améliorer le service',
       'Accompagnement pour adapter vos mentions d’information',
     ],
     rights: ['Pour toute question ou demande d’exercice de droits : ', { a: 'politique de confidentialité', href: '/confidentialite' }, '.'] as Rich,
@@ -216,10 +216,10 @@ export const UI_PAGES = {
   terms: {
     meta: {
       title: (brand: string) => `Conditions générales (CGU / CGV) — ${brand}`,
-      description: (brand: string) => `Consultez les conditions générales d'utilisation et de vente applicables aux forfaits et services de standard téléphonique IA ${brand}.`,
+      description: (brand: string) => `Consultez les conditions générales d’utilisation et de vente applicables aux forfaits et services de standard téléphonique IA ${brand}.`,
     },
-    h1: "Conditions Générales d'Utilisation & de Vente (CGU/CGV)",
-    updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 29 Septembre 2026',
+    h1: 'Conditions Générales d’Utilisation & de Vente (CGU/CGV)',
+    updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 29 septembre 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Article 1 — Objet du service',
@@ -229,7 +229,7 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: "Article 2 — Modalités de l'essai gratuit de 14 jours",
+        title: 'Article 2 — Modalités de l’essai gratuit de 14 jours',
         body: [
           { p: "Chaque nouveau client bénéficie, lors de sa première souscription à un forfait, d'une période d'essai gratuit de quatorze (14) jours calendaires consécutifs, incluant 30 minutes d'appels :" },
           {
@@ -252,12 +252,12 @@ export const UI_PAGES = {
       {
         title: 'Article 4 — Facturation, Tarifs & Résiliation',
         body: [
-          { p: "Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées automatiquement au paiement selon le pays du client et son statut (particulier ou entreprise, avec ou sans numéro de TVA). Les règlements sont opérés mensuellement via notre prestataire de paiement sécurisé Stripe ; l'abonnement est reconduit tacitement chaque mois." },
+          { p: "Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées automatiquement au paiement selon le pays du client et sa situation fiscale (avec ou sans numéro de TVA). Les règlements sont opérés mensuellement via notre prestataire de paiement sécurisé Stripe ; l'abonnement est reconduit tacitement chaque mois." },
           { p: ['Le client peut résilier son abonnement à tout moment et sans préavis depuis son tableau de bord ', { strong: appHost }, '. La résiliation prendra effet au terme de la période mensuelle déjà acquittée. Le client peut changer de forfait à tout moment et ajouter des minutes par une recharge de crédit ; le crédit acheté ne périme pas et sert à payer les minutes au-delà du forfait, au tarif de minute supplémentaire indiqué sur la page Tarifs.'] },
         ],
       },
       {
-        title: "Article 5 — Responsabilité et nature de l'obligation",
+        title: 'Article 5 — Responsabilité et nature de l’obligation',
         body: [
           { p: [`${brand} est tenue à une `, { strong: 'obligation de moyens' }, " quant à la disponibilité et au traitement technique des flux d'appels. L'utilisateur reconnaît que les modèles d'intelligence artificielle générative et de synthèse vocale peuvent occasionnellement produire des réponses approximatives ou inexactes."] },
           { p: `En aucun cas la responsabilité de ${brand} ne saurait être engagée pour des pertes d'exploitation indirectes, manques à gagner ou préjudices commerciaux. Dans tous les cas, le plafond maximal d'indemnisation est expressément limité au montant hors taxes versé par le client au cours du mois précédant le fait générateur.` },
@@ -397,10 +397,10 @@ export const UI_PAGES = {
   legalNotice: {
     meta: {
       title: (brand: string) => `Mentions légales — ${brand}`,
-      description: (brand: string) => `Mentions légales, informations sur l'éditeur, l'hébergement et les droits d'auteur de la plateforme ${brand}.`,
+      description: (brand: string) => `Mentions légales, informations sur l’éditeur, l’hébergement et les droits d’auteur de la plateforme ${brand}.`,
     },
     h1: 'Mentions Légales',
-    updated: 'Dernière mise à jour : 29 Septembre 2026',
+    updated: 'Dernière mise à jour : 29 septembre 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Éditeur du site',
@@ -425,8 +425,7 @@ export const UI_PAGES = {
           {
             ul: [
               [{ strong: 'Plateforme front-end :' }, " Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Région d'hébergement : us-east4 (Virginie du Nord, États-Unis)."],
-              [{ strong: 'Bases de données & Stockage :' }, " Supabase Inc., infrastructures situées au sein de l'Union Européenne (Région AWS EU-WEST-1, Dublin, Irlande)."],
-              [{ strong: 'Réseau téléphonique & Synthèse vocale :' }, ' Infrastructure de téléphonie voix cloud certifiée conforme aux normes européennes de télécommunication.'],
+              [{ strong: 'Bases de données & Stockage :' }, ' Supabase Inc., infrastructures situées aux États-Unis (région AWS us-east-1, Virginie).'],
             ],
           },
         ],
@@ -436,7 +435,6 @@ export const UI_PAGES = {
         body: [
           { p: ['La marque ', { strong: brand }, `, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l'ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes sources figurant sur le site sont la propriété exclusive de ${company}.`] },
           { p: 'Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le ' + legal.copyrightLaw + '.' },
-          { note: 'La mention Autocalls White-Label Architecture relève de la licence technologique concédée par Autocalls Inc.' },
         ],
       },
       {
@@ -494,6 +492,6 @@ export const UI_PAGES = {
     ctaEyebrow: "Passez à l'action",
     ctaTitle: "Prêt à équiper votre entreprise d'un standard IA ?",
     ctaText: (days: number, minutes: number) => `Testez dès aujourd'hui notre agent vocal en conditions réelles pendant ${days} jours, avec ${minutes} minutes incluses et sans engagement.`,
-    ctaButton: "Démarrer l'essai gratuit",
+    ctaButton: 'Commencer gratuitement',
   },
 };

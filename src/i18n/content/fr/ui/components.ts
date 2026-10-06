@@ -3,7 +3,7 @@
 export const UI_COMPONENTS = {
   layout: {
     home: 'Accueil',
-    freeTrial: 'Essai gratuit',
+    freeTrial: 'Commencer gratuitement',
     callMeBack: 'Être rappelé',
   },
 
@@ -39,7 +39,7 @@ export const UI_COMPONENTS = {
     startFree: 'Commencer gratuitement',
     login: 'Connexion',
     gdpr: 'Outils RGPD intégrés',
-    encryption: 'Chiffrement en transit et au repos',
+    encryption: 'Chiffrement en transit',
     cols: {
       platform: 'Plateforme',
       allFeatures: 'Toutes les fonctionnalités',
@@ -78,9 +78,9 @@ export const UI_COMPONENTS = {
     title: (minutes: string) => `Vos ${minutes} premières minutes sont offertes`,
     close: 'Fermer',
     text: (days: number) => `Testez votre agent vocal sur vos vrais appels pendant ${days} jours, avant de décider.`,
-    points: ['Rien n’est débité pendant l’essai', 'Annulable en un clic depuis votre espace', 'Premier agent prêt en quelques minutes'],
-    claim: (minutes: string) => `Réclamer mes ${minutes} minutes`,
-    callMeBack: 'Plutôt être rappelé',
+    points: ['Carte demandée à l’activation, rien n’est débité pendant l’essai', 'Annulation depuis votre espace client', 'Premier agent prêt en quelques minutes'],
+    claim: (minutes: string) => 'Commencer gratuitement',
+    callMeBack: 'Être rappelé',
   },
 
   liveCall: {
@@ -98,11 +98,11 @@ export const UI_COMPONENTS = {
   ctas: {
     primary: 'Commencer gratuitement',
     demo: 'Essayer en live notre agent',
-    callback: 'Laissez votre numéro, on vous rappelle',
+    callback: 'Être rappelé',
   },
 
   callbackForm: {
-    submit: 'Faites-vous rappeler',
+    submit: 'Être rappelé',
     consentRequired: 'Cochez la case pour accepter d’être rappelé.',
     sendFailed: 'La demande n’a pas pu être envoyée.',
     retry: (email: string) => `Réessayez ou écrivez à ${email}.`,
@@ -132,7 +132,7 @@ export const UI_COMPONENTS = {
     items: [
       { title: 'Répondez même hors horaires', text: 'Soirs, week-ends, pendant vos rendez-vous : chaque appel reçoit une réponse.' },
       { title: 'Qualifiez automatiquement', text: 'L’agent pose vos questions et vous transmet une demande complète.' },
-      { title: 'Réservez des rendez-vous', text: 'Directement dans votre agenda, avec confirmation et rappel.' },
+      { title: 'Réservez des rendez-vous', text: 'Directement dans votre agenda ; confirmation et rappel par SMS ou WhatsApp dès le forfait Assistant.' },
       { title: 'Rappelez les leads plus vite', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
       { title: 'Gardez l’humain pour l’important', text: 'Transfert vers votre équipe quand la situation l’exige.' },
     ],
@@ -152,7 +152,7 @@ export const UI_COMPONENTS = {
       { name: 'Messages', items: ['SMS', 'WhatsApp et templates', 'Messenger et Instagram', 'Widget web'] },
       { name: 'Agenda', items: ['Prise de rendez-vous', 'Confirmations et rappels', 'Reports et annulations'] },
       { name: 'Pilotage', items: ['Tableau de bord', 'Rapports détaillés', 'Rôles et permissions'] },
-      { name: 'Sécurité', items: ['Consentement et opt-out', 'Rétention configurable', 'Chiffrement', 'Journal des actions'] },
+      { name: 'Sécurité', items: ['Consentement et opt-out', 'Rétention configurable', 'Chiffrement en transit', 'Journal des actions'] },
     ],
     centerTitle: 'Votre agent vocal IA',
     centerText: 'Au centre : un agent configuré pour votre activité. Autour : tout ce qu’il peut utiliser.',
@@ -227,7 +227,7 @@ export const UI_COMPONENTS = {
     case3Plan: 'Offre sur mesure',
     case3Note: (plan: string) => `Au-delà du forfait ${plan}, nous négocions un prix à la minute adapté à votre volume.`,
     title: 'Ajoutez des minutes ou changez de forfait, au bon moment',
-    intro: 'Vous ne payez jamais une minute plus cher que nécessaire : nous vous indiquons quand une recharge suffit et quand le forfait supérieur devient plus avantageux.',
+    intro: 'Nous vous indiquons quand une recharge suffit et quand le forfait supérieur devient plus avantageux.',
     customerAt: 'Un client à',
   },
 
@@ -239,7 +239,7 @@ export const UI_COMPONENTS = {
   economy: {
     title: 'Un coût plus prévisible qu’un accueil humain',
     intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
-      `Dans certaines configurations, un accueil humain revient autour de ${costPerCall} par appel, soit plus de ${totalCost} pour ${calls} appels. Le forfait ${plan} à ${price} HT couvre ${minutes} minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres.`,
+      `Exemple indicatif : si un accueil humain revient à ${costPerCall} par appel, ${calls} appels représentent environ ${totalCost}. Le forfait ${plan} à ${price} HT couvre ${minutes} minutes par mois, avec une disponibilité 24/7. Comparez avec vos propres chiffres.`,
     humanTitle: 'Accueil humain',
     humanPoints: ['Horaires de bureau', 'Coût variable : salaire, charges, remplacements', 'Appels manqués aux pics'],
     aiPoints: ['Disponible 24/7', 'Forfait clair, prix HT', 'Plusieurs appels en parallèle'],
@@ -259,7 +259,7 @@ export const UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Consentement et opt-out', text: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
-      { title: 'Protection des données', text: 'Chiffrement en transit et au repos, accès par rôle et durée de conservation configurable.' },
+      { title: 'Protection des données', text: 'Chiffrement en transit, accès par rôle (forfait Centre d’appels) et durée de conservation configurable.' },
       { title: 'Traçabilité', text: 'Historique des appels, transcriptions et journal des actions pour chaque compte.' },
       { title: 'Contrôle des accès', text: 'Rôles et permissions par membre de l’équipe avec le forfait Centre d’appels.' },
       { title: 'Préparation réglementaire', text: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression, rétention.' },
@@ -283,7 +283,7 @@ export const UI_COMPONENTS = {
 
   finalCta: {
     title: 'Prêt à automatiser vos appels ?',
-    primary: 'Démarrer mon essai gratuit',
+    primary: 'Commencer gratuitement',
     demo: 'Voir la démo live',
     advisorTitle: 'Parler à un conseiller',
     advisorText: 'Laissez votre numéro : nous vous rappelons pour répondre à vos questions.',

@@ -64,7 +64,7 @@ export const UI_PAGES = {
       title: (days: number, minutes: number, brand: string) => `AI-telefoonassistent ${days} dagen gratis proberen · ${brand}`,
       description: (days: number, minutes: number, brand: string) => `Test uw AI-telefoonassistent: maak uw ${brand}-account aan, ${days} dagen gratis, ${minutes} minuten inbegrepen, niets afgeschreven, altijd opzegbaar.`,
     },
-    h1: (minutes: number) => `Test de AI-telefoonassistent: claim uw ${minutes} gratis minuten`,
+    h1: (minutes: number) => `Test de AI-telefoonassistent met ${minutes} gratis minuten`,
     intro: (days: number) => `Maak uw account aan, kies het abonnement dat u wilt testen en probeer uw agent ${days} dagen lang in uw eigen bedrijf.`,
     points: (days: number) => [
       `Betaalkaart gevraagd bij activering, ${days} dagen lang wordt er niets afgeschreven`,
@@ -107,7 +107,7 @@ export const UI_PAGES = {
     termsRequired: 'Ga akkoord met de voorwaarden om teruggebeld te worden.',
     sendError: 'De aanmelding kon niet worden verzonden.',
     sending: 'Verzenden…',
-    submit: 'Terugbellen',
+    submit: 'Bel mij terug',
   },
 
   help: {
@@ -117,7 +117,7 @@ export const UI_PAGES = {
     },
     breadcrumb: 'Help',
     h1: 'Help bij uw klantomgeving: uw AI-telefoonassistent instellen',
-    intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (ballon rechtsonder) u verder, schriftelijk of gesproken.',
+    intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (ballon rechtsonder) u verder in uw eigen taal, dus ook in het Nederlands, schriftelijk of gesproken.',
     openSpace: 'Open mijn klantomgeving',
     chatLabel: 'Voorbeeld van een gesprek met de hulpassistent',
     chatTitle: (brand: string) => `Help ${brand}`,
@@ -163,7 +163,7 @@ export const UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Beveiliging en AVG van uw AI-telefonie · ${brand}`,
-      description: (brand: string) => `Toestemming, versleuteling, bewaartermijn, rollen en traceerbaarheid: zo beschermt ${brand} de gesprekken van uw AI-telefoonassistent. Lees meer.`,
+      description: (brand: string) => `Toestemming, versleuteling tijdens verzending, bewaartermijn en traceerbaarheid: zo beschermt ${brand} de gesprekken van uw AI-telefoonassistent.`,
     },
     h1: 'Beveiliging en AVG-compliance van uw AI-telefoongesprekken',
     intro: 'Uw gesprekken bevatten persoonsgegevens. Hier leest u welke beveiligingsmaatregelen er zijn en welke instellingen u hebt om de AVG na te leven.',
@@ -179,9 +179,9 @@ export const UI_PAGES = {
     commitmentsTitle: 'Onze toezeggingen',
     commitments: [
       'De agent stelt zich voor als AI en doet zich niet voor als mens',
-      'Geen uitgaand gesprek zonder voorafgaande toestemming van het contact',
+      'Uw campagnes mogen alleen contacten bellen die daarmee hebben ingestemd; een ingebouwde blokkeerlijst sluit de anderen uit',
       'Geen medische, juridische of financiële diagnose door de agent',
-      'Gegevens alleen gebruikt om de dienst te leveren',
+      'Uw gegevens worden nooit verkocht; ze worden gebruikt om de dienst te leveren en te verbeteren',
       'Begeleiding bij het aanpassen van uw privacyverklaringen',
     ],
     rights: ['Voor vragen of om uw rechten uit te oefenen: ', { a: 'privacybeleid', href: '/confidentialite' }, '.'] as Rich,
@@ -410,8 +410,8 @@ export const UI_PAGES = {
           {
             ul: [
               [{ strong: 'Front-endplatform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, VS. Hostingregio: us-east4 (Noord-Virginia, Verenigde Staten).'],
-              [{ strong: 'Databases & Opslag:' }, ' Supabase Inc., infrastructuur binnen de Europese Unie (AWS-regio EU-WEST-1, Dublin, Ierland).'],
-              [{ strong: 'Telefoonnetwerk & Spraaksynthese:' }, ' Cloudinfrastructuur voor spraaktelefonie, gecertificeerd volgens de Europese telecommunicatienormen.'],
+              [{ strong: 'Databases & Opslag:' }, ' Supabase Inc., infrastructuur in de Verenigde Staten (AWS-regio us-east-1, Virginia).'],
+              [{ strong: 'Telefoonnetwerk & Spraaksynthese:' }, ' Cloudinfrastructuur voor spraaktelefonie.'],
             ],
           },
         ],
@@ -421,7 +421,6 @@ export const UI_PAGES = {
         body: [
           { p: ['Het merk ', { strong: brand }, `, het logo (de ballon in stand-by, de geluidsgolven en de beschikbaarheidsstip) en alle huisstijlen, teksten, gespreksscripts, infographics en broncodes op de website zijn exclusief eigendom van ${company}.`] },
           { p: `Elke verveelvoudiging, verspreiding, wijziging of elk gebruik zonder voorafgaande schriftelijke toestemming is uitdrukkelijk verboden en vormt een inbreuk in de zin van ${legal.copyrightLaw}.` },
-          { note: 'De vermelding Autocalls White-Label Architecture valt onder de technologielicentie die is verleend door Autocalls Inc.' },
         ],
       },
       {
@@ -479,6 +478,6 @@ export const UI_PAGES = {
     ctaEyebrow: 'Ga aan de slag',
     ctaTitle: 'Klaar om uw bedrijf uit te rusten met een AI-telefoniedienst?',
     ctaText: (days: number, minutes: number) => `Test onze spraakagent vandaag nog ${days} dagen lang in de praktijk, met ${minutes} minuten inbegrepen en zonder verplichtingen.`,
-    ctaButton: 'Start de gratis proefperiode',
+    ctaButton: 'Gratis starten',
   },
 };

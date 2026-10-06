@@ -14,8 +14,8 @@ const toInt = (s: string) => parseInt(s.replace(/\D/g, ''), 10) || 0;
 export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   layout: {
     home: 'Strona główna',
-    freeTrial: 'Bezpłatny okres próbny',
-    callMeBack: 'Zamów oddzwonienie',
+    freeTrial: 'Zacznij za darmo',
+    callMeBack: 'Zamów rozmowę',
   },
 
   navbar: {
@@ -50,7 +50,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     startFree: 'Zacznij za darmo',
     login: 'Logowanie',
     gdpr: 'Wbudowane narzędzia RODO',
-    encryption: 'Szyfrowanie podczas przesyłania i przechowywania',
+    encryption: 'Szyfrowanie podczas przesyłania',
     cols: {
       platform: 'Platforma',
       allFeatures: 'Wszystkie funkcje',
@@ -89,9 +89,9 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: (minutes: string) => `Pierwsze ${minutes} ${plural(toInt(minutes), 'minuta', 'minuty', 'minut')} za darmo`,
     close: 'Zamknij',
     text: (days: number) => `Przetestuj agenta głosowego na prawdziwych połączeniach przez ${days} ${days === 1 ? 'dzień' : 'dni'}, zanim podejmiesz decyzję.`,
-    points: ['W okresie próbnym nic nie jest pobierane', 'Anulujesz jednym kliknięciem w panelu klienta', 'Pierwszy agent gotowy w kilka minut'],
-    claim: (minutes: string) => `Odbierz ${minutes} ${plural(toInt(minutes), 'minutę', 'minuty', 'minut')} za darmo`,
-    callMeBack: 'Wolę, żebyście oddzwonili',
+    points: ['Karta wymagana przy aktywacji, w okresie próbnym nic nie jest pobierane', 'Anulujesz w panelu klienta', 'Pierwszy agent gotowy w kilka minut'],
+    claim: (_minutes: string) => 'Zacznij za darmo',
+    callMeBack: 'Zamów rozmowę',
   },
 
   liveCall: {
@@ -109,11 +109,11 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   ctas: {
     primary: 'Zacznij za darmo',
     demo: 'Wypróbuj naszego agenta na żywo',
-    callback: 'Zostaw numer, oddzwonimy',
+    callback: 'Zamów rozmowę',
   },
 
   callbackForm: {
-    submit: 'Zamów oddzwonienie',
+    submit: 'Zamów rozmowę',
     consentRequired: 'Zaznacz pole, aby wyrazić zgodę na oddzwonienie.',
     sendFailed: 'Nie udało się wysłać zgłoszenia.',
     retry: (email: string) => `Spróbuj ponownie lub napisz na adres ${email}.`,
@@ -143,7 +143,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     items: [
       { title: 'Odbieraj także poza godzinami pracy', text: 'Wieczory, weekendy, czas wizyt: każde połączenie zostaje odebrane.' },
       { title: 'Kwalifikuj automatycznie', text: 'Agent zadaje Twoje pytania i przekazuje Ci kompletne zgłoszenie.' },
-      { title: 'Umawiaj wizyty', text: 'Bezpośrednio w Twoim kalendarzu, z potwierdzeniem i przypomnieniem.' },
+      { title: 'Umawiaj wizyty', text: 'Bezpośrednio w Twoim kalendarzu, z potwierdzeniem (przypomnienia SMS i WhatsApp od pakietu Asystent).' },
       { title: 'Szybciej oddzwaniaj do leadów', text: 'Wypełniony formularz zamienia się w rozmowę w ciągu kilku minut.' },
       { title: 'Zostaw człowiekowi to, co ważne', text: 'Przekazanie rozmowy zespołowi, gdy sytuacja tego wymaga.' },
     ],
@@ -163,7 +163,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { name: 'Wiadomości', items: ['SMS', 'WhatsApp i szablony', 'Messenger i Instagram', 'Widżet na stronę'] },
       { name: 'Kalendarz', items: ['Umawianie wizyt', 'Potwierdzenia i przypomnienia', 'Zmiany terminów i odwołania'] },
       { name: 'Zarządzanie', items: ['Pulpit', 'Szczegółowe raporty', 'Role i uprawnienia'] },
-      { name: 'Bezpieczeństwo', items: ['Zgody i rezygnacje', 'Konfigurowalny okres przechowywania', 'Szyfrowanie', 'Dziennik działań'] },
+      { name: 'Bezpieczeństwo', items: ['Zgody i rezygnacje', 'Konfigurowalny okres przechowywania', 'Szyfrowanie podczas przesyłania', 'Dziennik działań'] },
     ],
     centerTitle: 'Twój agent głosowy AI',
     centerText: 'W centrum: agent skonfigurowany dla Twojej działalności. Wokół: wszystko, z czego może korzystać.',
@@ -238,7 +238,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     case3Plan: 'Oferta na miarę',
     case3Note: (plan: string) => `Powyżej pakietu ${plan} negocjujemy cenę za minutę dopasowaną do Twojego wolumenu.`,
     title: 'Dokupuj minuty lub zmieniaj pakiet we właściwym momencie',
-    intro: 'Nigdy nie płacisz za minutę więcej, niż to konieczne: podpowiadamy, kiedy wystarczy doładowanie, a kiedy bardziej opłaca się wyższy pakiet.',
+    intro: 'Podpowiadamy, kiedy wystarczy doładowanie, a kiedy wyższy pakiet staje się tańszy.',
     customerAt: 'Klient zużywa',
   },
 
@@ -250,7 +250,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   economy: {
     title: 'Koszt bardziej przewidywalny niż recepcja obsługiwana przez człowieka',
     intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
-      `W niektórych przypadkach obsługa przez człowieka kosztuje około ${costPerCall} za połączenie, czyli ponad ${totalCost} za ${calls} ${plural(toInt(calls), 'połączenie', 'połączenia', 'połączeń')}. Pakiet ${plan} za ${price} netto obejmuje ${minutes} ${plural(toInt(minutes), 'minutę', 'minuty', 'minut')} miesięcznie, z dostępnością 24/7. Porównaj z własnymi danymi.`,
+      `Przykład: obsługa przez człowieka może kosztować około ${costPerCall} za połączenie, czyli ponad ${totalCost} za ${calls} ${plural(toInt(calls), 'połączenie', 'połączenia', 'połączeń')}. Pakiet ${plan} za ${price} netto obejmuje ${minutes} ${plural(toInt(minutes), 'minutę', 'minuty', 'minut')} miesięcznie, z dostępnością 24/7. Porównaj z własnymi danymi.`,
     humanTitle: 'Recepcja obsługiwana przez człowieka',
     humanPoints: ['Godziny pracy biura', 'Zmienny koszt: wynagrodzenie, składki, zastępstwa', 'Nieodebrane połączenia w szczytach'],
     aiPoints: ['Dostępność 24/7', 'Przejrzysty pakiet, ceny netto', 'Kilka połączeń jednocześnie'],
@@ -270,7 +270,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Zgody i rezygnacje', text: 'Zgoda na oddzwonienie, obsługa odmów, dozwolone godziny połączeń i lista wykluczeń.' },
-      { title: 'Ochrona danych', text: 'Szyfrowanie podczas przesyłania i przechowywania, dostęp według ról i konfigurowalny okres przechowywania.' },
+      { title: 'Ochrona danych', text: 'Szyfrowanie podczas przesyłania, dostęp według ról (pakiet Call center) i konfigurowalny okres przechowywania.' },
       { title: 'Rozliczalność', text: 'Historia połączeń, transkrypcje i dziennik działań dla każdego konta.' },
       { title: 'Kontrola dostępu', text: 'Role i uprawnienia dla każdego członka zespołu w pakiecie Call center.' },
       { title: 'Przygotowanie do wymogów prawnych', text: 'Narzędzia do stosowania RODO: obowiązek informacyjny, prawo dostępu, usuwanie, okres przechowywania.' },
@@ -294,7 +294,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   finalCta: {
     title: 'Chcesz zautomatyzować obsługę połączeń?',
-    primary: 'Rozpocznij bezpłatny okres próbny',
+    primary: 'Zacznij za darmo',
     demo: 'Zobacz demo na żywo',
     advisorTitle: 'Porozmawiaj z doradcą',
     advisorText: 'Zostaw numer: oddzwonimy, aby odpowiedzieć na Twoje pytania.',
@@ -500,7 +500,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     widget: {
       question: 'Masz pytanie? Porozmawiajmy.',
       talk: 'Porozmawiaj z agentem',
-      callback: 'Zamów oddzwonienie',
+      callback: 'Zamów rozmowę',
     },
     whatsapp: {
       title: 'WhatsApp · Potwierdzenie',

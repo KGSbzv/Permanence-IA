@@ -25,7 +25,7 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
   },
   'Beauty en wellness': {
     title: 'Telefoonservice kapsalon en schoonheidssalon',
-    description: (days) => `Telefoonservice voor kapsalons en schoonheidssalons: afspraken geboekt terwijl u met klanten bezig bent, herinnering per bericht. Probeer ${days} dagen gratis.`,
+    description: (days) => `Telefoonservice voor kapsalons en schoonheidssalons: afspraken geboekt terwijl u met klanten bezig bent, ook buiten openingstijden. Probeer ${days} dagen gratis.`,
   },
   'Horeca en hotels': {
     title: 'Telefonische reserveringen voor uw restaurant',
@@ -67,7 +67,7 @@ export const UI_COMMERCE = {
       booking: {
         title: { before: 'Automatiseer ', kw: 'afspraken en herinneringen', after: '' },
         text: 'Praktijken, salons, garages, kantoren: de agent koppelt met uw agenda, stelt vrije tijdsloten voor, boekt en bevestigt. Verplaatsingen en annuleringen inbegrepen.',
-        points: ['Live agenda: Google, Outlook, Cal.com, Calendly', 'Bevestiging per sms of WhatsApp', 'Herinnering de dag vóór de afspraak'],
+        points: ['Live agenda: Google, Outlook, Cal.com, Calendly', 'Bevestiging per sms of WhatsApp (vanaf het Assistent-abonnement)', 'Herinnering de dag vóór de afspraak (vanaf het Assistent-abonnement)'],
         link: 'Bekijk afspraken plannen',
       },
       support: {
@@ -106,7 +106,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Gekoppeld aan uw tools',
-      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent werkt samen met wat u al gebruikt. De flow builder koppelt meer dan 300 tools zonder code, zoals Zapier of Make.',
+      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent werkt samen met wat u al gebruikt. De flow builder koppelt meer dan 300 tools zonder code, op dezelfde manier als Zapier of Make.',
       link: 'Bekijk alle integraties',
     },
     pricing: {
@@ -147,7 +147,7 @@ export const UI_COMMERCE = {
     faq: {
       title: 'Vragen over de prijzen',
       intro: 'Twijfelt u welk abonnement bij u past? Laat u terugbellen, of probeer de agent live.',
-      primary: 'Gratis beginnen',
+      primary: 'Gratis starten',
       demo: 'Bekijk de live demo',
     },
     finalCta: (minutes: number) => `Begin met ${minutes} gratis minuten`,
@@ -220,7 +220,7 @@ export const UI_COMMERCE = {
     other: {
       title: 'Staat uw branche er niet tussen?',
       intro: 'Advocatenkantoren, e-commerce, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
-      primary: 'Gratis beginnen',
+      primary: 'Gratis starten',
       demo: 'Probeer onze agent live',
     },
   },
@@ -310,7 +310,7 @@ export const UI_COMMERCE = {
     },
     flow: {
       title: { before: 'Bouw uw automatiseringen ', kw: 'zonder code', after: '' },
-      text: 'Een ingevuld formulier, een beëindigd gesprek, een nieuwe lead: elke gebeurtenis kan een reeks acties in uw tools starten, zoals in Zapier of Make, rechtstreeks vanuit uw klantomgeving.',
+      text: 'Een ingevuld formulier, een beëindigd gesprek, een nieuwe lead: elke gebeurtenis kan een reeks acties in uw tools starten, op dezelfde manier als Zapier of Make, rechtstreeks vanuit uw klantomgeving.',
       points: ['Meer dan 300 beschikbare tools', 'Slepen en neerzetten, geen ontwikkelwerk', 'Testen vóór activering'],
       link: 'Bekijk de flow builder',
     },

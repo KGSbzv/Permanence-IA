@@ -34,14 +34,14 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'prise-de-rendez-vous', name: 'Umawianie wizyt', family: 'Kalendarz',
-    short: 'Umawianie wizyt przez telefon, potwierdzenia i przypomnienia w Twoim kalendarzu.',
+    short: 'Umawianie wizyt przez telefon, zmiany terminów i odwołania w Twoim kalendarzu.',
     title: 'Umawianie wizyt przez telefon, gdy Ty pracujesz',
     intro: 'Podłącz kalendarz: agent proponuje wolne terminy, rezerwuje, potwierdza oraz obsługuje zmiany terminów i odwołania bez udziału Twojego zespołu.',
     uses: ['Wypełnianie wolnych terminów', 'Mniej nieodbytych wizyt', 'Recepcja wolna od telefonów w sprawie terminów'],
     steps: [
       { title: 'Podłącz kalendarz', text: 'Google, Outlook, Cal.com lub Calendly.' },
       { title: 'Ustal zasady', text: 'Czas trwania, terminy, rodzaje wizyt i specjaliści.' },
-      { title: 'Agent rezerwuje', text: 'Proponuje termin, potwierdza i wysyła podsumowanie.' },
+      { title: 'Agent rezerwuje', text: 'Proponuje termin, potwierdza i wysyła podsumowanie (SMS i WhatsApp od pakietu Asystent).' },
     ],
     cases: ['Gabinety i kliniki', 'Salony i gabinety kosmetyczne', 'Warsztaty i serwisy'],
     integrations: ['Kalendarz Google', 'Outlook', 'Cal.com', 'Calendly'],

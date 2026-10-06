@@ -27,7 +27,7 @@ export const SECTORS: Sector[] = [
       { title: 'Oddzwaniasz lub jedziesz na miejsce', text: 'Ze wszystkimi informacjami pod ręką.' },
     ],
     offer: 'assistant',
-    ctas: ['Testuj za darmo przez 14 dni', 'Zobacz, jak kwalifikowane są zgłoszenia'],
+    ctas: ['Zacznij za darmo', 'Zobacz, jak kwalifikowane są zgłoszenia'],
     call: [
       { who: 'client', text: 'Dzień dobry, mam przeciek pod zlewem, mocno cieknie.' },
       { who: 'agent', text: 'Rozumiem. Czy udało się zakręcić dopływ wody?' },
@@ -66,7 +66,7 @@ export const SECTORS: Sector[] = [
       { title: 'Dzień wcześniej agent potwierdza', text: 'Telefonicznie lub wiadomością, a w razie potrzeby zwalnia termin.' },
     ],
     offer: 'assistant',
-    ctas: ['Rozpocznij bezpłatny okres próbny', 'Poproś o demonstrację'],
+    ctas: ['Zacznij za darmo', 'Poproś o demonstrację'],
     call: [
       { who: 'client', text: 'Dzień dobry, chciałabym umówić się na skaling.' },
       { who: 'agent', text: 'Oczywiście. Czy była już Pani pacjentką naszego gabinetu?' },
@@ -105,7 +105,7 @@ export const SECTORS: Sector[] = [
       { title: 'Dalszy kontakt jest automatyczny', text: 'Kontakt po prezentacji i aktualizacja CRM.' },
     ],
     offer: 'assistant',
-    ctas: ['Przetestuj agenta dla nieruchomości', 'Odbierz 30 darmowych minut'],
+    ctas: ['Zacznij za darmo', 'Poproś o demonstrację'],
     call: [
       { who: 'client', text: 'Dzwonię w sprawie mieszkania 3-pokojowego z balkonem. Czy jest jeszcze dostępne?' },
       { who: 'agent', text: 'Tak. Czy mieszkanie ma być na własne potrzeby, czy pod inwestycję?' },
@@ -144,7 +144,7 @@ export const SECTORS: Sector[] = [
       { title: 'Klient otrzymuje przypomnienie', text: 'Potwierdzenie i przypomnienie przed wizytą.' },
     ],
     offer: 'assistant',
-    ctas: ['Zobacz demo dla warsztatu', 'Usprawnij pracę warsztatu'],
+    ctas: ['Zacznij za darmo', 'Usprawnij pracę warsztatu'],
     call: [
       { who: 'client', text: 'Od dwóch dni coś piszczy przy hamowaniu.' },
       { who: 'agent', text: 'Zanotowane. Jaki to model i rocznik samochodu?' },
@@ -183,7 +183,7 @@ export const SECTORS: Sector[] = [
       { title: 'Dzień wcześniej wysyłane jest przypomnienie', text: 'Wiadomością, z możliwością zmiany terminu.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Wypełnij mój kalendarz', 'Zacznij za darmo'],
+    ctas: ['Zacznij za darmo', 'Poproś o demonstrację'],
     call: [
       { who: 'client', text: 'Dzień dobry, chciałabym umówić strzyżenie i modelowanie na sobotę.' },
       { who: 'agent', text: 'Z przyjemnością. Czy ma Pani preferowaną fryzjerkę?' },
@@ -222,7 +222,7 @@ export const SECTORS: Sector[] = [
       { title: 'Twój zespół jest powiadamiany', text: 'Tylko wtedy, gdy potrzebna jest jego interwencja.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Zautomatyzuj moje rezerwacje', 'Poproś o demonstrację'],
+    ctas: ['Zacznij za darmo', 'Poproś o demonstrację'],
     call: [
       { who: 'client', text: 'Czy macie dziś stolik dla czterech osób około 20:00?' },
       { who: 'agent', text: 'Tak, o 20:15 na tarasie lub o 20:30 w sali.' },

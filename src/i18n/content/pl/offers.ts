@@ -18,8 +18,8 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     audience: 'Aby przetestować agenta w Twojej działalności',
     title: 'Przetestuj agenta za darmo przez 14 dni',
     pitch: 'Poznaj platformę, skonfiguruj pierwszego agenta, wypróbuj demo na żywo i wykorzystaj do 30 minut połączeń, aby sprawdzić potencjał w Twojej działalności.',
-    cta: 'Odbierz 30 darmowych minut',
-    highlights: ['1 agent testowy', 'Demo agenta na żywo', 'Widżet na stronę i formularz oddzwonienia', 'Podgląd bazy wiedzy'],
+    cta: 'Zacznij za darmo',
+    highlights: ['14 dni w wybranym pakiecie', '30 minut połączeń w cenie', 'Karta wymagana, w okresie próbnym nic nie jest pobierane', 'Anuluj przed końcem okresu próbnego bez kosztów'],
   },
   receptionniste: {
     name: 'Recepcjonistka',
@@ -78,15 +78,15 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Asystenci głosowi AI', detail: 'Agenci do połączeń przychodzących i wychodzących', cells: { decouverte: '1 testowy', receptionniste: '1', assistant: '3', 'centre-appels': 'Wielu agentów', 'sur-mesure': 'Na miarę' } },
       { label: 'Historia połączeń', detail: 'Nagrania, transkrypcje, podsumowania', cells: { ...all(true), decouverte: 'Ograniczona' } },
       { label: 'Rozmowy', detail: 'Rozmowy pisemne i głosowe w jednym miejscu', cells: all(true) },
-      { label: 'Przekazanie rozmowy człowiekowi', detail: 'Przełączenie do Twojego zespołu', cells: { ...all(true), decouverte: false } },
-      { label: 'Głosy wielojęzyczne', detail: 'Wykrywanie języków dodatkowych', cells: { ...all(true), decouverte: 'Podgląd' } },
+      { label: 'Przekazanie rozmowy człowiekowi', detail: 'Przełączenie do Twojego zespołu', cells: all(true) },
+      { label: 'Głosy wielojęzyczne', detail: 'Wykrywanie języków dodatkowych', cells: all(true) },
     ],
   },
   {
     group: 'Konfiguracja agenta',
     rows: [
       { label: 'Edytor promptów AI', detail: 'Zachowanie, ton, zasady', cells: { decouverte: 'Podgląd', receptionniste: 'Uproszczony', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Baza wiedzy', detail: 'PDF, strony WWW, procedury', cells: { decouverte: 'Podgląd', receptionniste: 'Podstawowa', assistant: true, 'centre-appels': 'Zaawansowana', 'sur-mesure': 'Zaawansowana' } },
+      { label: 'Baza wiedzy', detail: 'PDF, strony WWW, procedury', cells: { decouverte: 'Podstawowa', receptionniste: 'Podstawowa', assistant: true, 'centre-appels': 'Zaawansowana', 'sur-mesure': 'Zaawansowana' } },
       { label: 'Flow builder', detail: 'Wizualne scenariusze bez kodu', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Zaawansowany', 'sur-mesure': 'Zaawansowany' } },
       { label: 'Automatyzacje', detail: 'Ponad 300 narzędzi do podłączenia', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
@@ -94,7 +94,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Kalendarz i pozyskiwanie zgłoszeń',
     rows: [
-      { label: 'Integracja z kalendarzem', detail: 'Google, Outlook, Cal.com, Calendly', cells: { ...all(true), decouverte: 'Podgląd' } },
+      { label: 'Integracja z kalendarzem', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
       { label: 'Widżet na stronę', detail: 'Oddzwonienie i rozmowa z Twojej strony', cells: all(true) },
       { label: 'Identyfikacja dzwoniącego', detail: 'Przycisk caller ID', cells: { ...all(true), decouverte: false } },
       { label: 'Leady i wstępna kwalifikacja', detail: 'Uporządkowane karty potencjalnych klientów', cells: { decouverte: false, receptionniste: 'Podstawowe', assistant: true, 'centre-appels': true, 'sur-mesure': true } },

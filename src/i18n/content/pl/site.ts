@@ -11,7 +11,7 @@ const daysWord = (n: number) => (n === 1 ? 'dzień' : 'dni');
 
 export const SITE_TEXT = {
   trialLine: (days: number, minutes: number) => `${days} ${daysWord(days)} bezpłatnego okresu próbnego — ${minutes} ${minutesWord(minutes)} w cenie — ceny netto — bez zobowiązań`,
-  trialBadges: (days: number, minutes: number) => [`${days} ${daysWord(days)} za darmo`, `${minutes} ${minutesWord(minutes)} w cenie`, 'Ceny netto', 'Bez zobowiązań'],
+  trialBadges: (days: number, minutes: number) => [`${days} ${daysWord(days)} za darmo`, `${minutes} ${minutesWord(minutes)} w cenie`, 'W okresie próbnym nic nie jest pobierane', 'Bez zobowiązań'],
   growthLines: ['Dokupuj minuty w dowolnym momencie', 'Przejdź na wyższy pakiet, gdy liczba połączeń rośnie'],
   priceNote: 'Ceny w dolarach amerykańskich (USD), netto — lokalne podatki doliczane, jeśli mają zastosowanie. Dedykowany numer telefonu dostępny opcjonalnie, płatny co miesiąc.',
   skipToContent: 'Przejdź do treści',

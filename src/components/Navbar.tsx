@@ -40,7 +40,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
-      <p className="bg-ink px-4 py-1.5 text-center text-[13px] font-medium text-white">{c.site.trialLine(market.trial.days, market.trial.minutes)}</p>
+      <p className="truncate bg-ink px-4 py-1.5 text-center text-[12px] font-medium text-white sm:whitespace-normal sm:text-[13px]">{c.site.trialLine(market.trial.days, market.trial.minutes)}</p>
       <div ref={ref} className="wrap flex h-16 items-center gap-6">
         <Logo height={40} />
         <nav aria-label={t.mainNav} className="hidden flex-1 items-center gap-1 lg:flex">
@@ -80,7 +80,9 @@ export default function Navbar() {
         <nav aria-label={t.mobileNav} className="max-h-[75vh] overflow-y-auto border-t border-line bg-white px-4 pb-6 lg:hidden">
           {MENUS.map((m) => (
             <details key={m.label} className="border-b border-line py-2">
-              <summary className="cursor-pointer py-2 font-display font-semibold text-ink">{m.label}</summary>
+              <summary className="disclosure flex cursor-pointer items-center justify-between py-2 font-display font-semibold text-ink">
+                {m.label}<ChevronDown className="disclosure-icon h-4 w-4 transition-transform" aria-hidden />
+              </summary>
               <ul className="pb-2">{m.items.map((it) => <li key={it.href}><Link href={it.href} className="block py-1.5 pl-3 text-ink">{it.label}</Link></li>)}</ul>
             </details>
           ))}

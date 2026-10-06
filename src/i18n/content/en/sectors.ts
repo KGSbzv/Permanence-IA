@@ -29,7 +29,7 @@ export const SECTORS: Sector[] = [
       { title: 'You call back or go out', text: 'With all the information to hand.' },
     ],
     offer: 'assistant',
-    ctas: ['Try it free for 14 days', 'See how enquiries are qualified'],
+    ctas: ['Start for free', 'See how enquiries are qualified'],
     call: [
       { who: 'client', text: 'Hello, I’ve got a leak under the sink and it’s pouring out.' },
       { who: 'agent', text: 'I understand. Have you been able to turn off the water supply?' },
@@ -68,7 +68,7 @@ export const SECTORS: Sector[] = [
       { title: 'The day before, the agent confirms', text: 'By call or message, and frees up the slot if needed.' },
     ],
     offer: 'assistant',
-    ctas: ['Start the free trial', 'Request a demo'],
+    ctas: ['Start for free', 'Request a demo'],
     call: [
       { who: 'client', text: 'Hello, I’d like an appointment for a scale and polish.' },
       { who: 'agent', text: 'Of course. Are you already a patient at the practice?' },
@@ -107,7 +107,7 @@ export const SECTORS: Sector[] = [
       { title: 'Follow-up is automatic', text: 'Follow-up after the viewing and CRM update.' },
     ],
     offer: 'assistant',
-    ctas: ['Try the real estate agent', 'Claim my 30 minutes'],
+    ctas: ['Start for free', 'Request a demo'],
     call: [
       { who: 'client', text: 'I’m calling about the two-bedroom flat with a balcony. Is it still available?' },
       { who: 'agent', text: 'Yes. Are you looking to live there or to invest?' },
@@ -146,7 +146,7 @@ export const SECTORS: Sector[] = [
       { title: 'The customer is reminded', text: 'Confirmation and reminder before the appointment.' },
     ],
     offer: 'assistant',
-    ctas: ['See the garage demo', 'Optimise my workshop'],
+    ctas: ['Start for free', 'See the garage demo'],
     call: [
       { who: 'client', text: 'I’ve had a noise when braking for two days.' },
       { who: 'agent', text: 'Noted. What is the model and year of the vehicle?' },
@@ -185,7 +185,7 @@ export const SECTORS: Sector[] = [
       { title: 'The reminder goes out the day before', text: 'By message, with the option to reschedule.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Fill my diary', 'Start for free'],
+    ctas: ['Start for free', 'Request a demo'],
     call: [
       { who: 'client', text: 'Hello, I’d like a cut and blow-dry on Saturday.' },
       { who: 'agent', text: 'Of course. Do you have a preferred stylist?' },
@@ -224,7 +224,7 @@ export const SECTORS: Sector[] = [
       { title: 'Your team is told', text: 'Only when they need to step in.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Automate my bookings', 'Request a demo'],
+    ctas: ['Start for free', 'Request a demo'],
     call: [
       { who: 'client', text: 'Do you have a table for four tonight at around 8 pm?' },
       { who: 'agent', text: 'Yes, at 8:15 pm on the terrace or 8:30 pm inside.' },

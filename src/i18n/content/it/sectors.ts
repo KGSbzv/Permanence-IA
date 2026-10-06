@@ -10,7 +10,7 @@ export const SECTORS: Sector[] = [
     short: 'Urgenze filtrate e richieste qualificate mentre i Suoi tecnici sono sul campo.',
     targets: 'Idraulici, elettricisti, tecnici di riscaldamento e climatizzazione, coperture, ristrutturazioni, pulizie',
     title: 'Non perda più le urgenze mentre i Suoi tecnici sono sul campo',
-    subtitle: 'La segreteria telefonica AI per artigiani: PermanenceIA raccoglie le richieste, filtra le urgenze, organizza le richiamate e La aiuta a intervenire più in fretta, anche fuori orario.',
+    subtitle: 'L’assistente telefonico AI per artigiani: PermanenceIA raccoglie le richieste, filtra le urgenze, organizza le richiamate e La aiuta a intervenire più in fretta, anche fuori orario.',
     problems: [
       'I Suoi tecnici non possono rispondere durante un intervento.',
       'Le chiamate della sera e del fine settimana finiscono a un concorrente.',
@@ -29,7 +29,7 @@ export const SECTORS: Sector[] = [
       { title: 'Lei richiama o interviene', text: 'Con tutte le informazioni a disposizione.' },
     ],
     offer: 'assistant',
-    ctas: ['Provi gratis per 14 giorni', 'Veda come vengono qualificate le richieste'],
+    ctas: ['Inizi gratis', 'Veda come vengono qualificate le richieste'],
     call: [
       { who: 'client', text: 'Buongiorno, ho una perdita sotto il lavello, esce parecchia acqua.' },
       { who: 'agent', text: 'Capisco. È riuscito a chiudere l’acqua?' },
@@ -49,7 +49,7 @@ export const SECTORS: Sector[] = [
     short: 'Appuntamenti, conferme e spostamenti gestiti senza interrompere le cure.',
     targets: 'Studi dentistici, poliambulatori, cliniche non di emergenza, fisioterapia',
     title: 'Prenoti e confermi gli appuntamenti senza interrompere le cure',
-    subtitle: 'Una segreteria telefonica intelligente per il Suo studio dentistico: PermanenceIA aiuta il Suo team a gestire le chiamate amministrative, i nuovi pazienti, le conferme e gli spostamenti.',
+    subtitle: 'Una receptionist virtuale per il Suo studio dentistico: PermanenceIA aiuta il Suo team a gestire le chiamate amministrative, i nuovi pazienti, le conferme e gli spostamenti.',
     problems: [
       'La reception viene interrotta durante le visite.',
       'I nuovi pazienti chiamano fuori orario.',
@@ -68,7 +68,7 @@ export const SECTORS: Sector[] = [
       { title: 'Il giorno prima, l’agente conferma', text: 'Con una chiamata o un messaggio, e libera lo slot se necessario.' },
     ],
     offer: 'assistant',
-    ctas: ['Inizi la prova gratuita', 'Richieda una dimostrazione'],
+    ctas: ['Inizi gratis', 'Richieda una dimostrazione'],
     call: [
       { who: 'client', text: 'Buongiorno, vorrei un appuntamento per una pulizia dei denti.' },
       { who: 'agent', text: 'Volentieri. È già paziente dello studio?' },
@@ -107,7 +107,7 @@ export const SECTORS: Sector[] = [
       { title: 'Il follow-up è automatico', text: 'Ricontatto dopo la visita e aggiornamento del CRM.' },
     ],
     offer: 'assistant',
-    ctas: ['Provi l’agente immobiliare', 'Richieda i Suoi 30 minuti'],
+    ctas: ['Inizi gratis', 'Richieda una dimostrazione'],
     call: [
       { who: 'client', text: 'Chiamo per il trilocale con balcone, è ancora disponibile?' },
       { who: 'agent', text: 'Sì. Lo cerca come abitazione o come investimento?' },
@@ -146,7 +146,7 @@ export const SECTORS: Sector[] = [
       { title: 'Il cliente viene ricontattato', text: 'Conferma e promemoria prima dell’appuntamento.' },
     ],
     offer: 'assistant',
-    ctas: ['Veda la demo per officine', 'Ottimizzi la Sua officina'],
+    ctas: ['Inizi gratis', 'Ottimizzi la Sua officina'],
     call: [
       { who: 'client', text: 'Da due giorni sento un rumore quando freno.' },
       { who: 'agent', text: 'Prendo nota. Qual è il modello e l’anno del veicolo?' },
@@ -185,7 +185,7 @@ export const SECTORS: Sector[] = [
       { title: 'Il promemoria parte il giorno prima', text: 'Via messaggio, con la possibilità di spostare l’appuntamento.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Riempia la Sua agenda', 'Inizi gratuitamente'],
+    ctas: ['Inizi gratis', 'Richieda una dimostrazione'],
     call: [
       { who: 'client', text: 'Buongiorno, vorrei taglio e piega per sabato.' },
       { who: 'agent', text: 'Volentieri. Ha una preferenza per la parrucchiera?' },
@@ -224,7 +224,7 @@ export const SECTORS: Sector[] = [
       { title: 'Il Suo team viene avvisato', text: 'Solo quando serve il suo intervento.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Automatizzi le Sue prenotazioni', 'Richieda una dimostrazione'],
+    ctas: ['Inizi gratis', 'Richieda una dimostrazione'],
     call: [
       { who: 'client', text: 'Avete un tavolo per quattro stasera verso le 20?' },
       { who: 'agent', text: 'Sì, alle 20:15 in terrazza o alle 20:30 in sala.' },

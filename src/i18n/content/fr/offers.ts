@@ -17,8 +17,8 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     audience: 'Pour tester l’agent sur votre activité',
     title: 'Testez l’agent gratuitement pendant 14 jours',
     pitch: 'Découvrez la plateforme, configurez un premier agent, essayez la démo live et utilisez jusqu’à 30 minutes d’appels pour valider le potentiel sur votre activité.',
-    cta: 'Réclamer mes 30 minutes',
-    highlights: ['1 agent de test', 'Démo live de l’agent', 'Widget web et formulaire de rappel', 'Aperçu de la base de connaissances'],
+    cta: 'Commencer gratuitement',
+    highlights: ['14 jours sur le forfait de votre choix', '30 minutes d’appels incluses', 'Carte demandée, rien n’est débité pendant l’essai', 'Annulation sans frais avant la fin de l’essai'],
   },
   receptionniste: {
     name: 'Réceptionniste',
@@ -81,15 +81,15 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Assistants vocaux IA', detail: 'Agents entrants et sortants', cells: { decouverte: '1 de test', receptionniste: '1', assistant: '3', 'centre-appels': 'Multi-agents', 'sur-mesure': 'Sur mesure' } },
       { label: 'Historique des appels', detail: 'Enregistrements, transcriptions, résumés', cells: { ...all(true), decouverte: 'Limité' } },
       { label: 'Conversations', detail: 'Échanges écrits et vocaux centralisés', cells: all(true) },
-      { label: 'Transfert vers un humain', detail: 'Bascule vers votre équipe', cells: { ...all(true), decouverte: false } },
-      { label: 'Voix multilingues', detail: 'Langues secondaires détectées', cells: { ...all(true), decouverte: 'Aperçu' } },
+      { label: 'Transfert vers un humain', detail: 'Bascule vers votre équipe', cells: all(true) },
+      { label: 'Voix multilingues', detail: 'Langues secondaires détectées', cells: all(true) },
     ],
   },
   {
     group: 'Configuration de l’agent',
     rows: [
       { label: 'Éditeur de prompts IA', detail: 'Comportement, ton, règles', cells: { decouverte: 'Aperçu', receptionniste: 'Simplifié', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Base de connaissances', detail: 'PDF, pages web, procédures', cells: { decouverte: 'Aperçu', receptionniste: 'Basique', assistant: true, 'centre-appels': 'Avancée', 'sur-mesure': 'Avancée' } },
+      { label: 'Base de connaissances', detail: 'PDF, pages web, procédures', cells: { decouverte: 'Basique', receptionniste: 'Basique', assistant: true, 'centre-appels': 'Avancée', 'sur-mesure': 'Avancée' } },
       { label: 'Flow builder', detail: 'Scénarios visuels sans code', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Avancé', 'sur-mesure': 'Avancé' } },
       { label: 'Automatisations', detail: 'Plus de 300 outils connectables', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
@@ -97,7 +97,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agenda et capture',
     rows: [
-      { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly', cells: { ...all(true), decouverte: 'Aperçu' } },
+      { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
       { label: 'Widget web', detail: 'Rappel et appel depuis votre site', cells: all(true) },
       { label: 'Identification de l’appelant', detail: 'Bouton caller ID', cells: { ...all(true), decouverte: false } },
       { label: 'Leads et préqualification', detail: 'Fiches prospects structurées', cells: { decouverte: false, receptionniste: 'Basique', assistant: true, 'centre-appels': true, 'sur-mesure': true } },

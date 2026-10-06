@@ -11,8 +11,8 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     audience: 'Om de agent op uw eigen bedrijf te testen',
     title: 'Test de agent 14 dagen gratis',
     pitch: 'Leer het platform kennen, stel een eerste agent in, probeer de live demo en gebruik tot 30 belminuten om te zien wat het voor uw bedrijf kan betekenen.',
-    cta: 'Claim mijn 30 minuten',
-    highlights: ['1 testagent', 'Live demo van de agent', 'Webwidget en terugbelformulier', 'Kennismaking met de kennisbank'],
+    cta: 'Gratis starten',
+    highlights: ['14 dagen op het abonnement van uw keuze', '30 belminuten inbegrepen', 'Kaart gevraagd, niets afgeschreven tijdens de proefperiode', 'Kosteloos opzeggen vóór het einde'],
   },
   receptionniste: {
     name: 'Receptionist',
@@ -71,15 +71,15 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'AI-spraakassistenten', detail: 'Inkomende en uitgaande agents', cells: { decouverte: '1 testagent', receptionniste: '1', assistant: '3', 'centre-appels': 'Meerdere agents', 'sur-mesure': 'Maatwerk' } },
       { label: 'Gespreksgeschiedenis', detail: 'Opnames, transcripties, samenvattingen', cells: { ...all(true), decouverte: 'Beperkt' } },
       { label: 'Conversaties', detail: 'Geschreven en gesproken contact op één plek', cells: all(true) },
-      { label: 'Doorverbinden naar een medewerker', detail: 'Overdracht naar uw team', cells: { ...all(true), decouverte: false } },
-      { label: 'Meertalige stemmen', detail: 'Herkenning van extra talen', cells: { ...all(true), decouverte: 'Kennismaking' } },
+      { label: 'Doorverbinden naar een medewerker', detail: 'Overdracht naar uw team', cells: all(true) },
+      { label: 'Meertalige stemmen', detail: 'Herkenning van extra talen', cells: all(true) },
     ],
   },
   {
     group: 'Instellingen van de agent',
     rows: [
       { label: 'AI-prompteditor', detail: 'Gedrag, toon, regels', cells: { decouverte: 'Kennismaking', receptionniste: 'Vereenvoudigd', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Kennisbank', detail: 'Pdf’s, webpagina’s, procedures', cells: { decouverte: 'Kennismaking', receptionniste: 'Basis', assistant: true, 'centre-appels': 'Geavanceerd', 'sur-mesure': 'Geavanceerd' } },
+      { label: 'Kennisbank', detail: 'Pdf’s, webpagina’s, procedures', cells: { decouverte: 'Basis', receptionniste: 'Basis', assistant: true, 'centre-appels': 'Geavanceerd', 'sur-mesure': 'Geavanceerd' } },
       { label: 'Flow builder', detail: 'Visuele scenario’s zonder code', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Geavanceerd', 'sur-mesure': 'Geavanceerd' } },
       { label: 'Automatiseringen', detail: 'Meer dan 300 koppelbare tools', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
@@ -87,7 +87,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Agenda en leadcaptatie',
     rows: [
-      { label: 'Agendakoppeling', detail: 'Google, Outlook, Cal.com, Calendly', cells: { ...all(true), decouverte: 'Kennismaking' } },
+      { label: 'Agendakoppeling', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
       { label: 'Webwidget', detail: 'Terugbellen en bellen vanaf uw website', cells: all(true) },
       { label: 'Nummerherkenning', detail: 'Caller ID-knop', cells: { ...all(true), decouverte: false } },
       { label: 'Leads en voorkwalificatie', detail: 'Gestructureerde prospectkaarten', cells: { decouverte: false, receptionniste: 'Basis', assistant: true, 'centre-appels': true, 'sur-mesure': true } },

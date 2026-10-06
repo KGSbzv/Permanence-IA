@@ -67,7 +67,7 @@ export const UI_COMMERCE = {
       booking: {
         title: { before: 'Automatisez la prise de ', kw: 'rendez-vous et les rappels', after: '' },
         text: 'Cabinets, salons, garages, agences : l’agent se connecte à votre agenda, propose les créneaux libres, réserve et confirme. Reports et annulations compris.',
-        points: ['Agenda en direct : Google, Outlook, Cal.com, Calendly', 'Confirmation par SMS ou WhatsApp', 'Rappel la veille du rendez-vous'],
+        points: ['Agenda en direct : Google, Outlook, Cal.com, Calendly', 'Confirmation par SMS ou WhatsApp, dès le forfait Assistant', 'Rappel la veille du rendez-vous, dès le forfait Assistant'],
         link: 'Voir la prise de rendez-vous',
       },
       support: {
@@ -106,7 +106,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Connecté à vos outils',
-      intro: 'Agenda, CRM, messageries, téléphonie : l’agent s’intègre à ce que vous utilisez déjà. Le flow builder relie plus de 300 outils sans code, comme Zapier ou Make.',
+      intro: 'Agenda, CRM, messageries, téléphonie : l’agent s’intègre à ce que vous utilisez déjà. Le flow builder relie plus de 300 outils sans code, à la manière de Zapier ou Make.',
       link: 'Voir toutes les intégrations',
     },
     pricing: {
@@ -311,7 +311,7 @@ export const UI_COMMERCE = {
     },
     flow: {
       title: { before: 'Construisez vos automatisations ', kw: 'sans code', after: '' },
-      text: 'Un formulaire rempli, un appel terminé, un nouveau lead : chaque événement peut déclencher une suite d’actions dans vos outils, comme dans Zapier ou Make, directement depuis votre espace.',
+      text: 'Un formulaire rempli, un appel terminé, un nouveau lead : chaque événement peut déclencher une suite d’actions dans vos outils, à la manière de Zapier ou Make, directement depuis votre espace.',
       points: ['Plus de 300 outils disponibles', 'Glisser-déposer, aucun développement', 'Tests avant activation'],
       link: 'Voir le flow builder',
     },

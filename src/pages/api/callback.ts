@@ -1,10 +1,29 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, sendMail, toE164 } from '@/lib/server';
 
+// Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
+const hits = new Map<string, number[]>();
+function tooMany(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < 600_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > 20;
+}
+const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
+  const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+  if (tooMany(ip)) return res.status(429).json({ error: 'Trop de demandes, réessayez dans quelques minutes.' });
+  // Champ piège invisible : rempli uniquement par les robots. On répond « succès » sans rien faire.
+  if (req.body?.website) return res.status(200).json({ success: true });
 
-  const { name, phone, email, company, sector, slot, note, consentCall, type, agent, locale } = req.body || {};
+  const b = req.body || {};
+  const { consentCall, type, locale } = b;
+  const name = clip(b.name, 120), phone = clip(b.phone, 32), email = clip(b.email, 160), company = clip(b.company, 160);
+  const sector = clip(b.sector, 80), slot = clip(b.slot, 120), note = clip(b.note, 1500), agent = clip(b.agent, 120);
   // Accepte true ou "true" (les outils des agents envoient des chaînes).
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });

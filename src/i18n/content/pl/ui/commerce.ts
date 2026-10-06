@@ -65,7 +65,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       booking: {
         title: { before: 'Zautomatyzuj ', kw: 'umawianie wizyt przez telefon', after: ' i przypomnienia' },
         text: 'Gabinety, salony, warsztaty, biura: agent łączy się z Twoim kalendarzem, proponuje wolne terminy, rezerwuje i potwierdza. Także zmiany terminów i odwołania.',
-        points: ['Kalendarz na bieżąco: Google, Outlook, Cal.com, Calendly', 'Potwierdzenie SMS-em lub przez WhatsApp', 'Przypomnienie dzień przed wizytą'],
+        points: ['Kalendarz na bieżąco: Google, Outlook, Cal.com, Calendly', 'Potwierdzenie SMS-em lub przez WhatsApp (od pakietu Asystent)', 'Przypomnienie dzień przed wizytą (od pakietu Asystent)'],
         link: 'Zobacz umawianie wizyt',
       },
       support: {
@@ -104,7 +104,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     integrations: {
       title: 'Połączony z Twoimi narzędziami',
-      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent integruje się z tym, czego już używasz. Flow builder łączy ponad 300 narzędzi bez kodu, podobnie jak Zapier czy Make.',
+      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent integruje się z tym, czego już używasz. Flow builder łączy ponad 300 narzędzi bez kodu, na tej samej zasadzie co Zapier czy Make.',
       link: 'Zobacz wszystkie integracje',
     },
     pricing: {
@@ -144,7 +144,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     faq: {
       title: 'Pytania o ceny',
-      intro: 'Nie wiesz, który pakiet wybrać? Zamów oddzwonienie lub wypróbuj agenta na żywo.',
+      intro: 'Nie wiesz, który pakiet wybrać? Zamów rozmowę lub wypróbuj agenta na żywo.',
       primary: 'Zacznij za darmo',
       demo: 'Zobacz demo na żywo',
     },
@@ -308,7 +308,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     flow: {
       title: { before: 'Twórz automatyzacje ', kw: 'bez kodu', after: '' },
-      text: 'Wypełniony formularz, zakończona rozmowa, nowy lead: każde zdarzenie może uruchomić sekwencję działań w Twoich narzędziach, jak w Zapier czy Make, bezpośrednio z Twojego panelu.',
+      text: 'Wypełniony formularz, zakończona rozmowa, nowy lead: każde zdarzenie może uruchomić sekwencję działań w Twoich narzędziach, na tej samej zasadzie co Zapier czy Make, bezpośrednio z Twojego panelu.',
       points: ['Ponad 300 dostępnych narzędzi', 'Przeciągnij i upuść, bez programowania', 'Testy przed aktywacją'],
       link: 'Zobacz flow builder',
     },

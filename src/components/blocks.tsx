@@ -206,7 +206,8 @@ function PriceTag({ o, light = false }: { o: Offer; light?: boolean }) {
   const amount = o.price === null ? o.priceLabel : money(o.price);
   return (
     <div>
-      <p className={`font-display text-[2rem] font-bold leading-none ${light ? 'text-white' : 'text-ink'}`}>{amount}</p>
+      {/* Montant chiffré en grand ; libellé textuel (« sur devis ») plus petit pour tenir sur une ligne. */}
+      <p className={`font-display font-bold ${o.price === null ? 'text-2xl leading-8' : 'text-[2rem] leading-8'} ${light ? 'text-white' : 'text-ink'}`}>{amount}</p>
       <p className={`mt-1.5 text-sm ${light ? 'text-white/70' : 'text-slate'}`}>
         {o.price === 0 ? t.daysFree(market.trial.days) : o.price === null ? t.negotiated : c.offerLabels.perMonth}
       </p>
@@ -218,20 +219,24 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
   const { c, offers } = useI18n();
   const t = c.ui.components.pricingCards;
   const list = only ? offers.filter((o) => only.includes(o.slug)) : offers;
+  // Chaque carte est une sous-grille (7 rangées) : nom, public, prix, minutes, points forts, bouton et lien
+  // restent alignés d’une carte à l’autre, même quand un libellé passe sur deux lignes (NL, PL).
   return (
     <div className={`grid gap-4 md:grid-cols-2 ${list.length >= 5 ? 'xl:grid-cols-5' : list.length === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
       {list.map((o) => (
-        <div key={o.slug} className={`relative flex flex-col rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
-          {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
-          <p className={`font-display text-lg font-bold ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
-          <p className="mt-1 min-h-[2.5rem] text-sm">{o.audience}</p>
+        <div key={o.slug} className={`relative row-span-7 grid grid-rows-subgrid gap-y-0 rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
+          {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
+          <p className={`font-display text-lg font-bold leading-snug ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
+          <p className="mt-1 text-sm">{o.audience}</p>
           <div className="mt-4"><PriceTag o={o} light={o.featured} /></div>
-          <p className={`mt-3 text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
-          {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(o.perMinute)}</p>}
-          <ul className="mt-4 flex-1 space-y-2 text-[14px]">
+          <div className="mt-3">
+            <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
+            {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(o.perMinute)}</p>}
+          </div>
+          <ul className="mt-4 space-y-2 text-[14px]">
             {o.highlights.map((h) => <li key={h} className="flex gap-2"><Check className="mt-1 h-3.5 w-3.5 shrink-0 text-signal" aria-hidden /><span className={o.featured ? 'text-white' : 'text-ink'}>{h}</span></li>)}
           </ul>
-          <Link href={o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}`} className={`mt-6 ${o.featured ? 'btn-signal' : 'btn-ghost'} text-sm`}>{o.cta}</Link>
+          <Link href={o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}`} className={`mt-6 self-end ${o.featured ? 'btn-signal' : 'btn-ghost'} whitespace-normal text-center text-sm leading-tight`}>{o.cta}</Link>
           <Link href={`/offres/${o.slug}`} className={`mt-2 text-center text-xs font-semibold hover:underline ${o.featured ? 'text-white/70' : 'text-slate'}`}>{t.details}</Link>
         </div>
       ))}
@@ -250,7 +255,7 @@ export function GrowthLines({ dark = false, className = '' }: { dark?: boolean; 
 
 function CellView({ v, t }: { v: Cell; t: { included: string; notIncluded: string } }) {
   if (v === true) return <Check className="mx-auto h-4 w-4 text-signal" aria-label={t.included} />;
-  if (v === false) return <Minus className="mx-auto h-4 w-4 text-line" aria-label={t.notIncluded} />;
+  if (v === false) return <Minus className="mx-auto h-4 w-4 text-slate-light" strokeWidth={2.5} aria-label={t.notIncluded} />;
   return <span className="text-[13px] font-medium text-ink">{v}</span>;
 }
 
@@ -258,30 +263,31 @@ export function MatrixTable() {
   const { c, offers, money } = useI18n();
   const t = c.ui.components.matrix;
   return (
-    <div className="overflow-x-auto rounded-2xl border border-line bg-white">
-      <table className="w-full min-w-[760px] border-collapse text-left text-[14px]">
+    // Défilement dans les deux sens dans le cadre : en-tête et première colonne restent visibles.
+    <div className="max-h-[80vh] overflow-auto rounded-2xl border border-line bg-white">
+      <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[14px] [&_tbody_tr>*]:border-b [&_tbody_tr>*]:border-line">
         <caption className="sr-only">{t.caption}</caption>
-        <thead className="bg-white">
-          <tr className="border-b border-line">
-            <th scope="col" className="p-4 font-display text-sm font-semibold text-ink">{t.inYourInterface}</th>
-            {offers.map((o) => <th key={o.slug} scope="col" className={`p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'text-ink'}`}>{o.name}</th>)}
+        <thead className="sticky top-0 z-20 bg-white">
+          <tr>
+            <th scope="col" className="sticky left-0 z-10 w-36 border-b border-line bg-white p-3 font-display sm:w-auto sm:p-4 text-sm font-semibold text-ink">{t.inYourInterface}</th>
+            {offers.map((o) => <th key={o.slug} scope="col" className={`border-b border-line p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'bg-white text-ink'}`}>{o.name}</th>)}
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b border-line bg-paper/60">
-            <th scope="row" className="p-4 font-medium text-ink">{t.pricePerMonth}</th>
+          <tr className="bg-paper">
+            <th scope="row" className="sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4">{t.pricePerMonth}</th>
             {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.price === null ? o.priceLabel : money(o.price)}</td>)}
           </tr>
-          <tr className="border-b border-line bg-paper/60">
-            <th scope="row" className="p-4 font-medium text-ink">{t.includedMinutes}</th>
+          <tr className="bg-paper">
+            <th scope="row" className="sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4">{t.includedMinutes}</th>
             {offers.map((o) => <td key={o.slug} className="p-4 text-center text-[13px] font-semibold text-ink">{o.minutes}{o.perMinute && <span className="block font-normal text-slate-light">{o.perMinute}</span>}</td>)}
           </tr>
           {c.matrix.map((g) => (
             <React.Fragment key={g.group}>
-              <tr><th colSpan={6} scope="colgroup" className="bg-paper px-4 pb-2 pt-5 font-display text-sm font-semibold text-ink">{g.group}</th></tr>
+              <tr><th colSpan={offers.length + 1} scope="colgroup" className="bg-paper px-4 pb-2 pt-5 text-left font-display text-sm font-semibold text-ink"><span className="sticky left-4">{g.group}</span></th></tr>
               {g.rows.map((r) => (
-                <tr key={r.label} className="border-b border-line">
-                  <th scope="row" className="p-4 font-normal"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] text-slate-light">{r.detail}</span></th>
+                <tr key={r.label}>
+                  <th scope="row" className="sticky left-0 z-10 bg-white p-3 font-normal sm:p-4"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] text-slate-light">{r.detail}</span></th>
                   {offers.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} t={t} /></td>)}
                 </tr>
               ))}
@@ -408,27 +414,31 @@ export function planFor(minutes: number, i18n: Pick<ReturnType<typeof getI18n>, 
   return { offer: centre, extra: t.rechargeOrCustom };
 }
 
+// Hypothèse indicative d’accueil humain : coût par appel et durée moyenne d’un appel.
+const SAMPLE_COST = 1.7, SAMPLE_DURATION = 2;
+
 export function EconomyBlock() {
-  const [calls, setCalls] = useState(200);
-  const [cost, setCost] = useState(1.7);
-  const [duration, setDuration] = useState(2);
   const i18n = useI18n();
   const { c, market, offer, money, num } = i18n;
+  const rec = offer('receptionniste');
+  // Exemple cohérent avec le calculateur : le volume par défaut (appels × durée) tient dans les minutes
+  // du forfait Réceptionniste du marché (ex. 350 min / 2 min → 150 appels, arrondi à la cinquantaine).
+  const sampleCalls = Math.max(50, Math.floor(rec.minutesCount / SAMPLE_DURATION / 50) * 50);
+  const [calls, setCalls] = useState(sampleCalls);
+  const [cost, setCost] = useState(SAMPLE_COST);
+  const [duration, setDuration] = useState(SAMPLE_DURATION);
   const t = c.ui.components.economy;
   const human = calls * cost;
   const minutes = calls * duration;
   const { offer: plan, extra } = useMemo(() => planFor(minutes, i18n), [minutes, i18n]);
-  const rec = offer('receptionniste');
   // Montant sans décimales inutiles (ex. « 1,7 $ »), dans la devise et le format du marché.
   const amount = (n: number) => new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'narrowSymbol', minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(n);
   const value = (n: number) => n.toLocaleString(market.numberLocale);
-  // Hypothèse indicative d’accueil humain : 1,70 par appel, 200 appels par mois.
-  const sampleCost = 1.7, sampleCalls = 200;
 
   return (
     <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
       <div>
-        <Heading title={t.title} intro={t.intro(money(sampleCost, 2), money(Math.floor((sampleCost * sampleCalls) / 100) * 100), num(sampleCalls), rec.name, money(rec.price ?? 0), num(rec.minutesCount))} />
+        <Heading title={t.title} intro={t.intro(money(SAMPLE_COST, 2), money(Math.floor((SAMPLE_COST * sampleCalls) / 100) * 100), num(sampleCalls), rec.name, money(rec.price ?? 0), num(rec.minutesCount))} />
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="rounded-2xl border border-line bg-white p-5">
             <p className="font-display font-semibold text-ink">{t.humanTitle}</p>
@@ -523,11 +533,11 @@ export function VoicesNumbers() {
 export function IntegrationsGrid({ max }: { max?: number }) {
   const { c } = useI18n();
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {c.integrations.slice(0, max).map((i) => (
         <li key={i.name} className="flex items-center gap-3 rounded-xl border border-line bg-white p-4">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white" style={{ background: i.color }} aria-hidden>{i.mark}</span>
-          <div className="min-w-0"><p className="font-semibold text-ink">{i.name}</p><p className="truncate text-[13px] text-slate">{i.text}</p></div>
+          <div className="min-w-0"><p className="break-words font-semibold text-ink">{i.name}</p><p className="line-clamp-2 break-words text-[13px] leading-snug text-slate" title={i.text}>{i.text}</p></div>
         </li>
       ))}
     </ul>

@@ -1,6 +1,6 @@
 // Sections inspirées des références (autocalls.ai, vendasta.com), en version honnête :
 // démo réelle par rappel, équipe d’agents, onglets d’usages, parcours client, aperçu de l’espace client.
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowUpRight, BarChart3, BellRing, Bot, CalendarCheck, Check, Clock, FileText, Headphones, Layers,
@@ -34,9 +34,9 @@ export function HeroDemo() {
     try {
       const res = await fetch('/api/callback', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, type: 'commercial', agent: 'Démo live', locale, note: `Démo live — langue : ${lang} — voix : ${voice}` }),
+        body: JSON.stringify({ name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Démo live', locale, note: `Démo live — langue : ${lang} — voix : ${voice}` }),
       });
-      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || t.sendFailed);
+      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendFailed); }
       setState('sent');
     } catch (err: any) { setState('error'); setError(err.message); }
   }
@@ -55,11 +55,13 @@ export function HeroDemo() {
         </div>
       ) : (
         <form onSubmit={submit} className="mt-5 grid gap-3">
+        {/* Champ piège invisible pour les robots (ne pas remplir) */}
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
           <p className="text-[15px] text-white/80">{t.intro}</p>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <label className="text-xs text-white/60">{t.lang}<select value={lang} onChange={(e) => setLang(e.target.value)} className={`${sel} mt-1`}>{t.langs.map((l) => <option key={l} className="text-ink">{l}</option>)}</select></label>
             <label className="text-xs text-white/60">{t.voice}<select value={voice} onChange={(e) => setVoice(e.target.value)} className={`${sel} mt-1`}>{t.voices.map((v) => <option key={v} className="text-ink">{v}</option>)}</select></label>
-            <label className="text-xs text-white/60">{t.sector}<select value={sector} onChange={(e) => setSector(e.target.value)} className={`${sel} mt-1`}>{c.sectors.map((s) => <option key={s.slug} value={s.slug} className="text-ink">{s.name}</option>)}</select></label>
+            <label className="col-span-2 text-xs text-white/60">{t.sector}<select value={sector} onChange={(e) => setSector(e.target.value)} className={`${sel} mt-1`}>{c.sectors.map((s) => <option key={s.slug} value={s.slug} className="text-ink">{s.name}</option>)}</select></label>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <input name="name" required placeholder={t.firstName} autoComplete="given-name" aria-label={t.firstName} className={sel} />
@@ -78,8 +80,8 @@ export function HeroDemo() {
 
 export function Marquee({ items, className = '' }: { items: React.ReactNode[]; className?: string }) {
   return (
-    <div className={`relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] ${className}`}>
-      <div className="flex w-max animate-marquee gap-3 motion-reduce:animate-none">
+    <div className={`marquee relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] ${className}`}>
+      <div className="marquee-track flex w-max animate-marquee gap-3 motion-reduce:animate-none">
         {[...items, ...items].map((it, i) => <div key={i} aria-hidden={i >= items.length}>{it}</div>)}
       </div>
     </div>
@@ -121,7 +123,7 @@ export function AgentOrbit() {
   const AGENTS = useAgents();
   const r = 42; // rayon en %
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-md" aria-hidden>
+    <div className="relative mx-auto aspect-square w-[82%] max-w-md sm:w-full" aria-hidden>
       <div className="absolute inset-[14%] rounded-full border border-dashed border-signal/30" />
       <div className="absolute inset-[30%] rounded-full border border-line" />
       <div className="absolute left-1/2 top-1/2 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-float">
@@ -133,7 +135,7 @@ export function AgentOrbit() {
         return (
           <div key={a.name} className="absolute -translate-x-1/2 -translate-y-1/2 text-center" style={{ left: `${50 + r * Math.cos(angle)}%`, top: `${50 + r * Math.sin(angle)}%` }}>
             <span className={`mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white shadow-card ring-4 ring-white`}><a.icon className="h-6 w-6" /></span>
-            <span className="mt-1.5 block whitespace-nowrap rounded-full bg-white px-2 py-0.5 text-[11px] font-semibold text-ink shadow-card">{a.name}</span>
+            <span className="mx-auto mt-1.5 block w-max max-w-[7rem] whitespace-normal sm:max-w-[8rem] rounded-xl bg-white px-2 py-0.5 text-center text-[11px] font-semibold leading-tight text-ink shadow-card">{a.name}</span>
           </div>
         );
       })}
@@ -171,21 +173,51 @@ export function SectorShowcase() {
   const t = c.ui.components.sectorShowcase;
   const [active, setActive] = useState(c.sectors[0].slug);
   const s = c.sectors.find((x) => x.slug === active)!;
+  const base = useId().replace(/:/g, '');
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const list = useRef<HTMLDivElement>(null);
+  const [fade, setFade] = useState({ left: false, right: false });
+  // Indice de défilement : un dégradé signale qu’il reste des onglets hors de vue.
+  const measure = useCallback(() => {
+    const el = list.current;
+    if (!el) return;
+    setFade({ left: el.scrollLeft > 4, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4 });
+  }, []);
+  useEffect(() => {
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [measure]);
+  // Flèches gauche/droite, Début/Fin : on change d’onglet et on y place le focus.
+  const onKey = (e: React.KeyboardEvent, i: number) => {
+    const n = c.sectors.length;
+    const next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+    if (next === undefined) return;
+    e.preventDefault();
+    setActive(c.sectors[next].slug);
+    tabs.current[next]?.focus();
+    tabs.current[next]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  };
   return (
     <div>
-      <div role="tablist" aria-label={t.chooseSector} className="flex gap-2 overflow-x-auto pb-2">
-        {c.sectors.map((x) => {
-          const Icon = SECTOR_ICON[x.slug];
-          const on = x.slug === active;
-          return (
-            <button key={x.slug} role="tab" aria-selected={on} type="button" onClick={() => setActive(x.slug)}
-              className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${on ? 'bg-ink text-white' : 'border border-line bg-white text-ink hover:border-ink'}`}>
-              <Icon className="h-4 w-4" aria-hidden />{x.name}
-            </button>
-          );
-        })}
+      <div className="relative">
+        <div ref={list} onScroll={measure} role="tablist" aria-label={t.chooseSector} className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:thin]">
+          {c.sectors.map((x, i) => {
+            const Icon = SECTOR_ICON[x.slug];
+            const on = x.slug === active;
+            return (
+              <button key={x.slug} ref={(el) => { tabs.current[i] = el; }} role="tab" id={`${base}-tab-${x.slug}`} aria-selected={on} aria-controls={`${base}-panel`}
+                tabIndex={on ? 0 : -1} type="button" onClick={() => setActive(x.slug)} onKeyDown={(e) => onKey(e, i)}
+                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${on ? 'bg-ink text-white' : 'border border-line bg-white text-ink hover:border-ink'}`}>
+                <Icon className="h-4 w-4" aria-hidden />{x.name}
+              </button>
+            );
+          })}
+        </div>
+        {fade.left && <span className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-paper to-transparent" aria-hidden />}
+        {fade.right && <span className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-paper to-transparent" aria-hidden />}
       </div>
-      <div role="tabpanel" className="mt-8 grid items-center gap-10 lg:grid-cols-2">
+      <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${s.slug}`} className="mt-8 grid items-center gap-10 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-3xl">
           <div className="aspect-[3/2]"><Photo key={s.photo} src={s.photo} alt={s.photoAlt} fallback={<div className="h-full w-full bg-signal-soft" />} /></div>
           <p className="absolute inset-x-4 bottom-4 rounded-xl bg-white/90 px-4 py-3 text-[14px] text-ink backdrop-blur">{s.caption}</p>
@@ -219,7 +251,7 @@ export function UseCaseTabs() {
   }, {} as Record<UseKey, { label: string; icon: React.ElementType; items: { icon: React.ElementType; t: string; d: string }[] }>);
   return (
     <div>
-      <div role="tablist" aria-label={tx.ariaLabel} className="mx-auto flex w-fit rounded-full bg-paper p-1">
+      <div role="tablist" aria-label={tx.ariaLabel} className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-3xl bg-paper p-1">
         {(Object.keys(USES) as UseKey[]).map((k) => {
           const T = USES[k]; const on = tab === k;
           return (

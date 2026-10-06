@@ -9,12 +9,12 @@ import type { UI_COMMERCE as FR_UI_COMMERCE } from '../../fr/ui/commerce';
 // del settore o del modulo; se il nome manca, si usa il formato generico.
 const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
   'Servizi a domicilio': {
-    title: 'Segreteria telefonica AI per artigiani',
-    description: (days) => `Segreteria telefonica AI per idraulici, elettricisti e tecnici: urgenze filtrate e richieste qualificate, anche fuori orario. Provi gratis ${days} giorni.`,
+    title: 'Assistente telefonico AI per artigiani',
+    description: (days) => `Assistente telefonico AI per idraulici, elettricisti e tecnici: urgenze filtrate e richieste qualificate, anche fuori orario. Provi gratis ${days} giorni.`,
   },
   'Studi dentistici e cliniche': {
-    title: 'Segreteria per studio dentistico e clinica',
-    description: (days) => `Segreteria telefonica per studio dentistico: appuntamenti, conferme e spostamenti gestiti dall’AI senza interrompere le cure. Provi gratis ${days} giorni.`,
+    title: 'Receptionist virtuale per studio dentistico',
+    description: (days) => `Receptionist virtuale per studio dentistico: appuntamenti, conferme e spostamenti gestiti dall’AI senza interrompere le cure. Provi gratis ${days} giorni.`,
   },
   Immobiliare: {
     title: 'Centralino AI per agenzia immobiliare',
@@ -59,16 +59,16 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: { before: 'Automatizzi le Sue chiamate con un’AI che ', kw: 'risponde, qualifica e prenota', after: ' al posto Suo' },
-      intro: 'Un assistente telefonico AI che risponde a ogni chiamata, pongono le domande giuste, fissano gli appuntamenti e Le invia un riepilogo chiaro. Disponibile 24/7, configurato per il Suo settore, operativo in pochi minuti.',
+      intro: 'Un assistente telefonico AI che risponde a ogni chiamata, pone le domande giuste, fissa gli appuntamenti e Le invia un riepilogo chiaro. Disponibile 24/7, configurato per il Suo settore, operativo in pochi minuti.',
       photoAlt: 'Imprenditrice che consulta sul telefono il riepilogo di una chiamata',
     },
     showcase: { title: 'Veda l’agente all’opera nel Suo settore', intro: 'Scelga un settore: la receptionist virtuale risponde alla chiamata e la richiesta arriva pronta da gestire.' },
-    benefits: { title: 'Cosa fa l’agente per la Sua azienda', intro: 'Una segreteria telefonica intelligente, formata sulla Sua attività, che lavora quando il Suo team non può rispondere.' },
+    benefits: { title: 'Cosa fa l’agente per la Sua azienda', intro: 'Un assistente telefonico intelligente, formato sulla Sua attività, che lavora quando il Suo team non può rispondere.' },
     features: {
       booking: {
         title: { before: 'Automatizzi ', kw: 'appuntamenti e promemoria', after: '' },
         text: 'Studi, saloni, officine, agenzie: prenotazioni telefoniche automatiche. L’agente si collega al Suo calendario, propone gli orari liberi, prenota e conferma. Spostamenti e disdette compresi.',
-        points: ['Calendario in tempo reale: Google, Outlook, Cal.com, Calendly', 'Conferma via SMS o WhatsApp', 'Promemoria il giorno prima dell’appuntamento'],
+        points: ['Calendario in tempo reale: Google, Outlook, Cal.com, Calendly', 'Conferma via SMS o WhatsApp (dal piano Assistant)', 'Promemoria il giorno prima dell’appuntamento (dal piano Assistant)'],
         link: 'Scopra la gestione appuntamenti',
       },
       support: {
@@ -107,7 +107,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     integrations: {
       title: 'Collegato ai Suoi strumenti',
-      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra con ciò che usa già. Il flow builder collega oltre 300 strumenti senza codice, come Zapier o Make.',
+      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra con ciò che usa già. Il flow builder collega oltre 300 strumenti senza codice, allo stesso modo di Zapier o Make.',
       link: 'Veda tutte le integrazioni',
     },
     pricing: {
@@ -148,7 +148,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     faq: {
       title: 'Domande sui prezzi',
       intro: 'Ha un dubbio sul piano giusto per Lei? Si faccia richiamare, oppure provi l’agente dal vivo.',
-      primary: 'Inizi gratuitamente',
+      primary: 'Inizi gratis',
       demo: 'Veda la demo dal vivo',
     },
     finalCta: (minutes: number) => `Inizi con ${minutes} minuti gratuiti`,
@@ -212,7 +212,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Assistente telefonico AI per settore · ${brand}`,
-      description: 'Segreteria telefonica intelligente per artigiani, studi dentistici, agenzie immobiliari, officine, saloni, ristoranti e hotel. Scopra il Suo settore.',
+      description: 'Assistente telefonico intelligente per artigiani, studi dentistici, agenzie immobiliari, officine, saloni, ristoranti e hotel. Scopra il Suo settore.',
     },
     hero: {
       title: 'Un agente vocale adatto alla Sua attività',
@@ -221,7 +221,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     other: {
       title: 'La Sua attività non è nell’elenco?',
       intro: 'Studi legali, e-commerce, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
-      primary: 'Inizi gratuitamente',
+      primary: 'Inizi gratis',
       demo: 'Provi dal vivo il nostro agente',
     },
   },
@@ -311,7 +311,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     flow: {
       title: { before: 'Costruisca le Sue automazioni ', kw: 'senza codice', after: '' },
-      text: 'Un modulo compilato, una chiamata terminata, un nuovo lead: ogni evento può avviare una serie di azioni nei Suoi strumenti, come in Zapier o Make, direttamente dalla Sua area clienti.',
+      text: 'Un modulo compilato, una chiamata terminata, un nuovo lead: ogni evento può avviare una serie di azioni nei Suoi strumenti, allo stesso modo di Zapier o Make, direttamente dalla Sua area clienti.',
       points: ['Oltre 300 strumenti disponibili', 'Drag and drop, nessuno sviluppo', 'Test prima dell’attivazione'],
       link: 'Scopra il flow builder',
     },

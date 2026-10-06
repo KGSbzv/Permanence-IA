@@ -2,7 +2,7 @@
 
 Marchio: **PermanenceIA** · slogan: *Assistente telefonico AI* · registro formale (Lei).
 Termine principale del sito: **assistente telefonico AI**. Termini secondari trasversali:
-*centralino virtuale*, *segreteria telefonica intelligente*, *receptionist virtuale*,
+*centralino virtuale*, *receptionist virtuale*,
 *risponditore automatico AI*, *prenotazioni telefoniche automatiche*.
 
 Regole applicate: parola chiave principale nel meta title (≤ 60 caratteri, marchio incluso,
@@ -17,11 +17,11 @@ File: `C` = `src/i18n/content/it/ui/commerce.ts`, `P` = `ui/pages.ts`, `S` = `se
 
 | Pagina | Primaria | Secondarie | Dove è integrata |
 |---|---|---|---|
-| `/it` (home) | assistente telefonico AI | receptionist virtuale, segreteria telefonica intelligente, centralino virtuale, prenotazioni telefoniche automatiche | C `home.meta.title/description`, `hero.intro`; secondarie in `showcase.intro`, `benefits.intro`, `features.booking.text`, `platform.intro` |
+| `/it` (home) | assistente telefonico AI | receptionist virtuale, centralino virtuale, prenotazioni telefoniche automatiche | C `home.meta.title/description`, `hero.intro`; secondarie in `showcase.intro`, `benefits.intro`, `features.booking.text`, `platform.intro` |
 | `/it/tarifs` | prezzi assistente telefonico AI | costo / prezzo al mese | C `tarifs.meta.*` (riga piano accorciata per stare in 155), `hero.intro` |
 | `/it/offres/[piano]` | piano + assistente telefonico AI | prova gratuita | C `offer.metaTitleTrial`, `offer.metaDescription` |
 | `/it/offres/recharges` | ricarica minuti | assistente telefonico AI | C `recharges.meta.*` |
-| `/it/secteurs` | assistente telefonico AI per settore | segreteria telefonica intelligente | C `sectorsIndex.meta.*`, `hero.intro` |
+| `/it/secteurs` | assistente telefonico AI per settore | receptionist virtuale | C `sectorsIndex.meta.*`, `hero.intro` |
 | `/it/fonctionnalites` | centralino virtuale AI | receptionist virtuale, prenotazioni | C `featuresIndex.meta.*`, `hero.intro` |
 | `/it/integrations` | integrazioni calendario / CRM / WhatsApp / SIP | assistente telefonico AI | C `integrations.meta.description` (title invariato, già ottimale) |
 
@@ -32,8 +32,8 @@ fallback al formato generico). Primaria anche nel `subtitle` (intro sotto l’H1
 
 | Slug | Primaria | Secondarie |
 |---|---|---|
-| services-a-domicile | segreteria telefonica per artigiani | idraulici, elettricisti, urgenze fuori orario |
-| dentaire-cliniques | segreteria per studio dentistico | segreteria telefonica intelligente, clinica |
+| services-a-domicile | assistente telefonico AI per artigiani | idraulici, elettricisti, urgenze fuori orario |
+| dentaire-cliniques | receptionist virtuale per studio dentistico | assistente telefonico AI, clinica |
 | immobilier | centralino per agenzia immobiliare | qualificazione acquirenti / inquilini |
 | automobile | prenotazione officina | prenotazione al telefono 24/7, preventivi |
 | beaute-bien-etre | prenotazioni centro estetico / salone | prenotazioni telefoniche automatiche, parrucchieri, spa |
@@ -65,7 +65,7 @@ Title per modulo in `FEATURE_SEO` (C, chiave = nome del modulo, fallback generic
 |---|---|---|---|
 | `/it/demo` | demo assistente telefonico AI | receptionist virtuale | P `demo.meta.*`, `h1`, `intro` |
 | `/it/essai-gratuit` | assistente telefonico AI gratis | prova gratuita | P `trial.meta.*`, `intro` |
-| `/it/faq` | domande frequenti assistente telefonico AI | segreteria telefonica intelligente, centralino virtuale, prenotazioni telefoniche automatiche | P `faq.meta.*`, `intro`; F (4 domande/risposte) |
+| `/it/faq` | domande frequenti assistente telefonico AI | centralino virtuale, prenotazioni telefoniche automatiche | P `faq.meta.*`, `intro`; F (4 domande/risposte) |
 | `/it/contact` | contatti / richiamata | assistente telefonico AI | P `contact.meta.*` |
 | `/it/about` | assistente telefonico AI per PMI | — | P `about.meta.*`, `paragraphs[1]` |
 | `/it/securite` | assistente telefonico AI conforme al GDPR | — | P `security.meta.*`, `intro` |

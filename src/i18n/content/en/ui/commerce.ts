@@ -22,7 +22,7 @@ export const UI_COMMERCE = {
       booking: {
         title: { before: 'Automate ', kw: 'appointment booking and reminders', after: '' },
         text: 'Practices, salons, garages, agencies: the agent connects to your calendar, offers free slots, books and confirms. Rescheduling and cancellations included.',
-        points: ['Live calendar: Google, Outlook, Cal.com, Calendly', 'Confirmation by SMS or WhatsApp', 'Reminder the day before the appointment'],
+        points: ['Live calendar: Google, Outlook, Cal.com, Calendly', 'Confirmation by SMS or WhatsApp (from the Assistant plan)', 'Reminder the day before the appointment (from the Assistant plan)'],
         link: 'See appointment booking',
       },
       support: {
@@ -61,7 +61,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Connected to your tools',
-      intro: 'Calendar, CRM, messaging, telephony: the agent works with what you already use. The flow builder connects over 300 tools without code, like Zapier or Make.',
+      intro: 'Calendar, CRM, messaging, telephony: the agent works with what you already use. The flow builder connects over 300 tools without code, in the same way as Zapier or Make.',
       link: 'See all integrations',
     },
     pricing: {
@@ -105,7 +105,7 @@ export const UI_COMMERCE = {
       primary: 'Start for free',
       demo: 'See the live demo',
     },
-    finalCta: (minutes: number) => `Start with ${minutes} free minutes`,
+    finalCta: (_minutes: number) => 'Start for free',
   },
 
   offer: {
@@ -265,7 +265,7 @@ export const UI_COMMERCE = {
     },
     flow: {
       title: { before: 'Build your automations ', kw: 'without code', after: '' },
-      text: 'A completed form, a finished call, a new lead: each event can trigger a series of actions in your tools, as in Zapier or Make, straight from your customer area.',
+      text: 'A completed form, a finished call, a new lead: each event can trigger a series of actions in your tools, in the same way as Zapier or Make, straight from your customer area.',
       points: ['Over 300 tools available', 'Drag and drop, no development', 'Tests before activation'],
       link: 'See the flow builder',
     },

@@ -21,7 +21,9 @@ export default function LanguageSwitcher({ dark = false, className = '', id = 'l
   function change(e: React.ChangeEvent<HTMLSelectElement>) {
     const next = e.target.value as Locale;
     document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000; samesite=lax`;
-    router.push(router.asPath, router.asPath, { locale: next });
+    // Rechargement complet (pas de navigation client) : le widget de l’assistante doit changer avec la langue.
+    const path = router.asPath === '/' ? '' : router.asPath;
+    window.location.assign(next === 'fr' ? path || '/' : `/${next}${path}`);
   }
 
   return (

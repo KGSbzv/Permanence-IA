@@ -116,7 +116,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     termsRequired: 'Zaakceptuj warunki, abyśmy mogli oddzwonić.',
     sendError: 'Nie udało się wysłać zgłoszenia.',
     sending: 'Wysyłanie…',
-    submit: 'Zamów oddzwonienie',
+    submit: 'Zamów rozmowę',
   },
 
   help: {
@@ -126,7 +126,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     breadcrumb: 'Pomoc',
     h1: 'Pomoc do Twojego panelu klienta',
-    intro: 'Twój panel klienta jest wyświetlany po angielsku. Ten przewodnik tłumaczy każde menu i prowadzi Cię krok po kroku. W panelu asystentka pomocy (dymek w prawym dolnym rogu) również odpowiada na pytania, na piśmie lub głosowo.',
+    intro: 'Twój panel klienta jest wyświetlany po angielsku. Ten przewodnik tłumaczy każde menu i prowadzi Cię krok po kroku. W panelu asystentka pomocy (dymek w prawym dolnym rogu) również odpowiada na pytania w Twoim języku, na piśmie lub głosowo.',
     openSpace: 'Otwórz panel klienta',
     chatLabel: 'Przykładowa rozmowa z asystentką pomocy',
     chatTitle: (brand: string) => `Pomoc ${brand}`,
@@ -188,9 +188,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     commitmentsTitle: 'Nasze zobowiązania',
     commitments: [
       'Agent przedstawia się jako AI i nie podszywa się pod człowieka',
-      'Żadnych połączeń wychodzących bez uprzedniej zgody kontaktu',
+      'Twoje kampanie mogą dzwonić wyłącznie do kontaktów, które wyraziły zgodę; wbudowana lista wykluczeń pomija pozostałe',
       'Agent nie stawia diagnoz medycznych, prawnych ani finansowych',
-      'Dane wykorzystywane wyłącznie do świadczenia usługi',
+      'Twoje dane nigdy nie są sprzedawane; służą do świadczenia i ulepszania usługi',
       'Pomoc w dostosowaniu klauzul informacyjnych',
     ],
     rights: ['W razie pytań lub w celu skorzystania ze swoich praw: ', { a: 'polityka prywatności', href: '/confidentialite' }, '.'] as Rich,
@@ -419,8 +419,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           {
             ul: [
               [{ strong: 'Platforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Region hostingu: us-east4 (Północna Wirginia, Stany Zjednoczone).'],
-              [{ strong: 'Bazy danych i przechowywanie:' }, ' Supabase Inc., infrastruktura zlokalizowana w Unii Europejskiej (region AWS EU-WEST-1, Dublin, Irlandia).'],
-              [{ strong: 'Sieć telefoniczna i synteza mowy:' }, ' chmurowa infrastruktura telefonii głosowej z certyfikatem zgodności z europejskimi normami telekomunikacyjnymi.'],
+              [{ strong: 'Bazy danych i przechowywanie:' }, ' Supabase Inc., infrastruktura zlokalizowana w Stanach Zjednoczonych (region AWS us-east-1, Wirginia).'],
             ],
           },
         ],
@@ -430,7 +429,6 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         body: [
           { p: ['Marka ', { strong: brand }, `, logo (dymek w trybie czuwania, fale głosowe i punkt dostępności), a także wszystkie elementy identyfikacji wizualnej, teksty, skrypty rozmów, infografiki i kody źródłowe zamieszczone na stronie stanowią wyłączną własność ${company}.`] },
           { p: `Wszelkie powielanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie bez uprzedniej pisemnej zgody jest zabronione i stanowi naruszenie praw podlegające sankcjom przewidzianym w przepisach: ${legal.copyrightLaw}.` },
-          { note: 'Oznaczenie Autocalls White-Label Architecture wynika z licencji technologicznej udzielonej przez Autocalls Inc.' },
         ],
       },
       {
@@ -488,6 +486,6 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     ctaEyebrow: 'Przejdź do działania',
     ctaTitle: 'Chcesz wyposażyć swoją firmę w recepcję AI?',
     ctaText: (d: number, m: number) => `Przetestuj już dziś naszego agenta głosowego w rzeczywistych warunkach przez ${days(d)}, z ${m} ${plural(m, 'minutą', 'minutami', 'minutami')} w cenie i bez zobowiązań.`,
-    ctaButton: 'Rozpocznij bezpłatny okres próbny',
+    ctaButton: 'Zacznij za darmo',
   },
 };

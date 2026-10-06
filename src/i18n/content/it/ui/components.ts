@@ -5,8 +5,8 @@ import type { UI_COMPONENTS as FR_UI_COMPONENTS } from '../../fr/ui/components';
 export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   layout: {
     home: 'Home',
-    freeTrial: 'Prova gratuita',
-    callMeBack: 'Essere richiamato',
+    freeTrial: 'Inizi gratis',
+    callMeBack: 'Richieda una richiamata',
   },
 
   navbar: {
@@ -29,7 +29,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     },
     pricing: 'Prezzi',
     login: 'Accedi',
-    startFree: 'Inizi gratuitamente',
+    startFree: 'Inizi gratis',
     mainNav: 'Navigazione principale',
     mobileNav: 'Navigazione mobile',
     openMenu: 'Apri il menu',
@@ -38,10 +38,10 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   footer: {
     tagline: 'Agenti vocali AI che rispondono, qualificano, prenotano e richiamano per la Sua azienda, 24 ore su 24.',
-    startFree: 'Inizi gratuitamente',
+    startFree: 'Inizi gratis',
     login: 'Accedi',
     gdpr: 'Strumenti GDPR integrati',
-    encryption: 'Crittografia in transito e a riposo',
+    encryption: 'Crittografia in transito',
     cols: {
       platform: 'Piattaforma',
       allFeatures: 'Tutte le funzionalità',
@@ -80,9 +80,9 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: (minutes: string) => `I Suoi primi ${minutes} minuti sono gratuiti`,
     close: 'Chiudi',
     text: (days: number) => `Provi il Suo agente vocale sulle Sue chiamate reali per ${days} giorni, prima di decidere.`,
-    points: ['Nessun addebito durante la prova', 'Annullabile con un clic dalla Sua area clienti', 'Primo agente pronto in pochi minuti'],
-    claim: (minutes: string) => `Richieda i Suoi ${minutes} minuti`,
-    callMeBack: 'Preferisco essere richiamato',
+    points: ['Carta richiesta all’attivazione, nessun addebito durante la prova', 'Annullabile dalla Sua area clienti', 'Primo agente pronto in pochi minuti'],
+    claim: (minutes: string) => 'Inizi gratis',
+    callMeBack: 'Richieda una richiamata',
   },
 
   liveCall: {
@@ -98,13 +98,13 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   },
 
   ctas: {
-    primary: 'Inizi gratuitamente',
+    primary: 'Inizi gratis',
     demo: 'Provi dal vivo il nostro agente',
-    callback: 'Lasci il Suo numero, La richiamiamo noi',
+    callback: 'Richieda una richiamata',
   },
 
   callbackForm: {
-    submit: 'Mi faccia richiamare',
+    submit: 'Richieda una richiamata',
     consentRequired: 'Spunti la casella per accettare di essere richiamato.',
     sendFailed: 'Non è stato possibile inviare la richiesta.',
     retry: (email: string) => `Riprovi o scriva a ${email}.`,
@@ -134,7 +134,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     items: [
       { title: 'Risponda anche fuori orario', text: 'Sera, fine settimana, durante i Suoi appuntamenti: ogni chiamata riceve una risposta.' },
       { title: 'Qualifichi in automatico', text: 'L’agente pone le Sue domande e Le invia una richiesta completa.' },
-      { title: 'Prenoti appuntamenti', text: 'Direttamente nel Suo calendario, con conferma e promemoria.' },
+      { title: 'Prenoti appuntamenti', text: 'Direttamente nel Suo calendario, con conferma e promemoria (dal piano Assistant).' },
       { title: 'Richiami i lead più in fretta', text: 'Un modulo compilato diventa una chiamata in pochi minuti.' },
       { title: 'Lasci alle persone ciò che conta', text: 'Trasferimento al Suo team quando la situazione lo richiede.' },
     ],
@@ -229,7 +229,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     case3Plan: 'Offerta su misura',
     case3Note: (plan: string) => `Oltre il piano ${plan}, negoziamo un prezzo al minuto adatto al Suo volume.`,
     title: 'Aggiunga minuti o cambi piano, al momento giusto',
-    intro: 'Non paga mai un minuto più del necessario: Le indichiamo quando basta una ricarica e quando il piano superiore diventa più conveniente.',
+    intro: 'Le indichiamo quando basta una ricarica e quando il piano superiore diventa più conveniente.',
     customerAt: 'Un cliente a',
   },
 
@@ -241,7 +241,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   economy: {
     title: 'Un costo più prevedibile di una reception tradizionale',
     intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
-      `In alcune configurazioni, una reception gestita da personale costa circa ${costPerCall} a chiamata, cioè oltre ${totalCost} per ${calls} chiamate. Il piano ${plan} a ${price} IVA esclusa copre ${minutes} minuti al mese, con disponibilità 24/7. Faccia il confronto con i Suoi numeri.`,
+      `Un esempio indicativo: se una reception gestita da personale costa circa ${costPerCall} a chiamata, si superano i ${totalCost} per ${calls} chiamate. Il piano ${plan} a ${price} IVA esclusa copre ${minutes} minuti al mese, con disponibilità 24/7. Faccia il confronto con i Suoi numeri.`,
     humanTitle: 'Reception con personale',
     humanPoints: ['Orari d’ufficio', 'Costo variabile: stipendio, contributi, sostituzioni', 'Chiamate perse nei momenti di picco'],
     aiPoints: ['Disponibile 24/7', 'Piano chiaro, prezzi IVA esclusa', 'Più chiamate in parallelo'],
@@ -261,7 +261,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Consenso e opt-out', text: 'Consenso alla richiamata, gestione dei rifiuti, fasce orarie di chiamata consentite e lista di esclusione.' },
-      { title: 'Protezione dei dati', text: 'Crittografia in transito e a riposo, accesso per ruolo e periodo di conservazione configurabile.' },
+      { title: 'Protezione dei dati', text: 'Crittografia in transito, accesso per ruolo (piano Call Center) e periodo di conservazione configurabile.' },
       { title: 'Tracciabilità', text: 'Cronologia delle chiamate, trascrizioni e registro delle attività per ogni account.' },
       { title: 'Controllo degli accessi', text: 'Ruoli e permessi per membro del team con il piano Call Center.' },
       { title: 'Preparazione normativa', text: 'Strumenti per applicare il GDPR: informativa, diritto di accesso, cancellazione, conservazione.' },
@@ -285,7 +285,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   finalCta: {
     title: 'Pronto ad automatizzare le Sue chiamate?',
-    primary: 'Inizi la prova gratuita',
+    primary: 'Inizi gratis',
     demo: 'Veda la demo dal vivo',
     advisorTitle: 'Parli con un consulente',
     advisorText: 'Lasci il Suo numero: La richiamiamo per rispondere alle Sue domande.',
@@ -491,7 +491,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     widget: {
       question: 'Ha una domanda? Parliamone.',
       talk: 'Parli con l’agente',
-      callback: 'Essere richiamato',
+      callback: 'Richieda una richiamata',
     },
     whatsapp: {
       title: 'WhatsApp · Conferma',

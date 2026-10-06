@@ -3,8 +3,8 @@
 export const UI_COMPONENTS = {
   layout: {
     home: 'Home',
-    freeTrial: 'Gratis proberen',
-    callMeBack: 'Terugbellen',
+    freeTrial: 'Gratis starten',
+    callMeBack: 'Bel mij terug',
   },
 
   navbar: {
@@ -27,7 +27,7 @@ export const UI_COMPONENTS = {
     },
     pricing: 'Prijzen',
     login: 'Inloggen',
-    startFree: 'Gratis beginnen',
+    startFree: 'Gratis starten',
     mainNav: 'Hoofdnavigatie',
     mobileNav: 'Mobiele navigatie',
     openMenu: 'Menu openen',
@@ -36,10 +36,10 @@ export const UI_COMPONENTS = {
 
   footer: {
     tagline: 'AI-spraakagents die opnemen, kwalificeren, afspraken boeken en terugbellen voor uw bedrijf, 24 uur per dag.',
-    startFree: 'Gratis beginnen',
+    startFree: 'Gratis starten',
     login: 'Inloggen',
     gdpr: 'Ingebouwde AVG-hulpmiddelen',
-    encryption: 'Versleuteling tijdens verzending en opslag',
+    encryption: 'Versleuteling tijdens verzending',
     cols: {
       platform: 'Platform',
       allFeatures: 'Alle functies',
@@ -78,9 +78,9 @@ export const UI_COMPONENTS = {
     title: (minutes: string) => `Uw eerste ${minutes} minuten zijn gratis`,
     close: 'Sluiten',
     text: (days: number) => `Test uw spraakagent ${days} dagen lang op uw echte gesprekken, voordat u beslist.`,
-    points: ['Tijdens de proefperiode wordt niets afgeschreven', 'Met één klik op te zeggen in uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
-    claim: (minutes: string) => `Claim mijn ${minutes} minuten`,
-    callMeBack: 'Liever teruggebeld worden',
+    points: ['Kaart gevraagd bij activering, tijdens de proefperiode wordt niets afgeschreven', 'Op te zeggen vanuit uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
+    claim: (minutes: string) => 'Gratis starten',
+    callMeBack: 'Bel mij terug',
   },
 
   liveCall: {
@@ -96,13 +96,13 @@ export const UI_COMPONENTS = {
   },
 
   ctas: {
-    primary: 'Gratis beginnen',
+    primary: 'Gratis starten',
     demo: 'Probeer onze agent live',
-    callback: 'Laat uw nummer achter, wij bellen u terug',
+    callback: 'Bel mij terug',
   },
 
   callbackForm: {
-    submit: 'Laat u terugbellen',
+    submit: 'Bel mij terug',
     consentRequired: 'Vink het vakje aan om akkoord te gaan met terugbellen.',
     sendFailed: 'De aanvraag kon niet worden verzonden.',
     retry: (email: string) => `Probeer het opnieuw of mail naar ${email}.`,
@@ -132,7 +132,7 @@ export const UI_COMPONENTS = {
     items: [
       { title: 'Neem ook buiten openingstijden op', text: '’s Avonds, in het weekend, tijdens uw afspraken: elk gesprek krijgt antwoord.' },
       { title: 'Kwalificeer automatisch', text: 'De agent stelt uw vragen en stuurt u een volledige aanvraag.' },
-      { title: 'Boek afspraken', text: 'Direct in uw agenda, met bevestiging en herinnering.' },
+      { title: 'Boek afspraken', text: 'Direct in uw agenda, met bevestiging; herinneringen per sms of WhatsApp vanaf het Assistent-abonnement.' },
       { title: 'Bel leads sneller terug', text: 'Een ingevuld formulier wordt binnen enkele minuten een gesprek.' },
       { title: 'Houd mensen vrij voor wat belangrijk is', text: 'Doorverbinden naar uw team wanneer de situatie dat vraagt.' },
     ],
@@ -152,7 +152,7 @@ export const UI_COMPONENTS = {
       { name: 'Berichten', items: ['Sms', 'WhatsApp en templates', 'Messenger en Instagram', 'Webwidget'] },
       { name: 'Agenda', items: ['Afspraken plannen', 'Bevestigingen en herinneringen', 'Verplaatsingen en annuleringen'] },
       { name: 'Sturing', items: ['Dashboard', 'Uitgebreide rapporten', 'Rollen en rechten'] },
-      { name: 'Beveiliging', items: ['Toestemming en afmelden', 'Instelbare bewaartermijn', 'Versleuteling', 'Activiteitenlogboek'] },
+      { name: 'Beveiliging', items: ['Toestemming en afmelden', 'Instelbare bewaartermijn', 'Versleuteling tijdens verzending', 'Activiteitenlogboek'] },
     ],
     centerTitle: 'Uw AI-spraakagent',
     centerText: 'In het midden: een agent die is ingesteld op uw bedrijf. Eromheen: alles wat hij kan gebruiken.',
@@ -168,11 +168,11 @@ export const UI_COMPONENTS = {
     intro: 'Praat vanuit uw browser met de agent, of laat uw nummer achter voor een demonstratiegesprek dat past bij uw sector.',
     launchTitle: 'Start de live demo',
     launchText: 'Een echt gesprek, zonder installatie.',
-    callbackTitle: 'Laat mij terugbellen',
+    callbackTitle: 'Bel mij terug',
     callbackText: 'De agent belt u op het gekozen tijdslot.',
     formTitle: 'Ontvang een demonstratiegesprek',
     formText: 'Gratis en vrijblijvend. U hoort de stem en de manier waarop de agent een aanvraag kwalificeert.',
-    submit: 'Laat mij terugbellen',
+    submit: 'Bel mij terug',
   },
 
   sectorCards: {
@@ -227,7 +227,7 @@ export const UI_COMPONENTS = {
     case3Plan: 'Maatwerk',
     case3Note: (plan: string) => `Boven het abonnement ${plan} spreken we een prijs per minuut af die past bij uw volume.`,
     title: 'Voeg minuten toe of wissel van abonnement, op het juiste moment',
-    intro: 'U betaalt nooit meer per minuut dan nodig: wij laten u weten wanneer een opwaardering volstaat en wanneer het grotere abonnement voordeliger wordt.',
+    intro: 'Wij laten u weten wanneer een opwaardering volstaat en wanneer het volgende abonnement voordeliger wordt.',
     customerAt: 'Een klant met',
   },
 
@@ -239,7 +239,7 @@ export const UI_COMPONENTS = {
   economy: {
     title: 'Voorspelbaardere kosten dan een menselijke receptie',
     intro: (costPerCall: string, totalCost: string, calls: string, plan: string, price: string, minutes: string) =>
-      `In sommige situaties kost een menselijke receptie rond de ${costPerCall} per gesprek, oftewel meer dan ${totalCost} voor ${calls} gesprekken. Het abonnement ${plan} van ${price} excl. btw omvat ${minutes} minuten per maand, met 24/7 beschikbaarheid. Vergelijk het met uw eigen cijfers.`,
+      `Een voorbeeld: als een menselijke receptie u rond de ${costPerCall} per gesprek kost, komt u op ongeveer ${totalCost} voor ${calls} gesprekken. Het abonnement ${plan} van ${price} excl. btw omvat ${minutes} minuten per maand, met 24/7 beschikbaarheid. Vergelijk het met uw eigen cijfers.`,
     humanTitle: 'Menselijke receptie',
     humanPoints: ['Kantoortijden', 'Wisselende kosten: salaris, werkgeverslasten, vervanging', 'Gemiste gesprekken op drukke momenten'],
     aiPoints: ['24/7 beschikbaar', 'Duidelijk abonnement, prijzen excl. btw', 'Meerdere gesprekken tegelijk'],
@@ -259,7 +259,7 @@ export const UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Toestemming en afmelden', text: 'Toestemming voor terugbellen, afhandeling van weigeringen, toegestane beltijden en uitsluitingslijst.' },
-      { title: 'Gegevensbescherming', text: 'Versleuteling tijdens verzending en opslag, toegang per rol en instelbare bewaartermijn.' },
+      { title: 'Gegevensbescherming', text: 'Versleuteling tijdens verzending, toegang per rol (Callcenter-abonnement) en instelbare bewaartermijn.' },
       { title: 'Traceerbaarheid', text: 'Gespreksgeschiedenis, transcripties en activiteitenlogboek voor elk account.' },
       { title: 'Toegangsbeheer', text: 'Rollen en rechten per teamlid met het Callcenter-abonnement.' },
       { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering, bewaartermijn.' },
@@ -283,7 +283,7 @@ export const UI_COMPONENTS = {
 
   finalCta: {
     title: 'Klaar om uw gesprekken te automatiseren?',
-    primary: 'Start mijn gratis proefperiode',
+    primary: 'Gratis starten',
     demo: 'Bekijk de live demo',
     advisorTitle: 'Spreek een adviseur',
     advisorText: 'Laat uw nummer achter: wij bellen u terug om uw vragen te beantwoorden.',
@@ -491,7 +491,7 @@ export const UI_COMPONENTS = {
     widget: {
       question: 'Een vraag? Laten we praten.',
       talk: 'Praat met de agent',
-      callback: 'Terugbellen',
+      callback: 'Bel mij terug',
     },
     whatsapp: {
       title: 'WhatsApp · Bevestiging',

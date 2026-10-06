@@ -11,8 +11,8 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     audience: 'To test the agent on your business',
     title: 'Try the agent free for 14 days',
     pitch: 'Explore the platform, set up a first agent, try the live demo and use up to 30 minutes of calls to see what it can do for your business.',
-    cta: 'Claim my 30 minutes',
-    highlights: ['1 test agent', 'Live agent demo', 'Web widget and callback form', 'Knowledge base preview'],
+    cta: 'Start for free',
+    highlights: ['14 days on the plan of your choice', '30 call minutes included', 'Card requested, nothing charged during the trial', 'Cancel before the end at no cost'],
   },
   receptionniste: {
     name: 'Receptionist',
@@ -71,15 +71,15 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'AI voice assistants', detail: 'Inbound and outbound agents', cells: { decouverte: '1 test agent', receptionniste: '1', assistant: '3', 'centre-appels': 'Multiple agents', 'sur-mesure': 'Custom' } },
       { label: 'Call history', detail: 'Recordings, transcripts, summaries', cells: { ...all(true), decouverte: 'Limited' } },
       { label: 'Conversations', detail: 'Written and voice exchanges in one place', cells: all(true) },
-      { label: 'Transfer to a person', detail: 'Hand over to your team', cells: { ...all(true), decouverte: false } },
-      { label: 'Multilingual voices', detail: 'Secondary languages detected', cells: { ...all(true), decouverte: 'Preview' } },
+      { label: 'Transfer to a person', detail: 'Hand over to your team', cells: all(true) },
+      { label: 'Multilingual voices', detail: 'Secondary languages detected', cells: all(true) },
     ],
   },
   {
     group: 'Agent setup',
     rows: [
       { label: 'AI prompt editor', detail: 'Behaviour, tone, rules', cells: { decouverte: 'Preview', receptionniste: 'Simplified', assistant: true, 'centre-appels': true, 'sur-mesure': true } },
-      { label: 'Knowledge base', detail: 'PDFs, web pages, procedures', cells: { decouverte: 'Preview', receptionniste: 'Basic', assistant: true, 'centre-appels': 'Advanced', 'sur-mesure': 'Advanced' } },
+      { label: 'Knowledge base', detail: 'PDFs, web pages, procedures', cells: { decouverte: 'Basic', receptionniste: 'Basic', assistant: true, 'centre-appels': 'Advanced', 'sur-mesure': 'Advanced' } },
       { label: 'Flow builder', detail: 'Visual no-code scenarios', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': 'Advanced', 'sur-mesure': 'Advanced' } },
       { label: 'Automations', detail: 'Over 300 tools you can connect', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
     ],
@@ -87,7 +87,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Calendar and capture',
     rows: [
-      { label: 'Calendar integration', detail: 'Google, Outlook, Cal.com, Calendly', cells: { ...all(true), decouverte: 'Preview' } },
+      { label: 'Calendar integration', detail: 'Google, Outlook, Cal.com, Calendly', cells: all(true) },
       { label: 'Web widget', detail: 'Callback and calls from your website', cells: all(true) },
       { label: 'Caller identification', detail: 'Caller ID button', cells: { ...all(true), decouverte: false } },
       { label: 'Leads and pre-qualification', detail: 'Structured prospect records', cells: { decouverte: false, receptionniste: 'Basic', assistant: true, 'centre-appels': true, 'sur-mesure': true } },

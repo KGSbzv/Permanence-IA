@@ -11,7 +11,8 @@ export function middleware(req: NextRequest) {
   if (host === 'permanenceia.com') {
     // Chemin assigné sur une origine fixe : un chemin « //autre-site » ne peut pas changer de domaine.
     const url = new URL('https://www.permanenceia.com');
-    url.pathname = '/' + req.nextUrl.pathname.replace(/^\/+/, '');
+    const prefix = req.nextUrl.locale && req.nextUrl.locale !== DEFAULT_LOCALE ? `/${req.nextUrl.locale}` : '';
+    url.pathname = prefix + '/' + req.nextUrl.pathname.replace(/^\/+/, '');
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, 301);
   }

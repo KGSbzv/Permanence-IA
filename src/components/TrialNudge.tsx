@@ -66,9 +66,22 @@ export default function TrialNudge() {
     if (!open) return;
     const prev = document.activeElement as HTMLElement | null;
     dialog.current?.querySelector<HTMLElement>('a,button')?.focus();
-    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
-    document.addEventListener('keydown', esc);
-    return () => { document.removeEventListener('keydown', esc); prev?.focus(); };
+    // Pas de défilement de la page derrière la fenêtre.
+    const { overflow } = document.body.style;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') { setOpen(false); return; }
+      if (e.key !== 'Tab' || !dialog.current) return;
+      // Piège de focus : Tab et Maj+Tab restent dans la fenêtre.
+      const items = Array.from(dialog.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])'));
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !dialog.current.contains(active))) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (active === last || !dialog.current.contains(active))) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = overflow; prev?.focus(); };
   }, [open]);
 
   if (!open) return null;

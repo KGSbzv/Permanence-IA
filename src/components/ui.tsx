@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, PhoneCall, Play, Sparkles } from 'lucide-react';
 import { DEMO_URL, SIGNUP_URL, SITE } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
@@ -31,17 +32,22 @@ export function Heading({
 
 /* ---------- Conversion ---------- */
 
+/** Au plus trois pastilles sur mobile ; les suivantes apparaissent à partir de sm. */
+const MOBILE_BADGES = 3;
+
 export function TrialBadges({ dark = false, className = '' }: { dark?: boolean; className?: string }) {
   const { c, market } = useI18n();
+  const badges = c.site.trialBadges(market.trial.days, market.trial.minutes);
+  const hideOnMobile = (n: number) => (n >= MOBILE_BADGES ? 'hidden sm:inline-flex' : 'inline-flex');
   return (
     <ul className={`flex flex-wrap gap-2 ${className}`} aria-label={c.ui.components.trialBadges.ariaLabel}>
-      {c.site.trialBadges(market.trial.days, market.trial.minutes).map((b) => (
-        <li key={b} className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
+      {badges.map((b, n) => (
+        <li key={b} className={`${hideOnMobile(n)} items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
           <Check className="h-3.5 w-3.5 text-signal" aria-hidden /> {b}
         </li>
       ))}
-      {c.site.growthLines.map((g) => (
-        <li key={g} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm font-medium ${dark ? 'border-white/15 text-white/85' : 'border-line text-ink'}`}>
+      {c.site.growthLines.map((g, n) => (
+        <li key={g} className={`${hideOnMobile(badges.length + n)} items-center gap-1.5 rounded-full border px-3 py-1 text-sm font-medium ${dark ? 'border-white/15 text-white/85' : 'border-line text-ink'}`}>
           <ArrowUpRight className="h-3.5 w-3.5 text-signal" aria-hidden /> {g}
         </li>
       ))}
@@ -57,15 +63,19 @@ export function CTAs({
   const { openCallbackModal } = useCallbackModal();
   const { c } = useI18n();
   const t = c.ui.components.ctas;
+  // Sur la page de démo elle-même, le bouton « démo » renverrait vers la page courante : on ne l’affiche pas.
+  const showDemo = useRouter().pathname !== DEMO_URL;
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link href={SIGNUP_URL} className={dark ? 'btn-signal' : 'btn-primary'}>
           <Sparkles className="h-4 w-4" aria-hidden /> {primary ?? t.primary}
         </Link>
-        <Link href={DEMO_URL} className={dark ? 'btn-light' : 'btn-ghost'}>
-          <Play className="h-4 w-4" aria-hidden /> {demo ?? t.demo}
-        </Link>
+        {showDemo && (
+          <Link href={DEMO_URL} className={dark ? 'btn-light' : 'btn-ghost'}>
+            <Play className="h-4 w-4" aria-hidden /> {demo ?? t.demo}
+          </Link>
+        )}
       </div>
       {callback && (
         <button
@@ -102,7 +112,7 @@ export function CallbackForm({
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'),
           sector: f.get('sector'), note: f.get('note'), slot: f.get('slot') || 'asap',
-          consentCall: true, type: type === 'support' ? 'support' : 'commercial',
+          consentCall: true, website: f.get('website') || undefined, type: type === 'support' ? 'support' : 'commercial',
           agent: type === 'demo' ? 'Démo live' : undefined, locale,
         }),
       });
@@ -125,6 +135,8 @@ export function CallbackForm({
   }
   return (
     <form onSubmit={submit} className="grid gap-4" noValidate={false}>
+        {/* Champ piège invisible pour les robots (ne pas remplir) */}
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
         <div><label htmlFor="cb-name" className={label}>{t.name}</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
         <div><label htmlFor="cb-phone" className={label}>{t.phone}</label><input id="cb-phone" name="phone" type="tel" required minLength={8} autoComplete="tel" className="field" /></div>
@@ -167,6 +179,7 @@ export function CallbackForm({
 
 export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
   const [open, setOpen] = useState(0);
+  const base = useId().replace(/:/g, '');
   return (
     <div className="overflow-hidden rounded-2xl bg-night">
       {items.map((it, i) => {
@@ -176,7 +189,9 @@ export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
             <h3 className="font-display">
               <button
                 type="button"
+                id={`${base}-q${i}`}
                 aria-expanded={isOpen}
+                aria-controls={`${base}-a${i}`}
                 onClick={() => setOpen(isOpen ? -1 : i)}
                 className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-[17px] font-semibold text-white hover:text-signal-glow"
               >
@@ -184,7 +199,9 @@ export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
                 <ChevronDown className={`h-5 w-5 shrink-0 text-signal-glow transition-transform ${isOpen ? 'rotate-180' : ''}`} aria-hidden />
               </button>
             </h3>
-            {isOpen && <p className="px-6 pb-6 text-[15px] leading-relaxed text-white/70">{it.a}</p>}
+            <div id={`${base}-a${i}`} hidden={!isOpen}>
+              <p className="px-6 pb-6 text-[15px] leading-relaxed text-white/70">{it.a}</p>
+            </div>
           </div>
         );
       })}

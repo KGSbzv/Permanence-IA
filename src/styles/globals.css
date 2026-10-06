@@ -18,13 +18,32 @@
   .wrap { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
   .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-5 py-3 font-semibold transition-colors disabled:opacity-60; }
   .btn-primary { @apply btn bg-ink text-white hover:bg-ink-soft; }
-  .btn-signal { @apply btn bg-signal text-white hover:bg-signal-deep; }
+  .btn-signal { @apply btn bg-signal-deep text-white hover:bg-signal; }
   .btn-ghost { @apply btn border border-line bg-white text-ink hover:border-ink; }
   .btn-light { @apply btn border border-white/25 text-white hover:bg-white/10; }
   .field { @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-[15px] text-ink placeholder:text-slate-light focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/25; }
   .kw { @apply text-signal; }
 }
 
+/* Bandeaux défilants : pause au survol ou au focus ; sans animation, les éléments passent à la ligne. */
+.marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+
+/* Menu mobile : pas de triangle natif sur <summary>, un chevron à la place. */
+summary.disclosure { list-style: none; }
+summary.disclosure::-webkit-details-marker { display: none; }
+details[open] > summary.disclosure .disclosure-icon { transform: rotate(180deg); }
+
+/* Widget de l’assistante (iframe injectée par app.permanenceia.com) : au-dessus de la barre d’action mobile. */
+@media (max-width: 1023.98px) {
+  iframe[src*="/web-widget/"], iframe[title="Voice Assistant Widget"] {
+    bottom: 84px !important;
+    max-height: calc(100vh - 100px) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .marquee { -webkit-mask-image: none !important; mask-image: none !important; }
+  .marquee-track { width: auto !important; flex-wrap: wrap; }
+  .marquee-track > [aria-hidden="true"] { display: none; }
 }

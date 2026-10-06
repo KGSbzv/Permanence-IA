@@ -35,6 +35,10 @@ export default function Layout({ children, title, description, ogImage = '/og-im
   // asPath ne contient pas le préfixe de langue.
   const path = asPath.split('?')[0].split('#')[0] || '/';
   const url = localeUrl(locale, path);
+  // Barre d’action mobile : on n’y répète pas l’action déjà proposée par la page courante.
+  const showTrial = path !== SIGNUP_URL;
+  const showCallback = path !== '/contact';
+  const barBtn = 'min-h-[2.75rem] whitespace-normal px-3 py-2 text-center text-[13px] leading-tight sm:text-sm';
   const crumbs = breadcrumbs && {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [{ name: t.home, path: '/' }, ...breadcrumbs].map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: `${SITE.url}${localePath(b.path)}` })),
@@ -64,12 +68,12 @@ export default function Layout({ children, title, description, ogImage = '/og-im
       <Navbar />
       <main id="contenu">{children}</main>
       <Footer />
-      {/* Barre d’action collante sur mobile (doc 113) */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t border-line bg-white/95 p-3 pr-20 backdrop-blur lg:hidden">
-        <Link href={SIGNUP_URL} className="btn-primary py-2.5 text-sm">{t.freeTrial}</Link>
-        <button type="button" onClick={() => openCallbackModal({ type: 'commercial' })} className="btn-ghost py-2.5 text-sm"><PhoneCall className="h-4 w-4" aria-hidden />{t.callMeBack}</button>
+      {/* Barre d’action collante sur mobile (doc 113) ; l’action de la page courante n’y est pas répétée. */}
+      <div className={`fixed inset-x-0 bottom-0 z-40 grid gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden ${showTrial && showCallback ? 'grid-cols-2' : 'grid-cols-1'}`}>
+        {showTrial && <Link href={SIGNUP_URL} className={`btn-primary ${barBtn}`}>{t.freeTrial}</Link>}
+        {showCallback && <button type="button" onClick={() => openCallbackModal({ type: 'commercial' })} className={`btn-ghost ${barBtn}`}><PhoneCall className="h-4 w-4 shrink-0" aria-hidden />{t.callMeBack}</button>}
       </div>
-      <div className="h-16 lg:hidden" aria-hidden />
+      <div className="h-[4.75rem] lg:hidden" aria-hidden />
       {/* Assistante commerciale IA (voix + chat) sur toutes les pages, propre au marché */}
       <Script key={market.widgetAssistantId} src={WIDGET_SRC} data-assistant-id={market.widgetAssistantId} strategy="lazyOnload" />
     </>

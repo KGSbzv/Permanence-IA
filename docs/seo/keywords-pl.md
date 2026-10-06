@@ -22,7 +22,7 @@ Tytuły meta stron branż i funkcji pochodzą z map `SECTOR_SEO_TITLE` / `FEATUR
 | `/pl/integrations` | integracje asystenta głosowego AI | Kalendarz Google, Outlook, Calendly, HubSpot, SIP | C `integrations.meta.description` (skrócony do ≤ 155) |
 | `/pl/demo` | demo asystenta głosowego AI | na żywo, bezpłatnie | P `demo.meta`, `demo.h1` |
 | `/pl/contact` | kontakt — asystent głosowy AI | oddzwonienie, wycena | P `contact.meta` |
-| `/pl/faq` | asystent głosowy AI — FAQ | RODO, ceny, wirtualna centrala telefoniczna, inteligentna poczta głosowa | P `faq.meta`, `faq.h1`; F pytania 1, 6, 8 |
+| `/pl/faq` | asystent głosowy AI — FAQ | RODO, ceny, wirtualna centrala telefoniczna | P `faq.meta`, `faq.h1`; F pytania 1, 6, 8 |
 | `/pl/essai-gratuit` | asystent głosowy AI za darmo | bezpłatny okres próbny | P `trial.meta`, `trial.intro` |
 | `/pl/about` | inteligentny asystent telefoniczny | automatyczna obsługa połączeń | P `about.meta` |
 | `/pl/securite` | zgodność z RODO | bezpieczeństwo danych z połączeń | P `security.meta` |

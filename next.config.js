@@ -18,6 +18,7 @@ const nextConfig = {
       { source: '/offres', destination: '/tarifs', permanent: true },
       // Pas encore d’articles : le blog renvoie vers la FAQ.
       { source: '/blog', destination: '/faq', permanent: false },
+      { source: '/blog/:slug*', destination: '/faq', permanent: false },
       { source: '/plombiers', destination: '/secteurs/services-a-domicile', permanent: true },
       { source: '/dentaire', destination: '/secteurs/dentaire-cliniques', permanent: true },
       { source: '/cliniques', destination: '/secteurs/dentaire-cliniques', permanent: true },

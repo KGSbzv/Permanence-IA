@@ -37,7 +37,7 @@ export default function LiveCall({ title, call, lead, leadTitle }: Props) {
 
   const done = step >= total;
   return (
-    <div ref={root} className="relative" aria-label={t.ariaLabel}>
+    <div ref={root} className="relative" role="figure" aria-label={t.ariaLabel}>
       <div className="rounded-3xl border border-line bg-white p-5 shadow-float">
         <div className="flex items-center justify-between rounded-2xl bg-night px-4 py-3 text-white">
           <div className="flex items-center gap-3">
