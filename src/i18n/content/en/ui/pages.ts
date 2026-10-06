@@ -51,7 +51,7 @@ export const UI_PAGES = {
   faq: {
     meta: {
       title: (brand: string) => `Frequently asked questions — ${brand}`,
-      description: (brand: string) => `How it works, telephony, SIP, calendar, WhatsApp, GDPR, free trial and pricing: all the answers about the ${brand} AI voice agent.`,
+      description: (brand: string) => `How it works, telephony, SIP, calendar, WhatsApp, data protection, free trial and pricing: all the answers about the ${brand} AI voice agent.`,
     },
     h1: 'Frequently asked questions',
     intro: 'Can’t find your answer? Leave your number and an adviser will call you back.',
@@ -166,7 +166,7 @@ export const UI_PAGES = {
       description: (brand: string) => `Consent, opt-out, encryption, configurable retention, roles and traceability: how ${brand} protects your call data.`,
     },
     h1: 'Security and compliance for your AI calls',
-    intro: 'Your calls contain personal data. Here are the protections in place and the settings available to help you comply with the GDPR.',
+    intro: 'Your calls contain personal data. Here are the protections in place and the settings available to help you comply with data protection law.',
     settingsTitle: 'Your settings',
     settings: [
       'Retention period for recordings and transcripts',
@@ -205,7 +205,7 @@ export const UI_PAGES = {
     },
     h1: 'Terms and Conditions of Use and Sale',
     updated: 'Applicable to professionals and businesses • Last updated: 29 September 2026',
-    sections: ({ brand, company, email, appHost }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Article 1 — Purpose of the service',
         body: [
@@ -228,9 +228,9 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: 'Article 3 — Right of withdrawal and 14-day Peace of Mind Guarantee',
+        title: 'Article 3 — 14-day Peace of Mind Guarantee',
         body: [
-          { p: [`Although contracts between professionals do not legally benefit from the consumer right of withdrawal, ${brand} offers, as a commercial gesture, a `, { strong: 'full refund guarantee within 14 days' }, ' of the first paid subscription.'] },
+          { p: [`In addition to any rights you have by law, ${brand} offers, as a commercial gesture, a `, { strong: 'full refund guarantee within 14 days' }, ' of the first paid subscription.'] },
           { p: ['On simple notification by email to ', { strong: email }, ' within 14 days of the first payment, the full monthly fee is refunded with no reason required.'] },
         ],
       },
@@ -257,7 +257,8 @@ export const UI_PAGES = {
       {
         title: 'Article 7 — Governing law and jurisdiction',
         body: [
-          { p: 'These Terms and Conditions are governed by French law. Any dispute relating to their interpretation or performance falls under the exclusive jurisdiction of the Commercial Court of Paris (Tribunal de Commerce de Paris).' },
+          { p: `These Terms and Conditions are governed by ${legal.governingLaw}. Any dispute relating to their interpretation or performance shall be subject to the exclusive jurisdiction of ${legal.court}.` },
+          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
         ],
       },
     ],
@@ -272,7 +273,7 @@ export const UI_PAGES = {
     h1: 'Privacy policy',
     intro: 'What we collect, why, who with, for how long, and how to exercise your rights.',
     updated: 'Updated: October 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => {
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
@@ -337,9 +338,9 @@ export const UI_PAGES = {
           ],
         },
         {
-          title: 'Transfers outside the European Union',
+          title: 'Transfers outside your country',
           body: [
-            { p: 'Several of these providers, as well as our company, are based in the United States. Transfers rely on the EU-US Data Privacy Framework where the provider participates in it, or on the European Commission’s standard contractual clauses.' },
+            { p: 'Several of these providers, as well as our company, are based in the United States, so your data may be processed outside your country or region. These transfers rely on appropriate safeguards, such as standard contractual clauses (with the UK addendum where applicable), and we take reasonable steps to ensure that recipients protect your data to the standard required by the law that applies to you.' },
           ],
         },
         {
@@ -364,8 +365,8 @@ export const UI_PAGES = {
         {
           title: 'Your rights',
           body: [
-            { p: ['You can ask for access to your data, its correction, erasure or portability, the restriction of processing, object to marketing and withdraw your consent to be called back. Email ', mail, ': we reply within one month.'] },
-            { p: 'If you live in the European Union or the United Kingdom, you can also lodge a complaint with your data protection authority (in the UK, the ICO).' },
+            { p: [`Under ${legal.privacyLaw}, you can ask for access to your data, its correction, erasure or portability, the restriction of processing, object to marketing and withdraw your consent to be called back. Email `, mail, ': we reply within one month.'] },
+            { p: `You can also lodge a complaint with ${legal.dataAuthority}.` },
           ],
         },
         {
@@ -385,7 +386,7 @@ export const UI_PAGES = {
     },
     h1: 'Legal Notice',
     updated: 'Last updated: 29 September 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Website publisher',
         body: [
@@ -419,7 +420,7 @@ export const UI_PAGES = {
         title: '3. Intellectual property',
         body: [
           { p: ['The ', { strong: brand }, ` brand, the logo (the standby bubble, the sound waves and the availability dot), and all visual identity, text, conversation scripts, infographics and source code on the website are the exclusive property of ${company}.`] },
-          { p: 'Any reproduction, distribution, modification or use without prior written consent is strictly prohibited and constitutes infringement punishable under the French Intellectual Property Code.' },
+          { p: `Any reproduction, distribution, modification or use without prior written consent is strictly prohibited and constitutes infringement under ${legal.copyrightLaw}.` },
           { note: 'The Autocalls White-Label Architecture mention falls under the technology licence granted by Autocalls Inc.' },
         ],
       },
@@ -449,7 +450,7 @@ export const UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `${brand} Blog | AI assistants, appointment booking, qualification and GDPR`,
+      title: (brand: string) => `${brand} Blog | AI assistants, appointment booking, qualification and data protection`,
       description: 'Expert articles, case studies and in-depth guides to help your business convert more phone calls with AI voice agents.',
     },
     eyebrow: 'Resources and insights',

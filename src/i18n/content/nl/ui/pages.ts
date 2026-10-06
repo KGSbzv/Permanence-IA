@@ -61,8 +61,8 @@ export const UI_PAGES = {
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `Gratis proefperiode ${days} dagen — ${minutes} minuten inbegrepen · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Maak uw ${brand}-account aan: ${days} dagen gratis proberen, ${minutes} minuten inbegrepen, prijzen excl. btw, tijdens de proefperiode wordt niets afgeschreven, op elk moment op te zeggen.`,
+      title: (days: number, minutes: number, brand: string) => `${days} dagen gratis — ${minutes} minuten inbegrepen · ${brand}`,
+      description: (days: number, minutes: number, brand: string) => `Maak uw ${brand}-account aan: ${days} dagen gratis, ${minutes} minuten inbegrepen, niets afgeschreven tijdens de proef, altijd opzegbaar.`,
     },
     h1: (minutes: number) => `Claim uw ${minutes} gratis minuten`,
     intro: (days: number) => `Maak uw account aan, kies het abonnement dat u wilt testen en probeer uw agent ${days} dagen lang in uw eigen bedrijf.`,
@@ -205,7 +205,7 @@ export const UI_PAGES = {
     },
     h1: 'Algemene gebruiks- en verkoopvoorwaarden',
     updated: 'Van toepassing op professionals en bedrijven • Laatst bijgewerkt: 29 september 2026',
-    sections: ({ brand, company, email, appHost }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Artikel 1 — Doel van de dienst',
         body: [
@@ -228,9 +228,9 @@ export const UI_PAGES = {
         ],
       },
       {
-        title: 'Artikel 3 — Herroepingsrecht & Tevredenheidsgarantie 14 dagen',
+        title: 'Artikel 3 — Tevredenheidsgarantie 14 dagen',
         body: [
-          { p: [`Hoewel overeenkomsten tussen professionele partijen wettelijk niet onder het herroepingsrecht voor consumenten vallen, biedt ${brand} uit commerciële overweging een `, { strong: 'garantie op volledige terugbetaling binnen 14 dagen' }, ' na de eerste betaalde aanmelding.'] },
+          { p: [`Naast uw wettelijke rechten biedt ${brand} uit commerciële overweging een `, { strong: 'garantie op volledige terugbetaling binnen 14 dagen' }, ' na de eerste betaalde aanmelding.'] },
           { p: ['Na een eenvoudige melding per e-mail aan ', { strong: email }, ' binnen 14 dagen na de eerste betaling wordt de volledige maandtermijn zonder opgave van redenen terugbetaald.'] },
         ],
       },
@@ -257,7 +257,8 @@ export const UI_PAGES = {
       {
         title: 'Artikel 7 — Toepasselijk recht en bevoegde rechter',
         body: [
-          { p: 'Op deze algemene gebruiks- en verkoopvoorwaarden is Frans recht van toepassing. Bij geschillen over de uitleg of uitvoering ervan is uitsluitend de Tribunal de Commerce de Paris (handelsrechtbank van Parijs) bevoegd.' },
+          { p: `Op deze voorwaarden is ${legal.governingLaw} van toepassing. Geschillen over de uitleg of uitvoering ervan worden uitsluitend voorgelegd aan ${legal.court}.` },
+          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
         ],
       },
     ],
@@ -272,7 +273,7 @@ export const UI_PAGES = {
     h1: 'Privacybeleid',
     intro: 'Wat we verzamelen, waarom, met wie, hoe lang, en hoe u uw rechten uitoefent.',
     updated: 'Bijgewerkt: oktober 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => {
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
@@ -337,9 +338,9 @@ export const UI_PAGES = {
           ],
         },
         {
-          title: 'Doorgifte buiten de Europese Unie',
+          title: 'Doorgifte buiten de Europese Economische Ruimte',
           body: [
-            { p: 'Meerdere van deze dienstverleners, evenals onze vennootschap, zijn gevestigd in de Verenigde Staten. De doorgifte is gebaseerd op het EU-VS-kader voor gegevensbescherming (Data Privacy Framework) wanneer de dienstverlener daarbij is aangesloten, of op de modelcontractbepalingen van de Europese Commissie.' },
+            { p: `Meerdere van deze dienstverleners, evenals onze vennootschap, zijn gevestigd in de Verenigde Staten. Doorgifte van persoonsgegevens buiten de Europese Economische Ruimte gebeurt in overeenstemming met ${legal.privacyLaw}: op basis van het EU-VS-kader voor gegevensbescherming (Data Privacy Framework) wanneer de dienstverlener daarbij is aangesloten, en anders op basis van de modelcontractbepalingen (standaardcontractbepalingen) van de Europese Commissie.` },
           ],
         },
         {
@@ -365,7 +366,7 @@ export const UI_PAGES = {
           title: 'Uw rechten',
           body: [
             { p: ['U kunt vragen om inzage in uw gegevens, rectificatie, verwijdering, overdraagbaarheid en beperking van de verwerking, bezwaar maken tegen marketing en uw toestemming om teruggebeld te worden intrekken. Mail naar ', mail, ': wij antwoorden binnen een maand.'] },
-            { p: 'Woont u in de Europese Unie, dan kunt u ook een klacht indienen bij de toezichthouder voor gegevensbescherming in uw land (in Nederland: de Autoriteit Persoonsgegevens).' },
+            { p: `U kunt ook een klacht indienen bij ${legal.dataAuthority}, of bij de toezichthouder voor gegevensbescherming in het land van de Europese Economische Ruimte waar u woont.` },
           ],
         },
         {
@@ -385,7 +386,7 @@ export const UI_PAGES = {
     },
     h1: 'Juridische informatie',
     updated: 'Laatst bijgewerkt: 29 september 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Uitgever van de website',
         body: [
@@ -419,7 +420,7 @@ export const UI_PAGES = {
         title: '3. Intellectueel eigendom',
         body: [
           { p: ['Het merk ', { strong: brand }, `, het logo (de ballon in stand-by, de geluidsgolven en de beschikbaarheidsstip) en alle huisstijlen, teksten, gespreksscripts, infographics en broncodes op de website zijn exclusief eigendom van ${company}.`] },
-          { p: 'Elke verveelvoudiging, verspreiding, wijziging of elk gebruik zonder voorafgaande schriftelijke toestemming is uitdrukkelijk verboden en vormt een inbreuk die strafbaar is op grond van de Franse Code de la propriété intellectuelle (wetboek van intellectuele eigendom).' },
+          { p: `Elke verveelvoudiging, verspreiding, wijziging of elk gebruik zonder voorafgaande schriftelijke toestemming is uitdrukkelijk verboden en vormt een inbreuk in de zin van ${legal.copyrightLaw}.` },
           { note: 'De vermelding Autocalls White-Label Architecture valt onder de technologielicentie die is verleend door Autocalls Inc.' },
         ],
       },

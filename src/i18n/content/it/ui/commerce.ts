@@ -10,7 +10,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `${brand} — Agenti vocali AI 24/7 per le Sue chiamate`,
       description: (days: number, minutes: number) =>
-        `Automatizzi le Sue chiamate con un’AI che risponde, qualifica e prenota al posto Suo. ${days} giorni di prova gratuita, ${minutes} minuti inclusi, prezzi IVA esclusa, senza vincoli.`,
+        `Un’AI che risponde, qualifica e prenota al posto Suo. ${days} giorni di prova gratuita, ${minutes} minuti inclusi, IVA esclusa, senza vincoli.`,
     },
     hero: {
       title: { before: 'Automatizzi le Sue chiamate con un’AI che ', kw: 'risponde, qualifica e prenota', after: ' al posto Suo' },
@@ -83,7 +83,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       /** Un piano nella descrizione: `price` e `minutes` già formattati. */
       plan: (name: string, price: string, minutes: string) => `${name} ${price} IVA esclusa / ${minutes} min`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. Prova gratuita di ${days} giorni, ${minutes} minuti inclusi.`,
+        `${plans.join(', ')}. ${days} giorni gratis, ${minutes} min inclusi.`,
     },
     hero: {
       title: 'Scelga il piano adatto al Suo volume di chiamate',
@@ -148,7 +148,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Ricariche di minuti — ${brand}`,
       description: (price: string, minutes: string) =>
-        `Ricariche di credito da ${price} IVA esclusa per ${minutes} minuti extra. Aggiunga minuti in qualsiasi momento; passi al piano superiore quando il Suo volume cresce.`,
+        `Ricariche da ${price} IVA esclusa per ${minutes} minuti extra. Aggiunga minuti quando vuole o passi al piano superiore.`,
     },
     hero: {
       title: 'Aggiunga minuti in qualsiasi momento',

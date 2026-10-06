@@ -23,7 +23,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `${brand} — agenci głosowi AI 24/7 do obsługi połączeń`,
       description: (d: number, m: number) =>
-        `Zautomatyzuj obsługę połączeń dzięki AI, która odbiera, kwalifikuje i umawia wizyty za Ciebie. ${days(d)} bezpłatnego okresu próbnego, ${minutes(m)} w cenie, ceny netto, bez zobowiązań.`,
+        `AI, która odbiera, kwalifikuje i umawia wizyty za Ciebie. ${days(d)} za darmo, ${minutes(m)} w cenie, ceny netto, bez zobowiązań.`,
     },
     hero: {
       title: { before: 'Zautomatyzuj obsługę połączeń dzięki AI, która ', kw: 'odbiera, kwalifikuje i umawia wizyty', after: ' za Ciebie' },

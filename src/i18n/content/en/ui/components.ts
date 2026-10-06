@@ -42,7 +42,7 @@ export const UI_COMPONENTS = {
     tagline: 'AI voice agents that answer, qualify, book and call back for your business, 24/7.',
     startFree: 'Start for free',
     login: 'Log in',
-    gdpr: 'Built-in GDPR tools',
+    gdpr: 'Built-in data protection tools',
     encryption: 'Encryption in transit and at rest',
     cols: {
       platform: 'Platform',
@@ -266,7 +266,7 @@ export const UI_COMPONENTS = {
       { title: 'Data protection', text: 'Encryption in transit and at rest, role-based access and configurable retention periods.' },
       { title: 'Traceability', text: 'Call history, transcripts and an activity log for every account.' },
       { title: 'Access control', text: 'Roles and permissions for each team member with the Call Centre plan.' },
-      { title: 'Regulatory readiness', text: 'Tools to apply the GDPR: information, right of access, deletion, retention.' },
+      { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion, retention.' },
       { title: 'Infrastructure', text: 'Platform hosted with established cloud providers, with backups and monitoring.' },
     ],
     title: 'Security and compliance for your AI calls',

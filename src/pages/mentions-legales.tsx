@@ -7,7 +7,7 @@ import { RichBlocks } from '@/i18n/rich';
 export default function MentionsLegales() {
   const { c, market } = useI18n();
   const t = c.ui.pages.legalNotice;
-  const sections = t.sections({ brand: market.brand, company: SITE.company, email: SITE.email, appHost: SITE.appUrl.replace('https://', '') });
+  const sections = t.sections({ brand: market.brand, company: SITE.company, email: SITE.email, appHost: SITE.appUrl.replace('https://', ''), legal: market.legal });
   return (
     <Layout
       title={t.meta.title(market.brand)}

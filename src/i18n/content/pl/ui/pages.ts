@@ -71,7 +71,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   trial: {
     meta: {
       title: (d: number, m: number, brand: string) => `Bezpłatny okres próbny ${days(d)} — ${minutes(m)} w cenie · ${brand}`,
-      description: (d: number, m: number, brand: string) => `Załóż konto ${brand}: ${days(d)} bezpłatnego okresu próbnego, ${minutes(m)} w cenie, ceny netto, w okresie próbnym nic nie jest pobierane, możesz anulować w każdej chwili.`,
+      description: (d: number, m: number, brand: string) => `Załóż konto ${brand}: ${days(d)} za darmo, ${minutes(m)} w cenie, bez opłat w okresie próbnym, anulujesz w każdej chwili.`,
     },
     h1: (m: number) => `Odbierz ${m} ${plural(m, 'darmową minutę', 'darmowe minuty', 'darmowych minut')}`,
     intro: (d: number) => `Załóż konto, wybierz pakiet do przetestowania i wypróbuj agenta w swojej firmie przez ${days(d)}.`,
@@ -214,7 +214,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Ogólne Warunki Korzystania i Sprzedaży (Regulamin)',
     updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 29 września 2026',
-    sections: ({ brand, company, email, appHost }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Artykuł 1 — Przedmiot usługi',
         body: [
@@ -239,7 +239,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: 'Artykuł 3 — Prawo odstąpienia i 14-dniowa Gwarancja Spokoju',
         body: [
-          { p: [`Choć umowy zawierane między przedsiębiorcami nie są z mocy prawa objęte konsumenckim prawem odstąpienia, ${brand} przyznaje w ramach polityki handlowej `, { strong: 'gwarancję pełnego zwrotu w ciągu 14 dni' }, ' od pierwszego płatnego zakupu.'] },
+          { p: [`Niezależnie od uprawnień wynikających z przepisów prawa, ${brand} przyznaje w ramach polityki handlowej `, { strong: 'gwarancję pełnego zwrotu w ciągu 14 dni' }, ' od pierwszego płatnego zakupu.'] },
           { p: ['Po zwykłym zgłoszeniu e-mailem na adres ', { strong: email }, ' w ciągu 14 dni od pierwszej płatności cała opłata miesięczna jest zwracana bez podawania przyczyny.'] },
         ],
       },
@@ -266,7 +266,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: 'Artykuł 7 — Prawo właściwe i sąd właściwy',
         body: [
-          { p: 'Niniejszy Regulamin podlega prawu francuskiemu. W razie sporu dotyczącego jego interpretacji lub wykonania wyłączną właściwość ma Sąd Gospodarczy w Paryżu (Tribunal de Commerce de Paris).' },
+          { p: `Niniejszy regulamin podlega ${legal.governingLaw}. Wszelkie spory dotyczące jego interpretacji lub wykonania rozstrzyga ${legal.court}.` },
+          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
         ],
       },
     ],
@@ -281,13 +282,13 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     h1: 'Polityka prywatności',
     intro: 'Jakie dane zbieramy, w jakim celu, komu je przekazujemy, jak długo je przechowujemy i jak możesz skorzystać ze swoich praw.',
     updated: 'Aktualizacja: październik 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => {
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
           title: 'Kto odpowiada za Twoje dane',
           body: [
-            { p: [`${brand} jest marką firmy ${company}, spółki z ograniczoną odpowiedzialnością zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, '.'] },
+            { p: [`${brand} jest marką firmy ${company}, spółki z ograniczoną odpowiedzialnością zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, `. Dane osobowe przetwarzamy zgodnie z przepisami o ochronie danych: ${legal.privacyLaw}.`] },
             {
               ul: [
                 [{ strong: 'W zakresie strony internetowej, próśb o oddzwonienie, rozmów z naszymi asystentkami i zarządzania kontami klientów' }, ` administratorem danych jest ${company}.`],
@@ -346,9 +347,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           ],
         },
         {
-          title: 'Przekazywanie danych poza Unię Europejską',
+          title: 'Przekazywanie danych poza Europejski Obszar Gospodarczy',
           body: [
-            { p: 'Kilku z tych dostawców, a także nasza spółka, ma siedzibę w Stanach Zjednoczonych. Przekazywanie danych opiera się na Ramach ochrony danych UE-USA, jeśli dostawca do nich przystąpił, lub na standardowych klauzulach umownych Komisji Europejskiej.' },
+            { p: 'Kilku z tych dostawców, a także nasza spółka, ma siedzibę w Stanach Zjednoczonych. Przekazywanie danych poza Europejski Obszar Gospodarczy odbywa się na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską lub, w stosownych przypadkach, Ram ochrony danych UE-USA (EU-U.S. Data Privacy Framework), jeśli dostawca do nich przystąpił.' },
           ],
         },
         {
@@ -374,7 +375,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Twoje prawa',
           body: [
             { p: ['Możesz zażądać dostępu do swoich danych, ich sprostowania, usunięcia, przeniesienia, ograniczenia przetwarzania, sprzeciwić się marketingowi i wycofać zgodę na kontakt telefoniczny. Napisz na adres ', mail, ': odpowiemy w ciągu miesiąca.'] },
-            { p: 'Jeśli mieszkasz w Unii Europejskiej, możesz również złożyć skargę do organu ochrony danych w swoim kraju (w Polsce: Prezes UODO).' },
+            { p: `Masz również prawo wnieść skargę do organu nadzorczego: ${legal.dataAuthority}.` },
           ],
         },
         {
@@ -394,7 +395,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Nota prawna',
     updated: 'Ostatnia aktualizacja: 29 września 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Wydawca strony',
         body: [
@@ -428,7 +429,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         title: '3. Własność intelektualna',
         body: [
           { p: ['Marka ', { strong: brand }, `, logo (dymek w trybie czuwania, fale głosowe i punkt dostępności), a także wszystkie elementy identyfikacji wizualnej, teksty, skrypty rozmów, infografiki i kody źródłowe zamieszczone na stronie stanowią wyłączną własność ${company}.`] },
-          { p: 'Wszelkie powielanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie bez uprzedniej pisemnej zgody jest surowo zabronione i stanowi naruszenie podlegające sankcjom na podstawie francuskiego Kodeksu własności intelektualnej (Code de la propriété intellectuelle).' },
+          { p: `Wszelkie powielanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie bez uprzedniej pisemnej zgody jest zabronione i stanowi naruszenie praw podlegające sankcjom przewidzianym w przepisach: ${legal.copyrightLaw}.` },
           { note: 'Oznaczenie Autocalls White-Label Architecture wynika z licencji technologicznej udzielonej przez Autocalls Inc.' },
         ],
       },
@@ -459,7 +460,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   blog: {
     meta: {
       title: (brand: string) => `Blog ${brand} | Asystenci AI, umawianie wizyt, kwalifikacja i RODO`,
-      description: 'Artykuły ekspertów, studia przypadków i kompletne poradniki, które pomogą Twojej firmie skuteczniej zamieniać rozmowy telefoniczne w klientów dzięki agentom głosowym AI.',
+      description: 'Artykuły i poradniki o tym, jak agenci głosowi AI pomagają zamieniać rozmowy telefoniczne w klientów.',
     },
     eyebrow: 'Zasoby i wiedza',
     h1: 'Dziennik recepcji AI',

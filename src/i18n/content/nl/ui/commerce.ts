@@ -9,7 +9,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `${brand} — AI-spraakagents 24/7 voor uw telefoongesprekken`,
       description: (days: number, minutes: number) =>
-        `Automatiseer uw telefoongesprekken met AI die voor u opneemt, kwalificeert en afspraken boekt. ${days} dagen gratis proberen, ${minutes} minuten inbegrepen, prijzen excl. btw, geen verplichtingen.`,
+        `AI die voor u opneemt, kwalificeert en afspraken boekt. ${days} dagen gratis, ${minutes} minuten inbegrepen, excl. btw, geen verplichtingen.`,
     },
     hero: {
       title: { before: 'Automatiseer uw telefoongesprekken met AI die voor u ', kw: 'opneemt, kwalificeert en afspraken boekt', after: '' },
@@ -82,7 +82,7 @@ export const UI_COMMERCE = {
       /** Eén abonnement in de beschrijving: `price` en `minutes` zijn al opgemaakt. */
       plan: (name: string, price: string, minutes: string) => `${name} ${price} excl. btw / ${minutes} min`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. Gratis proefperiode van ${days} dagen, ${minutes} minuten inbegrepen.`,
+        `${plans.join(', ')}. ${days} dagen gratis, ${minutes} min inbegrepen.`,
     },
     hero: {
       title: 'Kies het abonnement dat past bij uw belvolume',
@@ -147,7 +147,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Minuten opwaarderen — ${brand}`,
       description: (price: string, minutes: string) =>
-        `Tegoed opwaarderen vanaf ${price} excl. btw voor ${minutes} extra minuten. Voeg op elk moment minuten toe; stap over op een groter abonnement wanneer uw volume groeit.`,
+        `Opwaarderen vanaf ${price} excl. btw voor ${minutes} extra minuten. Voeg altijd minuten toe of stap over op een groter abonnement.`,
     },
     hero: {
       title: 'Voeg op elk moment minuten toe',

@@ -62,7 +62,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   trial: {
     meta: {
       title: (days: number, minutes: number, brand: string) => `Prova gratuita di ${days} giorni — ${minutes} minuti inclusi · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Crei il Suo account ${brand}: ${days} giorni di prova gratuita, ${minutes} minuti inclusi, prezzi IVA esclusa, nessun addebito durante la prova, annullabile in qualsiasi momento.`,
+      description: (days: number, minutes: number, brand: string) => `Crei il Suo account ${brand}: ${days} giorni gratis, ${minutes} minuti inclusi, nessun addebito durante la prova, annullabile in qualsiasi momento.`,
     },
     h1: (minutes: number) => `Richieda i Suoi ${minutes} minuti gratuiti`,
     intro: (days: number) => `Crei il Suo account, scelga il piano da provare e provi il Suo agente sulla Sua attività per ${days} giorni.`,
@@ -205,7 +205,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Condizioni generali di utilizzo e di vendita',
     updated: 'Applicabili a professionisti e aziende • Ultimo aggiornamento: 29 settembre 2026',
-    sections: ({ brand, company, email, appHost }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Articolo 1 — Oggetto del servizio',
         body: [
@@ -228,9 +228,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         ],
       },
       {
-        title: 'Articolo 3 — Diritto di recesso e Garanzia Serenità 14 giorni',
+        title: 'Articolo 3 — Garanzia Serenità 14 giorni',
         body: [
-          { p: [`Sebbene i contratti conclusi tra professionisti non beneficino per legge del diritto di recesso previsto per i consumatori, ${brand} concede a titolo commerciale una `, { strong: 'garanzia di rimborso integrale entro 14 giorni' }, ' dalla prima sottoscrizione a pagamento.'] },
+          { p: [`Oltre ai diritti previsti dalla legge, ${brand} concede a titolo commerciale una `, { strong: 'garanzia di rimborso integrale entro 14 giorni' }, ' dalla prima sottoscrizione a pagamento.'] },
           { p: ['Con una semplice comunicazione via email a ', { strong: email }, ' entro 14 giorni dal primo pagamento, l’intera mensilità viene rimborsata senza necessità di motivazione.'] },
         ],
       },
@@ -257,7 +257,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: 'Articolo 7 — Legge applicabile e foro competente',
         body: [
-          { p: 'Le presenti Condizioni generali sono regolate dal diritto francese. In caso di controversia relativa alla loro interpretazione o esecuzione, la competenza è espressamente attribuita al Tribunale di commercio di Parigi (Tribunal de Commerce de Paris).' },
+          { p: `Le presenti Condizioni generali sono regolate dalla ${legal.governingLaw}. Per ogni controversia relativa alla loro interpretazione o esecuzione è competente in via esclusiva il ${legal.court}.` },
+          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
         ],
       },
     ],
@@ -272,7 +273,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     h1: 'Informativa sulla privacy',
     intro: 'Cosa raccogliamo, perché, con chi lo condividiamo, per quanto tempo e come esercitare i Suoi diritti.',
     updated: 'Aggiornamento: ottobre 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => {
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
@@ -364,8 +365,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'I Suoi diritti',
           body: [
-            { p: ['Può richiedere l’accesso ai Suoi dati, la loro rettifica, la cancellazione, la portabilità, la limitazione del trattamento, opporsi alle comunicazioni commerciali e revocare il consenso a essere richiamato. Scriva a ', mail, ': rispondiamo entro un mese.'] },
-            { p: 'Se risiede nell’Unione europea, può anche presentare un reclamo all’autorità di protezione dei dati del Suo paese (in Italia, il Garante per la protezione dei dati personali).' },
+            { p: [`Ai sensi del ${legal.privacyLaw}, può richiedere l’accesso ai Suoi dati, la loro rettifica, la cancellazione, la portabilità, la limitazione del trattamento, opporsi alle comunicazioni commerciali e revocare il consenso a essere richiamato. Scriva a `, mail, ': rispondiamo entro un mese.'] },
+            { p: `Ha inoltre il diritto di proporre reclamo all’autorità di controllo: in Italia, ${legal.dataAuthority}; se risiede in un altro paese dell’Unione europea, può rivolgersi all’autorità di protezione dei dati del Suo paese.` },
           ],
         },
         {
@@ -385,7 +386,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Note legali',
     updated: 'Ultimo aggiornamento: 29 settembre 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Editore del sito',
         body: [
@@ -419,7 +420,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         title: '3. Proprietà intellettuale',
         body: [
           { p: ['Il marchio ', { strong: brand }, `, il logo (la bolla in attesa, le onde vocali e il punto di disponibilità), nonché l’insieme delle linee grafiche, dei testi, degli script conversazionali, delle infografiche e dei codici sorgente presenti sul sito sono di proprietà esclusiva di ${company}.`] },
-          { p: 'Qualsiasi riproduzione, distribuzione, modifica o utilizzo senza previo accordo scritto è severamente vietato e costituisce contraffazione sanzionata dal Codice della proprietà intellettuale francese (Code de la propriété intellectuelle).' },
+          { p: `Qualsiasi riproduzione, distribuzione, modifica o utilizzo senza previo accordo scritto è severamente vietato e costituisce una violazione sanzionata ai sensi della ${legal.copyrightLaw}.` },
           { note: 'La dicitura Autocalls White-Label Architecture rientra nella licenza tecnologica concessa da Autocalls Inc.' },
         ],
       },

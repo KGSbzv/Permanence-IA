@@ -15,6 +15,8 @@ export interface LegalVars {
   email: string;
   /** Hôte de l’espace client, ex. app.permanenceia.com. */
   appHost: string;
+  /** Cadre juridique du pays visé (droit applicable, tribunal, autorité…), voir src/i18n/markets.ts. */
+  legal: import('../../../markets').MarketLegal;
 }
 export interface ChatLine { me?: boolean; text: Rich }
 
@@ -218,7 +220,7 @@ export const UI_PAGES = {
     },
     h1: "Conditions Générales d'Utilisation & de Vente (CGU/CGV)",
     updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 29 Septembre 2026',
-    sections: ({ brand, company, email, appHost }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: 'Article 1 — Objet du service',
         body: [
@@ -270,7 +272,8 @@ export const UI_PAGES = {
       {
         title: 'Article 7 — Droit applicable et juridiction compétente',
         body: [
-          { p: 'Les présentes CGU/CGV sont soumises au droit français. En cas de litige relatif à leur interprétation ou exécution, compétence expresse est attribuée au Tribunal de Commerce de Paris.' },
+          { p: `Les présentes CGU/CGV sont soumises au ${legal.governingLaw}. En cas de litige relatif à leur interprétation ou exécution, compétence expresse est attribuée au ${legal.court}.` },
+          ...(legal.mandatoryNote ? [{ p: legal.mandatoryNote }] : []),
         ],
       },
     ],
@@ -285,7 +288,7 @@ export const UI_PAGES = {
     h1: 'Politique de confidentialité',
     intro: 'Ce que nous collectons, pourquoi, avec qui, combien de temps, et comment exercer vos droits.',
     updated: 'Mise à jour : octobre 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => {
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
@@ -378,7 +381,7 @@ export const UI_PAGES = {
           title: 'Vos droits',
           body: [
             { p: ['Vous pouvez demander l’accès à vos données, leur rectification, leur effacement, leur portabilité, la limitation du traitement, vous opposer à la prospection et retirer votre consentement à être rappelé. Écrivez à ', mail, ' : nous répondons sous un mois.'] },
-            { p: 'Si vous résidez dans l’Union européenne, vous pouvez aussi adresser une réclamation à l’autorité de protection des données de votre pays (en France, la CNIL).' },
+            { p: `Vous pouvez aussi adresser une réclamation à ${legal.dataAuthority}, ou à l’autorité de protection des données de votre pays de résidence.` },
           ],
         },
         {
@@ -398,7 +401,7 @@ export const UI_PAGES = {
     },
     h1: 'Mentions Légales',
     updated: 'Dernière mise à jour : 29 Septembre 2026',
-    sections: ({ brand, company, email }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Éditeur du site',
         body: [
@@ -432,7 +435,7 @@ export const UI_PAGES = {
         title: '3. Propriété intellectuelle',
         body: [
           { p: ['La marque ', { strong: brand }, `, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l'ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes sources figurant sur le site sont la propriété exclusive de ${company}.`] },
-          { p: 'Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le Code de la propriété intellectuelle.' },
+          { p: 'Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le ' + legal.copyrightLaw + '.' },
           { note: 'La mention Autocalls White-Label Architecture relève de la licence technologique concédée par Autocalls Inc.' },
         ],
       },
