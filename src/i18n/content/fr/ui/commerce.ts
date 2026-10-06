@@ -7,6 +7,10 @@
 // Mots-clés SEO (voir docs/seo/keywords-fr.md) : titre et description par secteur et par module,
 // retrouvés à partir du nom affiché. Si un nom change, la page retombe sur le titre générique.
 const SECTOR_SEO: Record<string, { title: string; description: (days: number) => string }> = {
+  'E-commerce': { title: 'Service client IA pour boutique en ligne', description: (days) => `Service client IA pour e-commerce : suivi de commande, retours et questions produit traités à toute heure, au téléphone et par message. Testez ${days} jours gratuitement.` },
+  'Courtiers en assurance et en crédit': { title: 'Accueil téléphonique IA pour courtiers', description: (days) => `Accueil téléphonique IA pour courtiers en assurance et en crédit : demandes de devis rappelées vite, pièces relancées, rendez-vous posés. Testez ${days} jours gratuitement.` },
+  'Gestion locative et syndics': { title: 'Permanence téléphonique gestion locative', description: (days) => `Permanence téléphonique pour gestion locative et syndics : incidents des locataires triés jour et nuit, visites qualifiées. Testez ${days} jours gratuitement.` },
+  'Médecine et chirurgie esthétiques': { title: 'Secrétariat IA pour médecine esthétique', description: (days) => `Secrétariat téléphonique IA pour médecine esthétique : consultations réservées, rendez-vous confirmés la veille, aucun conseil médical. Testez ${days} jours gratuitement.` },
   'Services à domicile': {
     title: 'Permanence téléphonique pour artisans 24/7',
     description: (days) => `Permanence téléphonique pour plombiers, électriciens et chauffagistes : urgences filtrées et demandes qualifiées. Testez ${days} jours gratuitement.`,

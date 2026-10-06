@@ -8,6 +8,10 @@ import type { UI_COMMERCE as FR_UI_COMMERCE } from '../../fr/ui/commerce';
 // SEO: parola chiave principale per pagina (vedi docs/seo/keywords-it.md). Chiave = nome italiano
 // del settore o del modulo; se il nome manca, si usa il formato generico.
 const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
+  'E-commerce': { title: 'Assistenza clienti AI per e-commerce', description: (days) => `Assistenza clienti AI per negozi online: stato degli ordini, resi e domande sui prodotti gestiti a ogni ora, al telefono e via messaggio. Provi gratis ${days} giorni.` },
+  'Broker assicurativi e del credito': { title: 'Assistente telefonico AI per broker', description: (days) => `Assistente telefonico AI per broker assicurativi e del credito: richieste di preventivo richiamate subito, documenti sollecitati, appuntamenti fissati. Provi gratis ${days} giorni.` },
+  'Gestione immobiliare e condomini': { title: 'Assistente AI per amministratori di immobili', description: (days) => `Assistente telefonico AI per gestione immobiliare e condomini: guasti degli inquilini smistati giorno e notte, visite qualificate. Provi gratis ${days} giorni.` },
+  'Medicina e chirurgia estetica': { title: 'Segreteria AI per medicina estetica', description: (days) => `Segreteria telefonica AI per medicina estetica: consulenze prenotate, appuntamenti confermati il giorno prima, nessun consiglio medico. Provi gratis ${days} giorni.` },
   'Servizi a domicilio': {
     title: 'Assistente telefonico AI per artigiani',
     description: (days) => `Assistente telefonico AI per idraulici, elettricisti e tecnici: urgenze filtrate e richieste qualificate, anche fuori orario. Provi gratis ${days} giorni.`,

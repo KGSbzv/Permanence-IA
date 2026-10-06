@@ -7,6 +7,10 @@
 // SEO: hoofdzoekwoord per pagina (zie docs/seo/keywords-nl.md). Sleutel = Nederlandse naam van de
 // sector of module; ontbreekt de naam, dan wordt het generieke formaat gebruikt.
 const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
+  'E-commerce': { title: 'AI-klantenservice voor webshops', description: (days) => `AI-klantenservice voor webshops: bestelstatus, retouren en productvragen op elk moment beantwoord, telefonisch en per bericht. Probeer ${days} dagen gratis.` },
+  'Assurantie- en hypotheekadviseurs': { title: 'AI-telefoonservice voor adviseurs', description: (days) => `AI-telefoonservice voor assurantie- en hypotheekadviseurs: offerteaanvragen snel teruggebeld, stukken opgevraagd, afspraken ingepland. Probeer ${days} dagen gratis.` },
+  'Verhuurbeheer en VvE-beheer': { title: 'AI-telefoonservice voor verhuurbeheer', description: (days) => `AI-telefoonservice voor verhuurbeheer en VvE-beheer: storingen van huurders dag en nacht gesorteerd, bezichtigingen gekwalificeerd. Probeer ${days} dagen gratis.` },
+  'Esthetische geneeskunde en cosmetische chirurgie': { title: 'AI-secretariaat voor esthetische klinieken', description: (days) => `AI-telefoonsecretariaat voor esthetische klinieken: consulten ingepland, afspraken de dag ervoor bevestigd, geen medisch advies. Probeer ${days} dagen gratis.` },
   'Service aan huis': {
     title: 'Telefoonservice voor installateurs, 24/7',
     description: (days) => `Telefoonservice voor loodgieters, elektriciens en installateurs: spoed gefilterd, aanvragen gekwalificeerd, ook na sluitingstijd. Probeer ${days} dagen gratis.`,
