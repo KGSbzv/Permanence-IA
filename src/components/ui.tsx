@@ -99,6 +99,7 @@ export function CallbackForm({
   const t = c.ui.components.callbackForm;
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
+  const [slot, setSlot] = useState('asap');
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -112,6 +113,9 @@ export function CallbackForm({
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'),
           sector: f.get('sector'), note: f.get('note'), slot: f.get('slot') || 'asap',
+          // Créneau précis : date et heure locales du visiteur, avec son fuseau horaire (rappel programmé).
+          callAt: f.get('slot') === 'precise' ? f.get('callAt') : undefined,
+          tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
           consentCall: true, website: f.get('website') || undefined, type: type === 'support' ? 'support' : 'commercial',
           agent: type === 'demo' ? 'Démo live' : undefined, locale,
         }),
@@ -150,14 +154,21 @@ export function CallbackForm({
         </div>
         <div>
           <label htmlFor="cb-slot" className={label}>{t.when}</label>
-          <select id="cb-slot" name="slot" className="field" defaultValue="asap">
+          <select id="cb-slot" name="slot" className="field" value={slot} onChange={(e) => setSlot(e.target.value)}>
             {/* Les valeurs envoyées à l’API restent fixes ; seuls les libellés changent selon la langue. */}
             <option value="asap">{t.slots.asap}</option>
             <option value="Aujourd’hui après-midi">{t.slots.todayAfternoon}</option>
             <option value="Demain matin">{t.slots.tomorrowMorning}</option>
             <option value="Demain après-midi">{t.slots.tomorrowAfternoon}</option>
+            <option value="precise">{t.slots.precise}</option>
           </select>
         </div>
+        {slot === 'precise' && (
+          <div className={compact ? '' : 'sm:col-span-2'}>
+            <label htmlFor="cb-callat" className={label}>{t.preciseLabel}</label>
+            <input id="cb-callat" name="callAt" type="datetime-local" required className="field" />
+          </div>
+        )}
       </div>
       {!compact && (
         <div><label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{t.emailHint}</span></label><input id="cb-email" name="email" type="email" autoComplete="email" className="field" /></div>

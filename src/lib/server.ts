@@ -106,6 +106,79 @@ const CALLABLE = [
 ];
 // Indicatifs +1 qui ne sont ni aux États-Unis ni au Canada (Caraïbes, territoires) ou non géographiques (5xx, 6xx réservés, 700, 710).
 const NANP_EXCLUDED = /^\+1(?:242|246|264|268|284|340|345|441|473|649|658|664|670|671|684|721|758|767|784|787|809|829|849|868|869|876|939|5\d\d|600|622|633|644|655|677|688|700|710)/;
-export const isAutoCallable = (e164: string) => !NANP_EXCLUDED.test(e164) && CALLABLE.some((r) => r.test(e164));
+// Ailleurs dans le monde, tout numéro international est accepté, sauf les destinations connues pour la fraude
+// aux appels surtaxés (satellites, réseaux internationaux, micro-États du Pacifique, Cuba, Somalie…).
+// Les autorisations géographiques du compte Twilio restent le dernier filtre.
+const COVERED = /^\+(?:33|32|41|352|377|44|61|39|48|31|1)/;
+const HIGH_RISK = /^\+(?:53|252|232|224|245|220|231|235|239|269|222|291|246|247|290|500|67\d|68\d|69[0-2]|87\d|88[0-3]|979|808|800|99\d)/;
+export const isAutoCallable = (e164: string) => (COVERED.test(e164)
+  ? !NANP_EXCLUDED.test(e164) && CALLABLE.some((r) => r.test(e164))
+  : /^\+[1-9]\d{7,14}$/.test(e164) && !HIGH_RISK.test(e164));
+
+/** Campagne à utiliser pour un numéro reçu sans langue du site (demande enregistrée par un agent pendant un appel). */
+export function langFromPhone(e164: string) {
+  if (/^\+44/.test(e164)) return 'en-gb';
+  if (/^\+61/.test(e164)) return 'en-au';
+  if (/^\+39/.test(e164)) return 'it';
+  if (/^\+48/.test(e164)) return 'pl';
+  if (/^\+31/.test(e164)) return 'nl';
+  // France, Belgique, Suisse, Luxembourg, Monaco, Canada francophone par défaut et Afrique francophone (+2xx).
+  if (/^\+(?:33|32|41|352|377|2[0-6]\d)/.test(e164)) return 'fr';
+  return 'en-gb';
+}
+
+/* ---------- Rappels programmés ---------- */
+
+/** Fuseau par défaut de chaque langue du site, quand le navigateur n’en fournit pas. */
+const TZ: Record<string, string> = {
+  fr: 'Europe/Paris', 'en-gb': 'Europe/London', 'en-au': 'Australia/Sydney', it: 'Europe/Rome', pl: 'Europe/Warsaw', nl: 'Europe/Amsterdam',
+};
+const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
+
+/** Écart (ms) entre l’heure locale d’un fuseau et l’heure UTC, à un instant donné. */
+function tzOffset(at: Date, tz: string) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+    timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit',
+  }).formatToParts(at).map((x) => [x.type, x.value]));
+  return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - at.getTime();
+}
+
+/** Heure locale « AAAA-MM-JJTHH:MM » d’un fuseau → instant UTC. */
+function localToUtc(local: string, tz: string) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(local);
+  if (!m) return null;
+  const guess = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
+  return new Date(guess - tzOffset(new Date(guess), tz));
+}
+
+/** Date du jour (AAAA-MM-JJ) dans un fuseau, décalée de `days` jours. */
+function dayIn(tz: string, days: number) {
+  const d = new Date(Date.now() + days * 86_400_000);
+  return new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+}
+
+// Créneaux du formulaire du site (valeurs fixes, quelle que soit la langue) → heure locale du rappel.
+const SLOT_TIME: Record<string, [number, string]> = {
+  'Aujourd’hui après-midi': [0, '14:00'], 'Demain matin': [1, '09:30'], 'Demain après-midi': [1, '14:30'],
+};
+
+/**
+ * Moment du rappel, en UTC. Priorité : date précise (ISO avec décalage, ou heure locale du fuseau `tz`),
+ * puis créneau du formulaire, sinon tout de suite. Toujours entre maintenant et 30 jours.
+ * La campagne n’appelle de toute façon que dans ses plages horaires.
+ */
+export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unknown; lang: string }) {
+  const zone = typeof opts.tz === 'string' && validTz(opts.tz) ? opts.tz : TZ[opts.lang] || TZ.fr;
+  const now = Date.now();
+  let at: Date | null = null;
+  const raw = typeof opts.callAt === 'string' ? opts.callAt.trim() : '';
+  if (raw) at = /(?:[zZ]|[+-]\d{2}:?\d{2})$/.test(raw) ? new Date(raw) : localToUtc(raw, zone);
+  else if (typeof opts.slot === 'string' && SLOT_TIME[opts.slot]) {
+    const [days, time] = SLOT_TIME[opts.slot];
+    at = localToUtc(`${dayIn(zone, days)}T${time}`, zone);
+  }
+  if (!at || Number.isNaN(at.getTime()) || at.getTime() <= now) return new Date(now);
+  return new Date(Math.min(at.getTime(), now + 30 * 86_400_000));
+}
 
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));

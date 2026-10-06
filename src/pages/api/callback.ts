@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -31,34 +31,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Langue du site (fr, en-gb, en-au, it, pl, nl) ; « intl » = demande enregistrée par un agent pendant un appel.
   const lang = typeof locale === 'string' ? locale : 'fr';
   const e164 = toE164(String(phone), lang);
+  // Demande enregistrée par un agent : campagne choisie d’après l’indicatif du numéro.
+  const fromAgent = lang === 'intl' || (Boolean(agent) && agent !== 'Démo live');
+  const campaignLang = lang === 'intl' ? langFromPhone(e164 || '') : lang;
+  // Moment du rappel : date précise (formulaire ou agent), créneau du formulaire, sinon dès que possible.
+  const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
+  const scheduled = callAt.getTime() > Date.now() + 60_000;
   const row = {
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
-    slot: slot || 'asap', note: note || null, type: type === 'support' ? 'support' : 'commercial',
+    slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '), note: note || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
   // Rappel automatique : la demande rejoint la campagne d’appels de son pays et de son type (commercial ou support).
   const kind = row.type === 'support' ? 'support' : 'commercial';
   let leadHook: string | undefined;
-  if (lang === 'fr') leadHook = kind === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
+  if (campaignLang === 'fr') leadHook = kind === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
   else {
-    try { leadHook = JSON.parse(process.env.LEAD_WEBHOOKS_INTL || '{}')[lang]?.[kind]; } catch { leadHook = undefined; }
+    try { leadHook = JSON.parse(process.env.LEAD_WEBHOOKS_INTL || '{}')[campaignLang]?.[kind]; } catch { leadHook = undefined; }
   }
   const queueCall = async () => {
-    // Une demande déjà enregistrée par un agent pendant un appel n’est pas remise en file : l’équipe la traite.
-    if (lang === 'intl') throw new Error('demande issue d’un agent : suivi par l’équipe');
-    if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${lang}/${kind}`);
-    // Garde-fous contre les appels abusifs : pays desservis seulement, et une seule demande par numéro sur 7 jours.
+    if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);
+    // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus,
+    // et une seule demande du site par numéro sur 7 jours (un agent peut, lui, reprogrammer un rappel).
     if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
-    const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
-    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=2`);
-    if (recent.length > 1) throw new Error('demande déjà en file pour ce numéro');
+    if (!fromAgent) {
+      const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
+      const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=2`);
+      if (recent.length > 1) throw new Error('demande déjà en file pour ce numéro');
+    }
     // Plafond global : au-delà de 50 demandes en 24 h, plus d’appel automatique (l’équipe reste prévenue par email).
     const day = await dbSelect('callbacks', `select=id&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=51`);
     if (day.length > 50) throw new Error('plafond quotidien d’appels automatiques atteint');
     const r = await fetch(leadHook, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone: e164, company: company || '', sector: sector || '', note: [note, slot && `Créneau souhaité : ${slot}`].filter(Boolean).join(' — ') }),
+      // call_at (UTC) : l’automatisation attend ce moment avant d’ajouter le contact à la campagne.
+      body: JSON.stringify({
+        name, phone: e164, company: company || '', sector: sector || '', call_at: callAt.toISOString(),
+        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
+      }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);
   };
