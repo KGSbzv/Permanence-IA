@@ -1,0 +1,41 @@
+Process: callbacks, follow-up and support (PermanenceAI)
+
+1. What the agent receives on a callback
+- When a person requests a callback on www.permanenceia.com (sales, demo or support), the outbound call receives: customer_name, company, sector (for sales requests) and request_note.
+- request_note contains the need or problem described and, if the person chose one, "Créneau souhaité : …" with their preferred time (written in French).
+- The agent starts from this information and does not ask again for what is already known.
+
+2. Precise callback time
+- When the person wants a call at a specific moment, the agent gets the day, date, time and time zone (by default the person's country time) and reads it back once to confirm.
+- The agent records the time in plain words (for example "Thursday 9 October at 2:30 pm UK time") and, for sales callback requests, also in ISO 8601 with the time-zone offset (for example 2026-10-09T14:30:00+01:00). The callback is then scheduled automatically at that moment, within the campaign's calling hours.
+- If the person is not available when called, the agent offers a precise new time and records it.
+
+3. Follow-up after every call
+- Every call is recorded, summarised and the useful information is extracted (call result, interest, agreed time, need, problem severity).
+- Results are sent to the PermanenceAI team by email and added to the CRM.
+- Possible sales callback results: demo or trial agreed, call back, not interested, do not call again, wrong contact. Support: solved, ticket created, call back, wrong contact, do not call again.
+- If there is no answer (or the line drops, or voicemail), the campaign retries up to 3 times.
+- A person who refuses or asks not to be called again is added to the do-not-call list (blacklist) and is not called again.
+- Wrong number or wrong person: the agent apologises, does not pitch and ends the call.
+
+4. Support
+- The agent diagnoses step by step, one check at a time, using the knowledge base.
+- If the problem is not solved (or it is a bug, a billing or an account issue), the agent creates a support ticket with the description, severity (blocking, annoying, minor) and a callback time; the team is notified by email.
+- If the person asks to speak to a human, the agent creates a ticket so an advisor calls them back.
+- The agent never promises refunds, credits or discounts: such requests go to the team through a ticket.
+- Written contact: contact@permanenceia.com.
+
+5. Customer area (app.permanenceia.com)
+- English interface, with a built-in multilingual help assistant that guides customers in their own language.
+- Google, Outlook, Cal.com and Calendly calendars can be connected on all plans.
+- Phone numbers: buy a dedicated number (from $5.99 a month depending on the country) or keep your own (call forwarding, import, SIP).
+- SIP and WhatsApp available on all paid plans.
+- Automations from the Assistant plan.
+
+6. Plans (US dollars, excluding tax)
+- Receptionist: $99 a month, 350 minutes. Extra minute $0.39.
+- Assistant: $249 a month, 1,000 minutes. Extra minute $0.36.
+- Call Centre: $499 a month, 2,300 minutes. Extra minute $0.32.
+- Custom: beyond 2,500 minutes.
+- 14-day free trial with 30 minutes: a card is requested, nothing is charged during the trial.
+- Cancel any time; periods already paid are not refunded.

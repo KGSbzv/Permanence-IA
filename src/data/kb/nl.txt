@@ -1,0 +1,41 @@
+Proces: terugbellen, opvolging en support (PermanenceAI)
+
+1. Wat de agent ontvangt bij een terugbelverzoek
+- Als iemand op www.permanenceia.com om terugbellen vraagt (verkoop, demo of support), ontvangt het uitgaande gesprek: customer_name (naam), company (bedrijf), sector (branche, bij verkoopverzoeken) en request_note (toelichting).
+- request_note bevat de behoefte of het probleem en, als de persoon er een koos, de vermelding "Créneau souhaité : …" met het gewenste moment (in het Frans).
+- De agent gaat uit van deze informatie en vraagt niet opnieuw naar wat al bekend is.
+
+2. Terugbellen op een precies tijdstip
+- Als de persoon op een bepaald moment gebeld wil worden, vraagt de agent naar dag, datum, tijd en tijdzone (standaard Nederlandse tijd) en herhaalt die één keer ter bevestiging.
+- De agent legt het tijdstip vast in gewone woorden (bijvoorbeeld "donderdag 9 oktober om 14.30 uur Nederlandse tijd") en, bij verkoopterugbelverzoeken, ook in ISO 8601 met de tijdzoneverschuiving (bijvoorbeeld 2026-10-09T14:30:00+02:00). Het terugbelgesprek wordt dan automatisch op dat moment ingepland, binnen de beltijden van de campagne.
+- Als de persoon op het moment van bellen niet kan, stelt de agent een nieuw precies tijdstip voor en legt dat vast.
+
+3. Opvolging na elk gesprek
+- Elk gesprek wordt opgenomen, samengevat en de nuttige gegevens worden eruit gehaald (resultaat, interesse, afgesproken tijdstip, behoefte, ernst van een probleem).
+- De resultaten gaan per e-mail naar het PermanenceAI-team en worden toegevoegd aan het CRM.
+- Mogelijke resultaten van een verkoopterugbelgesprek: demo of proefperiode afgesproken, terugbellen, niet geïnteresseerd, niet meer bellen, verkeerd contact. Support: opgelost, ticket aangemaakt, terugbellen, verkeerd contact, niet meer bellen.
+- Bij geen antwoord (of een verbroken verbinding of voicemail) probeert de campagne het tot 3 keer opnieuw.
+- Wie weigert of vraagt niet meer gebeld te worden, komt op de belblokkeringslijst (blacklist) en wordt niet meer gebeld.
+- Verkeerd nummer of verkeerde persoon: de agent verontschuldigt zich, doet geen verkooppraatje en beëindigt het gesprek.
+
+4. Support
+- De agent stelt stap voor stap een diagnose, één controle tegelijk, op basis van de kennisbank.
+- Is het probleem niet opgelost (of gaat het om een bug, facturatie of het account), dan maakt de agent een supportticket aan met beschrijving, ernst (blokkerend, hinderlijk, klein) en een terugbelmoment; het team krijgt een e-mail.
+- Als de persoon een mens wil spreken, maakt de agent een ticket aan zodat een adviseur terugbelt.
+- De agent belooft nooit terugbetalingen, tegoeden of kortingen: zulke verzoeken gaan via een ticket naar het team.
+- Schriftelijk contact: contact@permanenceia.com.
+
+5. Klantomgeving (app.permanenceia.com)
+- Interface in het Engels, met een ingebouwde meertalige hulpassistent die klanten in hun eigen taal begeleidt.
+- Google-, Outlook-, Cal.com- en Calendly-agenda's zijn koppelbaar in alle abonnementen.
+- Nummers: een eigen nummer kopen (vanaf $5,99 per maand, afhankelijk van het land) of het huidige nummer behouden (doorschakelen, importeren, SIP).
+- SIP en WhatsApp beschikbaar in alle betaalde abonnementen.
+- Automatiseringen vanaf het abonnement Assistent.
+
+6. Abonnementen (Amerikaanse dollars, exclusief btw)
+- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39.
+- Assistent: $249 per maand, 1.000 minuten. Extra minuut $0,36.
+- Callcenter: $499 per maand, 2.300 minuten. Extra minuut $0,32.
+- Maatwerk: boven 2.500 minuten.
+- Gratis proefperiode van 14 dagen met 30 minuten: er wordt een kaart gevraagd, tijdens de proefperiode wordt niets afgeschreven.
+- Op elk moment opzegbaar; reeds betaalde periodes worden niet terugbetaald.

@@ -1,0 +1,41 @@
+Processus : rappels, suivi et support (Permanence IA)
+
+1. Ce que l'agent reçoit lors d'un rappel
+- Quand une personne demande un rappel sur www.permanenceia.com (commercial, démonstration ou support), l'appel sortant reçoit : customer_name (nom), company (entreprise), sector (secteur, pour les demandes commerciales) et request_note (précisions).
+- request_note contient le besoin ou le problème décrit, et, si la personne en a choisi un, la mention « Créneau souhaité : … » avec le moment qu'elle préfère.
+- L'agent part de ces informations et ne redemande pas ce qui est déjà connu.
+
+2. Rappel à heure précise
+- Quand la personne veut être rappelée à un moment précis, l'agent obtient le jour, la date, l'heure et le fuseau horaire (par défaut l'heure du pays de la personne), puis les relit une fois pour confirmation.
+- L'agent enregistre le créneau en clair (par exemple « jeudi 9 octobre à 14 h 30, heure de Paris ») et, pour les demandes de rappel commercial, aussi au format ISO 8601 avec décalage horaire (par exemple 2026-10-09T14:30:00+02:00). Le rappel est alors programmé automatiquement à ce moment, pendant les horaires d'appel de la campagne.
+- Si la personne n'est pas disponible au moment de l'appel, l'agent propose un nouveau créneau précis et l'enregistre.
+
+3. Suivi après chaque appel
+- Chaque appel est enregistré, résumé, et les informations utiles sont extraites (résultat de l'appel, intérêt, créneau convenu, besoin, gravité d'un problème).
+- Les résultats sont envoyés à l'équipe Permanence IA par email et ajoutés au CRM.
+- Résultats possibles d'un rappel commercial : démonstration ou essai convenu, à rappeler, pas intéressé, ne plus appeler, mauvais contact. Pour le support : résolu, ticket créé, à rappeler, mauvais contact, ne plus appeler.
+- Sans réponse (ou ligne coupée, répondeur), la campagne réessaie jusqu'à 3 fois.
+- Une personne qui refuse ou demande à ne plus être appelée est ajoutée à la liste d'opposition (blacklist) et n'est plus rappelée.
+- Mauvais numéro ou mauvaise personne : l'agent s'excuse, ne présente pas l'offre et termine l'appel.
+
+4. Support
+- L'agent diagnostique pas à pas, une vérification à la fois, et s'appuie sur la base de connaissances.
+- Si le problème n'est pas résolu (ou s'il s'agit d'un bug, de facturation ou du compte), l'agent crée un ticket de support avec la description, la gravité (bloquant, gênant, mineur) et un créneau de rappel ; l'équipe est prévenue par email.
+- Si la personne demande à parler à un humain, l'agent crée un ticket pour qu'un conseiller la rappelle.
+- L'agent ne promet jamais de remboursement, d'avoir ni de geste commercial : ces demandes sont transmises à l'équipe par ticket.
+- Contact écrit : contact@permanenceia.com.
+
+5. Espace client (app.permanenceia.com)
+- Interface en anglais, avec un assistant d'aide multilingue intégré qui guide dans la langue du client.
+- Agendas Google, Outlook, Cal.com et Calendly connectables sur tous les forfaits.
+- Numéros : achat d'un numéro dédié (à partir de 5,99 $ par mois selon le pays) ou conservation de son numéro (renvoi d'appel, import, SIP).
+- SIP et WhatsApp disponibles sur tous les forfaits payants.
+- Automatisations à partir du forfait Assistant.
+
+6. Forfaits (dollars US, hors taxes)
+- Réceptionniste : 99 $ par mois, 350 minutes. Minute supplémentaire 0,39 $.
+- Assistant : 249 $ par mois, 1 000 minutes. Minute supplémentaire 0,36 $.
+- Centre d'appels : 499 $ par mois, 2 300 minutes. Minute supplémentaire 0,32 $.
+- Sur mesure : au-delà de 2 500 minutes.
+- Essai gratuit de 14 jours avec 30 minutes : une carte est demandée, rien n'est débité pendant l'essai.
+- Résiliation à tout moment ; les périodes déjà payées ne sont pas remboursées.

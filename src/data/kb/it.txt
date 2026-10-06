@@ -1,0 +1,41 @@
+Processo: richiamate, follow-up e assistenza (PermanenceIA)
+
+1. Cosa riceve l'agente in una richiamata
+- Quando una persona richiede una richiamata su www.permanenceia.com (commerciale, demo o assistenza), la chiamata in uscita riceve: customer_name (nome), company (azienda), sector (settore, per le richieste commerciali) e request_note (dettagli).
+- request_note contiene l'esigenza o il problema descritto e, se la persona ne ha scelto uno, la dicitura "Créneau souhaité : …" con l'orario preferito (scritta in francese).
+- L'agente parte da queste informazioni e non richiede ciò che è già noto.
+
+2. Richiamata a un orario preciso
+- Quando la persona vuole essere richiamata in un momento preciso, l'agente chiede giorno, data, ora e fuso orario (per impostazione predefinita l'ora italiana) e li rilegge una volta per conferma.
+- L'agente registra l'orario in parole (ad esempio "giovedì 9 ottobre alle 14:30, ora italiana") e, per le richieste di richiamata commerciale, anche in formato ISO 8601 con lo scostamento orario (ad esempio 2026-10-09T14:30:00+02:00). La richiamata viene quindi programmata automaticamente in quel momento, negli orari di chiamata della campagna.
+- Se la persona non è disponibile al momento della chiamata, l'agente propone un nuovo orario preciso e lo registra.
+
+3. Follow-up dopo ogni chiamata
+- Ogni chiamata viene registrata, riassunta e le informazioni utili vengono estratte (esito, interesse, orario concordato, esigenza, gravità di un problema).
+- I risultati vengono inviati al team PermanenceIA via email e aggiunti al CRM.
+- Esiti possibili di una richiamata commerciale: demo o prova concordata, da richiamare, non interessato, non richiamare più, contatto errato. Assistenza: risolto, ticket creato, da richiamare, contatto errato, non richiamare più.
+- Se non c'è risposta (o la linea cade, o risponde la segreteria), la campagna riprova fino a 3 volte.
+- Chi rifiuta o chiede di non essere più chiamato viene inserito nella lista di esclusione (blacklist) e non viene più chiamato.
+- Numero o persona sbagliati: l'agente si scusa, non presenta l'offerta e chiude la chiamata.
+
+4. Assistenza
+- L'agente fa una diagnosi passo dopo passo, una verifica alla volta, usando la base di conoscenza.
+- Se il problema non è risolto (o si tratta di un bug, di fatturazione o dell'account), l'agente crea un ticket di assistenza con descrizione, gravità (bloccante, fastidioso, minore) e un orario di richiamata; il team viene avvisato via email.
+- Se la persona chiede di parlare con un operatore umano, l'agente crea un ticket affinché un consulente la richiami.
+- L'agente non promette mai rimborsi, crediti o sconti: queste richieste vengono inoltrate al team tramite ticket.
+- Contatto scritto: contact@permanenceia.com.
+
+5. Area clienti (app.permanenceia.com)
+- Interfaccia in inglese, con un assistente di aiuto multilingue integrato che guida il cliente nella sua lingua.
+- Calendari Google, Outlook, Cal.com e Calendly collegabili con tutti i piani.
+- Numeri: acquisto di un numero dedicato (da 5,99 $ al mese a seconda del paese) oppure mantenimento del proprio numero (inoltro di chiamata, importazione, SIP).
+- SIP e WhatsApp disponibili con tutti i piani a pagamento.
+- Automazioni a partire dal piano Assistant.
+
+6. Piani (dollari USA, IVA esclusa)
+- Receptionist: 99 $ al mese, 350 minuti. Minuto extra 0,39 $.
+- Assistant: 249 $ al mese, 1.000 minuti. Minuto extra 0,36 $.
+- Call Center: 499 $ al mese, 2.300 minuti. Minuto extra 0,32 $.
+- Su misura: oltre 2.500 minuti.
+- Prova gratuita di 14 giorni con 30 minuti: viene richiesta una carta, nulla viene addebitato durante la prova.
+- Disdetta in qualsiasi momento; i periodi già pagati non vengono rimborsati.

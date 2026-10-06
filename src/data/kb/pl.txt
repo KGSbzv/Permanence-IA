@@ -1,0 +1,41 @@
+Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
+
+1. Co agent otrzymuje przy oddzwonieniu
+- Gdy ktoś prosi o oddzwonienie na www.permanenceia.com (sprzedaż, demonstracja lub wsparcie), połączenie wychodzące otrzymuje: customer_name (imię i nazwisko), company (firma), sector (branża, przy zapytaniach sprzedażowych) i request_note (szczegóły).
+- request_note zawiera opis potrzeby lub problemu oraz, jeśli osoba wybrała termin, dopisek "Créneau souhaité : …" z preferowaną godziną (zapisany po francusku).
+- Agent zaczyna od tych informacji i nie pyta ponownie o to, co już wiadomo.
+
+2. Oddzwonienie o konkretnej godzinie
+- Gdy osoba chce rozmawiać w konkretnym momencie, agent ustala dzień, datę, godzinę i strefę czasową (domyślnie czas polski) i powtarza je raz do potwierdzenia.
+- Agent zapisuje termin słownie (np. "czwartek 9 października o 14:30 czasu polskiego"), a przy prośbach o oddzwonienie sprzedażowe także w formacie ISO 8601 z przesunięciem strefy (np. 2026-10-09T14:30:00+02:00). Oddzwonienie jest wtedy automatycznie zaplanowane na ten moment, w godzinach dzwonienia kampanii.
+- Jeśli osoba nie może rozmawiać w chwili połączenia, agent proponuje nowy konkretny termin i go zapisuje.
+
+3. Dalsze kroki po każdej rozmowie
+- Każda rozmowa jest nagrywana, podsumowywana, a przydatne informacje są wyodrębniane (wynik rozmowy, zainteresowanie, ustalony termin, potrzeba, waga problemu).
+- Wyniki trafiają do zespołu PermanenceAI e-mailem i do CRM.
+- Możliwe wyniki oddzwonienia sprzedażowego: demonstracja lub test ustalony, oddzwonić, niezainteresowany, nie dzwonić więcej, błędny kontakt. Wsparcie: rozwiązane, utworzono zgłoszenie, oddzwonić, błędny kontakt, nie dzwonić więcej.
+- Jeśli nikt nie odbiera (albo połączenie zostanie przerwane lub odbierze poczta głosowa), kampania ponawia próbę do 3 razy.
+- Osoba, która odmawia lub prosi, by więcej nie dzwonić, trafia na listę zastrzeżonych numerów (blacklist) i nie jest już wywoływana.
+- Błędny numer lub niewłaściwa osoba: agent przeprasza, nie przedstawia oferty i kończy rozmowę.
+
+4. Wsparcie
+- Agent diagnozuje problem krok po kroku, jedna czynność naraz, korzystając z bazy wiedzy.
+- Jeśli problem nie zostanie rozwiązany (albo dotyczy błędu, rozliczeń lub konta), agent tworzy zgłoszenie z opisem, wagą (blokujący, uciążliwy, drobny) i terminem oddzwonienia; zespół otrzymuje powiadomienie e-mailem.
+- Jeśli osoba chce rozmawiać z człowiekiem, agent tworzy zgłoszenie, aby doradca oddzwonił.
+- Agent nigdy nie obiecuje zwrotów, rekompensat ani rabatów: takie prośby trafiają do zespołu przez zgłoszenie.
+- Kontakt pisemny: contact@permanenceia.com.
+
+5. Panel klienta (app.permanenceia.com)
+- Interfejs po angielsku, z wbudowanym wielojęzycznym asystentem pomocy, który prowadzi klienta w jego języku.
+- Kalendarze Google, Outlook, Cal.com i Calendly można podłączyć w każdym pakiecie.
+- Numery: zakup dedykowanego numeru (od 5,99 $ miesięcznie, zależnie od kraju) lub zachowanie własnego (przekierowanie, import, SIP).
+- SIP i WhatsApp dostępne we wszystkich płatnych pakietach.
+- Automatyzacje od pakietu Asystent.
+
+6. Pakiety (dolary amerykańskie, bez VAT)
+- Recepcjonistka: 99 $ miesięcznie, 350 minut. Dodatkowa minuta 0,39 $.
+- Asystent: 249 $ miesięcznie, 1000 minut. Dodatkowa minuta 0,36 $.
+- Call center: 499 $ miesięcznie, 2300 minut. Dodatkowa minuta 0,32 $.
+- Na miarę: powyżej 2500 minut.
+- Bezpłatny okres próbny 14 dni z 30 minutami: wymagana jest karta, w trakcie testu nic nie jest pobierane.
+- Rezygnacja w dowolnym momencie; opłacone okresy nie podlegają zwrotowi.
