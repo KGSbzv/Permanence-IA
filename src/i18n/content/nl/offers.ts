@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Uitgaande campagnes', detail: 'Opvolging, bevestigingen en herinneringen die automatisch worden gebeld.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
       { label: 'Sms en WhatsApp', detail: 'Geschreven contact op één plek, betaald met berichtcredits.', cells: all(true) },
       { label: 'Messenger en Instagram', detail: 'Berichten van sociale netwerken in dezelfde inbox.', cells: all(true) },
-      { label: 'Inbegrepen berichtcredits', detail: 'Maandelijks gratis credits voor de geschreven antwoorden van de AI.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3.000 ($ 30)', 'sur-mesure': 'Op maat' } },
+      { label: 'Inbegrepen berichtcredits', detail: 'Maandelijks gratis credits voor de geschreven antwoorden van de AI.', cells: { decouverte: false, receptionniste: false, assistant: '1.000 ($ 10)', 'centre-appels': '3.000 ($ 30)', 'sur-mesure': 'Op maat' } },
     ],
   },
   {

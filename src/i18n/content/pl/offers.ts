@@ -111,7 +111,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Kampanie wychodzące', detail: 'Ponowne kontakty, potwierdzenia i przypomnienia realizowane automatycznie przez telefon.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
       { label: 'SMS i WhatsApp', detail: 'Korespondencja pisemna w jednym miejscu, opłacana kredytami na wiadomości.', cells: all(true) },
       { label: 'Messenger i Instagram', detail: 'Wiadomości z mediów społecznościowych w tej samej skrzynce.', cells: all(true) },
-      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na pisemne odpowiedzi AI.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na pisemne odpowiedzi AI.', cells: { decouverte: false, receptionniste: false, assistant: '1 000 (10 $)', 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Indywidualnie' } },
     ],
   },
   {

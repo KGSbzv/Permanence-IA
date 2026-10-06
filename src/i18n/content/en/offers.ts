@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Outbound campaigns', detail: 'Follow-ups, confirmations and reminders called automatically.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
       { label: 'SMS and WhatsApp', detail: 'Written conversations in one place, paid for with message credits.', cells: all(true) },
       { label: 'Messenger and Instagram', detail: 'Social media messages in the same inbox.', cells: all(true) },
-      { label: 'Message credits included', detail: 'Free credits every month for the AI’s written replies.', cells: { decouverte: false, receptionniste: false, assistant: false, 'centre-appels': '3,000 ($30)', 'sur-mesure': 'Custom' } },
+      { label: 'Message credits included', detail: 'Free credits every month for the AI’s written replies.', cells: { decouverte: false, receptionniste: false, assistant: '1,000 ($10)', 'centre-appels': '3,000 ($30)', 'sur-mesure': 'Custom' } },
     ],
   },
   {
