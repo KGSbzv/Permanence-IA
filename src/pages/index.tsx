@@ -1,3 +1,4 @@
+import { Phone } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
@@ -27,7 +28,7 @@ export default function Home() {
       title={t.meta.title(market.brand)}
       description={t.meta.description(days, minutes)}
       jsonLd={{ '@context': 'https://schema.org', '@type': 'Organization', name: market.brand, url: SITE.url, email: SITE.email, logo: `${SITE.url}/icon-512.png`, legalName: SITE.company,
-        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, availableLanguage: ['French', 'English'] } }}
+        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, ...(market.phone ? { telephone: market.phone.e164, areaServed: 'IL', availableLanguage: ['Hebrew', 'English'] } : { availableLanguage: ['French', 'English'] }) } }}
     >
       {/* Hero : promesse + démo live réelle (navigateur ou appel sur votre téléphone) */}
       <section className="overflow-hidden bg-paper">
@@ -39,6 +40,12 @@ export default function Home() {
               <p className="max-w-prose text-lg">{t.hero.intro}</p>
               <TrialBadges className="mt-5" />
               <CTAs className="mt-6" />
+              {market.phone && (
+                <a href={`tel:${market.phone.e164}`} className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-ink shadow-card hover:border-signal">
+                  <Phone className="h-5 w-5 shrink-0 text-signal" aria-hidden />
+                  <span><span className="block font-display font-semibold">{market.phone.label} · <bdi dir="ltr">{market.phone.display}</bdi></span><span className="block text-sm text-slate">{market.phone.note}</span></span>
+                </a>
+              )}
             </div>
           </div>
           <div id={LIVE_DEMO_ID} tabIndex={-1} className="mt-10 scroll-mt-24 outline-none lg:mt-12"><LiveDemo sector={sector} /></div>

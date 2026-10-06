@@ -3,7 +3,7 @@ import Layout from '@/components/Layout';
 import { CallbackForm, Heading, Section } from '@/components/ui';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
-import { Mail, MessageSquare, PhoneCall } from 'lucide-react';
+import { Mail, MessageSquare, Phone, PhoneCall } from 'lucide-react';
 
 export default function Contact() {
   const { c, market } = useI18n();
@@ -16,6 +16,7 @@ export default function Contact() {
           <div>
             <Heading as="h1" title={t.h1} intro={t.intro} />
             <ul className="mt-10 space-y-5">
+              {market.phone && <li className="flex gap-4"><Phone className="h-6 w-6 shrink-0 text-signal" aria-hidden /><div><p className="font-display font-semibold text-ink">{market.phone.label}</p><a href={`tel:${market.phone.e164}`} className="text-lg font-semibold text-signal-deep hover:underline"><bdi dir="ltr">{market.phone.display}</bdi></a><p className="text-[15px]">{market.phone.note}</p></div></li>}
               <li className="flex gap-4"><PhoneCall className="h-6 w-6 shrink-0 text-signal" aria-hidden /><div><p className="font-display font-semibold text-ink">{t.commercialTitle}</p><p className="text-[15px]">{t.commercialText}</p></div></li>
               <li className="flex gap-4"><MessageSquare className="h-6 w-6 shrink-0 text-signal" aria-hidden /><div><p className="font-display font-semibold text-ink">{t.supportTitle}</p><p className="text-[15px]">{t.supportText}</p></div></li>
               <li className="flex gap-4"><Mail className="h-6 w-6 shrink-0 text-signal" aria-hidden /><div><p className="font-display font-semibold text-ink">{t.emailTitle}</p><a href={`mailto:${SITE.email}`} className="text-[15px] font-semibold text-signal-deep hover:underline">{SITE.email}</a></div></li>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Lock, Mail, ShieldCheck } from 'lucide-react';
+import { Lock, Mail, Phone, ShieldCheck } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { SITE, LOGIN_URL, SIGNUP_URL } from '@/data/site';
@@ -29,6 +29,7 @@ export default function Footer() {
           <Logo height={44} dark />
           <p className="max-w-xs text-[15px]">{t.tagline}</p>
           <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 text-[15px] text-white hover:text-signal-glow"><Mail className="h-4 w-4" aria-hidden />{SITE.email}</a>
+          {market.phone && <a href={`tel:${market.phone.e164}`} className="flex items-center gap-2 text-[15px] text-white hover:text-signal-glow"><Phone className="h-4 w-4" aria-hidden /><bdi dir="ltr">{market.phone.display}</bdi><span className="text-white/60">· {market.phone.label}</span></a>}
           <div className="flex gap-2 pt-1">
             <Link href={SIGNUP_URL} className="btn-signal py-2.5 text-sm">{t.startFree}</Link>
             <a href={LOGIN_URL} className="btn-light py-2.5 text-sm">{t.login}</a>
