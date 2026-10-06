@@ -26,12 +26,14 @@ function tooMany(key: string, max: number) {
 
 /** Compteurs persistants partagés par toutes les instances (table call_events), sur la dernière heure. */
 const emailKey = (email: string) => createHmac('sha256', codeSecret()).update(`id|${email}`).digest('hex').slice(0, 32);
-async function countEvents(kind: string, email: string) {
-  const since = new Date(Date.now() - 3600_000).toISOString();
+async function countEvents(kind: string, email: string, windowMs = 3600_000) {
+  const since = new Date(Date.now() - windowMs).toISOString();
   const rows = await dbSelect<{ id: string }>('call_events', `select=id&kind=eq.${kind}&external_id=eq.${emailKey(email)}&created_at=gte.${since}&limit=20`);
   return rows.length;
 }
 const logEvent = (kind: string, email: string) => dbInsert('call_events', { kind, external_id: emailKey(email) }).catch(() => undefined);
+/** Enregistre l’essai AVANT de vérifier le code ; si l’écriture échoue, l’erreur remonte et l’accès est refusé. */
+const recordAttempt = (email: string) => dbInsert('call_events', { kind: 'otp_try', external_id: emailKey(email) });
 
 /** Secret dédié aux codes, distinct du jeton des webhooks ; sans lui, la route refuse de fonctionner. */
 function codeSecret() {
@@ -140,14 +142,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (b.action === 'lookup') {
-      // Verrou persistant : au plus 5 essais par heure et par email, toutes instances confondues.
-      if (tooMany(`try:${email}`, 5) || (await countEvents('otp_fail', email)) >= 5) {
+      // Verrou persistant, toutes instances confondues : l’essai est compté avant la vérification (au plus 5 par heure),
+      // et un code déjà utilisé avec succès ne resservira pas.
+      if (tooMany(`try:${email}`, 5)) return res.status(429).json({ verified: false, message: 'Trop d’essais : réessayez dans une heure, ou créez un ticket.' });
+      await recordAttempt(email);
+      if ((await countEvents('otp_try', email)) > 5) {
         return res.status(429).json({ verified: false, message: 'Trop d’essais : le dossier est verrouillé pendant une heure. Continuez sans dossier ou créez un ticket.' });
       }
-      if (!codeIsValid(email, String(b.code || ''))) {
-        await logEvent('otp_fail', email);
-        return res.status(200).json({ verified: false, message: 'Code incorrect ou expiré : proposez d’envoyer un nouveau code.' });
+      // Marqueur propre à ce code : un même code ne sert qu’une fois, un nouveau code reste utilisable.
+      const usedKey = `${email}|code:${String(b.code || '').replace(/\D/g, '')}`;
+      if (!codeIsValid(email, String(b.code || '')) || (await countEvents('otp_ok', usedKey, 2 * WINDOW_MS)) > 0) {
+        return res.status(200).json({ verified: false, message: 'Code incorrect, expiré ou déjà utilisé : proposez d’envoyer un nouveau code.' });
       }
+      await dbInsert('call_events', { kind: 'otp_ok', external_id: emailKey(usedKey) });
       const user = await findUser(email);
       if (!user) return res.status(200).json({ verified: false, message: 'Aucun compte avec cette adresse : demandez l’email utilisé à l’inscription.' });
 
