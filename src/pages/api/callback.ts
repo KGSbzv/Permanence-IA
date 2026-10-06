@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, dbInsert, dbSelect, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -31,8 +31,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Langue du site (fr, en-gb, en-au, it, pl, nl) ; « intl » = demande enregistrée par un agent pendant un appel.
   const lang = typeof locale === 'string' ? locale : 'fr';
   const e164 = toE164(String(phone), lang);
-  // Demande enregistrée par un agent : campagne choisie d’après l’indicatif du numéro.
-  const fromAgent = lang === 'intl' || (Boolean(agent) && agent !== 'Démo live');
+  // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
+  // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
+  const fromAgent = isAuthorized(req) && (lang === 'intl' || Boolean(agent));
   const campaignLang = lang === 'intl' ? langFromPhone(e164 || '') : lang;
   // Moment du rappel : date précise (formulaire ou agent), créneau du formulaire, sinon dès que possible.
   const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
@@ -52,13 +53,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   const queueCall = async () => {
     if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);
-    // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus,
-    // et une seule demande du site par numéro sur 7 jours (un agent peut, lui, reprogrammer un rappel).
+    // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus, et au plus
+    // 3 rappels par numéro sur 7 jours (la demande, puis jusqu’à deux reprogrammations par un agent).
+    // Un outil d’agent authentifié par le jeton n’est pas limité.
     if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
     if (!fromAgent) {
       const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
-      const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=2`);
-      if (recent.length > 1) throw new Error('demande déjà en file pour ce numéro');
+      const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=4`);
+      if (recent.length > 3) throw new Error('trop de demandes pour ce numéro cette semaine');
     }
     // Plafond global : au-delà de 50 demandes en 24 h, plus d’appel automatique (l’équipe reste prévenue par email).
     const day = await dbSelect('callbacks', `select=id&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=51`);
