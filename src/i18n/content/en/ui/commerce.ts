@@ -7,17 +7,17 @@
 export const UI_COMMERCE = {
   home: {
     meta: {
-      title: (brand: string) => `${brand} — AI Receptionists that answer every call`,
+      title: (brand: string) => `AI Receptionists that answer every call | ${brand}`,
       description: (days: number, minutes: number) =>
-        `Automate your calls with AI that answers, qualifies and books for you. ${days}-day free trial, ${minutes} minutes included, prices excl. tax, no commitment.`,
+        `AI receptionist and 24/7 phone answering service for small businesses: calls answered, qualified and booked. Try it free for ${days} days, ${minutes} min included.`,
     },
     hero: {
       title: { before: 'AI Receptionists that ', kw: 'answer every call', after: '.' },
-      intro: 'Voice agents that pick up every call, ask the right questions, book appointments and send you a clear summary. Available 24/7, set up for your trade, live in a few minutes.',
+      intro: 'An AI phone answering service for small businesses: voice agents that pick up every call, ask the right questions, book appointments and send you a clear summary. Available 24/7, set up for your trade, live in a few minutes.',
       photoAlt: 'Business owner reading a call summary on her phone',
     },
     showcase: { title: 'See the agent at work in your trade', intro: 'Choose a sector: the call plays out, then the request arrives ready to handle.' },
-    benefits: { title: 'What the agent does for your business', intro: 'A voice agent trained on your business, working when your team can’t pick up.' },
+    benefits: { title: 'What the agent does for your business', intro: 'A virtual receptionist trained on your business, working when your team can’t pick up.' },
     features: {
       booking: {
         title: { before: 'Automate ', kw: 'appointment booking and reminders', after: '' },
@@ -56,7 +56,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents tailored to your trade',
-      intro: 'Six sectors where every missed call costs a customer. The agent asks the right questions for each one.',
+      intro: 'Six sectors where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
       link: 'All sectors',
     },
     integrations: {
@@ -78,14 +78,14 @@ export const UI_COMMERCE = {
 
   tarifs: {
     meta: {
-      title: (brand: string) => `Pricing — plans excl. tax and top-ups · ${brand}`,
+      title: (brand: string) => `AI receptionist pricing — plans and top-ups · ${brand}`,
       /** One plan in the description: `price` and `minutes` already formatted. */
-      plan: (name: string, price: string, minutes: string) => `${name} ${price} excl. tax / ${minutes} min`,
+      plan: (name: string, price: string, minutes: string) => `${name} ${price}/${minutes} min`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. ${days}-day free trial, ${minutes} minutes included.`,
+        `AI receptionist plans excl. tax: ${plans.join(', ')}. Try it free for ${days} days, ${minutes} min included.`,
     },
     hero: {
-      title: 'Choose the plan that fits your call volume',
+      title: 'AI receptionist pricing: choose the plan that fits your call volume',
       intro: (days: number, minutes: number) =>
         `All prices are shown excluding tax. The bigger the plan, the less each minute costs. The free trial includes ${days} days and ${minutes} minutes of calls.`,
       moreMinutes: 'Need more minutes? Add a top-up at any time.',
@@ -101,7 +101,7 @@ export const UI_COMMERCE = {
     },
     faq: {
       title: 'Questions about pricing',
-      intro: 'Not sure which plan suits you? Request a callback, or try the agent live.',
+      intro: 'Not sure which AI answering service plan suits you? Request a callback, or try the agent live.',
       primary: 'Start for free',
       demo: 'See the live demo',
     },
@@ -109,10 +109,10 @@ export const UI_COMMERCE = {
   },
 
   offer: {
-    metaTitleTrial: (days: number, minutes: number, brand: string) => `${days}-day free trial — ${minutes} minutes · ${brand}`,
+    metaTitleTrial: (days: number, minutes: number, brand: string) => `${days}-day free AI receptionist trial — ${minutes} min · ${brand}`,
     /** `monthly`: adds "excl. tax / month" when the price is a monthly amount. */
     metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `${name} plan — ${price}${monthly ? ' excl. tax / month' : ''} · ${brand}`,
-    metaDescription: (title: string, days: number, minutes: number) => `${title}. ${days}-day free trial, ${minutes} minutes included, prices excl. tax.`,
+    metaDescription: (title: string, days: number, minutes: number) => `${title}. Prices excl. tax, no commitment. Try it free for ${days} days, ${minutes} min included.`,
     breadcrumb: 'Pricing',
     productName: (brand: string, name: string) => `${brand} ${name}`,
     eyebrow: (name: string, audience: string) => `${name} plan · ${audience}`,
@@ -145,9 +145,9 @@ export const UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Minute top-ups — ${brand}`,
+      title: (brand: string) => `AI receptionist minute top-ups · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Credit top-ups from ${price} excl. tax for ${minutes} extra minutes. Add minutes at any time; move up a plan when your volume grows.`,
+        `Extra minutes for your AI receptionist: top-ups from ${price} excl. tax for ${minutes} minutes. Add credit at any time from your customer area.`,
     },
     hero: {
       title: 'Add minutes at any time',
@@ -165,11 +165,11 @@ export const UI_COMMERCE = {
 
   sectorsIndex: {
     meta: {
-      title: (brand: string) => `Sectors — AI voice agents by trade · ${brand}`,
-      description: 'Home services, dental and clinics, real estate, garages, beauty, restaurants and hospitality: an AI voice agent tailored to each trade.',
+      title: (brand: string) => `AI receptionists by industry · ${brand}`,
+      description: 'An AI receptionist for trades, dental practices, estate agents, garages, salons and restaurants, set up for your industry. Try it free.',
     },
     hero: {
-      title: 'A voice agent tailored to your trade',
+      title: 'An AI receptionist tailored to your trade',
       intro: 'We have chosen six sectors where calls come in when teams are busy, and where every missed enquiry costs a customer.',
     },
     other: {
@@ -182,15 +182,15 @@ export const UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name}: 24/7 AI voice agent — ${brand}`,
-      /** `short` is the sector's short sentence, without a final full stop. */
+      title: (name: string, brand: string) => `${name} AI receptionist · ${brand}`,
+      /** `short` is the sector's short sentence (it already carries the sector keyword), without a final full stop. `name` is kept for the shared signature. */
       description: (name: string, short: string, days: number, minutes: number) =>
-        `${name}: ${short}. ${days}-day free trial, ${minutes} minutes included, prices excl. tax.`,
+        `${short}. Try it free for ${days} days, ${minutes} min included.`,
     },
     breadcrumb: 'Sectors',
     liveCallTitle: (name: string) => `${name} agent`,
     change: {
-      title: 'What changes when the agent answers for you',
+      title: 'What changes when an AI receptionist answers for you',
       intro: (targets: string) => `${targets}. In your trade, every unanswered call is an enquiry that goes elsewhere.`,
     },
     handles: {
@@ -222,21 +222,21 @@ export const UI_COMMERCE = {
 
   featuresIndex: {
     meta: {
-      title: (brand: string) => `Features — AI calling platform · ${brand}`,
-      description: 'AI receptionist, appointment booking, support, qualification, campaigns, WhatsApp, knowledge base, flow builder, SIP, reporting and web widget.',
+      title: (brand: string) => `AI receptionist software features · ${brand}`,
+      description: 'AI receptionist software: call answering, appointment booking, lead qualification, WhatsApp, knowledge base, SIP, reporting and more. Try it free.',
     },
     hero: {
       title: 'Everything you need to automate your calls',
-      intro: 'Thirteen modules, turned on according to your plan, from your customer area.',
+      intro: 'Thirteen modules of AI phone answering software, turned on according to your plan, from your customer area.',
     },
     overview: { title: 'Overview' },
   },
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} — AI voice agent | ${brand}`,
+      title: (name: string, brand: string) => `${name} — AI phone answering · ${brand}`,
       /** `short` is the module's benefit sentence, without a final full stop. */
-      description: (short: string, offerName: string, days: number) => `${short}. Included from the ${offerName} plan. ${days}-day free trial.`,
+      description: (short: string, offerName: string, days: number) => `${short}. Included from the ${offerName} plan. Try it free for ${days} days.`,
     },
     breadcrumb: 'Features',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
@@ -256,12 +256,12 @@ export const UI_COMMERCE = {
 
   integrations: {
     meta: {
-      title: (brand: string) => `Integrations — calendar, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Connect the AI voice agent to Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP and over 300 tools without code.',
+      title: (brand: string) => `AI receptionist integrations: CRM, calendar · ${brand}`,
+      description: 'Connect your AI receptionist to Google Calendar, Outlook, Calendly, HubSpot, Zoho, WhatsApp, SIP and over 300 tools without code. See all integrations.',
     },
     hero: {
       title: 'Connected to the tools you already use',
-      intro: 'Calendar, CRM, messaging, telephony: the agent fits into the way you work, and the flow builder connects over 300 tools without code.',
+      intro: 'Calendar, CRM, messaging, telephony: your AI receptionist fits into the way you work, and the flow builder connects over 300 tools without code.',
     },
     flow: {
       title: { before: 'Build your automations ', kw: 'without code', after: '' },

@@ -2,14 +2,14 @@
 export interface QA { q: string; a: string }
 
 export const FAQ_GENERAL: QA[] = [
-  { q: 'Comment fonctionne la plateforme d’appels IA ?', a: 'Vous configurez un agent vocal avec vos informations, vos règles et votre ton. Il répond aux appels entrants, passe des appels sortants autorisés, qualifie les demandes, réserve des rendez-vous et vous transmet un résumé de chaque échange.' },
+  { q: 'Comment fonctionne le standard téléphonique IA ?', a: 'Vous configurez un agent vocal IA avec vos informations, vos règles et votre ton. Il répond aux appels entrants, passe des appels sortants autorisés, qualifie les demandes, réserve des rendez-vous et vous transmet un résumé de chaque échange.' },
   { q: 'Combien de temps faut-il pour démarrer ?', a: 'Un premier agent est prêt en quelques minutes à partir de vos informations. Pour une configuration complète (agenda, numéros, transferts), comptez en général un à deux jours, avec notre accompagnement.' },
   { q: 'Faut-il des compétences techniques ?', a: 'Non. Vous décrivez votre activité, l’assistant de prompts vous guide et nous vous aidons pour la téléphonie et les intégrations.' },
   { q: 'Que se passe-t-il si l’agent ne sait pas répondre ?', a: 'Il ne l’invente pas : il note la demande, propose un rappel ou transfère à votre équipe selon les règles que vous avez fixées.' },
   { q: 'L’agent peut-il gérer plusieurs appels en même temps ?', a: 'Oui. Plusieurs appels sont traités en parallèle sur la même ligne : vos clients n’attendent plus.' },
-  { q: 'En quoi est-ce différent d’une messagerie ou d’un standard classique ?', a: 'Une messagerie enregistre, un standard oriente. L’agent IA comprend la demande, pose les questions utiles, agit (rendez-vous, rappel, réponse) et vous transmet une fiche exploitable.' },
+  { q: 'En quoi est-ce différent d’un répondeur ou d’un standard classique ?', a: 'Un répondeur enregistre, un standard oriente. L’agent IA comprend la demande, pose les questions utiles, agit (rendez-vous, rappel, réponse) et vous transmet une fiche exploitable, comme un secrétariat téléphonique disponible à toute heure.' },
   { q: 'Puis-je utiliser mon système téléphonique existant ?', a: 'Oui. Vous pouvez renvoyer votre ligne actuelle vers l’agent, connecter votre standard ou votre opérateur par SIP, ou importer vos numéros Twilio et Telnyx.' },
-  { q: 'Puis-je connecter mon calendrier ?', a: 'Oui : Google Agenda, Outlook, Cal.com et Calendly. L’agent propose les créneaux libres et réserve directement.' },
+  { q: 'Puis-je connecter mon calendrier ?', a: 'Oui : Google Agenda, Outlook, Cal.com et Calendly. L’agent propose les créneaux libres et réserve directement : la prise de rendez-vous par téléphone devient automatique.' },
   { q: 'Est-ce que je peux modifier les prompts ?', a: 'Oui. L’éditeur de prompts vous permet de régler l’objectif, le ton, les questions et les limites de l’agent, guidé pas à pas, sans expertise technique.' },
   { q: 'Est-ce que je peux créer des scénarios sans code ?', a: 'Oui, avec le flow builder à partir du forfait Assistant : vous enchaînez déclencheurs et actions en glissant-déposant, reliés à plus de 300 outils.' },
   { q: 'Puis-je utiliser WhatsApp et Instagram ?', a: 'Oui, à partir du forfait Assistant : SMS, WhatsApp, Messenger et Instagram, avec historique centralisé.' },

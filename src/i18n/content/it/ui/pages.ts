@@ -10,11 +10,11 @@ const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
 export const UI_PAGES: typeof FR_UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Demo dal vivo — provi l’agente vocale AI · ${brand}`,
-      description: 'Provi dal vivo il nostro agente: ci parli o riceva una chiamata dimostrativa adatta al Suo settore. Gratuita e senza impegno.',
+      title: (brand: string) => `Demo gratuita dell’assistente telefonico AI · ${brand}`,
+      description: 'Provi dal vivo il nostro assistente telefonico AI: ci parli o riceva una chiamata dimostrativa adatta al Suo settore. Gratuita e senza impegno.',
     },
-    h1: 'Provi subito dal vivo il nostro agente',
-    intro: 'Lasci il Suo numero e scelga il Suo settore: l’agente La chiama e simula uno scenario della Sua attività. Sente la sua voce, il suo ritmo e il modo in cui qualifica una richiesta.',
+    h1: 'Provi subito dal vivo il nostro assistente telefonico AI',
+    intro: 'Lasci il Suo numero e scelga il Suo settore: la receptionist virtuale La chiama e simula uno scenario della Sua attività. Sente la sua voce, il suo ritmo e il modo in cui qualifica una richiesta.',
     widgetHint: 'Preferisce provare subito? Clicchi sulla bolla in basso a destra dello schermo: la nostra assistente Le risponde a voce o per iscritto.',
     formTitle: 'Ricevere la mia chiamata dimostrativa',
     formIntro: 'Chiamata gratuita, nella fascia oraria che preferisce.',
@@ -32,8 +32,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   contact: {
     meta: {
-      title: (brand: string) => `Contatti e richiamata — ${brand}`,
-      description: 'Lasci il Suo numero, La richiamiamo noi. Richiamata commerciale, demo o assistenza: scelga la fascia oraria.',
+      title: (brand: string) => `Contatti: La richiamiamo noi · ${brand}`,
+      description: 'Ha domande sull’assistente telefonico AI? Lasci il Suo numero, La richiamiamo noi: richiamata commerciale, demo o assistenza, nella fascia oraria scelta.',
     },
     h1: 'Lasci il Suo numero, La richiamiamo noi',
     intro: 'Non pubblichiamo un numero di telefono: siamo noi a richiamarLa, nella fascia oraria che sceglie. Può anche scriverci.',
@@ -50,22 +50,22 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   faq: {
     meta: {
-      title: (brand: string) => `Domande frequenti — ${brand}`,
-      description: (brand: string) => `Funzionamento, telefonia, SIP, calendario, WhatsApp, GDPR, prova gratuita e prezzi: tutte le risposte sull’agente vocale AI ${brand}.`,
+      title: (brand: string) => `Domande frequenti: assistente telefonico AI · ${brand}`,
+      description: (brand: string) => `Funzionamento, centralino e SIP, calendario, WhatsApp, GDPR, prova e prezzi: tutte le risposte sull’assistente telefonico AI ${brand}.`,
     },
     h1: 'Domande frequenti',
-    intro: 'Non trova la risposta? Lasci il Suo numero, un consulente La richiama.',
+    intro: 'Tutto sull’assistente telefonico AI, dalla segreteria al centralino virtuale. Non trova la risposta? Lasci il Suo numero, un consulente La richiama.',
     general: 'La piattaforma',
     pricing: 'Prezzi e prova',
   },
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `Prova gratuita di ${days} giorni — ${minutes} minuti inclusi · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Crei il Suo account ${brand}: ${days} giorni gratis, ${minutes} minuti inclusi, nessun addebito durante la prova, annullabile in qualsiasi momento.`,
+      title: (days: number, minutes: number, brand: string) => `Assistente telefonico AI gratis per ${days} giorni · ${brand}`,
+      description: (days: number, minutes: number, brand: string) => `Provi gratis l’assistente telefonico AI ${brand}: ${days} giorni, ${minutes} minuti inclusi, nessun addebito durante la prova. Crei il Suo account.`,
     },
     h1: (minutes: number) => `Richieda i Suoi ${minutes} minuti gratuiti`,
-    intro: (days: number) => `Crei il Suo account, scelga il piano da provare e provi il Suo agente sulla Sua attività per ${days} giorni.`,
+    intro: (days: number) => `Crei il Suo account, scelga il piano da provare e provi il Suo assistente telefonico AI sulla Sua attività per ${days} giorni.`,
     points: (days: number) => [
       `Carta richiesta all’attivazione, nessun addebito per ${days} giorni`,
       'Se annulla dalla Sua area clienti prima della fine della prova, non paga nulla',
@@ -140,15 +140,15 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `Chi siamo — ${brand}`,
-      description: (brand: string, company: string) => `${brand} aiuta le aziende a rispondere a ogni chiamata grazie ad agenti vocali AI. Un marchio di ${company}.`,
+      title: (brand: string) => `Chi siamo: l’assistente telefonico AI per PMI · ${brand}`,
+      description: (brand: string, company: string) => `${brand} aiuta le piccole imprese a rispondere a ogni chiamata con un assistente telefonico AI. Un marchio di ${company}.`,
     },
     h1: 'Ogni chiamata merita una risposta',
     intro: (brand: string) => `${brand} nasce da una constatazione semplice: le piccole imprese perdono clienti perché nessuno può rispondere al momento giusto.`,
     photoAlt: 'Un’imprenditrice consulta il telefono nel suo ufficio',
     paragraphs: [
       'Artigiani, studi professionali, agenzie, officine, saloni, ristoranti: i Suoi collaboratori sono impegnati a servire i clienti. Nel frattempo, il telefono squilla.',
-      'Mettiamo a Sua disposizione agenti vocali AI che rispondono, qualificano, prenotano e richiamano, configurati per il Suo settore, con prezzi chiari e senza vincoli.',
+      'Mettiamo a Sua disposizione un assistente telefonico AI: agenti vocali che rispondono, qualificano, prenotano e richiamano, configurati per il Suo settore, con prezzi chiari e senza vincoli.',
     ],
     principlesTitle: 'I nostri principi',
     principles: [
@@ -162,11 +162,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   security: {
     meta: {
-      title: (brand: string) => `Sicurezza e conformità — ${brand}`,
-      description: (brand: string) => `Consenso, opt-out, crittografia, conservazione configurabile, ruoli e tracciabilità: come ${brand} protegge i dati delle Sue chiamate.`,
+      title: (brand: string) => `Assistente telefonico AI conforme al GDPR · ${brand}`,
+      description: (brand: string) => `Consenso, opt-out, crittografia, conservazione configurabile e ruoli: come l’assistente telefonico AI ${brand} protegge i dati delle Sue chiamate.`,
     },
     h1: 'Sicurezza e conformità delle Sue chiamate AI',
-    intro: 'Le Sue chiamate contengono dati personali. Ecco le protezioni attive e le impostazioni a Sua disposizione per rispettare il GDPR.',
+    intro: 'Le chiamate gestite dal Suo assistente telefonico AI contengono dati personali. Ecco le protezioni attive e le impostazioni a Sua disposizione per rispettare il GDPR.',
     settingsTitle: 'Le Sue impostazioni',
     settings: [
       'Periodo di conservazione di registrazioni e trascrizioni',
@@ -450,8 +450,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `Blog ${brand} | Assistenti AI, appuntamenti, qualificazione e GDPR`,
-      description: 'Articoli di esperti, casi di studio e guide complete per migliorare la conversione telefonica della Sua azienda grazie agli agenti vocali AI.',
+      title: (brand: string) => `Blog sull’assistente telefonico AI · ${brand}`,
+      description: 'Guide, casi di studio e analisi per migliorare la conversione telefonica della Sua azienda con un assistente telefonico AI e le prenotazioni automatiche.',
     },
     eyebrow: 'Risorse e approfondimenti',
     h1: 'Il giornale della reception AI',

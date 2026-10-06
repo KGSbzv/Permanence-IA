@@ -23,9 +23,9 @@ export interface Module {
 export const MODULES: Module[] = [
   {
     slug: 'receptionniste-ia', name: 'Réceptionniste IA', family: 'Téléphonie',
-    short: 'Répond à chaque appel, qualifie la demande et transfère ce qui compte.',
+    short: 'Réceptionniste virtuelle : répond à chaque appel et transfère ce qui compte.',
     title: 'Une réceptionniste qui décroche à chaque appel, de jour comme de nuit',
-    intro: 'L’agent accueille vos appelants avec votre ton, comprend leur demande, collecte les informations utiles et décide de la suite : réponse, rendez-vous, rappel ou transfert vers votre équipe.',
+    intro: 'Votre réceptionniste virtuelle accueille vos appelants avec votre ton, comprend leur demande, collecte les informations utiles et décide de la suite : réponse, rendez-vous, rappel ou transfert vers votre équipe.',
     uses: ['Ne plus laisser partir d’appels vers la messagerie', 'Filtrer les demandes répétitives et le démarchage', 'Recevoir un résumé clair de chaque appel'],
     steps: [
       { title: 'Vous décrivez votre activité', text: 'Horaires, services, questions fréquentes et règles de transfert.' },
@@ -38,9 +38,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'demo-live', name: 'Démo live de l’agent', family: 'Téléphonie',
-    short: 'Écoutez la voix, la langue et le ton de l’agent en direct.',
+    short: 'Écoutez la voix, la langue et le ton de l’agent vocal IA en direct.',
     title: 'Essayez l’agent en live avant de décider',
-    intro: 'Testez une conversation réelle depuis votre navigateur ou recevez un appel de démonstration. Vous entendez la voix, le rythme et la façon dont l’agent qualifie une demande.',
+    intro: 'Testez une conversation réelle avec l’agent vocal IA depuis votre navigateur ou recevez un appel de démonstration. Vous entendez la voix, le rythme et la façon dont l’agent qualifie une demande.',
     uses: ['Valider la qualité de la voix', 'Tester un scénario de votre métier', 'Montrer l’agent à votre équipe'],
     steps: [
       { title: 'Choisissez votre secteur', text: 'Le scénario de démonstration s’adapte à votre activité.' },
@@ -53,9 +53,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'prise-de-rendez-vous', name: 'Prise de rendez-vous', family: 'Agenda',
-    short: 'Réservations, confirmations, rappels et reports dans votre agenda.',
+    short: 'Rendez-vous pris par téléphone, confirmés et rappelés dans votre agenda.',
     title: 'Des rendez-vous réservés pendant que vous travaillez',
-    intro: 'Connectez votre calendrier : l’agent propose les créneaux libres, réserve, confirme et gère les reports et annulations sans intervention de votre équipe.',
+    intro: 'Connectez votre calendrier : l’agent prend les rendez-vous par téléphone, propose les créneaux libres, réserve, confirme et gère les reports et annulations sans intervention de votre équipe.',
     uses: ['Remplir les créneaux libres', 'Réduire les rendez-vous manqués', 'Libérer l’accueil des appels de planning'],
     steps: [
       { title: 'Connectez votre agenda', text: 'Google, Outlook, Cal.com ou Calendly.' },
@@ -68,9 +68,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'support-client', name: 'Support client', family: 'Automatisation',
-    short: 'Les questions répétitives traitées, les cas complexes transmis.',
+    short: 'Service client par IA : questions répétitives traitées, cas complexes transmis.',
     title: 'Un support qui répond tout de suite, sans file d’attente',
-    intro: 'L’agent répond aux questions fréquentes à partir de vos documents, suit les demandes et transmet à votre équipe les situations qui demandent un humain.',
+    intro: 'Un service client par téléphone sans attente : l’agent répond aux questions fréquentes à partir de vos documents, suit les demandes et transmet à votre équipe les situations qui demandent un humain.',
     uses: ['Supprimer l’attente au téléphone', 'Répondre de façon cohérente', 'Escalader les cas sensibles'],
     steps: [
       { title: 'Chargez vos contenus', text: 'FAQ, procédures, conditions et pages de votre site.' },
@@ -83,9 +83,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'qualification-des-leads', name: 'Qualification des leads', family: 'CRM et données',
-    short: 'Les bonnes informations collectées avant chaque rappel.',
+    short: 'Leads qualifiés par téléphone, avec les bonnes informations avant chaque rappel.',
     title: 'Chaque prospect arrive qualifié dans votre tableau de bord',
-    intro: 'L’agent pose vos questions de qualification — besoin, budget, zone, délai — et crée une fiche structurée. Votre équipe rappelle en sachant déjà tout.',
+    intro: 'L’agent qualifie vos leads par téléphone : il pose vos questions de qualification — besoin, budget, zone, délai — et crée une fiche structurée. Votre équipe rappelle en sachant déjà tout.',
     uses: ['Prioriser les prospects chauds', 'Écarter les demandes hors cible', 'Préparer les devis plus vite'],
     steps: [
       { title: 'Listez vos critères', text: 'Les informations indispensables avant de rappeler.' },
@@ -98,9 +98,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'campagnes-sortantes', name: 'Campagnes sortantes', family: 'Automatisation',
-    short: 'Relances, confirmations et suivis, dans un cadre maîtrisé.',
+    short: 'Appels sortants de relance, confirmation et suivi, dans un cadre maîtrisé.',
     title: 'Relancez, confirmez et suivez vos contacts automatiquement',
-    intro: 'Programmez des appels sortants vers des contacts qui l’ont accepté : confirmations, rappels de rendez-vous, relances de devis, renouvellements. Avec plages horaires, limites et liste d’exclusion.',
+    intro: 'Programmez des appels sortants automatisés vers des contacts qui l’ont accepté : confirmations, rappels de rendez-vous, relances de devis, renouvellements. Avec plages horaires, limites et liste d’exclusion.',
     uses: ['Confirmer les rendez-vous de la semaine', 'Relancer les devis en attente', 'Recontacter les clients inactifs'],
     steps: [
       { title: 'Importez vos contacts', text: 'Fichier, CRM ou formulaire, avec leur consentement.' },
@@ -130,7 +130,7 @@ export const MODULES: Module[] = [
     slug: 'base-de-connaissances', name: 'Base de connaissances', family: 'CRM et données',
     short: 'Vos PDF, pages web et procédures deviennent les réponses de l’agent.',
     title: 'L’agent répond avec vos informations, pas des suppositions',
-    intro: 'Chargez vos documents, ajoutez les pages de votre site ou connectez vos données. L’agent y cherche la réponse au moment où il en a besoin.',
+    intro: 'Chargez vos documents dans la base de connaissances de votre agent vocal IA, ajoutez les pages de votre site ou connectez vos données. L’agent y cherche la réponse au moment où il en a besoin.',
     uses: ['Réponses justes et à jour', 'Moins d’escalades inutiles', 'Un seul endroit à mettre à jour'],
     steps: [
       { title: 'Ajoutez vos sources', text: 'PDF, URL de votre site, textes ou données.' },
@@ -143,9 +143,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'editeur-de-prompts', name: 'Éditeur de prompts', family: 'Automatisation',
-    short: 'Le comportement de l’agent, réglé précisément et sans code.',
+    short: 'Le comportement de l’agent vocal, réglé précisément et sans code.',
     title: 'Décidez exactement comment votre agent parle et agit',
-    intro: 'Définissez l’objectif de l’appel, le ton, les questions et les limites. Un assistant d’écriture vous guide pas à pas, sans expertise technique.',
+    intro: 'Dans l’éditeur de prompts, définissez l’objectif de l’appel, le ton, les questions et les limites. Un assistant d’écriture vous guide pas à pas, sans expertise technique.',
     uses: ['Adapter le ton à votre marque', 'Fixer les limites de l’agent', 'Ajuster après écoute des appels'],
     steps: [
       { title: 'Choisissez un modèle', text: 'Par secteur ou par type d’appel.' },
@@ -158,9 +158,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'flow-builder', name: 'Flow builder', family: 'Automatisation',
-    short: 'Des scénarios visuels, sans code, reliés à plus de 300 outils.',
+    short: 'Des automatisations visuelles, sans code, reliées à plus de 300 outils.',
     title: 'Construisez vos scénarios en glissant-déposant',
-    intro: 'Enchaînez les étapes : nouveau lead, appel, mise à jour du CRM, message de confirmation. Le flow builder relie l’agent à plus de 300 outils.',
+    intro: 'Automatisez sans code en enchaînant les étapes : nouveau lead, appel, mise à jour du CRM, message de confirmation. Le flow builder relie l’agent à plus de 300 outils.',
     uses: ['Automatiser l’après-appel', 'Relier l’agent à vos outils', 'Éviter les ressaisies'],
     steps: [
       { title: 'Choisissez un déclencheur', text: 'Formulaire, fin d’appel, nouveau lead.' },
@@ -173,9 +173,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'sip-numeros', name: 'SIP et numéros', family: 'Téléphonie',
-    short: 'Gardez vos numéros, ou prenez un numéro dédié en option.',
+    short: 'Gardez vos numéros par renvoi d’appel ou SIP, ou prenez un numéro dédié en option.',
     title: 'Gardez vos numéros ou obtenez-en de nouveaux',
-    intro: 'Connectez votre standard ou votre opérateur par SIP, importez vos numéros Twilio ou Telnyx, ou prenez un numéro dédié en option (facturé au mois, selon le pays).',
+    intro: 'Connectez votre standard ou votre opérateur par trunk SIP, gardez votre numéro par renvoi d’appel, importez vos numéros Twilio ou Telnyx, ou prenez un numéro dédié en option (facturé au mois, selon le pays).',
     uses: ['Garder le numéro connu de vos clients', 'Ouvrir une ligne locale', 'Gérer plusieurs sites'],
     steps: [
       { title: 'Choisissez l’option', text: 'Numéro fourni, import ou trunk SIP.' },
@@ -188,9 +188,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'reporting', name: 'Reporting', family: 'Pilotage',
-    short: 'Volumes, durées, résultats et conversions en un coup d’œil.',
+    short: 'Statistiques d’appels : volumes, durées, résultats et conversions.',
     title: 'Mesurez ce que l’agent fait pour votre activité',
-    intro: 'Suivez le nombre d’appels, leur durée, les demandes qualifiées, les rendez-vous pris et les transferts. Écoutez les appels et lisez les transcriptions.',
+    intro: 'Des statistiques d’appels claires : suivez le nombre d’appels, leur durée, les demandes qualifiées, les rendez-vous pris et les transferts. Écoutez les appels et lisez les transcriptions.',
     uses: ['Comprendre vos pics d’appels', 'Mesurer les conversions', 'Améliorer les scripts'],
     steps: [
       { title: 'Les appels sont enregistrés', text: 'Avec transcription et résumé.' },
@@ -203,9 +203,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'widget-web', name: 'Widget web', family: 'Messages',
-    short: 'Rappel et appel depuis votre site, en un clic.',
+    short: 'Rappel et appel depuis votre site web, en un clic.',
     title: 'Transformez les visiteurs de votre site en demandes',
-    intro: 'Ajoutez un widget sur votre site : le visiteur parle à l’agent depuis son navigateur ou laisse son numéro pour être rappelé au créneau de son choix.',
+    intro: 'Ajoutez un widget d’appel sur votre site web : le visiteur parle à l’agent depuis son navigateur ou laisse son numéro pour être rappelé au créneau de son choix.',
     uses: ['Capter les visiteurs pressés', 'Proposer un rappel au bon moment', 'Éviter les formulaires oubliés'],
     steps: [
       { title: 'Copiez le code', text: 'Une ligne à coller sur votre site.' },

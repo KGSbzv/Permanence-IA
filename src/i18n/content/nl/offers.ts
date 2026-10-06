@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een volledig AI-callcenter voor ontvangst, afspraken en support',
     pitch: 'Het Callcenter-abonnement combineert meerdere agents, uitgebreide rapporten, rollen, de geavanceerde kennisbank, API’s en prioriteitssupport, met de laagste prijs per minuut.',
     cta: 'Kies Callcenter',
-    highlights: ['Alles van Assistent', 'Meerdere agents en rollen', 'Uitgebreide rapporten', 'API, webhooks en MCP-tools', 'Prioriteitssupport'],
+    highlights: ['Alles van Assistent', 'Meerdere agents en rollen', 'Uitgebreide rapporten', 'API, webhooks en MCP-tools', 'Prioriteitssupport', '3.000 berichtcredits inbegrepen ($ 30)'],
   },
   'sur-mesure': {
     name: 'Maatwerk',

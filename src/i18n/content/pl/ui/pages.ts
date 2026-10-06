@@ -19,10 +19,10 @@ const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
 export const UI_PAGES: typeof FR_UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Demo na żywo — wypróbuj agenta głosowego AI · ${brand}`,
-      description: 'Wypróbuj naszego agenta na żywo: porozmawiaj z nim lub odbierz połączenie demonstracyjne dopasowane do Twojej branży. Bezpłatnie i bez zobowiązań.',
+      title: (brand: string) => `Demo asystenta głosowego AI na żywo · ${brand}`,
+      description: 'Porozmawiaj z asystentem głosowym AI na żywo lub odbierz połączenie demo dopasowane do Twojej branży. Bezpłatnie i bez zobowiązań — wypróbuj teraz.',
     },
-    h1: 'Wypróbuj naszego agenta na żywo już teraz',
+    h1: 'Wypróbuj naszego asystenta głosowego AI na żywo',
     intro: 'Zostaw numer i wybierz branżę: agent zadzwoni do Ciebie i odegra scenariusz z Twojej branży. Usłyszysz jego głos, tempo i sposób, w jaki kwalifikuje zgłoszenie.',
     widgetHint: 'Wolisz od razu? Kliknij dymek w prawym dolnym rogu ekranu: nasza asystentka odpowie głosowo lub na piśmie.',
     formTitle: 'Odbierz połączenie demonstracyjne',
@@ -41,8 +41,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   contact: {
     meta: {
-      title: (brand: string) => `Kontakt i oddzwonienie — ${brand}`,
-      description: 'Zostaw numer, oddzwonimy. Rozmowa handlowa, demonstracja lub wsparcie: wybierz dogodny termin.',
+      title: (brand: string) => `Kontakt i oddzwonienie — asystent głosowy AI · ${brand}`,
+      description: 'Zostaw numer, oddzwonimy: pytania o asystenta głosowego AI, demonstracja, wycena lub wsparcie. Wybierz dogodny termin rozmowy.',
     },
     h1: 'Zostaw numer, oddzwonimy',
     intro: 'Nie publikujemy numeru telefonu: to my oddzwaniamy, w wybranym przez Ciebie terminie. Możesz też do nas napisać.',
@@ -59,10 +59,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   faq: {
     meta: {
-      title: (brand: string) => `Najczęstsze pytania — ${brand}`,
-      description: (brand: string) => `Działanie, telefonia, SIP, kalendarz, WhatsApp, RODO, bezpłatny okres próbny i ceny: wszystkie odpowiedzi na temat agenta głosowego AI ${brand}.`,
+      title: (brand: string) => `FAQ: asystent głosowy AI, ceny i RODO · ${brand}`,
+      description: (brand: string) => `Jak działa asystent głosowy AI ${brand}? Telefonia, SIP, kalendarz, WhatsApp, RODO, okres próbny i ceny. Sprawdź odpowiedzi lub zamów oddzwonienie.`,
     },
-    h1: 'Najczęstsze pytania',
+    h1: 'Najczęstsze pytania o asystenta głosowego AI',
     intro: 'Nie ma tu odpowiedzi na Twoje pytanie? Zostaw numer, a doradca oddzwoni.',
     general: 'Platforma',
     pricing: 'Ceny i okres próbny',
@@ -70,11 +70,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   trial: {
     meta: {
-      title: (d: number, m: number, brand: string) => `Bezpłatny okres próbny ${days(d)} — ${minutes(m)} w cenie · ${brand}`,
-      description: (d: number, m: number, brand: string) => `Załóż konto ${brand}: ${days(d)} za darmo, ${minutes(m)} w cenie, bez opłat w okresie próbnym, anulujesz w każdej chwili.`,
+      title: (d: number, m: number, brand: string) => `Asystent głosowy AI za darmo przez ${days(d)} · ${brand}`,
+      description: (d: number, m: number, brand: string) => `Wypróbuj asystenta głosowego AI ${brand}: ${days(d)} za darmo, ${minutes(m)} w cenie, bez opłat w okresie próbnym. Załóż konto, anuluj w każdej chwili.`,
     },
     h1: (m: number) => `Odbierz ${m} ${plural(m, 'darmową minutę', 'darmowe minuty', 'darmowych minut')}`,
-    intro: (d: number) => `Załóż konto, wybierz pakiet do przetestowania i wypróbuj agenta w swojej firmie przez ${days(d)}.`,
+    intro: (d: number) => `Załóż konto, wybierz pakiet do przetestowania i wypróbuj asystenta głosowego AI w swojej firmie przez ${days(d)}.`,
     points: (d: number) => [
       `Karta wymagana przy aktywacji, przez ${days(d)} nic nie jest pobierane`,
       'Anuluj w panelu klienta przed końcem okresu próbnego: nic nie zapłacisz',
@@ -149,8 +149,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `O nas — ${brand}`,
-      description: (brand: string, company: string) => `${brand} pomaga firmom odbierać każde połączenie dzięki agentom głosowym AI. Marka firmy ${company}.`,
+      title: (brand: string) => `O nas — inteligentny asystent telefoniczny · ${brand}`,
+      description: (brand: string, company: string) => `${brand} pomaga firmom odbierać każde połączenie dzięki asystentom głosowym AI i automatycznej obsłudze połączeń. Marka firmy ${company}.`,
     },
     h1: 'Każde połączenie zasługuje na odpowiedź',
     intro: (brand: string) => `${brand} powstała z prostej obserwacji: małe firmy tracą klientów, bo nikt nie może odebrać telefonu we właściwym momencie.`,
@@ -171,8 +171,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   security: {
     meta: {
-      title: (brand: string) => `Bezpieczeństwo i zgodność — ${brand}`,
-      description: (brand: string) => `Zgody, rezygnacje, szyfrowanie, konfigurowalny okres przechowywania, role i rozliczalność: jak ${brand} chroni dane z Twoich połączeń.`,
+      title: (brand: string) => `Bezpieczeństwo i zgodność z RODO — ${brand}`,
+      description: (brand: string) => `Zgody, rezygnacje, szyfrowanie, okres przechowywania, role i rozliczalność: jak ${brand} chroni dane z Twoich połączeń i pomaga przestrzegać RODO.`,
     },
     h1: 'Bezpieczeństwo i zgodność Twoich połączeń AI',
     intro: 'Twoje rozmowy zawierają dane osobowe. Oto stosowane zabezpieczenia i ustawienia, które pomagają przestrzegać RODO.',
@@ -459,7 +459,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `Blog ${brand} | Asystenci AI, umawianie wizyt, kwalifikacja i RODO`,
+      title: (brand: string) => `Blog: asystenci głosowi AI dla firm · ${brand}`,
       description: 'Artykuły i poradniki o tym, jak agenci głosowi AI pomagają zamieniać rozmowy telefoniczne w klientów.',
     },
     eyebrow: 'Zasoby i wiedza',

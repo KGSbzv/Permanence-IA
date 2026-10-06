@@ -10,10 +10,10 @@ const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
 export const UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Live demo — try the AI voice agent · ${brand}`,
-      description: 'Try our agent live: talk to it or receive a demo call tailored to your sector. Free and with no commitment.',
+      title: (brand: string) => `AI receptionist demo — try it live · ${brand}`,
+      description: 'Hear our AI receptionist live: talk to it or get a demo call tailored to your trade. Free, with no commitment. Book your demo call now.',
     },
-    h1: 'Try our agent live now',
+    h1: 'Try our AI receptionist live now',
     intro: 'Leave your number and choose your sector: the agent calls you and plays out a scenario from your trade. You hear its voice, its pace and how it qualifies a request.',
     widgetHint: 'Prefer to start straight away? Click the bubble at the bottom right of the screen: our assistant answers by voice or in writing.',
     formTitle: 'Get my demo call',
@@ -32,8 +32,8 @@ export const UI_PAGES = {
 
   contact: {
     meta: {
-      title: (brand: string) => `Contact and callback — ${brand}`,
-      description: 'Leave your number and we’ll call you back. Sales callback, demo or support: choose your time.',
+      title: (brand: string) => `Contact us — request a callback · ${brand}`,
+      description: 'Questions about our AI receptionist? Leave your number and we’ll call you back for sales, a demo or support, at the time you choose.',
     },
     h1: 'Leave your number and we’ll call you back',
     intro: 'We don’t publish a phone number: we call you back at the time you choose. You can also email us.',
@@ -50,10 +50,10 @@ export const UI_PAGES = {
 
   faq: {
     meta: {
-      title: (brand: string) => `Frequently asked questions — ${brand}`,
-      description: (brand: string) => `How it works, telephony, SIP, calendar, WhatsApp, data protection, free trial and pricing: all the answers about the ${brand} AI voice agent.`,
+      title: (brand: string) => `AI receptionist FAQ — questions answered · ${brand}`,
+      description: (brand: string) => `How the ${brand} AI receptionist works: telephony, SIP, calendar, WhatsApp, data protection, free trial and pricing. Find your answer here.`,
     },
-    h1: 'Frequently asked questions',
+    h1: 'AI receptionist: frequently asked questions',
     intro: 'Can’t find your answer? Leave your number and an adviser will call you back.',
     general: 'The platform',
     pricing: 'Pricing and trial',
@@ -61,11 +61,11 @@ export const UI_PAGES = {
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `${days}-day free trial — ${minutes} minutes included · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Create your ${brand} account: ${days}-day free trial, ${minutes} minutes included, prices excl. tax, nothing charged during the trial, cancel at any time.`,
+      title: (days: number, minutes: number, brand: string) => `Free AI receptionist trial — ${days} days · ${brand}`,
+      description: (days: number, minutes: number, brand: string) => `Try the ${brand} AI receptionist free for ${days} days, ${minutes} minutes included. Nothing charged during the trial, cancel at any time.`,
     },
     h1: (minutes: number) => `Claim your ${minutes} free minutes`,
-    intro: (days: number) => `Create your account, choose the plan you want to try and test your agent on your business for ${days} days.`,
+    intro: (days: number) => `Create your account, choose the plan you want to try and test your AI receptionist on your business for ${days} days.`,
     points: (days: number) => [
       `Card required on activation, nothing charged for ${days} days`,
       'Cancel from your customer area before the trial ends and you pay nothing',
@@ -113,7 +113,7 @@ export const UI_PAGES = {
   help: {
     meta: {
       title: (brand: string) => `Customer area help — ${brand}`,
-      description: 'Guide to your customer area: what each menu does, creating an agent, numbers, calendar, widget, minutes and billing.',
+      description: 'Guide to your AI receptionist customer area: what each menu does, creating an agent, numbers, calendar, widget, minutes and billing.',
     },
     breadcrumb: 'Help',
     h1: 'Help with your customer area',
@@ -140,15 +140,15 @@ export const UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `About — ${brand}`,
-      description: (brand: string, company: string) => `${brand} helps businesses answer every call with AI voice agents. A brand of ${company}.`,
+      title: (brand: string) => `About — AI receptionists for small business · ${brand}`,
+      description: (brand: string, company: string) => `${brand} helps small businesses answer every call with an AI receptionist: 24/7 call answering set up for your trade. A brand of ${company}.`,
     },
     h1: 'Every call deserves an answer',
     intro: (brand: string) => `${brand} started from a simple observation: small businesses lose customers because nobody can pick up at the right moment.`,
     photoAlt: 'A business owner checking her phone in her office',
     paragraphs: [
       'Tradespeople, practices, agencies, garages, salons, restaurants: your teams are busy serving your customers. Meanwhile, the phone keeps ringing.',
-      'We provide AI voice agents that answer, qualify, book and call back, set up for your trade, with clear prices and no commitment.',
+      'We provide AI receptionists that answer, qualify, book and call back, set up for your trade, with clear prices and no commitment.',
     ],
     principlesTitle: 'Our principles',
     principles: [
@@ -162,8 +162,8 @@ export const UI_PAGES = {
 
   security: {
     meta: {
-      title: (brand: string) => `Security and compliance — ${brand}`,
-      description: (brand: string) => `Consent, opt-out, encryption, configurable retention, roles and traceability: how ${brand} protects your call data.`,
+      title: (brand: string) => `AI call security and data protection · ${brand}`,
+      description: (brand: string) => `Consent, opt-out, encryption, configurable retention, roles and traceability: how the ${brand} AI receptionist protects your call data.`,
     },
     h1: 'Security and compliance for your AI calls',
     intro: 'Your calls contain personal data. Here are the protections in place and the settings available to help you comply with data protection law.',
@@ -201,7 +201,7 @@ export const UI_PAGES = {
   terms: {
     meta: {
       title: (brand: string) => `Terms and conditions — ${brand}`,
-      description: (brand: string) => `Read the terms and conditions of use and sale that apply to ${brand} AI phone answering plans and services.`,
+      description: (brand: string) => `The terms and conditions of use and sale that apply to ${brand} AI receptionist and phone answering plans and services.`,
     },
     h1: 'Terms and Conditions of Use and Sale',
     updated: 'Applicable to professionals and businesses • Last updated: 29 September 2026',
@@ -382,7 +382,7 @@ export const UI_PAGES = {
   legalNotice: {
     meta: {
       title: (brand: string) => `Legal notice — ${brand}`,
-      description: (brand: string) => `Legal notice, information about the publisher, hosting and copyright of the ${brand} platform.`,
+      description: (brand: string) => `Legal notice for the ${brand} AI receptionist platform: publisher, hosting and copyright information.`,
     },
     h1: 'Legal Notice',
     updated: 'Last updated: 29 September 2026',
@@ -437,7 +437,7 @@ export const UI_PAGES = {
   cookies: {
     meta: {
       title: (brand: string) => `Cookie policy — ${brand}`,
-      description: (brand: string) => `Cookies and trackers used on the ${brand} website.`,
+      description: (brand: string) => `Which cookies and trackers the ${brand} AI receptionist website uses, and why.`,
     },
     h1: 'Cookie policy',
     paragraphs: (siteHost: string, appHost: string) => [
@@ -450,8 +450,8 @@ export const UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `${brand} Blog | AI assistants, appointment booking, qualification and data protection`,
-      description: 'Expert articles, case studies and in-depth guides to help your business convert more phone calls with AI voice agents.',
+      title: (brand: string) => `AI receptionist blog — guides and tips · ${brand}`,
+      description: 'Guides, case studies and practical tips to help your small business answer and convert more phone calls with an AI receptionist.',
     },
     eyebrow: 'Resources and insights',
     h1: 'The AI Reception Journal',

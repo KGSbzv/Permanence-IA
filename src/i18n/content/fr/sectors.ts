@@ -30,7 +30,7 @@ export const SECTORS: Sector[] = [
     short: 'Urgences filtrées et demandes qualifiées pendant que vos équipes sont sur le terrain.',
     targets: 'Plombiers, électriciens, chauffagistes, climatisation, toiture, rénovation, nettoyage',
     title: 'Ne perdez plus les urgences pendant que vos équipes sont sur le terrain',
-    subtitle: 'Permanence IA capture les demandes, filtre l’urgence, organise les rappels et vous aide à intervenir plus vite — y compris hors horaires.',
+    subtitle: 'Permanence IA assure la permanence téléphonique de votre entreprise : les demandes sont captées, l’urgence filtrée et les rappels organisés pour intervenir plus vite — y compris hors horaires.',
     problems: [
       'Vos techniciens ne peuvent pas décrocher en intervention.',
       'Les appels du soir et du week-end partent chez un concurrent.',
@@ -58,7 +58,7 @@ export const SECTORS: Sector[] = [
     ],
     lead: [{ label: 'Demande', value: 'Fuite sous évier' }, { label: 'Urgence', value: 'Élevée' }, { label: 'Zone', value: 'Secteur nord' }, { label: 'Action', value: 'Rappel prioritaire' }],
     faq: [
-      { q: 'Comment l’agent gère-t-il les urgences ?', a: 'Vous définissez ce qu’est une urgence pour votre métier. L’agent pose les questions prévues, donne les consignes de sécurité que vous avez validées et vous alerte immédiatement par email ou par transfert.' },
+      { q: 'Comment l’agent gère-t-il les urgences ?', a: 'Vous définissez ce qu’est une urgence pour votre métier, qu’il s’agisse d’une fuite pour un plombier ou d’une panne de chauffage. L’agent pose les questions prévues, donne les consignes de sécurité que vous avez validées et vous alerte immédiatement par email ou par transfert.' },
       { q: 'Puis-je limiter la zone d’intervention ?', a: 'Oui. Indiquez vos communes ou codes postaux : l’agent informe poliment les demandes hors zone et ne crée que les demandes que vous pouvez traiter.' },
       { q: 'Est-ce que je reçois un résumé avant de rappeler ?', a: 'Oui. Chaque appel produit une fiche avec la demande, l’adresse, l’urgence et le créneau souhaité, consultable dans votre tableau de bord.' },
     ],
@@ -69,7 +69,7 @@ export const SECTORS: Sector[] = [
     short: 'Rendez-vous, confirmations et reports gérés sans interrompre les soins.',
     targets: 'Cabinets dentaires, centres de santé, cliniques non urgentes, kinésithérapie',
     title: 'Réservez et confirmez les rendez-vous sans interrompre les soins',
-    subtitle: 'Permanence IA aide votre équipe à gérer les appels administratifs, les nouveaux patients, les confirmations et les reports.',
+    subtitle: 'Un secrétariat dentaire par IA : Permanence IA aide votre équipe à gérer les appels administratifs, les nouveaux patients, les confirmations et les reports.',
     problems: [
       'L’accueil est interrompu en pleine consultation.',
       'Les nouveaux patients appellent hors horaires.',
@@ -98,7 +98,7 @@ export const SECTORS: Sector[] = [
     lead: [{ label: 'Patient', value: 'Nouveau' }, { label: 'Motif', value: 'Détartrage' }, { label: 'Créneau', value: 'Mardi 9 h 30' }, { label: 'Confirmation', value: 'Envoyée' }],
     faq: [
       { q: 'L’agent donne-t-il des conseils médicaux ?', a: 'Non. L’agent reste administratif : il ne pose aucun diagnostic et ne donne aucun conseil médical. Pour une situation urgente, il applique la consigne d’orientation que vous avez définie.' },
-      { q: 'Peut-il gérer plusieurs praticiens ?', a: 'Oui. Chaque praticien peut avoir ses types de rendez-vous, ses durées et ses disponibilités dans l’agenda connecté.' },
+      { q: 'Peut-il gérer plusieurs praticiens ?', a: 'Oui. Chaque praticien du cabinet dentaire ou médical peut avoir ses types de rendez-vous, ses durées et ses disponibilités dans l’agenda connecté.' },
       { q: 'Où sont conservées les données des appels ?', a: 'Les enregistrements et transcriptions sont conservés selon la durée de rétention que vous choisissez, et peuvent être supprimés à tout moment.' },
     ],
   },
@@ -108,7 +108,7 @@ export const SECTORS: Sector[] = [
     short: 'Acheteurs, vendeurs et locataires qualifiés même quand vos agents sont en visite.',
     targets: 'Agences immobilières, réseaux, gestion locative, syndics',
     title: 'Qualifiez acheteurs, vendeurs et locataires même quand vos agents sont en visite',
-    subtitle: 'Chaque demande arrive avec les informations nécessaires pour qu’un agent puisse agir plus vite : budget, zone, délai, bien concerné.',
+    subtitle: 'L’accueil téléphonique de votre agence immobilière, même pendant les visites : chaque demande arrive avec les informations nécessaires pour agir plus vite — budget, zone, délai, bien concerné.',
     problems: [
       'Vos agents sont en visite quand les prospects appellent.',
       'Les leads des portails attendent trop longtemps une réponse.',
@@ -147,7 +147,7 @@ export const SECTORS: Sector[] = [
     short: 'Rendez-vous atelier et devis préparés sans interrompre l’équipe au comptoir.',
     targets: 'Garages indépendants, centres d’entretien, carrosseries, concessions',
     title: 'Remplissez l’atelier sans interrompre vos équipes au comptoir',
-    subtitle: 'L’agent IA recueille les détails du véhicule et prépare la demande pendant que votre équipe reste concentrée sur l’atelier.',
+    subtitle: 'Un standard téléphonique pour votre garage : l’agent IA recueille les détails du véhicule et prépare la demande pendant que votre équipe reste concentrée sur l’atelier.',
     problems: [
       'Le téléphone sonne pendant que les mécaniciens travaillent.',
       'Les demandes de devis arrivent sans les infos du véhicule.',
@@ -175,7 +175,7 @@ export const SECTORS: Sector[] = [
     ],
     lead: [{ label: 'Véhicule', value: 'Citadine 2019 · 60 000 km' }, { label: 'Symptôme', value: 'Bruit au freinage' }, { label: 'Intervention', value: 'Contrôle freins' }, { label: 'Créneau', value: 'Jeudi 8 h 30' }],
     faq: [
-      { q: 'L’agent fait-il un diagnostic ?', a: 'Non. Il note les symptômes décrits par le client et prépare la demande : le diagnostic reste celui de votre atelier.' },
+      { q: 'L’agent fait-il un diagnostic ?', a: 'Non. Il note les symptômes décrits par le client et prépare la demande de rendez-vous au garage : le diagnostic reste celui de votre atelier.' },
       { q: 'Peut-il annoncer des prix ?', a: 'Uniquement les tarifs que vous lui fournissez, par exemple un forfait vidange. Pour le reste, il propose un devis.' },
       { q: 'Et les relances de devis ?', a: 'Avec le forfait Assistant, une campagne peut rappeler les clients dont le devis est en attente, aux horaires que vous choisissez.' },
     ],
@@ -186,7 +186,7 @@ export const SECTORS: Sector[] = [
     short: 'Un agenda rempli pendant que vous êtes avec vos clients.',
     targets: 'Salons de coiffure, instituts, spas, onglerie, massage',
     title: 'Remplissez votre agenda pendant que vous êtes déjà avec vos clients',
-    subtitle: 'Votre équipe reste concentrée sur l’expérience client. L’agent IA s’occupe des demandes et de l’agenda.',
+    subtitle: 'Prise de rendez-vous par téléphone pour votre salon de coiffure ou institut : votre équipe reste concentrée sur l’expérience client, l’agent IA s’occupe des demandes et de l’agenda.',
     problems: [
       'Impossible de répondre au téléphone en pleine prestation.',
       'Les annulations de dernière minute laissent des trous.',
@@ -225,7 +225,7 @@ export const SECTORS: Sector[] = [
     short: 'Réservations et questions clients gérées sans interrompre le service.',
     targets: 'Restaurants, brasseries, hôtels, chambres d’hôtes, résidences',
     title: 'Gérez les réservations et les demandes clients sans interrompre le service',
-    subtitle: 'Pendant le service, l’agent IA répond, collecte les détails et transmet uniquement les demandes qui nécessitent votre équipe.',
+    subtitle: 'La réservation par téléphone de votre restaurant ou hôtel, même en plein service : l’agent IA répond, collecte les détails et transmet uniquement les demandes qui nécessitent votre équipe.',
     problems: [
       'Le téléphone sonne en plein coup de feu.',
       'Les mêmes questions reviennent : horaires, parking, menu.',
@@ -253,7 +253,7 @@ export const SECTORS: Sector[] = [
     ],
     lead: [{ label: 'Couverts', value: '4 personnes' }, { label: 'Heure', value: 'Ce soir 20 h 30' }, { label: 'Note', value: 'Allergie fruits à coque' }, { label: 'Statut', value: 'Confirmée' }],
     faq: [
-      { q: 'L’agent connaît-il nos disponibilités ?', a: 'Oui, s’il est relié à votre agenda ou outil de réservation. Sinon, il prend la demande et votre équipe confirme.' },
+      { q: 'L’agent connaît-il nos disponibilités ?', a: 'Oui, s’il est relié à votre agenda ou outil de réservation de restaurant. Sinon, il prend la demande et votre équipe confirme.' },
       { q: 'Peut-il répondre en anglais ?', a: 'Oui. Ajoutez des langues secondaires : l’agent détecte la langue de l’appelant et répond dans celle-ci.' },
       { q: 'Et les groupes ou privatisations ?', a: 'L’agent collecte les détails (date, nombre, budget) et transmet la demande à votre équipe pour un devis.' },
     ],

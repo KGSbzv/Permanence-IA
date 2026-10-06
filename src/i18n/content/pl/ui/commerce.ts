@@ -18,23 +18,52 @@ const minutes = (n: number) => `${n} ${plural(n, 'minuta', 'minuty', 'minut')}`;
 /** „1 dzień”, „14 dni”. */
 const days = (n: number) => `${n} ${n === 1 ? 'dzień' : 'dni'}`;
 
+/**
+ * SEO: tytuł meta strony branżowej według nazwy branży (fraza, której szukają polskie firmy).
+ * Klucz = `name` z sectors.ts; brak klucza → tytuł ogólny. Mapa słów kluczowych: docs/seo/keywords-pl.md.
+ */
+const SECTOR_SEO_TITLE: Record<string, string> = {
+  'Usługi domowe': 'Obsługa telefoniczna zgłoszeń dla fachowców',
+  'Stomatologia i kliniki': 'Rejestracja pacjentów przez telefon 24/7',
+  'Nieruchomości': 'Obsługa telefoniczna biura nieruchomości',
+  'Warsztaty i motoryzacja': 'Umawianie wizyt w warsztacie samochodowym',
+  'Uroda i wellness': 'Umawianie wizyt w salonie kosmetycznym 24/7',
+  'Restauracje i hotele': 'Rezerwacje telefoniczne: restauracje i hotele',
+};
+/** SEO: tytuł meta strony funkcji według nazwy modułu (klucz = `name` z modules.ts). */
+const FEATURE_SEO_TITLE: Record<string, string> = {
+  'Recepcjonistka AI': 'Wirtualna recepcjonistka AI 24/7',
+  'Demo agenta na żywo': 'Demo asystenta głosowego AI na żywo',
+  'Umawianie wizyt': 'Umawianie wizyt przez telefon z AI',
+  'Obsługa klienta': 'Automatyczna obsługa klienta przez telefon',
+  'Kwalifikacja leadów': 'Kwalifikacja leadów przez telefon z AI',
+  'Kampanie wychodzące': 'Automatyczne połączenia wychodzące z AI',
+  'WhatsApp i wiadomości': 'WhatsApp, SMS i Messenger z asystentem AI',
+  'Baza wiedzy': 'Baza wiedzy dla asystenta głosowego AI',
+  'Edytor promptów': 'Edytor promptów asystenta głosowego AI',
+  'Flow builder': 'Flow builder: automatyzacje bez kodu',
+  'SIP i numery': 'Trunk SIP, przekierowanie i numery telefonu',
+  'Raporty': 'Raporty i analityka połączeń telefonicznych',
+  'Widżet na stronę': 'Widżet oddzwonienia i rozmowy na stronę WWW',
+};
+
 export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   home: {
     meta: {
-      title: (brand: string) => `${brand} — agenci głosowi AI 24/7 do obsługi połączeń`,
+      title: (brand: string) => `${brand} — asystent głosowy AI do obsługi połączeń 24/7`,
       description: (d: number, m: number) =>
-        `AI, która odbiera, kwalifikuje i umawia wizyty za Ciebie. ${days(d)} za darmo, ${minutes(m)} w cenie, ceny netto, bez zobowiązań.`,
+        `Asystent głosowy AI odbiera telefony, kwalifikuje zgłoszenia i umawia wizyty 24/7. ${days(d)} za darmo, ${minutes(m)} w cenie. Wypróbuj bez zobowiązań.`,
     },
     hero: {
       title: { before: 'Zautomatyzuj obsługę połączeń dzięki AI, która ', kw: 'odbiera, kwalifikuje i umawia wizyty', after: ' za Ciebie' },
-      intro: 'Agenci głosowi, którzy odbierają każde połączenie, zadają właściwe pytania, umawiają wizyty i przekazują Ci czytelne podsumowanie. Dostępni 24/7, skonfigurowani dla Twojej branży, gotowi do pracy w kilka minut.',
+      intro: 'Inteligentny asystent telefoniczny dla Twojej firmy: agenci głosowi AI odbierają każde połączenie, zadają właściwe pytania, umawiają wizyty i przekazują Ci czytelne podsumowanie. Dostępni 24/7, skonfigurowani dla Twojej branży, gotowi do pracy w kilka minut.',
       photoAlt: 'Właścicielka firmy czyta na telefonie podsumowanie rozmowy',
     },
     showcase: { title: 'Zobacz agenta w akcji w Twojej branży', intro: 'Wybierz branżę: rozmowa się odbywa, a zgłoszenie trafia do Ciebie gotowe do obsługi.' },
-    benefits: { title: 'Co agent robi dla Twojej firmy', intro: 'Agent głosowy przygotowany do Twojej działalności, który pracuje, gdy Twój zespół nie może odebrać telefonu.' },
+    benefits: { title: 'Co agent robi dla Twojej firmy', intro: 'Wirtualna recepcjonistka przygotowana do Twojej działalności, która pracuje, gdy Twój zespół nie może odebrać telefonu.' },
     features: {
       booking: {
-        title: { before: 'Zautomatyzuj ', kw: 'umawianie wizyt i przypomnienia', after: '' },
+        title: { before: 'Zautomatyzuj ', kw: 'umawianie wizyt przez telefon', after: ' i przypomnienia' },
         text: 'Gabinety, salony, warsztaty, biura: agent łączy się z Twoim kalendarzem, proponuje wolne terminy, rezerwuje i potwierdza. Także zmiany terminów i odwołania.',
         points: ['Kalendarz na bieżąco: Google, Outlook, Cal.com, Calendly', 'Potwierdzenie SMS-em lub przez WhatsApp', 'Przypomnienie dzień przed wizytą'],
         link: 'Zobacz umawianie wizyt',
@@ -54,7 +83,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     useCases: { title: 'Agent do każdego rodzaju połączeń', intro: 'Przychodzące, wychodzące czy wiadomości: włącz zastosowania, których potrzebuje Twoja firma.' },
     platform: {
-      title: 'Kompletna platforma do automatyzacji połączeń',
+      title: 'Kompletna platforma do automatycznej obsługi połączeń',
       intro: 'Wszystko w pakiecie: głos, inteligencja, telefonia, automatyzacje i raporty, w jednym panelu.',
       link: 'Wszystkie funkcje',
     },
@@ -92,14 +121,14 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   tarifs: {
     meta: {
-      title: (brand: string) => `Cennik — pakiety netto i doładowania · ${brand}`,
+      title: (brand: string) => `Cennik asystenta głosowego AI — pakiety netto · ${brand}`,
       /** Jeden pakiet w opisie: `price` i `minutes` już sformatowane. */
       plan: (name: string, price: string, mins: string) => `${name} ${price} netto / ${mins} min`,
       description: (plans: string[], d: number, m: number) =>
-        `${plans.join(', ')}. Bezpłatny okres próbny: ${days(d)}, ${minutes(m)} w cenie.`,
+        `${plans.join(', ')}. Wypróbuj: ${days(d)} za darmo, ${minutes(m)} w cenie.`,
     },
     hero: {
-      title: 'Wybierz pakiet dopasowany do liczby połączeń',
+      title: 'Cennik asystenta głosowego AI: wybierz pakiet według liczby połączeń',
       intro: (d: number, m: number) =>
         `Wszystkie ceny są podane netto. Im większy pakiet, tym tańsza minuta. Bezpłatny okres próbny to ${days(d)} i ${minutes(m)} połączeń w cenie.`,
       moreMinutes: 'Potrzebujesz więcej minut? Doładuj konto w dowolnym momencie.',
@@ -126,7 +155,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     metaTitleTrial: (d: number, m: number, brand: string) => `Bezpłatny okres próbny ${days(d)} — ${minutes(m)} · ${brand}`,
     /** `monthly`: dodaje „netto / mies.”, gdy cena jest kwotą miesięczną. */
     metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `Pakiet ${name} — ${price}${monthly ? ' netto / mies.' : ''} · ${brand}`,
-    metaDescription: (title: string, d: number, m: number) => `${title}. Bezpłatny okres próbny: ${days(d)}, ${minutes(m)} w cenie, ceny netto.`,
+    metaDescription: (title: string, d: number, m: number) => `${title}. Wypróbuj za darmo: ${days(d)}, ${minutes(m)} w cenie, ceny netto.`,
     breadcrumb: 'Cennik',
     productName: (brand: string, name: string) => `${brand} ${name}`,
     eyebrow: (name: string, audience: string) => `Pakiet ${name} · ${audience}`,
@@ -159,7 +188,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Doładowania minut — ${brand}`,
+      title: (brand: string) => `Doładowania minut dla asystenta głosowego AI — ${brand}`,
       description: (price: string, mins: string) =>
         `Doładowania środków od ${price} netto za ${mins} ${plural(toInt(mins), 'dodatkową minutę', 'dodatkowe minuty', 'dodatkowych minut')}. Dokupuj minuty w dowolnym momencie; przejdź na wyższy pakiet, gdy rośnie liczba połączeń.`,
     },
@@ -179,11 +208,11 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   sectorsIndex: {
     meta: {
-      title: (brand: string) => `Branże — agenci głosowi AI dla każdej branży · ${brand}`,
-      description: 'Usługi domowe, stomatologia i kliniki, nieruchomości, warsztaty, uroda, restauracje i hotele: agent głosowy AI dopasowany do każdej branży.',
+      title: (brand: string) => `Asystent głosowy AI dla firm z każdej branży · ${brand}`,
+      description: 'Gabinety stomatologiczne, biura nieruchomości, warsztaty, salony, restauracje, hotele i fachowcy: asystent głosowy AI dopasowany do Twojej branży.',
     },
     hero: {
-      title: 'Agent głosowy dopasowany do Twojej branży',
+      title: 'Asystent głosowy AI dopasowany do Twojej branży',
       intro: 'Wybraliśmy sześć branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient.',
     },
     other: {
@@ -196,10 +225,10 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name}: agent głosowy AI 24/7 — ${brand}`,
-      /** `short` to krótkie zdanie o branży, bez kropki na końcu. */
-      description: (name: string, short: string, d: number, m: number) =>
-        `${name}: ${short}. Bezpłatny okres próbny: ${days(d)}, ${minutes(m)} w cenie, ceny netto.`,
+      title: (name: string, brand: string) => `${SECTOR_SEO_TITLE[name] ?? `${name}: agent głosowy AI 24/7`} — ${brand}`,
+      /** `short` to krótkie zdanie o branży (z frazą kluczową), bez kropki na końcu; `name` nieużywane w PL. */
+      description: (_name: string, short: string, d: number, m: number) =>
+        `${short}. Wypróbuj za darmo: ${days(d)}, ${minutes(m)} w cenie.`,
     },
     breadcrumb: 'Branże',
     liveCallTitle: (name: string) => `Agent: ${name.toLowerCase()}`,
@@ -236,11 +265,11 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   featuresIndex: {
     meta: {
-      title: (brand: string) => `Funkcje — platforma połączeń AI · ${brand}`,
-      description: 'Recepcjonistka AI, umawianie wizyt, obsługa klienta, kwalifikacja, kampanie, WhatsApp, baza wiedzy, flow builder, SIP, raporty i widżet na stronę.',
+      title: (brand: string) => `Funkcje: automatyczna obsługa połączeń z AI · ${brand}`,
+      description: 'Wirtualna recepcjonistka, umawianie wizyt przez telefon, obsługa klienta, kwalifikacja leadów, WhatsApp, SIP, raporty i widżet. Poznaj wszystkie moduły.',
     },
     hero: {
-      title: 'Wszystko, czego potrzebujesz do automatyzacji połączeń',
+      title: 'Wszystko, czego potrzebujesz do automatycznej obsługi połączeń',
       intro: 'Trzynaście modułów, włączanych zależnie od pakietu, w Twoim panelu klienta.',
     },
     overview: { title: 'Przegląd' },
@@ -248,9 +277,9 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} — agent głosowy AI | ${brand}`,
+      title: (name: string, brand: string) => `${FEATURE_SEO_TITLE[name] ?? `${name} — agent głosowy AI`} | ${brand}`,
       /** `short` to zdanie o korzyści z modułu, bez kropki na końcu. */
-      description: (short: string, offerName: string, d: number) => `${short}. Dostępne od pakietu ${offerName}. Bezpłatny okres próbny: ${days(d)}.`,
+      description: (short: string, offerName: string, d: number) => `${short}. Dostępne od pakietu ${offerName}. Wypróbuj za darmo przez ${days(d)}.`,
     },
     breadcrumb: 'Funkcje',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
@@ -271,7 +300,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   integrations: {
     meta: {
       title: (brand: string) => `Integracje — kalendarz, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Połącz agenta głosowego AI z Kalendarzem Google, Outlookiem, Cal.com, Calendly, HubSpotem, Zoho, WhatsApp, Instagramem, SIP i ponad 300 narzędziami bez kodu.',
+      description: 'Połącz asystenta głosowego AI z Kalendarzem Google, Outlookiem, Cal.com, Calendly, HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',
     },
     hero: {
       title: 'Połączony z narzędziami, których już używasz',

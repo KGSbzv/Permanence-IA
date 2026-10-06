@@ -4,14 +4,14 @@ import type { QA } from '../fr/faq';
 export type { QA } from '../fr/faq';
 
 export const FAQ_GENERAL: QA[] = [
-  { q: 'Come funziona la piattaforma di chiamate AI?', a: 'Configura un agente vocale con le Sue informazioni, le Sue regole e il Suo tono. L’agente risponde alle chiamate in entrata, effettua le chiamate in uscita autorizzate, qualifica le richieste, prenota gli appuntamenti e Le invia un riepilogo di ogni conversazione.' },
+  { q: 'Come funziona l’assistente telefonico AI?', a: 'Configura un agente vocale con le Sue informazioni, le Sue regole e il Suo tono. L’agente risponde alle chiamate in entrata, effettua le chiamate in uscita autorizzate, qualifica le richieste, prenota gli appuntamenti e Le invia un riepilogo di ogni conversazione.' },
   { q: 'Quanto tempo serve per iniziare?', a: 'Un primo agente è pronto in pochi minuti a partire dalle Sue informazioni. Per una configurazione completa (calendario, numeri, trasferimenti) servono in genere uno o due giorni, con il nostro supporto.' },
   { q: 'Servono competenze tecniche?', a: 'No. Lei descrive la Sua attività, l’assistente per i prompt La guida e noi La aiutiamo con la telefonia e le integrazioni.' },
   { q: 'Cosa succede se l’agente non sa rispondere?', a: 'Non inventa: annota la richiesta, propone una richiamata o trasferisce la chiamata al Suo team secondo le regole che ha stabilito.' },
   { q: 'L’agente può gestire più chiamate contemporaneamente?', a: 'Sì. Più chiamate vengono gestite in parallelo sulla stessa linea: i Suoi clienti non restano più in attesa.' },
-  { q: 'In cosa si differenzia da una segreteria o da un centralino tradizionale?', a: 'Una segreteria registra, un centralino smista. L’agente AI comprende la richiesta, pone le domande utili, agisce (appuntamento, richiamata, risposta) e Le invia una scheda pronta da usare.' },
-  { q: 'Posso usare il mio sistema telefonico attuale?', a: 'Sì. Può inoltrare la Sua linea attuale all’agente, collegare il Suo centralino o il Suo operatore tramite SIP, oppure importare i Suoi numeri Twilio e Telnyx.' },
-  { q: 'Posso collegare il mio calendario?', a: 'Sì: Google Calendar, Outlook, Cal.com e Calendly. L’agente propone gli orari liberi e prenota direttamente.' },
+  { q: 'In cosa si differenzia da una segreteria telefonica o da un centralino tradizionale?', a: 'Una segreteria registra, un centralino smista. L’agente AI è una segreteria telefonica intelligente: comprende la richiesta, pone le domande utili, agisce (appuntamento, richiamata, risposta) e Le invia una scheda pronta da usare.' },
+  { q: 'Posso usare il mio sistema telefonico o il mio centralino virtuale attuale?', a: 'Sì. Può inoltrare la Sua linea attuale all’agente, collegare il Suo centralino o il Suo operatore tramite SIP, oppure importare i Suoi numeri Twilio e Telnyx.' },
+  { q: 'Posso collegare il mio calendario?', a: 'Sì: Google Calendar, Outlook, Cal.com e Calendly. L’agente propone gli orari liberi e prenota direttamente: le prenotazioni telefoniche diventano automatiche.' },
   { q: 'Posso modificare i prompt?', a: 'Sì. L’editor di prompt Le permette di impostare l’obiettivo, il tono, le domande e i limiti dell’agente, con una guida passo passo e senza competenze tecniche.' },
   { q: 'Posso creare scenari senza codice?', a: 'Sì, con il flow builder a partire dal piano Assistant: concatena trigger e azioni con il drag and drop, collegati a oltre 300 strumenti.' },
   { q: 'Posso usare WhatsApp e Instagram?', a: 'Sì, a partire dal piano Assistant: SMS, WhatsApp, Messenger e Instagram, con cronologia centralizzata.' },

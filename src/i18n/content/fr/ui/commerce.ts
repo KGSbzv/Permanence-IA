@@ -4,20 +4,65 @@
 //
 // Les titres avec mot-clé surligné sont découpés en { before, kw, after } : `kw` est affiché en couleur.
 
+// Mots-clés SEO (voir docs/seo/keywords-fr.md) : titre et description par secteur et par module,
+// retrouvés à partir du nom affiché. Si un nom change, la page retombe sur le titre générique.
+const SECTOR_SEO: Record<string, { title: string; description: (days: number) => string }> = {
+  'Services à domicile': {
+    title: 'Permanence téléphonique pour artisans 24/7',
+    description: (days) => `Permanence téléphonique pour plombiers, électriciens et chauffagistes : urgences filtrées et demandes qualifiées. Testez ${days} jours gratuitement.`,
+  },
+  'Dentaire et cliniques': {
+    title: 'Secrétariat dentaire et médical par IA',
+    description: (days) => `Secrétariat dentaire par IA : rendez-vous, confirmations et reports gérés sans interrompre les soins. Testez ${days} jours gratuitement.`,
+  },
+  Immobilier: {
+    title: 'Accueil téléphonique agence immobilière IA',
+    description: (days) => `Accueil téléphonique d’agence immobilière : acheteurs, vendeurs et locataires qualifiés pendant vos visites. Testez ${days} jours gratuitement.`,
+  },
+  'Garages et automobile': {
+    title: 'Standard téléphonique IA pour garage auto',
+    description: (days) => `Standard téléphonique pour garage : rendez-vous atelier et demandes de devis préparés sans interrompre le comptoir. Testez ${days} jours gratuitement.`,
+  },
+  'Beauté et bien-être': {
+    title: 'Prise de RDV salon de coiffure et institut',
+    description: (days) => `Prise de rendez-vous par téléphone pour salon de coiffure et institut, même en pleine prestation. Testez ${days} jours gratuitement.`,
+  },
+  'Restaurants et hôtellerie': {
+    title: 'Réservation restaurant par téléphone 24/7',
+    description: (days) => `Réservation restaurant par téléphone, même en plein service : tables, allergies et questions clients gérées. Testez ${days} jours gratuitement.`,
+  },
+};
+
+const MODULE_SEO_TITLE: Record<string, string> = {
+  'Réceptionniste IA': 'Réceptionniste virtuelle IA 24/7',
+  'Démo live de l’agent': 'Démo agent vocal IA en direct',
+  'Prise de rendez-vous': 'Prise de rendez-vous téléphonique par IA',
+  'Support client': 'Service client téléphonique par IA',
+  'Qualification des leads': 'Qualification de leads par téléphone',
+  'Campagnes sortantes': 'Appels sortants automatisés par IA',
+  'WhatsApp et messages': 'Messages WhatsApp et SMS automatisés',
+  'Base de connaissances': 'Base de connaissances pour agent vocal IA',
+  'Éditeur de prompts': 'Éditeur de prompts pour agent vocal IA',
+  'Flow builder': 'Flow builder : automatisations sans code',
+  'SIP et numéros': 'Trunk SIP, numéros et renvoi d’appel',
+  Reporting: 'Statistiques et transcriptions d’appels',
+  'Widget web': 'Widget d’appel et de rappel pour site web',
+};
+
 export const UI_COMMERCE = {
   home: {
     meta: {
-      title: (brand: string) => `${brand} — Agents vocaux IA 24/7 pour vos appels`,
+      title: (brand: string) => `Standard téléphonique IA : agent vocal 24/7 · ${brand}`,
       description: (days: number, minutes: number) =>
-        `Automatisez vos appels avec une IA qui répond, qualifie et réserve pour vous. ${days} jours d’essai gratuit, ${minutes} minutes incluses, prix HT, sans engagement.`,
+        `Standard téléphonique IA qui répond, qualifie et prend vos rendez-vous 24/7. ${days} jours d’essai gratuit, ${minutes} minutes incluses : essayez-le.`,
     },
     hero: {
       title: { before: 'Automatisez vos appels avec une IA qui ', kw: 'répond, qualifie et réserve', after: ' pour vous' },
-      intro: 'Des agents vocaux qui décrochent à chaque appel, posent les bonnes questions, prennent les rendez-vous et vous transmettent un résumé clair. Disponibles 24/7, configurés pour votre métier, en ligne en quelques minutes.',
+      intro: 'Votre standard téléphonique IA : des agents vocaux qui décrochent à chaque appel, posent les bonnes questions, prennent les rendez-vous et vous transmettent un résumé clair. Disponibles 24/7, configurés pour votre métier, en ligne en quelques minutes.',
       photoAlt: 'Dirigeante consultant le résumé d’un appel sur son téléphone',
     },
     showcase: { title: 'Voyez l’agent en action dans votre métier', intro: 'Choisissez un secteur : l’appel se déroule, puis la demande arrive prête à traiter.' },
-    benefits: { title: 'Ce que l’agent fait pour votre entreprise', intro: 'Un agent vocal formé à votre activité, qui travaille quand votre équipe ne peut pas décrocher.' },
+    benefits: { title: 'Ce que l’agent fait pour votre entreprise', intro: 'Une réceptionniste virtuelle formée à votre activité, qui travaille quand votre équipe ne peut pas décrocher.' },
     features: {
       booking: {
         title: { before: 'Automatisez la prise de ', kw: 'rendez-vous et les rappels', after: '' },
@@ -38,10 +83,10 @@ export const UI_COMMERCE = {
         link: 'Voir la qualification des leads',
       },
     },
-    useCases: { title: 'Un agent pour chaque type d’appel', intro: 'Entrants, sortants ou messages : activez les usages dont votre activité a besoin.' },
+    useCases: { title: 'Un agent pour chaque type d’appel', intro: 'Entrants, sortants ou messages : activez les usages dont votre activité a besoin, de la permanence téléphonique du soir aux relances de devis.' },
     platform: {
       title: 'La plateforme complète pour automatiser vos appels',
-      intro: 'Tout est inclus : voix, intelligence, téléphonie, automatisations et rapports, dans un seul espace.',
+      intro: 'Bien plus qu’un répondeur intelligent : voix, intelligence, téléphonie, automatisations et rapports sont inclus, dans un seul espace.',
       link: 'Toutes les fonctionnalités',
     },
     steps: {
@@ -66,7 +111,7 @@ export const UI_COMMERCE = {
     },
     pricing: {
       title: 'Des forfaits clairs, en prix HT',
-      intro: 'Choisissez selon votre volume d’appels. Plus le forfait est grand, plus la minute coûte moins cher.',
+      intro: 'Choisissez votre standard téléphonique IA selon votre volume d’appels. Plus le forfait est grand, plus la minute coûte moins cher.',
       compare: 'Comparer toutes les fonctions incluses',
     },
     faq: {
@@ -78,16 +123,16 @@ export const UI_COMMERCE = {
 
   tarifs: {
     meta: {
-      title: (brand: string) => `Tarifs — forfaits HT et recharges · ${brand}`,
+      title: (brand: string) => `Tarifs standard téléphonique IA, prix HT · ${brand}`,
       /** Un plan dans la description : `price` et `minutes` déjà formatés. */
-      plan: (name: string, price: string, minutes: string) => `${name} ${price} HT / ${minutes} min`,
+      plan: (name: string, price: string, minutes: string) => `${name} ${price}`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. Essai gratuit ${days} jours, ${minutes} minutes incluses.`,
+        `Standard téléphonique IA : ${plans.join(', ')} HT/mois, sans engagement. Testez ${days} jours gratuitement.`,
     },
     hero: {
       title: 'Choisissez le forfait adapté à votre volume d’appels',
       intro: (days: number, minutes: number) =>
-        `Tous les tarifs sont affichés hors taxes. Plus le forfait est grand, plus la minute coûte moins cher. L’essai gratuit comprend ${days} jours et ${minutes} minutes d’appels incluses.`,
+        `Les tarifs de notre standard téléphonique IA sont affichés hors taxes. Plus le forfait est grand, plus la minute coûte moins cher. L’essai gratuit comprend ${days} jours et ${minutes} minutes d’appels incluses.`,
       moreMinutes: 'Besoin de plus de minutes ? Ajoutez une recharge à tout moment.',
     },
     matrix: {
@@ -101,7 +146,7 @@ export const UI_COMMERCE = {
     },
     faq: {
       title: 'Questions sur les tarifs',
-      intro: 'Un doute sur l’offre qui vous convient ? Faites-vous rappeler, ou essayez l’agent en live.',
+      intro: 'Un doute sur le forfait de votre agent vocal IA ? Faites-vous rappeler, ou essayez l’agent en live.',
       primary: 'Commencer gratuitement',
       demo: 'Voir la démo live',
     },
@@ -109,10 +154,11 @@ export const UI_COMMERCE = {
   },
 
   offer: {
-    metaTitleTrial: (days: number, minutes: number, brand: string) => `Essai gratuit ${days} jours — ${minutes} minutes · ${brand}`,
+    metaTitleTrial: (days: number, minutes: number, brand: string) => `Agent vocal IA gratuit ${days} jours, ${minutes} min · ${brand}`,
     /** `monthly` : ajoute « HT / mois » quand le prix est un montant mensuel. */
-    metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `Forfait ${name} — ${price}${monthly ? ' HT / mois' : ''} · ${brand}`,
-    metaDescription: (title: string, days: number, minutes: number) => `${title}. Essai gratuit ${days} jours, ${minutes} minutes incluses, prix HT.`,
+    metaTitle: (name: string, price: string, monthly: boolean, brand: string) =>
+      monthly ? `Forfait ${name} IA — ${price} HT / mois · ${brand}` : `Standard IA ${name.toLowerCase()} — ${price} · ${brand}`,
+    metaDescription: (title: string, days: number, minutes: number) => `${title}. Essai gratuit ${days} jours, ${minutes} min incluses : démarrez sans engagement.`,
     breadcrumb: 'Tarifs',
     productName: (brand: string, name: string) => `${brand} ${name}`,
     eyebrow: (name: string, audience: string) => `Forfait ${name} · ${audience}`,
@@ -145,9 +191,9 @@ export const UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Recharges de minutes — ${brand}`,
+      title: (brand: string) => `Recharges de minutes agent vocal IA · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Recharges de crédit dès ${price} HT pour ${minutes} minutes supplémentaires. Ajoutez des minutes à tout moment ; passez au forfait supérieur quand votre volume grandit.`,
+        `Recharges dès ${price} HT pour ${minutes} minutes de plus sur votre agent vocal IA, sans changer de forfait. Ajoutez du crédit en un clic.`,
     },
     hero: {
       title: 'Ajoutez des minutes à tout moment',
@@ -165,12 +211,12 @@ export const UI_COMMERCE = {
 
   sectorsIndex: {
     meta: {
-      title: (brand: string) => `Secteurs — agents vocaux IA par métier · ${brand}`,
-      description: 'Services à domicile, dentaire et cliniques, immobilier, garages, beauté, restaurants et hôtellerie : un agent vocal IA adapté à chaque métier.',
+      title: (brand: string) => `Secrétariat téléphonique IA par métier · ${brand}`,
+      description: 'Artisans, cabinets dentaires, agences immobilières, garages, salons, restaurants : un secrétariat téléphonique IA pour votre métier. Trouvez le vôtre.',
     },
     hero: {
-      title: 'Un agent vocal adapté à votre métier',
-      intro: 'Nous avons retenu six secteurs où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client.',
+      title: 'Un secrétariat téléphonique IA adapté à votre métier',
+      intro: 'Nous avons retenu six secteurs où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet dentaire, l’agent pose les bonnes questions.',
     },
     other: {
       title: 'Votre activité n’est pas dans la liste ?',
@@ -182,10 +228,10 @@ export const UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name} : agent vocal IA 24/7 — ${brand}`,
+      title: (name: string, brand: string) => `${SECTOR_SEO[name]?.title ?? `${name} : agent vocal IA 24/7`} · ${brand}`,
       /** `short` est la phrase courte du secteur, sans point final. */
       description: (name: string, short: string, days: number, minutes: number) =>
-        `${name} : ${short}. Essai gratuit ${days} jours, ${minutes} minutes incluses, prix HT.`,
+        SECTOR_SEO[name]?.description(days) ?? `${name} : ${short}. Essai gratuit ${days} jours, ${minutes} minutes incluses, prix HT.`,
     },
     breadcrumb: 'Secteurs',
     liveCallTitle: (name: string) => `Agent ${name.toLowerCase()}`,
@@ -222,21 +268,21 @@ export const UI_COMMERCE = {
 
   featuresIndex: {
     meta: {
-      title: (brand: string) => `Fonctionnalités — plateforme d’appels IA · ${brand}`,
-      description: 'Réceptionniste IA, prise de rendez-vous, support, qualification, campagnes, WhatsApp, base de connaissances, flow builder, SIP, reporting et widget web.',
+      title: (brand: string) => `Fonctionnalités de l’agent vocal IA · ${brand}`,
+      description: 'Réceptionniste virtuelle, prise de rendez-vous, qualification, WhatsApp, flow builder, SIP, reporting : votre agent vocal IA. Découvrez les modules.',
     },
     hero: {
       title: 'Tout ce qu’il faut pour automatiser vos appels',
-      intro: 'Treize modules, activés selon votre offre, depuis votre espace client.',
+      intro: 'Treize modules pour votre agent vocal IA, activés selon votre offre, depuis votre espace client.',
     },
     overview: { title: 'Vue d’ensemble' },
   },
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} — agent vocal IA | ${brand}`,
+      title: (name: string, brand: string) => `${MODULE_SEO_TITLE[name] ?? `${name} — agent vocal IA`} · ${brand}`,
       /** `short` est la phrase bénéfice du module, sans point final. */
-      description: (short: string, offerName: string, days: number) => `${short}. Inclus dès le forfait ${offerName}. Essai gratuit ${days} jours.`,
+      description: (short: string, offerName: string, days: number) => `${short}. Inclus dès le forfait ${offerName}, essai gratuit ${days} jours : testez-le.`,
     },
     breadcrumb: 'Fonctionnalités',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
@@ -256,12 +302,12 @@ export const UI_COMMERCE = {
 
   integrations: {
     meta: {
-      title: (brand: string) => `Intégrations — agenda, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Connectez l’agent vocal IA à Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP et plus de 300 outils sans code.',
+      title: (brand: string) => `Intégrations agent vocal IA : agenda et CRM · ${brand}`,
+      description: 'Connectez votre agent vocal IA à Google Agenda, Outlook, Calendly, HubSpot, Zoho, WhatsApp, SIP et plus de 300 outils sans code. Voyez la liste.',
     },
     hero: {
       title: 'Connecté aux outils que vous utilisez déjà',
-      intro: 'Agenda, CRM, messageries, téléphonie : l’agent s’intègre à votre organisation, et le flow builder relie plus de 300 outils sans code.',
+      intro: 'Agenda, CRM, messageries, téléphonie : votre agent vocal IA s’intègre à votre organisation, et le flow builder relie plus de 300 outils sans code.',
     },
     flow: {
       title: { before: 'Construisez vos automatisations ', kw: 'sans code', after: '' },

@@ -4,12 +4,12 @@ import type { QA } from '../fr/faq';
 export type { QA } from '../fr/faq';
 
 export const FAQ_GENERAL: QA[] = [
-  { q: 'How does the AI calling platform work?', a: 'You set up a voice agent with your information, your rules and your tone. It answers inbound calls, makes authorised outbound calls, qualifies enquiries, books appointments and sends you a summary of every conversation.' },
+  { q: 'How does an AI receptionist work?', a: 'You set up a voice agent with your information, your rules and your tone. It answers inbound calls, makes authorised outbound calls, qualifies enquiries, books appointments and sends you a summary of every conversation.' },
   { q: 'How long does it take to get started?', a: 'A first agent is ready in a few minutes from your information. For a full setup (calendar, numbers, transfers), allow one to two days in most cases, with our help.' },
   { q: 'Do I need technical skills?', a: 'No. You describe your business, the prompt assistant guides you, and we help with telephony and integrations.' },
   { q: 'What happens if the agent doesn’t know the answer?', a: 'It doesn’t make one up: it notes the request, offers a callback or transfers to your team, following the rules you have set.' },
-  { q: 'Can the agent handle several calls at once?', a: 'Yes. Several calls are handled in parallel on the same line, so your customers no longer wait.' },
-  { q: 'How is this different from voicemail or a traditional phone system?', a: 'Voicemail records, a phone system routes. The AI agent understands the request, asks the right questions, takes action (appointment, callback, answer) and sends you a record you can act on.' },
+  { q: 'Can the agent handle several calls at once?', a: 'Yes. Unlike a single human receptionist, the AI answering service handles several calls in parallel on the same line, so your customers no longer wait.' },
+  { q: 'How is this different from voicemail or a traditional phone system?', a: 'Voicemail records, a phone system routes. An AI receptionist understands the request, asks the right questions, takes action (appointment, callback, answer) and sends you a record you can act on.' },
   { q: 'Can I use my existing phone system?', a: 'Yes. You can forward your current line to the agent, connect your phone system or carrier via SIP, or import your Twilio and Telnyx numbers.' },
   { q: 'Can I connect my calendar?', a: 'Yes: Google Calendar, Outlook, Cal.com and Calendly. The agent offers free slots and books directly.' },
   { q: 'Can I edit the prompts?', a: 'Yes. The prompt editor lets you set the agent’s goal, tone, questions and limits, step by step, with no technical expertise.' },

@@ -10,7 +10,7 @@ export const SECTORS: Sector[] = [
     short: 'Urgenze filtrate e richieste qualificate mentre i Suoi tecnici sono sul campo.',
     targets: 'Idraulici, elettricisti, tecnici di riscaldamento e climatizzazione, coperture, ristrutturazioni, pulizie',
     title: 'Non perda più le urgenze mentre i Suoi tecnici sono sul campo',
-    subtitle: 'PermanenceIA raccoglie le richieste, filtra le urgenze, organizza le richiamate e La aiuta a intervenire più in fretta, anche fuori orario.',
+    subtitle: 'La segreteria telefonica AI per artigiani: PermanenceIA raccoglie le richieste, filtra le urgenze, organizza le richiamate e La aiuta a intervenire più in fretta, anche fuori orario.',
     problems: [
       'I Suoi tecnici non possono rispondere durante un intervento.',
       'Le chiamate della sera e del fine settimana finiscono a un concorrente.',
@@ -49,7 +49,7 @@ export const SECTORS: Sector[] = [
     short: 'Appuntamenti, conferme e spostamenti gestiti senza interrompere le cure.',
     targets: 'Studi dentistici, poliambulatori, cliniche non di emergenza, fisioterapia',
     title: 'Prenoti e confermi gli appuntamenti senza interrompere le cure',
-    subtitle: 'PermanenceIA aiuta il Suo team a gestire le chiamate amministrative, i nuovi pazienti, le conferme e gli spostamenti.',
+    subtitle: 'Una segreteria telefonica intelligente per il Suo studio dentistico: PermanenceIA aiuta il Suo team a gestire le chiamate amministrative, i nuovi pazienti, le conferme e gli spostamenti.',
     problems: [
       'La reception viene interrotta durante le visite.',
       'I nuovi pazienti chiamano fuori orario.',
@@ -88,7 +88,7 @@ export const SECTORS: Sector[] = [
     short: 'Acquirenti, venditori e inquilini qualificati anche quando i Suoi agenti sono in visita.',
     targets: 'Agenzie immobiliari, network, gestione affitti, amministrazioni condominiali',
     title: 'Qualifichi acquirenti, venditori e inquilini anche quando i Suoi agenti sono in visita',
-    subtitle: 'Ogni richiesta arriva con le informazioni necessarie perché un agente possa agire più in fretta: budget, zona, tempistiche, immobile di interesse.',
+    subtitle: 'Con il centralino AI per agenzia immobiliare, ogni richiesta arriva con le informazioni necessarie perché un agente possa agire più in fretta: budget, zona, tempistiche, immobile di interesse.',
     problems: [
       'I Suoi agenti sono in visita quando i potenziali clienti chiamano.',
       'I lead dei portali aspettano troppo a lungo una risposta.',
@@ -127,7 +127,7 @@ export const SECTORS: Sector[] = [
     short: 'Appuntamenti in officina e preventivi preparati senza interrompere il team al banco.',
     targets: 'Officine indipendenti, centri di manutenzione, carrozzerie, concessionarie',
     title: 'Riempia l’officina senza interrompere il Suo team al banco',
-    subtitle: 'L’agente AI raccoglie i dettagli del veicolo e prepara la richiesta mentre il Suo team resta concentrato sull’officina.',
+    subtitle: 'Prenotazione officina automatica: l’agente AI raccoglie i dettagli del veicolo e prepara la richiesta mentre il Suo team resta concentrato sull’officina.',
     problems: [
       'Il telefono squilla mentre i meccanici lavorano.',
       'Le richieste di preventivo arrivano senza i dati del veicolo.',
@@ -166,7 +166,7 @@ export const SECTORS: Sector[] = [
     short: 'Un’agenda piena mentre è impegnata con le Sue clienti.',
     targets: 'Parrucchieri, centri estetici, spa, onicotecniche, massaggi',
     title: 'Riempia la Sua agenda mentre è già impegnata con le Sue clienti',
-    subtitle: 'Il Suo team resta concentrato sull’esperienza del cliente. L’agente AI si occupa delle richieste e dell’agenda.',
+    subtitle: 'Il Suo team resta concentrato sull’esperienza del cliente. L’agente AI si occupa delle richieste e delle prenotazioni del Suo centro estetico o salone.',
     problems: [
       'Impossibile rispondere al telefono durante un trattamento.',
       'Le disdette dell’ultimo minuto lasciano buchi in agenda.',
@@ -205,7 +205,7 @@ export const SECTORS: Sector[] = [
     short: 'Prenotazioni e domande dei clienti gestite senza interrompere il servizio.',
     targets: 'Ristoranti, trattorie, hotel, B&B, residence',
     title: 'Gestisca prenotazioni e richieste dei clienti senza interrompere il servizio',
-    subtitle: 'Durante il servizio, l’agente AI risponde, raccoglie i dettagli e inoltra solo le richieste che richiedono il Suo team.',
+    subtitle: 'Prenotazioni del ristorante al telefono, anche durante il servizio: l’agente AI risponde, raccoglie i dettagli e inoltra solo le richieste che richiedono il Suo team.',
     problems: [
       'Il telefono squilla nel pieno del servizio.',
       'Tornano sempre le stesse domande: orari, parcheggio, menu.',

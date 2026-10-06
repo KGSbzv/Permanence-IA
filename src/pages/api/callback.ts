@@ -9,19 +9,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
 
-  const e164 = toE164(String(phone));
+  // Langue du site (fr, en-gb, en-au, it, pl, nl) ; « intl » = demande enregistrée par un agent pendant un appel.
+  const lang = typeof locale === 'string' ? locale : 'fr';
+  const e164 = toE164(String(phone), lang);
   const row = {
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
     slot: slot || 'asap', note: note || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
-  // Rappel automatique : la demande rejoint la campagne d’appels de l’agent concerné (commercial ou support).
-  const leadHook = row.type === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
+  // Rappel automatique : la demande rejoint la campagne d’appels de son pays et de son type (commercial ou support).
+  const kind = row.type === 'support' ? 'support' : 'commercial';
+  let leadHook: string | undefined;
+  if (lang === 'fr') leadHook = kind === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
+  else {
+    try { leadHook = JSON.parse(process.env.LEAD_WEBHOOKS_INTL || '{}')[lang]?.[kind]; } catch { leadHook = undefined; }
+  }
   const queueCall = async () => {
-    if (!leadHook) throw new Error('webhook de campagne non configuré');
-    // Les campagnes de rappel utilisent des agents francophones : les demandes d’autres langues sont traitées par l’équipe.
-    if (locale && locale !== 'fr') throw new Error(`demande en langue ${locale} : rappel par l’équipe`);
+    // Une demande déjà enregistrée par un agent pendant un appel n’est pas remise en file : l’équipe la traite.
+    if (lang === 'intl') throw new Error('demande issue d’un agent : suivi par l’équipe');
+    if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${lang}/${kind}`);
     // Garde-fous contre les appels abusifs : pays desservis seulement, et une seule demande par numéro sur 7 jours.
     if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
     const since = new Date(Date.now() - 7 * 86_400_000).toISOString();

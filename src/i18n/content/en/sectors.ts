@@ -7,10 +7,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'services-a-domicile',
     name: 'Home services',
-    short: 'Emergencies filtered and enquiries qualified while your teams are out on jobs.',
+    short: 'AI receptionist for trades: emergencies filtered and enquiries qualified while your teams are out on jobs.',
     targets: 'Plumbers, electricians, heating engineers, air conditioning, roofing, renovation, cleaning',
     title: 'Stop losing emergency calls while your teams are out on jobs',
-    subtitle: 'PermanenceAI captures enquiries, filters emergencies, organises callbacks and helps you get there faster — including out of hours.',
+    subtitle: 'An AI receptionist for plumbers, electricians and other tradespeople: PermanenceAI captures enquiries, filters emergencies, organises callbacks and helps you get there faster — including out of hours.',
     problems: [
       'Your technicians can’t pick up while on a job.',
       'Evening and weekend calls go to a competitor.',
@@ -46,10 +46,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'dentaire-cliniques',
     name: 'Dental and clinics',
-    short: 'Appointments, confirmations and rescheduling handled without interrupting treatment.',
+    short: 'Dental receptionist AI: appointments, confirmations and rescheduling handled without interrupting treatment.',
     targets: 'Dental practices, health centres, non-emergency clinics, physiotherapy',
     title: 'Book and confirm appointments without interrupting treatment',
-    subtitle: 'PermanenceAI helps your team handle admin calls, new patients, confirmations and rescheduling.',
+    subtitle: 'An AI receptionist for dental practices and clinics: PermanenceAI helps your team handle admin calls, new patients, confirmations and rescheduling.',
     problems: [
       'Reception gets interrupted in the middle of appointments.',
       'New patients call outside opening hours.',
@@ -85,10 +85,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'immobilier',
     name: 'Real estate',
-    short: 'Buyers, sellers and tenants qualified even when your agents are out on viewings.',
+    short: 'Real estate call answering: buyers, sellers and tenants qualified even when your agents are out on viewings.',
     targets: 'Estate agents, agency networks, lettings and property management, block management',
     title: 'Qualify buyers, sellers and tenants even when your agents are out on viewings',
-    subtitle: 'Every enquiry arrives with the information an agent needs to act faster: budget, area, timescale, property.',
+    subtitle: 'An AI receptionist for estate and letting agents: every enquiry arrives with the information an agent needs to act faster — budget, area, timescale, property.',
     problems: [
       'Your agents are out on viewings when prospects call.',
       'Leads from property portals wait too long for a reply.',
@@ -124,10 +124,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'automobile',
     name: 'Garages and automotive',
-    short: 'Workshop bookings and quotes prepared without interrupting the front desk.',
+    short: 'Your garage booking line, answered: workshop bookings and quotes prepared without interrupting the front desk.',
     targets: 'Independent garages, service centres, body shops, dealerships',
     title: 'Fill your workshop without interrupting your front-desk team',
-    subtitle: 'The AI agent gathers the vehicle details and prepares the request while your team stays focused on the workshop.',
+    subtitle: 'An AI receptionist for garages: the agent gathers the vehicle details and prepares the service booking request while your team stays focused on the workshop.',
     problems: [
       'The phone rings while mechanics are working.',
       'Quote requests arrive without the vehicle details.',
@@ -163,10 +163,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'beaute-bien-etre',
     name: 'Beauty and wellbeing',
-    short: 'A full diary while you are with your clients.',
+    short: 'AI receptionist for salons: a full diary while you are with your clients.',
     targets: 'Hair salons, beauty salons, spas, nail bars, massage',
     title: 'Fill your diary while you are already with your clients',
-    subtitle: 'Your team stays focused on the client experience. The AI agent takes care of enquiries and the diary.',
+    subtitle: 'Your team stays focused on the client experience. Your salon’s AI receptionist takes care of phone enquiries and the diary.',
     problems: [
       'You can’t answer the phone in the middle of a treatment.',
       'Last-minute cancellations leave gaps.',
@@ -202,10 +202,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'restaurants-hotellerie',
     name: 'Restaurants and hospitality',
-    short: 'Bookings and customer questions handled without interrupting service.',
+    short: 'Restaurant phone bookings handled by AI, with customer questions answered without interrupting service.',
     targets: 'Restaurants, brasseries, hotels, B&Bs, serviced apartments',
-    title: 'Handle bookings and customer requests without interrupting service',
-    subtitle: 'During service, the AI agent answers, collects the details and only passes on the requests that need your team.',
+    title: 'Handle phone bookings and customer requests without interrupting service',
+    subtitle: 'An AI receptionist for restaurants and hotels: during service, it answers, collects the details and only passes on the requests that need your team.',
     problems: [
       'The phone rings in the middle of the rush.',
       'The same questions keep coming: opening hours, parking, menu.',

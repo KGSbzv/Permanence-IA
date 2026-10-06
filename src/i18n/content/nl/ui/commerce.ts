@@ -4,20 +4,65 @@
 //
 // Titels met een gemarkeerd trefwoord zijn opgesplitst in { before, kw, after }: `kw` wordt in kleur getoond.
 
+// SEO: hoofdzoekwoord per pagina (zie docs/seo/keywords-nl.md). Sleutel = Nederlandse naam van de
+// sector of module; ontbreekt de naam, dan wordt het generieke formaat gebruikt.
+const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
+  'Service aan huis': {
+    title: 'Telefoonservice voor installateurs, 24/7',
+    description: (days) => `Telefoonservice voor loodgieters, elektriciens en installateurs: spoed gefilterd, aanvragen gekwalificeerd, ook na sluitingstijd. Probeer ${days} dagen gratis.`,
+  },
+  'Tandartsen en klinieken': {
+    title: 'Telefoonservice tandarts en kliniek met AI',
+    description: (days) => `Telefoonservice voor tandartsen en klinieken: afspraken geboekt, bevestigd en verplaatst zonder de behandeling te onderbreken. Probeer ${days} dagen gratis.`,
+  },
+  Vastgoed: {
+    title: 'Telefonische bereikbaarheid makelaar met AI',
+    description: (days) => `Telefonisch bereikbaar als makelaar: kopers, verkopers en huurders gekwalificeerd, ook als u op bezichtiging bent. Probeer ${days} dagen gratis.`,
+  },
+  'Garages en autobedrijven': {
+    title: 'Telefoonservice garage: afspraken met AI',
+    description: (days) => `Klanten maken telefonisch een afspraak bij uw garage: voertuig, klacht en tijdslot vastgelegd zonder de balie te storen. Probeer ${days} dagen gratis.`,
+  },
+  'Beauty en wellness': {
+    title: 'Telefoonservice kapsalon en schoonheidssalon',
+    description: (days) => `Telefoonservice voor kapsalons en schoonheidssalons: afspraken geboekt terwijl u met klanten bezig bent, herinnering per bericht. Probeer ${days} dagen gratis.`,
+  },
+  'Horeca en hotels': {
+    title: 'Telefonische reserveringen voor uw restaurant',
+    description: (days, minutes) => `Reserveringen voor uw restaurant of hotel telefonisch aangenomen door AI, zonder de service te onderbreken. Probeer ${days} dagen gratis, ${minutes} min inbegrepen.`,
+  },
+};
+
+const FEATURE_SEO: Record<string, string> = {
+  'AI-receptionist': 'Virtuele receptionist met AI, 24/7',
+  'Live demo van de agent': 'Demo AI-telefoonassistent: probeer het live',
+  'Afspraken plannen': 'Afspraken inplannen via de telefoon met AI',
+  Klantenservice: 'AI-telefoonbeantwoorder voor klantenservice',
+  Leadkwalificatie: 'Leads telefonisch kwalificeren met AI',
+  'Uitgaande campagnes': 'Uitgaande belcampagnes met een AI-agent',
+  'WhatsApp en berichten': 'WhatsApp en sms automatisch beantwoorden',
+  Kennisbank: 'Kennisbank voor uw AI-telefoonassistent',
+  Prompteditor: 'Prompteditor: stel uw AI-agent in zonder code',
+  'Flow builder': 'Flow builder: automatiseringen zonder code',
+  'SIP en nummers': 'SIP-koppeling: behoud uw telefoonnummer',
+  Rapportage: 'Rapportage en statistieken van uw gesprekken',
+  Webwidget: 'Terugbelwidget en belknop voor uw website',
+};
+
 export const UI_COMMERCE = {
   home: {
     meta: {
-      title: (brand: string) => `${brand} — AI-spraakagents 24/7 voor uw telefoongesprekken`,
+      title: (brand: string) => `AI-telefoonassistent voor uw bedrijf, 24/7 · ${brand}`,
       description: (days: number, minutes: number) =>
-        `AI die voor u opneemt, kwalificeert en afspraken boekt. ${days} dagen gratis, ${minutes} minuten inbegrepen, excl. btw, geen verplichtingen.`,
+        `AI-telefoonassistent die opneemt, kwalificeert en afspraken inplant, 24/7. Probeer ${days} dagen gratis met ${minutes} minuten, zonder verplichtingen.`,
     },
     hero: {
-      title: { before: 'Automatiseer uw telefoongesprekken met AI die voor u ', kw: 'opneemt, kwalificeert en afspraken boekt', after: '' },
-      intro: 'Spraakagents die elk gesprek aannemen, de juiste vragen stellen, afspraken inplannen en u een duidelijke samenvatting sturen. 24/7 beschikbaar, ingesteld op uw vak, binnen enkele minuten online.',
+      title: { before: 'Een AI-telefoonassistent die voor u ', kw: 'opneemt, kwalificeert en afspraken boekt', after: '' },
+      intro: 'Als virtuele receptionist neemt de agent elk gesprek aan, stelt de juiste vragen, plant afspraken in en stuurt u een duidelijke samenvatting. Uw telefonische bereikbaarheid 24/7 geregeld, ingesteld op uw vak, binnen enkele minuten online.',
       photoAlt: 'Ondernemer die de samenvatting van een gesprek op haar telefoon bekijkt',
     },
     showcase: { title: 'Zie de agent aan het werk in uw vak', intro: 'Kies een sector: het gesprek speelt zich af en de aanvraag komt klaar om af te handelen binnen.' },
-    benefits: { title: 'Wat de agent voor uw bedrijf doet', intro: 'Een spraakagent die uw bedrijf kent en aan het werk is wanneer uw team niet kan opnemen.' },
+    benefits: { title: 'Wat de agent voor uw bedrijf doet', intro: 'Een spraakagent die uw bedrijf kent en aan het werk is wanneer u of uw team niet kan opnemen, van zzp’er tot praktijk met meerdere medewerkers.' },
     features: {
       booking: {
         title: { before: 'Automatiseer ', kw: 'afspraken en herinneringen', after: '' },
@@ -41,7 +86,7 @@ export const UI_COMMERCE = {
     useCases: { title: 'Een agent voor elk soort gesprek', intro: 'Inkomend, uitgaand of berichten: activeer de toepassingen die uw bedrijf nodig heeft.' },
     platform: {
       title: 'Het complete platform om uw gesprekken te automatiseren',
-      intro: 'Alles inbegrepen: stem, intelligentie, telefonie, automatiseringen en rapporten, in één omgeving.',
+      intro: 'Alles wat een telefoonservice voor bedrijven nodig heeft, inbegrepen: stem, intelligentie, telefonie, automatiseringen en rapporten, in één omgeving.',
       link: 'Alle functies',
     },
     steps: {
@@ -78,16 +123,16 @@ export const UI_COMMERCE = {
 
   tarifs: {
     meta: {
-      title: (brand: string) => `Prijzen — abonnementen excl. btw en opwaarderingen · ${brand}`,
+      title: (brand: string) => `Prijzen AI-telefoonassistent — abonnementen · ${brand}`,
       /** Eén abonnement in de beschrijving: `price` en `minutes` zijn al opgemaakt. */
-      plan: (name: string, price: string, minutes: string) => `${name} ${price} excl. btw / ${minutes} min`,
+      plan: (name: string, price: string, minutes: string) => `${name} ${price} (${minutes} min)`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. ${days} dagen gratis, ${minutes} min inbegrepen.`,
+        `AI-telefoonassistent: ${plans.join(', ')} per maand excl. btw. Probeer ${days} dagen gratis.`,
     },
     hero: {
-      title: 'Kies het abonnement dat past bij uw belvolume',
+      title: 'Prijzen AI-telefoonassistent: kies het abonnement dat past bij uw belvolume',
       intro: (days: number, minutes: number) =>
-        `Alle prijzen zijn exclusief belastingen. Hoe groter het abonnement, hoe goedkoper de minuut. De gratis proefperiode omvat ${days} dagen en ${minutes} belminuten.`,
+        `Alle prijzen van uw telefoonservice zijn exclusief belastingen. Hoe groter het abonnement, hoe goedkoper de minuut. De gratis proefperiode omvat ${days} dagen en ${minutes} belminuten.`,
       moreMinutes: 'Meer minuten nodig? Waardeer op elk moment op.',
     },
     matrix: {
@@ -109,10 +154,10 @@ export const UI_COMMERCE = {
   },
 
   offer: {
-    metaTitleTrial: (days: number, minutes: number, brand: string) => `Gratis proefperiode ${days} dagen — ${minutes} minuten · ${brand}`,
-    /** `monthly`: voegt „excl. btw / maand” toe als de prijs een maandbedrag is. */
-    metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `Abonnement ${name} — ${price}${monthly ? ' excl. btw / maand' : ''} · ${brand}`,
-    metaDescription: (title: string, days: number, minutes: number) => `${title}. Gratis proefperiode van ${days} dagen, ${minutes} minuten inbegrepen, prijzen excl. btw.`,
+    metaTitleTrial: (days: number, minutes: number, brand: string) => `Proefperiode AI-telefoonassistent: ${days} dagen · ${brand}`,
+    /** `monthly`: voegt „/mnd” toe als de prijs een maandbedrag is. */
+    metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `${name}: AI-telefoonservice, ${price}${monthly ? '/mnd' : ''} · ${brand}`,
+    metaDescription: (title: string, days: number, minutes: number) => `${title}. Start gratis: ${days} dagen, ${minutes} minuten inbegrepen, prijzen excl. btw.`,
     breadcrumb: 'Prijzen',
     productName: (brand: string, name: string) => `${brand} ${name}`,
     eyebrow: (name: string, audience: string) => `Abonnement ${name} · ${audience}`,
@@ -145,12 +190,12 @@ export const UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Minuten opwaarderen — ${brand}`,
+      title: (brand: string) => `Extra belminuten opwaarderen · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Opwaarderen vanaf ${price} excl. btw voor ${minutes} extra minuten. Voeg altijd minuten toe of stap over op een groter abonnement.`,
+        `Extra belminuten voor uw AI-telefoonassistent: waardeer op vanaf ${price} excl. btw voor ${minutes} minuten, of stap over op een groter abonnement.`,
     },
     hero: {
-      title: 'Voeg op elk moment minuten toe',
+      title: 'Voeg op elk moment extra belminuten toe',
       intro: 'Een opwaardering helpt u door een drukkere maand. Waardeert u vaak op, dan wordt het grotere abonnement voordeliger: wij laten u dat weten.',
     },
     how: {
@@ -165,12 +210,12 @@ export const UI_COMMERCE = {
 
   sectorsIndex: {
     meta: {
-      title: (brand: string) => `Sectoren — AI-spraakagents per vak · ${brand}`,
-      description: 'Service aan huis, tandartsen en klinieken, vastgoed, garages, beauty, horeca en hotels: een AI-spraakagent afgestemd op elk vak.',
+      title: (brand: string) => `Telefoonservice met AI per branche · ${brand}`,
+      description: 'Telefoonservice voor installateurs, tandartsen, makelaars, garages, salons en horeca: een AI-telefoonassistent afgestemd op uw vak. Kies uw branche.',
     },
     hero: {
-      title: 'Een spraakagent afgestemd op uw vak',
-      intro: 'We hebben zes sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn, en waarin elke gemiste aanvraag een klant kost.',
+      title: 'Een AI-telefoonassistent afgestemd op uw vak',
+      intro: 'We hebben zes sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant.',
     },
     other: {
       title: 'Staat uw branche er niet tussen?',
@@ -182,10 +227,10 @@ export const UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name}: AI-spraakagent 24/7 — ${brand}`,
+      title: (name: string, brand: string) => `${SECTOR_SEO[name]?.title ?? `${name}: AI-telefoonassistent`} · ${brand}`,
       /** `short` is de korte zin van de sector, zonder punt aan het eind. */
       description: (name: string, short: string, days: number, minutes: number) =>
-        `${name}: ${short}. Gratis proefperiode van ${days} dagen, ${minutes} minuten inbegrepen, prijzen excl. btw.`,
+        SECTOR_SEO[name]?.description(days, minutes) ?? `${name}: ${short}. Probeer ${days} dagen gratis, ${minutes} minuten inbegrepen.`,
     },
     breadcrumb: 'Sectoren',
     liveCallTitle: (name: string) => `Agent voor ${name.toLowerCase()}`,
@@ -222,21 +267,21 @@ export const UI_COMMERCE = {
 
   featuresIndex: {
     meta: {
-      title: (brand: string) => `Functies — AI-belplatform · ${brand}`,
-      description: 'AI-receptionist, afspraken plannen, klantenservice, kwalificatie, campagnes, WhatsApp, kennisbank, flow builder, SIP, rapportage en webwidget.',
+      title: (brand: string) => `Functies van de AI-telefoonassistent · ${brand}`,
+      description: 'Virtuele receptionist, afspraken inplannen, klantenservice, leadkwalificatie, WhatsApp, kennisbank, SIP en rapportage. Bekijk alle functies.',
     },
     hero: {
-      title: 'Alles wat u nodig hebt om uw gesprekken te automatiseren',
-      intro: 'Dertien modules, geactiveerd volgens uw abonnement, vanuit uw klantomgeving.',
+      title: 'Alle functies van uw AI-telefoonassistent',
+      intro: 'Van virtuele receptionist tot rapportage: dertien modules, geactiveerd volgens uw abonnement, vanuit uw klantomgeving.',
     },
     overview: { title: 'Overzicht' },
   },
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} — AI-spraakagent | ${brand}`,
-      /** `short` is de voordeelzin van de module, zonder punt aan het eind. */
-      description: (short: string, offerName: string, days: number) => `${short}. Inbegrepen vanaf het abonnement ${offerName}. Gratis proefperiode van ${days} dagen.`,
+      title: (name: string, brand: string) => `${FEATURE_SEO[name] ?? `${name} — AI-telefoonassistent`} · ${brand}`,
+      /** `short` is de voordeelzin van de module, zonder punt aan het eind. Het abonnement staat op de pagina zelf. */
+      description: (short: string, offerName: string, days: number) => `${short}. Probeer het ${days} dagen gratis, zonder verplichtingen.`,
     },
     breadcrumb: 'Functies',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
@@ -257,11 +302,11 @@ export const UI_COMMERCE = {
   integrations: {
     meta: {
       title: (brand: string) => `Integraties — agenda, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Koppel de AI-spraakagent aan Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP en meer dan 300 tools zonder code.',
+      description: 'Koppel uw AI-telefoonassistent aan Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP en meer dan 300 tools, zonder code.',
     },
     hero: {
-      title: 'Gekoppeld aan de tools die u al gebruikt',
-      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent past in uw organisatie, en de flow builder koppelt meer dan 300 tools zonder code.',
+      title: 'Uw AI-telefoonassistent, gekoppeld aan de tools die u al gebruikt',
+      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent past in uw organisatie en plant afspraken direct in uw agenda in, en de flow builder koppelt meer dan 300 tools zonder code.',
     },
     flow: {
       title: { before: 'Bouw uw automatiseringen ', kw: 'zonder code', after: '' },

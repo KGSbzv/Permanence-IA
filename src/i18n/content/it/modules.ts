@@ -8,7 +8,7 @@ export const MODULES: Module[] = [
     slug: 'receptionniste-ia', name: 'Receptionist AI', family: 'Telefonia',
     short: 'Risponde a ogni chiamata, qualifica la richiesta e trasferisce ciò che conta.',
     title: 'Una receptionist che risponde a ogni chiamata, di giorno e di notte',
-    intro: 'L’agente accoglie chi chiama con il Suo tono, comprende la richiesta, raccoglie le informazioni utili e decide il passo successivo: risposta, appuntamento, richiamata o trasferimento al Suo team.',
+    intro: 'La receptionist virtuale accoglie chi chiama con il Suo tono, comprende la richiesta, raccoglie le informazioni utili e decide il passo successivo: risposta, appuntamento, richiamata o trasferimento al Suo team.',
     uses: ['Non lasciare più finire le chiamate in segreteria', 'Filtrare le richieste ripetitive e le chiamate commerciali indesiderate', 'Ricevere un riepilogo chiaro di ogni chiamata'],
     steps: [
       { title: 'Descrive la Sua attività', text: 'Orari, servizi, domande frequenti e regole di trasferimento.' },
@@ -38,7 +38,7 @@ export const MODULES: Module[] = [
     slug: 'prise-de-rendez-vous', name: 'Gestione appuntamenti', family: 'Calendario',
     short: 'Prenotazioni, conferme, promemoria e spostamenti nel Suo calendario.',
     title: 'Appuntamenti prenotati mentre Lei lavora',
-    intro: 'Colleghi il Suo calendario: l’agente propone gli orari liberi, prenota, conferma e gestisce spostamenti e disdette senza l’intervento del Suo team.',
+    intro: 'Colleghi il Suo calendario e attivi le prenotazioni telefoniche automatiche: l’agente propone gli orari liberi, prenota, conferma e gestisce spostamenti e disdette senza l’intervento del Suo team.',
     uses: ['Riempire gli orari liberi', 'Ridurre gli appuntamenti mancati', 'Liberare la reception dalle chiamate di pianificazione'],
     steps: [
       { title: 'Colleghi il Suo calendario', text: 'Google, Outlook, Cal.com o Calendly.' },
@@ -53,7 +53,7 @@ export const MODULES: Module[] = [
     slug: 'support-client', name: 'Assistenza clienti', family: 'Automazione',
     short: 'Le domande ripetitive gestite, i casi complessi inoltrati.',
     title: 'Un’assistenza che risponde subito, senza code',
-    intro: 'L’agente risponde alle domande frequenti a partire dai Suoi documenti, segue le richieste e inoltra al Suo team le situazioni che richiedono una persona.',
+    intro: 'Un risponditore automatico AI che risponde alle domande frequenti a partire dai Suoi documenti, segue le richieste e inoltra al Suo team le situazioni che richiedono una persona.',
     uses: ['Eliminare l’attesa al telefono', 'Rispondere in modo coerente', 'Inoltrare i casi delicati'],
     steps: [
       { title: 'Carichi i Suoi contenuti', text: 'FAQ, procedure, condizioni e pagine del Suo sito.' },
@@ -158,7 +158,7 @@ export const MODULES: Module[] = [
     slug: 'sip-numeros', name: 'SIP e numeri', family: 'Telefonia',
     short: 'Mantenga i Suoi numeri o scelga un numero dedicato come opzione.',
     title: 'Mantenga i Suoi numeri o ne ottenga di nuovi',
-    intro: 'Colleghi il Suo centralino o il Suo operatore tramite SIP, importi i Suoi numeri Twilio o Telnyx, oppure scelga un numero dedicato come opzione (fatturato mensilmente, in base al paese).',
+    intro: 'Un centralino virtuale collegato ai Suoi numeri: colleghi il Suo centralino o il Suo operatore tramite SIP, importi i Suoi numeri Twilio o Telnyx, oppure scelga un numero dedicato come opzione (fatturato mensilmente, in base al paese).',
     uses: ['Mantenere il numero che i Suoi clienti conoscono', 'Aprire una linea locale', 'Gestire più sedi'],
     steps: [
       { title: 'Scelga l’opzione', text: 'Numero fornito, importazione o trunk SIP.' },

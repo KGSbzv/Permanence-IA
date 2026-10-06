@@ -25,17 +25,17 @@ const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
 export const UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Démo live — essayez l’agent vocal IA · ${brand}`,
-      description: 'Essayez en live notre agent : parlez-lui ou recevez un appel de démonstration adapté à votre secteur. Gratuit et sans engagement.',
+      title: (brand: string) => `Démo agent vocal IA : essayez-le en live · ${brand}`,
+      description: 'Démo gratuite de notre agent vocal IA : parlez-lui ou recevez un appel adapté à votre secteur. Sans engagement, laissez votre numéro.',
     },
-    h1: 'Essayez en live notre agent maintenant',
+    h1: 'Essayez en live notre agent vocal IA',
     intro: 'Laissez votre numéro et choisissez votre secteur : l’agent vous appelle et joue un scénario de votre métier. Vous entendez sa voix, son rythme et la façon dont il qualifie une demande.',
     widgetHint: 'Vous préférez tout de suite ? Cliquez sur la bulle en bas à droite de l’écran : notre assistante vous répond à l’oral ou par écrit.',
     formTitle: 'Recevoir mon appel de démonstration',
     formIntro: 'Appel gratuit, au créneau de votre choix.',
     submit: 'Recevoir l’appel de démo',
     hearTitle: 'Ce que vous allez entendre',
-    hearIntro: 'Un exemple d’appel dans un cabinet dentaire : l’agent identifie la demande, propose un créneau et prépare la fiche pour l’équipe.',
+    hearIntro: 'Un exemple d’appel dans un cabinet dentaire : la réceptionniste virtuelle identifie la demande, propose un créneau et prépare la fiche pour l’équipe.',
     steps: [
       { title: 'Vous laissez votre numéro', text: 'Avec votre secteur et votre créneau.' },
       { title: 'L’agent vous appelle', text: 'Il joue un scénario de votre métier.' },
@@ -47,8 +47,8 @@ export const UI_PAGES = {
 
   contact: {
     meta: {
-      title: (brand: string) => `Contact et rappel — ${brand}`,
-      description: 'Laissez votre numéro, on vous rappelle. Rappel commercial, démonstration ou support : choisissez votre créneau.',
+      title: (brand: string) => `Contact : un conseiller vous rappelle · ${brand}`,
+      description: 'Une question sur le standard téléphonique IA ? Laissez votre numéro, on vous rappelle au créneau choisi : démo, devis sur mesure ou support.',
     },
     h1: 'Laissez votre numéro, on vous rappelle',
     intro: 'Nous ne publions pas de numéro : c’est nous qui vous rappelons, au créneau que vous choisissez. Vous pouvez aussi nous écrire.',
@@ -65,10 +65,10 @@ export const UI_PAGES = {
 
   faq: {
     meta: {
-      title: (brand: string) => `Questions fréquentes — ${brand}`,
-      description: (brand: string) => `Fonctionnement, téléphonie, SIP, calendrier, WhatsApp, RGPD, essai gratuit et tarifs : toutes les réponses sur l’agent vocal IA ${brand}.`,
+      title: (brand: string) => `FAQ standard téléphonique IA et agent vocal · ${brand}`,
+      description: (brand: string) => `Fonctionnement, SIP, agenda, WhatsApp, RGPD, essai et tarifs : toutes les réponses sur le standard téléphonique IA ${brand}. Consultez la FAQ.`,
     },
-    h1: 'Questions fréquentes',
+    h1: 'Questions fréquentes sur le standard téléphonique IA',
     intro: 'Vous ne trouvez pas votre réponse ? Laissez votre numéro, un conseiller vous rappelle.',
     general: 'La plateforme',
     pricing: 'Tarifs et essai',
@@ -76,11 +76,11 @@ export const UI_PAGES = {
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `Essai gratuit ${days} jours — ${minutes} minutes incluses · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Créez votre compte ${brand} : ${days} jours d’essai gratuit, ${minutes} minutes incluses, prix HT, rien n’est débité pendant l’essai, annulable à tout moment.`,
+      title: (days: number, minutes: number, brand: string) => `Essai gratuit agent vocal IA — ${days} jours · ${brand}`,
+      description: (days: number, minutes: number, brand: string) => `Essai gratuit de l’agent vocal IA ${brand} : ${days} jours, ${minutes} minutes incluses, rien n’est débité pendant l’essai. Créez votre compte.`,
     },
     h1: (minutes: number) => `Réclamez vos ${minutes} minutes gratuites`,
-    intro: (days: number) => `Créez votre compte, choisissez le forfait à tester et essayez votre agent sur votre activité pendant ${days} jours.`,
+    intro: (days: number) => `Créez votre compte, choisissez le forfait à tester et essayez votre agent vocal IA sur votre activité pendant ${days} jours.`,
     points: (days: number) => [
       `Carte demandée à l’activation, rien n’est débité pendant ${days} jours`,
       'Annulez depuis votre espace avant la fin de l’essai : vous ne payez rien',
@@ -155,8 +155,8 @@ export const UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `À propos — ${brand}`,
-      description: (brand: string, company: string) => `${brand} aide les entreprises à répondre à chaque appel grâce à des agents vocaux IA. Une marque de ${company}.`,
+      title: (brand: string) => `À propos — agents vocaux IA pour TPE et PME · ${brand}`,
+      description: (brand: string, company: string) => `${brand} aide les TPE et PME à répondre à chaque appel grâce à des agents vocaux IA. Une marque de ${company}. Découvrez notre approche.`,
     },
     h1: 'Chaque appel mérite une réponse',
     intro: (brand: string) => `${brand} est née d’un constat simple : les petites entreprises perdent des clients parce que personne ne peut décrocher au bon moment.`,
@@ -177,8 +177,8 @@ export const UI_PAGES = {
 
   security: {
     meta: {
-      title: (brand: string) => `Sécurité et conformité — ${brand}`,
-      description: (brand: string) => `Consentement, opt-out, chiffrement, rétention configurable, rôles et traçabilité : comment ${brand} protège les données de vos appels.`,
+      title: (brand: string) => `Sécurité et RGPD de l’agent vocal IA · ${brand}`,
+      description: (brand: string) => `Consentement, opt-out, chiffrement, rétention configurable : comment ${brand} protège les données de vos appels et vous aide à respecter le RGPD.`,
     },
     h1: 'Sécurité et conformité de vos appels IA',
     intro: 'Vos appels contiennent des données personnelles. Voici les protections en place et les réglages dont vous disposez pour respecter le RGPD.',
@@ -465,8 +465,8 @@ export const UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `Blog ${brand} | Assistants IA, Prise de RDV, Qualification & RGPD`,
-      description: "Articles d'experts, études de cas et guides complets pour optimiser la conversion téléphonique de votre entreprise grâce aux agents vocaux IA.",
+      title: (brand: string) => `Blog accueil téléphonique et agents IA · ${brand}`,
+      description: 'Guides et retours d’expérience sur l’accueil téléphonique, la prise de rendez-vous et les agents vocaux IA en entreprise. Lisez nos articles.',
     },
     eyebrow: 'Ressources & Insights',
     h1: 'Le Journal de la Réception IA',

@@ -4,9 +4,9 @@ import type { Module } from '../fr/modules';
 export const MODULES: Module[] = [
   {
     slug: 'receptionniste-ia', name: 'Recepcjonistka AI', family: 'Telefonia',
-    short: 'Odbiera każde połączenie, kwalifikuje zgłoszenie i przekazuje to, co ważne.',
-    title: 'Recepcjonistka, która odbiera każde połączenie, w dzień i w nocy',
-    intro: 'Agent wita dzwoniących w Twoim stylu, rozumie ich potrzebę, zbiera przydatne informacje i decyduje o dalszych krokach: odpowiedź, wizyta, oddzwonienie lub przekazanie rozmowy Twojemu zespołowi.',
+    short: 'Wirtualna recepcjonistka: odbiera każde połączenie i przekazuje to, co ważne.',
+    title: 'Wirtualna recepcjonistka, która odbiera każde połączenie, w dzień i w nocy',
+    intro: 'Działa jak sekretariat telefoniczny dostępny całą dobę: agent wita dzwoniących w Twoim stylu, rozumie ich potrzebę, zbiera przydatne informacje i decyduje o dalszych krokach: odpowiedź, wizyta, oddzwonienie lub przekazanie rozmowy Twojemu zespołowi.',
     uses: ['Koniec z połączeniami trafiającymi na pocztę głosową', 'Odsiewanie powtarzalnych pytań i telemarketingu', 'Czytelne podsumowanie każdej rozmowy'],
     steps: [
       { title: 'Opisujesz swoją działalność', text: 'Godziny otwarcia, usługi, częste pytania i zasady przekazywania rozmów.' },
@@ -21,7 +21,7 @@ export const MODULES: Module[] = [
     slug: 'demo-live', name: 'Demo agenta na żywo', family: 'Telefonia',
     short: 'Posłuchaj głosu, języka i tonu agenta na żywo.',
     title: 'Wypróbuj agenta na żywo, zanim podejmiesz decyzję',
-    intro: 'Przeprowadź prawdziwą rozmowę w przeglądarce lub odbierz połączenie demonstracyjne. Usłyszysz głos, tempo i sposób, w jaki agent kwalifikuje zgłoszenie.',
+    intro: 'Przeprowadź prawdziwą rozmowę z asystentem głosowym AI w przeglądarce lub odbierz połączenie demonstracyjne. Usłyszysz głos, tempo i sposób, w jaki agent kwalifikuje zgłoszenie.',
     uses: ['Sprawdzenie jakości głosu', 'Test scenariusza z Twojej branży', 'Pokazanie agenta zespołowi'],
     steps: [
       { title: 'Wybierz branżę', text: 'Scenariusz demonstracyjny dopasowuje się do Twojej działalności.' },
@@ -34,8 +34,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'prise-de-rendez-vous', name: 'Umawianie wizyt', family: 'Kalendarz',
-    short: 'Rezerwacje, potwierdzenia, przypomnienia i zmiany terminów w Twoim kalendarzu.',
-    title: 'Wizyty umawiane, gdy Ty pracujesz',
+    short: 'Umawianie wizyt przez telefon, potwierdzenia i przypomnienia w Twoim kalendarzu.',
+    title: 'Umawianie wizyt przez telefon, gdy Ty pracujesz',
     intro: 'Podłącz kalendarz: agent proponuje wolne terminy, rezerwuje, potwierdza oraz obsługuje zmiany terminów i odwołania bez udziału Twojego zespołu.',
     uses: ['Wypełnianie wolnych terminów', 'Mniej nieodbytych wizyt', 'Recepcja wolna od telefonów w sprawie terminów'],
     steps: [
@@ -49,8 +49,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'support-client', name: 'Obsługa klienta', family: 'Automatyzacja',
-    short: 'Powtarzalne pytania obsłużone, złożone sprawy przekazane dalej.',
-    title: 'Wsparcie, które odpowiada od razu, bez kolejki',
+    short: 'Automatyczna obsługa klienta: częste pytania obsłużone, złożone sprawy przekazane.',
+    title: 'Automatyczna obsługa klienta, która odpowiada od razu, bez kolejki',
     intro: 'Agent odpowiada na częste pytania na podstawie Twoich dokumentów, śledzi zgłoszenia i przekazuje Twojemu zespołowi sytuacje wymagające człowieka.',
     uses: ['Koniec z czekaniem na linii', 'Spójne odpowiedzi', 'Przekazywanie spraw wrażliwych'],
     steps: [
@@ -66,7 +66,7 @@ export const MODULES: Module[] = [
     slug: 'qualification-des-leads', name: 'Kwalifikacja leadów', family: 'CRM i dane',
     short: 'Właściwe informacje zebrane przed każdym oddzwonieniem.',
     title: 'Każdy potencjalny klient trafia na Twój pulpit już zakwalifikowany',
-    intro: 'Agent zadaje Twoje pytania kwalifikujące — potrzeba, budżet, lokalizacja, termin — i tworzy uporządkowaną kartę. Twój zespół oddzwania, wiedząc już wszystko.',
+    intro: 'Agent zadaje przez telefon Twoje pytania kwalifikujące — potrzeba, budżet, lokalizacja, termin — i tworzy uporządkowaną kartę. Twój zespół oddzwania, wiedząc już wszystko.',
     uses: ['Priorytet dla najbardziej zainteresowanych', 'Odrzucanie zapytań spoza grupy docelowej', 'Szybsze przygotowanie wycen'],
     steps: [
       { title: 'Wypisz kryteria', text: 'Informacje niezbędne przed oddzwonieniem.' },
@@ -79,9 +79,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'campagnes-sortantes', name: 'Kampanie wychodzące', family: 'Automatyzacja',
-    short: 'Przypomnienia, potwierdzenia i kontakty kontrolne w ustalonych ramach.',
+    short: 'Automatyczne przypomnienia, potwierdzenia i kontakty kontrolne w ustalonych ramach.',
     title: 'Automatycznie przypominaj, potwierdzaj i utrzymuj kontakt z klientami',
-    intro: 'Zaplanuj połączenia wychodzące do kontaktów, które wyraziły na to zgodę: potwierdzenia, przypomnienia o wizytach, ponowny kontakt w sprawie wycen, odnowienia. Z przedziałami godzinowymi, limitami i listą wykluczeń.',
+    intro: 'Zaplanuj automatyczne połączenia wychodzące do kontaktów, które wyraziły na to zgodę: potwierdzenia, przypomnienia o wizytach, ponowny kontakt w sprawie wycen, odnowienia. Z przedziałami godzinowymi, limitami i listą wykluczeń.',
     uses: ['Potwierdzanie wizyt na dany tydzień', 'Ponowny kontakt w sprawie oczekujących wycen', 'Odzyskiwanie nieaktywnych klientów'],
     steps: [
       { title: 'Zaimportuj kontakty', text: 'Z pliku, CRM lub formularza, za ich zgodą.' },
@@ -111,7 +111,7 @@ export const MODULES: Module[] = [
     slug: 'base-de-connaissances', name: 'Baza wiedzy', family: 'CRM i dane',
     short: 'Twoje pliki PDF, strony WWW i procedury stają się odpowiedziami agenta.',
     title: 'Agent odpowiada na podstawie Twoich informacji, a nie domysłów',
-    intro: 'Wgraj dokumenty, dodaj strony swojej witryny lub podłącz swoje dane. Agent szuka w nich odpowiedzi wtedy, gdy jej potrzebuje.',
+    intro: 'Wgraj dokumenty, dodaj strony swojej witryny lub podłącz swoje dane. Asystent głosowy AI szuka w nich odpowiedzi wtedy, gdy jej potrzebuje.',
     uses: ['Trafne i aktualne odpowiedzi', 'Mniej zbędnych eskalacji', 'Jedno miejsce do aktualizacji'],
     steps: [
       { title: 'Dodaj źródła', text: 'PDF, adresy URL Twojej strony, teksty lub dane.' },
@@ -154,9 +154,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'sip-numeros', name: 'SIP i numery', family: 'Telefonia',
-    short: 'Zachowaj swoje numery lub weź opcjonalny numer dedykowany.',
+    short: 'Zachowaj swoje numery, podłącz centralę przez SIP lub weź numer dedykowany.',
     title: 'Zachowaj swoje numery lub uzyskaj nowe',
-    intro: 'Podłącz centralę lub operatora przez SIP, zaimportuj numery z Twilio lub Telnyx albo weź opcjonalny numer dedykowany (płatny co miesiąc, zależnie od kraju).',
+    intro: 'Podłącz swoją centralę (także wirtualną centralę telefoniczną) lub operatora przez SIP, zaimportuj numery z Twilio lub Telnyx albo weź opcjonalny numer dedykowany (płatny co miesiąc, zależnie od kraju).',
     uses: ['Zachowanie numeru znanego klientom', 'Uruchomienie lokalnej linii', 'Obsługa wielu lokalizacji'],
     steps: [
       { title: 'Wybierz opcję', text: 'Nowy numer, import lub trunk SIP.' },
@@ -170,7 +170,7 @@ export const MODULES: Module[] = [
   {
     slug: 'reporting', name: 'Raporty', family: 'Zarządzanie',
     short: 'Wolumeny, czas trwania, wyniki i konwersje w jednym widoku.',
-    title: 'Mierz, co agent robi dla Twojej firmy',
+    title: 'Raporty połączeń: mierz, co agent robi dla Twojej firmy',
     intro: 'Śledź liczbę i długość połączeń, zakwalifikowane zgłoszenia, umówione wizyty i przekazania rozmów. Odsłuchuj nagrania i czytaj transkrypcje.',
     uses: ['Zrozumienie szczytów połączeń', 'Pomiar konwersji', 'Ulepszanie skryptów'],
     steps: [

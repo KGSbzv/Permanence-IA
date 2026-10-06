@@ -43,7 +43,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Kompletne call center AI do obsługi recepcji, wizyt i wsparcia',
     pitch: 'Pakiet Call center łączy wielu agentów, szczegółowe raporty, role, zaawansowaną bazę wiedzy, API i priorytetowe wsparcie, z najniższą ceną za minutę.',
     cta: 'Wybierz Call center',
-    highlights: ['Wszystko z pakietu Asystent', 'Wielu agentów i role', 'Szczegółowe raporty', 'API, webhooki i narzędzia MCP', 'Priorytetowe wsparcie'],
+    highlights: ['Wszystko z pakietu Asystent', 'Wielu agentów i role', 'Szczegółowe raporty', 'API, webhooki i narzędzia MCP', 'Priorytetowe wsparcie', '3000 kredytów na wiadomości w cenie (30 $)'],
   },
   'sur-mesure': {
     name: 'Na miarę',

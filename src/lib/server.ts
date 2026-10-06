@@ -71,11 +71,21 @@ export function isAuthorized(req: NextApiRequest) {
 }
 
 /** Numéro au format international (+33…) ; les numéros français à 10 chiffres sont convertis. Null si illisible. */
-export function toE164(raw: string) {
-  const s = raw.replace(/[\s.\-()]/g, '');
+/** Indicatif du pays visé par chaque langue du site, pour convertir un numéro saisi au format national. */
+const DIAL: Record<string, { cc: string; keepZero?: boolean }> = {
+  fr: { cc: '33' }, 'en-gb': { cc: '44' }, 'en-au': { cc: '61' }, it: { cc: '39', keepZero: true }, pl: { cc: '48' }, nl: { cc: '31' },
+};
+
+/** Numéro au format international (+33…). Un numéro national est converti selon la langue du site. Null si illisible. */
+export function toE164(raw: string, locale = 'fr') {
+  const s = raw.replace(/[\s.\-()/]/g, '');
   if (/^\+\d{8,15}$/.test(s)) return s;
   if (/^00\d{8,15}$/.test(s)) return `+${s.slice(2)}`;
-  if (/^0\d{9}$/.test(s)) return `+33${s.slice(1)}`;
+  const d = DIAL[locale] || DIAL.fr;
+  if (/^\d{6,12}$/.test(s)) {
+    if (d.keepZero || !s.startsWith('0')) return `+${d.cc}${s}`;
+    return `+${d.cc}${s.slice(1)}`;
+  }
   return null;
 }
 
@@ -87,6 +97,11 @@ const CALLABLE = [
   /^\+41(?:[2-6]\d{8}|7[5-9]\d{7})$/, // Suisse : fixes géographiques et mobiles 075-079
   /^\+352(?:6[2-9]1\d{6}|[2-5]\d{5,7})$/, // Luxembourg : mobiles 6x1 et fixes
   /^\+377[4-9]\d{7}$/, // Monaco : fixes et mobiles
+  /^\+44(?:1\d{8,9}|2\d{9}|3\d{9}|7[1-57-9]\d{8})$/, // Royaume-Uni : fixes 01-03 et mobiles 07 (hors 070, 076, 08, 09)
+  /^\+61(?:[2378]\d{8}|4\d{8})$/, // Australie : fixes et mobiles 04 (hors 13, 1300, 1800, 19)
+  /^\+39(?:3\d{8,9}|0\d{5,10})$/, // Italie : mobiles 3xx et fixes 0x (hors 8xx surtaxés)
+  /^\+48(?!70|80)[1-9]\d{8}$/, // Pologne : fixes et mobiles (hors 70x surtaxés et 80x)
+  /^\+31(?:[1-57]\d{8}|6[1-5]\d{7})$/, // Pays-Bas : fixes et mobiles 06 (hors 08x, 09x)
   /^\+1(?!(?:900|976|8(?:00|33|44|55|66|77|88)))[2-9]\d{2}[2-9]\d{6}$/, // États-Unis / Canada hors surtaxés et numéros verts
 ];
 // Indicatifs +1 qui ne sont ni aux États-Unis ni au Canada (Caraïbes, territoires) ou non géographiques (5xx, 6xx réservés, 700, 710).

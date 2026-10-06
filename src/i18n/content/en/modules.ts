@@ -7,8 +7,8 @@ export const MODULES: Module[] = [
   {
     slug: 'receptionniste-ia', name: 'AI receptionist', family: 'Telephony',
     short: 'Answers every call, qualifies the request and transfers what matters.',
-    title: 'A receptionist that picks up every call, day and night',
-    intro: 'The agent greets your callers in your tone, understands what they need, collects the useful details and decides what happens next: an answer, an appointment, a callback or a transfer to your team.',
+    title: 'An AI receptionist that picks up every call, day and night',
+    intro: 'Your virtual receptionist greets your callers in your tone, understands what they need, collects the useful details and decides what happens next: an answer, an appointment, a callback or a transfer to your team.',
     uses: ['Stop calls going to voicemail', 'Filter out repetitive requests and cold calls', 'Get a clear summary of every call'],
     steps: [
       { title: 'You describe your business', text: 'Opening hours, services, common questions and transfer rules.' },
@@ -22,7 +22,7 @@ export const MODULES: Module[] = [
   {
     slug: 'demo-live', name: 'Live agent demo', family: 'Telephony',
     short: 'Hear the agent’s voice, language and tone live.',
-    title: 'Try the agent live before you decide',
+    title: 'Try the AI receptionist live before you decide',
     intro: 'Test a real conversation from your browser or receive a demo call. You hear the voice, the pace and how the agent qualifies a request.',
     uses: ['Check the voice quality', 'Test a scenario from your trade', 'Show the agent to your team'],
     steps: [
@@ -36,8 +36,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'prise-de-rendez-vous', name: 'Appointment booking', family: 'Calendar',
-    short: 'Bookings, confirmations, reminders and rescheduling in your calendar.',
-    title: 'Appointments booked while you work',
+    short: 'AI appointment booking: confirmations, reminders and rescheduling in your calendar.',
+    title: 'Appointments booked by AI while you work',
     intro: 'Connect your calendar: the agent offers free slots, books, confirms and handles rescheduling and cancellations without your team stepping in.',
     uses: ['Fill free slots', 'Reduce missed appointments', 'Free reception from scheduling calls'],
     steps: [
@@ -52,7 +52,7 @@ export const MODULES: Module[] = [
   {
     slug: 'support-client', name: 'Customer support', family: 'Automation',
     short: 'Repetitive questions handled, complex cases passed on.',
-    title: 'Support that answers straight away, with no queue',
+    title: 'AI phone support that answers straight away, with no queue',
     intro: 'The agent answers common questions from your documents, follows up requests and passes situations that need a person to your team.',
     uses: ['Remove waiting on the phone', 'Give consistent answers', 'Escalate sensitive cases'],
     steps: [
@@ -66,7 +66,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'qualification-des-leads', name: 'Lead qualification', family: 'CRM and data',
-    short: 'The right information collected before every callback.',
+    short: 'AI lead qualification: the right information collected before every callback.',
     title: 'Every prospect arrives qualified in your dashboard',
     intro: 'The agent asks your qualifying questions — need, budget, area, timescale — and creates a structured record. Your team calls back already knowing everything.',
     uses: ['Prioritise hot prospects', 'Screen out off-target requests', 'Prepare quotes faster'],
@@ -81,7 +81,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'campagnes-sortantes', name: 'Outbound campaigns', family: 'Automation',
-    short: 'Follow-ups, confirmations and check-ins, within clear limits.',
+    short: 'Automated outbound calls: follow-ups, confirmations and check-ins, within clear limits.',
     title: 'Follow up, confirm and keep in touch with your contacts automatically',
     intro: 'Schedule outbound calls to contacts who have agreed to them: confirmations, appointment reminders, quote follow-ups, renewals. With calling hours, limits and an exclusion list.',
     uses: ['Confirm this week’s appointments', 'Follow up pending quotes', 'Get back in touch with inactive customers'],
@@ -141,7 +141,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'flow-builder', name: 'Flow builder', family: 'Automation',
-    short: 'Visual no-code scenarios connected to over 300 tools.',
+    short: 'No-code call automation: visual scenarios connected to over 300 tools.',
     title: 'Build your scenarios with drag and drop',
     intro: 'Chain the steps: new lead, call, CRM update, confirmation message. The flow builder connects the agent to over 300 tools.',
     uses: ['Automate after-call tasks', 'Connect the agent to your tools', 'Avoid retyping data'],
@@ -156,7 +156,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'sip-numeros', name: 'SIP and numbers', family: 'Telephony',
-    short: 'Keep your numbers, or add a dedicated number as an option.',
+    short: 'Keep your numbers via SIP or call forwarding, or add a dedicated number as an option.',
     title: 'Keep your numbers or get new ones',
     intro: 'Connect your phone system or carrier via SIP, import your Twilio or Telnyx numbers, or add a dedicated number as an option (billed monthly, depending on the country).',
     uses: ['Keep the number your customers know', 'Open a local line', 'Manage several locations'],
@@ -171,7 +171,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'reporting', name: 'Reporting', family: 'Management',
-    short: 'Volumes, durations, outcomes and conversions at a glance.',
+    short: 'Call analytics: volumes, durations, outcomes and conversions at a glance.',
     title: 'Measure what the agent does for your business',
     intro: 'Track the number of calls, their duration, qualified enquiries, appointments booked and transfers. Listen to calls and read the transcripts.',
     uses: ['Understand your call peaks', 'Measure conversions', 'Improve your scripts'],
@@ -186,7 +186,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'widget-web', name: 'Web widget', family: 'Messages',
-    short: 'Callbacks and calls from your website, in one click.',
+    short: 'Website call widget: callbacks and calls from your site, in one click.',
     title: 'Turn your website visitors into enquiries',
     intro: 'Add a widget to your website: visitors talk to the agent from their browser or leave their number for a callback at a time that suits them.',
     uses: ['Capture visitors in a hurry', 'Offer a callback at the right moment', 'Avoid abandoned forms'],

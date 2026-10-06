@@ -42,7 +42,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch: 'Le forfait Centre d’appels réunit plusieurs agents, les rapports détaillés, les rôles, la base de connaissances avancée, les API et le support prioritaire, avec le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
-    highlights: ['Tout Assistant', 'Multi-agents et rôles', 'Rapports détaillés', 'API, webhooks et outils MCP', 'Support prioritaire'],
+    highlights: ['Tout Assistant', 'Multi-agents et rôles', 'Rapports détaillés', 'API, webhooks et outils MCP', 'Support prioritaire', '3 000 crédits de messages inclus (30 $)'],
   },
   'sur-mesure': {
     name: 'Sur mesure',

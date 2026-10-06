@@ -5,10 +5,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'services-a-domicile',
     name: 'Usługi domowe',
-    short: 'Pilne zgłoszenia odfiltrowane, a zapytania zakwalifikowane, gdy Twoje ekipy pracują w terenie.',
+    short: 'Obsługa telefoniczna zgłoszeń: pilne sprawy odfiltrowane, zapytania zakwalifikowane, gdy ekipy są w terenie.',
     targets: 'Hydraulicy, elektrycy, instalatorzy ogrzewania i klimatyzacji, dekarze, firmy remontowe, firmy sprzątające',
     title: 'Nie trać pilnych zleceń, gdy Twoje ekipy pracują w terenie',
-    subtitle: 'PermanenceAI przyjmuje zgłoszenia, ocenia ich pilność, organizuje oddzwonienia i pomaga szybciej reagować — także poza godzinami pracy.',
+    subtitle: 'PermanenceAI zapewnia obsługę telefoniczną zgłoszeń dla hydraulików, elektryków i firm remontowych: przyjmuje je, ocenia pilność, organizuje oddzwonienia i pomaga szybciej reagować — także poza godzinami pracy.',
     problems: [
       'Twoi technicy nie mogą odebrać telefonu w trakcie zlecenia.',
       'Wieczorne i weekendowe telefony trafiają do konkurencji.',
@@ -44,10 +44,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'dentaire-cliniques',
     name: 'Stomatologia i kliniki',
-    short: 'Wizyty, potwierdzenia i zmiany terminów obsługiwane bez przerywania pracy z pacjentem.',
+    short: 'Rejestracja pacjentów, potwierdzenia i zmiany terminów obsługiwane bez przerywania pracy w gabinecie.',
     targets: 'Gabinety stomatologiczne, przychodnie, kliniki (sprawy niepilne), fizjoterapia',
-    title: 'Rezerwuj i potwierdzaj wizyty bez przerywania pracy z pacjentem',
-    subtitle: 'PermanenceAI pomaga Twojemu zespołowi obsługiwać telefony w sprawach administracyjnych, nowych pacjentów, potwierdzenia i zmiany terminów.',
+    title: 'Rejestracja pacjentów i potwierdzanie wizyt bez przerywania pracy z pacjentem',
+    subtitle: 'PermanenceAI pomaga zespołowi gabinetu stomatologicznego lub kliniki obsługiwać telefony w sprawach administracyjnych, nowych pacjentów, potwierdzenia i zmiany terminów.',
     problems: [
       'Rejestracja jest odrywana od pracy w trakcie wizyt.',
       'Nowi pacjenci dzwonią poza godzinami pracy.',
@@ -76,17 +76,17 @@ export const SECTORS: Sector[] = [
     lead: [{ label: 'Pacjent', value: 'Nowy' }, { label: 'Powód wizyty', value: 'Skaling' }, { label: 'Termin', value: 'Wtorek 9:30' }, { label: 'Potwierdzenie', value: 'Wysłane' }],
     faq: [
       { q: 'Czy agent udziela porad medycznych?', a: 'Nie. Agent zajmuje się wyłącznie sprawami administracyjnymi: nie stawia diagnoz i nie udziela porad medycznych. W pilnej sytuacji stosuje ustaloną przez Ciebie instrukcję postępowania.' },
-      { q: 'Czy może obsługiwać kilku lekarzy?', a: 'Tak. Każdy lekarz może mieć własne rodzaje wizyt, czas ich trwania i dostępność w podłączonym kalendarzu.' },
+      { q: 'Czy rejestracja pacjentów działa dla kilku lekarzy?', a: 'Tak. Każdy lekarz może mieć własne rodzaje wizyt, czas ich trwania i dostępność w podłączonym kalendarzu.' },
       { q: 'Gdzie przechowywane są dane z rozmów?', a: 'Nagrania i transkrypcje są przechowywane przez wybrany przez Ciebie okres i w każdej chwili można je usunąć.' },
     ],
   },
   {
     slug: 'immobilier',
     name: 'Nieruchomości',
-    short: 'Kupujący, sprzedający i najemcy zakwalifikowani, nawet gdy Twoi agenci są na prezentacji.',
+    short: 'Obsługa telefoniczna biura nieruchomości: klienci zakwalifikowani, nawet gdy agenci są na prezentacji.',
     targets: 'Biura nieruchomości, sieci agencji, zarządcy najmu, zarządcy wspólnot',
     title: 'Kwalifikuj kupujących, sprzedających i najemców, nawet gdy Twoi agenci są na prezentacji',
-    subtitle: 'Każde zgłoszenie trafia z informacjami, dzięki którym agent może działać szybciej: budżet, lokalizacja, termin, nieruchomość.',
+    subtitle: 'Obsługa telefoniczna Twojego biura nieruchomości bez utraconych zgłoszeń: każde trafia z informacjami, dzięki którym agent może działać szybciej — budżet, lokalizacja, termin, nieruchomość.',
     problems: [
       'Twoi agenci są na prezentacjach, gdy dzwonią klienci.',
       'Leady z portali zbyt długo czekają na odpowiedź.',
@@ -122,10 +122,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'automobile',
     name: 'Warsztaty i motoryzacja',
-    short: 'Wizyty w warsztacie i wyceny przygotowane bez odrywania zespołu od pracy.',
+    short: 'Umawianie wizyt w warsztacie samochodowym i wyceny przygotowane bez odrywania zespołu od pracy.',
     targets: 'Niezależne warsztaty, serwisy obsługowe, blacharnie, salony samochodowe',
-    title: 'Wypełniaj grafik warsztatu bez odrywania zespołu od pracy',
-    subtitle: 'Agent AI zbiera informacje o pojeździe i przygotowuje zgłoszenie, a Twój zespół może skupić się na pracy w warsztacie.',
+    title: 'Umawianie wizyt w warsztacie bez odrywania zespołu od pracy',
+    subtitle: 'Agent AI umawia wizyty w Twoim warsztacie samochodowym, zbiera informacje o pojeździe i przygotowuje zgłoszenie, a zespół może skupić się na pracy.',
     problems: [
       'Telefon dzwoni, gdy mechanicy pracują.',
       'Zapytania o wycenę przychodzą bez danych pojazdu.',
@@ -161,10 +161,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'beaute-bien-etre',
     name: 'Uroda i wellness',
-    short: 'Pełny kalendarz, gdy Ty zajmujesz się klientami.',
+    short: 'Umawianie wizyt w salonie kosmetycznym lub fryzjerskim: pełny kalendarz, gdy zajmujesz się klientami.',
     targets: 'Salony fryzjerskie, gabinety kosmetyczne, spa, stylizacja paznokci, masaż',
     title: 'Wypełniaj kalendarz, gdy zajmujesz się klientami',
-    subtitle: 'Twój zespół skupia się na kliencie. Agent AI zajmuje się zapytaniami i kalendarzem.',
+    subtitle: 'Twój zespół skupia się na kliencie. Agent AI zajmuje się zapytaniami, umawianiem wizyt w salonie i kalendarzem.',
     problems: [
       'W trakcie zabiegu nie da się odebrać telefonu.',
       'Odwołania w ostatniej chwili zostawiają luki w grafiku.',
@@ -200,10 +200,10 @@ export const SECTORS: Sector[] = [
   {
     slug: 'restaurants-hotellerie',
     name: 'Restauracje i hotele',
-    short: 'Rezerwacje i pytania gości obsługiwane bez przerywania serwisu.',
+    short: 'Rezerwacje telefoniczne i pytania gości obsługiwane bez przerywania serwisu w restauracji lub hotelu.',
     targets: 'Restauracje, bistra, hotele, pensjonaty, apartamenty',
     title: 'Obsługuj rezerwacje i pytania gości bez przerywania serwisu',
-    subtitle: 'W trakcie serwisu agent AI odbiera telefony, zbiera szczegóły i przekazuje tylko te sprawy, które wymagają Twojego zespołu.',
+    subtitle: 'Rezerwacje telefoniczne bez przerywania serwisu: agent AI odbiera telefony, zbiera szczegóły i przekazuje tylko te sprawy, które wymagają Twojego zespołu.',
     problems: [
       'Telefon dzwoni w największym ruchu.',
       'Ciągle te same pytania: godziny otwarcia, parking, menu.',

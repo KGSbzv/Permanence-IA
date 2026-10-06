@@ -4,14 +4,14 @@ import type { QA } from '../fr/faq';
 export type { QA };
 
 export const FAQ_GENERAL: QA[] = [
-  { q: 'Hoe werkt het AI-belplatform?', a: 'U stelt een spraakagent in met uw gegevens, uw regels en uw toon. De agent neemt inkomende gesprekken aan, voert toegestane uitgaande gesprekken, kwalificeert aanvragen, plant afspraken in en stuurt u van elk gesprek een samenvatting.' },
-  { q: 'Hoe snel kan ik beginnen?', a: 'Een eerste agent staat binnen enkele minuten klaar op basis van uw gegevens. Voor een volledige configuratie (agenda, nummers, doorverbinden) rekent u meestal op een tot twee dagen, met onze begeleiding.' },
-  { q: 'Heb ik technische kennis nodig?', a: 'Nee. U beschrijft uw bedrijf, de promptassistent begeleidt u en wij helpen u met de telefonie en de integraties.' },
+  { q: 'Hoe werkt de AI-telefoonassistent?', a: 'U stelt een spraakagent in met uw gegevens, uw regels en uw toon. De agent neemt inkomende gesprekken aan, voert toegestane uitgaande gesprekken, kwalificeert aanvragen, plant afspraken in en stuurt u van elk gesprek een samenvatting.' },
+  { q: 'Hoe snel kan ik beginnen?', a: 'Een eerste virtuele receptionist staat binnen enkele minuten klaar op basis van uw gegevens. Voor een volledige configuratie (agenda, nummers, doorverbinden) rekent u meestal op een tot twee dagen, met onze begeleiding.' },
+  { q: 'Heb ik technische kennis nodig?', a: 'Nee, ook niet als zzp’er zonder IT-afdeling. U beschrijft uw bedrijf, de promptassistent begeleidt u en wij helpen u met de telefonie en de integraties.' },
   { q: 'Wat gebeurt er als de agent het antwoord niet weet?', a: 'Hij verzint niets: hij noteert de vraag, biedt aan om terug te bellen of verbindt door met uw team, volgens de regels die u hebt ingesteld.' },
-  { q: 'Kan de agent meerdere gesprekken tegelijk afhandelen?', a: 'Ja. Meerdere gesprekken worden tegelijk afgehandeld op dezelfde lijn: uw klanten hoeven niet meer te wachten.' },
-  { q: 'Wat is het verschil met een voicemail of een gewone telefooncentrale?', a: 'Een voicemail neemt op, een telefooncentrale verbindt door. De AI-agent begrijpt de vraag, stelt de juiste vragen, onderneemt actie (afspraak, terugbelverzoek, antwoord) en stuurt u een bruikbaar overzicht.' },
+  { q: 'Kan de agent meerdere gesprekken tegelijk afhandelen?', a: 'Ja. Meerdere gesprekken worden tegelijk afgehandeld op dezelfde lijn: uw klanten hoeven niet meer te wachten en uw telefonische bereikbaarheid blijft op peil, ook op drukke momenten.' },
+  { q: 'Wat is het verschil met een voicemail, telefoonbeantwoorder of telefooncentrale?', a: 'Een voicemail of gewone telefoonbeantwoorder neemt een bericht op, een telefooncentrale verbindt door. De AI-telefoonbeantwoorder begrijpt de vraag, stelt de juiste vragen, onderneemt actie (afspraak, terugbelverzoek, antwoord) en stuurt u een bruikbaar overzicht.' },
   { q: 'Kan ik mijn bestaande telefoonsysteem gebruiken?', a: 'Ja. U kunt uw huidige lijn doorschakelen naar de agent, uw telefooncentrale of provider via SIP koppelen, of uw Twilio- en Telnyx-nummers importeren.' },
-  { q: 'Kan ik mijn agenda koppelen?', a: 'Ja: Google Agenda, Outlook, Cal.com en Calendly. De agent stelt vrije tijdsloten voor en boekt direct.' },
+  { q: 'Kan ik afspraken laten inplannen via de telefoon?', a: 'Ja: koppel Google Agenda, Outlook, Cal.com of Calendly. De agent stelt vrije tijdsloten voor en boekt direct in uw agenda.' },
   { q: 'Kan ik de prompts aanpassen?', a: 'Ja. Met de prompteditor stelt u het doel, de toon, de vragen en de grenzen van de agent in, stap voor stap begeleid en zonder technische kennis.' },
   { q: 'Kan ik scenario’s maken zonder code?', a: 'Ja, met de flow builder vanaf het Assistent-abonnement: u koppelt triggers en acties via slepen en neerzetten, verbonden met meer dan 300 tools.' },
   { q: 'Kan ik WhatsApp en Instagram gebruiken?', a: 'Ja, vanaf het Assistent-abonnement: sms, WhatsApp, Messenger en Instagram, met een centrale geschiedenis.' },

@@ -10,10 +10,10 @@ const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
 export const UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Live demo — probeer de AI-spraakagent · ${brand}`,
-      description: 'Probeer onze agent live: praat met hem of ontvang een demonstratiegesprek dat past bij uw sector. Gratis en vrijblijvend.',
+      title: (brand: string) => `Demo AI-telefoonassistent — probeer live · ${brand}`,
+      description: 'Hoor hoe een AI-telefoonassistent klinkt: praat live met de agent of ontvang een demogesprek voor uw sector. Gratis en vrijblijvend, probeer het nu.',
     },
-    h1: 'Probeer onze agent nu live',
+    h1: 'Probeer onze AI-telefoonassistent nu live',
     intro: 'Laat uw nummer achter en kies uw sector: de agent belt u en speelt een scenario uit uw vak. U hoort zijn stem, zijn tempo en de manier waarop hij een aanvraag kwalificeert.',
     widgetHint: 'Liever meteen? Klik op de ballon rechtsonder in beeld: onze assistent antwoordt u gesproken of schriftelijk.',
     formTitle: 'Ontvang mijn demonstratiegesprek',
@@ -32,8 +32,8 @@ export const UI_PAGES = {
 
   contact: {
     meta: {
-      title: (brand: string) => `Contact en terugbellen — ${brand}`,
-      description: 'Laat uw nummer achter, wij bellen u terug. Verkoop, demonstratie of support: kies uw tijdslot.',
+      title: (brand: string) => `Contact: advies over uw AI-telefoonassistent · ${brand}`,
+      description: 'Vragen over een AI-telefoonassistent voor uw bedrijf? Laat uw nummer achter, wij bellen u terug voor verkoop, demo of support. Kies uw tijdslot.',
     },
     h1: 'Laat uw nummer achter, wij bellen u terug',
     intro: 'Wij publiceren geen telefoonnummer: wij bellen u terug, op het tijdslot dat u kiest. U kunt ons ook mailen.',
@@ -50,10 +50,10 @@ export const UI_PAGES = {
 
   faq: {
     meta: {
-      title: (brand: string) => `Veelgestelde vragen — ${brand}`,
-      description: (brand: string) => `Werking, telefonie, SIP, agenda, WhatsApp, AVG, gratis proefperiode en prijzen: alle antwoorden over de AI-spraakagent van ${brand}.`,
+      title: (brand: string) => `Veelgestelde vragen: AI-telefoonassistent · ${brand}`,
+      description: (brand: string) => `Hoe werkt een AI-telefoonassistent? Telefonie, SIP, agenda, WhatsApp, AVG, proefperiode en prijzen: alle antwoorden over ${brand}. Bekijk de FAQ.`,
     },
-    h1: 'Veelgestelde vragen',
+    h1: 'Veelgestelde vragen over de AI-telefoonassistent',
     intro: 'Staat uw vraag er niet tussen? Laat uw nummer achter, een adviseur belt u terug.',
     general: 'Het platform',
     pricing: 'Prijzen en proefperiode',
@@ -61,10 +61,10 @@ export const UI_PAGES = {
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `${days} dagen gratis — ${minutes} minuten inbegrepen · ${brand}`,
-      description: (days: number, minutes: number, brand: string) => `Maak uw ${brand}-account aan: ${days} dagen gratis, ${minutes} minuten inbegrepen, niets afgeschreven tijdens de proef, altijd opzegbaar.`,
+      title: (days: number, minutes: number, brand: string) => `AI-telefoonassistent ${days} dagen gratis proberen · ${brand}`,
+      description: (days: number, minutes: number, brand: string) => `Test uw AI-telefoonassistent: maak uw ${brand}-account aan, ${days} dagen gratis, ${minutes} minuten inbegrepen, niets afgeschreven, altijd opzegbaar.`,
     },
-    h1: (minutes: number) => `Claim uw ${minutes} gratis minuten`,
+    h1: (minutes: number) => `Test de AI-telefoonassistent: claim uw ${minutes} gratis minuten`,
     intro: (days: number) => `Maak uw account aan, kies het abonnement dat u wilt testen en probeer uw agent ${days} dagen lang in uw eigen bedrijf.`,
     points: (days: number) => [
       `Betaalkaart gevraagd bij activering, ${days} dagen lang wordt er niets afgeschreven`,
@@ -112,11 +112,11 @@ export const UI_PAGES = {
 
   help: {
     meta: {
-      title: (brand: string) => `Help bij de klantomgeving — ${brand}`,
-      description: 'Nederlandstalige gids voor uw klantomgeving: vertaling van de menu’s, een agent aanmaken, nummers, agenda, widget, minuten en facturatie.',
+      title: (brand: string) => `Handleiding: AI-telefoonassistent instellen · ${brand}`,
+      description: 'Nederlandstalige handleiding voor uw klantomgeving: menu’s vertaald, een agent aanmaken, nummers, agenda, widget, minuten en facturatie. Begin hier.',
     },
     breadcrumb: 'Help',
-    h1: 'Help bij uw klantomgeving',
+    h1: 'Help bij uw klantomgeving: uw AI-telefoonassistent instellen',
     intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (ballon rechtsonder) u verder, schriftelijk of gesproken.',
     openSpace: 'Open mijn klantomgeving',
     chatLabel: 'Voorbeeld van een gesprek met de hulpassistent',
@@ -140,15 +140,15 @@ export const UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `Over ons — ${brand}`,
-      description: (brand: string, company: string) => `${brand} helpt bedrijven om elk telefoongesprek te beantwoorden met AI-spraakagents. Een merk van ${company}.`,
+      title: (brand: string) => `Over ons: AI-telefoonservice voor bedrijven · ${brand}`,
+      description: (brand: string, company: string) => `${brand} maakt telefoonservice voor bedrijven toegankelijk: AI-spraakagents die elk gesprek beantwoorden. Een merk van ${company}.`,
     },
     h1: 'Elk gesprek verdient een antwoord',
-    intro: (brand: string) => `${brand} is ontstaan uit een eenvoudige vaststelling: kleine bedrijven verliezen klanten omdat niemand op het juiste moment kan opnemen.`,
+    intro: (brand: string) => `${brand} is ontstaan uit een eenvoudige vaststelling: kleine bedrijven en zzp’ers verliezen klanten omdat niemand op het juiste moment kan opnemen.`,
     photoAlt: 'Een ondernemer bekijkt haar telefoon op kantoor',
     paragraphs: [
       'Vakmensen, praktijken, kantoren, garages, salons, restaurants: uw team is bezig met uw klanten. Ondertussen gaat de telefoon.',
-      'Wij stellen AI-spraakagents tot uw beschikking die opnemen, kwalificeren, afspraken boeken en terugbellen, ingesteld op uw vak, met duidelijke prijzen en zonder verplichtingen.',
+      'Wij stellen AI-spraakagents tot uw beschikking die als virtuele receptionist opnemen, kwalificeren, afspraken boeken en terugbellen. Zo blijft uw telefonische bereikbaarheid op orde, ingesteld op uw vak, met duidelijke prijzen en zonder verplichtingen.',
     ],
     principlesTitle: 'Onze principes',
     principles: [
@@ -162,10 +162,10 @@ export const UI_PAGES = {
 
   security: {
     meta: {
-      title: (brand: string) => `Beveiliging en compliance — ${brand}`,
-      description: (brand: string) => `Toestemming, afmelden, versleuteling, instelbare bewaartermijn, rollen en traceerbaarheid: hoe ${brand} de gegevens van uw gesprekken beschermt.`,
+      title: (brand: string) => `Beveiliging en AVG van uw AI-telefonie · ${brand}`,
+      description: (brand: string) => `Toestemming, versleuteling, bewaartermijn, rollen en traceerbaarheid: zo beschermt ${brand} de gesprekken van uw AI-telefoonassistent. Lees meer.`,
     },
-    h1: 'Beveiliging en compliance van uw AI-gesprekken',
+    h1: 'Beveiliging en AVG-compliance van uw AI-telefoongesprekken',
     intro: 'Uw gesprekken bevatten persoonsgegevens. Hier leest u welke beveiligingsmaatregelen er zijn en welke instellingen u hebt om de AVG na te leven.',
     settingsTitle: 'Uw instellingen',
     settings: [
@@ -437,7 +437,7 @@ export const UI_PAGES = {
   cookies: {
     meta: {
       title: (brand: string) => `Cookiebeleid — ${brand}`,
-      description: (brand: string) => `Cookies en trackers die op de website van ${brand} worden gebruikt.`,
+      description: (brand: string) => `Welke cookies de website van ${brand} gebruikt: alleen strikt noodzakelijke cookies, geen advertentiecookies. Lees het cookiebeleid.`,
     },
     h1: 'Cookiebeleid',
     paragraphs: (siteHost: string, appHost: string) => [
@@ -450,7 +450,7 @@ export const UI_PAGES = {
 
   blog: {
     meta: {
-      title: (brand: string) => `Blog ${brand} | AI-assistenten, afspraken, kwalificatie & AVG`,
+      title: (brand: string) => `Blog: AI-telefoonassistent en bereikbaarheid · ${brand}`,
       description: 'Artikelen van experts, praktijkvoorbeelden en uitgebreide gidsen om de telefonische conversie van uw bedrijf te verbeteren met AI-spraakagents.',
     },
     eyebrow: 'Kennis & inzichten',

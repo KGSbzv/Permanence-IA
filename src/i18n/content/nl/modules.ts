@@ -6,9 +6,9 @@ export type { MockKind, Module };
 export const MODULES: Module[] = [
   {
     slug: 'receptionniste-ia', name: 'AI-receptionist', family: 'Telefonie',
-    short: 'Neemt elk gesprek aan, kwalificeert de vraag en verbindt door wat belangrijk is.',
-    title: 'Een receptionist die elk gesprek aanneemt, dag en nacht',
-    intro: 'De agent ontvangt uw bellers in uw eigen toon, begrijpt hun vraag, verzamelt de nodige gegevens en bepaalt de volgende stap: antwoord, afspraak, terugbelverzoek of doorverbinden naar uw team.',
+    short: 'Uw virtuele receptionist neemt elk gesprek aan, kwalificeert de vraag en verbindt door indien nodig.',
+    title: 'Een virtuele receptionist die elk gesprek aanneemt, dag en nacht',
+    intro: 'De agent ontvangt uw bellers in uw eigen toon, begrijpt hun vraag, verzamelt de nodige gegevens en bepaalt de volgende stap: antwoord, afspraak, terugbelverzoek of doorverbinden naar uw team. Zo blijft uw bedrijf telefonisch bereikbaar, ook als niemand kan opnemen.',
     uses: ['Geen gesprekken meer naar de voicemail laten gaan', 'Herhaalde vragen en verkoopgesprekken filteren', 'Van elk gesprek een duidelijke samenvatting ontvangen'],
     steps: [
       { title: 'U beschrijft uw bedrijf', text: 'Openingstijden, diensten, veelgestelde vragen en regels voor doorverbinden.' },
@@ -22,7 +22,7 @@ export const MODULES: Module[] = [
   {
     slug: 'demo-live', name: 'Live demo van de agent', family: 'Telefonie',
     short: 'Hoor live de stem, de taal en de toon van de agent.',
-    title: 'Probeer de agent live voordat u beslist',
+    title: 'Probeer de AI-telefoonassistent live voordat u beslist',
     intro: 'Test een echt gesprek vanuit uw browser of ontvang een demonstratiegesprek. U hoort de stem, het tempo en de manier waarop de agent een aanvraag kwalificeert.',
     uses: ['De kwaliteit van de stem beoordelen', 'Een scenario uit uw vak testen', 'De agent aan uw team laten zien'],
     steps: [
@@ -36,8 +36,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'prise-de-rendez-vous', name: 'Afspraken plannen', family: 'Agenda',
-    short: 'Boekingen, bevestigingen, herinneringen en verplaatsingen in uw agenda.',
-    title: 'Afspraken geboekt terwijl u aan het werk bent',
+    short: 'Afspraken inplannen via de telefoon: boekingen, bevestigingen, herinneringen en verplaatsingen.',
+    title: 'Afspraken ingepland via de telefoon terwijl u aan het werk bent',
     intro: 'Koppel uw agenda: de agent stelt vrije tijdsloten voor, boekt, bevestigt en regelt verplaatsingen en annuleringen zonder tussenkomst van uw team.',
     uses: ['Vrije tijdsloten vullen', 'Minder gemiste afspraken', 'De receptie ontlasten van planningsgesprekken'],
     steps: [
@@ -51,9 +51,9 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'support-client', name: 'Klantenservice', family: 'Automatisering',
-    short: 'Herhaalde vragen afgehandeld, complexe gevallen doorgegeven.',
-    title: 'Support die direct antwoordt, zonder wachtrij',
-    intro: 'De agent beantwoordt veelgestelde vragen op basis van uw documenten, volgt aanvragen op en geeft situaties die een mens vragen door aan uw team.',
+    short: 'Een AI-telefoonbeantwoorder voor herhaalde vragen; complexe gevallen gaan naar uw team.',
+    title: 'Telefonische klantenservice die direct antwoordt, zonder wachtrij',
+    intro: 'Als AI-telefoonbeantwoorder beantwoordt de agent veelgestelde vragen op basis van uw documenten, volgt aanvragen op en geeft situaties die een mens vragen door aan uw team.',
     uses: ['Geen wachttijd meer aan de telefoon', 'Consistent antwoorden', 'Gevoelige gevallen escaleren'],
     steps: [
       { title: 'Laad uw content', text: 'FAQ, procedures, voorwaarden en pagina’s van uw website.' },
@@ -66,8 +66,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'qualification-des-leads', name: 'Leadkwalificatie', family: 'CRM en gegevens',
-    short: 'De juiste gegevens verzameld vóór elk terugbelgesprek.',
-    title: 'Elke prospect komt gekwalificeerd binnen in uw dashboard',
+    short: 'Leads telefonisch gekwalificeerd: de juiste gegevens verzameld vóór elk terugbelgesprek.',
+    title: 'Elke prospect komt telefonisch gekwalificeerd binnen in uw dashboard',
     intro: 'De agent stelt uw kwalificatievragen — behoefte, budget, regio, termijn — en maakt een gestructureerde kaart aan. Uw team belt terug en weet dan al alles.',
     uses: ['Warme prospects voorrang geven', 'Aanvragen buiten uw doelgroep eruit filteren', 'Sneller offertes voorbereiden'],
     steps: [
@@ -82,7 +82,7 @@ export const MODULES: Module[] = [
   {
     slug: 'campagnes-sortantes', name: 'Uitgaande campagnes', family: 'Automatisering',
     short: 'Opvolging, bevestigingen en follow-ups, binnen duidelijke grenzen.',
-    title: 'Volg uw contacten automatisch op, bevestig en blijf in contact',
+    title: 'Uitgaande belcampagnes: volg uw contacten automatisch op en bevestig',
     intro: 'Plan uitgaande gesprekken naar contacten die daarmee hebben ingestemd: bevestigingen, afspraakherinneringen, opvolging van offertes, verlengingen. Met beltijden, limieten en uitsluitingslijst.',
     uses: ['De afspraken van de week bevestigen', 'Openstaande offertes opvolgen', 'Inactieve klanten opnieuw benaderen'],
     steps: [
@@ -96,7 +96,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'whatsapp-messages', name: 'WhatsApp en berichten', family: 'Berichten',
-    short: 'Sms, WhatsApp, Messenger en Instagram in één omgeving.',
+    short: 'WhatsApp, sms, Messenger en Instagram automatisch beantwoord, in één omgeving.',
     title: 'Antwoord via de kanalen die uw klanten echt gebruiken',
     intro: 'Stuur bevestigingen en overzichten per sms of WhatsApp, antwoord op Messenger en Instagram, en vind elk bericht terug in de gespreksgeschiedenis.',
     uses: ['Na het gesprek schriftelijk bevestigen', 'Een boekingslink sturen', 'Berichten op één plek bundelen'],
@@ -112,7 +112,7 @@ export const MODULES: Module[] = [
   {
     slug: 'base-de-connaissances', name: 'Kennisbank', family: 'CRM en gegevens',
     short: 'Uw pdf’s, webpagina’s en procedures worden de antwoorden van de agent.',
-    title: 'De agent antwoordt met uw informatie, niet met aannames',
+    title: 'Uw AI-telefoonassistent antwoordt met uw informatie, niet met aannames',
     intro: 'Upload uw documenten, voeg de pagina’s van uw website toe of koppel uw gegevens. De agent zoekt er het antwoord in op het moment dat hij het nodig heeft.',
     uses: ['Juiste en actuele antwoorden', 'Minder onnodige escalaties', 'Eén plek om bij te werken'],
     steps: [
@@ -126,7 +126,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'editeur-de-prompts', name: 'Prompteditor', family: 'Automatisering',
-    short: 'Het gedrag van de agent precies afgesteld, zonder code.',
+    short: 'Stel het gedrag van uw AI-agent precies in, zonder code.',
     title: 'Bepaal precies hoe uw agent praat en handelt',
     intro: 'Leg het doel van het gesprek, de toon, de vragen en de grenzen vast. Een schrijfassistent begeleidt u stap voor stap, zonder technische kennis.',
     uses: ['De toon afstemmen op uw merk', 'De grenzen van de agent vastleggen', 'Bijstellen na het terugluisteren van gesprekken'],
@@ -141,7 +141,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'flow-builder', name: 'Flow builder', family: 'Automatisering',
-    short: 'Visuele scenario’s zonder code, gekoppeld aan meer dan 300 tools.',
+    short: 'Automatiseringen zonder code: visuele scenario’s gekoppeld aan meer dan 300 tools.',
     title: 'Bouw uw scenario’s met slepen en neerzetten',
     intro: 'Koppel de stappen aan elkaar: nieuwe lead, gesprek, CRM bijwerken, bevestigingsbericht. De flow builder verbindt de agent met meer dan 300 tools.',
     uses: ['Wat na het gesprek gebeurt automatiseren', 'De agent koppelen aan uw tools', 'Dubbel invoeren voorkomen'],
@@ -156,8 +156,8 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'sip-numeros', name: 'SIP en nummers', family: 'Telefonie',
-    short: 'Behoud uw nummers, of neem optioneel een eigen nummer.',
-    title: 'Behoud uw nummers of vraag nieuwe aan',
+    short: 'Behoud uw telefoonnummer via SIP of doorschakeling, of neem optioneel een eigen nummer.',
+    title: 'Behoud uw telefoonnummer of vraag een nieuw nummer aan',
     intro: 'Koppel uw telefooncentrale of provider via SIP, importeer uw Twilio- of Telnyx-nummers, of neem optioneel een eigen nummer (per maand gefactureerd, afhankelijk van het land).',
     uses: ['Het nummer behouden dat uw klanten kennen', 'Een lokale lijn openen', 'Meerdere vestigingen beheren'],
     steps: [
@@ -172,7 +172,7 @@ export const MODULES: Module[] = [
   {
     slug: 'reporting', name: 'Rapportage', family: 'Sturing',
     short: 'Volumes, gespreksduur, resultaten en conversies in één oogopslag.',
-    title: 'Meet wat de agent voor uw bedrijf doet',
+    title: 'Meet wat uw AI-telefoonassistent voor uw bedrijf doet',
     intro: 'Volg het aantal gesprekken, de duur, gekwalificeerde aanvragen, geboekte afspraken en doorverbindingen. Luister gesprekken terug en lees de transcripties.',
     uses: ['Uw piekmomenten begrijpen', 'Conversies meten', 'Scripts verbeteren'],
     steps: [
@@ -186,7 +186,7 @@ export const MODULES: Module[] = [
   },
   {
     slug: 'widget-web', name: 'Webwidget', family: 'Berichten',
-    short: 'Terugbellen en bellen vanaf uw website, met één klik.',
+    short: 'Terugbelwidget voor uw website: bellen of teruggebeld worden met één klik.',
     title: 'Maak van websitebezoekers aanvragen',
     intro: 'Plaats een widget op uw website: de bezoeker praat via de browser met de agent of laat zijn nummer achter om op een gekozen moment teruggebeld te worden.',
     uses: ['Bezoekers met haast vasthouden', 'Op het juiste moment terugbellen aanbieden', 'Vergeten formulieren voorkomen'],

@@ -5,24 +5,69 @@
 // I titoli con parola chiave evidenziata sono divisi in { before, kw, after }: `kw` è mostrato a colori.
 import type { UI_COMMERCE as FR_UI_COMMERCE } from '../../fr/ui/commerce';
 
+// SEO: parola chiave principale per pagina (vedi docs/seo/keywords-it.md). Chiave = nome italiano
+// del settore o del modulo; se il nome manca, si usa il formato generico.
+const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
+  'Servizi a domicilio': {
+    title: 'Segreteria telefonica AI per artigiani',
+    description: (days) => `Segreteria telefonica AI per idraulici, elettricisti e tecnici: urgenze filtrate e richieste qualificate, anche fuori orario. Provi gratis ${days} giorni.`,
+  },
+  'Studi dentistici e cliniche': {
+    title: 'Segreteria per studio dentistico e clinica',
+    description: (days) => `Segreteria telefonica per studio dentistico: appuntamenti, conferme e spostamenti gestiti dall’AI senza interrompere le cure. Provi gratis ${days} giorni.`,
+  },
+  Immobiliare: {
+    title: 'Centralino AI per agenzia immobiliare',
+    description: (days) => `Centralino AI per agenzia immobiliare: acquirenti, venditori e inquilini qualificati mentre i Suoi agenti sono in visita. Provi gratis ${days} giorni.`,
+  },
+  'Officine e settore auto': {
+    title: 'Prenotazione officina automatica 24/7',
+    description: (days) => `Prenotazione officina al telefono, 24/7: l’agente AI fissa gli appuntamenti e prepara i preventivi senza disturbare il banco. Provi gratis ${days} giorni.`,
+  },
+  'Bellezza e benessere': {
+    title: 'Prenotazioni per centro estetico e salone',
+    description: (days) => `Prenotazioni telefoniche automatiche per parrucchieri, centri estetici e spa: agenda piena e promemoria via messaggio. Provi gratis ${days} giorni.`,
+  },
+  'Ristoranti e hotel': {
+    title: 'Prenotazioni ristorante al telefono con l’AI',
+    description: (days, minutes) => `Prenotazioni ristorante e hotel al telefono gestite dall’AI, senza interrompere il servizio. Provi gratis ${days} giorni, ${minutes} minuti inclusi.`,
+  },
+};
+
+const FEATURE_SEO: Record<string, string> = {
+  'Receptionist AI': 'Receptionist virtuale AI 24/7',
+  'Demo dal vivo dell’agente': 'Demo dal vivo dell’assistente telefonico AI',
+  'Gestione appuntamenti': 'Prenotazioni telefoniche automatiche con l’AI',
+  'Assistenza clienti': 'Risponditore automatico AI per l’assistenza',
+  'Qualificazione dei lead': 'Qualificazione dei lead al telefono con l’AI',
+  'Campagne in uscita': 'Chiamate automatiche in uscita con l’AI',
+  'WhatsApp e messaggi': 'Risposte automatiche su WhatsApp e SMS',
+  'Base di conoscenza': 'Base di conoscenza per l’agente vocale AI',
+  'Editor di prompt': 'Editor di prompt per l’agente vocale AI',
+  'Flow builder': 'Flow builder: automazioni senza codice',
+  'SIP e numeri': 'Centralino virtuale: SIP e numeri',
+  Report: 'Report e statistiche delle chiamate',
+  'Widget web': 'Widget di richiamata per il sito web',
+};
+
 export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   home: {
     meta: {
-      title: (brand: string) => `${brand} — Agenti vocali AI 24/7 per le Sue chiamate`,
+      title: (brand: string) => `Assistente telefonico AI che risponde 24/7 · ${brand}`,
       description: (days: number, minutes: number) =>
-        `Un’AI che risponde, qualifica e prenota al posto Suo. ${days} giorni di prova gratuita, ${minutes} minuti inclusi, IVA esclusa, senza vincoli.`,
+        `Assistente telefonico AI che risponde, qualifica e prenota al posto Suo, 24/7. Provi gratis ${days} giorni con ${minutes} minuti inclusi, senza vincoli.`,
     },
     hero: {
       title: { before: 'Automatizzi le Sue chiamate con un’AI che ', kw: 'risponde, qualifica e prenota', after: ' al posto Suo' },
-      intro: 'Agenti vocali che rispondono a ogni chiamata, pongono le domande giuste, fissano gli appuntamenti e Le inviano un riepilogo chiaro. Disponibili 24/7, configurati per il Suo settore, operativi in pochi minuti.',
+      intro: 'Un assistente telefonico AI che risponde a ogni chiamata, pongono le domande giuste, fissano gli appuntamenti e Le invia un riepilogo chiaro. Disponibile 24/7, configurato per il Suo settore, operativo in pochi minuti.',
       photoAlt: 'Imprenditrice che consulta sul telefono il riepilogo di una chiamata',
     },
-    showcase: { title: 'Veda l’agente all’opera nel Suo settore', intro: 'Scelga un settore: la chiamata si svolge e la richiesta arriva pronta da gestire.' },
-    benefits: { title: 'Cosa fa l’agente per la Sua azienda', intro: 'Un agente vocale formato sulla Sua attività, che lavora quando il Suo team non può rispondere.' },
+    showcase: { title: 'Veda l’agente all’opera nel Suo settore', intro: 'Scelga un settore: la receptionist virtuale risponde alla chiamata e la richiesta arriva pronta da gestire.' },
+    benefits: { title: 'Cosa fa l’agente per la Sua azienda', intro: 'Una segreteria telefonica intelligente, formata sulla Sua attività, che lavora quando il Suo team non può rispondere.' },
     features: {
       booking: {
         title: { before: 'Automatizzi ', kw: 'appuntamenti e promemoria', after: '' },
-        text: 'Studi, saloni, officine, agenzie: l’agente si collega al Suo calendario, propone gli orari liberi, prenota e conferma. Spostamenti e disdette compresi.',
+        text: 'Studi, saloni, officine, agenzie: prenotazioni telefoniche automatiche. L’agente si collega al Suo calendario, propone gli orari liberi, prenota e conferma. Spostamenti e disdette compresi.',
         points: ['Calendario in tempo reale: Google, Outlook, Cal.com, Calendly', 'Conferma via SMS o WhatsApp', 'Promemoria il giorno prima dell’appuntamento'],
         link: 'Scopra la gestione appuntamenti',
       },
@@ -42,7 +87,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     useCases: { title: 'Un agente per ogni tipo di chiamata', intro: 'In entrata, in uscita o messaggi: attivi gli utilizzi di cui la Sua attività ha bisogno.' },
     platform: {
       title: 'La piattaforma completa per automatizzare le Sue chiamate',
-      intro: 'Tutto incluso: voce, intelligenza, telefonia, automazioni e report, in un unico spazio.',
+      intro: 'Più di un centralino virtuale: voce, intelligenza, telefonia, automazioni e report, tutto incluso in un unico spazio.',
       link: 'Tutte le funzionalità',
     },
     steps: {
@@ -79,16 +124,16 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   tarifs: {
     meta: {
-      title: (brand: string) => `Prezzi — piani IVA esclusa e ricariche · ${brand}`,
+      title: (brand: string) => `Prezzi dell’assistente telefonico AI · ${brand}`,
       /** Un piano nella descrizione: `price` e `minutes` già formattati. */
-      plan: (name: string, price: string, minutes: string) => `${name} ${price} IVA esclusa / ${minutes} min`,
+      plan: (name: string, price: string, minutes: string) => `${name} ${price}/mese`,
       description: (plans: string[], days: number, minutes: number) =>
-        `${plans.join(', ')}. ${days} giorni gratis, ${minutes} min inclusi.`,
+        `Assistente telefonico AI: ${plans.join(', ')}, IVA esclusa. Provi gratis ${days} giorni, ${minutes} min inclusi.`,
     },
     hero: {
       title: 'Scelga il piano adatto al Suo volume di chiamate',
       intro: (days: number, minutes: number) =>
-        `Tutti i prezzi sono indicati IVA esclusa. Più il piano è grande, meno costa il minuto. La prova gratuita comprende ${days} giorni e ${minutes} minuti di chiamate inclusi.`,
+        `Prezzi dell’assistente telefonico AI, tutti indicati IVA esclusa. Più il piano è grande, meno costa il minuto. La prova gratuita comprende ${days} giorni e ${minutes} minuti di chiamate inclusi.`,
       moreMinutes: 'Le servono più minuti? Aggiunga una ricarica in qualsiasi momento.',
     },
     matrix: {
@@ -110,10 +155,10 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   },
 
   offer: {
-    metaTitleTrial: (days: number, minutes: number, brand: string) => `Prova gratuita di ${days} giorni — ${minutes} minuti · ${brand}`,
+    metaTitleTrial: (days: number, minutes: number, brand: string) => `Assistente AI gratis: ${days} giorni, ${minutes} minuti · ${brand}`,
     /** `monthly`: aggiunge «IVA esclusa / mese» quando il prezzo è un importo mensile. */
     metaTitle: (name: string, price: string, monthly: boolean, brand: string) => `Piano ${name} — ${price}${monthly ? ' IVA esclusa / mese' : ''} · ${brand}`,
-    metaDescription: (title: string, days: number, minutes: number) => `${title}. Prova gratuita di ${days} giorni, ${minutes} minuti inclusi, prezzi IVA esclusa.`,
+    metaDescription: (title: string, days: number, minutes: number) => `${title}. Assistente telefonico AI, prova gratis ${days} giorni con ${minutes} min inclusi.`,
     breadcrumb: 'Prezzi',
     productName: (brand: string, name: string) => `${brand} ${name}`,
     eyebrow: (name: string, audience: string) => `Piano ${name} · ${audience}`,
@@ -146,9 +191,9 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Ricariche di minuti — ${brand}`,
+      title: (brand: string) => `Ricariche di minuti per l’assistente AI · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Ricariche da ${price} IVA esclusa per ${minutes} minuti extra. Aggiunga minuti quando vuole o passi al piano superiore.`,
+        `Ricariche da ${price} IVA esclusa per ${minutes} minuti extra del Suo assistente telefonico AI. Aggiunga minuti quando vuole o passi al piano superiore.`,
     },
     hero: {
       title: 'Aggiunga minuti in qualsiasi momento',
@@ -166,12 +211,12 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   sectorsIndex: {
     meta: {
-      title: (brand: string) => `Settori — agenti vocali AI per ogni attività · ${brand}`,
-      description: 'Servizi a domicilio, studi dentistici e cliniche, immobiliare, officine, bellezza, ristoranti e hotel: un agente vocale AI adatto a ogni attività.',
+      title: (brand: string) => `Assistente telefonico AI per settore · ${brand}`,
+      description: 'Segreteria telefonica intelligente per artigiani, studi dentistici, agenzie immobiliari, officine, saloni, ristoranti e hotel. Scopra il Suo settore.',
     },
     hero: {
       title: 'Un agente vocale adatto alla Sua attività',
-      intro: 'Abbiamo scelto sei settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente.',
+      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto sei settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente.',
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',
@@ -183,10 +228,10 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   sector: {
     meta: {
-      title: (name: string, brand: string) => `${name}: agente vocale AI 24/7 — ${brand}`,
+      title: (name: string, brand: string) => `${SECTOR_SEO[name]?.title ?? `${name}: agente vocale AI 24/7`} · ${brand}`,
       /** `short` è la frase breve del settore, senza punto finale. */
       description: (name: string, short: string, days: number, minutes: number) =>
-        `${name}: ${short}. Prova gratuita di ${days} giorni, ${minutes} minuti inclusi, prezzi IVA esclusa.`,
+        SECTOR_SEO[name]?.description(days, minutes) ?? `${name}: ${short}. Prova gratuita di ${days} giorni, ${minutes} minuti inclusi, prezzi IVA esclusa.`,
     },
     breadcrumb: 'Settori',
     liveCallTitle: (name: string) => `Agente ${name.toLowerCase()}`,
@@ -223,19 +268,19 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   featuresIndex: {
     meta: {
-      title: (brand: string) => `Funzionalità — piattaforma di chiamate AI · ${brand}`,
-      description: 'Receptionist AI, gestione appuntamenti, assistenza, qualificazione, campagne, WhatsApp, base di conoscenza, flow builder, SIP, report e widget web.',
+      title: (brand: string) => `Funzionalità del centralino virtuale AI · ${brand}`,
+      description: 'Centralino virtuale AI completo: receptionist virtuale, prenotazioni, assistenza, qualificazione, campagne, WhatsApp, SIP e report. Scopra i moduli.',
     },
     hero: {
       title: 'Tutto ciò che serve per automatizzare le Sue chiamate',
-      intro: 'Tredici moduli, attivati in base al Suo piano, dalla Sua area clienti.',
+      intro: 'Il Suo centralino virtuale AI in tredici moduli, attivati in base al Suo piano, dalla Sua area clienti.',
     },
     overview: { title: 'Panoramica' },
   },
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} — agente vocale AI | ${brand}`,
+      title: (name: string, brand: string) => `${FEATURE_SEO[name] ?? `${name} — agente vocale AI`} · ${brand}`,
       /** `short` è la frase sul vantaggio del modulo, senza punto finale. */
       description: (short: string, offerName: string, days: number) => `${short}. Incluso dal piano ${offerName}. Prova gratuita di ${days} giorni.`,
     },
@@ -258,7 +303,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   integrations: {
     meta: {
       title: (brand: string) => `Integrazioni — calendario, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Colleghi l’agente vocale AI a Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, Instagram, SIP e oltre 300 strumenti senza codice.',
+      description: 'Colleghi l’assistente telefonico AI a Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP e oltre 300 strumenti senza codice.',
     },
     hero: {
       title: 'Collegato agli strumenti che usa già',

@@ -2,14 +2,14 @@
 import type { QA } from '../fr/faq';
 
 export const FAQ_GENERAL: QA[] = [
-  { q: 'Jak działa platforma połączeń AI?', a: 'Konfigurujesz agenta głosowego, podając informacje o firmie, zasady i ton rozmowy. Agent odbiera połączenia przychodzące, wykonuje dozwolone połączenia wychodzące, kwalifikuje zgłoszenia, rezerwuje wizyty i przekazuje Ci podsumowanie każdej rozmowy.' },
+  { q: 'Jak działa asystent głosowy AI?', a: 'Konfigurujesz agenta głosowego, podając informacje o firmie, zasady i ton rozmowy. Agent odbiera połączenia przychodzące, wykonuje dozwolone połączenia wychodzące, kwalifikuje zgłoszenia, rezerwuje wizyty i przekazuje Ci podsumowanie każdej rozmowy.' },
   { q: 'Ile trwa uruchomienie?', a: 'Pierwszy agent jest gotowy w kilka minut na podstawie Twoich informacji. Pełna konfiguracja (kalendarz, numery, przekierowania) zajmuje zwykle jeden–dwa dni, z naszym wsparciem.' },
   { q: 'Czy potrzebna jest wiedza techniczna?', a: 'Nie. Opisujesz swoją działalność, asystent promptów prowadzi Cię krok po kroku, a my pomagamy w kwestii telefonii i integracji.' },
   { q: 'Co się dzieje, gdy agent nie zna odpowiedzi?', a: 'Niczego nie wymyśla: zapisuje zgłoszenie, proponuje oddzwonienie lub przekazuje rozmowę Twojemu zespołowi, zgodnie z ustalonymi przez Ciebie zasadami.' },
   { q: 'Czy agent może obsługiwać kilka połączeń jednocześnie?', a: 'Tak. Kilka połączeń jest obsługiwanych równolegle na tej samej linii: Twoi klienci nie czekają.' },
-  { q: 'Czym to się różni od poczty głosowej lub zwykłej centrali?', a: 'Poczta głosowa nagrywa, centrala przekierowuje. Agent AI rozumie zgłoszenie, zadaje potrzebne pytania, działa (wizyta, oddzwonienie, odpowiedź) i przekazuje Ci gotową do wykorzystania kartę zgłoszenia.' },
+  { q: 'Czym to się różni od poczty głosowej lub wirtualnej centrali telefonicznej?', a: 'Poczta głosowa nagrywa, centrala przekierowuje. Agent AI działa jak inteligentna poczta głosowa: rozumie zgłoszenie, zadaje potrzebne pytania, działa (wizyta, oddzwonienie, odpowiedź) i przekazuje Ci gotową do wykorzystania kartę zgłoszenia.' },
   { q: 'Czy mogę korzystać z obecnego systemu telefonicznego?', a: 'Tak. Możesz przekierować obecną linię do agenta, podłączyć centralę lub operatora przez SIP albo zaimportować numery z Twilio i Telnyx.' },
-  { q: 'Czy mogę podłączyć kalendarz?', a: 'Tak: Kalendarz Google, Outlook, Cal.com i Calendly. Agent proponuje wolne terminy i od razu je rezerwuje.' },
+  { q: 'Czy mogę podłączyć kalendarz?', a: 'Tak: Kalendarz Google, Outlook, Cal.com i Calendly. Przy umawianiu wizyt przez telefon agent proponuje wolne terminy i od razu je rezerwuje.' },
   { q: 'Czy mogę edytować prompty?', a: 'Tak. Edytor promptów pozwala ustawić cel, ton, pytania i ograniczenia agenta, krok po kroku, bez wiedzy technicznej.' },
   { q: 'Czy mogę tworzyć scenariusze bez kodowania?', a: 'Tak, w flow builderze od pakietu Asystent: łączysz wyzwalacze i akcje metodą „przeciągnij i upuść”, z dostępem do ponad 300 narzędzi.' },
   { q: 'Czy mogę korzystać z WhatsApp i Instagrama?', a: 'Tak, od pakietu Asystent: SMS, WhatsApp, Messenger i Instagram, ze wspólną historią rozmów.' },

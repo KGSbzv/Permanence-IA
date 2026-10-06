@@ -10,7 +10,7 @@ export const SECTORS: Sector[] = [
     short: 'Spoedgevallen gefilterd en aanvragen gekwalificeerd terwijl uw monteurs onderweg zijn.',
     targets: 'Loodgieters, elektriciens, cv-monteurs, airco-installateurs, dakdekkers, renovatiebedrijven, schoonmaakbedrijven',
     title: 'Mis geen spoedgevallen meer terwijl uw monteurs onderweg zijn',
-    subtitle: 'PermanenceAI legt aanvragen vast, filtert spoedgevallen, plant terugbelmomenten en helpt u sneller ter plaatse te zijn — ook buiten openingstijden.',
+    subtitle: 'Uw telefoonservice voor loodgieters, elektriciens en installateurs: de AI-agent legt aanvragen vast, filtert spoedgevallen, plant terugbelmomenten en helpt u sneller ter plaatse te zijn — ook buiten openingstijden.',
     problems: [
       'Uw monteurs kunnen tijdens een klus niet opnemen.',
       'Gesprekken in de avond en het weekend gaan naar een concurrent.',
@@ -40,7 +40,7 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'Hoe gaat de agent om met spoedgevallen?', a: 'U bepaalt wat in uw vak als spoed geldt. De agent stelt de vastgelegde vragen, geeft de veiligheidsinstructies die u hebt goedgekeurd en waarschuwt u direct per e-mail of door door te verbinden.' },
       { q: 'Kan ik mijn werkgebied beperken?', a: 'Ja. Geef uw gemeenten of postcodes op: de agent informeert bellers buiten uw werkgebied vriendelijk en maakt alleen aanvragen aan die u kunt afhandelen.' },
-      { q: 'Krijg ik een samenvatting voordat ik terugbel?', a: 'Ja. Elk gesprek levert een overzicht op met de aanvraag, het adres, de mate van spoed en het gewenste tijdstip, te bekijken in uw dashboard.' },
+      { q: 'Krijg ik een samenvatting voordat ik terugbel?', a: 'Ja. Elk gesprek levert een overzicht op met de aanvraag, het adres, de mate van spoed en het gewenste tijdstip, te bekijken in uw dashboard. Zo blijft uw telefonische bereikbaarheid op orde, ook tijdens een klus.' },
     ],
   },
   {
@@ -48,8 +48,8 @@ export const SECTORS: Sector[] = [
     name: 'Tandartsen en klinieken',
     short: 'Afspraken, bevestigingen en verplaatsingen geregeld zonder de behandeling te onderbreken.',
     targets: 'Tandartspraktijken, gezondheidscentra, klinieken voor niet-spoedeisende zorg, fysiotherapie',
-    title: 'Boek en bevestig afspraken zonder de behandeling te onderbreken',
-    subtitle: 'PermanenceAI helpt uw team met administratieve gesprekken, nieuwe patiënten, bevestigingen en verplaatsingen.',
+    title: 'Telefoonservice voor uw praktijk: afspraken geboekt zonder de behandeling te onderbreken',
+    subtitle: 'De AI-telefoonassistent helpt uw balie met administratieve gesprekken, nieuwe patiënten, bevestigingen en verplaatsingen, zodat uw tandartspraktijk of kliniek telefonisch bereikbaar blijft.',
     problems: [
       'De balie wordt midden in een behandeling gestoord.',
       'Nieuwe patiënten bellen buiten openingstijden.',
@@ -88,7 +88,7 @@ export const SECTORS: Sector[] = [
     short: 'Kopers, verkopers en huurders gekwalificeerd, ook als uw makelaars op bezichtiging zijn.',
     targets: 'Makelaarskantoren, makelaarsnetwerken, verhuurbeheer, VvE-beheer',
     title: 'Kwalificeer kopers, verkopers en huurders, ook als uw makelaars op bezichtiging zijn',
-    subtitle: 'Elke aanvraag komt binnen met de gegevens die een makelaar nodig heeft om sneller te handelen: budget, regio, termijn, betreffende woning.',
+    subtitle: 'Uw makelaarskantoor blijft telefonisch bereikbaar: elke aanvraag komt binnen met de gegevens die een makelaar nodig heeft om sneller te handelen, zoals budget, regio, termijn en betreffende woning.',
     problems: [
       'Uw makelaars zijn op bezichtiging wanneer prospects bellen.',
       'Leads van woningportalen wachten te lang op antwoord.',
@@ -127,7 +127,7 @@ export const SECTORS: Sector[] = [
     short: 'Werkplaatsafspraken en offertes voorbereid zonder het team aan de balie te storen.',
     targets: 'Onafhankelijke garages, onderhoudscentra, schadeherstelbedrijven, dealers',
     title: 'Vul uw werkplaats zonder uw team aan de balie te storen',
-    subtitle: 'De AI-agent verzamelt de gegevens van het voertuig en bereidt de aanvraag voor, terwijl uw team zich op de werkplaats richt.',
+    subtitle: 'Klanten maken telefonisch een afspraak bij uw garage: de AI-agent verzamelt de gegevens van het voertuig en bereidt de aanvraag voor, terwijl uw team zich op de werkplaats richt.',
     problems: [
       'De telefoon gaat terwijl de monteurs aan het werk zijn.',
       'Offerteaanvragen komen binnen zonder voertuiggegevens.',
@@ -165,8 +165,8 @@ export const SECTORS: Sector[] = [
     name: 'Beauty en wellness',
     short: 'Een volle agenda terwijl u met uw klanten bezig bent.',
     targets: 'Kapsalons, schoonheidssalons, spa’s, nagelstudio’s, massagesalons',
-    title: 'Vul uw agenda terwijl u al met uw klanten bezig bent',
-    subtitle: 'Uw team richt zich op de klantervaring. De AI-agent regelt de aanvragen en de agenda.',
+    title: 'Vul de agenda van uw salon terwijl u al met uw klanten bezig bent',
+    subtitle: 'Telefoonservice voor kapsalons en schoonheidssalons: uw team richt zich op de klantervaring, de AI-agent regelt de afspraken en de agenda.',
     problems: [
       'Midden in een behandeling kunt u de telefoon niet opnemen.',
       'Annuleringen op het laatste moment laten gaten in de agenda achter.',
@@ -194,7 +194,7 @@ export const SECTORS: Sector[] = [
     ],
     lead: [{ label: 'Behandeling', value: 'Knippen + föhnen' }, { label: 'Duur', value: '1 uur' }, { label: 'Medewerker', value: 'Lotte' }, { label: 'Tijdslot', value: 'Zaterdag 10.00 uur' }],
     faq: [
-      { q: 'Kunnen meerdere medewerkers worden beheerd?', a: 'Ja. Iedere medewerker heeft eigen behandelingen, duur en beschikbaarheid in de gekoppelde agenda.' },
+      { q: 'Kunnen meerdere medewerkers worden beheerd?', a: 'Ja. Iedere medewerker heeft eigen behandelingen, duur en beschikbaarheid in de gekoppelde agenda, zodat klanten telefonisch een afspraak bij de juiste kapper of specialist maken.' },
       { q: 'Kunnen klanten via WhatsApp boeken?', a: 'Ja, met het Assistent-abonnement: de agent antwoordt ook schriftelijk en stuurt bevestigingen via WhatsApp of sms.' },
       { q: 'Belooft de agent resultaten?', a: 'Nee. Hij houdt zich bij de organisatie: behandelingen, duur, beschikbaarheid. Hij doet geen cosmetische of medische beloften.' },
     ],
@@ -205,7 +205,7 @@ export const SECTORS: Sector[] = [
     short: 'Reserveringen en vragen van gasten afgehandeld zonder de service te onderbreken.',
     targets: 'Restaurants, brasserieën, hotels, B&B’s, vakantieverblijven',
     title: 'Regel reserveringen en vragen van gasten zonder de service te onderbreken',
-    subtitle: 'Tijdens de service neemt de AI-agent op, verzamelt de details en geeft alleen de vragen door die uw team nodig hebben.',
+    subtitle: 'Telefonische reserveringen voor uw restaurant of hotel: tijdens de service neemt de AI-agent op, verzamelt de details en geeft alleen de vragen door die uw team nodig hebben.',
     problems: [
       'De telefoon gaat midden in de drukte.',
       'Steeds dezelfde vragen: openingstijden, parkeren, menu.',
