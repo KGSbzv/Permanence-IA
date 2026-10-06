@@ -51,8 +51,8 @@ export default function SectorPage({ slug }: { slug: string }) {
             <CTAs className="mt-8" primary={s.ctas[0]} sector={s.slug} />
           </div>
           <div className="relative mx-auto w-full max-w-lg">
-            <SectorVisual s={s} className="absolute -right-10 top-0 hidden h-[80%] w-[70%] rounded-3xl sm:block" />
-            <div className="relative pt-10 sm:mr-28 sm:pt-20"><LiveCall title={t.liveCallTitle(s.name)} call={s.call} lead={s.lead} /></div>
+            <SectorVisual s={s} className="absolute -end-10 top-0 hidden h-[80%] w-[70%] rounded-3xl sm:block" />
+            <div className="relative pt-10 sm:me-28 sm:pt-20"><LiveCall title={t.liveCallTitle(s.name)} call={s.call} lead={s.lead} /></div>
           </div>
         </div>
       </section>

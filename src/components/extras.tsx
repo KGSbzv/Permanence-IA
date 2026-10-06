@@ -32,7 +32,7 @@ export function IndustryMarquee() {
   return <Marquee items={names.map((n) => <span key={n} className="whitespace-nowrap rounded-full border border-line bg-white px-4 py-2 font-display text-sm font-semibold text-ink">{n}</span>)} />;
 }
 
-const LANGUAGE_FLAGS = ['🇫🇷', '🇬🇧', '🇪🇸', '🇩🇪', '🇮🇹', '🇵🇹', '🇳🇱', '🇧🇪', '🇨🇭', '🇨🇦', '🇲🇦', '🇵🇱', '🇷🇴', '🇹🇷', '🇸🇪'];
+const LANGUAGE_FLAGS = ['🇫🇷', '🇬🇧', '🇪🇸', '🇩🇪', '🇮🇹', '🇵🇹', '🇳🇱', '🇧🇪', '🇨🇭', '🇨🇦', '🇲🇦', '🇵🇱', '🇷🇴', '🇹🇷', '🇸🇪', '🇮🇱'];
 
 export function LanguageMarquee() {
   const { c } = useI18n();
@@ -77,7 +77,7 @@ export function AgentOrbit() {
             <span className="relative mx-auto block h-14 w-14 sm:h-16 sm:w-16">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={a.persona.photo} alt="" width={64} height={64} loading="lazy" className="h-full w-full rounded-full object-cover shadow-card ring-4 ring-white" />
-              <span className={`absolute -bottom-0.5 -right-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-3 w-3" /></span>
+              <span className={`absolute -bottom-0.5 -end-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-3 w-3" /></span>
             </span>
             <span className="mx-auto mt-1.5 block w-max max-w-[7rem] whitespace-normal rounded-xl bg-white px-2 py-1 text-center leading-tight shadow-card sm:max-w-[8rem]">
               <span className="block font-display text-[12px] font-bold text-ink">{a.persona.name}</span>
@@ -105,7 +105,7 @@ export function AgentTeam() {
               <span className="relative h-11 w-11 shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={a.persona.photo} alt="" width={44} height={44} loading="lazy" className="h-full w-full rounded-full object-cover" />
-                <span className={`absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-2.5 w-2.5" aria-hidden /></span>
+                <span className={`absolute -bottom-1 -end-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br ${a.color} text-white ring-2 ring-white`}><a.icon className="h-2.5 w-2.5" aria-hidden /></span>
               </span>
               <span>
                 <span className="block font-display font-semibold leading-tight text-ink group-hover:underline">{a.persona.name}<span className="sr-only">,</span></span>
@@ -180,8 +180,8 @@ export function SectorShowcase() {
             );
           })}
         </div>
-        {fade.left && <span className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-paper to-transparent" aria-hidden />}
-        {fade.right && <span className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-paper to-transparent" aria-hidden />}
+        {fade.left && <span className="pointer-events-none absolute inset-y-0 start-0 w-10 bg-gradient-to-r from-paper to-transparent" aria-hidden />}
+        {fade.right && <span className="pointer-events-none absolute inset-y-0 end-0 w-10 bg-gradient-to-l from-paper to-transparent" aria-hidden />}
       </div>
       <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${s.slug}`} className="mt-8 grid items-center gap-10 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-3xl">
@@ -362,12 +362,12 @@ export function PortalPreview() {
               <li key={x.who} className="flex items-center gap-3 py-2.5 text-sm">
                 <PhoneIncoming className="h-4 w-4 text-signal" aria-hidden />
                 <span className="font-medium text-ink">{x.who}</span><span className="hidden text-slate sm:inline">{x.what}</span>
-                <span className={`ml-auto rounded-full px-2.5 py-0.5 text-xs font-semibold ${x.c}`}>{x.tag}</span>
+                <span className={`ms-auto rounded-full px-2.5 py-0.5 text-xs font-semibold ${x.c}`}>{x.tag}</span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="absolute -bottom-8 -left-4 hidden w-44 rounded-[1.6rem] border-4 border-ink bg-white p-3 shadow-float sm:block" aria-hidden>
+        <div className="absolute -bottom-8 -start-4 hidden w-44 rounded-[1.6rem] border-4 border-ink bg-white p-3 shadow-float sm:block" aria-hidden>
           <p className="text-[11px] font-semibold text-ink">{t.notification}</p>
           <p className="mt-1 rounded-lg bg-signal-soft p-2 text-[11px] text-ink">{t.notifBooking}</p>
           <p className="mt-1.5 rounded-lg bg-paper p-2 text-[11px] text-ink">{t.notifMinutes}</p>

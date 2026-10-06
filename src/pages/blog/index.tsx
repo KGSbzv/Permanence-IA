@@ -45,13 +45,13 @@ export default function BlogIndex() {
             {/* Search */}
             <div className="pt-4 max-w-md mx-auto">
               <div className="relative">
-                <Search className="w-4 h-4 text-navy/40 dark:text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-navy/40 dark:text-gray-400 absolute start-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder={t.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 dark:bg-[#161F2B] border border-gray-200 dark:border-navy-light/60 text-navy dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
+                  className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-gray-50 dark:bg-[#161F2B] border border-gray-200 dark:border-navy-light/60 text-navy dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-primary shadow-sm"
                 />
               </div>
             </div>

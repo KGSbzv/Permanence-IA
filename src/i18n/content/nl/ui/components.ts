@@ -364,7 +364,7 @@ export const UI_COMPONENTS = {
       { name: 'Support', text: 'Beantwoordt vragen van uw klanten en schakelt door waar nodig.' },
     ],
     langLabel: 'Taal',
-    accents: { fr: 'Frans uit Parijs', 'en-gb': 'Brits Engels', 'en-au': 'Australisch Engels', it: 'Italiaans', pl: 'Pools', nl: 'Nederlands' },
+    accents: { fr: 'Frans uit Parijs', 'en-gb': 'Brits Engels', 'en-au': 'Australisch Engels', it: 'Italiaans', pl: 'Pools', nl: 'Nederlands', he: 'Israëlisch Hebreeuws' },
     sector: 'Uw vakgebied',
     modeLabel: 'Hoe wilt u het proberen',
     modeBrowser: 'In deze browser',
@@ -397,7 +397,7 @@ export const UI_COMPONENTS = {
   industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbiers', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Esthetische klinieken', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
 
   // Zelfde volgorde als de vlaggen van de component.
-  languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'België', 'Zwitserland', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds'],
+  languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'België', 'Zwitserland', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds', 'Hebreeuws'],
 
   agentTeam: {
     // Zelfde volgorde als de iconen en links van de component.

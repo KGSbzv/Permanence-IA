@@ -158,7 +158,7 @@ export function SectorVisual({ s, className = '' }: { s: Sector; className?: str
   const Icon = SECTOR_ICON[s.slug] || Sparkles;
   const fallback = (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-br from-signal-soft via-white to-paper">
-      <Icon className="absolute -right-6 -top-6 h-40 w-40 text-signal/10" aria-hidden />
+      <Icon className="absolute -end-6 -top-6 h-40 w-40 text-signal/10" aria-hidden />
       <div className="relative w-56 rounded-xl bg-white p-3 shadow-card">
         <p className="flex items-center gap-2 text-xs font-semibold text-ink"><Icon className="h-4 w-4 text-signal" aria-hidden />{s.name}</p>
         {s.lead.slice(0, 3).map((f) => <p key={f.label} className="mt-1.5 flex justify-between text-[12px]"><span className="text-slate-light">{f.label}</span><span className="font-medium text-ink">{f.value}</span></p>)}
@@ -276,7 +276,7 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
           const plan = o.slug === 'sur-mesure' ? '/contact' : `${SIGNUP_URL}?plan=${o.slug}${annual ? '&billing=annual' : ''}`;
           return (
             <div key={o.slug} className={`relative row-span-7 grid grid-rows-subgrid gap-y-0 rounded-2xl border p-6 ${o.featured ? 'border-ink bg-ink text-white/80' : 'border-line bg-white'}`}>
-              {o.featured && <span className="absolute -top-3 left-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
+              {o.featured && <span className="absolute -top-3 start-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
               <p className={`font-display text-lg font-bold leading-snug ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
               <p className="mt-1 text-sm">{o.audience}</p>
               <div className="mt-4"><PriceTag o={o} light={o.featured} billing={billing} /></div>
@@ -326,7 +326,7 @@ export function MatrixTable() {
   const [open, setOpen] = useState(false);
   const groups = open ? c.matrix : c.matrix.slice(0, 1);
   const moduleCount = c.matrix.reduce((n, g) => n + g.rows.length, 0);
-  const head = 'sticky left-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4';
+  const head = 'sticky start-0 z-10 bg-paper p-3 font-medium text-ink sm:p-4';
   const priceRows: { label: string; cell: (o: Offer) => React.ReactNode }[] = [
     {
       label: annualMode ? t.pricePerMonthAnnual : t.pricePerMonth,
@@ -341,11 +341,11 @@ export function MatrixTable() {
   return (
     <div>
       <div className={`${open ? 'max-h-[80vh]' : ''} overflow-auto rounded-2xl border border-line bg-white`}>
-        <table className="w-full min-w-[760px] border-separate border-spacing-0 text-left text-[14px] [&_tbody_tr>*]:border-b [&_tbody_tr>*]:border-line">
+        <table className="w-full min-w-[760px] border-separate border-spacing-0 text-start text-[14px] [&_tbody_tr>*]:border-b [&_tbody_tr>*]:border-line">
           <caption className="sr-only">{t.caption}</caption>
           <thead className="sticky top-0 z-20 bg-white">
             <tr>
-              <th scope="col" className="sticky left-0 z-10 w-36 border-b border-line bg-white p-3 font-display text-sm font-semibold text-ink sm:w-auto sm:p-4">{t.inYourInterface}</th>
+              <th scope="col" className="sticky start-0 z-10 w-36 border-b border-line bg-white p-3 font-display text-sm font-semibold text-ink sm:w-auto sm:p-4">{t.inYourInterface}</th>
               {offers.map((o) => <th key={o.slug} scope="col" className={`border-b border-line p-4 text-center font-display text-sm font-semibold ${o.featured ? 'bg-signal-soft text-ink' : 'bg-white text-ink'}`}>{o.name}</th>)}
             </tr>
           </thead>
@@ -358,10 +358,10 @@ export function MatrixTable() {
             ))}
             {groups.map((g) => (
               <React.Fragment key={g.group}>
-                <tr><th colSpan={offers.length + 1} scope="colgroup" className="bg-white px-4 pb-2 pt-6 text-left font-display text-sm font-semibold text-ink"><span className="sticky left-4">{g.group}</span></th></tr>
+                <tr><th colSpan={offers.length + 1} scope="colgroup" className="bg-white px-4 pb-2 pt-6 text-start font-display text-sm font-semibold text-ink"><span className="sticky start-4">{g.group}</span></th></tr>
                 {g.rows.map((r) => (
                   <tr key={r.label}>
-                    <th scope="row" className="sticky left-0 z-10 max-w-[18rem] bg-white p-3 font-normal sm:p-4"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] leading-snug text-slate-light">{r.detail}</span></th>
+                    <th scope="row" className="sticky start-0 z-10 max-w-[18rem] bg-white p-3 font-normal sm:p-4"><span className="block font-medium text-ink">{r.label}</span><span className="text-[13px] leading-snug text-slate-light">{r.detail}</span></th>
                     {offers.map((o) => <td key={o.slug} className={`p-4 text-center ${o.featured ? 'bg-signal-soft/40' : ''}`}><CellView v={r.cells[o.slug]} t={t} /></td>)}
                   </tr>
                 ))}
@@ -407,7 +407,7 @@ function StackChip({ item, label }: { item: StackItem; label: string }) {
   const mark = item.mark ? BRAND_MARKS[item.mark] : undefined;
   const Icon = item.icon;
   return (
-    <li className="flex items-center gap-2.5 rounded-xl border border-line bg-white py-2 pl-2 pr-3.5">
+    <li className="flex items-center gap-2.5 rounded-xl border border-line bg-white py-2 ps-2 pe-3.5">
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-paper" aria-hidden>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {item.logo ? <img src={item.logo} alt="" width={20} height={20} loading="lazy" className={`h-5 w-5 mix-blend-multiply ${item.crop ? 'object-cover object-left' : 'object-contain'}`} />
@@ -460,16 +460,16 @@ export function RechargeTables() {
         <p className="mt-1 text-[15px]">{t.text}</p>
         <table className="mt-4 w-full min-w-[460px] text-[15px]">
           <thead>
-            <tr className="border-b border-line text-left text-sm text-slate">
+            <tr className="border-b border-line text-start text-sm text-slate">
               <th className="py-2 font-medium">{t.rechargeCol}</th>
-              {plans.map((o) => <th key={o.slug} className="py-2 text-right font-medium">{o.name}</th>)}
+              {plans.map((o) => <th key={o.slug} className="py-2 text-end font-medium">{o.name}</th>)}
             </tr>
           </thead>
           <tbody>
             {market.recharges.map((amount) => (
               <tr key={amount} className="border-b border-line last:border-0">
                 <td className="py-2.5 font-semibold text-ink">{money(amount)}</td>
-                {plans.map((o) => <td key={o.slug} className="py-2.5 text-right text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
+                {plans.map((o) => <td key={o.slug} className="py-2.5 text-end text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
               </tr>
             ))}
           </tbody>
@@ -672,7 +672,7 @@ export function HumanVsAi() {
     <div>
       <Heading title={t.title} intro={t.intro} />
       <div className="mt-10 overflow-x-auto rounded-2xl border border-line bg-white">
-        <table className="w-full min-w-[640px] text-left text-[15px]">
+        <table className="w-full min-w-[640px] text-start text-[15px]">
           <caption className="sr-only">{t.caption}</caption>
           <thead>
             <tr className="border-b border-line">
@@ -790,7 +790,7 @@ export function AutomationLogos() {
   return (
     <ul className="flex flex-wrap gap-2">
       {AUTOMATION_TOOLS.map(([k, name]) => (
-        <li key={k} className="flex items-center gap-2 rounded-xl border border-line bg-white py-2 pl-2 pr-3.5">
+        <li key={k} className="flex items-center gap-2 rounded-xl border border-line bg-white py-2 ps-2 pe-3.5">
           <span className="flex h-7 w-7 items-center justify-center rounded-md bg-paper" aria-hidden><svg viewBox="0 0 24 24" className="h-4 w-4" fill={BRAND_MARKS[k].hex}><path d={BRAND_MARKS[k].path} /></svg></span>
           <span className="text-[14px] font-medium text-ink">{name}</span>
         </li>

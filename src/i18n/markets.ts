@@ -83,7 +83,7 @@ const basePlans = (): Record<PlanSlug, PlanPricing> => ({
   'sur-mesure': { price: null, minutes: 2500 },
 });
 const baseRecharges = () => [39, 89, 159, 299, 725];
-// Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL).
+// Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL, 21306 HE).
 const SALES_WIDGET = '2841fa2d-1fed-4fbc-b832-28b954d049a6';
 const SHARED = { currency: 'USD' as const, phoneNumberFrom: 5.99, paygMinute: 0.39, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 } };
 
@@ -123,6 +123,12 @@ export const MARKETS: Record<Locale, Market> = {
     brand: 'PermanenceAI', tagline: 'AI-telefonieassistent', numberLocale: 'nl-NL',
     legal: { governingLaw: 'het recht van de staat Wyoming (Verenigde Staten)', court: 'de bevoegde rechter in Laramie County (Wyoming, Verenigde Staten)', dataAuthority: 'de Autoriteit Persoonsgegevens', privacyLaw: 'de Algemene verordening gegevensbescherming (AVG)', copyrightLaw: 'de Auteurswet', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: '8fec85f2-1c9e-4af7-b48e-1925a1f34764',
+  },
+  he: {
+    ...SHARED, locale: 'he', hreflang: 'he', ogLocale: 'he_IL', country: 'ישראל',
+    brand: 'PermanenceAI', tagline: 'מענה טלפוני חכם 24/7', numberLocale: 'he-IL',
+    legal: { governingLaw: 'דיני מדינת ויומינג, ארצות הברית', court: 'בתי המשפט המוסמכים במחוז לרמי, ויומינג, ארצות הברית', dataAuthority: 'הרשות להגנת הפרטיות', privacyLaw: 'חוק הגנת הפרטיות, התשמ״א-1981 ותקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017', copyrightLaw: 'חוק זכות יוצרים, התשס״ח-2007', mandatoryNote: '' },
+    plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: 'd8bde5e6-bb6d-435c-8934-3c1131c964e9',
   },
 };
 

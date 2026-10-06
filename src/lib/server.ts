@@ -73,7 +73,7 @@ export function isAuthorized(req: NextApiRequest) {
 /** Numéro au format international (+33…) ; les numéros français à 10 chiffres sont convertis. Null si illisible. */
 /** Indicatif du pays visé par chaque langue du site, pour convertir un numéro saisi au format national. */
 const DIAL: Record<string, { cc: string; keepZero?: boolean }> = {
-  fr: { cc: '33' }, 'en-gb': { cc: '44' }, 'en-au': { cc: '61' }, it: { cc: '39', keepZero: true }, pl: { cc: '48' }, nl: { cc: '31' },
+  fr: { cc: '33' }, 'en-gb': { cc: '44' }, 'en-au': { cc: '61' }, it: { cc: '39', keepZero: true }, pl: { cc: '48' }, nl: { cc: '31' }, he: { cc: '972' },
 };
 
 /** Numéro au format international (+33…). Un numéro national est converti selon la langue du site. Null si illisible. */
@@ -102,6 +102,7 @@ const CALLABLE = [
   /^\+39(?:3\d{8,9}|0\d{5,10})$/, // Italie : mobiles 3xx et fixes 0x (hors 8xx surtaxés)
   /^\+48(?!70|80)[1-9]\d{8}$/, // Pologne : fixes et mobiles (hors 70x surtaxés et 80x)
   /^\+31(?:[1-57]\d{8}|6[1-5]\d{7})$/, // Pays-Bas : fixes et mobiles 06 (hors 08x, 09x)
+  /^\+972(?:5[0-9]\d{7}|[234689]\d{7}|7[2-9]\d{7})$/, // Israël : mobiles 05x, fixes 02-04, 08-09 et 07x (hors 1-800, 1-700, *xxxx)
   /^\+1(?!(?:900|976|8(?:00|33|44|55|66|77|88)))[2-9]\d{2}[2-9]\d{6}$/, // États-Unis / Canada hors surtaxés et numéros verts
 ];
 // Indicatifs +1 qui ne sont ni aux États-Unis ni au Canada (Caraïbes, territoires) ou non géographiques (5xx, 6xx réservés, 700, 710).
@@ -109,7 +110,7 @@ const NANP_EXCLUDED = /^\+1(?:242|246|264|268|284|340|345|441|473|649|658|664|67
 // Ailleurs dans le monde, tout numéro international est accepté, sauf les destinations connues pour la fraude
 // aux appels surtaxés (satellites, réseaux internationaux, micro-États du Pacifique, Cuba, Somalie…).
 // Les autorisations géographiques du compte Twilio restent le dernier filtre.
-const COVERED = /^\+(?:33|32|41|352|377|44|61|39|48|31|1)/;
+const COVERED = /^\+(?:33|32|41|352|377|44|61|39|48|31|972|1)/;
 const HIGH_RISK = /^\+(?:53|252|232|224|245|220|231|235|239|269|222|291|246|247|290|500|67\d|68\d|69[0-2]|87\d|88[0-3]|979|808|800|99\d)/;
 export const isAutoCallable = (e164: string) => (COVERED.test(e164)
   ? !NANP_EXCLUDED.test(e164) && CALLABLE.some((r) => r.test(e164))
@@ -122,6 +123,7 @@ export function langFromPhone(e164: string) {
   if (/^\+39/.test(e164)) return 'it';
   if (/^\+48/.test(e164)) return 'pl';
   if (/^\+31/.test(e164)) return 'nl';
+  if (/^\+972/.test(e164)) return 'he';
   // France, Belgique, Suisse, Luxembourg, Monaco, Canada francophone par défaut et Afrique francophone (+2xx).
   if (/^\+(?:33|32|41|352|377|2[0-6]\d)/.test(e164)) return 'fr';
   return 'en-gb';
@@ -131,7 +133,7 @@ export function langFromPhone(e164: string) {
 
 /** Fuseau par défaut de chaque langue du site, quand le navigateur n’en fournit pas. */
 const TZ: Record<string, string> = {
-  fr: 'Europe/Paris', 'en-gb': 'Europe/London', 'en-au': 'Australia/Sydney', it: 'Europe/Rome', pl: 'Europe/Warsaw', nl: 'Europe/Amsterdam',
+  fr: 'Europe/Paris', 'en-gb': 'Europe/London', 'en-au': 'Australia/Sydney', it: 'Europe/Rome', pl: 'Europe/Warsaw', nl: 'Europe/Amsterdam', he: 'Asia/Jerusalem',
 };
 const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
 

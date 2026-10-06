@@ -1,13 +1,17 @@
 // Langues du site. Le code de locale apparaît dans l’URL (/it/tarifs, /en-gb/tarifs…) ;
 // le français est la langue par défaut, sans préfixe.
 
-export const LOCALES = ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl'] as const;
+export const LOCALES = ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl', 'he'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'fr';
 
 /** Langue de contenu : l’anglais est partagé entre le Royaume-Uni et l’Australie. */
-export type Lang = 'fr' | 'en' | 'it' | 'pl' | 'nl';
-export const LANG_OF: Record<Locale, Lang> = { fr: 'fr', 'en-gb': 'en', 'en-au': 'en', it: 'it', pl: 'pl', nl: 'nl' };
+export type Lang = 'fr' | 'en' | 'it' | 'pl' | 'nl' | 'he';
+export const LANG_OF: Record<Locale, Lang> = { fr: 'fr', 'en-gb': 'en', 'en-au': 'en', it: 'it', pl: 'pl', nl: 'nl', he: 'he' };
+
+/** Langues écrites de droite à gauche. */
+export const RTL_LOCALES: readonly Locale[] = ['he'];
+export const isRtl = (l: Locale) => RTL_LOCALES.includes(l);
 
 export const isLocale = (v: unknown): v is Locale => typeof v === 'string' && (LOCALES as readonly string[]).includes(v);
 export const asLocale = (v: unknown): Locale => (isLocale(v) ? v : DEFAULT_LOCALE);
@@ -32,6 +36,7 @@ export function detectLocale(acceptLanguage: string | null): Locale {
     if (lang === 'it') return 'it';
     if (lang === 'pl') return 'pl';
     if (lang === 'nl') return 'nl';
+    if (lang === 'he' || lang === 'iw') return 'he';
     if (lang === 'en') return region === 'au' || region === 'nz' ? 'en-au' : 'en-gb';
   }
   return 'en-gb';

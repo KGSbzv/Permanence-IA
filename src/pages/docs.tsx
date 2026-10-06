@@ -3,7 +3,7 @@
 import type { GetServerSideProps } from 'next';
 import { DEFAULT_LOCALE, LOCALES } from '@/i18n/locales';
 
-const BY_LANG: Record<string, string> = { fr: 'fr', en: 'en-gb', it: 'it', pl: 'pl', nl: 'nl' };
+const BY_LANG: Record<string, string> = { fr: 'fr', en: 'en-gb', it: 'it', pl: 'pl', nl: 'nl', he: 'he', iw: 'he' };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const cookie = /(?:^|;\s*)pia_lang=([^;]+)/.exec(req.headers.cookie || '')?.[1];

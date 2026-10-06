@@ -31,6 +31,7 @@ export const VOICES: Record<Locale, Record<Gender, Persona>> = {
   it: { female: female('it', 'Manuela', '/agents/manuela.jpg'), male: male('it', 'Marco', '/agents/marco.jpg', 'd96c1ace-1564-4fdf-9360-c8753103d774') },
   pl: { female: female('pl', 'Lena', '/agents/lena.jpg'), male: male('pl', 'Tomasz', '/agents/tomasz.jpg', '9dd87407-08f2-4669-ad32-bdf358543b8c') },
   nl: { female: female('nl', 'Emma', '/agents/emma.jpg'), male: male('nl', 'Daan', '/agents/daan.jpg', 'edbb8a6e-1fe0-4083-ad5f-5790eead8eef') },
+  he: { female: female('he', 'נועה', '/agents/noa.jpg'), male: male('he', 'דניאל', '/agents/daniel.jpg', '16cef988-872b-4b6b-820a-9ba7647930f6') },
 };
 
 /** Ordre d’affichage des voix dans le sélecteur de la démo. */
@@ -44,6 +45,7 @@ export const PERSONAS: Record<Locale, Persona> = {
   it: VOICES.it.female,
   pl: VOICES.pl.female,
   nl: VOICES.nl.female,
+  he: VOICES.he.female,
 };
 
 /**

@@ -19,7 +19,7 @@ function HelpChatPreview() {
       </div>
       <div className="mt-4 space-y-3">
         {t.chat.map((l, i) => (
-          <p key={i} className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] ${l.me ? 'ml-auto bg-signal-deep text-white' : 'bg-paper text-ink'}`}><RichText value={l.text} /></p>
+          <p key={i} className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-[15px] ${l.me ? 'ms-auto bg-signal-deep text-white' : 'bg-paper text-ink'}`}><RichText value={l.text} /></p>
         ))}
       </div>
     </div>
@@ -61,7 +61,7 @@ export default function Aide() {
           {tasks.map((task) => (
             <article key={task.title} className="rounded-2xl border border-line p-6">
               <h3 className="font-display text-lg font-bold">{task.title}</h3>
-              <ol className="mt-3 list-decimal space-y-2 pl-5">
+              <ol className="mt-3 list-decimal space-y-2 ps-5">
                 {task.steps.map((s) => <li key={s}>{s}</li>)}
               </ol>
             </article>
@@ -72,7 +72,7 @@ export default function Aide() {
       <Section>
         <h2 className="font-display text-2xl font-bold">{t.menuTitle}</h2>
         <div className="mt-8 overflow-x-auto rounded-2xl border border-line bg-white">
-          <table className="w-full text-left text-[15px]">
+          <table className="w-full text-start text-[15px]">
             <thead className="border-b border-line text-ink">
               <tr><th className="p-4">{t.colMenu}</th><th className="p-4">{t.colLabel}</th><th className="p-4">{t.colText}</th></tr>
             </thead>

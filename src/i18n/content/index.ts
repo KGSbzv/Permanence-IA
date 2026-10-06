@@ -2,6 +2,7 @@
 import type { Lang } from '../locales';
 import { en } from './en';
 import { fr } from './fr';
+import { he } from './he';
 import { it } from './it';
 import { nl } from './nl';
 import { pl } from './pl';
@@ -14,4 +15,5 @@ export const CONTENT: Record<Lang, Content> = {
   it,
   pl,
   nl,
+  he,
 };

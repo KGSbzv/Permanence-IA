@@ -31,7 +31,7 @@ export default function CGU() {
                 <h2 className="font-display text-2xl font-bold text-ink">
                   {s.title}
                 </h2>
-                <RichBlocks blocks={s.body} ulClassName="list-disc pl-5 space-y-1" />
+                <RichBlocks blocks={s.body} ulClassName="list-disc ps-5 space-y-1" />
               </section>
             ))}
           </div>

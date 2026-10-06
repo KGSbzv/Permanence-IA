@@ -364,7 +364,7 @@ export const UI_COMPONENTS = {
       { name: 'Support', text: 'Répond aux questions de vos clients et escalade si besoin.' },
     ],
     langLabel: 'Langue',
-    accents: { fr: 'Français de Paris', 'en-gb': 'Anglais britannique', 'en-au': 'Anglais australien', it: 'Italien', pl: 'Polonais', nl: 'Néerlandais' },
+    accents: { fr: 'Français de Paris', 'en-gb': 'Anglais britannique', 'en-au': 'Anglais australien', it: 'Italien', pl: 'Polonais', nl: 'Néerlandais', he: 'Hébreu israélien' },
     sector: 'Votre métier',
     modeLabel: 'Comment essayer',
     modeBrowser: 'Dans ce navigateur',
@@ -397,7 +397,7 @@ export const UI_COMPONENTS = {
   industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Médecine esthétique', 'Kinés', 'Ostéopathes', 'Vétérinaires'],
 
   // Même ordre que les drapeaux du composant.
-  languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Belgique', 'Suisse', 'Québécois', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois'],
+  languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Belgique', 'Suisse', 'Québécois', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois', 'Hébreu'],
 
   agentTeam: {
     // Même ordre que les icônes et liens du composant.

@@ -66,7 +66,7 @@ export function GuideBody({ guide }: { guide: Guide }) {
             </ol>
           )}
           {s.list && (
-            <ul className="mt-5 list-disc space-y-2 pl-5 marker:text-signal">
+            <ul className="mt-5 list-disc space-y-2 ps-5 marker:text-signal">
               {s.list.map((item, i) => <li key={i}>{fill(item)}</li>)}
             </ul>
           )}

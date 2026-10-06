@@ -4,7 +4,7 @@ import path from 'path';
 import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 
-const DOCS = ['fr', 'en', 'it', 'pl', 'nl'];
+const DOCS = ['fr', 'en', 'it', 'pl', 'nl', 'he'];
 
 export default function KbDoc({ text }: { text: string }) {
   const [title, ...rest] = text.split('\n');

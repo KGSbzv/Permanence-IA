@@ -12,6 +12,7 @@ const NAMES: Record<Locale, string> = {
   it: 'Italiano',
   pl: 'Polski',
   nl: 'Nederlands',
+  he: 'עברית',
 };
 
 export default function LanguageSwitcher({ dark = false, className = '', id = 'lang-switcher' }: { dark?: boolean; className?: string; id?: string }) {

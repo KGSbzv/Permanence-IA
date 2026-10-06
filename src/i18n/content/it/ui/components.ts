@@ -366,7 +366,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { name: 'Assistenza', text: 'Risponde alle domande dei clienti e inoltra i casi delicati.' },
     ],
     langLabel: 'Lingua',
-    accents: { fr: 'Francese di Parigi', 'en-gb': 'Inglese britannico', 'en-au': 'Inglese australiano', it: 'Italiano', pl: 'Polacco', nl: 'Olandese' },
+    accents: { fr: 'Francese di Parigi', 'en-gb': 'Inglese britannico', 'en-au': 'Inglese australiano', it: 'Italiano', pl: 'Polacco', nl: 'Olandese', he: 'Ebraico israeliano' },
     sector: 'Il Suo settore',
     modeLabel: 'Come provarlo',
     modeBrowser: 'In questo browser',
@@ -399,7 +399,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   industryMarquee: ['Idraulici', 'Elettricisti', 'Studi dentistici', 'Cliniche', 'Agenzie immobiliari', 'Gestione affitti', 'Officine', 'Carrozzerie', 'Parrucchieri', 'Barbieri', 'Centri estetici', 'Ristoranti', 'Hotel', 'Avvocati', 'Commercialisti', 'E-commerce', 'Broker', 'Amministratori di condominio', 'Medicina estetica', 'Fisioterapisti', 'Osteopati', 'Veterinari'],
 
   // Stesso ordine delle bandiere del componente.
-  languageMarquee: ['Francese', 'Inglese', 'Spagnolo', 'Tedesco', 'Italiano', 'Portoghese', 'Olandese', 'Belgio', 'Svizzera', 'Québec', 'Arabo', 'Polacco', 'Rumeno', 'Turco', 'Svedese'],
+  languageMarquee: ['Francese', 'Inglese', 'Spagnolo', 'Tedesco', 'Italiano', 'Portoghese', 'Olandese', 'Belgio', 'Svizzera', 'Québec', 'Arabo', 'Polacco', 'Rumeno', 'Turco', 'Svedese', 'Ebraico'],
 
   agentTeam: {
     // Stesso ordine delle icone e dei link del componente.

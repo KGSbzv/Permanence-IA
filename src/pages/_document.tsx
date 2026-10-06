@@ -1,8 +1,12 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript, type DocumentProps } from 'next/document';
+import { MARKETS } from '@/i18n/markets';
+import { asLocale, isRtl } from '@/i18n/locales';
 
-export default function Document() {
+export default function Document({ __NEXT_DATA__ }: DocumentProps) {
+  // Langue et sens d’écriture de la page (l’hébreu se lit de droite à gauche).
+  const locale = asLocale(__NEXT_DATA__.locale);
   return (
-    <Html>
+    <Html lang={MARKETS[locale].hreflang} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
       <Head>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />

@@ -42,7 +42,7 @@ export function TalkNowPill({ href = '#demo', className = '' }: { href?: string;
     <div className={className}>
     <a
       href={href}
-      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-signal/30 bg-white py-1.5 pl-1.5 pr-4 text-sm shadow-sm ring-4 ring-signal/10 transition hover:border-signal hover:ring-signal/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-signal"
+      className="group inline-flex max-w-full items-center gap-2.5 rounded-full border border-signal/30 bg-white py-1.5 ps-1.5 pe-4 text-sm shadow-sm ring-4 ring-signal/10 transition hover:border-signal hover:ring-signal/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-signal"
     >
       <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-signal text-white">
         <span className="absolute inset-0 animate-ping rounded-full bg-signal/40" aria-hidden />
@@ -227,7 +227,7 @@ export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
                 aria-expanded={isOpen}
                 aria-controls={`${base}-a${i}`}
                 onClick={() => setOpen(isOpen ? -1 : i)}
-                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-[17px] font-semibold text-white hover:text-signal-glow"
+                className="flex w-full items-center justify-between gap-4 px-6 py-5 text-start text-[17px] font-semibold text-white hover:text-signal-glow"
               >
                 {it.q}
                 <ChevronDown className={`h-5 w-5 shrink-0 text-signal-glow transition-transform ${isOpen ? 'rotate-180' : ''}`} aria-hidden />

@@ -9,7 +9,7 @@ import { LOCALES, type Locale } from '@/i18n/locales';
 import { GENDERS, VOICES, type Gender } from '@/data/personas';
 
 /** Nom de chaque langue dans sa propre langue (identique sur toutes les versions du site). */
-const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands' };
+const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands', he: 'עברית' };
 /** Libellés internes de la note (lus par l'équipe et l'agent de la campagne, en français). */
 const ROLE_NOTE = ['Réceptionniste', 'Commercial / qualification', 'Support'];
 /** Teintes des orbes, dans l'ordre des rôles : [reflet, cœur, bord]. */
@@ -361,7 +361,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
               <span aria-hidden className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,.18),inset_0_-14px_28px_rgba(10,18,51,.35)]" />
             </div>
           </div>
-          <p className="absolute left-5 top-5 flex items-center gap-2 text-[13px] text-white/70">
+          <p className="absolute start-5 top-5 flex items-center gap-2 text-[13px] text-white/70">
             <span className="relative flex h-2 w-2" aria-hidden><span className="absolute inset-0 animate-ping rounded-full bg-ok/70 motion-reduce:animate-none" /><span className="relative h-2 w-2 rounded-full bg-ok" /></span>
             {t.stageLabel}
           </p>
@@ -406,7 +406,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
               {LOCALES.map((l) => (
                 <label key={l} className="cursor-pointer">
                   <input type="radio" name={`${uid}-lang`} value={l} checked={lang === l} onChange={() => setLang(l)} className="peer sr-only" />
-                  <span className={`flex items-center gap-1.5 rounded-full py-1 pl-1 pr-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
+                  <span className={`flex items-center gap-1.5 rounded-full py-1 ps-1 pe-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
                     <span aria-hidden className="flex shrink-0 -space-x-2">
                       {GENDERS.map((g) => (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -430,7 +430,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 return (
                   <label key={g} className="cursor-pointer">
                     <input type="radio" name={`${uid}-voice`} value={g} checked={on} onChange={() => setGender(g)} className="peer sr-only" />
-                    <span className={`flex items-center gap-2 rounded-2xl p-1.5 pr-2.5 ring-1 sm:gap-3 sm:p-2 sm:pr-3 transition-colors ${on ? 'bg-white/[.09] ring-signal-glow' : 'ring-white/15 hover:bg-white/[.04] hover:ring-white/40'} ${focusRing}`}>
+                    <span className={`flex items-center gap-2 rounded-2xl p-1.5 pe-2.5 ring-1 sm:gap-3 sm:p-2 sm:pe-3 transition-colors ${on ? 'bg-white/[.09] ring-signal-glow' : 'ring-white/15 hover:bg-white/[.04] hover:ring-white/40'} ${focusRing}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={p.photo} alt="" width={44} height={44} loading="lazy"
                         className={`h-9 w-9 shrink-0 rounded-full object-cover ring-2 sm:h-11 sm:w-11 ${on ? 'ring-signal-glow' : 'opacity-75 ring-transparent'}`} />
@@ -438,7 +438,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                         <span aria-hidden>{p.name}</span>
                         <span className="sr-only">{t.voiceOption(p.name, g === 'male')}</span>
                       </span>
-                      <span aria-hidden className={`ml-auto flex h-4 w-4 shrink-0 items-center sm:h-5 sm:w-5 justify-center rounded-full ring-2 ${on ? 'bg-signal-glow ring-signal-glow' : 'ring-white/30'}`}>
+                      <span aria-hidden className={`ms-auto flex h-4 w-4 shrink-0 items-center sm:h-5 sm:w-5 justify-center rounded-full ring-2 ${on ? 'bg-signal-glow ring-signal-glow' : 'ring-white/30'}`}>
                         {on && <span className="h-2 w-2 rounded-full bg-night" />}
                       </span>
                     </span>

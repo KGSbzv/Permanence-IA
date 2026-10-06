@@ -59,7 +59,7 @@ export default function LiveCall({ title, call, lead, leadTitle }: Props) {
       </div>
 
       <div
-        className={`relative -mt-6 ml-6 mr-[-0.5rem] rounded-2xl border border-signal/30 bg-white p-4 shadow-card sm:ml-16 ${done ? 'animate-rise' : 'invisible'}`}
+        className={`relative -mt-6 ms-6 me-[-0.5rem] rounded-2xl border border-signal/30 bg-white p-4 shadow-card sm:ms-16 ${done ? 'animate-rise' : 'invisible'}`}
         aria-hidden={!done}
       >
         <p className="flex items-center gap-2 font-display text-sm font-semibold text-ink">

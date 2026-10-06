@@ -57,7 +57,7 @@ export default function Navbar() {
                 {m.label}<ChevronDown className={`h-4 w-4 transition-transform ${open === m.label ? 'rotate-180' : ''}`} aria-hidden />
               </button>
               {open === m.label && (
-                <div className={`absolute left-0 top-full mt-2 rounded-2xl border border-line bg-white p-3 shadow-float ${m.wide ? 'grid w-[680px] grid-cols-2 gap-1' : 'w-64'}`}>
+                <div className={`absolute start-0 top-full mt-2 rounded-2xl border border-line bg-white p-3 shadow-float ${m.wide ? 'grid w-[680px] grid-cols-2 gap-1' : 'w-64'}`}>
                   {m.items.map((it) => (
                     <Link key={it.href} href={it.href} className="block rounded-lg px-3 py-2 hover:bg-paper">
                       <span className="block text-[15px] font-semibold text-ink">{it.label}</span>
@@ -70,12 +70,12 @@ export default function Navbar() {
           ))}
           <Link href="/tarifs" className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.pricing}</Link>
         </nav>
-        <div className="ml-auto hidden items-center gap-2 lg:flex">
+        <div className="ms-auto hidden items-center gap-2 lg:flex">
           <LanguageSwitcher id="lang-desktop" />
           <a href={LOGIN_URL} className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.login}</a>
           <Link href={SIGNUP_URL} className="btn-primary py-2.5">{t.startFree}</Link>
         </div>
-        <button type="button" className="ml-auto rounded-md p-2 text-ink lg:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
+        <button type="button" className="ms-auto rounded-md p-2 text-ink lg:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
           {mobile ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
@@ -87,7 +87,7 @@ export default function Navbar() {
               <summary className="disclosure flex cursor-pointer items-center justify-between py-2 font-display font-semibold text-ink">
                 {m.label}<ChevronDown className="disclosure-icon h-4 w-4 transition-transform" aria-hidden />
               </summary>
-              <ul className="pb-2">{m.items.map((it) => <li key={it.href}><Link href={it.href} className="block py-1.5 pl-3 text-ink">{it.label}</Link></li>)}</ul>
+              <ul className="pb-2">{m.items.map((it) => <li key={it.href}><Link href={it.href} className="block py-1.5 ps-3 text-ink">{it.label}</Link></li>)}</ul>
             </details>
           ))}
           <Link href="/tarifs" className="block border-b border-line py-4 font-display font-semibold text-ink">{t.pricing}</Link>

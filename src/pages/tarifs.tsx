@@ -47,7 +47,7 @@ export default function Tarifs() {
         <div className="wrap py-14 text-center lg:py-20">
           <Heading as="h1" center title={t.hero.title} intro={t.hero.intro(days, minutes)} />
           <TrialBadges className="mt-6 justify-center" />
-          <div className="mt-12 text-left"><PricingCards /></div>
+          <div className="mt-12 text-start"><PricingCards /></div>
           <p className="mt-6 text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))} {t.hero.moreMinutes}</p>
         </div>
       </section>

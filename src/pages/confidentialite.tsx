@@ -23,7 +23,7 @@ export default function Confidentialite() {
         </div>
       </section>
       <section className="bg-white">
-        <div className="wrap max-w-3xl space-y-10 py-14 lg:py-20 [&_a]:font-semibold [&_a]:text-signal-deep [&_a]:underline [&_li]:mt-2 [&_p+p]:mt-3 [&_ul]:list-disc [&_ul]:pl-5">
+        <div className="wrap max-w-3xl space-y-10 py-14 lg:py-20 [&_a]:font-semibold [&_a]:text-signal-deep [&_a]:underline [&_li]:mt-2 [&_p+p]:mt-3 [&_ul]:list-disc [&_ul]:ps-5">
           {sections.map((s, i) => (
             <section key={s.title}>
               <h2 className="font-display text-2xl font-bold text-ink">{i + 1}. {s.title}</h2>

@@ -37,7 +37,7 @@ export function Bubble({ who, children }: { who: 'agent' | 'client'; children: R
       {agent ? <AgentFace className="mt-0.5 h-7 w-7" /> : (
         <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-paper text-slate"><User className="h-3.5 w-3.5" aria-hidden /></span>
       )}
-      <p className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-[14px] leading-snug ${agent ? 'rounded-tl-sm bg-signal-soft text-ink' : 'rounded-tr-sm bg-paper text-ink'}`}>{children}</p>
+      <p className={`max-w-[80%] rounded-2xl px-3.5 py-2 text-[14px] leading-snug ${agent ? 'rounded-ss-sm bg-signal-soft text-ink' : 'rounded-se-sm bg-paper text-ink'}`}>{children}</p>
     </div>
   );
 }
@@ -114,7 +114,7 @@ function KnowledgeMock() {
           <li key={r.name} className="flex items-center gap-3 rounded-lg border border-line px-3 py-2.5">
             <r.icon className="h-5 w-5 text-signal" aria-hidden />
             <div className="min-w-0"><p className="truncate text-sm font-medium text-ink">{r.name}</p><p className="text-xs text-slate-light">{r.meta}</p></div>
-            <CheckCircle2 className="ml-auto h-4 w-4 text-ok" aria-hidden />
+            <CheckCircle2 className="ms-auto h-4 w-4 text-ok" aria-hidden />
           </li>
         ))}
       </ul>
@@ -130,7 +130,7 @@ function PromptMock() {
       <p className="mt-1 text-xs text-slate-light">{t.hint}</p>
       <div className="mt-3 rounded-lg border border-line bg-paper p-3 text-sm text-ink">
         {t.text}
-        <span className="ml-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-signal" aria-hidden />
+        <span className="ms-0.5 inline-block h-4 w-[2px] translate-y-0.5 animate-pulse bg-signal" aria-hidden />
       </div>
       <div className="mt-3 flex flex-wrap gap-2 text-xs">
         {t.tags.map((t) => <span key={t} className="rounded-full bg-signal-soft px-2.5 py-1 font-medium text-ink">{t}</span>)}
@@ -171,7 +171,7 @@ function NumbersMock() {
           <li key={x.c} className="flex items-center gap-3 py-2.5">
             <PhoneForwarded className="h-4 w-4 text-signal" aria-hidden />
             <div><p className="text-sm font-medium text-ink">{x.c}</p><p className="text-xs text-slate-light">{x.n}</p></div>
-            <span className="ml-auto rounded-full bg-paper px-2.5 py-1 text-xs text-ink">{x.t}</span>
+            <span className="ms-auto rounded-full bg-paper px-2.5 py-1 text-xs text-ink">{x.t}</span>
           </li>
         ))}
       </ul>
@@ -208,7 +208,7 @@ function WidgetMock() {
         <div className="h-3 w-24 rounded bg-paper" /><div className="mt-2 h-3 w-40 rounded bg-paper" /><div className="mt-2 h-3 w-32 rounded bg-paper" />
         <div className="mt-6 grid grid-cols-3 gap-2"><div className="h-14 rounded-lg bg-paper" /><div className="h-14 rounded-lg bg-paper" /><div className="h-14 rounded-lg bg-paper" /></div>
       </Card>
-      <div className="absolute -bottom-4 right-4 w-60 rounded-2xl bg-night p-4 text-white shadow-float">
+      <div className="absolute -bottom-4 end-4 w-60 rounded-2xl bg-night p-4 text-white shadow-float">
         <p className="text-sm font-semibold">{t.question}</p>
         <div className="mt-3 grid gap-2">
           <span className="flex items-center justify-center gap-2 rounded-lg bg-signal py-2 text-sm font-semibold"><Mic className="h-4 w-4" aria-hidden />{t.talk}</span>
@@ -225,8 +225,8 @@ function WhatsAppMock() {
     <Card className="bg-[#F3F7F5]">
       <div className="flex items-center gap-2 border-b border-line pb-3"><MessageCircle className="h-5 w-5 text-[#25D366]" aria-hidden /><p className="text-sm font-semibold text-ink">{t.title}</p></div>
       <div className="mt-3 space-y-2">
-        <p className="ml-auto max-w-[85%] rounded-xl rounded-tr-sm bg-[#DCF8C6] px-3 py-2 text-[14px] text-ink">{t.confirmation}</p>
-        <p className="max-w-[60%] rounded-xl rounded-tl-sm bg-white px-3 py-2 text-[14px] text-ink">{t.reply}</p>
+        <p className="ms-auto max-w-[85%] rounded-xl rounded-se-sm bg-[#DCF8C6] px-3 py-2 text-[14px] text-ink">{t.confirmation}</p>
+        <p className="max-w-[60%] rounded-xl rounded-ss-sm bg-white px-3 py-2 text-[14px] text-ink">{t.reply}</p>
       </div>
     </Card>
   );
@@ -242,7 +242,7 @@ function CampaignMock() {
         {rows.map(([n, s, r]) => (
           <li key={n} className="flex items-center gap-3 rounded-lg border border-line px-3 py-2.5 text-sm">
             <PhoneOutgoing className="h-4 w-4 text-signal" aria-hidden /><span className="text-ink">{n}</span>
-            <span className="ml-auto text-xs text-slate-light">{s}</span><span className="w-10 text-right text-xs font-semibold text-ink">{r}</span>
+            <span className="ms-auto text-xs text-slate-light">{s}</span><span className="w-10 text-end text-xs font-semibold text-ink">{r}</span>
           </li>
         ))}
       </ul>

@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>PermanenceAI — מצגת</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=block" rel="stylesheet">
+<style>
+/* Couleurs du site (tailwind.config.js) ; police Heebo (glyphes hébreux) ; mise en page en miroir (RTL) */
+:root{
+  --ink:#0E1B4D; --ink-soft:#22306A;
+  --signal:#0FA3C4; --signal-deep:#0A7690; --signal-soft:#E2F5FA; --glow:#5AD3EC;
+  --paper:#F5F8FB; --slate:#4A5875; --slate-light:#626E86; --line:#DDE5EE;
+  --night:#0A1233; --night-raised:#141E47; --ok:#178256; --no:#C8463D;
+}
+@page{size:1920px 1080px;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Heebo',system-ui,sans-serif;color:var(--ink);font-size:28px;line-height:1.45}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;padding:104px 140px 150px;background:#fff;page-break-after:always;break-after:page}
+.slide:last-child{page-break-after:auto;break-after:auto}
+.slide.paper{background:var(--paper)}
+.slide.dark{background:var(--night);color:#fff}
+h1,h2,h3{font-family:'Heebo',system-ui,sans-serif;letter-spacing:-0.01em;font-weight:800}
+h2{font-size:72px;line-height:1.1;max-width:1550px}
+h3{font-size:32px;line-height:1.25;letter-spacing:0;font-weight:700}
+.hl{color:var(--signal)}
+.dark .hl{color:var(--glow)}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.eyebrow{font-weight:700;font-size:24px;letter-spacing:.02em;color:var(--signal-deep);display:flex;align-items:center;gap:18px;margin-bottom:28px}
+.eyebrow::before{content:"";width:44px;height:3px;border-radius:2px;background:var(--signal)}
+.dark .eyebrow{color:var(--glow)}
+.lead{font-size:30px;line-height:1.5;color:var(--slate);max-width:1350px;margin-top:26px}
+.dark .lead{color:#C4CCE4}
+.muted{color:var(--slate)}
+.small{font-size:23px;line-height:1.5}
+.cap{font-weight:700;font-size:22px;letter-spacing:.02em}
+.foot{position:absolute;left:140px;right:140px;bottom:46px;display:flex;align-items:center;justify-content:space-between;gap:40px;font-size:21px;color:var(--slate-light);border-top:1px solid var(--line);padding-top:22px}
+.dark .foot{border-top-color:rgba(255,255,255,.12);color:#9AA6C8}
+.foot .pg{font-weight:700;letter-spacing:.04em}
+/* Logo : pictogramme + marque PermanenceAI + slogan du marché (comme le site pour les langues non françaises) */
+.brand{display:flex;align-items:center;gap:14px;flex:none}
+.brand img{height:46px;width:auto;display:block}
+.dark .brand img{clip-path:circle(47% at 50% 50%)}
+.brand .bt{display:flex;flex-direction:column;line-height:1}
+.brand b{font-weight:800;font-size:25px;color:var(--ink);direction:ltr;letter-spacing:-.01em}
+.brand small{font-size:15px;font-weight:500;color:var(--slate);margin-top:5px}
+.dark .brand b{color:#fff}
+.dark .brand small{color:rgba(255,255,255,.6)}
+.brand.xl{gap:28px}
+.brand.xl img{height:118px}
+.brand.xl b{font-size:64px}
+.brand.xl small{font-size:28px;margin-top:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:38px 40px;box-shadow:0 1px 2px rgba(14,27,77,.06),0 14px 34px -18px rgba(14,27,77,.22)}
+.dark .card{background:var(--night-raised);border-color:rgba(255,255,255,.08);box-shadow:none}
+.pill{display:inline-flex;align-items:center;gap:10px;background:var(--signal-soft);color:var(--signal-deep);font-weight:700;font-size:21px;letter-spacing:.02em;border-radius:999px;padding:8px 20px}
+.num{font-weight:800;color:var(--signal);font-size:27px;min-width:40px;flex:none}
+.nw{white-space:nowrap}
+.grid{display:grid;gap:30px}
+.chip{display:inline-flex;align-items:center;border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:12px 24px;font-weight:600;font-size:24px;color:var(--ink)}
+ul.check{list-style:none}
+ul.check li{position:relative;padding-inline-start:44px;margin:12px 0;font-size:26px;line-height:1.4}
+ul.check li::before{content:"";position:absolute;inset-inline-start:0;top:9px;width:24px;height:24px;border-radius:50%;background:var(--signal-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' fill='none' stroke='%230A7690' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/24px no-repeat}
+ul.dash{list-style:none}
+ul.dash li{position:relative;padding-inline-start:34px;margin:12px 0;font-size:26px;line-height:1.4}
+ul.dash li::before{content:"";position:absolute;inset-inline-start:4px;top:19px;width:14px;height:3px;border-radius:2px;background:var(--slate-light)}
+.waves{position:absolute;display:flex;align-items:center;gap:14px}
+.waves i{display:block;width:14px;border-radius:7px;background:var(--signal)}
+.arrow{color:var(--signal);font-weight:700;font-size:44px;align-self:center}
+.tiles .card{padding:44px 44px;min-height:200px}.tiles h3{font-size:34px}.tiles p.small{font-size:24px}
+</style>
+</head>
+<body>
+
+<!-- 1. Couverture -->
+<section class="slide dark" style="padding:0">
+  <div style="position:absolute;left:-260px;top:-180px;width:1100px;height:1100px;border-radius:50%;border:2px solid rgba(90,211,236,.10)"></div>
+  <div style="position:absolute;left:-120px;top:-40px;width:820px;height:820px;border-radius:50%;border:2px solid rgba(90,211,236,.14)"></div>
+  <div style="position:absolute;left:20px;top:100px;width:540px;height:540px;border-radius:50%;border:2px solid rgba(90,211,236,.20)"></div>
+  <div class="waves" style="left:228px;top:290px;opacity:.9">
+    <i style="height:60px;opacity:.5"></i><i style="height:140px;opacity:.85"></i><i style="height:90px;opacity:.7"></i><i style="height:200px"></i><i style="height:120px;opacity:.8"></i><i style="height:170px"></i><i style="height:110px;opacity:.7"></i><i style="height:60px;opacity:.5"></i>
+  </div>
+  <div style="position:absolute;right:140px;top:120px">
+    <div class="brand xl"><img src="../../public/logo/mark-dark.png" alt="PermanenceAI"><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div>
+  </div>
+  <div style="position:absolute;right:140px;bottom:200px;max-width:1150px">
+    <div class="pill" style="background:rgba(90,211,236,.12);color:var(--glow)"><span style="width:12px;height:12px;border-radius:50%;background:var(--glow)"></span>הסוכן זמין · <bdi>24/7</bdi></div>
+    <h1 style="font-size:100px;line-height:1.08;margin-top:36px">סוכן קולי AI שעונה<br><span class="hl">לכל שיחה</span>, <bdi>24/7</bdi></h1>
+    <p class="lead" style="font-size:33px;margin-top:34px">מענה טלפוני, קביעת תורים וסינון פניות, בעברית ובשם העסק שלכם.</p>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;bottom:64px;display:flex;justify-content:space-between;font-size:23px;color:#9AA6C8">
+    <span style="font-weight:600;color:#fff" class="ltr">www.permanenceia.com/he</span><span>מצגת עסקית · 2026</span>
+  </div>
+</section>
+
+<!-- 2. Le problème -->
+<section class="slide">
+  <div class="eyebrow">הבעיה</div>
+  <h2>הטלפון מצלצל בדיוק כשאי אפשר <span class="hl">לענות</span></h2>
+  <p class="lead">אתם עם לקוח, בשטח, בנהיגה או עם המשפחה. מי שמתקשר לא תמיד משאיר הודעה: הוא פשוט מתקשר למספר הבא.</p>
+  <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:64px">
+    <div class="card"><div class="num">01</div><h3 style="margin-top:14px">באמצע פגישה</h3><p class="small muted" style="margin-top:12px">אתם מרוכזים בלקוח שמולכם. הלקוח הבא מחכה על הקו, ואז מנתק.</p></div>
+    <div class="card"><div class="num">02</div><h3 style="margin-top:14px">בשטח</h3><p class="small muted" style="margin-top:12px">עבודה אצל לקוח, התקנה, נסיעה: אי אפשר לענות כמו שצריך.</p></div>
+    <div class="card"><div class="num">03</div><h3 style="margin-top:14px">בערב ובסוף השבוע</h3><p class="small muted" style="margin-top:12px">הרבה לקוחות מתקשרים אחרי יום העבודה, כשהעסק כבר סגור.</p></div>
+    <div class="card" style="background:var(--ink);border-color:var(--ink);color:#fff"><div class="num" style="color:var(--glow)">04</div><h3 style="margin-top:14px">התא הקולי לא חוזר ללקוחות</h3><p class="small" style="margin-top:12px;color:#C4CCE4">הודעה קולית היא פנייה שמחכה. ובינתיים, המתחרים עונים.</p></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">02</span></div>
+</section>
+
+<!-- 3. Le coût de l'inaction -->
+<section class="slide paper">
+  <div class="eyebrow">המחיר של שיחה שלא נענתה</div>
+  <h2>עשו את החישוב עם <span class="hl">המספרים שלכם</span></h2>
+  <div class="grid" style="grid-template-columns:1.15fr 1fr;margin-top:56px;gap:40px">
+    <div class="card" style="padding:46px 48px">
+      <div class="pill">הנוסחה</div>
+      <div style="display:flex;align-items:stretch;gap:18px;margin-top:34px">
+        <div style="flex:1;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-weight:800;font-size:29px;line-height:1.2">שיחות שלא נענו</div><div class="small muted">בשבוע</div></div>
+        <div class="arrow">×</div>
+        <div style="flex:.6;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-weight:800;font-size:29px;line-height:1.2">4.3</div><div class="small muted">שבועות בחודש</div></div>
+        <div class="arrow">×</div>
+        <div style="flex:1;border:1.5px dashed var(--line);border-radius:16px;padding:22px 20px;text-align:center"><div style="font-weight:800;font-size:29px;line-height:1.2">שווי של לקוח</div><div class="small muted">כמה פנייה אחת מכניסה</div></div>
+      </div>
+      <div style="margin-top:28px;background:var(--ink);color:#fff;border-radius:16px;padding:24px 30px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:27px;font-weight:600">=&nbsp; הפסד חודשי</span><span style="font-weight:800;font-size:32px;color:var(--glow)" class="ltr">₪ ?</span>
+      </div>
+      <p class="small muted" style="margin-top:28px">החליפו כל משבצת בנתונים שלכם. ספרו רק שיחות שלא הספקתם לענות עליהן או לחזור אליהן בזמן.</p>
+    </div>
+    <div class="card" style="padding:46px 48px;border:2px solid var(--signal)">
+      <div class="pill" style="background:var(--signal);color:#fff">דוגמה</div>
+      <div style="margin-top:30px;font-size:29px" class="muted">10 שיחות בשבוע &nbsp;×&nbsp; 4.3 &nbsp;×&nbsp; <bdi class="ltr">₪500</bdi></div>
+      <div style="font-weight:800;font-size:96px;line-height:1.05;letter-spacing:-.02em;margin-top:10px"><bdi class="ltr">₪21,500</bdi></div>
+      <div style="font-size:27px;font-weight:600">הכנסות שעומדות על הפרק בכל חודש</div>
+      <div style="border-top:1px solid var(--line);margin:30px 0 24px"></div>
+      <div class="small muted">גם אם תחזירו רק חצי מהן:</div>
+      <div style="font-weight:800;font-size:56px;color:var(--signal-deep);margin-top:4px"><bdi class="ltr">₪10,750</bdi> <span style="font-size:29px;font-weight:600">בחודש</span></div>
+      <p class="small muted" style="margin-top:12px">מספרים להמחשה בלבד, לא ממוצע שוק.</p>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span>חשבו את זה עם הנתונים שלכם ב-<b style="color:var(--signal-deep)" class="ltr">permanenceia.com/he/tarifs</b></span><span class="pg">03</span></div>
+</section>
+
+<!-- 4. La solution -->
+<section class="slide">
+  <div class="grid" style="grid-template-columns:1fr 1.1fr;gap:90px;height:100%">
+    <div style="align-self:center;margin-top:-40px">
+      <div class="eyebrow">הפתרון</div>
+      <h2 style="font-size:80px">עמית <span class="hl">ה-AI</span> שלכם,<br>על הקו</h2>
+      <p class="lead" style="font-size:31px">הוא עונה בשם העסק, עם המידע וההנחיות שלכם. הוא מטפל בשיחות השוטפות, ואתם נשארים בשליטה על מה שחשוב באמת.</p>
+      <div class="pill" style="margin-top:44px"><span style="width:12px;height:12px;border-radius:50%;background:var(--signal)"></span>זמין <bdi>24/7</bdi></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;justify-content:center;margin-top:-30px">
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:26px 34px"><span class="num">01</span><div><h3>עונה מיד</h3><p class="small muted" style="margin-top:6px">אף שיחה לא נופלת לתא הקולי, לא ביום ולא בלילה.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:26px 34px"><span class="num">02</span><div><h3>קובע תורים ביומן שלכם</h3><p class="small muted" style="margin-top:6px">בודק מתי אתם פנויים ושומר את המועד.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:26px 34px"><span class="num">03</span><div><h3>מסנן את הפניות</h3><p class="small muted" style="margin-top:6px">שם, פרטי קשר, צורך, דחיפות: השאלות הנכונות, בסדר הנכון.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:26px 34px"><span class="num">04</span><div><h3>עונה על שאלות נפוצות</h3><p class="small muted" style="margin-top:6px">שעות פעילות, מחירים, אזורי שירות, מסמכים שצריך להביא.</p></div></div>
+      <div class="card" style="display:flex;gap:28px;align-items:flex-start;padding:26px 34px"><span class="num">05</span><div><h3>שולח לכם סיכום</h3><p class="small muted" style="margin-top:6px">אחרי כל שיחה, העיקר בכמה שורות.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">04</span></div>
+</section>
+
+<!-- 5. Une voix naturelle -->
+<section class="slide dark">
+  <div class="eyebrow">קול טבעי</div>
+  <h2>שיחה אמיתית, <span class="hl">בשפה של הלקוחות שלכם</span></h2>
+  <p class="lead">לכל שפה יש קולות של דוברים ילידיים, נשיים וגבריים. הסוכן מקשיב, מאפשר לקטוע אותו וחוזר לנושא, כמו בן שיח קשוב.</p>
+  <div class="grid" style="grid-template-columns:1.25fr 1fr;gap:44px;margin-top:56px">
+    <div class="card">
+      <div class="cap" style="color:var(--glow)">קולות של דוברים ילידיים</div>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:24px">
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">עברית</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">אנגלית</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">ערבית</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">רוסית</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">צרפתית</span>
+        <span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.2)">ספרדית</span>
+        <span class="chip" style="background:var(--glow);color:var(--night);border-color:var(--glow)">יותר מ-80 שפות זמינות</span>
+      </div>
+      <p class="small" style="color:#C4CCE4;margin-top:26px">בהדגמה החיה בעברית: הקולות של נועה ודניאל.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div class="card" style="padding:28px 34px"><h3>מתמודד עם קטיעות</h3><p class="small" style="color:#C4CCE4;margin-top:6px">הלקוח קוטע, משנה את דעתו: הסוכן מתאים את עצמו.</p></div>
+      <div class="card" style="padding:28px 34px"><h3>כמה שיחות במקביל</h3><p class="small" style="color:#C4CCE4;margin-top:6px">אף אחד לא שומע צליל תפוס בשעות העומס.</p></div>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-dark.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">05</span></div>
+</section>
+
+<!-- 6. La comparaison honnête -->
+<section class="slide paper">
+  <div class="eyebrow">עובד/ת קבלה או סוכן AI</div>
+  <h2>ההשוואה <span class="hl">ההוגנת</span></h2>
+  <p class="lead">אדם בעמדת הקבלה הוא נכס. הוא גם עולה לא מעט, עובד בשעות מוגבלות ועונה לשיחה אחת בכל פעם. זה מה שמשתנה כשסוכן ה-AI עונה ראשון.</p>
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:48px">
+    <div class="card" style="padding:40px 46px">
+      <div class="cap muted">עובד/ת קבלה במשרה מלאה (ישראל)</div>
+      <div style="font-weight:800;font-size:46px;margin-top:14px;line-height:1.15">לפחות שכר המינימום</div>
+      <div class="small muted">בתוספת עלויות מעסיק</div>
+      <ul class="dash" style="margin-top:22px">
+        <li>כ-42 שעות בשבוע</li>
+        <li>חופשות, ימי מחלה ומילואים: צריך מחליף</li>
+        <li>שיחה אחת בכל פעם</li>
+        <li>כמה שבועות של הכשרה</li>
+      </ul>
+    </div>
+    <div class="card" style="padding:40px 46px;border:2px solid var(--signal)">
+      <div class="cap" style="color:var(--signal-deep)">סוכן AI של PermanenceAI</div>
+      <div style="font-weight:800;font-size:46px;margin-top:14px;line-height:1.15">החל מ-<bdi class="ltr">$99</bdi> לחודש</div>
+      <div class="small muted">לא כולל מע״מ · 350 דקות כלולות, או <bdi class="ltr">$0.39</bdi> לדקה בלי מנוי</div>
+      <ul class="check" style="margin-top:22px">
+        <li><bdi>24/7</bdi>, כלומר 168 שעות בשבוע</li>
+        <li>כמה שיחות במקביל</li>
+        <li>אפשר לעדכן אותו בתוך דקות</li>
+        <li>סיכום ותמלול של כל שיחה</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span style="max-width:1200px;text-align:center">במקרים רגישים עדיין צריך אדם: הסוכן מעביר לו סיכום ומתאם שיחה חוזרת.</span><span class="pg">06</span></div>
+</section>
+
+<!-- 7. Tableau ligne par ligne -->
+<section class="slide">
+  <div class="eyebrow">זה מול זה</div>
+  <h2 style="font-size:64px">מה שחשוב, <span class="hl">שורה אחר שורה</span></h2>
+  <table style="width:100%;border-collapse:separate;border-spacing:0;margin-top:40px;font-size:24px;line-height:1.3">
+    <thead>
+      <tr style="text-align:start">
+        <th style="width:24%;padding:0 0 16px 24px"></th>
+        <th style="width:37%;padding:0 24px 16px;font-size:22px;letter-spacing:.02em;color:var(--slate);text-align:start">עובד/ת קבלה</th>
+        <th style="width:39%;padding:16px 24px;font-size:22px;letter-spacing:.02em;color:#fff;background:var(--ink);border-radius:16px 16px 0 0;text-align:start">סוכן AI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="rl">עלות חודשית</td><td class="hu">לפחות שכר המינימום, בתוספת עלויות מעסיק</td><td class="ai">החל מ-<bdi class="ltr">$99</bdi> לא כולל מע״מ, או <bdi class="ltr">$0.39</bdi> לדקה</td></tr>
+      <tr><td class="rl">שעות מענה</td><td class="hu">כ-42 שעות בשבוע</td><td class="ai">168 שעות בשבוע, <bdi>24/7</bdi></td></tr>
+      <tr><td class="rl">חופשות והיעדרויות</td><td class="hu">צריך מחליף, או לדחות</td><td class="ai">תמיד זמין</td></tr>
+      <tr><td class="rl">שיחות במקביל</td><td class="hu">אחת בכל פעם</td><td class="ai">כמה שיחות במקביל</td></tr>
+      <tr><td class="rl">זמן הקמה</td><td class="hu">גיוס, ואחריו כמה שבועות של הכשרה</td><td class="ai">הגדרה מודרכת, עם בדיקה בטלפון שלכם</td></tr>
+      <tr><td class="rl">שינוי הנחיה</td><td class="hu">פגישה, הודעה, תזכורת לצוות</td><td class="ai">מתעדכן בתוך דקות</td></tr>
+      <tr><td class="rl">תיעוד השיחות</td><td class="hu">רשימות ידניות</td><td class="ai">סיכום ותמלול של כל שיחה</td></tr>
+      <tr><td class="rl">מקרים רגישים</td><td class="hu"><b style="color:var(--ok)">החוזקה של האדם</b></td><td class="ai" style="border-bottom:2px solid var(--ink);border-radius:0 0 16px 16px">מעביר סיכום ומתאם שיחה חוזרת</td></tr>
+    </tbody>
+  </table>
+  <style>
+    td.rl{padding:15px 0 15px 24px;font-weight:700;border-top:1px solid var(--line)}
+    td.hu{padding:15px 24px;color:var(--slate);border-top:1px solid var(--line)}
+    td.ai{padding:15px 24px;font-weight:600;background:var(--signal-soft);border-top:1px solid #C9E8F1;border-left:2px solid var(--ink);border-right:2px solid var(--ink)}
+  </style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span>משרה מלאה בישראל: 42 שעות בשבוע. מחירי הסוכן בדולר ארה״ב, לא כולל מע״מ.</span><span class="pg">07</span></div>
+</section>
+
+<!-- 8. Cas d'usage 1 -->
+<section class="slide paper">
+  <div class="eyebrow">תרחיש 1 · שיחות נכנסות</div>
+  <h2>שיחות שלא נענו, <span class="hl">על טייס אוטומטי</span></h2>
+  <p class="lead">כל שיחה שאתם לא יכולים לקחת מקבלת מענה, מובנת והופכת לפעולה ממשית.</p>
+  <div style="display:flex;gap:14px;margin-top:70px;align-items:stretch">
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">1</div><h3 style="margin-top:12px;font-size:29px">הלקוח מתקשר</h3><p class="small muted" style="margin-top:10px">באמצע פגישה, בערב או בסוף השבוע.</p></div>
+    <div class="arrow"><svg viewBox="0 0 24 24" width="34" height="34" style="display:block"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">2</div><h3 style="margin-top:12px;font-size:29px">הסוכן עונה בשם העסק</h3><p class="small muted" style="margin-top:10px">מיד, עם הודעת הפתיחה שלכם.</p></div>
+    <div class="arrow"><svg viewBox="0 0 24 24" width="34" height="34" style="display:block"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">3</div><h3 style="margin-top:12px;font-size:29px">אוסף את הפרטים החשובים</h3><p class="small muted" style="margin-top:10px">שם, טלפון ומהות הפנייה.</p></div>
+    <div class="arrow"><svg viewBox="0 0 24 24" width="34" height="34" style="display:block"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="card" style="flex:1;padding:32px 28px"><div class="num">4</div><h3 style="margin-top:12px;font-size:29px">קובע תור או שיחה חוזרת</h3><p class="small muted" style="margin-top:10px">תור ביומן שלכם, או מועד לחזור ללקוח.</p></div>
+    <div class="arrow"><svg viewBox="0 0 24 24" width="34" height="34" style="display:block"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="card" style="flex:1;padding:32px 28px;background:var(--ink);border-color:var(--ink);color:#fff"><div class="num" style="color:var(--glow)">5</div><h3 style="margin-top:12px;font-size:29px">אתם מקבלים כרטיס פנייה</h3><p class="small" style="margin-top:10px;color:#C4CCE4">לא הודעה קולית שצריך להאזין לה, אלא פנייה ברורה.</p></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">08</span></div>
+</section>
+
+<!-- 9. Cas d'usage 2 -->
+<section class="slide">
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:90px">
+    <div>
+      <div class="eyebrow">תרחיש 2 · קביעת תורים</div>
+      <h2 style="font-size:66px">קביעת תורים,<br><span class="hl">בלי להרים טלפון</span></h2>
+      <p class="lead" style="font-size:29px">הסוכן בודק את היומן שלכם בזמן אמת, מציע שני מועדים מדויקים ומאשר את המועד שהלקוח בוחר.</p>
+      <div class="cap muted" style="margin-top:44px">יומנים מחוברים</div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:16px">
+        <span class="chip">Google Calendar</span><span class="chip">Outlook</span><span class="chip">Cal.com</span><span class="chip">Calendly</span>
+      </div>
+    </div>
+    <div class="card" style="padding:40px 40px;background:var(--paper);align-self:start;margin-top:20px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="pill">שיחה פעילה</span><span class="small muted">דוגמה לשיחה</span></div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:28px;font-size:26px;line-height:1.42">
+        <div style="align-self:flex-end;max-width:82%;background:var(--ink);color:#fff;border-radius:20px 20px 20px 6px;padding:16px 22px">שלום, אני רוצה לקבוע תור לשבוע הבא.</div>
+        <div style="align-self:flex-start;max-width:86%;background:#fff;border:1px solid var(--line);border-radius:20px 20px 6px 20px;padding:16px 22px">בשמחה. יש מקום ביום שני ב-14:00 או ביום רביעי ב-9:30. מה מתאים לך?</div>
+        <div style="align-self:flex-end;max-width:82%;background:var(--ink);color:#fff;border-radius:20px 20px 20px 6px;padding:16px 22px">רביעי מצוין.</div>
+        <div style="align-self:flex-start;max-width:86%;background:#fff;border:1px solid var(--line);border-radius:20px 20px 6px 20px;padding:16px 22px">נקבע: יום רביעי ב-9:30. אישור יישלח אליך בעוד רגע.</div>
+      </div>
+      <div style="margin-top:24px;display:flex;align-items:center;gap:14px;background:#fff;border:1.5px solid var(--signal);border-radius:14px;padding:16px 20px;font-size:23px">
+        <span style="width:14px;height:14px;border-radius:50%;background:var(--ok);flex:none"></span><b>נוסף ליומן שלכם</b><span class="muted">· רביעי 9:30 · לקוח חדש</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">09</span></div>
+</section>
+
+<!-- 10. Cas d'usage 3 -->
+<section class="slide paper">
+  <div class="eyebrow">תרחיש 3 · שיחות יוצאות</div>
+  <h2>חוזרים להצעות מחיר <span class="hl">וללקוחות ותיקים</span></h2>
+  <p class="lead">עם קמפיינים יוצאים, הסוכן מתקשר בשבילכם בזמן הנכון ומתעד את התשובה של כל איש קשר.</p>
+  <div class="pill" style="margin-top:30px">מסלול עוזר AI</div>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:40px">
+    <div class="card"><div class="num">01</div><h3 style="margin-top:14px">הצעות מחיר שלא נענו</h3><p class="small muted" style="margin-top:12px">48 שעות אחרי שליחת ההצעה, הסוכן מתקשר, עונה על שאלות ומציע את הצעד הבא.</p></div>
+    <div class="card"><div class="num">02</div><h3 style="margin-top:14px">טיפול עונתי</h3><p class="small muted" style="margin-top:12px">מזגן, דוד שמש, טיפול לרכב, בדיקה שנתית: תזכורת בזמן הנכון, עם קביעת תור.</p></div>
+    <div class="card"><div class="num">03</div><h3 style="margin-top:14px">לקוחות שלא חזרו</h3><p class="small muted" style="margin-top:12px">לחדש את הקשר עם מי שלא היה אצלכם כבר הרבה זמן.</p></div>
+  </div>
+  <div style="margin-top:34px;display:flex;gap:18px;align-items:center;font-size:24px;color:var(--slate)">
+    <span style="flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:19px">i</span>
+    <span>שיחות שיווקיות בחיוג אוטומטי מותרות רק לאנשי קשר שנתנו הסכמה מפורשת מראש (סעיף 30א לחוק התקשורת). מי שמסרב נוסף לרשימת החסימה.</span>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">10</span></div>
+</section>
+
+<!-- 11. Votre parcours -->
+<section class="slide">
+  <div class="eyebrow">העסק שלכם</div>
+  <h2 style="font-size:64px">המסלול של שיחה <span class="hl">ב-5 משבצות</span></h2>
+  <p class="lead" style="font-size:28px">מלאו את המשבצות עם שיחה טיפוסית מהעסק שלכם: זה הבסיס להגדרת הסוכן.</p>
+  <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:22px;margin-top:46px">
+    <div class="card fill"><div class="num">1</div><h3>נקודת פתיחה</h3><p class="small muted">מי מתקשר, ולמה?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">2</div><h3>פתיחת השיחה</h3><p class="small muted">מה הסוכן אומר כשהוא עונה?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">3</div><h3>השיחה</h3><p class="small muted">אילו שאלות לשאול, ואילו תשובות לתת?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">4</div><h3>פעולה</h3><p class="small muted">תור, שיחה חוזרת, העברה, הצעת מחיר?</p><div class="lines"></div></div>
+    <div class="card fill"><div class="num">5</div><h3>המשך טיפול</h3><p class="small muted">מי מקבל את הסיכום, ומה קורה אחר כך?</p><div class="lines"></div></div>
+  </div>
+  <style>
+    .fill{padding:30px 28px;height:470px;display:flex;flex-direction:column}
+    .fill h3{margin-top:10px;font-size:30px}
+    .fill p{margin-top:8px;min-height:96px}
+    .fill .lines{flex:1;margin-top:18px;background:repeating-linear-gradient(to bottom,transparent 0 50px,var(--line) 50px 52px)}
+  </style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span>אפשר גם להגיע עם התרחיש כמו שהוא: אשף ההגדרה ידריך אתכם.</span><span class="pg">11</span></div>
+</section>
+
+<!-- 12. Chaque appel, chaque détail -->
+<section class="slide paper">
+  <div class="eyebrow">כלול</div>
+  <h2>כל שיחה, <span class="hl">כל פרט</span></h2>
+  <p class="lead">כל מה שנאמר זמין, קריא ושימושי, בלי להאזין שוב לאף הודעה קולית.</p>
+  <div class="grid tiles" style="grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px">
+    <div class="card"><h3>תמלול</h3><p class="small muted" style="margin-top:10px">הטקסט המלא של השיחה, מילה במילה.</p></div>
+    <div class="card"><h3>הקלטה</h3><p class="small muted" style="margin-top:10px">האודיו של השיחה, להאזנה חוזרת כשיש ספק.</p></div>
+    <div class="card"><h3>סיכום</h3><p class="small muted" style="margin-top:10px">העיקר בכמה שורות, נשלח אחרי השיחה.</p></div>
+    <div class="card"><h3>נתונים שחולצו</h3><p class="small muted" style="margin-top:10px">שם, טלפון, פנייה, דחיפות: שדות מוכנים לשימוש.</p></div>
+    <div class="card"><h3>סטטיסטיקות</h3><p class="small muted" style="margin-top:10px">כמות שיחות, משך, סיבות פנייה, תוצאות.</p></div>
+    <div class="card" style="border:2px solid var(--signal)"><h3>שיבוט קול</h3><p class="small muted" style="margin-top:10px">הסוכן מדבר בקול שלכם, בהסכמתכם. במסלול עוזר AI.</p></div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">12</span></div>
+</section>
+
+<!-- 13. Intégrations -->
+<section class="slide">
+  <div class="eyebrow">אינטגרציות</div>
+  <h2>מתחבר <span class="hl">לכלים שלכם</span></h2>
+  <p class="lead">התורים, אנשי הקשר והסיכומים מגיעים למקום שבו אתם כבר עובדים.</p>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px">
+    <div class="card int"><div class="lab">יומנים</div><div class="chips"><span class="chip">Google Calendar</span><span class="chip">Outlook</span><span class="chip">Cal.com</span><span class="chip">Calendly</span></div></div>
+    <div class="card int"><div class="lab">CRM</div><div class="chips"><span class="chip">HubSpot</span><span class="chip">Pipedrive</span><span class="chip">Salesforce</span></div></div>
+    <div class="card int"><div class="lab">עבודת צוות</div><div class="chips"><span class="chip">Slack</span><span class="chip">Teams</span></div></div>
+    <div class="card int"><div class="lab">הודעות</div><div class="chips"><span class="chip">WhatsApp</span><span class="chip">Messenger</span><span class="chip">SMS</span></div></div>
+    <div class="card int"><div class="lab">מסחר מקוון</div><div class="chips"><span class="chip">Shopify</span></div></div>
+    <div class="card int" style="background:var(--ink);border-color:var(--ink);color:#fff"><div class="lab" style="color:var(--glow)">אוטומציות · מסלול עוזר AI</div><div class="chips"><span class="chip" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.25)">Webhooks</span><span class="chip" style="background:var(--glow);border-color:var(--glow);color:var(--night)">יותר מ-300 כלים</span></div></div>
+  </div>
+  <style>
+    .int{padding:34px 34px;min-height:200px}
+    .int .lab{font-weight:700;font-size:23px;letter-spacing:.02em;color:var(--signal-deep)}
+    .int .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .int .chip{font-size:22px;padding:10px 20px}
+  </style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">13</span></div>
+</section>
+
+<!-- 14. Mise en route -->
+<section class="slide paper">
+  <div class="eyebrow">תחילת עבודה</div>
+  <h2>עולים לאוויר <span class="hl">בלי פרויקט IT</span></h2>
+  <p class="lead">מתקדמים בקצב שלכם, מהדפדפן. אשף ההגדרה מלווה אתכם בכל שלב.</p>
+  <div style="position:relative;margin-top:64px">
+    <div style="position:absolute;left:40px;right:40px;top:39px;height:3px;background:var(--line)"></div>
+    <div class="grid" style="grid-template-columns:repeat(5,1fr);gap:26px;position:relative">
+      <div class="step"><div class="dot">0</div><div class="lab">יום 0</div><h3>הרשמה</h3><p class="small muted">תקופת ניסיון חינם של 14 יום, עם 30 דקות שיחה.</p></div>
+      <div class="step"><div class="dot">1</div><div class="lab">שלב 1</div><h3>מתארים את העסק</h3><p class="small muted">אשף ההגדרה מדריך אתכם.</p></div>
+      <div class="step"><div class="dot">2</div><div class="lab">שלב 2</div><h3>בודקים את הסוכן</h3><p class="small muted">הוא מתקשר אליכם, לטלפון שלכם.</p></div>
+      <div class="step"><div class="dot">3</div><div class="lab">שלב 3</div><h3>מחברים את הקו</h3><p class="small muted">הפניית שיחות כשאין מענה או כשהקו תפוס, או מספר ייעודי.</p></div>
+      <div class="step"><div class="dot" style="background:var(--ink);border-color:var(--ink);color:#fff">✓</div><div class="lab">שלב 4</div><h3>באוויר</h3><p class="small muted">השיחות שלכם מקבלות מענה, ביום ובלילה.</p></div>
+    </div>
+  </div>
+  <style>
+    .step .dot{width:80px;height:80px;border-radius:50%;background:#fff;border:3px solid var(--signal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:32px;color:var(--signal-deep)}
+    .step .lab{margin-top:24px;font-weight:700;font-size:22px;letter-spacing:.02em;color:var(--signal-deep)}
+    .step h3{margin-top:8px;font-size:30px}
+    .step p{margin-top:10px}
+  </style>
+  <div style="margin-top:56px;display:flex;gap:16px">
+    <span class="pill" style="font-size:23px;padding:12px 26px">ללא דמי הקמה</span>
+    <span class="pill" style="font-size:23px;padding:12px 26px">ללא התחייבות</span>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">14</span></div>
+</section>
+
+<!-- 15. Tarifs -->
+<section class="slide" style="padding-top:88px">
+  <div class="eyebrow">מחירים</div>
+  <h2 style="font-size:60px">מסלולים ברורים, <span class="hl">בדולר ארה״ב, לא כולל מע״מ</span></h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr 1.08fr 1fr;gap:24px;margin-top:48px;align-items:stretch">
+    <div class="card plan">
+      <div class="nm">תשלום לפי שימוש</div>
+      <div class="pr"><bdi class="ltr">$0.39</bdi><span>לדקה</span></div>
+      <div class="sub">בלי מנוי</div>
+      <ul class="check"><li>משלמים רק על הדקות שבשימוש</li><li>מתאים להתחלה קטנה</li></ul>
+    </div>
+    <div class="card plan">
+      <div class="nm">מענה טלפוני</div>
+      <div class="pr"><bdi class="ltr">$99</bdi><span>לחודש</span></div>
+      <div class="sub">350 דקות · סוכן אחד</div>
+      <ul class="check"><li>יומן מחובר</li><li>העברת שיחות לצוות שלכם</li><li>דקה נוספת: <bdi class="ltr">$0.39</bdi></li></ul>
+    </div>
+    <div class="card plan" style="border:2.5px solid var(--signal);position:relative">
+      <span class="pill" style="position:absolute;top:-20px;right:40px;background:var(--signal);color:#fff">הכי פופולרי</span>
+      <div class="nm">עוזר AI</div>
+      <div class="pr"><bdi class="ltr">$249</bdi><span>לחודש</span></div>
+      <div class="sub">1,000 דקות · 3 סוכנים</div>
+      <ul class="check"><li>קמפיינים ואוטומציות</li><li>שיבוט קול אחד</li><li>1,000 קרדיטים להודעות</li><li>דקה נוספת: <bdi class="ltr">$0.36</bdi></li></ul>
+    </div>
+    <div class="card plan">
+      <div class="nm">מוקד שיחות</div>
+      <div class="pr"><bdi class="ltr">$499</bdi><span>לחודש</span></div>
+      <div class="sub">2,300 דקות</div>
+      <ul class="check"><li>כל מה שיש בעוזר AI, בלי הגבלת סוכנים</li><li>20 שיחות במקביל</li><li>דקה נוספת: <bdi class="ltr">$0.32</bdi></li></ul>
+    </div>
+  </div>
+  <style>
+    .plan{padding:34px 32px 26px}
+    .plan .nm{font-weight:800;font-size:28px}
+    .plan .pr{font-weight:800;font-size:62px;letter-spacing:-.02em;margin-top:10px;line-height:1.05}
+    .plan .pr span{font-size:24px;font-weight:600;color:var(--slate);letter-spacing:0;margin-inline-start:10px}
+    .plan .sub{font-size:23px;font-weight:600;color:var(--signal-deep);margin-top:6px}
+    .plan ul{margin-top:16px;border-top:1px solid var(--line);padding-top:8px}
+    .plan ul li{font-size:23px;margin:9px 0;padding-inline-start:36px}
+    .plan ul li::before{width:22px;height:22px;top:4px;background-size:22px}
+  </style>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:28px">
+    <div class="note"><b>מנוי שנתי:</b> חודשיים מתנה</div>
+    <div class="note"><b>מספר ייעודי</b> בתוספת תשלום, <span class="nw">החל מ-<bdi class="ltr">$5.99</bdi> לחודש</span></div>
+    <div class="note"><b>ניסיון של 14 יום</b>, 30 דקות: אין חיוב בתקופת הניסיון</div>
+    <div class="note"><b>ללא דמי הקמה</b>, ללא התחייבות</div>
+  </div>
+  <style>.note{background:var(--paper);border-radius:14px;padding:16px 22px;font-size:22px;line-height:1.4;color:var(--slate)} .note b{color:var(--ink)}</style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span>פרטים והשוואה מלאה ב-<span class="ltr">permanenceia.com/he/tarifs</span></span><span class="pg">15</span></div>
+</section>
+
+<!-- 16. Numéros -->
+<section class="slide paper">
+  <div class="eyebrow">מספרי טלפון</div>
+  <h2>שומרים על המספר שלכם. <span class="hl">או מקבלים מספר חדש.</span></h2>
+  <div class="grid" style="grid-template-columns:1fr 1fr;gap:40px;margin-top:64px">
+    <div class="card" style="padding:46px 50px;border:2px solid var(--signal)">
+      <div class="pill">אפשרות א׳</div>
+      <h3 style="font-size:40px;margin-top:24px">שומרים על המספר הקיים</h3>
+      <p class="muted" style="margin-top:14px;font-size:26px">מפעילים בקו שלכם הפניית שיחות אל הסוכן, כשאין מענה או כשהקו תפוס.</p>
+      <ul class="check" style="margin-top:20px"><li>ממשיכים לענות בעצמכם כשאתם פנויים</li><li>שום דבר לא משתנה בכרטיסי הביקור</li><li>אפשר לבטל בכל רגע מהטלפון</li></ul>
+    </div>
+    <div class="card" style="padding:46px 50px">
+      <div class="pill" style="background:var(--paper);color:var(--slate)">אפשרות ב׳</div>
+      <h3 style="font-size:40px;margin-top:24px">מקבלים מספר חדש</h3>
+      <p class="muted" style="margin-top:14px;font-size:26px">מספר ייעודי, לפי המדינה שתבחרו, לקו חדש, לקמפיין או לסניף נוסף.</p>
+      <ul class="check" style="margin-top:20px"><li>מספרים ישראליים החל מ-<bdi class="ltr">$5.99</bdi> לחודש</li><li>מאפשר להפריד בין תחומי פעילות</li></ul>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">16</span></div>
+</section>
+
+<!-- 17. Sécurité et conformité -->
+<section class="slide">
+  <div class="eyebrow">אבטחה ותאימות</div>
+  <h2 style="font-size:66px">שקיפות מול הלקוחות, <span class="hl">הקפדה על המידע שלהם</span></h2>
+  <div class="grid" style="grid-template-columns:0.95fr 1.2fr 1.15fr 0.85fr;gap:24px;margin-top:64px">
+    <div class="card comp">
+      <div class="pill">שקיפות</div>
+      <h3>גילוי נאות מהרגע הראשון</h3>
+      <ul class="check"><li>הסוכן מציג את עצמו כ-AI</li><li>הוא מודיע שהשיחה מוקלטת</li></ul>
+    </div>
+    <div class="card comp">
+      <div class="pill">חוק הגנת הפרטיות</div>
+      <h3>המידע בשליטה שלכם</h3>
+      <ul class="check"><li>כלים ליישום החוק, כולל תיקון 13</li><li>תקופת שמירה שאתם קובעים</li><li>מחיקת שיחה והקלטה לפי בקשה</li><li>הסכם עיבוד נתונים (DPA) לפי בקשה</li></ul>
+    </div>
+    <div class="card comp">
+      <div class="pill">חוק התקשורת, סעיף 30א</div>
+      <h3>דיוור שיווקי רק בהסכמה</h3>
+      <ul class="check"><li>פרסומת בחיוג אוטומטי, SMS או דוא״ל: רק בהסכמה מפורשת מראש</li><li>רשימת חסימה למי שמסרב</li></ul>
+    </div>
+    <div class="card comp">
+      <div class="pill">תשלומים</div>
+      <h3>מאובטחים ב-Stripe</h3>
+      <p class="small muted" style="margin-top:14px">מנויים ותשלומים בכרטיס אשראי מנוהלים על ידי Stripe.</p>
+    </div>
+  </div>
+  <style>
+    .comp{padding:38px 34px;min-height:400px}
+    .comp h3{margin-top:20px;font-size:29px}
+    .comp ul{margin-top:12px}
+    .comp ul.check li{font-size:24px;margin:10px 0;padding-inline-start:38px}
+    .comp ul.check li::before{width:22px;height:22px;top:6px;background-size:22px}
+  </style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span>פרטים נוספים במדיניות הפרטיות ב-<span class="ltr">permanenceia.com/he</span></span><span class="pg">17</span></div>
+</section>
+
+<!-- 18. Objections -->
+<section class="slide paper">
+  <div class="eyebrow">שאלות נפוצות</div>
+  <h2 style="font-size:62px">השאלות שלכם, <span class="hl">התשובות שלנו</span></h2>
+  <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px">
+    <div class="card qa"><h3>"זה נשמע כמו רובוט?"</h3><p>קולות טבעיים בעברית, וטיפול בקטיעות באמצע משפט. הכי פשוט: תקשיבו להדגמה החיה.</p></div>
+    <div class="card qa"><h3>"הלקוחות שלי רוצים לדבר עם בן אדם."</h3><p>הסוכן עונה מיד, ואז מעביר את השיחה לצוות שלכם או מתאם שיחה חוזרת, עם סיכום.</p></div>
+    <div class="card qa"><h3>"כבר יש לי מענה אנושי."</h3><p>הסוכן נכנס לתמונה כשהקו תפוס, בערבים, בסופי שבוע ובשעות העומס.</p></div>
+    <div class="card qa"><h3>"אני לא רוצה להחליף מספר."</h3><p>אין צורך: מספיקה הפניית שיחות כשאין מענה או כשהקו תפוס.</p></div>
+    <div class="card qa"><h3>"ההקמה לוקחת הרבה זמן?"</h3><p>מתארים את העסק, האשף מדריך אתכם, ובודקים את הסוכן בטלפון שלכם. ללא דמי הקמה.</p></div>
+    <div class="card qa"><h3>"ומה אם ארצה להפסיק?"</h3><p>ללא התחייבות. מבטלים את הפניית השיחות, והקו שלכם עובד בדיוק כמו קודם.</p></div>
+  </div>
+  <style>.qa{padding:38px 38px;min-height:250px}.qa h3{font-size:30px;color:var(--ink)}.qa p{margin-top:14px;font-size:25px;line-height:1.45;color:var(--slate)}</style>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-light.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">18</span></div>
+</section>
+
+<!-- 19. Essayez maintenant -->
+<section class="slide dark">
+  <div class="grid" style="grid-template-columns:1.3fr 1fr;gap:100px;align-items:center;height:100%;margin-top:-30px">
+    <div>
+      <div class="eyebrow">הדגמה חיה</div>
+      <h2 style="font-size:100px">נסו <span class="hl">עכשיו</span></h2>
+      <p class="lead" style="font-size:34px;margin-top:34px">דברו עם הסוכן שלנו באתר <b style="color:#fff" class="ltr">permanenceia.com/he</b>: הדגמה חיה, בחינם, בלי הרשמה. או בקשו שיתקשר לטלפון שלכם.</p>
+      <div style="display:flex;gap:16px;margin-top:44px;flex-wrap:wrap">
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:23px;padding:12px 26px">בחינם</span>
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:23px;padding:12px 26px">בלי הרשמה</span>
+        <span class="pill" style="background:rgba(90,211,236,.12);color:var(--glow);font-size:23px;padding:12px 26px">בעברית, עם נועה או דניאל</span>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#fff;border-radius:32px;padding:44px;width:520px;margin:0 auto;box-shadow:0 0 0 10px rgba(90,211,236,.15)" dir="ltr">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31 31" shape-rendering="crispEdges" style="width:432px;height:432px;display:block"><path fill="#FFFFFF" d="M0 0h31v31H0z"/><path stroke="#0E1B4D" d="M1 1.5h7m1 0h2m2 0h1m1 0h1m1 0h1m1 0h1m3 0h7M1 2.5h1m5 0h1m1 0h2m3 0h1m2 0h1m1 0h2m2 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h2m1 0h4m4 0h2m1 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m3 0h4m1 0h3m2 0h1m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h7m1 0h4m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m3 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M10 8.5h6m1 0h1m3 0h1M1 9.5h1m2 0h6m1 0h2m2 0h1m1 0h4m1 0h1m2 0h1m1 0h3M1 10.5h1m2 0h1m1 0h1m2 0h1m4 0h3m1 0h3m1 0h1m1 0h2m1 0h2M1 11.5h1m1 0h1m2 0h3m2 0h3m1 0h3m3 0h2m1 0h1m2 0h1M2 12.5h1m1 0h1m1 0h1m1 0h2m2 0h1m2 0h1m2 0h4m1 0h1m2 0h1m2 0h1M1 13.5h1m2 0h1m1 0h3m2 0h2m3 0h2m3 0h1m1 0h2m4 0h1M3 14.5h3m4 0h1m3 0h1m1 0h2m1 0h1m3 0h1m1 0h5M1 15.5h2m1 0h1m2 0h1m1 0h4m2 0h7m1 0h2m2 0h1m1 0h1M1 16.5h4m1 0h1m1 0h1m1 0h4m1 0h1m6 0h4m1 0h1m1 0h1M1 17.5h1m1 0h1m1 0h5m2 0h1m1 0h1m1 0h1m4 0h1m4 0h1M1 18.5h3m1 0h2m6 0h1m2 0h1m2 0h4m2 0h1m1 0h2M1 19.5h2m1 0h8m1 0h2m1 0h1m3 0h4m2 0h1m2 0h1M1 20.5h2m1 0h1m5 0h5m1 0h1m6 0h5M1 21.5h4m2 0h3m2 0h1m1 0h1m1 0h3m2 0h8M9 22.5h3m1 0h7m1 0h1m3 0h2M1 23.5h7m1 0h2m1 0h3m1 0h3m1 0h2m1 0h1m1 0h2M1 24.5h1m5 0h1m1 0h1m2 0h3m3 0h1m1 0h2m3 0h1m2 0h2M1 25.5h1m1 0h3m1 0h1m1 0h1m3 0h2m1 0h2m1 0h8m1 0h1M1 26.5h1m1 0h3m1 0h1m1 0h1m2 0h8m1 0h2m1 0h1m4 0h1M1 27.5h1m1 0h3m1 0h1m2 0h1m2 0h1m2 0h3m1 0h1m1 0h1m1 0h2m1 0h3M1 28.5h1m5 0h1m5 0h2m2 0h1m4 0h1m1 0h1m1 0h2m1 0h1M1 29.5h7m1 0h1m1 0h1m2 0h1m5 0h2m3 0h2"/></svg>
+      </div>
+      <div style="margin-top:28px;font-size:25px;color:#C4CCE4">סרקו כדי להתחיל את ההדגמה<br><b style="color:#fff" class="ltr">permanenceia.com/he#demo-live</b></div>
+    </div>
+  </div>
+  <div class="foot"><div class="brand"><img src="../../public/logo/mark-dark.png" alt=""><div class="bt"><b>PermanenceAI</b><small>מענה טלפוני חכם 24/7</small></div></div><span class="pg">19</span></div>
+</section>
+
+<!-- 20. Contact -->
+<section class="slide dark" style="padding:0">
+  <div style="position:absolute;left:-260px;bottom:-320px;width:1100px;height:1100px;border-radius:50%;border:2px solid rgba(90,211,236,.10)"></div>
+  <div style="position:absolute;left:-120px;bottom:-180px;width:820px;height:820px;border-radius:50%;border:2px solid rgba(90,211,236,.14)"></div>
+  <div style="position:absolute;right:140px;top:120px">
+    <div class="brand xl" style="gap:24px"><img src="../../public/logo/mark-dark.png" alt="PermanenceAI" style="height:100px"><div class="bt"><b style="font-size:54px">PermanenceAI</b><small style="font-size:25px">מענה טלפוני חכם 24/7</small></div></div>
+  </div>
+  <div style="position:absolute;right:140px;top:340px;max-width:1400px">
+    <div class="eyebrow">צרו קשר</div>
+    <h2 style="font-size:92px">כל שיחה ראויה <span class="hl">למענה</span></h2>
+    <div style="display:flex;gap:80px;margin-top:56px;font-size:31px">
+      <div><div class="cap" style="color:#9AA6C8">אתר</div><div style="font-weight:700;margin-top:6px" class="ltr">www.permanenceia.com/he</div></div>
+      <div><div class="cap" style="color:#9AA6C8">דוא״ל</div><div style="font-weight:700;margin-top:6px" class="ltr">contact@permanenceia.com</div></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:30px;margin-top:60px">
+      <span style="display:inline-block;background:var(--signal);color:#fff;font-weight:800;font-size:34px;border-radius:14px;padding:22px 48px">התחילו בחינם</span>
+      <span style="font-size:26px;color:#C4CCE4"><span class="ltr">permanenceia.com/he/essai-gratuit</span> · 14 יום · 30 דקות מתנה</span>
+    </div>
+  </div>
+  <div style="position:absolute;left:140px;right:140px;bottom:52px;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;font-size:20px;color:#8792B5;display:flex;justify-content:space-between">
+    <span>PermanenceAI הוא מותג של SINAY STRATEGIC LLC (ויומינג, ארה״ב)</span><span style="font-weight:700">20</span>
+  </div>
+</section>
+
+</body>
+</html>

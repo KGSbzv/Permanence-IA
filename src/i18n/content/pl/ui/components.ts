@@ -375,7 +375,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { name: 'Wsparcie', text: 'Odpowiada na pytania klientów i w razie potrzeby przekazuje sprawę dalej.' },
     ],
     langLabel: 'Język',
-    accents: { fr: 'Francuski paryski', 'en-gb': 'Angielski brytyjski', 'en-au': 'Angielski australijski', it: 'Włoski', pl: 'Polski', nl: 'Niderlandzki' },
+    accents: { fr: 'Francuski paryski', 'en-gb': 'Angielski brytyjski', 'en-au': 'Angielski australijski', it: 'Włoski', pl: 'Polski', nl: 'Niderlandzki', he: 'Hebrajski (Izrael)' },
     sector: 'Twoja branża',
     modeLabel: 'Jak wypróbować',
     modeBrowser: 'W tej przeglądarce',
@@ -408,7 +408,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Brokerzy', 'Zarządcy wspólnot', 'Medycyna estetyczna', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
 
   // Ta sama kolejność co flagi komponentu.
-  languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki'],
+  languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki', 'Hebrajski'],
 
   agentTeam: {
     // Ta sama kolejność co ikony i linki komponentu.

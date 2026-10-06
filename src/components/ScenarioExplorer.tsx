@@ -46,7 +46,7 @@ function StageFallback({ slug }: { slug: string }) {
   const Icon = SECTOR_ICON[slug] || Sparkles;
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-br from-signal-soft via-white to-paper">
-      <Icon className="absolute -left-10 -top-10 h-72 w-72 text-signal/10" aria-hidden />
+      <Icon className="absolute -start-10 -top-10 h-72 w-72 text-signal/10" aria-hidden />
       <Icon className="relative h-24 w-24 text-signal/40 md:-translate-x-1/2 lg:-translate-x-3/4" aria-hidden />
     </div>
   );
@@ -68,7 +68,7 @@ function Stage({ s, Icon }: { s: Sector; Icon: React.ElementType }) {
           : <StageFallback slug={s.slug} />}
       </div>
       {photo && <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-night/80 via-night/10 to-transparent md:bg-gradient-to-r md:from-night/75 md:via-night/25" aria-hidden />}
-      <p className={`absolute bottom-8 left-4 right-4 max-w-sm text-[15px] font-medium leading-snug md:bottom-6 md:left-6 md:right-auto md:max-w-[17rem] ${photo ? 'text-white' : 'text-ink'}`}>
+      <p className={`absolute bottom-8 start-4 end-4 max-w-sm text-[15px] font-medium leading-snug md:bottom-6 md:start-6 md:end-auto md:max-w-[17rem] ${photo ? 'text-white' : 'text-ink'}`}>
         <span className="mb-2 flex w-fit items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-ink"><Icon className="h-3.5 w-3.5 text-signal-deep" aria-hidden />{s.name}</span>
         {s.caption}
       </p>
@@ -110,7 +110,7 @@ function AnswerCard({ s, armed }: { s: Sector; armed: boolean }) {
           const agent = l.who === 'agent';
           return (
             <li key={i} className={`flex ${agent ? '' : 'justify-end'} ${i < step ? 'animate-rise' : 'invisible'}`}>
-              <p className={`max-w-[88%] rounded-2xl px-3 py-1.5 text-[13.5px] leading-snug text-ink ${agent ? 'rounded-tl-sm bg-signal-soft' : 'rounded-tr-sm bg-paper'}`}>{l.text}</p>
+              <p className={`max-w-[88%] rounded-2xl px-3 py-1.5 text-[13.5px] leading-snug text-ink ${agent ? 'rounded-ss-sm bg-signal-soft' : 'rounded-se-sm bg-paper'}`}>{l.text}</p>
             </li>
           );
         })}
@@ -199,7 +199,7 @@ export default function ScenarioExplorer({ onTry }: {
               <button key={x.slug} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab"
                 id={`${base}-tab-${x.slug}`} aria-selected={on} aria-controls={`${base}-panel`} tabIndex={on ? 0 : -1}
                 onClick={() => select(i)} onKeyDown={(e) => onKey(e, i)}
-                className={`group flex shrink-0 items-center gap-3 rounded-full py-1.5 pl-1.5 pr-4 text-left text-[15px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-glow lg:rounded-xl lg:pr-3 ${on ? 'bg-white/10 font-semibold text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
+                className={`group flex shrink-0 items-center gap-3 rounded-full py-1.5 ps-1.5 pe-4 text-start text-[15px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-glow lg:rounded-xl lg:pe-3 ${on ? 'bg-white/10 font-semibold text-white' : 'text-white/70 hover:bg-white/5 hover:text-white'}`}>
                 <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors ${on ? 'bg-signal text-night' : 'bg-white/5 text-signal-glow'}`}>
                   <XIcon className="h-4 w-4" aria-hidden />
                 </span>
@@ -217,7 +217,7 @@ export default function ScenarioExplorer({ onTry }: {
         <div key={s.slug}>
           <div className="relative md:h-[430px]">
             <Stage s={s} Icon={Icon} />
-            <div className="relative -mt-4 px-2 animate-dock motion-reduce:animate-none md:absolute md:bottom-4 md:right-4 md:top-4 md:mt-0 md:w-[min(23rem,55%)] md:px-0">
+            <div className="relative -mt-4 px-2 animate-dock motion-reduce:animate-none md:absolute md:bottom-4 md:end-4 md:top-4 md:mt-0 md:w-[min(23rem,55%)] md:px-0">
               <AnswerCard s={s} armed={armed} />
             </div>
           </div>

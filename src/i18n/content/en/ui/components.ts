@@ -368,7 +368,7 @@ export const UI_COMPONENTS = {
       { name: 'Support', text: 'Answers your customers’ questions and escalates when needed.' },
     ],
     langLabel: 'Language',
-    accents: { fr: 'Parisian French', 'en-gb': 'British English', 'en-au': 'Australian English', it: 'Italian', pl: 'Polish', nl: 'Dutch' },
+    accents: { fr: 'Parisian French', 'en-gb': 'British English', 'en-au': 'Australian English', it: 'Italian', pl: 'Polish', nl: 'Dutch', he: 'Israeli Hebrew' },
     sector: 'Your trade',
     modeLabel: 'How to try it',
     modeBrowser: 'In this browser',
@@ -401,7 +401,7 @@ export const UI_COMPONENTS = {
   industryMarquee: ['Plumbers', 'Electricians', 'Dental practices', 'Clinics', 'Estate agents', 'Property management', 'Garages', 'Body shops', 'Hair salons', 'Barbers', 'Beauty salons', 'Restaurants', 'Hotels', 'Law firms', 'Accountants', 'E-commerce', 'Brokers', 'Block management', 'Aesthetic clinics', 'Physios', 'Osteopaths', 'Vets'],
 
   // Same order as the component's flags.
-  languageMarquee: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Dutch', 'Belgian French', 'Swiss French', 'Québécois', 'Arabic', 'Polish', 'Romanian', 'Turkish', 'Swedish'],
+  languageMarquee: ['French', 'English', 'Spanish', 'German', 'Italian', 'Portuguese', 'Dutch', 'Belgian French', 'Swiss French', 'Québécois', 'Arabic', 'Polish', 'Romanian', 'Turkish', 'Swedish', 'Hebrew'],
 
   agentTeam: {
     // Same order as the component's icons and links.
