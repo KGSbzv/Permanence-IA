@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI receptionist that answers every call, 24/7',
     pitch: 'The Receptionist plan picks up your calls, answers common questions, books appointments and sends you a clear summary of every request. Simple to set up, no complexity.',
     cta: 'Choose Receptionist',
-    highlights: ['24/7 AI receptionist', 'Connected calendar', 'Web widget, SMS and WhatsApp', 'Transfer to a person', '2 concurrent calls'],
+    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 phone number and 1 knowledge base', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger (message credits as needed)'],
   },
   assistant: {
     name: 'Assistant',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI assistant that qualifies, follows up and automates your enquiries',
     pitch: 'The Assistant plan adds three agents, follow-up campaigns, the flow builder connected to over 300 tools and a cloned voice, so you convert more enquiries.',
     cta: 'Choose Assistant',
-    highlights: ['Everything in Receptionist', '3 agents, 5 concurrent calls', 'Flow builder and automations', 'Follow-up campaigns', '1 cloned voice'],
+    highlights: ['Everything in Receptionist, plus:', '3 agents, 5 concurrent calls', '3 numbers, 3 knowledge bases, 3 in-call tools', '3 follow-up campaigns', 'Flow builder and automations (5,000 runs / month)', '1 cloned voice', '1,000 message credits a month (≈ 500 written replies)'],
   },
   'centre-appels': {
     name: 'Call Centre',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'A complete AI call centre to organise reception, bookings and support',
     pitch: 'The Call Centre plan removes the limits: unlimited agents and campaigns, 20 concurrent calls, custom dashboards, priority support and the best per-minute price.',
     cta: 'Choose Call Centre',
-    highlights: ['Everything in Assistant', 'Unlimited agents and campaigns', '20 concurrent calls', 'Custom dashboards', 'Priority support', '3,000 message credits included ($30)'],
+    highlights: ['Everything in Assistant, plus:', 'Unlimited agents, campaigns and knowledge bases', '20 concurrent calls, 10 numbers', '3 cloned voices, 50,000 automations / month', 'Custom dashboards', 'Priority support', '3,000 message credits a month (≈ 1,500 written replies)'],
   },
   'sur-mesure': {
     name: 'Custom',
@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Outbound campaigns', detail: 'Follow-ups, confirmations and reminders called automatically.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
       { label: 'SMS and WhatsApp', detail: 'Written conversations in one place, paid for with message credits.', cells: all(true) },
       { label: 'Messenger and Instagram', detail: 'Social media messages in the same inbox.', cells: all(true) },
-      { label: 'Message credits included', detail: 'Free credits every month for the AI’s written replies.', cells: { decouverte: false, receptionniste: false, assistant: '1,000 ($10)', 'centre-appels': '3,000 ($30)', 'sur-mesure': 'Custom' } },
+      { label: 'Message credits included', detail: 'Free credits every month for written exchanges (WhatsApp, SMS, Messenger, chat). 100 credits = $1, one AI reply ≈ 2 credits. Without included credits, you top up as you go.', cells: { decouverte: false, receptionniste: 'As needed', assistant: '1,000 / month (≈ 500 replies)', 'centre-appels': '3,000 / month (≈ 1,500 replies)', 'sur-mesure': 'Custom' } },
     ],
   },
   {

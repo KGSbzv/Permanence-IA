@@ -26,7 +26,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place, sans complexité.',
     cta: 'Choisir Réceptionniste',
-    highlights: ['Réceptionniste IA 24/7', 'Agenda connecté', 'Widget web, SMS et WhatsApp', 'Transfert vers un humain', '2 appels simultanés'],
+    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 numéro et 1 base de connaissances', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger (crédits de messages en option)'],
   },
   assistant: {
     name: 'Assistant',
@@ -34,7 +34,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch: 'Le forfait Assistant ajoute trois agents, les campagnes de relance, le flow builder relié à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
-    highlights: ['Tout Réceptionniste', '3 agents, 5 appels simultanés', 'Flow builder et automatisations', 'Campagnes de relance', '1 voix clonée'],
+    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 numéros, 3 bases de connaissances, 3 outils en appel', '3 campagnes de relance', 'Flow builder et automatisations (5 000 exécutions / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
   },
   'centre-appels': {
     name: 'Centre d’appels',
@@ -42,7 +42,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch: 'Le forfait Centre d’appels lève les limites : agents et campagnes illimités, 20 appels simultanés, tableaux de bord personnalisés, support prioritaire et le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
-    highlights: ['Tout Assistant', 'Agents et campagnes illimités', '20 appels simultanés', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages inclus (30 $)'],
+    highlights: ['Tout Assistant, et en plus :', 'Agents, campagnes et bases illimités', '20 appels simultanés, 10 numéros', '3 voix clonées, 50 000 automatisations / mois', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages par mois (≈ 1 500 réponses écrites)'],
   },
   'sur-mesure': {
     name: 'Sur mesure',
@@ -114,7 +114,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Campagnes sortantes', detail: 'Relances, confirmations et rappels appelés automatiquement.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
       { label: 'SMS et WhatsApp', detail: 'Échanges écrits centralisés, payés avec les crédits de messages.', cells: all(true) },
       { label: 'Messenger et Instagram', detail: 'Messages des réseaux sociaux dans la même boîte.', cells: all(true) },
-      { label: 'Crédits de messages inclus', detail: 'Crédits offerts chaque mois pour les réponses écrites de l’IA.', cells: { decouverte: false, receptionniste: false, assistant: '1 000 (10 $)', 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Crédits de messages inclus', detail: 'Crédits offerts chaque mois pour les échanges écrits (WhatsApp, SMS, Messenger, chat). 100 crédits = 1 $, une réponse de l’IA ≈ 2 crédits. Sans crédits inclus, vous rechargez selon votre usage.', cells: { decouverte: false, receptionniste: 'À la demande', assistant: '1 000 / mois (≈ 500 réponses)', 'centre-appels': '3 000 / mois (≈ 1 500 réponses)', 'sur-mesure': 'Sur mesure' } },
     ],
   },
   {

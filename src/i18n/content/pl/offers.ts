@@ -27,7 +27,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Recepcjonistka AI, która odbiera każde połączenie, całą dobę',
     pitch: 'Pakiet Recepcjonistka przejmuje połączenia, odpowiada na częste pytania, umawia wizyty i przekazuje Ci czytelne podsumowanie każdego zgłoszenia. Proste wdrożenie, bez komplikacji.',
     cta: 'Wybierz Recepcjonistkę',
-    highlights: ['Recepcjonistka AI 24/7', 'Podłączony kalendarz', 'Widżet na stronę, SMS i WhatsApp', 'Przekazanie rozmowy człowiekowi', '2 jednoczesne połączenia'],
+    highlights: ['1 agent głosowy AI odbierający 24/7', '2 jednoczesne połączenia', '1 numer i 1 baza wiedzy', 'Podłączony kalendarz i widżet na stronę', 'Przekazanie rozmowy do zespołu', 'SMS, WhatsApp i Messenger (kredyty na wiadomości według potrzeb)'],
   },
   assistant: {
     name: 'Asystent',
@@ -35,7 +35,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Asystent AI, który kwalifikuje, przypomina i automatyzuje obsługę zgłoszeń',
     pitch: 'Pakiet Asystent dodaje trzech agentów, kampanie przypominające, flow builder połączony z ponad 300 narzędziami oraz sklonowany głos, aby zamieniać więcej zapytań w klientów.',
     cta: 'Wybierz Asystenta',
-    highlights: ['Wszystko z pakietu Recepcjonistka', '3 agentów, 5 jednoczesnych połączeń', 'Flow builder i automatyzacje', 'Kampanie przypominające', '1 sklonowany głos'],
+    highlights: ['Wszystko z pakietu Recepcjonistka, a do tego:', '3 agentów, 5 jednoczesnych połączeń', '3 numery, 3 bazy wiedzy, 3 narzędzia w trakcie rozmowy', '3 kampanie przypominające', 'Flow builder i automatyzacje (5000 uruchomień / mies.)', '1 sklonowany głos', '1000 kredytów na wiadomości miesięcznie (≈ 500 odpowiedzi pisemnych)'],
   },
   'centre-appels': {
     name: 'Call center',
@@ -43,7 +43,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Kompletne call center AI do obsługi recepcji, wizyt i wsparcia',
     pitch: 'Pakiet Call center znosi limity: nielimitowani agenci i kampanie, 20 jednoczesnych połączeń, własne pulpity, priorytetowe wsparcie i najniższa cena za minutę.',
     cta: 'Wybierz Call center',
-    highlights: ['Wszystko z pakietu Asystent', 'Nielimitowani agenci i kampanie', '20 jednoczesnych połączeń', 'Własne pulpity', 'Priorytetowe wsparcie', '3000 kredytów na wiadomości w cenie (30 $)'],
+    highlights: ['Wszystko z pakietu Asystent, a do tego:', 'Nielimitowani agenci, kampanie i bazy wiedzy', '20 jednoczesnych połączeń, 10 numerów', '3 sklonowane głosy, 50 000 automatyzacji / mies.', 'Własne pulpity', 'Priorytetowe wsparcie', '3000 kredytów na wiadomości miesięcznie (≈ 1500 odpowiedzi pisemnych)'],
   },
   'sur-mesure': {
     name: 'Na miarę',
@@ -111,7 +111,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Kampanie wychodzące', detail: 'Ponowne kontakty, potwierdzenia i przypomnienia realizowane automatycznie przez telefon.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
       { label: 'SMS i WhatsApp', detail: 'Korespondencja pisemna w jednym miejscu, opłacana kredytami na wiadomości.', cells: all(true) },
       { label: 'Messenger i Instagram', detail: 'Wiadomości z mediów społecznościowych w tej samej skrzynce.', cells: all(true) },
-      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na pisemne odpowiedzi AI.', cells: { decouverte: false, receptionniste: false, assistant: '1 000 (10 $)', 'centre-appels': '3 000 (30 $)', 'sur-mesure': 'Indywidualnie' } },
+      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na komunikację pisemną (WhatsApp, SMS, Messenger, czat). 100 kredytów = 1 $, odpowiedź AI ≈ 2 kredyty. Bez kredytów w cenie doładowuje się według potrzeb.', cells: { decouverte: false, receptionniste: 'Według potrzeb', assistant: '1 000 / mies. (≈ 500 odpowiedzi)', 'centre-appels': '3 000 / mies. (≈ 1500 odpowiedzi)', 'sur-mesure': 'Indywidualnie' } },
     ],
   },
   {

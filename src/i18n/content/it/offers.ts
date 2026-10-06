@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Una receptionist AI che risponde a ogni chiamata, 24 ore su 24',
     pitch: 'Il piano Receptionist gestisce le Sue chiamate, risponde alle domande frequenti, fissa gli appuntamenti e Le invia un riepilogo chiaro di ogni richiesta. Semplice da attivare, senza complicazioni.',
     cta: 'Scelga Receptionist',
-    highlights: ['Receptionist AI 24/7', 'Calendario collegato', 'Widget web, SMS e WhatsApp', 'Trasferimento a un operatore', '2 chiamate simultanee'],
+    highlights: ['1 agente vocale AI che risponde 24/7', '2 chiamate simultanee', '1 numero e 1 base di conoscenza', 'Calendario collegato e widget web', 'Trasferimento di chiamata al Suo team', 'SMS, WhatsApp e Messenger (crediti messaggi secondo l’uso)'],
   },
   assistant: {
     name: 'Assistant',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un assistente AI che qualifica, ricontatta e automatizza le Sue richieste',
     pitch: 'Il piano Assistant aggiunge tre agenti, le campagne di ricontatto, il flow builder collegato a oltre 300 strumenti e una voce clonata, per convertire più richieste.',
     cta: 'Scelga Assistant',
-    highlights: ['Tutto Receptionist', '3 agenti, 5 chiamate simultanee', 'Flow builder e automazioni', 'Campagne di ricontatto', '1 voce clonata'],
+    highlights: ['Tutto Receptionist, e in più:', '3 agenti, 5 chiamate simultanee', '3 numeri, 3 basi di conoscenza, 3 strumenti in chiamata', '3 campagne di ricontatto', 'Flow builder e automazioni (5.000 esecuzioni / mese)', '1 voce clonata', '1.000 crediti messaggi al mese (≈ 500 risposte scritte)'],
   },
   'centre-appels': {
     name: 'Call Center',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un call center AI completo per organizzare accoglienza, appuntamenti e assistenza',
     pitch: 'Il piano Call Center elimina i limiti: agenti e campagne illimitati, 20 chiamate simultanee, dashboard personalizzate, assistenza prioritaria e il miglior prezzo al minuto.',
     cta: 'Scelga Call Center',
-    highlights: ['Tutto Assistant', 'Agenti e campagne illimitati', '20 chiamate simultanee', 'Dashboard personalizzate', 'Assistenza prioritaria', '3.000 crediti messaggi inclusi (30 $)'],
+    highlights: ['Tutto Assistant, e in più:', 'Agenti, campagne e basi illimitati', '20 chiamate simultanee, 10 numeri', '3 voci clonate, 50.000 automazioni / mese', 'Dashboard personalizzate', 'Assistenza prioritaria', '3.000 crediti messaggi al mese (≈ 1.500 risposte scritte)'],
   },
   'sur-mesure': {
     name: 'Su misura',
@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Campagne in uscita', detail: 'Ricontatti, conferme e promemoria chiamati automaticamente.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitate', 'sur-mesure': 'Illimitate' } },
       { label: 'SMS e WhatsApp', detail: 'Scambi scritti centralizzati, pagati con i crediti messaggi.', cells: all(true) },
       { label: 'Messenger e Instagram', detail: 'I messaggi dei social network nella stessa casella.', cells: all(true) },
-      { label: 'Crediti messaggi inclusi', detail: 'Crediti offerti ogni mese per le risposte scritte dell’AI.', cells: { decouverte: false, receptionniste: false, assistant: '1.000 (10 $)', 'centre-appels': '3.000 (30 $)', 'sur-mesure': 'Su misura' } },
+      { label: 'Crediti messaggi inclusi', detail: 'Crediti offerti ogni mese per gli scambi scritti (WhatsApp, SMS, Messenger, chat). 100 crediti = 1 $, una risposta dell’AI ≈ 2 crediti. Senza crediti inclusi, ricarica secondo l’uso.', cells: { decouverte: false, receptionniste: 'Secondo l’uso', assistant: '1.000 / mese (≈ 500 risposte)', 'centre-appels': '3.000 / mese (≈ 1.500 risposte)', 'sur-mesure': 'Su misura' } },
     ],
   },
   {
