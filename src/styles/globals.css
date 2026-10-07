@@ -80,6 +80,8 @@ html[dir="rtl"] iframe[title="Voice Assistant Widget"]:not([style*="100vw"]):not
 /* Poppins et Figtree n’ont pas de glyphes hébreux : Heebo prend le relais pour tout le texte. */
 html[lang="he"] body, html[lang="he"] .font-sans, html[lang="he"] .font-display { font-family: 'Heebo', system-ui, sans-serif; }
 html[lang="he"] .font-display { letter-spacing: 0; }
+/* Heebo paraît petit à taille égale : on l'agrandit d'environ 10 % partout (y compris les tailles en px) et on aère les lignes. */
+html[lang="he"] body { font-size-adjust: ex-height 0.57; line-height: 1.65; }
 /* Les flèches de direction pointent vers la gauche en RTL (la propriété scale se combine aux rotations Tailwind). */
 html[dir="rtl"] svg.lucide-arrow-right, html[dir="rtl"] svg.lucide-arrow-left, html[dir="rtl"] svg.lucide-arrow-up-right,
 html[dir="rtl"] svg.lucide-chevron-right, html[dir="rtl"] svg.lucide-chevron-left, html[dir="rtl"] svg.lucide-move-right,

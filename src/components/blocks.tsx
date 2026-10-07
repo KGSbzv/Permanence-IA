@@ -284,7 +284,16 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
               <div className="mt-4">
                 <PriceTag o={o} light={o.featured} billing={billing} />
                 {/* Repère en devise locale (facturation toujours en USD, voir la note sous les cartes). */}
-                {fx && !!o.price && <p className={`mt-1 text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{market.localCurrencies.filter((cur) => fx.rates[cur]).map((cur) => approx(annual ? annual.monthly : o.price!, cur, fx.rates[cur], market.numberLocale)).join(' · ')}</p>}
+                {/* Équivalents en devise locale : pastilles en gras sur fond teinté, lisibles dans toutes les monnaies. */}
+                {fx && !!o.price && (
+                  <p className="mt-2 flex flex-wrap gap-1.5">
+                    {market.localCurrencies.filter((cur) => fx.rates[cur]).map((cur) => (
+                      <span key={cur} className={`rounded-md px-2 py-0.5 text-sm font-bold tabular-nums ${o.featured ? 'bg-white/15 text-white' : 'bg-signal-soft text-signal-deep'}`}>
+                        {approx(annual ? annual.monthly : o.price!, cur, fx.rates[cur], market.numberLocale)}
+                      </span>
+                    ))}
+                  </p>
+                )}
               </div>
               <div className="mt-3">
                 <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
