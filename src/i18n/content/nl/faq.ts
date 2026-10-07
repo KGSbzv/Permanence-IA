@@ -33,7 +33,7 @@ export const FAQ_GENERAL: QA[] = [
 ];
 
 export const FAQ_PRICING: QA[] = [
-  { q: 'Kan ik per gebruik betalen, zonder abonnement?', a: 'Ja. Maak uw account aan en waardeer tegoed op wanneer u wilt (Add credits): een minuut kost $ 0,39 excl. btw, zonder abonnement, en tegoed vervalt niet. U krijgt dezelfde functies als het Receptionist-abonnement (1 agent, 2 gelijktijdige gesprekken, 1 nummer). Zodra u regelmatig gebeld wordt, is een abonnement goedkoper: van $ 0,28 tot $ 0,22 per minuut.' },
+  { q: 'Kan ik per gebruik betalen, zonder abonnement?', a: 'Ja. Maak uw account aan en waardeer tegoed op wanneer u wilt (Add credits): een minuut kost $ 0,39 excl. btw, zonder abonnement, en tegoed vervalt niet. U krijgt dezelfde functies als het Receptionist-abonnement (1 agent, 2 gelijktijdige gesprekken, 1 eigen nummer mogelijk als optie, niet inbegrepen, vanaf $ 3,99 excl. btw per maand). Zodra u regelmatig gebeld wordt, is een abonnement goedkoper: van $ 0,28 tot $ 0,22 per minuut.' },
   { q: 'Wat gebeurt er na de 30 proefminuten?', a: 'De 30 minuten zijn het maximum van de proefperiode: zodra dat bereikt is, stoppen de gesprekken tot het einde van de proefperiode of tot u uw abonnement start. Na de 14 dagen start het gekozen abonnement, tenzij u het in uw klantomgeving hebt opgezegd.' },
   { q: 'Zijn de prijzen exclusief btw?', a: 'Ja, alle prijzen worden exclusief belastingen weergegeven. Lokale belastingen komen erbij als ze van toepassing zijn.' },
   { q: 'Wat gebeurt er als ik over mijn minuten heen ga?', a: 'U voegt op elk moment minuten toe met een opwaardering, voor een drukke maand. Gaat u er regelmatig overheen, dan is het grotere abonnement per minuut goedkoper: wij laten u dat weten.' },

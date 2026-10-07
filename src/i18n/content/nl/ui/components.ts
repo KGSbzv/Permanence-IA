@@ -400,7 +400,7 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'mannenstem' : 'vrouwenstem'}`,
   },
 
-  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbershops', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Esthetische klinieken', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
+  industryMarquee: ['Loodgieters', 'Elektriciens', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbershops', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Dierenartsen'],
 
   // Zelfde volgorde als de vlaggen van de component.
   languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'Belgisch-Frans', 'Zwitsers-Frans', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds', 'Hebreeuws'],

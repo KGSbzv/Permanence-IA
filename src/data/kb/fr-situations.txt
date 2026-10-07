@@ -87,8 +87,8 @@ A8. Objections
 
 A9. Angles par secteur (1 ou 2 phrases)
 - Services à domicile (plombiers, électriciens, chauffagistes…) : les techniciens ne peuvent pas décrocher en intervention ; l'agent trie l'urgence, prend adresse et panne, relance les devis à 48 h. Forfait conseillé : Assistant.
-- Dentaire et cliniques : l'assistante ne quitte plus le fauteuil ; rendez-vous, reports et rappels la veille, nouveaux patients captés hors horaires. Assistant.
-- Kinés et paramédical : restez avec votre patient ; séances réservées et reportées, plus de messagerie à rappeler le soir. Assistant.
+- Dentaire et cliniques : l'assistante ne quitte plus le fauteuil ; rendez-vous, reports et rappels la veille, nouveaux patients captés hors horaires. Assistant. Secteur en pause commerciale : ne pas le mettre en avant ; proposer le rappel d'un conseiller avant toute souscription.
+- Kinés et paramédical : restez avec votre patient ; séances réservées et reportées, plus de messagerie à rappeler le soir. Assistant. Secteur en pause commerciale : ne pas le mettre en avant ; proposer le rappel d'un conseiller avant toute souscription.
 - Cliniques vétérinaires : chaque propriétaire inquiet obtient une réponse, urgences transmises selon votre protocole, rappels de vaccins. Assistant.
 - Immobilier : prospects qualifiés pendant les visites (budget, zone, délai), demandes reçues des portails rappelées en quelques minutes. Assistant.
 - Garages et automobile : demandes arrivées avec le véhicule et le symptôme, devis relancés, rappels de révision. Assistant.
@@ -99,7 +99,7 @@ A9. Angles par secteur (1 ou 2 phrases)
 - E-commerce : « où est ma commande ? » traité à toute heure, plusieurs clients servis pendant les soldes. Assistant.
 - Courtiers en assurance et en crédit : demandes de devis rappelées en quelques minutes, pièces relancées ; aucun conseil donné par l'IA. Assistant.
 - Gestion locative et syndics : incidents de locataires triés jour et nuit, urgences transmises selon votre protocole, candidats présélectionnés. Assistant.
-- Médecine et chirurgie esthétiques : demandes captées pendant les actes, rendez-vous confirmés la veille, discrétion ; aucun conseil médical par l'IA. Assistant.
+- Médecine et chirurgie esthétiques : demandes captées pendant les actes, rendez-vous confirmés la veille, discrétion ; aucun conseil médical par l'IA. Assistant. Secteur en pause commerciale : ne pas le mettre en avant ; proposer le rappel d'un conseiller avant toute souscription.
 
 A10. Relance des anciens clients (module à présenter)
 - Idée : le fichier clients du prospect contient des clients satisfaits qui ont simplement oublié de revenir (contrôle annuel, entretien de chaudière, révision, coupe). L'agent les rappelle, cite la dernière prestation, propose deux créneaux et réserve.
@@ -336,6 +336,7 @@ F. CANAUX
 
 F1. Téléphone
 - Agent vocal entrant ou sortant : accueil, qualification, rendez-vous, rappels. C'est le canal le plus complet. Les minutes sont décomptées.
+- Ligne de Permanence IA au Royaume-Uni : +44 7367 090106, Katie, notre assistante IA, commercial et support, en anglais, 24 h/24.
 - Ligne de Permanence IA en Israël : 02-376-7085, agent en hébreu, 24 h/24.
 
 F2. Widget du site (voix et chat)

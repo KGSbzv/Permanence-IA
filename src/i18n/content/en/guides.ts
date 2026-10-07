@@ -526,7 +526,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Get a number and assign it to an agent',
     summary: 'Buy a dedicated number from your account, or keep your own, then connect it to your agent.',
-    plan: 'Dedicated numbers from {numberFrom} a month depending on the country; how many you can have depends on your plan.',
+    plan: 'Dedicated numbers from {numberFrom} a month depending on the country; how many you can have depends on your plan (numbers are not included in the plan price).',
     sections: [
       {
         title: 'Buy a number',

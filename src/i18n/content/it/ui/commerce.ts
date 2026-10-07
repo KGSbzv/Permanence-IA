@@ -139,7 +139,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenti adatti al Suo settore',
-      intro: 'Quattordici settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
+      intro: 'Undici settori in cui ogni chiamata persa costa un cliente. Per ciascuno, l’agente pone le domande giuste.',
       link: 'Tutti i settori',
     },
     integrations: {
@@ -271,11 +271,11 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Assistente telefonico AI per settore · ${brand}`,
-      description: 'Assistente telefonico AI per artigiani, dentisti, fisioterapisti, veterinari, agenzie, officine, parrucchieri, centri estetici, ristoranti, avvocati.',
+      description: 'Assistente telefonico AI per artigiani, veterinari, agenzie, officine, parrucchieri, centri estetici, ristoranti, avvocati.',
     },
     hero: {
       title: 'Un agente vocale adatto alla Sua attività',
-      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto quattordici settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente: dall’idraulico allo studio di fisioterapia, dal parrucchiere allo studio legale, l’agente pone le domande giuste.',
+      intro: 'Un assistente telefonico AI configurato per il Suo mestiere. Abbiamo scelto undici settori in cui le chiamate arrivano quando il personale è occupato, e in cui ogni richiesta persa costa un cliente: dall’idraulico alla clinica veterinaria, dal parrucchiere allo studio legale, l’agente pone le domande giuste.',
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',

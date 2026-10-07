@@ -87,8 +87,8 @@ A8. Bezwaren
 
 A9. Invalshoek per branche (1 of 2 zinnen)
 - Service aan huis (loodgieters, elektriciens, cv-monteurs…): monteurs kunnen tijdens een klus niet opnemen; de agent schat de urgentie in, noteert adres en storing en belt openstaande offertes na twee dagen na. Aanbevolen abonnement: Assistent.
-- Tandartsen en klinieken: de assistente hoeft de stoel niet meer te verlaten; afspraken, verplaatsingen en herinneringen de dag ervoor, nieuwe patiënten ook buiten openingstijden binnengehaald. Assistent.
-- Fysiotherapie en paramedische zorg: u blijft bij uw patiënt; behandelingen geboekt en verplaatst, geen voicemails meer om 's avonds terug te bellen. Assistent.
+- Tandartsen en klinieken: de assistente hoeft de stoel niet meer te verlaten; afspraken, verplaatsingen en herinneringen de dag ervoor, nieuwe patiënten ook buiten openingstijden binnengehaald. Assistent. Branche commercieel gepauzeerd: niet actief aanprijzen; bied aan dat een adviseur terugbelt vóór een abonnement.
+- Fysiotherapie en paramedische zorg: u blijft bij uw patiënt; behandelingen geboekt en verplaatst, geen voicemails meer om 's avonds terug te bellen. Assistent. Branche commercieel gepauzeerd: niet actief aanprijzen; bied aan dat een adviseur terugbelt vóór een abonnement.
 - Dierenartspraktijken: elke ongeruste eigenaar krijgt antwoord, spoedgevallen doorgegeven volgens uw protocol, vaccinatieherinneringen. Assistent.
 - Vastgoed (makelaars): prospects gekwalificeerd tijdens bezichtigingen (budget, gebied, termijn), leads van portals binnen enkele minuten teruggebeld. Assistent.
 - Garages en autobedrijven: aanvragen komen binnen met het voertuig en het symptoom, offertes nagebeld, herinneringen voor onderhoudsbeurten. Assistent.
@@ -99,7 +99,7 @@ A9. Invalshoek per branche (1 of 2 zinnen)
 - E-commerce: "waar blijft mijn bestelling?" op elk uur afgehandeld, meerdere klanten tegelijk geholpen tijdens de uitverkoop. Assistent.
 - Assurantie- en hypotheekadviseurs: offerteaanvragen binnen enkele minuten teruggebeld, ontbrekende documenten opgevraagd; de AI geeft geen advies. Assistent.
 - Verhuurbeheer en VvE-beheer: meldingen van huurders dag en nacht gesorteerd, spoed doorgegeven volgens uw protocol, kandidaat-huurders voorgeselecteerd. Assistent.
-- Esthetische geneeskunde en cosmetische chirurgie: aanvragen opgevangen tijdens behandelingen, afspraken de dag ervoor bevestigd, discretie; de AI geeft geen medisch advies. Assistent.
+- Esthetische geneeskunde en cosmetische chirurgie: aanvragen opgevangen tijdens behandelingen, afspraken de dag ervoor bevestigd, discretie; de AI geeft geen medisch advies. Assistent. Branche commercieel gepauzeerd: niet actief aanprijzen; bied aan dat een adviseur terugbelt vóór een abonnement.
 
 A10. Oud-klanten opnieuw benaderen (module om te presenteren)
 - Idee: in het bestand van de prospect staan tevreden klanten die simpelweg vergeten zijn terug te komen (jaarlijkse controle, ketelonderhoud, onderhoudsbeurt, knipbeurt). De agent belt ze, noemt de laatste dienst, stelt twee tijdstippen voor en boekt.
@@ -336,6 +336,7 @@ F. KANALEN
 
 F1. Telefoon
 - Inkomende of uitgaande spraakagent: ontvangst, kwalificatie, afspraken, terugbelgesprekken. Dit is het meest complete kanaal. Minuten worden verrekend.
+- Lijn van PermanenceAI in het Verenigd Koninkrijk: +44 7367 090106, Katie, onze AI-assistente, verkoop en support, in het Engels, 24 uur per dag.
 - Lijn van PermanenceAI in Israël: 02-376-7085, agent in het Hebreeuws, 24 uur per dag.
 
 F2. Websitewidget (spraak en chat)

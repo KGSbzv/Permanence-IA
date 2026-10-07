@@ -553,7 +553,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Obtenir un numéro et l’attribuer à un agent',
     summary: 'Acheter un numéro dédié depuis votre espace, ou garder le vôtre, puis le relier à votre agent.',
-    plan: 'Numéros dédiés à partir de {numberFrom} par mois selon le pays ; le nombre inclus dépend du forfait.',
+    plan: 'Numéros dédiés à partir de {numberFrom} par mois selon le pays ; le nombre de numéros possibles dépend du forfait (les numéros ne sont pas inclus dans son prix).',
     sections: [
       {
         title: 'Acheter un numéro',

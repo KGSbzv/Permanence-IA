@@ -87,8 +87,8 @@ A8. Obiezioni
 
 A9. Argomenti per settore (1 o 2 frasi)
 - Servizi a domicilio (idraulici, elettricisti, tecnici caldaie…): i tecnici non possono rispondere durante un intervento; l'agente valuta l'urgenza, prende indirizzo e guasto, ricontatta i preventivi dopo 48 ore. Piano consigliato: Assistant.
-- Studi dentistici e cliniche: l'assistente non lascia più la poltrona; appuntamenti, spostamenti e promemoria il giorno prima, nuovi pazienti acquisiti fuori orario. Assistant.
-- Fisioterapia e professioni sanitarie: resti con il Suo paziente; sedute prenotate e spostate, niente più messaggi in segreteria da richiamare la sera. Assistant.
+- Studi dentistici e cliniche: l'assistente non lascia più la poltrona; appuntamenti, spostamenti e promemoria il giorno prima, nuovi pazienti acquisiti fuori orario. Assistant. Settore in pausa commerciale: non promuoverlo; proporre di essere richiamati da un consulente prima di qualsiasi sottoscrizione.
+- Fisioterapia e professioni sanitarie: resti con il Suo paziente; sedute prenotate e spostate, niente più messaggi in segreteria da richiamare la sera. Assistant. Settore in pausa commerciale: non promuoverlo; proporre di essere richiamati da un consulente prima di qualsiasi sottoscrizione.
 - Cliniche veterinarie: ogni proprietario preoccupato riceve una risposta, urgenze inoltrate secondo il Suo protocollo, promemoria dei vaccini. Assistant.
 - Immobiliare: potenziali clienti qualificati durante le visite (budget, zona, tempistiche), contatti dai portali richiamati in pochi minuti. Assistant.
 - Officine e settore auto: richieste che arrivano con il veicolo e il sintomo, preventivi ricontattati, promemoria dei tagliandi. Assistant.
@@ -99,7 +99,7 @@ A9. Argomenti per settore (1 o 2 frasi)
 - E-commerce: "dov'è il mio ordine?" gestito a qualsiasi ora, più clienti serviti durante i saldi. Assistant.
 - Broker assicurativi e mediatori creditizi: richieste di preventivo richiamate in pochi minuti, documenti sollecitati; nessuna consulenza fornita dall'AI. Assistant.
 - Gestione immobiliare e condomini: segnalazioni degli inquilini smistate giorno e notte, urgenze inoltrate secondo il Suo protocollo, aspiranti inquilini preselezionati. Assistant.
-- Medicina e chirurgia estetica: richieste raccolte durante le prestazioni, appuntamenti confermati il giorno prima, discrezione; nessuna consulenza medica da parte dell'AI. Assistant.
+- Medicina e chirurgia estetica: richieste raccolte durante le prestazioni, appuntamenti confermati il giorno prima, discrezione; nessuna consulenza medica da parte dell'AI. Assistant. Settore in pausa commerciale: non promuoverlo; proporre di essere richiamati da un consulente prima di qualsiasi sottoscrizione.
 
 A10. Ricontatto dei clienti inattivi (modulo da presentare)
 - L'idea: l'archivio del potenziale cliente contiene clienti soddisfatti che si sono semplicemente dimenticati di tornare (controllo annuale, manutenzione della caldaia, tagliando, taglio). L'agente li richiama, cita l'ultima prestazione, propone due orari e prenota.
@@ -337,6 +337,8 @@ F. CANALI
 
 F1. Telefono
 - Agente vocale in entrata o in uscita: accoglienza, qualificazione, appuntamenti, richiamate. È il canale più completo. I minuti vengono conteggiati.
+- Linea di PermanenceIA nel Regno Unito: +44 7367 090106, Katie, la nostra assistente AI, vendite e assistenza, in inglese, 24 ore su 24.
+- Linea di PermanenceIA in Israele: 02-376-7085, agente in ebraico, 24 ore su 24.
 
 F2. Widget del sito (voce e chat)
 - Su www.permanenceia.com la bolla permette di parlare con l'agente dal browser o di scrivergli, e di richiedere una richiamata. Ideale per una demo live.

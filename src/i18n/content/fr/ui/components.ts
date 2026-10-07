@@ -400,7 +400,7 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, voix ${male ? 'masculine' : 'féminine'}`,
   },
 
-  industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts de beauté', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Médecine esthétique', 'Kinésithérapeutes', 'Ostéopathes', 'Vétérinaires'],
+  industryMarquee: ['Plombiers', 'Électriciens', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts de beauté', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Vétérinaires'],
 
   // Même ordre que les drapeaux du composant.
   languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Français de Belgique', 'Français de Suisse', 'Français du Québec', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois', 'Hébreu'],

@@ -79,7 +79,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents tailored to your trade',
-      intro: 'Fourteen trades where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
+      intro: 'Eleven trades where every missed call costs a customer. Your AI receptionist asks the right questions for each one.',
       link: 'All sectors',
     },
     integrations: {
@@ -211,11 +211,11 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `AI receptionists by industry · ${brand}`,
-      description: 'AI receptionist for trades, dentists, physios, vets, estate agents, garages, hair and beauty salons, restaurants, law firms and accountants.',
+      description: 'AI receptionist for trades, vets, estate agents, garages, hair and beauty salons, restaurants, law firms and accountants.',
     },
     hero: {
       title: 'An AI receptionist tailored to your trade',
-      intro: 'We have chosen fourteen trades where calls come in when teams are busy, and where every missed enquiry costs a customer. From a plumber’s emergency line to a physio clinic’s front desk, from the barber shop to the law firm, the agent asks the right questions.',
+      intro: 'We have chosen eleven trades where calls come in when teams are busy, and where every missed enquiry costs a customer. From a plumber’s emergency line to a veterinary clinic’s front desk, from the barber shop to the law firm, the agent asks the right questions.',
     },
     other: {
       title: 'Your business isn’t on the list?',

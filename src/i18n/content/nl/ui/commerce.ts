@@ -130,7 +130,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Agents afgestemd op uw vak',
-      intro: 'Veertien sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
+      intro: 'Elf sectoren waarin elk gemist gesprek een klant kost. De agent stelt voor elk ervan de juiste vragen.',
       link: 'Alle sectoren',
     },
     integrations: {
@@ -262,11 +262,11 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Telefoonservice met AI per branche · ${brand}`,
-      description: 'Installateurs, tandartsen, fysio’s, dierenartsen, makelaars, garages, kappers, salons, horeca, advocaten: telefoonservice met AI per branche.',
+      description: 'Installateurs, dierenartsen, makelaars, garages, kappers, salons, horeca, advocaten: telefoonservice met AI per branche.',
     },
     hero: {
       title: 'Een AI-telefoonassistent afgestemd op uw vak',
-      intro: 'We hebben veertien sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant. Van de loodgieter op een klus tot de fysiotherapiepraktijk, van de kapsalon tot het advocatenkantoor: de agent stelt de juiste vragen.',
+      intro: 'We hebben elf sectoren gekozen waarin gesprekken binnenkomen terwijl teams druk zijn. Daar maakt telefonische bereikbaarheid het verschil: elke gemiste aanvraag kost een klant. Van de loodgieter op een klus tot de dierenartsenpraktijk, van de kapsalon tot het advocatenkantoor: de agent stelt de juiste vragen.',
     },
     other: {
       title: 'Staat uw branche er niet tussen?',

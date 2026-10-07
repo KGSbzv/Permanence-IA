@@ -87,8 +87,8 @@ A8. Zastrzeżenia
 
 A9. Argumenty według branży (1 lub 2 zdania)
 - Usługi domowe (hydraulicy, elektrycy, instalatorzy ogrzewania…): technicy nie mogą odebrać w trakcie pracy; agent ocenia pilność, zapisuje adres i usterkę, po 48 godzinach przypomina o wycenach. Zalecany pakiet: Asystent.
-- Stomatologia i kliniki: asystentka nie odchodzi od fotela; wizyty, przełożenia i przypomnienia dzień wcześniej, nowi pacjenci pozyskiwani poza godzinami pracy. Asystent.
-- Fizjoterapia i gabinety terapeutyczne: zostają Państwo przy pacjencie; sesje rezerwowane i przekładane, koniec z oddzwanianiem na wiadomości wieczorem. Asystent.
+- Stomatologia i kliniki: asystentka nie odchodzi od fotela; wizyty, przełożenia i przypomnienia dzień wcześniej, nowi pacjenci pozyskiwani poza godzinami pracy. Asystent. Branża wstrzymana handlowo: nie promować; zaproponować oddzwonienie doradcy przed jakąkolwiek subskrypcją.
+- Fizjoterapia i gabinety terapeutyczne: zostają Państwo przy pacjencie; sesje rezerwowane i przekładane, koniec z oddzwanianiem na wiadomości wieczorem. Asystent. Branża wstrzymana handlowo: nie promować; zaproponować oddzwonienie doradcy przed jakąkolwiek subskrypcją.
 - Gabinety weterynaryjne: każdy zaniepokojony właściciel dostaje odpowiedź, pilne przypadki przekazywane zgodnie z Państwa procedurą, przypomnienia o szczepieniach. Asystent.
 - Nieruchomości: klienci kwalifikowani, gdy są Państwo na prezentacji nieruchomości (budżet, lokalizacja, termin), leady z portali obsłużone w kilka minut. Asystent.
 - Warsztaty i motoryzacja: zgłoszenia przychodzą z danymi pojazdu i objawem usterki, przypomnienia o wycenach, przypomnienia o przeglądach. Asystent.
@@ -99,7 +99,7 @@ A9. Argumenty według branży (1 lub 2 zdania)
 - E-commerce: "gdzie jest moje zamówienie?" obsłużone o każdej porze, wielu klientów obsłużonych w czasie wyprzedaży. Asystent.
 - Pośrednicy ubezpieczeniowi i kredytowi: prośby o wycenę obsłużone w kilka minut, przypomnienia o dokumentach; AI nie udziela żadnych porad. Asystent.
 - Zarządzanie najmem i wspólnotami: zgłoszenia najemców segregowane dniem i nocą, pilne sprawy przekazywane zgodnie z Państwa procedurą, wstępna selekcja kandydatów. Asystent.
-- Medycyna i chirurgia estetyczna: zapytania przyjmowane w trakcie zabiegów, wizyty potwierdzane dzień wcześniej, dyskrecja; AI nie udziela porad medycznych. Asystent.
+- Medycyna i chirurgia estetyczna: zapytania przyjmowane w trakcie zabiegów, wizyty potwierdzane dzień wcześniej, dyskrecja; AI nie udziela porad medycznych. Asystent. Branża wstrzymana handlowo: nie promować; zaproponować oddzwonienie doradcy przed jakąkolwiek subskrypcją.
 
 A10. Ponowny kontakt z dawnymi klientami (moduł do zaprezentowania)
 - Idea: w bazie klienta są zadowoleni klienci, którzy po prostu zapomnieli wrócić (coroczna kontrola, serwis kotła, przegląd, strzyżenie). Agent dzwoni do nich, przywołuje ostatnią usługę, proponuje dwa terminy i rezerwuje.
@@ -336,6 +336,7 @@ F. KANAŁY
 
 F1. Telefon
 - Głosowy agent przychodzący lub wychodzący: powitanie, kwalifikacja, wizyty, oddzwonienia. To najpełniejszy kanał. Minuty są naliczane.
+- Linia PermanenceAI w Wielkiej Brytanii: +44 7367 090106, Katie, nasza asystentka AI, sprzedaż i wsparcie, po angielsku, całą dobę.
 - Linia PermanenceAI w Izraelu: 02-376-7085, agent po hebrajsku, całą dobę.
 
 F2. Widżet na stronie (głos i czat)

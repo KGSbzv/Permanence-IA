@@ -124,7 +124,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     sectors: {
       title: 'Agenci dopasowani do Twojej branży',
-      intro: 'Czternaście branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
+      intro: 'Jedenaście branż, w których każde nieodebrane połączenie to utracony klient. Agent zadaje właściwe pytania w każdej z nich.',
       link: 'Wszystkie branże',
     },
     integrations: {
@@ -256,11 +256,11 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Asystent głosowy AI dla firm z każdej branży · ${brand}`,
-      description: 'Fachowcy, dentyści, fizjoterapeuci, weterynarze, biura nieruchomości, warsztaty, fryzjerzy, salony urody, restauracje, kancelarie: asystent głosowy AI.',
+      description: 'Fachowcy, weterynarze, biura nieruchomości, warsztaty, fryzjerzy, salony urody, restauracje, kancelarie: asystent głosowy AI.',
     },
     hero: {
       title: 'Asystent głosowy AI dopasowany do Twojej branży',
-      intro: 'Wybraliśmy czternaście branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient. Od zgłoszeń awarii u fachowca po rejestrację w gabinecie fizjoterapii, od salonu fryzjerskiego po kancelarię: agent zadaje właściwe pytania.',
+      intro: 'Wybraliśmy jedenaście branż, w których telefony dzwonią, gdy zespoły są zajęte, a każde nieodebrane zgłoszenie to utracony klient. Od zgłoszeń awarii u fachowca po rejestrację w gabinecie weterynaryjnym, od salonu fryzjerskiego po kancelarię: agent zadaje właściwe pytania.',
     },
     other: {
       title: 'Twojej branży nie ma na liście?',

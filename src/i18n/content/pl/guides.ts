@@ -525,7 +525,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Uzyskanie numeru i przypisanie go do agenta',
     summary: 'Kup dedykowany numer w panelu klienta lub zachowaj obecny, a następnie połącz go z agentem.',
-    plan: 'Numery dedykowane od {numberFrom} miesięcznie, zależnie od kraju; liczba numerów w cenie zależy od pakietu.',
+    plan: 'Numery dedykowane od {numberFrom} miesięcznie, zależnie od kraju; liczba numerów, które można podłączyć, zależy od pakietu (numery nie są wliczone w cenę pakietu).',
     sections: [
       {
         title: 'Kup numer',

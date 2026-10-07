@@ -130,7 +130,7 @@ export const UI_COMMERCE = {
     },
     sectors: {
       title: 'Des agents adaptés à votre métier',
-      intro: 'Quatorze métiers où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
+      intro: 'Onze métiers où chaque appel manqué coûte un client. L’agent pose les bonnes questions pour chacun.',
       link: 'Tous les secteurs',
     },
     integrations: {
@@ -263,11 +263,11 @@ export const UI_COMMERCE = {
   sectorsIndex: {
     meta: {
       title: (brand: string) => `Secrétariat téléphonique IA par métier · ${brand}`,
-      description: 'Artisans, dentistes, kinés, vétérinaires, agences, garages, coiffeurs, instituts, restaurants, avocats : un secrétariat téléphonique IA par métier.',
+      description: 'Artisans, vétérinaires, agences immobilières, garages, coiffeurs, instituts, restaurants, avocats : un secrétariat téléphonique IA par métier.',
     },
     hero: {
       title: 'Un secrétariat téléphonique IA adapté à votre métier',
-      intro: 'Nous avons retenu quatorze métiers où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan au secrétariat d’un cabinet de kiné, du salon de coiffure au cabinet d’avocats, l’agent pose les bonnes questions.',
+      intro: 'Nous avons retenu onze métiers où les appels arrivent quand les équipes sont occupées, et où chaque demande manquée coûte un client. De la permanence téléphonique d’un artisan à l’accueil d’une clinique vétérinaire, du salon de coiffure au cabinet d’avocats, l’agent pose les bonnes questions.',
     },
     other: {
       title: 'Votre activité n’est pas dans la liste ?',

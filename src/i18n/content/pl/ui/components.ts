@@ -411,7 +411,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, głos ${male ? 'męski' : 'żeński'}`,
   },
 
-  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Pośrednicy ubezpieczeniowi', 'Zarządcy wspólnot', 'Medycyna estetyczna', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
+  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Pośrednicy ubezpieczeniowi', 'Zarządcy wspólnot', 'Weterynarze'],
 
   // Ta sama kolejność co flagi komponentu.
   languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki', 'Hebrajski'],

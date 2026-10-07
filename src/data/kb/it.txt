@@ -5,7 +5,7 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - PermanenceIA è un marchio di SINAY STRATEGIC LLC, società registrata nello Stato del Wyoming (Stati Uniti). Contatto scritto: contact@permanenceia.com.
 - I nostri agenti sono intelligenze artificiali e si presentano come tali. All'inizio di ogni chiamata l'agente dice di essere un assistente AI e che la chiamata viene registrata.
 - Il sito esiste in sei lingue: francese (Francia e paesi francofoni), inglese (Regno Unito e Australia), italiano, polacco, olandese ed ebraico (Israele). I prezzi sono gli stessi ovunque, in dollari USA, IVA esclusa.
-- Contatti: sul mercato italiano non pubblichiamo un numero di telefono; il contatto avviene tramite la demo live del sito, la bolla di chat e voce (widget), la richiesta di richiamata, Messenger e l'email.
+- Contatti: sul mercato italiano non pubblichiamo un numero di telefono. Le nostre linee esistenti: nel Regno Unito il +44 7367 090106, a cui risponde 24 ore su 24 Katie, la nostra assistente AI, per domande commerciali e di assistenza, in inglese; in Israele lo 02-376-7085 (+972 2-376-7085), con un'agente AI in ebraico, 24 ore su 24. In Italia il contatto avviene tramite la demo live del sito, la bolla di chat e voce (widget), la richiesta di richiamata, Messenger e l'email.
 
 1. Cosa riceve l'agente in una richiamata
 - Quando una persona richiede una richiamata su www.permanenceia.com (commerciale, demo o assistenza), la chiamata in uscita riceve: customer_name (nome), company (azienda), sector (settore, per le richieste commerciali) e request_note (dettagli).
@@ -52,9 +52,9 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - Campagne in uscita, scenari automatizzati, automazioni e voce clonata a partire dal piano Assistant.
 
 7. Piani (dollari USA, IVA esclusa)
-- Receptionist: 99 $ al mese, 350 minuti. Minuto extra 0,39 $. 1 agente, 2 chiamate simultanee, 1 numero, 1 base di conoscenza, 200 crediti messaggi al mese (≈ 65 risposte scritte).
-- Assistant: 249 $ al mese, 1.000 minuti. Minuto extra 0,36 $. 3 agenti, 5 chiamate simultanee, 3 numeri, 3 campagne, automazioni (5.000 esecuzioni al mese), 1 voce clonata, 1.000 crediti messaggi al mese (≈ 330 risposte scritte).
-- Call Center: 499 $ al mese, 2.300 minuti. Minuto extra 0,32 $. Agenti, campagne e basi di conoscenza illimitati, 20 chiamate simultanee, 10 numeri, 3 voci clonate, 50.000 automazioni al mese, dashboard personalizzate, assistenza prioritaria, 3.000 crediti messaggi al mese (≈ 1.000 risposte scritte).
+- Receptionist: 99 $ al mese, 350 minuti. Minuto extra 0,39 $. 1 agente, 2 chiamate simultanee, 1 numero dedicato possibile (opzionale, non incluso, da 3,99 $ IVA esclusa al mese), 1 base di conoscenza, 200 crediti messaggi al mese (≈ 65 risposte scritte).
+- Assistant: 249 $ al mese, 1.000 minuti. Minuto extra 0,36 $. 3 agenti, 5 chiamate simultanee, fino a 3 numeri dedicati (opzionali, non inclusi, da 3,99 $ IVA esclusa al mese ciascuno), 3 campagne, automazioni (5.000 esecuzioni al mese), 1 voce clonata, 1.000 crediti messaggi al mese (≈ 330 risposte scritte).
+- Call Center: 499 $ al mese, 2.300 minuti. Minuto extra 0,32 $. Agenti, campagne e basi di conoscenza illimitati, 20 chiamate simultanee, fino a 10 numeri dedicati (opzionali, non inclusi, da 3,99 $ IVA esclusa al mese ciascuno), 3 voci clonate, 50.000 automazioni al mese, dashboard personalizzate, assistenza prioritaria, 3.000 crediti messaggi al mese (≈ 1.000 risposte scritte).
 - Su misura: oltre 2.500 minuti al mese, su preventivo (prezzo al minuto negoziato, multi-sede, SLA).
 - Fatturazione annuale: 990 $, 2.490 $ o 4.990 $ all'anno, cioè 2 mesi in omaggio, pagati in anticipo; minuti assegnati ogni mese, prezzo del minuto extra invariato.
 - Pagamento a consumo, senza abbonamento: 0,39 $ al minuto, credito senza scadenza, stesse funzioni del piano Receptionist.

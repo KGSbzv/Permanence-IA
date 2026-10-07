@@ -525,7 +525,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Ottenere un numero e assegnarlo a un agente',
     summary: 'Acquistare un numero dedicato dalla Sua area, o mantenere il Suo, e poi collegarlo al Suo agente.',
-    plan: 'Numeri dedicati a partire da {numberFrom} al mese a seconda del Paese; il numero di linee incluse dipende dal piano.',
+    plan: 'Numeri dedicati a partire da {numberFrom} al mese a seconda del Paese; quanti numeri può collegare dipende dal piano (i numeri non sono inclusi nel prezzo del piano).',
     sections: [
       {
         title: 'Acquistare un numero',

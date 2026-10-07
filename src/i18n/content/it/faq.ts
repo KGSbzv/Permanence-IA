@@ -33,7 +33,7 @@ export const FAQ_GENERAL: QA[] = [
 ];
 
 export const FAQ_PRICING: QA[] = [
-  { q: 'Posso pagare a consumo, senza piano?', a: 'Sì. Crei il Suo account, poi aggiunga credito quando vuole (Add credits): il minuto costa 0,39 $ IVA esclusa, senza abbonamento, e il credito non scade. Ha le stesse funzioni del piano Receptionist (1 agente, 2 chiamate simultanee, 1 numero). Appena le chiamate sono regolari, un piano costa meno: da 0,28 $ a 0,22 $ al minuto.' },
+  { q: 'Posso pagare a consumo, senza piano?', a: 'Sì. Crei il Suo account, poi aggiunga credito quando vuole (Add credits): il minuto costa 0,39 $ IVA esclusa, senza abbonamento, e il credito non scade. Ha le stesse funzioni del piano Receptionist (1 agente, 2 chiamate simultanee, 1 numero dedicato possibile come opzione, non incluso, da 3,99 $ IVA esclusa al mese). Appena le chiamate sono regolari, un piano costa meno: da 0,28 $ a 0,22 $ al minuto.' },
   { q: 'Cosa succede dopo i 30 minuti di prova?', a: 'I 30 minuti sono il limite del periodo di prova: una volta raggiunti, le chiamate si interrompono fino alla fine della prova o fino all’avvio del Suo abbonamento. Al termine dei 14 giorni parte il piano scelto, a meno che non lo abbia disdetto dalla Sua area clienti.' },
   { q: 'I prezzi sono IVA esclusa?', a: 'Sì, tutti i prezzi sono indicati IVA esclusa. Le imposte locali si aggiungono se applicabili.' },
   { q: 'Cosa succede se supero i miei minuti?', a: 'Può aggiungere minuti in qualsiasi momento con una ricarica, per coprire un mese più intenso. Se li supera regolarmente, il piano superiore costa meno al minuto: glielo segnaliamo.' },

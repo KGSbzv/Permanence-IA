@@ -62,7 +62,7 @@ export interface Market {
   plans: Record<PlanSlug, PlanPricing>;
   /** Montants des recharges de crédit proposées. */
   recharges: number[];
-  /** Prix de vente minimum d’un numéro dédié (par mois), affiché « à partir de » : coût Autocalls + 2 $. */
+  /** Prix minimum d’un numéro dédié (par mois, HT), affiché « à partir de » : les numéros sont facturés au prix de la plateforme (espace client), dès 3,99 $ selon le pays ; jamais inclus dans le forfait. */
   phoneNumberFrom: number;
   /** Prix de la minute sans forfait (paiement à la consommation, compte sans abonnement dans l’espace client). */
   paygMinute: number;

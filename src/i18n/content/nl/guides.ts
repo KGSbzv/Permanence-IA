@@ -525,7 +525,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Een nummer aanvragen en aan een agent toewijzen',
     summary: 'Een eigen nummer kopen vanuit uw omgeving, of uw huidige nummer behouden, en het daarna aan uw agent koppelen.',
-    plan: 'Eigen nummers vanaf {numberFrom} per maand, afhankelijk van het land; het aantal inbegrepen nummers hangt af van het abonnement.',
+    plan: 'Eigen nummers vanaf {numberFrom} per maand, afhankelijk van het land; hoeveel nummers u kunt koppelen hangt af van het abonnement (nummers zijn niet inbegrepen in de abonnementsprijs).',
     sections: [
       {
         title: 'Een nummer kopen',
