@@ -47,8 +47,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const row = {
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
-    // Marqueur [WA] posé seulement par le serveur (retiré du texte du visiteur) : sert au plafond quotidien.
-    note: [note && String(note).replace(/\[WA\]/gi, ''), wantsWhatsApp && WA_MARK].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
+    // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && WA_MARK].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
