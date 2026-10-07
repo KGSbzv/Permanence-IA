@@ -9,6 +9,7 @@ import Footer from './Footer';
 import { SIGNUP_URL, SITE, WIDGET_SRC } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
+import { WhatsAppLink } from './ui';
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/locales';
 import { MARKETS } from '@/i18n/markets';
 
@@ -76,9 +77,11 @@ export default function Layout({ children, title, description, ogImage, jsonLd, 
       <main id="contenu">{children}</main>
       <Footer />
       {/* Barre d’action collante sur mobile (doc 113) ; l’action de la page courante n’y est pas répétée. */}
-      <div className={`fixed inset-x-0 bottom-0 z-40 grid gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden ${showTrial && showCallback ? 'grid-cols-2' : 'grid-cols-1'}`}>
+      <div className={`fixed inset-x-0 bottom-0 z-40 grid gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden ${showTrial && showCallback ? 'grid-cols-[1fr_1fr_auto]' : 'grid-cols-[1fr_auto]'}`}>
         {showTrial && <Link href={SIGNUP_URL} className={`btn-primary ${barBtn}`}>{t.freeTrial}</Link>}
         {showCallback && <button type="button" onClick={() => openCallbackModal({ type: 'commercial' })} className={`btn-ghost ${barBtn}`}><PhoneCall className="h-4 w-4 shrink-0" aria-hidden />{t.callMeBack}</button>}
+        {/* WhatsApp : la conversation s’ouvre avec un message prérempli dans la langue du site. */}
+        <WhatsAppLink variant="icon" place="mobile_bar" />
       </div>
       <div className="h-[4.75rem] lg:hidden" aria-hidden />
       {/* Assistante commerciale IA (voix + chat) sur toutes les pages, propre au marché */}

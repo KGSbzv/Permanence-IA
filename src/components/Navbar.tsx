@@ -6,6 +6,7 @@ import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { useI18n } from '@/i18n';
+import { WhatsAppLink } from './ui';
 
 type Item = { href: string; label: string; text?: string };
 
@@ -72,6 +73,7 @@ export default function Navbar() {
         </nav>
         <div className="ms-auto hidden items-center gap-2 xl:flex">
           <LanguageSwitcher id="lang-desktop" />
+          <WhatsAppLink variant="icon" place="header" />
           <a href={LOGIN_URL} className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.login}</a>
           <Link href={SIGNUP_URL} className="btn-primary py-2.5">{t.startFree}</Link>
         </div>

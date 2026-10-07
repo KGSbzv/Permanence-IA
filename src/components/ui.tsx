@@ -332,11 +332,14 @@ export function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) 
 }
 
 /** Lien WhatsApp : « card » (carte claire avec la note), « dark » (pied de page), « button » (bouton plein). */
-export function WhatsAppLink({ variant = 'card', place, className = '' }: { variant?: 'card' | 'dark' | 'button'; place: string; className?: string }) {
+export function WhatsAppLink({ variant = 'card', place, className = '' }: { variant?: 'card' | 'dark' | 'button' | 'icon'; place: string; className?: string }) {
   const { c, locale } = useI18n();
   const t = c.site.whatsapp;
   const href = whatsappUrl(t.prefill);
   const onClick = () => track('whatsapp_click', { language: locale, place });
+  if (variant === 'icon') {
+    return <a href={href} target="_blank" rel="noopener" onClick={onClick} aria-label={t.cta} title={t.cta} className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#25D366] text-white hover:bg-[#1FBF5B] ${className}`}><WhatsAppIcon className="h-5 w-5" /></a>;
+  }
   if (variant === 'dark') {
     return <a href={href} target="_blank" rel="noopener" onClick={onClick} className={`flex items-center gap-2 text-[15px] text-white hover:text-signal-glow ${className}`}><WhatsAppIcon className="h-4 w-4 text-[#25D366]" /><span>{t.cta}</span></a>;
   }

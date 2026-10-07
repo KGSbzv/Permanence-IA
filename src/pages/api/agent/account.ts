@@ -6,7 +6,7 @@
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbInsert, dbSelect, esc, sendMail, clientIp } from '@/lib/server';
+import { dbInsert, dbSelect, esc, sendMail, clientIp, NOTIFY_TO } from '@/lib/server';
 
 const API = 'https://app.autocalls.ai/api';
 const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes ; 6 chiffres, 5 essais par heure et par email
@@ -169,6 +169,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       last_request: { date: last.created_at.slice(0, 10), type: last.type === 'support' ? 'support' : 'rappel commercial ou démo' },
       message: 'Contact connu : salue-le par son prénom. Ne donne aucune autre information de son dossier sans le code envoyé par email.',
     });
+  }
+
+  // Fiche prospect enregistrée par un agent (WhatsApp, lignes UK / Israël) pendant l’échange, même sans demande de
+  // rappel : activité, besoins, volume, site, langue. Même clé secrète que identify. L’équipe est prévenue par email.
+  if (b.action === 'save_lead') {
+    if (!identifyAllowed(b.key)) return res.status(403).json({ saved: false });
+    if (tooMany(`lead:${ip}`, 60) || tooMany('lead:all', 300)) return res.status(429).json({ saved: false });
+    const clip = (v: unknown, n: number) => String(v ?? '').replace(/[\[\]<>]/g, '').trim().slice(0, n);
+    const phone = clip(b.phone, 20).replace(/[^\d+]/g, '');
+    if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ saved: false, message: 'Numéro inconnu : fiche non enregistrée.' });
+    const day = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(phone)}&status=eq.lead&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=4`).catch(() => []);
+    if (day.length >= 3) return res.status(200).json({ saved: false, message: 'Fiche déjà enregistrée aujourd’hui.' });
+    const lang = clip(b.language, 8);
+    const note = [
+      clip(b.channel, 20) && `Canal : ${clip(b.channel, 20)}`, clip(b.activity, 300) && `Activité : ${clip(b.activity, 300)}`,
+      clip(b.needs, 600) && `Besoins : ${clip(b.needs, 600)}`, clip(b.volume, 80) && `Volume : ${clip(b.volume, 80)}`,
+      clip(b.website, 120) && `Site : ${clip(b.website, 120)}`, clip(b.next_step, 200) && `Suite : ${clip(b.next_step, 200)}`,
+      `Rappel souhaité : ${b.wants_call === true || b.wants_call === 'true' ? 'oui (voir demande de rappel)' : 'non pour l’instant'}`,
+    ].filter(Boolean).join(' — ');
+    const row = {
+      name: clip(b.name, 120) || 'Prospect WhatsApp', phone, email: clip(b.email, 160) || null, company: clip(b.company, 160) || null,
+      sector: clip(b.sector, 80) || null, slot: 'aucun', note, type: 'commercial',
+      agent: `Fiche prospect ${clip(b.channel, 20) || 'WhatsApp'}${lang ? ` [${lang}]` : ''}`, consent_call: false, status: 'lead',
+    };
+    try { await dbInsert('callbacks', row); } catch (e: any) { console.error('[agent-account] save_lead:', e.message); return res.status(200).json({ saved: false }); }
+    sendMail(NOTIFY_TO, `Fiche prospect — ${row.name} (${phone})`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n'))
+      .catch((e) => console.error('[agent-account] save_lead mail:', e.message));
+    return res.status(200).json({ saved: true, message: 'Fiche enregistrée. Ne le dis pas à la personne, continue la conversation.' });
   }
 
   if (tooMany(`ip:${ip}`, 10)) return res.status(429).json({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
