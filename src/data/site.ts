@@ -20,3 +20,11 @@ export const DEMO_URL = '/demo';
 
 // Widget Autocalls (assistante commerciale voix + chat) ; l’assistant dépend du marché.
 export const WIDGET_SRC = `${SITE.appUrl}/embed.js`;
+
+/**
+ * Secteurs de santé humaine mis en pause (7 octobre 2026) : enregistrements et transcriptions d’appels de patients
+ * = données de santé (HDS en France, art. 9 RGPD, amendement 13 en Israël). Pages accessibles avec un avertissement,
+ * mais retirées des menus, de l’accueil, des démos et du plan du site, et non indexées.
+ */
+export const PAUSED_SECTORS = ['dentaire-cliniques', 'kines-paramedical', 'medecine-esthetique'];
+export const isActiveSector = (s: { slug: string }) => !PAUSED_SECTORS.includes(s.slug);

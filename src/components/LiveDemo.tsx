@@ -4,7 +4,7 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
-import { SITE } from '@/data/site';
+import { SITE, isActiveSector } from '@/data/site';
 import { PhoneField, dialCode } from './ui';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
@@ -287,7 +287,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
   const [role, setRole] = useState(0);
   const [lang, setLang] = useState<Locale>(locale);
   const [gender, setGender] = useState<Gender>('female');
-  const [sector, setSector] = useState(initialSector && c.sectors.some((s) => s.slug === initialSector) ? initialSector : c.sectors[0].slug);
+  const [sector, setSector] = useState(initialSector && c.sectors.some((s) => s.slug === initialSector && isActiveSector(s)) ? initialSector : c.sectors.filter(isActiveSector)[0].slug);
   const [mode, setMode] = useState<'browser' | 'phone'>('browser');
   const [state, setState] = useState<'idle' | 'busy' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
@@ -295,7 +295,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
 
   useEffect(() => { setLang(locale); }, [locale]);
   // Présélection pilotée par la page (explorateur de scénarios, lien /demo?sector=…) : chaque nouveau secteur reçu est appliqué.
-  useEffect(() => { if (initialSector && c.sectors.some((s) => s.slug === initialSector)) setSector(initialSector); }, [initialSector, c.sectors]);
+  useEffect(() => { if (initialSector && c.sectors.some((s) => s.slug === initialSector && isActiveSector(s))) setSector(initialSector); }, [initialSector, c.sectors]);
 
   // Deux voix réelles par langue (féminine et masculine), chacune avec son prénom, son portrait et son assistant.
   const persona = VOICES[lang][gender];
@@ -456,7 +456,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           <label className="mt-5 block">
             <span className={`${legend} block`}>{t.sector}</span>
             <select value={sector} onChange={(e) => setSector(e.target.value)} className={field}>
-              {c.sectors.map((s) => <option key={s.slug} value={s.slug} className="text-ink">{s.name}</option>)}
+              {c.sectors.filter(isActiveSector).map((s) => <option key={s.slug} value={s.slug} className="text-ink">{s.name}</option>)}
             </select>
           </label>
 

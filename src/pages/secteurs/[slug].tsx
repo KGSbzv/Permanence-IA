@@ -14,19 +14,31 @@ import {
   SectorCards, SectorVisual, SecurityBlock, Steps,
 } from '@/components/blocks';
 import type { Sector } from '@/i18n/content/fr/sectors';
-import { SITE } from '@/data/site';
+import { SITE, isActiveSector } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { fr } from '@/i18n/content/fr';
 
 // Slugs identiques dans toutes les langues : la liste vient du contenu français.
 const SLUGS = fr.sectors.map((s) => s.slug);
 
+/** Avertissement des secteurs de santé en pause : accueil administratif seulement, aucune donnée de santé demandée. */
+const HEALTH_NOTICE: Record<string, { title: string; text: string }> = {
+  fr: { title: 'Accueil administratif uniquement', text: 'Pour les cabinets et établissements de santé, l’agent assure seulement l’accueil administratif : prise de rendez-vous, horaires, adresse et informations pratiques. Il ne demande aucune information de santé (symptômes, motif médical) et oriente vers le praticien ou les urgences. Nous ne proposons pas, à ce jour, d’hébergement certifié HDS : l’enregistrement et la transcription des appels peuvent être désactivés. Parlons de votre cas avant de démarrer.' },
+  en: { title: 'Front-desk tasks only', text: 'For healthcare practices, the agent handles front-desk tasks only: appointments, opening hours, address and practical information. It never asks for health information (symptoms, medical reasons) and refers callers to the practitioner or emergency services. Call recording and transcription can be switched off. Let’s talk about your situation before you start.' },
+  it: { title: 'Solo accoglienza amministrativa', text: 'Per studi e strutture sanitarie l’agente si occupa solo dell’accoglienza amministrativa: appuntamenti, orari, indirizzo e informazioni pratiche. Non chiede alcuna informazione sanitaria (sintomi, motivo medico) e indirizza al professionista o ai servizi di emergenza. La registrazione e la trascrizione delle chiamate si possono disattivare. Ne parliamo prima di iniziare?' },
+  pl: { title: 'Wyłącznie obsługa administracyjna', text: 'W placówkach medycznych agent zajmuje się wyłącznie obsługą administracyjną: wizytami, godzinami otwarcia, adresem i informacjami praktycznymi. Nie pyta o żadne informacje o zdrowiu (objawy, powód medyczny) i kieruje do lekarza lub na numer alarmowy. Nagrywanie i transkrypcję rozmów można wyłączyć. Porozmawiajmy o Twojej sytuacji przed startem.' },
+  nl: { title: 'Alleen administratieve ontvangst', text: 'Voor zorgpraktijken verzorgt de agent alleen de administratieve ontvangst: afspraken, openingstijden, adres en praktische informatie. Hij vraagt nooit naar gezondheidsinformatie (klachten, medische reden) en verwijst door naar de zorgverlener of de spoeddienst. Opname en transcriptie van gesprekken kunnen worden uitgeschakeld. Laten we uw situatie bespreken voordat u start.' },
+  he: { title: 'קבלה מנהלית בלבד', text: 'במרפאות ובמוסדות בריאות הסוכנת מטפלת רק בקבלה המנהלית: קביעת תורים, שעות פעילות, כתובת ומידע מעשי. היא לא שואלת שום מידע רפואי (תסמינים, סיבה רפואית) ומפנה לרופא או לשירותי החירום. אפשר לכבות את ההקלטה ואת התמלול של השיחות. בואו נדבר על המקרה שלכם לפני שמתחילים.' },
+};
+
 export default function SectorPage({ slug }: { slug: string }) {
-  const { c, market, offer, path, money } = useI18n();
+  const { c, market, offer, path, money, locale } = useI18n();
   const t = c.ui.commerce.sector;
   const tm = c.ui.commerce.tarifs.matrix;
   const { days, minutes } = market.trial;
   const s = c.sectors.find((x) => x.slug === slug) as Sector;
+  const paused = !isActiveSector(s);
+  const notice = HEALTH_NOTICE[locale.startsWith('en') ? 'en' : locale] || HEALTH_NOTICE.en;
   const Icon = SECTOR_ICON[s.slug] || Sparkles;
   return (
     <Layout
@@ -34,11 +46,17 @@ export default function SectorPage({ slug }: { slug: string }) {
       description={t.meta.description(s.name, s.short.replace(/\.$/, ''), days, minutes).slice(0, 158)}
       breadcrumbs={[{ name: t.breadcrumb, path: '/secteurs' }, { name: s.name, path: `/secteurs/${s.slug}` }]}
       ogImage={s.photo || undefined}
+      noindex={paused}
       jsonLd={{
         '@context': 'https://schema.org', '@type': 'FAQPage', url: `${SITE.url}${path(`/secteurs/${s.slug}`)}`,
         mainEntity: s.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
       }}
     >
+      {paused && (
+        <div role="note" className="border-b border-amber-200 bg-amber-50">
+          <div className="wrap py-4 text-[15px] text-ink"><strong className="font-display">{notice.title}.</strong> {notice.text}</div>
+        </div>
+      )}
       {/* Hero métier */}
       <section className="overflow-hidden bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-20">

@@ -4,7 +4,7 @@ import { Lock, Mail, Phone, ShieldCheck } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { OPEN_CONSENT_EVENT } from './ConsentBanner';
-import { SITE, LOGIN_URL, SIGNUP_URL } from '@/data/site';
+import { SITE, LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { WhatsAppLink } from './ui';
 
@@ -15,7 +15,7 @@ export default function Footer() {
   const COLS = [
     { title: t.cols.platform, links: [...c.modules.slice(0, 7).map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name })), { href: '/fonctionnalites', label: t.cols.allFeatures }] },
     { title: t.cols.offers, links: [...offers.map((o) => ({ href: `/offres/${o.slug}`, label: o.name })), { href: '/offres/recharges', label: t.cols.recharges }, { href: '/tarifs', label: t.cols.compare }] },
-    { title: t.cols.sectors, links: c.sectors.map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })) },
+    { title: t.cols.sectors, links: c.sectors.filter(isActiveSector).map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })) },
     {
       title: t.cols.resources,
       links: [

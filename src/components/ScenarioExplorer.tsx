@@ -2,13 +2,14 @@
 // À gauche, les métiers comme des lignes d’un standard ; à droite, la ligne choisie « décroche » :
 // photo du métier, agent du marché qui répond (extrait s.call), bénéfices, offre conseillée et deux actions.
 // Une seule transition orchestrée au changement de métier ; tout s’affiche d’emblée si les animations sont réduites.
-import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, CheckCircle2, PhoneCall, RotateCcw, Sparkles } from 'lucide-react';
 import { Wave } from './Mock';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
+import { isActiveSector } from '@/data/site';
 import type { Sector } from '@/i18n/content/fr/sectors';
 
 const STEP_MS = 950;
@@ -138,8 +139,10 @@ export default function ScenarioExplorer({ onTry }: {
 }) {
   const { c, offer, money } = useI18n();
   const t = c.ui.components.scenarioExplorer;
-  const [active, setActive] = useState(c.sectors[0].slug);
-  const s = c.sectors.find((x) => x.slug === active) ?? c.sectors[0];
+  // Secteurs santé en pause : absents des onglets.
+  const sectors = useMemo(() => c.sectors.filter(isActiveSector), [c.sectors]);
+  const [active, setActive] = useState(sectors[0].slug);
+  const s = sectors.find((x) => x.slug === active) ?? sectors[0];
   const o = offer(s.offer);
   const base = useId().replace(/:/g, '');
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -165,16 +168,16 @@ export default function ScenarioExplorer({ onTry }: {
   }, []);
 
   const select = useCallback((i: number, focus = false) => {
-    setActive(c.sectors[i].slug);
+    setActive(sectors[i].slug);
     if (focus) {
       tabs.current[i]?.focus();
       tabs.current[i]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
     }
-  }, [c.sectors]);
+  }, [sectors]);
 
   // Flèches (dans les deux sens, la liste est verticale sur grand écran et horizontale sur mobile), Début, Fin.
   const onKey = (e: React.KeyboardEvent, i: number) => {
-    const n = c.sectors.length;
+    const n = sectors.length;
     const rtl = document.documentElement.dir === 'rtl';
     const next = ({ ArrowRight: rtl ? i - 1 : i + 1, ArrowDown: i + 1, ArrowLeft: rtl ? i + 1 : i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 } as Record<string, number>)[e.key];
     if (next === undefined) return;
@@ -193,7 +196,7 @@ export default function ScenarioExplorer({ onTry }: {
         <p id={`${base}-label`} className="px-1 text-sm text-white/55 lg:px-2">{t.chooseTrade}</p>
         <div role="tablist" aria-labelledby={`${base}-label`} aria-orientation={vertical ? 'vertical' : 'horizontal'}
           className="-mx-2 mt-3 flex gap-2 overflow-x-auto px-2 pb-2 [scrollbar-width:none] lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden">
-          {c.sectors.map((x, i) => {
+          {sectors.map((x, i) => {
             const XIcon = SECTOR_ICON[x.slug] || Sparkles;
             const on = x.slug === active;
             return (

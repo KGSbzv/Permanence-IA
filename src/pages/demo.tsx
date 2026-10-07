@@ -10,7 +10,7 @@ import { useI18n } from '@/i18n';
 export default function Demo() {
   const { c, market } = useI18n();
   const t = c.ui.pages.demo;
-  const s = c.sectors[1];
+  const s = c.sectors.find((x) => x.slug === 'services-a-domicile') ?? c.sectors[0];
   const { sector, trySector } = useLiveDemoSector();
   return (
     <Layout title={t.meta.title(market.brand)} description={t.meta.description}>

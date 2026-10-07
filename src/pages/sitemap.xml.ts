@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import { SITE } from '@/data/site';
+import { SITE, isActiveSector } from '@/data/site';
 import { getI18n } from '@/i18n';
 import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/locales';
 import { MARKETS } from '@/i18n/markets';
@@ -17,7 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const paths = [
     ...STATIC,
     ...offers.map((o) => `/offres/${o.slug}`),
-    ...c.sectors.map((s) => `/secteurs/${s.slug}`),
+    ...c.sectors.filter(isActiveSector).map((s) => `/secteurs/${s.slug}`),
     ...c.modules.map((m) => `/fonctionnalites/${m.slug}`),
     ...c.guides.list.map((g) => `/aide/guides/${g.slug}`),
   ];

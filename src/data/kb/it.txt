@@ -68,3 +68,7 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - Protezione dei dati: GDPR e Codice privacy; autorità di controllo: il Garante per la protezione dei dati personali. DPA (accordo sul trattamento dei dati) integrato nelle Condizioni (articolo 8), versione firmata su richiesta; diritto alla cancellazione (chiamata, registrazione e trascrizione cancellate su richiesta), conservazione delle registrazioni di 90 giorni dalla chiamata per impostazione predefinita (durata del nostro fornitore tecnico), modificabile dal cliente. Dati ospitati su server nello Spazio economico europeo e/o negli Stati Uniti, con garanzie adeguate. Crittografia TLS e AES-256, fornitore certificato ISO 27001.
 - Altri paesi: nel Regno Unito si applicano TPS e PECR, in Australia il Do Not Call Register; altrove valgono le regole locali.
 - Emergenze: l'agente non sostituisce mai i soccorsi. Invita a chiamare il numero di emergenza locale: Italia 112, Francia 112 o 15, Regno Unito 999, Australia 000, Polonia e Paesi Bassi 112, Israele 101 (ambulanza), 100 (polizia), 102 (vigili del fuoco).
+
+Sanità (studi dentistici, cliniche, fisioterapia, paramedici, medicina estetica) — in pausa commerciale:
+- L'agente si occupa solo dell'accoglienza amministrativa (appuntamenti, orari, indirizzo, informazioni pratiche). Non chiede mai sintomi né motivi medici e indirizza al professionista o al 112.
+- Non promettere conformità per i dati sanitari; registrazione e trascrizione si possono disattivare. Proporre un richiamo da un consulente prima che una struttura sanitaria si abboni.

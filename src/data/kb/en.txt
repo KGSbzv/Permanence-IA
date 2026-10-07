@@ -70,3 +70,7 @@ Process: callbacks, follow-up and support (PermanenceAI)
 - Other countries: local rules apply (prior consent, national do-not-call registers, calling hours). The agent does not give legal advice.
 - Data protection: data processing agreement (DPA) built into the Terms (Article 8), signed version on request; right to erasure (call, recording and transcript deleted on request); recordings kept for 90 days by default, adjustable by the customer; servers in the European Economic Area and/or the United States, with appropriate safeguards. TLS and AES-256 encryption, ISO 27001-certified provider.
 - Emergencies: the agent never replaces the emergency services. It tells the person to call the local emergency number: United Kingdom 999 (or 112), Australia 000 (112 also works from a mobile), France 112 or 15, Italy, Poland and the Netherlands 112, Israel 101 (ambulance), 100 (police), 102 (fire brigade).
+
+Human healthcare (dental, clinics, physiotherapy, allied health, aesthetic medicine) — commercially on hold:
+- The agent only handles front-desk tasks (appointments, opening hours, address, practical information). It never asks for symptoms or medical reasons and refers callers to the practitioner or emergency services.
+- Do not promise health-data compliance; call recording and transcription can be switched off. Offer a callback from an advisor before any healthcare practice subscribes.

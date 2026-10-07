@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
-import { LOGIN_URL, SIGNUP_URL } from '@/data/site';
+import { LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { useI18n } from '@/i18n';
 
 type Item = { href: string; label: string; text?: string };
@@ -19,7 +19,7 @@ export default function Navbar() {
   const r = t.resources;
   const MENUS: { label: string; items: Item[]; wide?: boolean }[] = [
     { label: t.menus.features, wide: true, items: [...c.modules.map((m) => ({ href: `/fonctionnalites/${m.slug}`, label: m.name, text: m.short })), { href: '/fonctionnalites', label: t.menus.allFeatures, text: t.menus.allFeaturesText }] },
-    { label: t.menus.sectors, items: [...c.sectors.map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })), { href: '/secteurs', label: t.menus.allSectors }] },
+    { label: t.menus.sectors, items: [...c.sectors.filter(isActiveSector).map((s) => ({ href: `/secteurs/${s.slug}`, label: s.name })), { href: '/secteurs', label: t.menus.allSectors }] },
     {
       label: t.menus.resources,
       items: [

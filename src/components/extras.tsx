@@ -1,6 +1,6 @@
 // Sections inspirées des références (autocalls.ai, vendasta.com), en version honnête :
 // démo réelle par rappel, équipe d’agents, onglets d’usages, parcours client, aperçu de l’espace client.
-import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ArrowUpRight, BarChart3, BellRing, CalendarCheck, Check, Clock, FileText, Headphones, Layers,
@@ -12,6 +12,7 @@ import Mock, { Wave } from './Mock';
 import { Heading, Photo } from './ui';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
+import { isActiveSector } from '@/data/site';
 import { VOICES } from '@/data/personas';
 
 /* ---------- Bandeau défilant ---------- */
@@ -142,8 +143,10 @@ function ShowcaseFallback({ slug }: { slug: string }) {
 export function SectorShowcase() {
   const { c } = useI18n();
   const t = c.ui.components.sectorShowcase;
-  const [active, setActive] = useState(c.sectors[0].slug);
-  const s = c.sectors.find((x) => x.slug === active)!;
+  // Secteurs santé en pause : absents des onglets.
+  const sectors = useMemo(() => c.sectors.filter(isActiveSector), [c.sectors]);
+  const [active, setActive] = useState(sectors[0].slug);
+  const s = sectors.find((x) => x.slug === active)!;
   const base = useId().replace(/:/g, '');
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const list = useRef<HTMLDivElement>(null);
@@ -164,13 +167,13 @@ export function SectorShowcase() {
   }, [measure]);
   // Flèches gauche/droite, Début/Fin : on change d’onglet et on y place le focus.
   const onKey = (e: React.KeyboardEvent, i: number) => {
-    const n = c.sectors.length;
+    const n = sectors.length;
     const rtl = document.documentElement.dir === 'rtl';
     const fwd = (i + 1) % n, back = (i - 1 + n) % n;
     const next = { ArrowRight: rtl ? back : fwd, ArrowLeft: rtl ? fwd : back, Home: 0, End: n - 1 }[e.key];
     if (next === undefined) return;
     e.preventDefault();
-    setActive(c.sectors[next].slug);
+    setActive(sectors[next].slug);
     tabs.current[next]?.focus();
     tabs.current[next]?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   };
@@ -178,7 +181,7 @@ export function SectorShowcase() {
     <div>
       <div className="relative">
         <div ref={list} onScroll={measure} role="tablist" aria-label={t.chooseSector} className="flex gap-2 overflow-x-auto pb-2 [scrollbar-width:thin]">
-          {c.sectors.map((x, i) => {
+          {sectors.map((x, i) => {
             const Icon = SECTOR_ICON[x.slug] || Sparkles;
             const on = x.slug === active;
             return (

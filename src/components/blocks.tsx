@@ -9,7 +9,7 @@ import {
 import { MODULES as FR_MODULES } from '@/i18n/content/fr/modules';
 import type { Sector } from '@/i18n/content/fr/sectors';
 import type { Cell } from '@/i18n/content/fr/offers';
-import { DEMO_URL, SIGNUP_URL } from '@/data/site';
+import { DEMO_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { BRAND_MARKS } from '@/data/brandMarks';
 import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
@@ -171,7 +171,7 @@ export function SectorVisual({ s, className = '' }: { s: Sector; className?: str
 
 export function SectorCards({ exclude }: { exclude?: string }) {
   const { c } = useI18n();
-  const list = c.sectors.filter((s) => s.slug !== exclude);
+  const list = c.sectors.filter((s) => s.slug !== exclude && isActiveSector(s));
   // Grille sans carte isolée : 10 secteurs → 2 rangées de 5 ; 9 (page d’un secteur) → 3 rangées de 3.
   const cols = list.length % 5 === 0 ? 'lg:grid-cols-5' : 'lg:grid-cols-3';
   return (
