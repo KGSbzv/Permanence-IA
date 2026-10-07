@@ -12,7 +12,7 @@ import Mock, { Wave } from './Mock';
 import { Heading, Photo } from './ui';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
-import { TEAM_PERSONAS } from '@/data/personas';
+import { TEAM_PERSONAS, VOICES } from '@/data/personas';
 
 /* ---------- Bandeau défilant ---------- */
 
@@ -53,9 +53,11 @@ const AGENT_STYLE = [
 ];
 
 function useAgents() {
-  const { c } = useI18n();
-  // Chaque rôle a son personnage (prénom et visage), le même dans toutes les langues.
-  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i], persona: TEAM_PERSONAS[i] }));
+  const { c, locale } = useI18n();
+  // Chaque rôle a son personnage (prénom et visage), le même dans toutes les langues ; en hébreu, les voix
+  // israéliennes (נועה, דניאל) en alternance, pour ne pas afficher de prénoms latins sur le site israélien.
+  const he = [VOICES.he.female, VOICES.he.male];
+  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i], persona: locale === 'he' ? he[i % 2] : TEAM_PERSONAS[i] }));
 }
 
 export function AgentOrbit() {
@@ -147,7 +149,10 @@ export function SectorShowcase() {
   const measure = useCallback(() => {
     const el = list.current;
     if (!el) return;
-    setFade({ left: el.scrollLeft > 4, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4 });
+    // En RTL, scrollLeft est négatif : on raisonne sur la valeur absolue (début = côté droit).
+    const pos = Math.abs(el.scrollLeft), rest = el.scrollWidth - el.clientWidth - pos;
+    const rtl = document.documentElement.dir === 'rtl';
+    setFade({ left: rtl ? rest > 4 : pos > 4, right: rtl ? pos > 4 : rest > 4 });
   }, []);
   useEffect(() => {
     measure();
@@ -157,7 +162,9 @@ export function SectorShowcase() {
   // Flèches gauche/droite, Début/Fin : on change d’onglet et on y place le focus.
   const onKey = (e: React.KeyboardEvent, i: number) => {
     const n = c.sectors.length;
-    const next = { ArrowRight: (i + 1) % n, ArrowLeft: (i - 1 + n) % n, Home: 0, End: n - 1 }[e.key];
+    const rtl = document.documentElement.dir === 'rtl';
+    const fwd = (i + 1) % n, back = (i - 1 + n) % n;
+    const next = { ArrowRight: rtl ? back : fwd, ArrowLeft: rtl ? fwd : back, Home: 0, End: n - 1 }[e.key];
     if (next === undefined) return;
     e.preventDefault();
     setActive(c.sectors[next].slug);

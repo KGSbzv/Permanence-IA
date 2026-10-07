@@ -1,4 +1,5 @@
 import React, { useId, useState } from 'react';
+import { track } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
@@ -135,7 +136,10 @@ export function CallbackForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'),
-          sector: f.get('sector'), note: f.get('note'), slot: f.get('slot') || 'asap',
+          sector: f.get('sector'),
+          // Entreprise et volume (facultatifs) : ajoutés à la note lue par l’agent avant le rappel.
+          note: [f.get('note'), f.get('company') && `Company: ${f.get('company')}`, f.get('volume') && `Calls/month: ${f.get('volume')}`].filter(Boolean).join(' — ') || undefined,
+          slot: f.get('slot') || 'asap',
           // Créneau précis : date et heure locales du visiteur, avec son fuseau horaire (rappel programmé).
           callAt: f.get('slot') === 'precise' ? f.get('callAt') : undefined,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -146,6 +150,7 @@ export function CallbackForm({
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendFailed);
       setState('sent'); onDone?.();
+      track('generate_lead', { lead_type: type, language: locale, form: 'callback' });
     } catch (err: any) {
       setState('error'); setError(`${err.message} ${t.retry(SITE.email)}`);
     }
@@ -166,13 +171,21 @@ export function CallbackForm({
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
         <div><label htmlFor="cb-name" className={label}>{t.name}</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
-        <div><label htmlFor="cb-phone" className={label}>{t.phone}</label><input id="cb-phone" name="phone" type="tel" required minLength={8} autoComplete="tel" className="field" /></div>
+        <div><label htmlFor="cb-company" className={label}>{t.company} <span className="font-normal text-slate-light">{t.optional}</span></label><input id="cb-company" name="company" autoComplete="organization" className="field" /></div>
+        <div><label htmlFor="cb-phone" className={label}>{t.phone}</label><input id="cb-phone" name="phone" type="tel" required minLength={8} pattern="[+0-9][0-9 .()\-]{6,}" autoComplete="tel" className="field" onInvalid={(e) => e.currentTarget.setCustomValidity(t.phoneInvalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} /></div>
         <div>
           <label htmlFor="cb-sector" className={label}>{t.sector}</label>
           <select id="cb-sector" name="sector" defaultValue={sector} className="field">
             <option value="">{t.choose}</option>
             {c.sectors.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
             <option value="autre">{t.otherSector}</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="cb-volume" className={label}>{t.volume} <span className="font-normal text-slate-light">{t.optional}</span></label>
+          <select id="cb-volume" name="volume" defaultValue="" className="field">
+            <option value="">{t.choose}</option>
+            {t.volumeOptions.map((v) => <option key={v} value={v}>{v}</option>)}
           </select>
         </div>
         <div>

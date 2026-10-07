@@ -75,6 +75,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       terms: 'Regulamin',
       privacy: 'Prywatność',
       cookies: 'Pliki cookie',
+      accessibility: 'Dostępność',
     },
   },
 
@@ -139,6 +140,11 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     needPlaceholder: 'Np. tracę połączenia wieczorami, chcę zautomatyzować umawianie wizyt…',
     consent: (brand: string) => `Wyrażam zgodę na kontakt telefoniczny pod podanym numerem, również przez agenta głosowego AI ${brand}. Moje dane posłużą wyłącznie do obsługi mojego zgłoszenia.`,
     sending: 'Wysyłanie…',
+    company: 'Firma',
+    optional: '(opcjonalnie)',
+    volume: 'Liczba połączeń miesięcznie',
+    volumeOptions: ['Mniej niż 200', 'Od 200 do 1000', 'Ponad 1000'],
+    phoneInvalid: 'Proszę podać prawidłowy numer telefonu, np. 512 345 678.',
   },
 
   benefits: {
@@ -195,7 +201,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   pricingCards: {
     daysFree: (days: number) => `${days} ${days === 1 ? 'dzień' : 'dni'} za darmo`,
     negotiated: 'Negocjowana cena za minutę',
-    mostChosen: 'Najczęściej wybierany',
+    mostChosen: 'Polecany',
     perMinute: (label: string) => `czyli ${label}`,
     details: 'Szczegóły pakietu',
     billing: 'Okres rozliczeniowy',

@@ -5,10 +5,27 @@ import Head from 'next/head';
 import { CallbackProvider } from '@/context/CallbackContext';
 import CallbackModal from '@/components/CallbackModal';
 import TrialNudge from '@/components/TrialNudge';
+import ConsentBanner from '@/components/ConsentBanner';
+import { useEffect } from 'react';
+import { track } from '@/lib/analytics';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { locale } = useRouter();
+  const router = useRouter();
+  const { locale } = router;
+  // Pages vues lors des changements de page côté client, et clics utiles (essai, inscription, appel).
+  useEffect(() => {
+    const onRoute = (url: string) => track('page_view', { page_location: window.location.origin + url, page_title: document.title });
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement | null)?.closest('a');
+      const href = a?.getAttribute('href') || '';
+      if (href.startsWith('tel:')) track('phone_call_click', { phone: href.slice(4), language: locale });
+      else if (/essai-gratuit|\/register/.test(href)) track('begin_trial_click', { link_url: href, language: locale });
+    };
+    router.events.on('routeChangeComplete', onRoute);
+    document.addEventListener('click', onClick);
+    return () => { router.events.off('routeChangeComplete', onRoute); document.removeEventListener('click', onClick); };
+  }, [router.events, locale]);
   return (
     <I18nProvider locale={locale}>
     <CallbackProvider>
@@ -18,6 +35,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <CallbackModal />
       <TrialNudge />
+      <ConsentBanner />
     </CallbackProvider>
     </I18nProvider>
   );

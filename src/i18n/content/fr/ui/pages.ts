@@ -205,9 +205,27 @@ export const UI_PAGES = {
       'Accord de traitement des données (DPA) fourni sur simple demande',
       'Droit à l’effacement : un appel, son enregistrement et sa transcription sont supprimés sur demande',
       'L’agent annonce l’enregistrement de l’appel ; une personne qui refuse peut nous écrire à la place',
-      'Campagnes sortantes : vous gardez la preuve de la base légale (relation client ou consentement) ; en France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026',
+      'Rappels et confirmations (appels sortants) : vous gardez la preuve de la base légale (relation client ou consentement) ; en France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026',
     ],
     rights: ['Pour toute question ou demande d’exercice de droits : ', { a: 'politique de confidentialité', href: '/confidentialite' }, '.'] as Rich,
+  },
+
+  accessibility: {
+    meta: {
+      title: (brand: string) => `Déclaration d’accessibilité — ${brand}`,
+      description: (brand: string) => `Niveau d’accessibilité du site ${brand}, aménagements réalisés, limites connues et contact pour signaler une difficulté.`,
+    },
+    h1: 'Déclaration d’accessibilité',
+    updated: 'Dernière mise à jour : 7 octobre 2026',
+    intro: (brand: string, company: string) => `${brand} est un service de ${company}, société enregistrée dans l’État du Wyoming (États-Unis). Nous voulons que chacun puisse utiliser ce site, y compris les personnes en situation de handicap.`,
+    sections: [
+      { title: 'Niveau visé', items: ['Le site vise la conformité au niveau AA des règles WCAG 2.1 (et, pour Israël, à la norme IS 5568).', 'Statut : partiellement conforme. Les points non conformes connus sont listés plus bas et sont en cours de correction.'] },
+      { title: 'Aménagements réalisés', items: ['Langue et sens de lecture déclarés sur chaque page (dont l’hébreu, de droite à gauche).', 'Navigation complète au clavier, lien d’accès direct au contenu, focus visible.', 'Titres hiérarchisés, textes alternatifs sur les images informatives, formulaires étiquetés.', 'Contrastes renforcés, texte agrandissable jusqu’à 200 % sans perte d’information, mise en page adaptée au mobile.', 'Animations réduites quand le système le demande (préférence « réduire les animations »).'] },
+      { title: 'Limites connues', items: ['La fenêtre de discussion et de démonstration vocale est fournie par notre prestataire technique : son accessibilité au clavier et aux lecteurs d’écran peut être incomplète. Le formulaire de rappel et l’adresse email restent toujours disponibles.', 'L’espace client (app.permanenceia.com) est en anglais et relève de la plateforme de notre prestataire.', 'Certains documents PDF (présentation commerciale) ne sont pas entièrement balisés.'] },
+      { title: 'Évaluation', items: ['Évaluation interne réalisée le 7 octobre 2026 sur l’ensemble des pages publiques, avec des outils automatiques et une vérification manuelle (clavier, contrastes, lecteur d’écran).'] },
+    ],
+    contactTitle: 'Signaler une difficulté',
+    contact: (company: string, email: string) => `Responsable accessibilité : ${company}. Écrivez-nous à ${email} en décrivant la page et la difficulté rencontrée : nous vous répondons sous 5 jours ouvrés et vous proposons une solution adaptée (information dans un autre format, aide par email ou par téléphone).`,
   },
 
   notFound: {
@@ -605,7 +623,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Demandes de rappel et échanges avec nos assistantes : 24 mois après le dernier contact.',
-                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 12 mois par défaut ; chaque client peut réduire cette durée et supprimer ses données.',
+                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 90 jours par défaut à compter de l’appel (durée appliquée par notre prestataire technique) ; chaque client peut modifier cette durée et supprimer ses données.',
                 'Prospects et contacts recueillis par les agents de nos clients : 24 mois par défaut, réductibles par le client.',
                 'Données du compte : pendant la relation contractuelle, puis 3 ans pour la prospection, sauf opposition. Le contenu du compte est supprimé dans les 90 jours suivant la fin du contrat.',
                 'Factures et pièces comptables : 10 ans.',
@@ -781,6 +799,6 @@ export const UI_PAGES = {
     ctaEyebrow: "Passez à l'action",
     ctaTitle: "Prêt à équiper votre entreprise d'un standard IA ?",
     ctaText: (days: number, minutes: number) => `Testez dès aujourd'hui notre agent vocal en conditions réelles pendant ${days} jours, avec ${minutes} minutes incluses et sans engagement.`,
-    ctaButton: 'Commencer gratuitement',
+    ctaButton: 'Démarrer l’essai de 14 jours',
   },
 };

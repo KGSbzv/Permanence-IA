@@ -68,6 +68,7 @@ export const UI_COMPONENTS = {
       terms: 'Terms and conditions',
       privacy: 'Privacy',
       cookies: 'Cookies',
+      accessibility: 'Accessibility',
     },
   },
 
@@ -132,6 +133,11 @@ export const UI_COMPONENTS = {
     needPlaceholder: 'E.g. I miss calls in the evening, I want to automate bookings…',
     consent: (brand: string) => `I agree to be called back on the number provided, including by a ${brand} AI voice agent. My data is used only to handle my request.`,
     sending: 'Sending…',
+    company: 'Company',
+    optional: '(optional)',
+    volume: 'Calls received per month',
+    volumeOptions: ['Fewer than 200', '200 to 1,000', 'More than 1,000'],
+    phoneInvalid: 'Please enter a valid phone number, e.g. 07700 900123 (UK) or 0412 345 678 (Australia).',
   },
 
   benefits: {
@@ -188,7 +194,7 @@ export const UI_COMPONENTS = {
   pricingCards: {
     daysFree: (days: number) => `${days} days free`,
     negotiated: 'Negotiated per-minute price',
-    mostChosen: 'Most popular',
+    mostChosen: 'Recommended',
     perMinute: (label: string) => `that’s ${label}`,
     details: 'Plan details',
     billing: 'Billing period',

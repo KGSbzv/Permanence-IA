@@ -3,7 +3,7 @@
 export const UI_COMPONENTS = {
   layout: {
     home: 'Accueil',
-    freeTrial: 'Commencer gratuitement',
+    freeTrial: 'Essai gratuit',
     callMeBack: 'Être rappelé',
   },
 
@@ -27,7 +27,7 @@ export const UI_COMPONENTS = {
     },
     pricing: 'Tarifs',
     login: 'Connexion',
-    startFree: 'Commencer gratuitement',
+    startFree: 'Essai gratuit 14 jours',
     mainNav: 'Navigation principale',
     mobileNav: 'Navigation mobile',
     openMenu: 'Ouvrir le menu',
@@ -36,7 +36,7 @@ export const UI_COMPONENTS = {
 
   footer: {
     tagline: 'Agents vocaux IA qui répondent, qualifient, réservent et rappellent pour votre entreprise, 24 h/24.',
-    startFree: 'Commencer gratuitement',
+    startFree: 'Démarrer l’essai de 14 jours',
     login: 'Connexion',
     gdpr: 'Outils RGPD intégrés',
     encryption: 'Chiffrement en transit',
@@ -64,6 +64,7 @@ export const UI_COMPONENTS = {
       terms: 'CGU / CGV',
       privacy: 'Confidentialité',
       cookies: 'Cookies',
+      accessibility: 'Accessibilité',
     },
   },
 
@@ -79,7 +80,7 @@ export const UI_COMPONENTS = {
     close: 'Fermer',
     text: (days: number) => `Testez votre agent vocal sur vos vrais appels pendant ${days} jours, avant de décider.`,
     points: ['Carte demandée à l’activation, rien n’est débité pendant l’essai', 'Annulation depuis votre espace client', 'Premier agent prêt en quelques minutes'],
-    claim: (minutes: string) => 'Commencer gratuitement',
+    claim: (minutes: string) => 'Démarrer l’essai de 14 jours',
     callMeBack: 'Être rappelé',
   },
 
@@ -96,7 +97,7 @@ export const UI_COMPONENTS = {
   },
 
   ctas: {
-    primary: 'Commencer gratuitement',
+    primary: 'Démarrer l’essai de 14 jours',
     demo: 'Essayer en live notre agent',
     callback: 'Être rappelé',
   },
@@ -128,6 +129,11 @@ export const UI_COMPONENTS = {
     needPlaceholder: 'Ex. : je rate des appels le soir, je veux automatiser les rendez-vous…',
     consent: (brand: string) => `J’accepte d’être rappelé au numéro indiqué, y compris par un agent vocal IA de ${brand}. Mes données servent uniquement à traiter ma demande.`,
     sending: 'Envoi…',
+    company: 'Entreprise',
+    optional: '(facultatif)',
+    volume: 'Appels reçus par mois',
+    volumeOptions: ['Moins de 200', '200 à 1 000', 'Plus de 1 000'],
+    phoneInvalid: 'Indiquez un numéro de téléphone valide, par exemple 06 12 34 56 78.',
   },
 
   benefits: {
@@ -135,7 +141,7 @@ export const UI_COMPONENTS = {
       { title: 'Répondez même hors horaires', text: 'Soirs, week-ends, pendant vos rendez-vous : chaque appel reçoit une réponse.' },
       { title: 'Qualifiez automatiquement', text: 'L’agent pose vos questions et vous transmet une demande complète.' },
       { title: 'Réservez des rendez-vous', text: 'Directement dans votre agenda ; confirmation et rappel par SMS ou WhatsApp dès le forfait Assistant.' },
-      { title: 'Rappelez les leads plus vite', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
+      { title: 'Rappelez les prospects plus vite', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
       { title: 'Gardez l’humain pour l’important', text: 'Transfert vers votre équipe quand la situation l’exige.' },
     ],
     seeAgent: 'Voir l’agent en détail',
@@ -149,8 +155,8 @@ export const UI_COMPONENTS = {
     // Même ordre que les icônes du composant : téléphonie, automatisation, CRM, messages, agenda, pilotage, sécurité.
     families: [
       { name: 'Téléphonie', items: ['Appels entrants et sortants', 'Numéro dédié en option', 'Intégration SIP', 'Transfert vers un humain', 'Identification de l’appelant'] },
-      { name: 'Automatisation', items: ['Éditeur de prompts', 'Flow builder sans code', 'Assistant d’automatisation', '300+ outils connectables'] },
-      { name: 'CRM et données', items: ['Leads et préqualification', 'Base de connaissances', 'Historique des appels', 'Webhooks et API'] },
+      { name: 'Automatisation', items: ['Consignes de l’agent', 'Scénarios automatisés sans code', 'Assistant d’automatisation', '300+ outils connectables'] },
+      { name: 'CRM et données', items: ['Tri et qualification des demandes', 'Base de connaissances', 'Historique des appels', 'Webhooks et API'] },
       { name: 'Messages', items: ['SMS', 'WhatsApp et templates', 'Messenger et Instagram', 'Widget web'] },
       { name: 'Agenda', items: ['Prise de rendez-vous', 'Confirmations et rappels', 'Reports et annulations'] },
       { name: 'Pilotage', items: ['Tableau de bord', 'Rapports détaillés', 'Rôles et permissions'] },
@@ -184,7 +190,7 @@ export const UI_COMPONENTS = {
   pricingCards: {
     daysFree: (days: number) => `${days} jours offerts`,
     negotiated: 'Prix à la minute négocié',
-    mostChosen: 'Le plus choisi',
+    mostChosen: 'Recommandé',
     perMinute: (label: string) => `soit ${label}`,
     details: 'Détail de l’offre',
     billing: 'Période de facturation',
@@ -347,7 +353,7 @@ export const UI_COMPONENTS = {
 
   finalCta: {
     title: 'Prêt à automatiser vos appels ?',
-    primary: 'Commencer gratuitement',
+    primary: 'Démarrer l’essai de 14 jours',
     demo: 'Voir la démo live',
     advisorTitle: 'Parler à un conseiller',
     advisorText: 'Laissez votre numéro : nous vous rappelons pour répondre à vos questions.',
@@ -448,7 +454,7 @@ export const UI_COMPONENTS = {
       sortants: {
         label: 'Appels sortants',
         items: [
-          { title: 'Rappel des leads web', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
+          { title: 'Rappel des demandes web', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
           { title: 'Confirmations', text: 'Rendez-vous et réservations confirmés la veille.' },
           { title: 'Relance des devis', text: 'Les devis en attente relancés aux bons horaires.' },
           { title: 'Préqualification', text: 'Contacts filtrés avant l’appel de votre équipe.' },
@@ -475,7 +481,7 @@ export const UI_COMPONENTS = {
     simultaneousText: 'Pas de file d’attente : l’agent traite plusieurs appels en même temps sur la même ligne.',
     knowledgeTitle: 'Base de connaissances',
     knowledgeText: 'PDF, pages de votre site, procédures : l’agent répond avec vos informations.',
-    promptTitle: 'Assistant de prompts',
+    promptTitle: 'Rédaction des consignes',
     promptText: 'Décrivez l’objectif de l’appel : un assistant pas à pas règle le comportement de l’agent.',
     transferTitle: 'Transfert vers un humain',
     transferText: 'Quand le client le demande ou quand la situation l’exige, l’appel bascule vers votre équipe.',
@@ -483,7 +489,7 @@ export const UI_COMPONENTS = {
     yourTeam: 'Votre équipe',
     reportsTitle: 'Rapports détaillés',
     reportsText: 'Enregistrements, transcriptions, résumés et graphiques pour chaque appel.',
-    campaignsTitle: 'Campagnes sortantes',
+    campaignsTitle: 'Rappels et confirmations',
     campaignsText: 'Importez vos contacts consentants ou déclenchez des appels depuis vos outils et formulaires.',
   },
 
@@ -494,7 +500,7 @@ export const UI_COMPONENTS = {
     // Même ordre que les icônes et maquettes du composant.
     stages: [
       { key: 'Attirer', title: 'Captez chaque demande', items: ['Landing pages par secteur', 'Widget web : parler ou être rappelé', 'Numéros locaux et renvoi de votre ligne', 'Réponse 24/7 aux appels et messages'] },
-      { key: 'Convertir', title: 'Transformez les demandes en clients', items: ['Qualification selon vos critères', 'Rappel des leads en quelques minutes', 'Prise de rendez-vous dans votre agenda', 'Fiche CRM créée automatiquement'] },
+      { key: 'Convertir', title: 'Transformez les demandes en clients', items: ['Qualification selon vos critères', 'Rappel des prospects en quelques minutes', 'Prise de rendez-vous dans votre agenda', 'Fiche CRM créée automatiquement'] },
       { key: 'Fidéliser', title: 'Gardez le lien avec vos clients', items: ['Confirmations et rappels', 'Support répondant depuis vos documents', 'Relances, renouvellements et enquêtes', 'WhatsApp, SMS, Instagram'] },
       { key: 'Mesurer', title: 'Pilotez avec des chiffres réels', items: ['Volumes, durées et résultats', 'Rendez-vous pris et transferts', 'Usage des minutes et alertes', 'Écoute des appels et transcriptions'] },
     ],
@@ -509,12 +515,12 @@ export const UI_COMPONENTS = {
       { who: 'Question horaires', what: 'Réponse donnée', tag: 'Résolu' },
     ],
     title: 'Votre espace client, clair dès la première connexion',
-    intro: 'Appels, rendez-vous, leads, messages et minutes : tout est visible au même endroit, sur ordinateur comme sur mobile.',
+    intro: 'Appels, rendez-vous, demandes, messages et minutes : tout est visible au même endroit, sur ordinateur comme sur mobile.',
     points: ['Résumé de chaque appel et prochaine action', 'Écoute des enregistrements et transcriptions', 'Suivi des minutes et alertes de consommation', 'Configuration de vos agents sans code'],
     roles: 'Un espace sécurisé par client, avec ses propres agents, numéros et données.',
     dashboard: 'Tableau de bord',
     sampleData: 'Données d’exemple · 30 derniers jours',
-    stats: [['Appels', '412'], ['Rendez-vous', '96'], ['Leads', '183'], ['Minutes', '62 %']],
+    stats: [['Appels', '412'], ['Rendez-vous', '96'], ['Demandes', '183'], ['Minutes', '62 %']],
     notification: 'Notification',
     notifBooking: 'Nouveau rendez-vous réservé par l’agent : mardi 9 h 30.',
     notifMinutes: 'Minutes : 62 % utilisées.',
@@ -560,10 +566,10 @@ export const UI_COMPONENTS = {
       tags: ['Ton : chaleureux', 'Vouvoiement', 'Pas de conseil médical'],
     },
     flow: {
-      title: 'Scénario : lead web',
+      title: 'Scénario : demande web',
       steps: [
         { title: 'Nouveau formulaire', source: 'Site web' },
-        { title: 'Appeler le lead', source: 'Agent commercial' },
+        { title: 'Rappeler le prospect', source: 'Agent commercial' },
         { title: 'Créer la fiche', source: 'CRM' },
         { title: 'Envoyer la confirmation', source: 'WhatsApp' },
       ],

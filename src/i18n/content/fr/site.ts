@@ -10,4 +10,7 @@ export const SITE_TEXT = {
   talkNow: 'Parlez à notre agent maintenant',
   talkNowSub: 'Démo live, gratuite, sans inscription',
   rechargeFreeAmount: 'Le montant est libre : saisissez-le dans votre espace (Add credits). Les montants ci-dessus sont des exemples.',
+  consent: { title: 'Cookies de mesure', text: 'Avec votre accord, nous utilisons des cookies pour mesurer l’audience et l’efficacité de nos publicités. Refuser n’empêche pas d’utiliser le site.', accept: 'Accepter', reject: 'Refuser', policy: 'En savoir plus', manage: 'Gérer les cookies' },
+  keepNumber: { title: 'Vous gardez votre numéro', text: 'Aucun changement d’opérateur ni de matériel : un simple renvoi d’appel, permanent ou seulement quand vous ne répondez pas, et l’agent prend le relais.' },
+  fxNote: (date: string) => `Montants en devise locale donnés à titre indicatif, au taux de référence de la BCE du ${date}. Les forfaits sont facturés en dollars US : le montant débité dépend du taux de change de votre banque le jour du paiement.`,
 };

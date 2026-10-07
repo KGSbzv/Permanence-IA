@@ -44,11 +44,21 @@ export function GuideIndex() {
   );
 }
 
+// Codes de renvoi (**61*…#), numéros (+972…), adresses web, emails et balises (</body>) gardent leur sens
+// de lecture de gauche à droite, même dans un texte hébreu : sinon « ##61# » s'affiche « #61## ».
+const LTR = /(https?:\/\/[^\s،]+|[\w.+-]+@[\w-]+\.[\w.]+|<\/?[A-Za-z][^<>]*>|[#*][#*\d][#*\d]*|\+\d[\d\s-]{6,}\d)/g;
+export function isolateLtr(text: string): React.ReactNode {
+  const parts = text.split(LTR);
+  if (parts.length === 1) return text;
+  return parts.map((p, i) => (i % 2 ? <bdi key={i} dir="ltr">{p}</bdi> : p));
+}
+
 /** Corps d’une fiche : sections avec texte, étapes, listes et conseil. */
 export function GuideBody({ guide }: { guide: Guide }) {
   const { c } = useI18n();
   const t = c.guides.ui;
-  const fill = useGuideText();
+  const fillText = useGuideText();
+  const fill = (x: string) => isolateLtr(fillText(x));
   return (
     <div className="max-w-prose space-y-12">
       {guide.sections.map((s) => (

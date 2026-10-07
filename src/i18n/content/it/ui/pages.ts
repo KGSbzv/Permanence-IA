@@ -195,6 +195,24 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     rights: ['Per qualsiasi domanda o richiesta di esercizio dei diritti: ', { a: 'informativa sulla privacy', href: '/confidentialite' }, '.'] as Rich,
   },
 
+  accessibility: {
+    meta: {
+      title: (brand: string) => `Dichiarazione di accessibilità — ${brand}`,
+      description: (brand: string) => `Livello di accessibilità del sito ${brand}, interventi realizzati, limiti noti e contatto per segnalare una difficoltà.`,
+    },
+    h1: 'Dichiarazione di accessibilità',
+    updated: 'Ultimo aggiornamento: 7 ottobre 2026',
+    intro: (brand: string, company: string) => `${brand} è un servizio di ${company}, società registrata nello Stato del Wyoming (Stati Uniti). Vogliamo che tutti possano usare questo sito, comprese le persone con disabilità.`,
+    sections: [
+      { title: 'Livello di riferimento', items: ['Il sito punta alla conformità al livello AA delle linee guida WCAG 2.1, in linea con gli obiettivi generali dell’Atto europeo sull’accessibilità (European Accessibility Act).', 'Stato: parzialmente conforme. I punti non conformi noti sono elencati più sotto e sono in corso di correzione.'] },
+      { title: 'Interventi realizzati', items: ['Lingua e direzione di lettura dichiarate in ogni pagina (compreso l’ebraico, da destra a sinistra).', 'Navigazione completa da tastiera, link per passare direttamente al contenuto, focus visibile.', 'Titoli gerarchici, testi alternativi per le immagini informative, moduli etichettati.', 'Contrasti rafforzati, testo ingrandibile fino al 200% senza perdita di informazioni, impaginazione adatta al mobile.', 'Animazioni ridotte quando il sistema lo richiede (preferenza «riduci movimento»).'] },
+      { title: 'Limiti noti', items: ['La finestra di chat e della demo vocale è fornita dal nostro fornitore tecnico: la sua accessibilità da tastiera e con lettori di schermo può essere incompleta. Il modulo di richiamata e l’indirizzo email restano sempre disponibili.', 'L’area clienti (app.permanenceia.com) è in inglese e si basa sulla piattaforma del nostro fornitore.', 'Alcuni documenti PDF (presentazione commerciale) non sono completamente strutturati.'] },
+      { title: 'Valutazione', items: ['Valutazione interna effettuata il 7 ottobre 2026 su tutte le pagine pubbliche, con strumenti automatici e verifica manuale (tastiera, contrasti, lettore di schermo).'] },
+    ],
+    contactTitle: 'Segnalare una difficoltà',
+    contact: (company: string, email: string) => `Referente per l’accessibilità: ${company}. Ci scriva a ${email} descrivendo la pagina e la difficoltà incontrata: rispondiamo entro 5 giorni lavorativi e Le proponiamo una soluzione adeguata (informazioni in un altro formato, assistenza via email o per telefono).`,
+  },
+
   notFound: {
     meta: {
       title: (brand: string) => `Pagina non trovata — ${brand}`,
@@ -590,7 +608,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Richieste di richiamata e conversazioni con le nostre assistenti: 24 mesi dall’ultimo contatto.',
-                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 12 mesi per impostazione predefinita; ogni cliente può ridurre tale periodo e cancellare i propri dati.',
+                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 90 giorni dalla data della chiamata (durata applicata dal nostro fornitore tecnico) per impostazione predefinita; ogni cliente può modificare tale periodo e cancellare i propri dati.',
                 'Potenziali clienti e contatti raccolti dagli agenti dei nostri clienti: 24 mesi per impostazione predefinita, riducibili dal cliente.',
                 'Dati dell’account: per la durata del rapporto contrattuale, poi 3 anni per finalità di marketing, salvo opposizione. Il contenuto dell’account è cancellato entro 90 giorni dalla fine del contratto.',
                 'Fatture e scritture contabili: 10 anni.',

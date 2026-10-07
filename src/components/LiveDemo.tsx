@@ -2,6 +2,7 @@
 // « Dans ce navigateur » ouvre l'assistante Autocalls de la langue choisie (même page widget que embed.js,
 // ouverte d'office) dans une fenêtre ; « Sur mon téléphone » envoie une demande de rappel à /api/callback.
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
@@ -314,6 +315,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
       const cfg = await res.json();
       if (cfg.widget_enabled === false) throw new Error();
       setDialog(widgetUrl(id, cfg, { demo_role: ROLE_NOTE[role], demo_language: NATIVE[lang], demo_sector: sectorName }));
+      track('demo_start', { mode: 'browser', demo_language: lang, sector, voice: gender });
       setState('idle');
     } catch {
       setState('error'); setError(t.browserError);
@@ -331,12 +333,14 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined,
           type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
-          note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — voix : ${voice} — secteur : ${sectorName}`,
+          // Note lue par l’agent avant de rappeler : en anglais neutre (les agents de chaque langue la comprennent).
+          note: `Live demo — role: ${['receptionist', 'sales / qualification', 'support'][role]} — language: ${NATIVE[lang]} — voice: ${voice} — sector: ${sectorName}`,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
       if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendFailed); }
       setState('sent');
+      track('generate_lead', { lead_type: 'demo_call', demo_language: lang, sector, voice: gender });
     } catch (err: any) { setState('error'); setError(err.message || t.sendFailed); }
   }
 
@@ -403,11 +407,11 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           <fieldset className="mt-3">
             <legend className={legend}>{t.langLabel}</legend>
             <div className="flex flex-wrap gap-1.5">
-              {LOCALES.map((l) => (
+              {[locale, ...LOCALES.filter((x) => x !== locale)].map((l) => (
                 <label key={l} className="cursor-pointer">
                   <input type="radio" name={`${uid}-lang`} value={l} checked={lang === l} onChange={() => setLang(l)} className="peer sr-only" />
                   <span className={`flex items-center gap-1.5 rounded-full py-1 ps-1 pe-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
-                    <span aria-hidden className="flex shrink-0 -space-x-2">
+                    <span aria-hidden className="flex shrink-0 -space-x-2 rtl:space-x-reverse">
                       {GENDERS.map((g) => (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img key={g} src={VOICES[l][g].photo} alt="" width={24} height={24} loading="lazy"

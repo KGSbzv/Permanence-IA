@@ -7,7 +7,7 @@ import { MARKETS } from '@/i18n/markets';
 // Toutes les pages, dans toutes les langues : le français sans préfixe, les autres sous /<locale>/…
 // Chaque URL liste ses variantes de langue (hreflang) et la version française en x-default.
 // Le blog n’y figure pas : il renvoie vers la FAQ tant qu’aucun article n’est publié.
-const STATIC = ['/', '/tarifs', '/demo', '/contact', '/integrations', '/securite', '/faq', '/aide', '/secteurs', '/fonctionnalites', '/offres/recharges', '/essai-gratuit', '/about', '/mentions-legales', '/cgu', '/confidentialite', '/cookies'];
+const STATIC = ['/', '/tarifs', '/demo', '/contact', '/integrations', '/securite', '/faq', '/aide', '/secteurs', '/fonctionnalites', '/offres/recharges', '/essai-gratuit', '/about', '/mentions-legales', '/cgu', '/confidentialite', '/cookies', '/accessibilite'];
 
 const url = (locale: Locale, p: string) => `${SITE.url}${locale === DEFAULT_LOCALE ? p : `/${locale}${p === '/' ? '' : p}`}`;
 

@@ -195,6 +195,24 @@ export const UI_PAGES = {
     rights: ['For any question or to exercise your rights: ', { a: 'privacy policy', href: '/confidentialite' }, '.'] as Rich,
   },
 
+  accessibility: {
+    meta: {
+      title: (brand: string) => `Accessibility statement — ${brand}`,
+      description: (brand: string) => `Accessibility level of the ${brand} website, measures taken, known limitations and how to report a problem.`,
+    },
+    h1: 'Accessibility statement',
+    updated: 'Last updated: 7 October 2026',
+    intro: (brand: string, company: string) => `${brand} is a service of ${company}, a company registered in the State of Wyoming (United States). We want everyone to be able to use this website, including people with disabilities.`,
+    sections: [
+      { title: 'Target level', items: ['This website aims to conform to level AA of the Web Content Accessibility Guidelines (WCAG) 2.1.', 'Status: partially conformant. Known non-conformities are listed below and are being fixed.'] },
+      { title: 'Measures taken', items: ['Language and reading direction declared on every page (including Hebrew, right to left).', 'Full keyboard navigation, a skip-to-content link and a visible focus indicator.', 'Structured headings, text alternatives for informative images, labelled forms.', 'Stronger colour contrast, text that can be enlarged to 200% without loss of information, mobile-friendly layout.', 'Reduced animations when your system asks for it (“reduce motion” setting).'] },
+      { title: 'Known limitations', items: ['The chat and voice demo window is provided by our technology provider: its keyboard and screen reader support may be incomplete. The callback form and our email address are always available instead.', 'The customer area (app.permanenceia.com) runs on our provider’s platform.', 'Some PDF documents (sales presentation) are not fully tagged.'] },
+      { title: 'Assessment', items: ['Internal assessment carried out on 7 October 2026 across all public pages, using automated tools and manual checks (keyboard, contrast, screen reader).'] },
+    ],
+    contactTitle: 'Report a problem',
+    contact: (company: string, email: string) => `Accessibility contact: ${company}. Email us at ${email}, describing the page and the problem you encountered: we reply within 5 working days and offer a suitable solution (information in another format, help by email or by phone).`,
+  },
+
   notFound: {
     meta: {
       title: (brand: string) => `Page not found — ${brand}`,
@@ -590,7 +608,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Callback requests and conversations with our assistants: 24 months after the last contact.',
-                'Calls, recordings, transcripts, chats and SMS processed for our customers: 12 months by default; each customer can shorten this period and delete its data.',
+                'Calls, recordings, transcripts, chats and SMS processed for our customers: 90 days by default from the date of the call (the period applied by our technical provider); each customer can shorten this period and delete its data.',
                 'Leads and contacts collected by our customers’ agents: 24 months by default, which the customer can shorten.',
                 'Account data: for the duration of the contract, then 3 years for marketing unless you object. Account content is deleted within 90 days of the end of the contract.',
                 'Invoices and accounting records: 10 years.',

@@ -64,6 +64,7 @@ export const UI_COMPONENTS = {
       terms: 'Algemene voorwaarden',
       privacy: 'Privacy',
       cookies: 'Cookies',
+      accessibility: 'Toegankelijkheid',
     },
   },
 
@@ -128,6 +129,11 @@ export const UI_COMPONENTS = {
     needPlaceholder: 'Bijv.: ik mis ’s avonds gesprekken, ik wil afspraken automatiseren…',
     consent: (brand: string) => `Ik ga ermee akkoord dat ik op het opgegeven nummer word teruggebeld, ook door een AI-spraakagent van ${brand}. Mijn gegevens worden alleen gebruikt om mijn aanvraag af te handelen.`,
     sending: 'Verzenden…',
+    company: 'Bedrijf',
+    optional: '(optioneel)',
+    volume: 'Ontvangen gesprekken per maand',
+    volumeOptions: ['Minder dan 200', '200 tot 1.000', 'Meer dan 1.000'],
+    phoneInvalid: 'Vul een geldig telefoonnummer in, bijvoorbeeld 06 12345678.',
   },
 
   benefits: {
@@ -184,7 +190,7 @@ export const UI_COMPONENTS = {
   pricingCards: {
     daysFree: (days: number) => `${days} dagen gratis`,
     negotiated: 'Onderhandelde prijs per minuut',
-    mostChosen: 'Meest gekozen',
+    mostChosen: 'Aanbevolen',
     perMinute: (label: string) => `oftewel ${label}`,
     details: 'Details van het abonnement',
     billing: 'Factuurperiode',

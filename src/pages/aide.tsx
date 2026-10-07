@@ -2,7 +2,7 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import { Heading, Section } from '@/components/ui';
-import { GuideIndex } from '@/components/Guides';
+import { GuideIndex, isolateLtr } from '@/components/Guides';
 import { LOGIN_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
@@ -62,7 +62,7 @@ export default function Aide() {
             <article key={task.title} className="rounded-2xl border border-line p-6">
               <h3 className="font-display text-lg font-bold">{task.title}</h3>
               <ol className="mt-3 list-decimal space-y-2 ps-5">
-                {task.steps.map((s) => <li key={s}>{s}</li>)}
+                {task.steps.map((s) => <li key={s}>{isolateLtr(s)}</li>)}
               </ol>
             </article>
           ))}
