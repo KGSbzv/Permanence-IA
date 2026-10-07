@@ -46,7 +46,7 @@ export function GuideIndex() {
 
 // Codes de renvoi (**61*…#), numéros (+972…), adresses web, emails et balises (</body>) gardent leur sens
 // de lecture de gauche à droite, même dans un texte hébreu : sinon « ##61# » s'affiche « #61## ».
-const LTR = /(https?:\/\/[^\s،]+|[\w.+-]+@[\w-]+\.[\w.]+|<\/?[A-Za-z][^<>]*>|[#*][#*\d][^\s,;:)]*|\+\d[\d\s-]{6,}\d)/g;
+const LTR = /(https?:\/\/[^\s،]+|[\w.+-]+@[\w-]+\.[\w.]+|<\/?[A-Za-z][^<>]*>|[#*][#*\d][#*\d]*|\+\d[\d\s-]{6,}\d)/g;
 export function isolateLtr(text: string): React.ReactNode {
   const parts = text.split(LTR);
   if (parts.length === 1) return text;
