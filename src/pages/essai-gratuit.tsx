@@ -29,7 +29,7 @@ export default function EssaiGratuit() {
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), email: f.get('email'), company: f.get('company'),
           sector: f.get('sector'), consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
-          note: `Demande d’accompagnement à l’essai — offre ${f.get('plan')} — ${f.get('company') || ''}`,
+          note: `Trial onboarding request — plan: ${f.get('plan')} — company: ${f.get('company') || ''}`,
         }),
       });
       if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendError); }

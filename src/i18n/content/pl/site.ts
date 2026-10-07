@@ -21,4 +21,5 @@ export const SITE_TEXT = {
   talkNowSub: 'Demo na żywo, bezpłatnie, bez rejestracji',
   rechargeFreeAmount: 'Kwotę wybierasz sam: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
   consent: { title: 'Pliki cookie do pomiaru', text: 'Za Państwa zgodą używamy plików cookie do pomiaru ruchu i skuteczności naszych reklam. Odmowa nie ogranicza korzystania ze strony.', accept: 'Akceptuję', reject: 'Odrzucam', policy: 'Więcej informacji', manage: 'Ustawienia cookie' },
+  keepNumber: { title: 'Zachowują Państwo swój numer', text: 'Bez zmiany operatora i sprzętu: wystarczy przekierowanie połączeń, stałe lub tylko wtedy, gdy nie odbierają Państwo telefonu, a agent przejmuje rozmowę.' },
 };

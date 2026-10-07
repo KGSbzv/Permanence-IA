@@ -110,6 +110,26 @@ async function accountSummary(user: PlatformUser) {
   }
 }
 
+/** Email du code de vérification, dans la langue de la conversation (français + anglais si inconnue). */
+const CODE_MAIL: Record<string, { dir?: 'rtl'; subject: string; hello: string; line: string; valid: string; ignore: string }> = {
+  fr: { subject: 'Votre code de vérification', hello: 'Bonjour,', line: 'Votre code pour que votre conseillère Permanence IA consulte votre compte :', valid: 'Il est valable 10 minutes.', ignore: 'Si vous n’avez rien demandé, ignorez cet email.' },
+  en: { subject: 'Your verification code', hello: 'Hello,', line: 'Your code so your PermanenceAI adviser can look at your account:', valid: 'It is valid for 10 minutes.', ignore: 'If you didn’t ask for it, please ignore this email.' },
+  it: { subject: 'Il Suo codice di verifica', hello: 'Buongiorno,', line: 'Il Suo codice per permettere alla consulente PermanenceIA di consultare il Suo account:', valid: 'È valido 10 minuti.', ignore: 'Se non lo ha richiesto, ignori questa email.' },
+  pl: { subject: 'Kod weryfikacyjny', hello: 'Dzień dobry,', line: 'Kod, dzięki któremu doradczyni PermanenceAI może sprawdzić Państwa konto:', valid: 'Kod jest ważny 10 minut.', ignore: 'Jeśli to nie Państwo o niego prosili, prosimy zignorować tę wiadomość.' },
+  nl: { subject: 'Uw verificatiecode', hello: 'Hallo,', line: 'Uw code waarmee uw PermanenceAI-adviseur uw account kan bekijken:', valid: 'De code is 10 minuten geldig.', ignore: 'Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren.' },
+  he: { dir: 'rtl', subject: 'קוד האימות שלכם', hello: 'שלום,', line: 'הקוד שמאפשר ליועצת של PermanenceAI לעיין בחשבון שלכם:', valid: 'הקוד בתוקף ל-10 דקות.', ignore: 'אם לא ביקשתם קוד, אפשר להתעלם מהודעה זו.' },
+};
+function codeMail(lang: string, code: string) {
+  const key = lang.toLowerCase().slice(0, 2);
+  const list = CODE_MAIL[key] ? [CODE_MAIL[key]] : [CODE_MAIL.fr, CODE_MAIL.en];
+  const block = (t: (typeof list)[number]) => `<div dir="${t.dir || 'ltr'}" style="text-align:${t.dir ? 'right' : 'left'}"><p>${t.hello}</p><p>${t.line}</p><p style="font-size:28px;font-weight:bold;letter-spacing:4px" dir="ltr">${esc(code)}</p><p>${t.valid} ${t.ignore}</p></div>`;
+  return {
+    subject: `${list.map((t) => t.subject).join(' · ')} : ${code}`,
+    text: list.map((t) => `${t.hello}\n\n${t.line} ${code}\n${t.valid} ${t.ignore}`).join('\n\n—\n\n'),
+    html: list.map(block).join('<hr>'),
+  };
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
   const ip = clientIp(req);
@@ -129,12 +149,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if (!user) return;
         await logEvent('otp_send', email);
         const code = codeFor(email, Math.floor(Date.now() / WINDOW_MS));
-        await sendMail(
-          email,
-          `Votre code de vérification : ${code} · Your verification code`,
-          `Bonjour,\n\nVotre code pour que Lucie consulte votre compte Permanence IA : ${code}\nIl est valable 10 minutes. Si vous n’avez rien demandé, ignorez cet email.\n\nYour code so Lucie can look at your PermanenceAI account: ${code} (valid for 10 minutes).`,
-          `<p>Bonjour,</p><p>Votre code pour que Lucie consulte votre compte Permanence IA :</p><p style="font-size:28px;font-weight:bold;letter-spacing:4px">${esc(code)}</p><p>Il est valable 10 minutes. Si vous n’avez rien demandé, ignorez cet email.</p><hr><p>Your code so Lucie can look at your PermanenceAI account: <b>${esc(code)}</b> (valid for 10 minutes).</p>`,
-        );
+        const m = codeMail(String(b.lang || ''), code);
+        await sendMail(email, m.subject, m.text, m.html);
       })().catch((e) => console.error('[agent-account] send_code:', e.message));
       await Promise.race([work, sleep(6000)]);
       await sleep(Math.max(0, 6000 - (Date.now() - started)));

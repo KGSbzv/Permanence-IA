@@ -61,6 +61,7 @@ export default function Footer() {
             <li><Link href="/cgu" className="hover:text-white">{t.legal.terms}</Link></li>
             <li><Link href="/confidentialite" className="hover:text-white">{t.legal.privacy}</Link></li>
             <li><Link href="/cookies" className="hover:text-white">{t.legal.cookies}</Link></li>
+            <li><Link href="/accessibilite" className="hover:text-white">{t.legal.accessibility}</Link></li>
           </ul>
         </div>
       </div>

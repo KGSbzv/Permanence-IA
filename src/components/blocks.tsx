@@ -584,7 +584,7 @@ export function EconomyBlock() {
   const t = c.ui.components.economy;
   const [calls, setCalls] = useState(300);
   const [duration, setDuration] = useState(3);
-  const [hourly, setHourly] = useState(25);
+  const [hourly, setHourly] = useState(market.hourlyCost);
   const [missed, setMissed] = useState(20);
   const [value, setValue] = useState(150);
 

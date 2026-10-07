@@ -50,7 +50,7 @@ export const SECTORS: Sector[] = [
       { title: 'Vous rappelez ou intervenez', text: 'Avec toutes les informations en main.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, j’ai une fuite sous l’évier, ça coule beaucoup.' },
       { who: 'agent', text: 'Je comprends. Avez-vous pu couper l’arrivée d’eau ?' },
@@ -91,7 +91,7 @@ export const SECTORS: Sector[] = [
       { title: 'La veille, l’agent confirme', text: 'Par appel ou message dès le forfait Assistant, et libère le créneau si besoin.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais un rendez-vous pour un détartrage.' },
       { who: 'agent', text: 'Avec plaisir. Êtes-vous déjà patient du cabinet ?' },
@@ -132,7 +132,7 @@ export const SECTORS: Sector[] = [
       { title: 'La veille, le rappel part', text: 'Par appel ou message dès le forfait Assistant, et le créneau se libère si besoin.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, j’ai une prescription pour dix séances de rééducation du genou.' },
       { who: 'agent', text: 'Très bien. Est-ce votre premier rendez-vous au cabinet ?' },
@@ -173,7 +173,7 @@ export const SECTORS: Sector[] = [
       { title: 'Les rappels partent', text: 'La veille du rendez-vous et à l’échéance des vaccins, dès le forfait Assistant.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, mon chien a mangé du chocolat il y a une heure.' },
       { who: 'agent', text: 'Je comprends. Quel est son poids, et savez-vous quelle quantité il a mangée ?' },
@@ -197,11 +197,11 @@ export const SECTORS: Sector[] = [
     subtitle: 'L’accueil téléphonique de votre agence immobilière, même pendant les visites : chaque demande arrive avec les informations nécessaires pour agir plus vite — budget, zone, délai, bien concerné.',
     problems: [
       'Vos agents sont en visite quand les prospects appellent.',
-      'Les leads des portails attendent trop longtemps une réponse.',
+      'Les demandes des portails attendent trop longtemps une réponse.',
       'La gestion locative mélange incidents et demandes commerciales.',
     ],
     handles: ['Achat, vente ou location', 'Budget, zone et délai', 'Référence du bien', 'Financement', 'Planification de visite', 'Routage vers le bon agent', 'Incidents locatifs et tickets'],
-    benefits: ['Chaque appel qualifié pendant les visites : budget, zone, délai', 'Leads rappelés en quelques minutes dès le forfait Assistant, même le soir', 'Incidents locatifs séparés des demandes commerciales', 'Visites mieux planifiées', 'Suivi après visite', 'Anciens clients recontactés pour une estimation ou un nouveau projet (campagnes, forfait Assistant)'],
+    benefits: ['Chaque appel qualifié pendant les visites : budget, zone, délai', 'Prospects rappelés en quelques minutes dès le forfait Assistant, même le soir', 'Incidents locatifs séparés des demandes commerciales', 'Visites mieux planifiées', 'Suivi après visite', 'Anciens clients recontactés pour une estimation ou un nouveau projet (campagnes, forfait Assistant)'],
     photo: '/photos/immobilier.jpg',
     photoAlt: 'Agent immobilier faisant visiter un appartement lumineux',
     caption: 'Chaque demande arrive avec les informations nécessaires pour qu’un agent puisse agir plus vite.',
@@ -213,7 +213,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le suivi est automatique', text: 'Relance après visite et mise à jour du CRM, dès le forfait Assistant.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'J’appelle pour le T3 avec balcon, il est toujours disponible ?' },
       { who: 'agent', text: 'Oui. Vous cherchez pour habiter ou pour investir ?' },
@@ -224,7 +224,7 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'Peut-on router vers l’agent responsable du bien ?', a: 'Oui. Selon la référence ou le secteur, la demande est attribuée à l’agent concerné et la visite posée dans son agenda.' },
       { q: 'L’agent connaît-il nos biens ?', a: 'Il s’appuie sur les informations que vous chargez dans la base de connaissances ou fournissez via votre outil, et ne donne aucune information non vérifiée.' },
-      { q: 'Et les leads des portails ?', a: 'Dès le forfait Assistant, un lead reçu par formulaire ou dans votre CRM peut déclencher automatiquement un appel de l’agent, qui qualifie le projet et propose une visite.' },
+      { q: 'Et les demandes des portails ?', a: 'Dès le forfait Assistant, une demande reçue par formulaire ou dans votre CRM peut déclencher automatiquement un appel de l’agent, qui qualifie le projet et propose une visite.' },
       { q: 'Et la gestion locative ?', a: 'L’agent distingue locataire, propriétaire et candidat, crée un ticket pour les incidents et transmet les urgences selon vos règles.' },
       { q: 'Peut-il proposer une estimation à nos anciens clients ?', a: 'Oui, avec les campagnes du forfait Assistant : l’agent rappelle vos anciens clients vendeurs ou acquéreurs, prend des nouvelles de leur projet et propose un rendez-vous d’estimation. N’utilisez que vos propres fichiers clients, jamais des listes achetées ou issues de portails.' },
     ],
@@ -254,7 +254,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le client est relancé', text: 'Confirmation et rappel avant le rendez-vous, dès le forfait Assistant.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'J’ai un bruit au freinage depuis deux jours.' },
       { who: 'agent', text: 'Je note. Quel est le modèle et l’année du véhicule ?' },
@@ -293,7 +293,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le rappel part la veille', text: 'Par SMS ou WhatsApp dès le forfait Assistant, avec possibilité de reporter.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais une couleur et une coupe, plutôt samedi matin.' },
       { who: 'agent', text: 'Avec plaisir. C’est une couleur racines ou complète ? Je prévois la bonne durée.' },
@@ -333,7 +333,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le rappel part la veille', text: 'Par message dès le forfait Assistant, avec possibilité de reporter.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais un soin du visage, mais je ne sais pas lequel choisir.' },
       { who: 'agent', text: 'Je peux vous aider. Vous cherchez plutôt un soin hydratant ou un nettoyage en profondeur ?' },
@@ -374,7 +374,7 @@ export const SECTORS: Sector[] = [
       { title: 'Votre équipe est prévenue', text: 'Seulement quand une intervention est nécessaire.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Avez-vous une table pour quatre ce soir vers 20 h ?' },
       { who: 'agent', text: 'Oui, à 20 h 15 en terrasse ou 20 h 30 en salle.' },
@@ -413,7 +413,7 @@ export const SECTORS: Sector[] = [
       { title: 'Vous recevez la fiche', text: 'Message ou résumé, transmis au bon associé ou collaborateur.' },
     ],
     offer: 'receptionniste',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, mon employeur m’a convoqué à un entretien préalable vendredi.' },
       { who: 'agent', text: 'Je comprends. Êtes-vous déjà client du cabinet ?' },
@@ -453,7 +453,7 @@ export const SECTORS: Sector[] = [
       { title: 'Vous suivez tout', text: 'Résumés et statistiques dans votre tableau de bord.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, j’ai commandé une veste mardi et je n’ai rien reçu.' },
       { who: 'agent', text: 'Je regarde. Pouvez-vous me donner votre numéro de commande ?' },
@@ -493,7 +493,7 @@ export const SECTORS: Sector[] = [
       { title: 'Le rendez-vous est posé', text: 'Avec le conseiller, et la fiche arrive dans votre CRM.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'agent', text: 'Bonjour, vous avez demandé un devis d’assurance emprunteur sur notre site il y a quelques minutes.' },
       { who: 'client', text: 'Oui, pour un achat immobilier en février.' },
@@ -504,7 +504,7 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'L’agent donne-t-il des conseils ?', a: 'Non. Il ne recommande aucun contrat et ne donne aucun avis financier. Il recueille les informations, répond aux questions pratiques (pièces, délais, rendez-vous) et réserve un créneau avec un conseiller.' },
       { q: 'Peut-il rappeler les demandes laissées sur mon site ?', a: 'Oui, avec les campagnes du forfait Assistant : la personne a demandé à être rappelée, l’appel est donc légitime. Il part dans les minutes qui suivent, aux horaires que vous autorisez.' },
-      { q: 'Et les fichiers de leads achetés ?', a: 'À éviter. En France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026, et c’est à vous de le prouver. Appelez vos clients, vos prospects qui l’ont demandé, et respectez toute opposition.' },
+      { q: 'Et les fichiers de prospects achetés ?', a: 'À éviter. En France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026, et c’est à vous de le prouver. Appelez vos clients, vos prospects qui l’ont demandé, et respectez toute opposition.' },
       { q: 'Peut-il relancer les pièces manquantes et les échéances ?', a: 'Oui, auprès de vos clients : l’agent rappelle les pièces à fournir, propose de les envoyer et prévient avant l’échéance d’un contrat pour fixer un rendez-vous de révision.' },
     ],
   },
@@ -533,7 +533,7 @@ export const SECTORS: Sector[] = [
       { title: 'Vous suivez l’incident', text: 'Fiche complète dans votre tableau de bord ou votre outil.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonsoir, l’eau coule du plafond de ma salle de bains.' },
       { who: 'agent', text: 'D’accord. Quelle est votre adresse, et l’eau touche-t-elle une installation électrique ?' },
@@ -573,7 +573,7 @@ export const SECTORS: Sector[] = [
       { title: 'La veille, il confirme', text: 'Et libère le créneau en cas d’empêchement.' },
     ],
     offer: 'assistant',
-    ctas: ['Commencer gratuitement', 'Être rappelé'],
+    ctas: ['Démarrer l’essai de 14 jours', 'Être rappelé'],
     call: [
       { who: 'client', text: 'Bonjour, je voudrais un rendez-vous pour une première consultation.' },
       { who: 'agent', text: 'Avec plaisir. Avez-vous une préférence de praticien ou de jour ?' },

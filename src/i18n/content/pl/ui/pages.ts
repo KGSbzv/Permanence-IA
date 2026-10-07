@@ -204,6 +204,24 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     rights: ['W razie pytań lub w celu skorzystania ze swoich praw: ', { a: 'polityka prywatności', href: '/confidentialite' }, '.'] as Rich,
   },
 
+  accessibility: {
+    meta: {
+      title: (brand: string) => `Deklaracja dostępności — ${brand}`,
+      description: (brand: string) => `Poziom dostępności serwisu ${brand}, wprowadzone rozwiązania, znane ograniczenia i kontakt w celu zgłoszenia problemu.`,
+    },
+    h1: 'Deklaracja dostępności',
+    updated: 'Ostatnia aktualizacja: 7 października 2026 r.',
+    intro: (brand: string, company: string) => `${brand} to usługa ${company}, spółki zarejestrowanej w stanie Wyoming (Stany Zjednoczone). Chcemy, aby z serwisu mógł korzystać każdy, także osoby z niepełnosprawnościami.`,
+    sections: [
+      { title: 'Docelowy poziom', items: ['Serwis dąży do zgodności z poziomem AA wytycznych WCAG 2.1, zgodnie z ogólnymi celami Europejskiego aktu o dostępności (European Accessibility Act).', 'Status: częściowo zgodny. Znane niezgodności opisujemy poniżej i są one na bieżąco usuwane.'] },
+      { title: 'Wprowadzone rozwiązania', items: ['Język i kierunek czytania określone na każdej stronie (w tym hebrajski, od prawej do lewej).', 'Pełna obsługa z klawiatury, link pozwalający przejść bezpośrednio do treści, widoczny fokus.', 'Hierarchiczne nagłówki, teksty alternatywne dla obrazów informacyjnych, opisane pola formularzy.', 'Wzmocniony kontrast, możliwość powiększenia tekstu do 200% bez utraty informacji, układ dostosowany do urządzeń mobilnych.', 'Ograniczone animacje, gdy wymaga tego system (ustawienie „ogranicz ruch”).'] },
+      { title: 'Znane ograniczenia', items: ['Okno czatu i demonstracji głosowej dostarcza nasz dostawca technologii: jego obsługa z klawiatury i przez czytniki ekranu może być niepełna. Formularz oddzwonienia i adres e-mail są zawsze dostępne.', 'Panel klienta (app.permanenceia.com) jest w języku angielskim i działa na platformie naszego dostawcy.', 'Niektóre dokumenty PDF (prezentacja handlowa) nie są w pełni oznaczone strukturalnie.'] },
+      { title: 'Ocena', items: ['Ocena wewnętrzna przeprowadzona 7 października 2026 r. na wszystkich stronach publicznych, z użyciem narzędzi automatycznych i weryfikacji ręcznej (klawiatura, kontrast, czytnik ekranu).'] },
+    ],
+    contactTitle: 'Zgłoś problem',
+    contact: (company: string, email: string) => `Osoba odpowiedzialna za dostępność: ${company}. Prosimy o wiadomość na adres ${email} z opisem strony i napotkanego problemu: odpowiadamy w ciągu 5 dni roboczych i proponujemy odpowiednie rozwiązanie (informacje w innym formacie, pomoc e-mailowa lub telefoniczna).`,
+  },
+
   notFound: {
     meta: {
       title: (brand: string) => `Nie znaleziono strony — ${brand}`,

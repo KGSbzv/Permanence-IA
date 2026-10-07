@@ -8,7 +8,7 @@ export const INTEGRATIONS: Integration[] = [
   { name: 'Cal.com', category: 'Agenda', text: 'Types de rendez-vous et équipes.', mark: 'C', color: '#111827' },
   { name: 'Calendly', category: 'Agenda', text: 'Réservation sur vos événements.', mark: 'C', color: '#006BFF' },
   { name: 'HubSpot', category: 'CRM', text: 'Contacts et transactions mis à jour.', mark: 'H', color: '#FF7A59' },
-  { name: 'Zoho CRM', category: 'CRM', text: 'Leads créés après chaque appel.', mark: 'Z', color: '#E42527' },
+  { name: 'Zoho CRM', category: 'CRM', text: 'Fiches prospects créées après chaque appel.', mark: 'Z', color: '#E42527' },
   { name: 'GoHighLevel', category: 'CRM', text: 'Lead Connector et pipelines.', mark: 'HL', color: '#188BF6' },
   { name: 'Google Sheets', category: 'Données', text: 'Une ligne par demande, sans ressaisie.', mark: 'S', color: '#0F9D58' },
   { name: 'WhatsApp', category: 'Messages', text: 'Confirmations et réponses écrites.', mark: 'W', color: '#25D366' },
@@ -18,5 +18,5 @@ export const INTEGRATIONS: Integration[] = [
   { name: 'Twilio', category: 'Téléphonie', text: 'Import de vos numéros.', mark: 'T', color: '#F22F46' },
   { name: 'Telnyx', category: 'Téléphonie', text: 'Import de vos numéros.', mark: 'Tx', color: '#00C08B' },
   { name: 'Webhooks', category: 'Développeurs', text: 'Événements envoyés à vos systèmes.', mark: '{ }', color: '#0FA3C4' },
-  { name: '+300 outils', category: 'Automatisations', text: 'Via le flow builder sans code.', mark: '+', color: '#22306A' },
+  { name: '+300 outils', category: 'Automatisations', text: 'Via les scénarios automatisés sans code.', mark: '+', color: '#22306A' },
 ];

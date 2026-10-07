@@ -5,7 +5,9 @@ import { DEFAULT_LOCALE, LOCALES } from '@/i18n/locales';
 
 const BY_LANG: Record<string, string> = { fr: 'fr', en: 'en-gb', it: 'it', pl: 'pl', nl: 'nl', he: 'he', iw: 'he' };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, locale: urlLocale }) => {
+  // /he/docs, /it/docs… : la langue de l’adresse prime.
+  if (urlLocale && urlLocale !== DEFAULT_LOCALE) return { redirect: { destination: `/${urlLocale}/aide`, permanent: false } };
   const cookie = /(?:^|;\s*)pia_lang=([^;]+)/.exec(req.headers.cookie || '')?.[1];
   let locale = cookie && (LOCALES as readonly string[]).includes(cookie) ? cookie : '';
   if (!locale) {

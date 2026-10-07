@@ -195,6 +195,24 @@ export const UI_PAGES = {
     rights: ['Voor vragen of om uw rechten uit te oefenen: ', { a: 'privacybeleid', href: '/confidentialite' }, '.'] as Rich,
   },
 
+  accessibility: {
+    meta: {
+      title: (brand: string) => `Toegankelijkheidsverklaring — ${brand}`,
+      description: (brand: string) => `Toegankelijkheidsniveau van de website van ${brand}, genomen maatregelen, bekende beperkingen en contact om een probleem te melden.`,
+    },
+    h1: 'Toegankelijkheidsverklaring',
+    updated: 'Laatst bijgewerkt: 7 oktober 2026',
+    intro: (brand: string, company: string) => `${brand} is een dienst van ${company}, een bedrijf geregistreerd in de staat Wyoming (Verenigde Staten). Wij willen dat iedereen deze website kan gebruiken, ook mensen met een beperking.`,
+    sections: [
+      { title: 'Beoogd niveau', items: ['De website streeft naar conformiteit met niveau AA van de WCAG 2.1-richtlijnen, in lijn met de algemene doelen van de Europese toegankelijkheidswet (European Accessibility Act).', 'Status: gedeeltelijk conform. Bekende afwijkingen staan hieronder en worden opgelost.'] },
+      { title: 'Genomen maatregelen', items: ['Taal en leesrichting op elke pagina aangegeven (ook Hebreeuws, van rechts naar links).', 'Volledige bediening met het toetsenbord, een link om direct naar de inhoud te gaan, zichtbare focus.', 'Logisch opgebouwde koppen, alternatieve teksten bij informatieve afbeeldingen, formulieren met labels.', 'Versterkt kleurcontrast, tekst vergroot tot 200% zonder verlies van informatie, opmaak geschikt voor mobiel.', 'Minder animaties wanneer uw systeem daarom vraagt (instelling „beweging beperken”).'] },
+      { title: 'Bekende beperkingen', items: ['Het chat- en spraakdemovenster wordt geleverd door onze technische leverancier: de bediening met toetsenbord en schermlezer kan onvolledig zijn. Het terugbelformulier en ons e-mailadres zijn altijd beschikbaar.', 'De klantomgeving (app.permanenceia.com) is in het Engels en draait op het platform van onze leverancier.', 'Sommige pdf-documenten (verkooppresentatie) zijn niet volledig getagd.'] },
+      { title: 'Beoordeling', items: ['Interne beoordeling uitgevoerd op 7 oktober 2026 op alle openbare pagina’s, met automatische tools en handmatige controle (toetsenbord, contrast, schermlezer).'] },
+    ],
+    contactTitle: 'Een probleem melden',
+    contact: (company: string, email: string) => `Contactpersoon toegankelijkheid: ${company}. Mail ons op ${email} met een beschrijving van de pagina en het probleem: wij reageren binnen 5 werkdagen en bieden een passende oplossing (informatie in een ander formaat, hulp per e-mail of telefoon).`,
+  },
+
   notFound: {
     meta: {
       title: (brand: string) => `Pagina niet gevonden — ${brand}`,

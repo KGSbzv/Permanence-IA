@@ -11,4 +11,5 @@ export const SITE_TEXT = {
   talkNowSub: 'Démo live, gratuite, sans inscription',
   rechargeFreeAmount: 'Le montant est libre : saisissez-le dans votre espace (Add credits). Les montants ci-dessus sont des exemples.',
   consent: { title: 'Cookies de mesure', text: 'Avec votre accord, nous utilisons des cookies pour mesurer l’audience et l’efficacité de nos publicités. Refuser n’empêche pas d’utiliser le site.', accept: 'Accepter', reject: 'Refuser', policy: 'En savoir plus', manage: 'Gérer les cookies' },
+  keepNumber: { title: 'Vous gardez votre numéro', text: 'Aucun changement d’opérateur ni de matériel : un simple renvoi d’appel, permanent ou seulement quand vous ne répondez pas, et l’agent prend le relais.' },
 };

@@ -17,7 +17,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     audience: 'Pour tester l’agent sur votre activité',
     title: 'Testez l’agent gratuitement pendant 14 jours',
     pitch: 'Découvrez la plateforme, configurez un premier agent, essayez la démo live et utilisez jusqu’à 30 minutes d’appels pour valider le potentiel sur votre activité.',
-    cta: 'Commencer gratuitement',
+    cta: 'Démarrer l’essai de 14 jours',
     highlights: ['14 jours sur le forfait de votre choix', '30 minutes d’appels incluses', 'Carte demandée, rien n’est débité pendant l’essai', 'Annulation sans frais avant la fin de l’essai'],
   },
   receptionniste: {
@@ -32,9 +32,9 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     name: 'Assistant',
     audience: 'Entreprises locales à volume régulier',
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
-    pitch: 'Le forfait Assistant ajoute trois agents, les campagnes de relance, le flow builder relié à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
+    pitch: 'Le forfait Assistant ajoute trois agents, les rappels et confirmations automatiques, les scénarios automatisés reliés à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
-    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 numéros, 3 bases de connaissances, 3 outils en appel', '3 campagnes de relance', 'Flow builder et automatisations (5 000 exécutions / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
+    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 numéros, 3 bases de connaissances, 3 outils en appel', '3 campagnes de relance', 'Scénarios automatisés (5 000 exécutions / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
   },
   'centre-appels': {
     name: 'Centre d’appels',
@@ -92,10 +92,10 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Configuration de l’agent',
     rows: [
-      { label: 'Éditeur de prompts IA', detail: 'Un assistant de rédaction règle le comportement, le ton et les règles de l’agent.', cells: all(true) },
+      { label: 'Consignes de l’agent', detail: 'Un assistant de rédaction règle le comportement, le ton et les règles de l’agent.', cells: all(true) },
       { label: 'Bases de connaissances', detail: 'PDF, pages web et procédures que l’agent consulte pendant l’appel.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
       { label: 'Outils pendant l’appel', detail: 'Actions déclenchées en direct : vérifier une disponibilité, consulter un dossier, interroger votre logiciel.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Illimités', 'sur-mesure': 'Illimités' } },
-      { label: 'Flow builder', detail: 'Scénarios visuels sans code : déclencheurs, conditions et actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Scénarios automatisés', detail: 'Scénarios visuels sans code : déclencheurs, conditions et actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Plateforme d’automatisation', detail: 'Plus de 300 outils connectables : CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5 000 exécutions / mois', 'centre-appels': '50 000 exécutions / mois', 'sur-mesure': 'Sur mesure' } },
       { label: 'Connecteur IA', detail: 'Pilotez votre espace depuis ChatGPT ou Claude : créer un agent, lire vos appels, lancer une action.', cells: all(true) },
     ],
@@ -105,13 +105,13 @@ export const MATRIX: MatrixGroup[] = [
     rows: [
       { label: 'Intégration calendrier', detail: 'Google, Outlook, Cal.com, Calendly : l’agent réserve dans votre agenda.', cells: all(true) },
       { label: 'Widget web', detail: 'Bouton d’appel et de rappel à poser sur votre site.', cells: all(true) },
-      { label: 'Leads', detail: 'Fiches prospects créées à partir des appels.', cells: all(true) },
+      { label: 'Fiches prospects', detail: 'Fiches créées à partir des appels.', cells: all(true) },
     ],
   },
   {
     group: 'Messages et campagnes',
     rows: [
-      { label: 'Campagnes sortantes', detail: 'Relances, confirmations et rappels appelés automatiquement.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
+      { label: 'Rappels et confirmations', detail: 'Relances, confirmations et rappels appelés automatiquement.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
       { label: 'SMS et WhatsApp', detail: 'Échanges écrits centralisés, payés avec les crédits de messages.', cells: all(true) },
       { label: 'Messenger et Instagram', detail: 'Messages des réseaux sociaux dans la même boîte.', cells: all(true) },
       { label: 'Crédits de messages inclus', detail: 'Crédits offerts chaque mois pour les échanges écrits (WhatsApp, SMS, Messenger, chat). 100 crédits = 1 $, une réponse de l’IA ≈ 2 crédits. Sans crédits inclus, vous rechargez selon votre usage.', cells: { decouverte: false, receptionniste: 'À la demande', assistant: '1 000 / mois (≈ 500 réponses)', 'centre-appels': '3 000 / mois (≈ 1 500 réponses)', 'sur-mesure': 'Sur mesure' } },

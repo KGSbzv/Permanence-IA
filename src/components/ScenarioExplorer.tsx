@@ -175,7 +175,8 @@ export default function ScenarioExplorer({ onTry }: {
   // Flèches (dans les deux sens, la liste est verticale sur grand écran et horizontale sur mobile), Début, Fin.
   const onKey = (e: React.KeyboardEvent, i: number) => {
     const n = c.sectors.length;
-    const next = ({ ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 } as Record<string, number>)[e.key];
+    const rtl = document.documentElement.dir === 'rtl';
+    const next = ({ ArrowRight: rtl ? i - 1 : i + 1, ArrowDown: i + 1, ArrowLeft: rtl ? i + 1 : i - 1, ArrowUp: i - 1, Home: 0, End: n - 1 } as Record<string, number>)[e.key];
     if (next === undefined) return;
     e.preventDefault();
     select((next + n) % n, true);

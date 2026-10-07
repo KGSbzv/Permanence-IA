@@ -150,7 +150,7 @@ function FlowMock() {
       <ol className="mt-3">
         {steps.map((st, i) => (
           <li key={st.t} className="relative flex items-center gap-3 pb-3 last:pb-0">
-            {i < steps.length - 1 && <span className="absolute left-[17px] top-9 h-[calc(100%-24px)] w-px bg-line" aria-hidden />}
+            {i < steps.length - 1 && <span className="absolute start-[17px] top-9 h-[calc(100%-24px)] w-px bg-line" aria-hidden />}
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line bg-white"><st.icon className="h-4 w-4 text-ink" aria-hidden /></span>
             <div><p className="text-sm font-medium text-ink">{st.t}</p><p className="text-xs text-slate-light">{st.s}</p></div>
           </li>

@@ -22,7 +22,7 @@
   .btn-ghost { @apply btn border border-line bg-white text-ink hover:border-ink; }
   .btn-light { @apply btn border border-white/25 text-white hover:bg-white/10; }
   .field { @apply w-full rounded-lg border border-line bg-white px-3.5 py-2.5 text-[15px] text-ink placeholder:text-slate-light focus:border-signal focus:outline-none focus:ring-2 focus:ring-signal/25; }
-  .kw { @apply text-signal; }
+  .kw { @apply text-signal-deep; }
 }
 
 /* Bandeaux défilants : pause au survol ou au focus ; sans animation, les éléments passent à la ligne. */
@@ -54,6 +54,15 @@ iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*=
     transform: scale(0.78) !important;
     transform-origin: right bottom;
   }
+}
+
+/* Hébreu : la bulle passe en bas à gauche (sens de lecture de droite à gauche). La fenêtre ouverte en plein écran
+   (mobile) n’est pas concernée. */
+html[dir="rtl"] iframe[src*="/web-widget/"]:not([style*="100vw"]):not([style*="100dvh"]),
+html[dir="rtl"] iframe[title="Voice Assistant Widget"]:not([style*="100vw"]):not([style*="100dvh"]) {
+  right: auto !important;
+  left: 16px !important;
+  transform-origin: left bottom !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

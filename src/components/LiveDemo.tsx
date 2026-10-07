@@ -333,7 +333,8 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined,
           type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
-          note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — voix : ${voice} — secteur : ${sectorName}`,
+          // Note lue par l’agent avant de rappeler : en anglais neutre (les agents de chaque langue la comprennent).
+          note: `Live demo — role: ${['receptionist', 'sales / qualification', 'support'][role]} — language: ${NATIVE[lang]} — voice: ${voice} — sector: ${sectorName}`,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
@@ -406,11 +407,11 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           <fieldset className="mt-3">
             <legend className={legend}>{t.langLabel}</legend>
             <div className="flex flex-wrap gap-1.5">
-              {LOCALES.map((l) => (
+              {[locale, ...LOCALES.filter((x) => x !== locale)].map((l) => (
                 <label key={l} className="cursor-pointer">
                   <input type="radio" name={`${uid}-lang`} value={l} checked={lang === l} onChange={() => setLang(l)} className="peer sr-only" />
                   <span className={`flex items-center gap-1.5 rounded-full py-1 ps-1 pe-3 text-[13.5px] font-medium ring-1 transition-colors ${lang === l ? 'bg-signal-glow text-night ring-signal-glow' : 'text-white/75 ring-white/15 hover:ring-white/40'} ${focusRing}`}>
-                    <span aria-hidden className="flex shrink-0 -space-x-2">
+                    <span aria-hidden className="flex shrink-0 -space-x-2 rtl:space-x-reverse">
                       {GENDERS.map((g) => (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img key={g} src={VOICES[l][g].photo} alt="" width={24} height={24} loading="lazy"

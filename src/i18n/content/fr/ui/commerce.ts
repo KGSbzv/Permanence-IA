@@ -66,14 +66,14 @@ const MODULE_SEO_TITLE: Record<string, string> = {
   'Démo live de l’agent': 'Démo agent vocal IA en direct',
   'Prise de rendez-vous': 'Prise de rendez-vous téléphonique par IA',
   'Support client': 'Service client téléphonique par IA',
-  'Qualification des leads': 'Qualification de leads par téléphone',
-  'Campagnes sortantes': 'Appels sortants automatisés par IA',
+  'Tri et qualification des demandes': 'Tri et qualification des demandes par téléphone',
+  'Rappels et confirmations': 'Rappels et confirmations de rendez-vous par IA',
   'WhatsApp et messages': 'Messages WhatsApp et SMS automatisés',
   'Base de connaissances': 'Base de connaissances pour agent vocal IA',
-  'Éditeur de prompts': 'Éditeur de prompts pour agent vocal IA',
-  'Flow builder': 'Flow builder : automatisations sans code',
+  'Consignes de l’agent': 'Consignes de l’agent vocal IA, sans code',
+  'Scénarios automatisés': 'Scénarios automatisés sans code',
   'SIP et numéros': 'Trunk SIP, numéros et renvoi d’appel',
-  Reporting: 'Statistiques et transcriptions d’appels',
+  'Statistiques et suivi des appels': 'Statistiques et transcriptions d’appels',
   'Widget web': 'Widget d’appel et de rappel pour site web',
 };
 
@@ -85,8 +85,8 @@ export const UI_COMMERCE = {
         `Standard téléphonique IA qui répond, qualifie et prend vos rendez-vous 24/7. ${days} jours d’essai gratuit, ${minutes} minutes incluses : essayez-le.`,
     },
     hero: {
-      title: { before: 'Automatisez vos appels avec une IA qui ', kw: 'répond, qualifie et réserve', after: ' pour vous' },
-      intro: 'Votre standard téléphonique IA : des agents vocaux qui décrochent à chaque appel, posent les bonnes questions, prennent les rendez-vous et vous transmettent un résumé clair. Disponibles 24/7, configurés pour votre métier, en ligne en quelques minutes.',
+      title: { before: 'Ne perdez plus un client parce que ', kw: 'personne n’a décroché', after: '' },
+      intro: 'Votre permanence téléphonique par IA répond 24 h/24, trie les demandes et prend les rendez-vous dans votre agenda. Sans matériel, sans engagement, sans frais de mise en service.',
       photoAlt: 'Dirigeante consultant le résumé d’un appel sur son téléphone',
     },
     showcase: { title: 'Voyez l’agent en action dans votre métier', intro: 'Choisissez un secteur : l’appel se déroule, puis la demande arrive prête à traiter.' },
@@ -108,7 +108,7 @@ export const UI_COMMERCE = {
         title: { before: 'Qualifiez et ', kw: 'rappelez vos prospects', after: ' plus vite' },
         text: 'Un formulaire rempli sur votre site devient un appel en quelques minutes. L’agent qualifie, relance et prépare une fiche que votre équipe peut traiter tout de suite.',
         points: ['Préqualification selon vos critères', 'Relances et confirmations automatiques', 'Campagnes vers des contacts consentants'],
-        link: 'Voir la qualification des leads',
+        link: 'Voir le tri et la qualification des demandes',
       },
     },
     useCases: { title: 'Un agent pour chaque type d’appel', intro: 'Entrants, sortants ou messages : activez les usages dont votre activité a besoin, de la permanence téléphonique du soir aux relances de devis.' },
@@ -134,7 +134,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Connecté à vos outils',
-      intro: 'Agenda, CRM, messageries, téléphonie : l’agent s’intègre à ce que vous utilisez déjà. Le flow builder relie plus de 300 outils sans code, à la manière de Zapier ou Make.',
+      intro: 'Agenda, CRM, messageries, téléphonie : l’agent s’intègre à ce que vous utilisez déjà. Les scénarios automatisés relient plus de 300 outils sans code, à la manière de Zapier ou Make.',
       link: 'Voir toutes les intégrations',
     },
     pricing: {
@@ -176,7 +176,7 @@ export const UI_COMMERCE = {
     faq: {
       title: 'Questions sur les tarifs',
       intro: 'Un doute sur le forfait de votre agent vocal IA ? Faites-vous rappeler, ou essayez l’agent en live.',
-      primary: 'Commencer gratuitement',
+      primary: 'Démarrer l’essai de 14 jours',
       demo: 'Voir la démo live',
     },
     finalCta: (minutes: number) => `Démarrez avec ${minutes} minutes offertes`,
@@ -251,7 +251,7 @@ export const UI_COMMERCE = {
     other: {
       title: 'Votre activité n’est pas dans la liste ?',
       intro: 'Auto-écoles, salles de sport, e-commerce, recrutement, tourisme : l’agent se configure pour tout métier qui reçoit des appels. Parlons de votre cas.',
-      primary: 'Commencer gratuitement',
+      primary: 'Démarrer l’essai de 14 jours',
       demo: 'Essayer en live notre agent',
     },
   },
@@ -299,7 +299,7 @@ export const UI_COMMERCE = {
   featuresIndex: {
     meta: {
       title: (brand: string) => `Fonctionnalités de l’agent vocal IA · ${brand}`,
-      description: 'Réceptionniste virtuelle, prise de rendez-vous, qualification, WhatsApp, flow builder, SIP, reporting : votre agent vocal IA. Découvrez les modules.',
+      description: 'Réceptionniste virtuelle, prise de rendez-vous, qualification, WhatsApp, scénarios automatisés, SIP, statistiques : votre agent vocal IA. Découvrez les modules.',
     },
     hero: {
       title: 'Tout ce qu’il faut pour automatiser vos appels',
@@ -338,13 +338,13 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Connecté aux outils que vous utilisez déjà',
-      intro: 'Agenda, CRM, messageries, téléphonie : votre agent vocal IA s’intègre à votre organisation, et le flow builder relie plus de 300 outils sans code.',
+      intro: 'Agenda, CRM, messageries, téléphonie : votre agent vocal IA s’intègre à votre organisation, et les scénarios automatisés relient plus de 300 outils sans code.',
     },
     flow: {
       title: { before: 'Construisez vos automatisations ', kw: 'sans code', after: '' },
-      text: 'Un formulaire rempli, un appel terminé, un nouveau lead : chaque événement peut déclencher une suite d’actions dans vos outils, à la manière de Zapier ou Make, directement depuis votre espace.',
+      text: 'Un formulaire rempli, un appel terminé, une nouvelle demande : chaque événement peut déclencher une suite d’actions dans vos outils, à la manière de Zapier ou Make, directement depuis votre espace.',
       points: ['Plus de 300 outils disponibles', 'Glisser-déposer, aucun développement', 'Tests avant activation'],
-      link: 'Voir le flow builder',
+      link: 'Voir les scénarios automatisés',
     },
     api: {
       title: { before: 'Webhooks et API pour ', kw: 'vos systèmes', after: '' },

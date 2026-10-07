@@ -1,4 +1,4 @@
-import { Phone } from 'lucide-react';
+import { Phone, PhoneForwarded } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
@@ -40,6 +40,10 @@ export default function Home() {
               <p className="max-w-prose text-lg">{t.hero.intro}</p>
               <TrialBadges className="mt-5" />
               <CTAs className="mt-6" />
+              <p className="mt-5 flex max-w-prose items-start gap-2.5 text-[15px] text-slate">
+                <PhoneForwarded className="mt-0.5 h-5 w-5 shrink-0 text-signal" aria-hidden />
+                <span><strong className="font-semibold text-ink">{c.site.keepNumber.title}.</strong> {c.site.keepNumber.text}</span>
+              </p>
               {market.phone && (
                 <a href={`tel:${market.phone.e164}`} className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-ink shadow-card hover:border-signal">
                   <Phone className="h-5 w-5 shrink-0 text-signal" aria-hidden />

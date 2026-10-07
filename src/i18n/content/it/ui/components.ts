@@ -66,6 +66,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       terms: 'Termini e condizioni',
       privacy: 'Privacy',
       cookies: 'Cookie',
+      accessibility: 'Accessibilità',
     },
   },
 
@@ -130,6 +131,11 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     needPlaceholder: 'Es.: perdo chiamate la sera, voglio automatizzare gli appuntamenti…',
     consent: (brand: string) => `Accetto di essere richiamato al numero indicato, anche da un agente vocale AI di ${brand}. I miei dati sono utilizzati esclusivamente per gestire la mia richiesta.`,
     sending: 'Invio…',
+    company: 'Azienda',
+    optional: '(facoltativo)',
+    volume: 'Chiamate ricevute al mese',
+    volumeOptions: ['Meno di 200', 'Da 200 a 1.000', 'Più di 1.000'],
+    phoneInvalid: 'Indichi un numero di telefono valido, ad esempio 312 345 6789.',
   },
 
   benefits: {
@@ -186,7 +192,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   pricingCards: {
     daysFree: (days: number) => `${days} giorni gratuiti`,
     negotiated: 'Prezzo al minuto negoziato',
-    mostChosen: 'Il più scelto',
+    mostChosen: 'Consigliato',
     perMinute: (label: string) => `pari a ${label}`,
     details: 'Dettagli del piano',
     billing: 'Periodo di fatturazione',

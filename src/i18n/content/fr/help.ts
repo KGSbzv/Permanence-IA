@@ -18,7 +18,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Channels → WhatsApp / Messenger & Instagram', label: 'Canaux', text: 'Connecter vos comptes de messagerie.' },
   { en: 'Get new phone number', label: 'Obtenir un numéro', text: 'Acheter un numéro dédié (option payée chaque mois, prix affiché avant l’achat).' },
   { en: 'Your phone numbers', label: 'Vos numéros', text: 'Vos numéros, l’import Twilio / Telnyx et la connexion SIP.' },
-  { en: 'Automate platform', label: 'Automatisations', text: 'Flow builder sans code relié à plus de 300 outils (forfait Assistant et plus).' },
+  { en: 'Automate platform', label: 'Automatisations', text: 'Scénarios automatisés sans code (« Flow Builder »), reliés à plus de 300 outils (forfait Assistant et plus).' },
   { en: 'Change plan', label: 'Changer de forfait', text: 'Passer au forfait supérieur ou inférieur.' },
   { en: 'Add credits', label: 'Ajouter du crédit', text: 'Acheter une recharge de minutes ; le crédit ne périme pas.' },
   { en: 'Billing info', label: 'Facturation', text: 'Moyen de paiement, factures, abonnement et annulation.' },
