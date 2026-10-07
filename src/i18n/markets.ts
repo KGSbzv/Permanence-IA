@@ -105,6 +105,7 @@ export const MARKETS: Record<Locale, Market> = {
     brand: 'PermanenceAI', tagline: 'AI Receptionist', numberLocale: 'en-GB',
     legal: { governingLaw: 'the laws of the State of Wyoming, United States', court: 'the state and federal courts located in Laramie County, Wyoming, United States', dataAuthority: 'the Information Commissioner’s Office (ICO)', privacyLaw: 'the UK GDPR and the Data Protection Act 2018', copyrightLaw: 'the Copyright, Designs and Patents Act 1988', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: '57ba145e-b9d7-47cb-8bd3-6053a861951b',
+    phone: { e164: '+447367090106', display: '07367 090106', label: 'Call us, 24/7', note: 'Katie, our AI agent, answers sales and support questions — and it’s the best demo there is.' },
   },
   'en-au': {
     ...SHARED, localCurrencies: ['AUD'], hourlyCost: 24, locale: 'en-au', hreflang: 'en-AU', ogLocale: 'en_AU', country: 'Australia',

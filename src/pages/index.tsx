@@ -18,8 +18,12 @@ import { useI18n } from '@/i18n';
 
 const Kw = ({ t }: { t: { before: string; kw: string; after: string } }) => <>{t.before}<span className="kw">{t.kw}</span>{t.after}</>;
 
+/** Données structurées : pays servi et langues du service client, selon la version du site. */
+const AREA: Record<string, string[]> = { fr: ['FR', 'BE', 'CH', 'LU', 'MC'], 'en-gb': ['GB'], 'en-au': ['AU'], it: ['IT'], pl: ['PL'], nl: ['NL', 'BE'], he: ['IL'] };
+const LANGS: Record<string, string[]> = { fr: ['French', 'English'], 'en-gb': ['English'], 'en-au': ['English'], it: ['Italian', 'English'], pl: ['Polish', 'English'], nl: ['Dutch', 'English'], he: ['Hebrew', 'English'] };
+
 export default function Home() {
-  const { c, market } = useI18n();
+  const { c, market, locale } = useI18n();
   const t = c.ui.commerce.home;
   const { days, minutes } = market.trial;
   const { sector, trySector } = useLiveDemoSector();
@@ -28,7 +32,7 @@ export default function Home() {
       title={t.meta.title(market.brand)}
       description={t.meta.description(days, minutes)}
       jsonLd={{ '@context': 'https://schema.org', '@type': 'Organization', name: market.brand, url: SITE.url, email: SITE.email, logo: `${SITE.url}/icon-512.png`, legalName: SITE.company,
-        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, ...(market.phone ? { telephone: market.phone.e164, areaServed: 'IL', availableLanguage: ['Hebrew', 'English'] } : { availableLanguage: ['French', 'English'] }) } }}
+        contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', email: SITE.email, ...(market.phone ? { telephone: market.phone.e164 } : {}), areaServed: AREA[locale], availableLanguage: LANGS[locale] } }}
     >
       {/* Hero : promesse + démo live réelle (navigateur ou appel sur votre téléphone) */}
       <section className="overflow-hidden bg-paper">

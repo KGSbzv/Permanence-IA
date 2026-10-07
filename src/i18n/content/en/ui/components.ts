@@ -75,7 +75,7 @@ export const UI_COMPONENTS = {
   callbackModal: {
     titleSupport: 'Request a support callback',
     titleCommercial: 'Leave your number and we’ll call you back',
-    intro: 'Choose a time. We don’t publish a phone number: we call you back.',
+    intro: 'Choose a time and we call you back.',
     close: 'Close',
   },
 

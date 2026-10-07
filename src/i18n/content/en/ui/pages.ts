@@ -36,7 +36,7 @@ export const UI_PAGES = {
       description: 'Questions about our AI receptionist? Leave your number and we’ll call you back for sales, a demo or support, at the time you choose.',
     },
     h1: 'Leave your number and we’ll call you back',
-    intro: 'We don’t publish a phone number: we call you back at the time you choose. You can also email us.',
+    intro: 'Choose a time and we call you back, or reach us in writing on WhatsApp or by email. Our AI agent answers 24/7.',
     commercialTitle: 'Sales callback',
     commercialText: 'Questions about plans, demos, custom quotes.',
     supportTitle: 'Support callback',
