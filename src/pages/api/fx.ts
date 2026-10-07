@@ -16,6 +16,11 @@ export default async function handler(_req: NextApiRequest, res: NextApiResponse
     res.setHeader('Cache-Control', 'public, s-maxage=43200, stale-while-revalidate=86400');
     return res.status(200).json(cache.body);
   } catch {
+    // Source indisponible : derniers taux connus (périmés), mis en cache peu de temps pour réessayer bientôt.
+    if (cache) {
+      res.setHeader('Cache-Control', 'public, s-maxage=600');
+      return res.status(200).json(cache.body);
+    }
     // Sans taux, la page affiche seulement les prix en dollars.
     return res.status(503).json({ error: 'fx_unavailable' });
   }

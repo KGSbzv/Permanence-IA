@@ -34,5 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => ({
   props: {
     text: fs.readFileSync(path.join(process.cwd(), 'src/data/kb', `${params!.doc}.txt`), 'utf8'),
     rtl: String(params!.doc).startsWith('he'),
+    // Langue de la fiche (fr.txt, he-situations.txt…) pour <html lang dir> dans _document.
+    htmlLang: String(params!.doc).split('-')[0],
   },
 });

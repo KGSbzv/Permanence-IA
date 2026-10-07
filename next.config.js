@@ -5,10 +5,24 @@ const nextConfig = {
   // La détection se fait dans src/middleware.ts (langue du navigateur + choix mémorisé).
   i18n: { locales: ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl', 'he'], defaultLocale: 'fr', localeDetection: false },
   images: { unoptimized: true },
-  // Autorise l’interface white-label à récupérer les logos et icônes du site.
+  // Pas d’en-tête « X-Powered-By: Next.js ».
+  poweredByHeader: false,
   async headers() {
+    // En-têtes de sécurité de toutes les pages. Micro autorisé pour le site et pour app.permanenceia.com :
+    // la bulle de l’assistante (embed.js) et la démo dans le navigateur s’ouvrent dans un iframe de ce domaine.
+    // CSP limitée à frame-ancestors (aucune règle sur les scripts) : le site ne peut être intégré que par
+    // lui-même et par l’espace client white-label.
+    const security = [
+      { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
+      { key: 'X-Content-Type-Options', value: 'nosniff' },
+      { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      { key: 'Permissions-Policy', value: 'camera=(), geolocation=(), microphone=(self "https://app.permanenceia.com")' },
+      { key: 'Content-Security-Policy', value: "frame-ancestors 'self' https://app.permanenceia.com https://app.autocalls.ai" },
+    ];
+    // Autorise l’interface white-label à récupérer les logos et icônes du site.
     const cors = [{ key: 'Access-Control-Allow-Origin', value: 'https://app.autocalls.ai' }];
     return [
+      { source: '/:path*', headers: security },
       { source: '/logo/:path*', headers: cors },
       { source: '/agents/:path*', headers: cors },
       { source: '/icon-:size.png', headers: cors },
@@ -21,8 +35,9 @@ const nextConfig = {
       { source: '/blog', destination: '/faq', permanent: false },
       { source: '/blog/:slug*', destination: '/faq', permanent: false },
       { source: '/plombiers', destination: '/secteurs/services-a-domicile', permanent: true },
-      { source: '/dentaire', destination: '/secteurs/dentaire-cliniques', permanent: true },
-      { source: '/cliniques', destination: '/secteurs/dentaire-cliniques', permanent: true },
+      // Secteurs santé en pause : vers la liste des secteurs (redirection temporaire, ils pourront revenir).
+      { source: '/dentaire', destination: '/secteurs', permanent: false },
+      { source: '/cliniques', destination: '/secteurs', permanent: false },
       { source: '/immobilier', destination: '/secteurs/immobilier', permanent: true },
       { source: '/industries', destination: '/secteurs', permanent: true },
       { source: '/demo-live', destination: '/demo', permanent: true },

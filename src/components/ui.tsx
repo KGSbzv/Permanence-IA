@@ -3,7 +3,7 @@ import { track } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
-import { DEMO_URL, SIGNUP_URL, SITE, whatsappUrl } from '@/data/site';
+import { DEMO_URL, SIGNUP_URL, SITE, isActiveSector, whatsappUrl } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
 
@@ -227,7 +227,8 @@ export function CallbackForm({
           <label htmlFor="cb-sector" className={label}>{t.sector}</label>
           <select id="cb-sector" name="sector" defaultValue={sector} className="field">
             <option value="">{t.choose}</option>
-            {c.sectors.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+            {/* Secteurs en pause (santé) exclus de la liste. */}
+            {c.sectors.filter(isActiveSector).map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
             <option value="autre">{t.otherSector}</option>
           </select>
         </div>

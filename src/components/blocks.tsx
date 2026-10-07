@@ -310,7 +310,8 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
         })}
       </div>
       <p className="mt-6 text-center text-sm text-slate">{c.site.payg(money(market.paygMinute, 2))}</p>
-      {fx && <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-slate-light">{c.site.fxNote(new Intl.DateTimeFormat(market.numberLocale, { dateStyle: 'long' }).format(new Date(fx.date)))}</p>}
+      {/* Date des taux (AAAA-MM-JJ, lue en UTC) : jamais affichée la veille à l’ouest de Greenwich. */}
+      {fx && <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-slate-light">{c.site.fxNote(new Intl.DateTimeFormat(market.numberLocale, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(fx.date)))}</p>}
     </div>
   );
 }

@@ -40,10 +40,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Sans langue précisée (outils d’agents WhatsApp, lignes UK / Israël), la campagne suit l’indicatif du numéro.
   const lang = isLocale(locale) ? locale : 'intl';
   const e164 = toE164(String(phone), lang, typeof b.cc === 'string' ? b.cc : undefined);
+  // Numéro illisible (lettres, trop court ou trop long) : rien n’est enregistré ni envoyé par email.
+  if (!e164) {
+    return res.status(400).json({
+      error: 'Nom et numéro valides requis.',
+      message_for_agent: `The phone number "${phone}" is not valid. Nothing was saved: ask the person to repeat the number digit by digit (with the country code if it is not local), then call this tool again.`,
+    });
+  }
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
   const fromAgent = isAuthorized(req) && (lang === 'intl' || Boolean(agent));
-  const campaignLang = lang === 'intl' ? langFromPhone(e164 || '') : lang;
+  const campaignLang = lang === 'intl' ? langFromPhone(e164) : lang;
   // Date fournie par un outil d’agent (champ call_at) : illisible, passée ou à plus de 30 jours → rien n’est
   // enregistré et l’agent reçoit la date du jour pour redemander, au lieu d’un appel immédiat non souhaité.
   const zone = zoneFor(b.tz, campaignLang);
@@ -61,9 +68,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
   const scheduled = callAt.getTime() > Date.now() + 60_000;
   // Case WhatsApp du formulaire (accord séparé, décoché par défaut) : confirmation envoyée sur WhatsApp.
-  const wantsWhatsApp = (b.whatsapp === true || b.whatsapp === 'true') && !fromAgent && Boolean(e164);
+  const wantsWhatsApp = (b.whatsapp === true || b.whatsapp === 'true') && !fromAgent;
   const row = {
-    name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
+    name, phone: e164, email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
     note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
@@ -84,7 +91,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus, et au plus
     // 3 rappels par numéro sur 7 jours (la demande, puis jusqu’à deux reprogrammations par un agent).
     // Un outil d’agent authentifié par le jeton n’est pas limité.
-    if (!e164 || !isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
+    if (!isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
     if (!fromAgent) {
       const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
       const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=4`);
@@ -121,16 +128,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const sendWhatsApp = async () => {
     if (!wantsWhatsApp) return null;
     if (db.status !== 'fulfilled') throw new Error('demande non enregistrée');
-    if (!isAutoCallable(e164 as string)) throw new Error(`numéro hors zone : ${e164}`);
+    if (!isAutoCallable(e164)) throw new Error(`numéro hors zone : ${e164}`);
     const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
-    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164 as string)}&created_at=gte.${since}&limit=4`);
+    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=4`);
     if (recent.length > 3) throw new Error('trop de demandes pour ce numéro cette semaine');
     const day = await dbSelect('callbacks', `select=id&note=like.*${encodeURIComponent('[WA:')}*&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=31`);
     if (day.length > 30) throw new Error('plafond quotidien de messages WhatsApp atteint');
     // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
     return scheduled
-      ? sendCallbackConfirmation({ lang: campaignLang, phone: e164 as string, name: String(name), callAt, tz: b.tz, kind, voice })
-      : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: safeFirstName(name, campaignLang) });
+      ? sendCallbackConfirmation({ lang: campaignLang, phone: e164, name: String(name), callAt, tz: b.tz, kind, voice })
+      : sendTemplate('pia_welcome_whatsapp', campaignLang, e164, { 1: safeFirstName(name, campaignLang) });
   };
   // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
   const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall(db.value) : Promise.reject(new Error('demande non enregistrée'))]);

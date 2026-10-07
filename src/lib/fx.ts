@@ -18,5 +18,8 @@ export function useFx(): Fx | null {
 /** « ≈ 88 € » : montant arrondi à l’unité (ou au centime sous 10), au format du pays. */
 export function approx(usd: number, cur: string, rate: number, locale: string) {
   const v = usd * rate;
-  return `≈ ${new Intl.NumberFormat(locale, { style: 'currency', currency: cur, maximumFractionDigits: v < 10 ? 2 : 0, minimumFractionDigits: v < 10 ? 2 : 0, useGrouping: 'always' as unknown as boolean }).format(v)}`;
+  const fmt = (currencyDisplay: 'symbol' | 'code') => new Intl.NumberFormat(locale, { style: 'currency', currency: cur, currencyDisplay, maximumFractionDigits: v < 10 ? 2 : 0, minimumFractionDigits: v < 10 ? 2 : 0, useGrouping: 'always' as unknown as boolean }).format(v);
+  // Symbole « $ » seul (dollar australien en en-AU) : code ISO « AUD 142 » pour ne pas le confondre avec les prix en USD.
+  const s = fmt('symbol');
+  return `≈ ${/(^|[^A-Z])\$/.test(s) ? fmt('code') : s}`;
 }

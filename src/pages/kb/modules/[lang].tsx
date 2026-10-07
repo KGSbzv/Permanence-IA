@@ -11,7 +11,8 @@ const TITLE: Record<string, string> = {
   pl: 'Funkcje — szczegóły modułów', nl: 'Functies — details van de modules', he: 'פיצ׳רים – פירוט המודולים',
 };
 
-interface Props { lang: string; text: string }
+// htmlLang : langue de la fiche pour <html lang dir> dans _document.
+interface Props { lang: string; text: string; htmlLang: string }
 
 export default function KbModules({ lang, text }: Props) {
   return (
@@ -43,5 +44,5 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     `Intégrations : ${m.integrations.join(', ')}`,
     `À partir de : ${offerName(m.from)}`,
   ].join('\n')).join('\n\n');
-  return { props: { lang, text } };
+  return { props: { lang, text, htmlLang: lang } };
 };

@@ -6,8 +6,12 @@ import { CONSENT_DEFAULT_SCRIPT, GA_ID } from '@/lib/analytics';
 export default function Document({ __NEXT_DATA__ }: DocumentProps) {
   // Langue et sens d’écriture de la page (l’hébreu se lit de droite à gauche).
   const locale = asLocale(__NEXT_DATA__.locale);
+  // Fiches /kb : langue du document lui-même (prop htmlLang), quelle que soit la langue de l’URL.
+  const docLang: unknown = __NEXT_DATA__.props?.pageProps?.htmlLang;
+  const lang = typeof docLang === 'string' ? docLang : MARKETS[locale].hreflang;
+  const rtl = typeof docLang === 'string' ? docLang === 'he' : isRtl(locale);
   return (
-    <Html lang={MARKETS[locale].hreflang} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+    <Html lang={lang} dir={rtl ? 'rtl' : 'ltr'}>
       <Head>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
