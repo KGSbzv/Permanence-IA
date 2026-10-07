@@ -35,8 +35,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
 
-  // Langue du site (fr, en-gb, en-au, it, pl, nl) ; « intl » = demande enregistrée par un agent pendant un appel.
-  const lang = typeof locale === 'string' ? locale : 'fr';
+  // Langue du site (fr, en-gb, en-au, it, pl, nl, he) ; « intl » = demande enregistrée par un agent pendant un appel.
+  // Sans langue précisée (outils d’agents WhatsApp, lignes UK / Israël), la campagne suit l’indicatif du numéro.
+  const lang = typeof locale === 'string' && locale ? locale : 'intl';
   const e164 = toE164(String(phone), lang, typeof b.cc === 'string' ? b.cc : undefined);
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
