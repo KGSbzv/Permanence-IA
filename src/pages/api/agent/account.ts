@@ -6,7 +6,7 @@
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbInsert, dbSelect, esc, sendMail } from '@/lib/server';
+import { dbInsert, dbSelect, esc, sendMail, clientIp } from '@/lib/server';
 
 const API = 'https://app.autocalls.ai/api';
 const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes ; 6 chiffres, 5 essais par heure et par email
@@ -42,11 +42,6 @@ function codeSecret() {
   return s;
 }
 
-/** Adresse du client : avant-dernière valeur de X-Forwarded-For (la dernière est ajoutée par le répartiteur Google). */
-function clientIp(req: NextApiRequest) {
-  const parts = String(req.headers['x-forwarded-for'] || '').split(',').map((x) => x.trim()).filter(Boolean);
-  return parts.length >= 2 ? parts[parts.length - 2] : parts[0] || req.socket.remoteAddress || '';
-}
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function codeFor(email: string, slot: number) {
@@ -133,9 +128,15 @@ function codeMail(lang: string, code: string) {
   };
 }
 
-/** Assistants autorisés à reconnaître un numéro : UUID non publiés (aucun widget public), qui servent de clé partagée
- *  avec l’outil Autocalls « identifier_contact ». Jamais d’identifiant numérique, devinable. */
-const IDENTIFY_ASSISTANTS = new Set(['798c2ab1-b454-40fb-b16c-711fc68eff50', '6b50ad79-6c28-4950-afc2-e1fafd152def', '78f36e5d-1c24-45c5-ac69-fb20b641b02e']);
+/**
+ * Clé partagée avec l’outil Autocalls « identifier_contact » (champ fixe `key`), stockée dans les secrets de
+ * production (IDENTIFY_KEY), jamais dans le code : le dépôt est public.
+ */
+function identifyAllowed(key: unknown) {
+  const want = process.env.IDENTIFY_KEY || '';
+  const got = String(key || '');
+  return want.length >= 24 && got.length === want.length && timingSafeEqual(Buffer.from(got), Buffer.from(want));
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -146,10 +147,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Reconnaissance d’un contact par son numéro (premier message WhatsApp, appel entrant) : seulement pour nos
   // assistants non publics (pas les widgets du site), et réponse minimale : prénom, profil, langue, dernière demande.
   if (b.action === 'identify') {
-    if (!IDENTIFY_ASSISTANTS.has(String(b.assistant || ''))) {
-      console.warn('[agent-account] identify refusé (assistant non autorisé, format :', /^\d+$/.test(String(b.assistant)) ? 'numérique' : 'autre', ')');
-      return res.status(403).json({ known: false });
-    }
+    if (!identifyAllowed(b.key)) return res.status(403).json({ known: false });
     // Plafonds : par adresse et global (toutes adresses confondues) sur chaque instance.
     if (tooMany(`identify:${ip}`, 60) || tooMany('identify:all', 300)) return res.status(429).json({ known: false });
     const phone = String(b.phone || '').replace(/[^\d+]/g, '');

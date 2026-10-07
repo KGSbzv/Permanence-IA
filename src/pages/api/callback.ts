@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
-import { NOTIFY_TO, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, clientIp, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -20,7 +21,7 @@ const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, ma
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
-  const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+  const ip = clientIp(req);
   if (tooMany(ip)) return res.status(429).json({ error: 'Trop de demandes, réessayez dans quelques minutes.' });
   // Champ piège invisible : rempli uniquement par les robots. On répond « succès » sans rien faire.
   if (req.body?.website) return res.status(200).json({ success: true });
@@ -37,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Langue du site (fr, en-gb, en-au, it, pl, nl, he) ; « intl » = demande enregistrée par un agent pendant un appel.
   // Sans langue précisée (outils d’agents WhatsApp, lignes UK / Israël), la campagne suit l’indicatif du numéro.
-  const lang = typeof locale === 'string' && locale ? locale : 'intl';
+  const lang = isLocale(locale) ? locale : 'intl';
   const e164 = toE164(String(phone), lang, typeof b.cc === 'string' ? b.cc : undefined);
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
@@ -53,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
     note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
-    agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
+    agent: agent ? `${agent}${isLocale(locale) && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
   // Rappel automatique : la demande rejoint la campagne d’appels de son pays et de son type (commercial ou support).
@@ -111,10 +112,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ? sendCallbackConfirmation({ lang: campaignLang, phone: e164 as string, name: String(name), callAt, tz: b.tz, kind, voice })
       : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: safeFirstName(name, campaignLang) });
   };
-  const [call, wa] = await Promise.allSettled([
-    db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée')),
-    sendWhatsApp(),
-  ]);
+  // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
+  const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée'))]);
+  const [wa] = await Promise.allSettled([call.status === 'fulfilled' ? sendWhatsApp() : Promise.resolve(null)]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);

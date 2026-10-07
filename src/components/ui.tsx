@@ -252,7 +252,7 @@ export function CallbackForm({
         {slot === 'precise' && (
           <div className={compact ? '' : 'sm:col-span-2'}>
             <label htmlFor="cb-callat" className={label}>{t.preciseLabel}</label>
-            <input id="cb-callat" name="callAt" type="datetime-local" required className="field" />
+            <input id="cb-callat" name="callAt" type="datetime-local" required className="field" min={new Date(Date.now() - new Date().getTimezoneOffset() * 60_000).toISOString().slice(0, 16)} />
           </div>
         )}
       </div>
@@ -292,7 +292,7 @@ const DIAL_CODES: { id: string; flag: string; cc: string }[] = [
 const DEFAULT_COUNTRY: Record<string, string> = { fr: 'FR', 'en-gb': 'GB', 'en-au': 'AU', it: 'IT', pl: 'PL', nl: 'NL', he: 'IL' };
 const DIAL_LABEL: Record<string, string> = { fr: 'Indicatif pays', 'en-gb': 'Country code', 'en-au': 'Country code', it: 'Prefisso internazionale', pl: 'Numer kierunkowy kraju', nl: 'Landcode', he: 'קידומת מדינה' };
 /** Motif valable aussi en mode « v » des navigateurs récents (parenthèses et tiret échappés). */
-export const PHONE_PATTERN = '[+0-9\\(][0-9 .\\(\\)\\-]{6,}';
+export const PHONE_PATTERN = '[+0-9\\(][0-9 .\\(\\)\\-]{7,}';
 
 /**
  * Champ téléphone avec indicatif pays : un numéro saisi sans « + » est complété avec l’indicatif choisi
@@ -310,7 +310,7 @@ export function PhoneField({ id, label, className = 'field', placeholder, hideLa
         <select name="cc" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} defaultValue={DEFAULT_COUNTRY[locale] || 'FR'} className={`${className} w-auto shrink-0 pe-7`}>
           {DIAL_CODES.map((d) => <option key={d.id} value={d.id}>{d.flag} +{d.cc}</option>)}
         </select>
-        <input id={id} name="phone" type="tel" required minLength={6} pattern={PHONE_PATTERN} autoComplete="tel-national" placeholder={placeholder}
+        <input id={id} name="phone" type="tel" required minLength={8} pattern={PHONE_PATTERN} autoComplete="tel-national" placeholder={placeholder}
           aria-label={hideLabel ? label : undefined} className={`${className} min-w-0 flex-1`}
           onInvalid={(e) => e.currentTarget.setCustomValidity(invalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} />
       </div>

@@ -61,6 +61,13 @@ export async function sendMail(to: string, subject: string, text: string, html?:
   await transporter.sendMail({ from: `${fromName} <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
 }
 
+/** Adresse du client : avant-dernière valeur de X-Forwarded-For (la dernière est ajoutée par le répartiteur Google ;
+ *  la première peut être falsifiée par le client). */
+export function clientIp(req: NextApiRequest) {
+  const parts = String(req.headers['x-forwarded-for'] || '').split(',').map((x) => x.trim()).filter(Boolean);
+  return parts.length >= 2 ? parts[parts.length - 2] : parts[0] || req.socket.remoteAddress || '';
+}
+
 /** Jeton secret des webhooks : en-tête x-webhook-token, ou ?token=… car Autocalls n’envoie pas d’en-têtes personnalisés. */
 export function isAuthorized(req: NextApiRequest) {
   const expected = process.env.WEBHOOK_TOKEN;

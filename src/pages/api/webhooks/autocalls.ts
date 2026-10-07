@@ -6,7 +6,8 @@ import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
 
 const HOT = ['rappel', 'demo', 'demo_planifiee', 'essai_gratuit', 'ticket_cree'];
-const MISSED = ['no-answer', 'busy', 'failed', 'voicemail'];
+// « failed » (numéro invalide, erreur opérateur) n’est pas un appel manqué : pas de message.
+const MISSED = ['no-answer', 'busy', 'voicemail'];
 const MISSED_OUTCOME = 'whatsapp_rappel_manque';
 const MISSED_SMS = 'sms_rappel_manque';
 
