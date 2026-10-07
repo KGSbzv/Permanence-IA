@@ -18,11 +18,16 @@ function supabaseHeaders(extra: Record<string, string> = {}) {
   };
 }
 
-export async function dbInsert(table: string, row: Record<string, unknown>) {
-  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}`, {
-    method: 'POST', headers: supabaseHeaders({ Prefer: 'return=minimal' }), body: JSON.stringify(row),
+/** Insère une ligne ; avec `returnId`, renvoie l’identifiant de la ligne créée (undefined s’il est illisible). */
+export async function dbInsert(table: string, row: Record<string, unknown>, returnId = false): Promise<string | undefined> {
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/${table}${returnId ? '?select=id' : ''}`, {
+    method: 'POST', headers: supabaseHeaders({ Prefer: returnId ? 'return=representation' : 'return=minimal' }), body: JSON.stringify(row),
   });
   if (!res.ok) throw new Error(`Supabase ${table} ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  if (!returnId) return undefined;
+  const created = await res.json().catch(() => []);
+  const id = Array.isArray(created) ? created[0]?.id : undefined;
+  return id == null ? undefined : String(id);
 }
 
 /** Insère la ligne si elle n’existe pas (contrainte unique) ; renvoie true seulement si elle a été créée. */

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
-import { NOTIFY_TO, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -77,7 +77,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   else {
     try { leadHook = JSON.parse(process.env.LEAD_WEBHOOKS_INTL || '{}')[campaignLang]?.[kind]; } catch { leadHook = undefined; }
   }
-  const queueCall = async () => {
+  // requestId : identifiant de la ligne enregistrée, renvoyé par l’automatisation à /api/callback/check
+  // juste avant l’appel (une demande remplacée par une plus récente du même numéro n’est plus appelée).
+  const queueCall = async (requestId?: string) => {
     if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);
     // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus, et au plus
     // 3 rappels par numéro sur 7 jours (la demande, puis jusqu’à deux reprogrammations par un agent).
@@ -96,16 +98,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // call_at (UTC) : l’automatisation attend ce moment avant d’ajouter le contact à la campagne.
       body: JSON.stringify({
         name, phone: e164, company: company || '', sector: sector || '', call_at: callAt.toISOString(),
+        ...(requestId ? { request_id: requestId } : {}),
         // Les automatisations Autocalls basculent sur la campagne de la voix masculine quand body.voice === 'male'.
         ...(voice ? { voice } : {}),
         note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);
+    // Statut « scheduled » = rappel réellement mis en file : seule une demande dans cet état remplace les précédentes
+    // (une nouvelle demande refusée par les plafonds laisse l’ancienne valable). Échec sans effet sur l’appel.
+    if (requestId) await dbUpdate('callbacks', `id=eq.${encodeURIComponent(requestId)}`, { status: 'scheduled' })
+      .catch((e) => console.error('[callback] statut:', e.message));
   };
 
   const [db, mail] = await Promise.allSettled([
-    dbInsert('callbacks', row),
+    dbInsert('callbacks', row, true),
     sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
   ]);
   // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
@@ -126,7 +133,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: safeFirstName(name, campaignLang) });
   };
   // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
-  const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée'))]);
+  const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall(db.value) : Promise.reject(new Error('demande non enregistrée'))]);
   const [wa] = await Promise.allSettled([call.status === 'fulfilled' ? sendWhatsApp() : Promise.resolve(null)]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
