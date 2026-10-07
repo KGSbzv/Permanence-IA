@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import Layout from '@/components/Layout';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Section, TalkNowPill, Tick, TrialBadges, WhatsAppLink } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, Tick, TrialBadges, WhatsAppStarters } from '@/components/ui';
 import {
   BillingProvider, DemoBlock, EconomyBlock, FinalCTA, IncludedStack, MatrixTable, ModuleCards, PricingCards, SecurityBlock, Steps,
 } from '@/components/blocks';
@@ -46,7 +46,7 @@ export default function ModulePage({ slug }: { slug: string }) {
               <div className="mt-8 max-w-prose rounded-2xl border border-[#25D366]/40 bg-[#25D366]/5 p-5">
                 <p className="font-display font-semibold text-ink">{c.site.whatsapp.tryTitle}</p>
                 <p className="mt-1 text-[15px]">{c.site.whatsapp.tryText}</p>
-                <WhatsAppLink variant="button" place="module_whatsapp" className="mt-4 text-sm" />
+                <WhatsAppStarters place="module_whatsapp" className="mt-4" />
               </div>
             )}
           </div>

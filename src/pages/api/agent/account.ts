@@ -133,12 +133,42 @@ function codeMail(lang: string, code: string) {
   };
 }
 
+/** Assistants autorisés à reconnaître un numéro (UUID non publiés) : WhatsApp, lignes UK et Israël. */
+const IDENTIFY_ASSISTANTS = new Set(['798c2ab1-b454-40fb-b16c-711fc68eff50', '6b50ad79-6c28-4950-afc2-e1fafd152def', '78f36e5d-1c24-45c5-ac69-fb20b641b02e', '21358', '21376', '21314']);
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
   const ip = clientIp(req);
-  if (tooMany(`ip:${ip}`, 10)) return res.status(429).json({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
 
   const b = req.body || {};
+
+  // Reconnaissance d’un contact par son numéro (premier message WhatsApp, appel entrant) : seulement pour nos
+  // assistants non publics (pas les widgets du site), et réponse minimale : prénom, profil, langue, dernière demande.
+  if (b.action === 'identify') {
+    if (!IDENTIFY_ASSISTANTS.has(String(b.assistant || ''))) return res.status(403).json({ known: false });
+    if (tooMany(`identify:${ip}`, 60)) return res.status(429).json({ known: false });
+    const phone = String(b.phone || '').replace(/[^\d+]/g, '');
+    if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro non reconnu : identifie le besoin à partir du message.' });
+    const rows = await dbSelect<{ name: string; email: string | null; type: string; agent: string | null; created_at: string; note: string | null }>(
+      'callbacks', `select=name,email,type,agent,created_at,note&phone=eq.${encodeURIComponent(phone)}&order=created_at.desc&limit=5`).catch(() => []);
+    if (!rows.length) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro inconnu : nouvelle personne. Pars de son message pour comprendre ce qu’elle veut, sans lui demander si elle est cliente.' });
+    const emails = Array.from(new Set(rows.map((r) => r.email).filter(Boolean))) as string[];
+    const signedUp = emails.length
+      ? (await dbSelect('signups', `select=email&email=in.(${emails.map((e) => encodeURIComponent(e.toLowerCase())).join(',')})&limit=1`).catch(() => [])).length > 0
+      : false;
+    const last = rows[0];
+    const lang = /\[(fr|en-gb|en-au|it|pl|nl|he)\]/.exec(rows.map((r) => r.agent || '').join(' '))?.[1] || /\[WA:([a-z-]+)\]/.exec(rows.map((r) => r.note || '').join(' '))?.[1] || null;
+    return res.status(200).json({
+      known: true,
+      first_name: String(last.name || '').trim().split(/\s+/)[0] || null,
+      profile: signedUp || rows.some((r) => r.type === 'support') ? 'client' : 'prospect',
+      language: lang,
+      last_request: { date: last.created_at.slice(0, 10), type: last.type === 'support' ? 'support' : 'rappel commercial ou démo' },
+      message: 'Contact connu : salue-le par son prénom. Ne donne aucune autre information de son dossier sans le code envoyé par email.',
+    });
+  }
+
+  if (tooMany(`ip:${ip}`, 10)) return res.status(429).json({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
   const email = String(b.email || '').trim().toLowerCase().slice(0, 160);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ message: 'Adresse email invalide : demandez à la personne de la vérifier.' });
 

@@ -351,6 +351,26 @@ export function WhatsAppLink({ variant = 'card', place, className = '' }: { vari
   );
 }
 
+/** Raccourcis WhatsApp par intention : chaque bouton ouvre la conversation avec un premier message prérempli
+ *  dans la langue du site, que l’agent WhatsApp reconnaît (découvrir, forfait, essai ou démo, client). */
+export function WhatsAppStarters({ place, dark = false, className = '' }: { place: string; dark?: boolean; className?: string }) {
+  const { c, locale } = useI18n();
+  const t = c.site.whatsapp;
+  return (
+    <div className={className}>
+      <p className={`text-sm ${dark ? 'text-white/75' : 'text-slate'}`}>{t.startersIntro}</p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {t.starters.map((s, i) => (
+          <a key={s.label} href={whatsappUrl(s.text)} target="_blank" rel="noopener" onClick={() => track('whatsapp_click', { language: locale, place, topic: i })}
+            className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors ${dark ? 'border-white/25 text-white hover:border-[#25D366]' : 'border-line bg-white text-ink hover:border-[#25D366]'}`}>
+            <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />{s.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------- FAQ en accordéon sombre ---------- */
 
 export function FaqDark({ items }: { items: { q: string; a: string }[] }) {
