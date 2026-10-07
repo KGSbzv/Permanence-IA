@@ -617,7 +617,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Prośby o oddzwonienie i rozmowy z naszymi asystentkami: 24 miesiące od ostatniego kontaktu.',
-                'Połączenia, nagrania, transkrypcje, czaty i SMS-y przetwarzane dla naszych klientów: domyślnie 12 miesięcy; każdy klient może skrócić ten okres i usunąć swoje dane.',
+                'Połączenia, nagrania, transkrypcje, czaty i SMS-y przetwarzane dla naszych klientów: domyślnie 90 dni od daty połączenia (okres stosowany przez naszego dostawcę technicznego); każdy klient może zmienić ten okres i usunąć swoje dane.',
                 'Potencjalni klienci i kontakty zebrane przez agentów naszych klientów: domyślnie 24 miesiące, klient może ten okres skrócić.',
                 'Dane konta: przez czas trwania umowy, a następnie 3 lata w celach marketingowych, chyba że wniesiesz sprzeciw. Zawartość konta jest usuwana w ciągu 90 dni od zakończenia umowy.',
                 'Faktury i dokumenty księgowe: 10 lat.',

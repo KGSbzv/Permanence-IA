@@ -14,4 +14,5 @@ export const SITE_TEXT: typeof FR_SITE_TEXT = {
   rechargeFreeAmount: 'L’importo è libero: lo inserisca nella Sua area clienti (Add credits). Gli importi sopra sono esempi.',
   consent: { title: 'Cookie di misurazione', text: 'Con il Suo consenso usiamo cookie per misurare le visite e l’efficacia dei nostri annunci. Se rifiuta, può comunque usare il sito.', accept: 'Accetta', reject: 'Rifiuta', policy: 'Maggiori informazioni', manage: 'Gestisci i cookie' },
   keepNumber: { title: 'Mantiene il Suo numero', text: 'Nessun cambio di operatore né di apparecchi: basta un trasferimento di chiamata, permanente o solo quando non risponde, e l’agente subentra.' },
+  fxNote: (date: string) => `Gli importi in valuta locale sono indicativi, al tasso di riferimento BCE del ${date}. I piani sono fatturati in dollari USA: l’importo addebitato dipende dal tasso di cambio della Sua banca il giorno del pagamento.`,
 };

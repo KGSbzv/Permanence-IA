@@ -14,6 +14,7 @@ import { BRAND_MARKS } from '@/data/brandMarks';
 import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
+import { approx, useFx } from '@/lib/fx';
 import LiveDemo from './LiveDemo';
 
 /* ---------- Icônes ---------- */
@@ -263,6 +264,7 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
   const { c, market, offers, money } = useI18n();
   const t = c.ui.components.pricingCards;
   const { billing, setBilling } = useBilling();
+  const fx = useFx();
   const list = only ? offers.filter((o) => only.includes(o.slug)) : offers;
   const hasAnnual = list.some((o) => o.annual);
   // Chaque carte est une sous-grille (7 rangées) : nom, public, prix, minutes, points forts, bouton et lien
@@ -279,7 +281,11 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
               {o.featured && <span className="absolute -top-3 start-6 rounded-full bg-signal-deep px-3 py-1 text-xs font-semibold text-white">{t.mostChosen}</span>}
               <p className={`font-display text-lg font-bold leading-snug ${o.featured ? 'text-white' : 'text-ink'}`}>{o.name}</p>
               <p className="mt-1 text-sm">{o.audience}</p>
-              <div className="mt-4"><PriceTag o={o} light={o.featured} billing={billing} /></div>
+              <div className="mt-4">
+                <PriceTag o={o} light={o.featured} billing={billing} />
+                {/* Repère en devise locale (facturation toujours en USD, voir la note sous les cartes). */}
+                {fx && !!o.price && <p className={`mt-1 text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{market.localCurrencies.filter((cur) => fx.rates[cur]).map((cur) => approx(annual ? annual.monthly : o.price!, cur, fx.rates[cur], market.numberLocale)).join(' · ')}</p>}
+              </div>
               <div className="mt-3">
                 <p className={`text-sm font-semibold ${o.featured ? 'text-signal-glow' : 'text-signal-deep'}`}>{o.minutes}</p>
                 {o.perMinute && <p className={`text-xs ${o.featured ? 'text-white/60' : 'text-slate-light'}`}>{t.perMinute(annual ? annual.perMinute : o.perMinute)}</p>}
@@ -295,6 +301,7 @@ export function PricingCards({ only }: { only?: Offer['slug'][] }) {
         })}
       </div>
       <p className="mt-6 text-center text-sm text-slate">{c.site.payg(money(market.paygMinute, 2))}</p>
+      {fx && <p className="mx-auto mt-2 max-w-3xl text-center text-xs text-slate-light">{c.site.fxNote(new Intl.DateTimeFormat(market.numberLocale, { dateStyle: 'long' }).format(new Date(fx.date)))}</p>}
     </div>
   );
 }

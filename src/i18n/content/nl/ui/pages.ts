@@ -608,7 +608,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Terugbelverzoeken en gesprekken met onze assistenten: 24 maanden na het laatste contact.',
-                'Gesprekken, opnames, transcripties, chats en sms die wij voor onze klanten verwerken: standaard 12 maanden; elke klant kan deze termijn verkorten en zijn gegevens verwijderen.',
+                'Gesprekken, opnames, transcripties, chats en sms die wij voor onze klanten verwerken: standaard 90 dagen vanaf de datum van het gesprek (de termijn van onze technische leverancier); elke klant kan deze termijn verkorten en zijn gegevens verwijderen.',
                 'Leads en contacten verzameld door de agents van onze klanten: standaard 24 maanden, door de klant in te korten.',
                 'Accountgegevens: zolang de overeenkomst loopt, daarna 3 jaar voor marketing, tenzij u bezwaar maakt. De inhoud van het account wordt binnen 90 dagen na het einde van de overeenkomst verwijderd.',
                 'Facturen en boekhoudkundige stukken: 10 jaar.',

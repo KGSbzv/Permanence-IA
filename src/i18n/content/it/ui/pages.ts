@@ -608,7 +608,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Richieste di richiamata e conversazioni con le nostre assistenti: 24 mesi dall’ultimo contatto.',
-                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 12 mesi per impostazione predefinita; ogni cliente può ridurre tale periodo e cancellare i propri dati.',
+                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 90 giorni dalla data della chiamata (durata applicata dal nostro fornitore tecnico) per impostazione predefinita; ogni cliente può modificare tale periodo e cancellare i propri dati.',
                 'Potenziali clienti e contatti raccolti dagli agenti dei nostri clienti: 24 mesi per impostazione predefinita, riducibili dal cliente.',
                 'Dati dell’account: per la durata del rapporto contrattuale, poi 3 anni per finalità di marketing, salvo opposizione. Il contenuto dell’account è cancellato entro 90 giorni dalla fine del contratto.',
                 'Fatture e scritture contabili: 10 anni.',

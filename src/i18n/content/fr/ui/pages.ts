@@ -623,7 +623,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Demandes de rappel et échanges avec nos assistantes : 24 mois après le dernier contact.',
-                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 12 mois par défaut ; chaque client peut réduire cette durée et supprimer ses données.',
+                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 90 jours par défaut à compter de l’appel (durée appliquée par notre prestataire technique) ; chaque client peut modifier cette durée et supprimer ses données.',
                 'Prospects et contacts recueillis par les agents de nos clients : 24 mois par défaut, réductibles par le client.',
                 'Données du compte : pendant la relation contractuelle, puis 3 ans pour la prospection, sauf opposition. Le contenu du compte est supprimé dans les 90 jours suivant la fin du contrat.',
                 'Factures et pièces comptables : 10 ans.',

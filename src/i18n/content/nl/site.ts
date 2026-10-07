@@ -12,4 +12,5 @@ export const SITE_TEXT = {
   rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
   consent: { title: 'Meetcookies', text: 'Met uw toestemming gebruiken wij cookies om bezoeken en de resultaten van onze advertenties te meten. Weigeren heeft geen invloed op het gebruik van de site.', accept: 'Accepteren', reject: 'Weigeren', policy: 'Meer informatie', manage: 'Cookies beheren' },
   keepNumber: { title: 'U houdt uw nummer', text: 'Geen andere provider of apparatuur nodig: een eenvoudige doorschakeling, altijd of alleen als u niet opneemt, en de agent neemt het over.' },
+  fxNote: (date: string) => `Bedragen in lokale valuta zijn indicatief, tegen de ECB-referentiekoers van ${date}. Abonnementen worden in Amerikaanse dollars gefactureerd: het afgeschreven bedrag hangt af van de wisselkoers van uw bank op de dag van betaling.`,
 };
