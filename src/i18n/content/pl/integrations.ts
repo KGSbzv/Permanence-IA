@@ -3,8 +3,8 @@
 import type { Integration } from '../fr/integrations';
 
 export const INTEGRATIONS: Integration[] = [
-  { name: 'Kalendarz Google', category: 'Kalendarz', text: 'Wolne terminy i rezerwacje na bieżąco.', mark: 'G', color: '#4285F4' },
-  { name: 'Outlook', category: 'Kalendarz', text: 'Zsynchronizowany kalendarz Microsoft.', mark: 'O', color: '#0A64AD' },
+  { name: 'Kalendarz Google', category: 'Kalendarz', text: 'Wolne terminy i rezerwacje na bieżąco, przez Cal.com lub Calendly.', mark: 'G', color: '#4285F4' },
+  { name: 'Outlook', category: 'Kalendarz', text: 'Kalendarz Microsoft, synchronizowany przez Cal.com lub Calendly.', mark: 'O', color: '#0A64AD' },
   { name: 'Cal.com', category: 'Kalendarz', text: 'Typy spotkań i zespoły.', mark: 'C', color: '#111827' },
   { name: 'Calendly', category: 'Kalendarz', text: 'Rezerwacje w Twoich wydarzeniach.', mark: 'C', color: '#006BFF' },
   { name: 'HubSpot', category: 'CRM', text: 'Aktualne kontakty i transakcje.', mark: 'H', color: '#FF7A59' },
@@ -18,5 +18,5 @@ export const INTEGRATIONS: Integration[] = [
   { name: 'Twilio', category: 'Telefonia', text: 'Import Twoich numerów.', mark: 'T', color: '#F22F46' },
   { name: 'Telnyx', category: 'Telefonia', text: 'Import Twoich numerów.', mark: 'Tx', color: '#00C08B' },
   { name: 'Webhooks', category: 'Dla programistów', text: 'Zdarzenia wysyłane do Twoich systemów.', mark: '{ }', color: '#0FA3C4' },
-  { name: '300+ narzędzi', category: 'Automatyzacje', text: 'Przez flow builder, bez kodowania.', mark: '+', color: '#22306A' },
+  { name: '300+ narzędzi', category: 'Automatyzacje', text: 'W edytorze automatyzacji, bez kodowania.', mark: '+', color: '#22306A' },
 ];

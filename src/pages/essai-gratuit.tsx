@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Check } from 'lucide-react';
 import Layout from '@/components/Layout';
-import { Heading, TrialBadges } from '@/components/ui';
+import { Heading, PhoneField, ProfileFields, TrialBadges, dialCode, profileNote } from '@/components/ui';
 import { LOGIN_URL, REGISTER_URL } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
@@ -27,9 +27,9 @@ export default function EssaiGratuit() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         // Champs destinés à l’équipe (back-office) : restent en français quelle que soit la langue du site.
         body: JSON.stringify({
-          name: f.get('name'), phone: f.get('phone'), email: f.get('email'), company: f.get('company'),
+          name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), email: f.get('email'), company: f.get('company'),
           sector: f.get('sector'), consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
-          note: `Trial onboarding request — plan: ${f.get('plan')} — company: ${f.get('company') || ''}`,
+          note: [`Trial onboarding request — plan: ${f.get('plan')} — company: ${f.get('company') || ''}`, profileNote(f)].filter(Boolean).join(' — '),
         }),
       });
       if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendError); }
@@ -83,7 +83,7 @@ export default function EssaiGratuit() {
                   <div><label htmlFor="su-name" className="mb-1.5 block text-sm font-semibold text-ink">{t.name}</label><input id="su-name" name="name" required autoComplete="name" className="field" /></div>
                   <div><label htmlFor="su-company" className="mb-1.5 block text-sm font-semibold text-ink">{t.company}</label><input id="su-company" name="company" required autoComplete="organization" className="field" /></div>
                   <div><label htmlFor="su-email" className="mb-1.5 block text-sm font-semibold text-ink">{t.email}</label><input id="su-email" name="email" type="email" required autoComplete="email" className="field" /></div>
-                  <div><label htmlFor="su-phone" className="mb-1.5 block text-sm font-semibold text-ink">{t.phone}</label><input id="su-phone" name="phone" type="tel" required minLength={8} autoComplete="tel" className="field" /></div>
+                  <PhoneField id="su-phone" label={t.phone} labelClassName="mb-1.5 block text-sm font-semibold text-ink" />
                   <div>
                     <label htmlFor="su-sector" className="mb-1.5 block text-sm font-semibold text-ink">{t.sector}</label>
                     <select id="su-sector" name="sector" className="field" defaultValue="">
@@ -98,6 +98,7 @@ export default function EssaiGratuit() {
                       {offers.map((o) => <option key={o.slug} value={o.slug}>{o.name}{o.price ? t.planPrice(money(o.price)) : o.price === 0 ? t.planFree : t.planQuote}</option>)}
                     </select>
                   </div>
+                  <div className="sm:col-span-2 grid gap-4"><ProfileFields labelClassName="mb-1.5 block text-sm font-semibold text-ink" optional={c.ui.components.callbackForm.optional} /></div>
                 </div>
                 <label className="flex items-start gap-2.5 text-sm">
                   <input type="checkbox" name="terms" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />

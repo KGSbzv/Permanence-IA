@@ -12,7 +12,7 @@ import Mock, { Wave } from './Mock';
 import { Heading, Photo } from './ui';
 import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
-import { TEAM_PERSONAS, VOICES } from '@/data/personas';
+import { VOICES } from '@/data/personas';
 
 /* ---------- Bandeau défilant ---------- */
 
@@ -32,11 +32,14 @@ export function IndustryMarquee() {
   return <Marquee items={names.map((n) => <span key={n} className="whitespace-nowrap rounded-full border border-line bg-white px-4 py-2 font-display text-sm font-semibold text-ink">{n}</span>)} />;
 }
 
+// Drapeaux dans l’ordre de c.ui.components.languageMarquee ; l’hébreu a son propre ordre (hébreu, anglais, arabe, russe…).
+const LANGUAGE_FLAGS_HE = ['🇮🇱', '🇬🇧', '🌐', '🇷🇺', '🇫🇷', '🇪🇸', '🇩🇪', '🇮🇹', '🇵🇹', '🇳🇱', '🇵🇱', '🇷🇴', '🇹🇷', '🇸🇪'];
 const LANGUAGE_FLAGS = ['🇫🇷', '🇬🇧', '🇪🇸', '🇩🇪', '🇮🇹', '🇵🇹', '🇳🇱', '🇧🇪', '🇨🇭', '🇨🇦', '🇲🇦', '🇵🇱', '🇷🇴', '🇹🇷', '🇸🇪', '🇮🇱'];
 
 export function LanguageMarquee() {
-  const { c } = useI18n();
-  const langs = c.ui.components.languageMarquee.map((n, i) => [LANGUAGE_FLAGS[i] ?? '', n]);
+  const { c, locale } = useI18n();
+  const flags = locale === 'he' ? LANGUAGE_FLAGS_HE : LANGUAGE_FLAGS;
+  const langs = c.ui.components.languageMarquee.map((n, i) => [flags[i] ?? '', n]);
   return <Marquee items={langs.map(([f, n]) => <span key={n} className="flex items-center gap-2 whitespace-nowrap rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink shadow-card"><span aria-hidden>{f}</span>{n}</span>)} />;
 }
 
@@ -54,10 +57,10 @@ const AGENT_STYLE = [
 
 function useAgents() {
   const { c, locale } = useI18n();
-  // Chaque rôle a son personnage (prénom et visage), le même dans toutes les langues ; en hébreu, les voix
-  // israéliennes (נועה, דניאל) en alternance, pour ne pas afficher de prénoms latins sur le site israélien.
-  const he = [VOICES.he.female, VOICES.he.male];
-  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i], persona: locale === 'he' ? he[i % 2] : TEAM_PERSONAS[i] }));
+  // Chaque rôle prend une des deux voix du marché (féminine, masculine, en alternance) : le visiteur voit les
+  // prénoms qu’il entendra au téléphone (Manuela et Marco en italien, נועה et דניאל en hébreu…).
+  const own = [VOICES[locale].female, VOICES[locale].male];
+  return AGENT_STYLE.map((st, i) => ({ ...st, ...c.ui.components.agentTeam.agents[i], persona: own[i % 2] }));
 }
 
 export function AgentOrbit() {
@@ -187,8 +190,8 @@ export function SectorShowcase() {
             );
           })}
         </div>
-        {fade.left && <span className="pointer-events-none absolute inset-y-0 start-0 w-10 bg-gradient-to-r from-paper to-transparent" aria-hidden />}
-        {fade.right && <span className="pointer-events-none absolute inset-y-0 end-0 w-10 bg-gradient-to-l from-paper to-transparent" aria-hidden />}
+        {fade.left && <span className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-paper to-transparent" aria-hidden />}
+        {fade.right && <span className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-paper to-transparent" aria-hidden />}
       </div>
       <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${s.slug}`} className="mt-8 grid items-center gap-10 lg:grid-cols-2">
         <div className="relative overflow-hidden rounded-3xl">

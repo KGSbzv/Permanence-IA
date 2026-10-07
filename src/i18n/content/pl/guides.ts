@@ -49,7 +49,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Odpowiada na częste pytania, przyjmuje wiadomości i umawia wizyty, 24 godziny na dobę.',
           'Kwalifikuje zgłoszenie i w razie potrzeby przekazuje połączenie Twojemu zespołowi.',
-          'Obsługuje kilka połączeń jednocześnie (liczba połączeń równoczesnych zależy od pakietu).',
+          'Obsługuje kilka połączeń jednocześnie (liczba jednoczesnych połączeń zależy od pakietu).',
         ],
       },
       {
@@ -58,7 +58,7 @@ export const GUIDES: Guide[] = [
           'Instrukcje („System prompt”): rola, ton i zasady działania agenta.',
           'Powitanie („Initial message”): pierwsze wypowiadane zdanie.',
           'Głos („Voice”): głos z biblioteki lub Twój sklonowany głos.',
-          'Narzędzia („Tools”): przekazanie połączenia, zakończenie rozmowy, umawianie wizyt, narzędzia na miarę.',
+          'Narzędzia („Tools”): przekazanie połączenia, zakończenie rozmowy, umawianie wizyt, własne narzędzia.',
           'Baza wiedzy („Knowledge base”): Twoje dokumenty i strony WWW.',
         ],
       },
@@ -85,13 +85,13 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Dodaj potrzebne narzędzia',
-        text: 'W sekcji „Tools & actions” dodaj to, czego agent potrzebuje: przekazanie połączenia, zakończenie rozmowy, umawianie wizyt, narzędzia na miarę.',
+        text: 'W sekcji „Tools & actions” dodaj to, czego agent potrzebuje: przekazanie połączenia, zakończenie rozmowy, umawianie wizyt, własne narzędzia.',
       },
       {
         title: 'Podłącz i przetestuj',
         list: [
-          'Agent przychodzący: przypisz mu numer (sekcja „General”, pole „Phone number”).',
-          'Agent wychodzący: przypisz go do kampanii lub przetestuj, prosząc, by do Ciebie zadzwonił.',
+          'Agent do połączeń przychodzących: przypisz mu numer (sekcja „General”, pole „Phone number”).',
+          'Agent do połączeń wychodzących: przypisz go do kampanii lub przetestuj, prosząc, by do Ciebie zadzwonił.',
           'W każdym przypadku przetestuj go przed uruchomieniem.',
         ],
       },
@@ -134,15 +134,15 @@ export const GUIDES: Guide[] = [
       {
         title: '3. Prawdziwe połączenie telefoniczne: ostateczna weryfikacja',
         list: [
-          'Agent wychodzący: kliknij „Speak to your assistant”, wybierz połączenie telefoniczne i wpisz swój numer: agent od razu do Ciebie zadzwoni.',
-          'Agent przychodzący: po prostu zadzwoń na numer przypisany do agenta.',
+          'Agent do połączeń wychodzących: kliknij „Speak to your assistant”, wybierz połączenie telefoniczne i wpisz swój numer: agent od razu do Ciebie zadzwoni.',
+          'Agent do połączeń przychodzących: po prostu zadzwoń na numer przypisany do agenta.',
           'To jedyny test, który sprawdza wszystkie narzędzia, w tym przekazywanie połączenia.',
         ],
       },
       {
         title: 'Dobrze wiedzieć',
         list: [
-          'Testy głosowe zużywają minuty tak jak prawdziwe połączenia; czat testowy zużywa niewielką ilość środków.',
+          'Testy głosowe zużywają minuty tak jak prawdziwe połączenia; czat testowy zużywa niewielką liczbę kredytów.',
           'Zapisz numer agenta w kontaktach, aby łatwo do niego dzwonić.',
         ],
       },
@@ -233,7 +233,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Zmienne i dane po rozmowie',
         list: [
-          'Karta „Variables”: dodaj pola, np. {customer_name}, aby personalizować każde połączenie.',
+          'Karta „Variables”: dodaj pola, np. {{customer_name}}, aby personalizować każde połączenie.',
           'Karta „Post-Call”: określ informacje do wyodrębnienia z każdej rozmowy (umówiona wizyta, poziom zainteresowania…). Możesz zapytać AI: „Jakie dane powinienem zbierać?”',
         ],
       },
@@ -250,15 +250,15 @@ export const GUIDES: Guide[] = [
         title: 'Powitanie tekstowe',
         text: 'To pierwsze zdanie wypowiadane przez agenta („Greeting” lub „Initial message”). Jest odczytywane dokładnie tak, jak zostało napisane.',
         list: [
-          'Celuj w 5–10 sekund: powitanie, nazwa firmy, pytanie.',
+          'Powitanie powinno trwać 5–10 sekund: powitanie, nazwa firmy, informacja, że mówi asystent AI, pytanie.',
           'Używaj interpunkcji do oznaczania pauz („…” oznacza chwilę przerwy).',
           'Zapisuj liczby tak, jak mają być wymawiane, i nie pomijaj polskich znaków.',
-          'Przykład: „Dzień dobry, gabinet Nowak, mówi Anna… W czym mogę pomóc?”',
+          'Przykład: „Dzień dobry, gabinet Nowak, tu Anna, wirtualna asystentka gabinetu… W czym mogę pomóc?”',
         ],
       },
       {
         title: 'Powitanie nagrane',
-        text: 'Aby uzyskać w pełni ludzkie brzmienie, możesz przesłać plik audio odtwarzany po odebraniu połączenia.',
+        text: 'Jeśli wolisz powitanie nagrane głosem, możesz przesłać plik audio odtwarzany po odebraniu połączenia. Nagranie także powinno informować, że rozmowę prowadzi asystent AI.',
         steps: [
           'Nagraj powitanie w cichym miejscu (krócej niż 10 sekund).',
           'Prześlij plik w ustawieniach agenta i włącz jego odtwarzanie.',
@@ -277,7 +277,7 @@ export const GUIDES: Guide[] = [
     category: 'assistant',
     title: 'Wybór lub klonowanie głosu',
     summary: 'Wybierz głos z biblioteki, zaimportuj go lub sklonuj własny.',
-    plan: 'Głosy z biblioteki: wszystkie pakiety. Głosy sklonowane: od pakietu Asystent.',
+    plan: 'Głosy z biblioteki: wszystkie pakiety. Głosy sklonowane: od pakietu Asystent wzwyż.',
     sections: [
       {
         title: 'Wybierz głos',
@@ -313,7 +313,7 @@ export const GUIDES: Guide[] = [
     category: 'assistant',
     title: 'Projektowanie scenariusza w Flow Builder',
     summary: 'Rozrysuj rozmowę z połączonych bloków, z kilkoma ścieżkami zależnie od odpowiedzi.',
-    plan: 'Od pakietu Asystent.',
+    plan: 'Od pakietu Asystent wzwyż.',
     sections: [
       {
         title: 'Kiedy z niego korzystać',
@@ -333,7 +333,7 @@ export const GUIDES: Guide[] = [
           '„Start”: początek połączenia i zdanie powitalne (tylko jeden na scenariusz).',
           '„Speak”: zdanie wypowiadane słowo w słowo.',
           '„Prompt”: instrukcja, którą AI formułuje własnymi słowami zależnie od kontekstu.',
-          '„Action”: przekazanie połączenia, umówienie wizyty lub uruchomienie narzędzia na miarę.',
+          '„Action”: przekazanie połączenia, umówienie wizyty lub uruchomienie własnego narzędzia.',
           '„End”: rozłączenie, przekazanie połączenia lub przekazanie rozmowy innemu agentowi.',
         ],
       },
@@ -473,7 +473,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Więcej możliwości',
         list: [
-          'Narzędzia na miarę odpytują Twoje oprogramowanie na bieżąco (stan magazynu, dane klienta…).',
+          'Własne narzędzia odpytują Twoje oprogramowanie na bieżąco (stan magazynu, dane klienta…).',
           'Po rozmowie automatyzacje przesyłają wyniki do Twojego CRM, Google Sheets lub na e-mail.',
         ],
         tip: 'Narzędzia można łączyć: sprawdzić informację, umówić wizytę, a w razie potrzeby przekazać połączenie. Opisz tę kolejność w instrukcjach.',
@@ -484,7 +484,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'outils-sur-mesure',
     category: 'tools',
-    title: 'Tworzenie narzędzia na miarę (w trakcie rozmowy)',
+    title: 'Tworzenie własnego narzędzia (w trakcie rozmowy)',
     summary: 'Pozwól agentowi odpytywać Twoje oprogramowanie na bieżąco: status zamówienia, weryfikacja klienta, dostępność.',
     plan: 'Liczba narzędzi zależy od pakietu (menu „Limits”).',
     sections: [
@@ -706,13 +706,13 @@ export const GUIDES: Guide[] = [
     category: 'channels',
     title: 'Połączenie WhatsApp z agentem',
     summary: 'Pozwól agentowi odpowiadać na WhatsAppie i wysyłaj szablony wiadomości zatwierdzone przez Metę.',
-    plan: 'Wszystkie pakiety. Wiadomości są opłacane ze środków na wiadomości.',
+    plan: 'Wszystkie pakiety. Wiadomości są opłacane z kredytów na wiadomości.',
     sections: [
       {
         title: 'Utwórz nadawcę WhatsApp',
         steps: [
           'Menu „Channels” → „WhatsApp”, a następnie utwórz nadawcę.',
-          'Wybierz numer kupiony w panelu klienta (weryfikacja automatyczna) lub własny numer komórkowy (kod SMS-em lub w połączeniu głosowym). Ten numer nie może być już używany w WhatsAppie.',
+          'Wybierz numer kupiony w panelu klienta (weryfikacja automatyczna) lub własny numer komórkowy (kod SMS-em lub w połączeniu głosowym). Ten numer nie może być wcześniej zarejestrowany w WhatsAppie (ani WhatsApp Business).',
           'Wpisz nazwę wyświetlaną klientom, a następnie postępuj zgodnie z oknem Mety („Login with Facebook”), tworząc nowe konto WhatsApp Business.',
         ],
         tip: 'Podczas weryfikacji kupionego numeru połączenia przychodzące na niego są przez kilka minut przechwytywane: nie uruchamiaj jej na numerze, który jest już w użyciu.',
@@ -742,14 +742,14 @@ export const GUIDES: Guide[] = [
     category: 'outbound',
     title: 'Uruchomienie kampanii połączeń (lub wiadomości)',
     summary: 'Niech agent dzwoni do listy kontaktów, z ustalonymi godzinami, ponownymi próbami i celami.',
-    plan: 'Od pakietu Asystent.',
+    plan: 'Od pakietu Asystent wzwyż.',
     sections: [
       {
         title: 'Zanim zaczniesz',
         list: [
           'Połączenia: agent „Make phone calls” z numerem oraz dostępne minuty.',
-          'WhatsApp: podłączony nadawca i zatwierdzony szablon. SMS: numer obsługujący SMS-y. Oba kanały korzystają ze środków na wiadomości.',
-          'Kontakty, które wyraziły zgodę na kontakt.',
+          'WhatsApp: podłączony nadawca i zatwierdzony szablon. SMS: numer obsługujący SMS-y. Oba kanały korzystają z kredytów na wiadomości.',
+          'Kontakty, które wyraziły uprzednią zgodę na kontakt telefoniczny (art. 398 PKE) — zob. przewodnik „Do kogo może dzwonić Twój agent?”.',
         ],
       },
       {
@@ -757,7 +757,7 @@ export const GUIDES: Guide[] = [
         steps: [
           'Menu „Campaigns”, utwórz kampanię: nazwa, kanał („Call”, „WhatsApp” lub „SMS”) i agent.',
           'Godziny: jeden lub kilka przedziałów dziennie (np. 9:00–12:00 i 14:00–18:00) oraz dozwolone dni.',
-          'Ponowne próby: liczba prób (od 1 do 5) i odstęp między nimi; zdecyduj, czy połączenie zakończone na automatycznej sekretarce liczy się jako próba.',
+          'Ponowne próby: liczba prób (od 1 do 5) i odstęp między nimi; zdecyduj, czy połączenie zakończone na poczcie głosowej liczy się jako próba.',
           'Opcja „Retry until goal completed”: kampania ponawia połączenia, dopóki cel nie zostanie osiągnięty (pole tak/nie z danych po rozmowie, np. umówiona wizyta).',
           'Dodaj kontakty (ręcznie lub importując plik), a następnie kliknij „Start Campaign”.',
         ],
@@ -767,12 +767,12 @@ export const GUIDES: Guide[] = [
         list: [
           'Pulpit kampanii pokazuje połączenia w toku i zakończone, pozostałe kontakty oraz następne połączenie.',
           'Aby zmienić ustawienia: wstrzymaj kampanię, wprowadź zmiany i wznów ją. Nic nie zostanie utracone.',
-          'Opcja awaryjna: po ostatniej próbie połączenia jednorazowo wysłać SMS lub szablon WhatsApp.',
+          'Opcja awaryjna: po ostatniej nieudanej próbie wyślij jednorazowo SMS lub szablon WhatsApp.',
         ],
-        tip: 'Zacznij od 2–3 prób w godzinach pracy obowiązujących w kraju Twoich kontaktów i zawsze respektuj sprzeciwy (menu „Blacklist”).',
+        tip: 'Zacznij od 2–3 prób w godzinach pracy obowiązujących w kraju Twoich kontaktów i zawsze respektuj sprzeciwy (menu „Blacklist”, czyli lista wykluczeń).',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -889,7 +889,7 @@ export const GUIDES: Guide[] = [
     category: 'results',
     title: 'Pierwsze kroki z automatyzacjami',
     summary: 'Automatycznie przesyłaj wyniki połączeń do CRM, Google Sheets, Slacka lub na e-mail.',
-    plan: 'Od pakietu Asystent (5000 uruchomień miesięcznie, 50 000 w pakiecie Call center).',
+    plan: 'Od pakietu Asystent wzwyż (5000 uruchomień miesięcznie, 50 000 w pakiecie Call center).',
     sections: [
       {
         title: 'Zasada działania',
@@ -922,15 +922,15 @@ export const GUIDES: Guide[] = [
   {
     slug: 'minutes-et-facturation',
     category: 'billing',
-    title: 'Minuty, środki i rozliczenia',
-    summary: 'Jak naliczane są minuty, do czego służą środki i gdzie zarządzać subskrypcją.',
+    title: 'Minuty, kredyty i rozliczenia',
+    summary: 'Jak naliczane są minuty, do czego służą kredyty i gdzie zarządzać subskrypcją.',
     sections: [
       {
         title: 'Za co płacisz',
         list: [
           'Miesięczny pakiet z minutami połączeń w cenie.',
-          'Minuty ponad pakiet, opłacane ze środków („Credits”: 100 kredytów = 1 $).',
-          'Wiadomości WhatsApp, SMS i pisemne odpowiedzi AI, opłacane ze środków na wiadomości.',
+          'Minuty ponad pakiet, opłacane z kredytów („Credits”: 100 kredytów = 1 $).',
+          'Wiadomości WhatsApp, SMS i pisemne odpowiedzi AI, opłacane z kredytów na wiadomości.',
           'Numery dedykowane, od {numberFrom} miesięcznie, zależnie od kraju.',
         ],
       },
@@ -945,10 +945,10 @@ export const GUIDES: Guide[] = [
       {
         title: 'Gdzie czym zarządzać',
         list: [
-          '„Add credits”: zakup doładowania; środki nie wygasają.',
+          '„Add credits”: zakup doładowania; kredyty nie wygasają.',
           '„Change plan”: zmiana pakietu. Jeśli często przekraczasz limit, wyższy pakiet wychodzi taniej za minutę.',
           '„Billing info”: metoda płatności, faktury i subskrypcja.',
-          '„Limits”: co obejmuje Twój pakiet (agenci, połączenia równoczesne, numery…).',
+          '„Limits”: co obejmuje Twój pakiet (agenci, jednoczesne połączenia, numery…).',
         ],
         tip: 'Pulpit („Dashboard”) pokazuje zużycie w bieżącym miesiącu. Dzięki automatyzacjom możesz otrzymać alert, gdy zbliżasz się do limitu.',
       },
@@ -1003,8 +1003,8 @@ export const GUIDES: Guide[] = [
     slug: 'qui-peut-on-appeler',
     category: 'outbound',
     title: 'Do kogo może dzwonić Twój agent?',
-    summary: 'Zasady, których trzeba przestrzegać przed kampanią połączeń wychodzących: zgoda, relacja z klientem, godziny, sprzeciw i przejrzystość.',
-    plan: 'Kampanie: od pakietu Asystent. Ten przewodnik ma charakter informacyjny i nie zastępuje porady prawnej.',
+    summary: 'Zasady, których trzeba przestrzegać przed kampanią połączeń wychodzących: zgoda, godziny, sprzeciw i przejrzystość.',
+    plan: 'Kampanie: od pakietu Asystent wzwyż. Ten przewodnik ma charakter informacyjny i nie zastępuje porady prawnej.',
     sections: [
       {
         title: 'Złota zasada',
@@ -1013,8 +1013,8 @@ export const GUIDES: Guide[] = [
       {
         title: 'W Polsce',
         list: [
-          'Marketing bezpośredni przez telefon, w tym z użyciem automatycznych systemów wywołujących, wymaga uprzedniej zgody abonenta lub użytkownika (Prawo komunikacji elektronicznej, wcześniej Prawo telekomunikacyjne). Ciężar udowodnienia zgody spoczywa na Tobie.',
-          'Dane kontaktowe przetwarzasz zgodnie z RODO: podstawa prawna, obowiązek informacyjny, prawo sprzeciwu. Organem nadzorczym jest Prezes UODO.',
+          'Marketing bezpośredni przez telefon, w tym z użyciem automatycznych systemów wywołujących, wymaga uprzedniej zgody abonenta lub użytkownika końcowego (art. 398 ustawy – Prawo komunikacji elektronicznej). Dotyczy to także firm (B2B), nie tylko konsumentów. Zgody nie można domniemywać ani zbierać w samym telefonie marketingowym. Ciężar udowodnienia zgody spoczywa na Tobie.',
+          'Dane kontaktowe przetwarzasz zgodnie z RODO: podstawa prawna, obowiązek informacyjny, prawo sprzeciwu. Nadzór sprawują Prezes UODO (dane osobowe) oraz Prezes UKE i Prezes UOKiK (zgoda na marketing, praktyki wobec konsumentów).',
           'Oddzwonienie, o które ktoś poprosił, potwierdzenie wizyty czy kontakt w ramach trwającej usługi to nie marketing: są dozwolone.',
           'Bazy kupione lub zebrane z katalogów i portali: nie używaj ich bez udokumentowanej zgody.',
         ],
@@ -1022,7 +1022,6 @@ export const GUIDES: Guide[] = [
       {
         title: 'W innych krajach',
         list: [
-          'Francja: od 11 sierpnia 2026 r. telemarketing skierowany do konsumentów wymaga ich uprzedniej, wyraźnej zgody (art. L223-1 Kodeksu konsumenckiego); rejestr Bloctel przestał działać.',
           'Wielka Brytania: sprawdź rejestry TPS i CTPS oraz stosuj PECR i UK GDPR.',
           'Australia: sprawdź Do Not Call Register, a przy wiadomościach Spam Act.',
           'Włochy: Registro pubblico delle opposizioni. Holandia: uprzednia zgoda lub istniejąca relacja z klientem.',
@@ -1032,12 +1031,12 @@ export const GUIDES: Guide[] = [
       {
         title: 'W trakcie rozmowy',
         list: [
-          'Agent od początku mówi, że jest AI i że rozmowa jest nagrywana.',
+          'Agent od początku mówi, że jest AI (obowiązek z art. 50 unijnego AI Act) i że rozmowa jest nagrywana.',
           'Podaje prawdziwy powód połączenia („prosił Pan o oddzwonienie dnia…”).',
-          'Jeśli ktoś nie chce więcej telefonów, dodaj jego numer w menu „Blacklist”: zostanie wykluczony ze wszystkich kampanii.',
+          'Jeśli ktoś nie chce więcej telefonów, dodaj jego numer w menu „Blacklist” (lista wykluczeń): zostanie wykluczony ze wszystkich kampanii.',
           'Dzwoń w rozsądnych godzinach, w dni powszednie, według czasu lokalnego kontaktu.',
         ],
-        tip: 'Przed importem pliku zapisz jego źródło, datę nawiązania relacji i podstawę prawną. W razie kontroli to właśnie ta notatka Cię chroni.',
+        tip: 'Przed importem pliku zapisz jego źródło oraz datę i sposób uzyskania zgody. W razie kontroli to właśnie ta notatka Cię chroni.',
       },
     ],
     related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
@@ -1063,11 +1062,11 @@ export const GUIDES: Guide[] = [
           'Prośba „chcę rozmawiać z człowiekiem” uruchamia przewidziane przekazanie lub oddzwonienie.',
           'Słowo oznaczające pilną sprawę w Twojej branży (wyciek, ból, awaria) uruchamia przewidzianą instrukcję.',
           'Zachowanie poza godzinami pracy jest takie, jak chcesz.',
-          'Agent nie podaje cen, gwarancji ani porad, których nie zatwierdziłeś.',
+          'Agent nie podaje cen, gwarancji ani porad, których nie zatwierdzono.',
           'Poprawnie odpowiada na 5 pytań, które słyszysz najczęściej.',
           'Informacja o nagrywaniu jest obecna, jeśli rozmowy są nagrywane.',
-          'Numery, do których nie wolno dzwonić, są w „Blacklist” przed każdą kampanią.',
-          'Przesłuchałeś trzy pełne nagrania i ton Ci odpowiada.',
+          'Numery, do których nie wolno dzwonić, są na liście wykluczeń („Blacklist”) przed każdą kampanią.',
+          'Odsłuchano trzy pełne nagrania i ton jest odpowiedni.',
         ],
         tip: 'Zanotuj, co nie działa, popraw instrukcje lub bazę wiedzy, a potem powtórz tylko odpowiednie testy.',
       },
@@ -1078,7 +1077,7 @@ export const GUIDES: Guide[] = [
     slug: 'point-mensuel',
     category: 'results',
     title: 'Miesięczny przegląd w 20 minut',
-    summary: 'Cztery liczby do sprawdzenia, rozmowy do przesłuchania i ustawienia do przejrzenia, aby agent pozostał dobry na dłużej.',
+    summary: 'Cztery liczby do sprawdzenia, rozmowy do odsłuchania i ustawienia do przejrzenia, aby agent pozostał dobry na dłużej.',
     plan: 'Wszystkie pakiety.',
     sections: [
       {
@@ -1092,7 +1091,7 @@ export const GUIDES: Guide[] = [
         text: 'Zużyte minuty służą do kontroli pakietu, a nie do mierzenia efektów: najpierw sprawdź, co połączenia przyniosły.',
       },
       {
-        title: 'Przesłuchaj 10 rozmów',
+        title: 'Odsłuchaj 10 rozmów',
         steps: [
           'Menu „Calls history”: wybierz 10 losowych rozmów z miesiąca.',
           'Przy każdej: czy zgłoszenie zostało zrozumiane? czy wykonano właściwe działanie? czy ton Ci odpowiada?',

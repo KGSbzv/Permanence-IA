@@ -16,7 +16,7 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
     description: (days) => `Telefoonservice voor loodgieters, elektriciens en installateurs: spoed gefilterd, aanvragen gekwalificeerd, ook na sluitingstijd. Probeer ${days} dagen gratis.`,
   },
   'Tandartsen en klinieken': {
-    title: 'Telefoonservice tandarts en kliniek met AI',
+    title: 'Telefoonservice voor tandartspraktijken met AI',
     description: (days) => `Telefoonservice voor tandartsen en klinieken: afspraken geboekt, bevestigd en verplaatst zonder de behandeling te onderbreken. Probeer ${days} dagen gratis.`,
   },
   Vastgoed: {
@@ -27,7 +27,7 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
     title: 'Telefoonservice garage: afspraken met AI',
     description: (days) => `Klanten maken telefonisch een afspraak bij uw garage: voertuig, klacht en tijdslot vastgelegd zonder de balie te storen. Probeer ${days} dagen gratis.`,
   },
-  'Fysiotherapie en paramedisch': {
+  'Fysiotherapie en paramedische zorg': {
     title: 'Telefoonservice fysiotherapeut met AI',
     description: (days) => `Telefoonservice voor fysiotherapeuten, osteopaten en paramedici: afspraken en verplaatsingen geregeld tijdens uw behandelingen. Probeer ${days} dagen gratis.`,
   },
@@ -53,7 +53,7 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
   },
 };
 
-/** Werkplek per sector, voor „Wat het verandert voor uw …”. */
+/** Werkplek per sector, voor “Wat het oplevert voor uw …”. */
 const SECTOR_PLACE: Record<string, string> = {
   immobilier: 'kantoor', 'dentaire-cliniques': 'praktijk', 'kines-paramedical': 'praktijk', 'cliniques-veterinaires': 'praktijk',
   automobile: 'garage', 'salons-de-coiffure': 'salon', 'beaute-bien-etre': 'salon', 'restaurants-hotellerie': 'zaak',
@@ -71,10 +71,11 @@ const FEATURE_SEO: Record<string, string> = {
   'WhatsApp en berichten': 'WhatsApp en sms automatisch beantwoorden',
   Kennisbank: 'Kennisbank voor uw AI-telefoonassistent',
   Prompteditor: 'Prompteditor: stel uw AI-agent in zonder code',
-  'Flow builder': 'Flow builder: automatiseringen zonder code',
+  'Geautomatiseerde scenario’s': 'Automatiseringen zonder code voor uw AI-agent',
   'SIP en nummers': 'SIP-koppeling: behoud uw telefoonnummer',
   Rapportage: 'Rapportage en statistieken van uw gesprekken',
   Webwidget: 'Terugbelwidget en belknop voor uw website',
+  'Oud-klanten terugwinnen': 'Oud-klanten terugbellen met AI',
 };
 
 export const UI_COMMERCE = {
@@ -89,23 +90,23 @@ export const UI_COMMERCE = {
       intro: 'Als virtuele receptionist neemt de agent elk gesprek aan, stelt de juiste vragen, plant afspraken in en stuurt u een duidelijke samenvatting. Uw telefonische bereikbaarheid 24/7 geregeld, ingesteld op uw vak, binnen enkele minuten online.',
       photoAlt: 'Ondernemer die de samenvatting van een gesprek op haar telefoon bekijkt',
     },
-    showcase: { title: 'Zie de agent aan het werk in uw vak', intro: 'Kies een sector: het gesprek speelt zich af en de aanvraag komt klaar om af te handelen binnen.' },
+    showcase: { title: 'Zie de agent aan het werk in uw vak', intro: 'Kies een sector: het gesprek speelt zich af en de aanvraag komt kant-en-klaar bij u binnen.' },
     benefits: { title: 'Wat de agent voor uw bedrijf doet', intro: 'Een spraakagent die uw bedrijf kent en aan het werk is wanneer u of uw team niet kan opnemen, van zzp’er tot praktijk met meerdere medewerkers.' },
     features: {
       booking: {
         title: { before: 'Automatiseer ', kw: 'afspraken en herinneringen', after: '' },
-        text: 'Praktijken, salons, garages, kantoren: de agent koppelt met uw agenda, stelt vrije tijdsloten voor, boekt en bevestigt. Verplaatsingen en annuleringen inbegrepen.',
-        points: ['Live agenda: Google, Outlook, Cal.com, Calendly', 'Bevestiging per sms of WhatsApp (vanaf het Assistent-abonnement)', 'Herinnering de dag vóór de afspraak (vanaf het Assistent-abonnement)'],
+        text: 'Praktijken, salons, garages, kantoren: de agent wordt aan uw agenda gekoppeld, stelt vrije tijdsloten voor, boekt en bevestigt. Verplaatsingen en annuleringen inbegrepen.',
+        points: ['Live agenda: Google Agenda of Outlook via Cal.com of Calendly', 'Bevestiging per sms of WhatsApp (vanaf het Assistent-abonnement)', 'Herinnering de dag vóór de afspraak (vanaf het Assistent-abonnement)'],
         link: 'Bekijk afspraken plannen',
       },
       support: {
         title: { before: 'Beantwoord ', kw: 'de vragen van uw klanten', after: ' zonder wachttijd' },
-        text: 'De agent baseert zich op uw documenten, uw webpagina’s en uw procedures. Hij geeft het juiste antwoord en verbindt door naar uw team wat een mens nodig heeft.',
+        text: 'De agent baseert zich op uw documenten, uw webpagina’s en uw procedures. Hij geeft het juiste antwoord en verbindt door naar uw team als er een mens nodig is.',
         points: ['Kennisbank: pdf, website, gegevens', 'Meerdere gesprekken tegelijk, zonder wachtrij', 'Doorverbinden naar een medewerker volgens uw regels'],
         link: 'Bekijk klantenservice',
       },
       leads: {
-        title: { before: 'Kwalificeer uw prospects en ', kw: 'bel ze sneller terug', after: '' },
+        title: { before: 'Kwalificeer uw leads en ', kw: 'bel ze sneller terug', after: '' },
         text: 'Een ingevuld formulier op uw website wordt binnen enkele minuten een gesprek. De agent kwalificeert, volgt op en maakt een overzicht dat uw team direct kan oppakken.',
         points: ['Voorkwalificatie volgens uw criteria', 'Automatische opvolging en bevestigingen', 'Campagnes naar contacten die toestemming hebben gegeven'],
         link: 'Bekijk leadkwalificatie',
@@ -124,7 +125,7 @@ export const UI_COMMERCE = {
         { title: 'Maak uw account aan', text: `Kies uw abonnement: ${days} dagen gratis, ${minutes} minuten inbegrepen, tijdens de proefperiode wordt niets afgeschreven.` },
         { title: 'Beschrijf uw bedrijf', text: 'Diensten, openingstijden, veelgestelde vragen, regels voor doorverbinden.' },
         { title: 'Test de agent', text: 'Luister naar hem in de live demo en stel de toon en de antwoorden bij.' },
-        { title: 'Sluit uw gesprekken aan', text: 'Doorschakeling van uw lijn, nieuw nummer of SIP, en de widget op uw website.' },
+        { title: 'Koppel uw telefoonlijn', text: 'Doorschakeling van uw lijn, nieuw nummer of SIP, en de widget op uw website.' },
       ],
     },
     sectors: {
@@ -134,7 +135,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Gekoppeld aan uw tools',
-      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent werkt samen met wat u al gebruikt. De flow builder koppelt meer dan 300 tools zonder code, op dezelfde manier als Zapier of Make.',
+      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent werkt samen met wat u al gebruikt. Met no-code automatiseringen koppelt u meer dan 300 tools, op dezelfde manier als Zapier of Make.',
       link: 'Bekijk alle integraties',
     },
     pricing: {
@@ -197,9 +198,9 @@ export const UI_COMMERCE = {
     facts: {
       minutes: 'Inbegrepen minuten',
       more: 'Meer nodig?',
-      moreCustom: 'Onderhandeld volume',
+      moreCustom: 'Volume in overleg',
       moreDefault: 'Op elk moment opwaarderen',
-      commitment: 'Verplichting',
+      commitment: 'Minimale looptijd',
       commitmentValue: 'Geen',
     },
     included: {
@@ -249,7 +250,7 @@ export const UI_COMMERCE = {
     },
     other: {
       title: 'Staat uw branche er niet tussen?',
-      intro: 'Rijscholen, sportscholen, e-commerce, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
+      intro: 'Rijscholen, sportscholen, opleidingen, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
       primary: 'Gratis starten',
       demo: 'Probeer onze agent live',
     },
@@ -273,12 +274,12 @@ export const UI_COMMERCE = {
       intro: 'Hij stelt de vragen die u zelf zou stellen, in een natuurlijke volgorde, en stuurt u een volledige aanvraag.',
     },
     /** Titel van de voordelen: de werkplek van het vak (kantoor, praktijk, salon…), „bedrijf” als standaard. */
-    benefitsTitle: (slug: string) => `Wat het verandert voor uw ${SECTOR_PLACE[slug] ?? 'bedrijf'}`,
+    benefitsTitle: (slug: string) => `Wat het oplevert voor uw ${SECTOR_PLACE[slug] ?? 'bedrijf'}`,
     how: { title: 'Hoe het werkt' },
-    includes: { title: 'Wat erbij hoort', intro: 'De handigste modules voor uw vak, allemaal beschikbaar in uw klantomgeving.' },
+    includes: { title: 'Wat er inbegrepen is', intro: 'De handigste modules voor uw vak, allemaal beschikbaar in uw klantomgeving.' },
     integrations: {
       title: 'Handige integraties',
-      intro: 'Uw agenda, uw CRM, uw berichtenapps en uw telefonie blijven hetzelfde: de agent koppelt ermee.',
+      intro: 'Uw agenda, uw CRM, uw berichtenapps en uw telefonie blijven hetzelfde: de agent sluit erop aan.',
     },
     pricing: {
       title: 'Prijzen excl. btw, geen verplichtingen of opstartkosten',
@@ -302,7 +303,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Alle functies van uw AI-telefoonassistent',
-      intro: 'Van virtuele receptionist tot rapportage: dertien modules, geactiveerd volgens uw abonnement, vanuit uw klantomgeving.',
+      intro: 'Van virtuele receptionist tot rapportage: veertien modules, geactiveerd volgens uw abonnement, vanuit uw klantomgeving.',
     },
     overview: { title: 'Overzicht' },
   },
@@ -315,7 +316,7 @@ export const UI_COMMERCE = {
     },
     breadcrumb: 'Functies',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
-    uses: { title: 'Waarvoor dient het' },
+    uses: { title: 'Waarvoor gebruikt u het?' },
     from: {
       title: (offerName: string) => `Inbegrepen vanaf het abonnement ${offerName}`,
       /** `price` al opgemaakt in de valuta van de markt. */
@@ -330,20 +331,20 @@ export const UI_COMMERCE = {
   },
 
   integrations: {
-    tools: { title: 'Meer dan 300 tools via automatiseringen', intro: 'Met het automatiseringsplatform (vanaf het Assistent-abonnement) voedt elk gesprek uw tools: e-mail, teamchat, CRM, webshop, betalingen, spreadsheets. Hier zijn er een paar.' },
+    tools: { title: 'Meer dan 300 tools via automatiseringen', intro: 'Met het automatiseringsplatform (vanaf het Assistent-abonnement) stuurt elk gesprek gegevens door naar uw tools: e-mail, teamchat, CRM, webshop, betalingen, spreadsheets. Een paar voorbeelden.' },
     meta: {
       title: (brand: string) => `Integraties — agenda, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Koppel uw AI-telefoonassistent aan Google Agenda, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP en meer dan 300 tools, zonder code.',
+      description: 'Koppel uw AI-telefoonassistent aan uw agenda (Google Agenda of Outlook via Cal.com of Calendly), HubSpot, Zoho, WhatsApp, SIP en meer dan 300 tools, zonder code.',
     },
     hero: {
       title: 'Uw AI-telefoonassistent, gekoppeld aan de tools die u al gebruikt',
-      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent past in uw organisatie en plant afspraken direct in uw agenda in, en de flow builder koppelt meer dan 300 tools zonder code.',
+      intro: 'Agenda, CRM, berichtenapps, telefonie: de agent past in uw organisatie en plant afspraken direct in uw agenda in, en no-code automatiseringen koppelen meer dan 300 tools.',
     },
     flow: {
       title: { before: 'Bouw uw automatiseringen ', kw: 'zonder code', after: '' },
       text: 'Een ingevuld formulier, een beëindigd gesprek, een nieuwe lead: elke gebeurtenis kan een reeks acties in uw tools starten, op dezelfde manier als Zapier of Make, rechtstreeks vanuit uw klantomgeving.',
       points: ['Meer dan 300 beschikbare tools', 'Slepen en neerzetten, geen ontwikkelwerk', 'Testen vóór activering'],
-      link: 'Bekijk de flow builder',
+      link: 'Bekijk de geautomatiseerde scenario’s',
     },
     api: {
       title: { before: 'Webhooks en API voor ', kw: 'uw systemen', after: '' },

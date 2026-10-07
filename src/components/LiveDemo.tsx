@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE } from '@/data/site';
+import { PhoneField, dialCode } from './ui';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
 import { GENDERS, VOICES, type Gender } from '@/data/personas';
@@ -331,7 +332,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
       const res = await fetch('/api/callback', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: f.get('name'), phone: f.get('phone'), sector, consentCall: true, website: f.get('website') || undefined,
+          name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), sector, consentCall: true, website: f.get('website') || undefined,
           type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
           // Note lue par l’agent avant de rappeler : en anglais neutre (les agents de chaque langue la comprennent).
           note: `Live demo — role: ${['receptionist', 'sales / qualification', 'support'][role]} — language: ${NATIVE[lang]} — voice: ${voice} — sector: ${sectorName}`,
@@ -482,7 +483,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 {state === 'busy' ? t.browserOpening : t.browserCta(voice)}
               </button>
               {error && <p role="alert" className="mt-3 text-sm text-red-300">{error}</p>}
-              <p className="mt-3 text-[12px] text-white/45">{t.browserLegal}</p>
+              <p className="mt-3 text-[12px] text-white/65">{t.browserLegal}</p>
             </div>
           ) : state === 'sent' ? (
             <div role="status" className="mt-4 rounded-2xl bg-white/[.07] p-5 ring-1 ring-white/10">
@@ -494,9 +495,9 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
             <form onSubmit={submitPhone} className="mt-4 grid gap-3">
               {/* Champ piège invisible pour les robots (ne pas remplir) */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
-              <div className="grid gap-2 sm:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
+              <div className="grid gap-2">
                 <input name="name" required placeholder={t.firstName} autoComplete="given-name" aria-label={t.firstName} className={field} />
-                <input name="phone" type="tel" required minLength={8} placeholder={t.phone} autoComplete="tel" aria-label={t.phone} className={field} />
+                <PhoneField id="demo-phone" label={t.phone} placeholder={t.phone} hideLabel className={field} />
               </div>
               <label className="flex items-start gap-2 text-[13px] text-white/70"><input type="checkbox" name="consent" className="mt-0.5 h-4 w-4 shrink-0 accent-[#5AD3EC]" />{t.consent}</label>
               {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
@@ -504,7 +505,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 {state === 'busy' ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : <PhoneCall className="h-5 w-5" aria-hidden />}
                 {state === 'busy' ? t.sending : t.phoneCta}
               </button>
-              <p className="text-[12px] text-white/45">{t.phoneLegal}</p>
+              <p className="text-[12px] text-white/65">{t.phoneLegal}</p>
             </form>
           )}
         </div>

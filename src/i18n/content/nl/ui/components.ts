@@ -14,14 +14,14 @@ export const UI_COMPONENTS = {
       allFeaturesText: 'Overzicht van de modules en abonnementen.',
       sectors: 'Sectoren',
       allSectors: 'Alle sectoren',
-      resources: 'Hulpbronnen',
+      resources: 'Kennisbank',
     },
     resources: {
       demo: 'Live demo',
       integrations: 'Integraties',
       security: 'Beveiliging en compliance',
       faq: 'Veelgestelde vragen',
-      help: 'Help bij de klantomgeving',
+      help: 'Helpcentrum',
       about: 'Over ons',
       contact: 'Contact en terugbellen',
     },
@@ -39,7 +39,7 @@ export const UI_COMPONENTS = {
     startFree: 'Gratis starten',
     login: 'Inloggen',
     gdpr: 'Ingebouwde AVG-hulpmiddelen',
-    encryption: 'Versleuteling tijdens verzending',
+    encryption: 'Versleuteling tijdens transport',
     cols: {
       platform: 'Platform',
       allFeatures: 'Alle functies',
@@ -47,13 +47,13 @@ export const UI_COMPONENTS = {
       recharges: 'Minuten opwaarderen',
       compare: 'Abonnementen vergelijken',
       sectors: 'Sectoren',
-      resources: 'Hulpbronnen',
+      resources: 'Kennisbank',
     },
     resources: {
       demo: 'Live demo',
       integrations: 'Integraties',
       faq: 'Veelgestelde vragen',
-      help: 'Help bij de klantomgeving',
+      help: 'Helpcentrum',
       about: 'Over ons',
       security: 'Beveiliging en compliance',
       contact: 'Contact',
@@ -79,7 +79,7 @@ export const UI_COMPONENTS = {
     title: (minutes: string) => `Uw eerste ${minutes} minuten zijn gratis`,
     close: 'Sluiten',
     text: (days: number) => `Test uw spraakagent ${days} dagen lang op uw echte gesprekken, voordat u beslist.`,
-    points: ['Kaart gevraagd bij activering, tijdens de proefperiode wordt niets afgeschreven', 'Op te zeggen vanuit uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
+    points: ['Creditcard gevraagd bij activering; tijdens de proefperiode wordt niets afgeschreven', 'Opzeggen kan direct in uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
     claim: (minutes: string) => 'Gratis starten',
     callMeBack: 'Bel mij terug',
   },
@@ -108,12 +108,12 @@ export const UI_COMPONENTS = {
     sendFailed: 'De aanvraag kon niet worden verzonden.',
     retry: (email: string) => `Probeer het opnieuw of mail naar ${email}.`,
     sentTitle: 'Terugbelverzoek verzonden',
-    sentText: 'Wij bellen u terug op het gekozen tijdslot. Als u uw e-mailadres hebt opgegeven, ontvangt u een bevestiging.',
+    sentText: 'Wij bellen u terug op het gekozen tijdstip. Als u WhatsApp hebt aangevinkt, ontvangt u daar de bevestiging.',
     name: 'Naam',
     phone: 'Telefoon',
     sector: 'Sector',
     choose: 'Kies…',
-    otherSector: 'Andere branche',
+    otherSector: 'Andere sector',
     when: 'Wanneer mogen we u terugbellen?',
     slots: {
       asap: 'Zo snel mogelijk',
@@ -124,7 +124,7 @@ export const UI_COMPONENTS = {
     },
     preciseLabel: 'Datum en tijd (uw lokale tijd)',
     email: 'E-mail',
-    emailHint: '(voor de bevestiging)',
+    emailHint: '(om u zo nodig te mailen)',
     need: 'Uw vraag',
     needPlaceholder: 'Bijv.: ik mis ’s avonds gesprekken, ik wil afspraken automatiseren…',
     consent: (brand: string) => `Ik ga ermee akkoord dat ik op het opgegeven nummer word teruggebeld, ook door een AI-spraakagent van ${brand}. Mijn gegevens worden alleen gebruikt om mijn aanvraag af te handelen.`,
@@ -139,28 +139,28 @@ export const UI_COMPONENTS = {
   benefits: {
     items: [
       { title: 'Neem ook buiten openingstijden op', text: '’s Avonds, in het weekend, tijdens uw afspraken: elk gesprek krijgt antwoord.' },
-      { title: 'Kwalificeer automatisch', text: 'De agent stelt uw vragen en stuurt u een volledige aanvraag.' },
+      { title: 'Kwalificeer automatisch', text: 'De agent stelt de vragen die u belangrijk vindt en stuurt u een complete aanvraag.' },
       { title: 'Boek afspraken', text: 'Direct in uw agenda, met bevestiging; herinneringen per sms of WhatsApp vanaf het Assistent-abonnement.' },
       { title: 'Bel leads sneller terug', text: 'Een ingevuld formulier wordt binnen enkele minuten een gesprek.' },
-      { title: 'Houd mensen vrij voor wat belangrijk is', text: 'Doorverbinden naar uw team wanneer de situatie dat vraagt.' },
+      { title: 'Laat uw team zich richten op wat ertoe doet', text: 'Doorverbinden naar uw team wanneer de situatie dat vraagt.' },
     ],
     seeAgent: 'Bekijk de agent in detail',
   },
 
   moduleCards: {
-    seeIncluded: 'Bekijk wat erbij hoort',
+    seeIncluded: 'Bekijk wat er inbegrepen is',
   },
 
   includesSchema: {
     // Zelfde volgorde als de iconen van de component: telefonie, automatisering, CRM, berichten, agenda, sturing, beveiliging.
     families: [
       { name: 'Telefonie', items: ['Inkomende en uitgaande gesprekken', 'Optioneel eigen nummer', 'SIP-koppeling', 'Doorverbinden naar een medewerker', 'Nummerherkenning'] },
-      { name: 'Automatisering', items: ['Prompteditor', 'No-code flow builder', 'Automatiseringsassistent', '300+ koppelbare tools'] },
+      { name: 'Automatisering', items: ['Prompteditor', 'Geautomatiseerde scenario’s', 'Automatiseringsassistent', '300+ koppelbare tools'] },
       { name: 'CRM en gegevens', items: ['Leads en voorkwalificatie', 'Kennisbank', 'Gespreksgeschiedenis', 'Webhooks en API'] },
       { name: 'Berichten', items: ['Sms', 'WhatsApp en templates', 'Messenger en Instagram', 'Webwidget'] },
       { name: 'Agenda', items: ['Afspraken plannen', 'Bevestigingen en herinneringen', 'Verplaatsingen en annuleringen'] },
       { name: 'Sturing', items: ['Dashboard', 'Uitgebreide rapporten', 'Rollen en rechten'] },
-      { name: 'Beveiliging', items: ['Toestemming en afmelden', 'Instelbare bewaartermijn', 'Versleuteling tijdens verzending', 'Activiteitenlogboek'] },
+      { name: 'Beveiliging', items: ['Toestemming en afmelden', 'Instelbare bewaartermijn', 'Versleuteling tijdens transport', 'Activiteitenlogboek'] },
     ],
     centerTitle: 'Uw AI-spraakagent',
     centerText: 'In het midden: een agent die is ingesteld op uw bedrijf. Eromheen: alles wat hij kan gebruiken.',
@@ -178,7 +178,7 @@ export const UI_COMPONENTS = {
     launchText: 'Een echt gesprek, zonder installatie.',
     callbackTitle: 'Bel mij terug',
     callbackText: 'De agent belt u op het gekozen tijdslot.',
-    formTitle: 'Ontvang een demonstratiegesprek',
+    formTitle: 'Vraag een demogesprek aan',
     formText: 'Gratis en vrijblijvend. U hoort de stem en de manier waarop de agent een aanvraag kwalificeert.',
     submit: 'Bel mij terug',
   },
@@ -189,11 +189,11 @@ export const UI_COMPONENTS = {
 
   pricingCards: {
     daysFree: (days: number) => `${days} dagen gratis`,
-    negotiated: 'Onderhandelde prijs per minuut',
+    negotiated: 'Prijs per minuut in overleg',
     mostChosen: 'Aanbevolen',
     perMinute: (label: string) => `oftewel ${label}`,
     details: 'Details van het abonnement',
-    billing: 'Factuurperiode',
+    billing: 'Facturering',
     monthly: 'Maandelijks',
     annual: 'Jaarlijks',
     twoMonthsFree: '2 maanden gratis',
@@ -205,7 +205,7 @@ export const UI_COMPONENTS = {
   matrix: {
     included: 'Inbegrepen',
     notIncluded: 'Niet inbegrepen',
-    caption: 'Functies inbegrepen in elk abonnement',
+    caption: 'Inbegrepen functies per abonnement',
     inYourInterface: 'In uw interface',
     pricePerMonthAnnual: 'Prijs excl. btw / maand (jaarlijkse facturatie)',
     pricePerMonth: 'Prijs excl. btw / maand',
@@ -221,12 +221,12 @@ export const UI_COMPONENTS = {
   },
 
   includedStack: {
-    title: 'Alles inbegrepen, geen enkele API-sleutel',
+    title: 'Alles inbegrepen, geen API-sleutels nodig',
     intro: 'De beste AI-modellen, stemmen en transcriptie zijn al gekoppeld in uw klantomgeving. Geen account openen bij elke leverancier, geen sleutels kopiëren, één factuur.',
     groups: [
       { key: 'llm', title: 'Taalmodellen', text: 'Het brein van de agent: het begrijpt de vraag en bepaalt wat het antwoordt.' },
       { key: 's2s', title: 'Realtime spraak', text: 'Modellen die direct luisteren en spreken, voor de meest natuurlijke gesprekken.' },
-      { key: 'tts', title: 'Spraaksynthese', text: 'Honderden natuurlijke stemmen, in meer dan 30 talen.' },
+      { key: 'tts', title: 'Spraaksynthese', text: 'Honderden natuurlijke stemmen, in meer dan 80 talen.' },
       { key: 'stt', title: 'Transcriptie', text: 'Snelle spraakherkenning, ook via de telefoon.' },
       { key: 'channels', title: 'Kanalen', text: 'Dezelfde agent antwoordt overal waar uw klanten u schrijven of bellen.' },
     ],
@@ -249,7 +249,7 @@ export const UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Eenmalig iets meer verbruikt', text: 'Een opwaardering is genoeg om de maand af te maken.' },
-      { title: 'Regelmatig meer verbruikt', text: 'Wij stellen u het grotere abonnement voor.' },
+      { title: 'Regelmatig meer verbruikt', text: 'Wij raden u het hogere abonnement aan.' },
       { title: 'Vaak opwaarderen', text: 'Uw dashboard laat zien dat u te veel betaalt voor uw gebruik.' },
     ],
     ruleCustom: (minutes: string) => `Vanaf ${minutes} min per maand`,
@@ -292,7 +292,7 @@ export const UI_COMPONENTS = {
     bestPlan: 'Goedkoopste abonnement voor dit volume',
     planCost: (plan: string) => `Kosten ${plan}`,
     withExtra: (minutes: string, price: string) => `waarvan ${minutes} extra min à ${price}`,
-    customAbove: (minutes: string) => `Boven ${minutes} min per maand op vaste basis vraagt u een aanbod op maat aan.`,
+    customAbove: (minutes: string) => `Gaat u structureel boven ${minutes} min per maand? Vraag dan een offerte op maat aan.`,
     effectivePerMinute: 'Werkelijke prijs per minuut',
     humanCost: 'Kosten van een menselijke receptie',
     savings: 'Maandelijkse besparing',
@@ -303,7 +303,7 @@ export const UI_COMPONENTS = {
     roi: (x: string) => `Rendement: ${x} keer de prijs van het abonnement`,
     perMonth: ' / maand',
     assumptions: (wrapUp: number, conversion: number) =>
-      `Aannames: ${wrapUp} min nawerk per gesprek voor een medewerker, ${conversion} % van de gemiste gesprekken wordt klant. Prijzen excl. btw in Amerikaanse dollars; telefoonnummer niet inbegrepen. Indicatieve schatting, vergelijk met uw eigen cijfers.`,
+      `Aannames: ${wrapUp} min nawerk per gesprek voor een medewerker, ${conversion}% van de gemiste gesprekken wordt klant. Prijzen excl. btw in Amerikaanse dollars; telefoonnummer niet inbegrepen. Indicatieve schatting, vergelijk met uw eigen cijfers.`,
     cta: 'Gratis proberen',
   },
 
@@ -315,7 +315,7 @@ export const UI_COMPONENTS = {
     ai: 'AI-agent',
     rows: [
       { label: 'Kosten per maand', human: 'Minstens het wettelijk minimumloon, plus werkgeverslasten', ai: 'Vanaf {from} excl. btw per maand (350 min), of {payg} per minuut zonder abonnement' },
-      { label: 'Bereikbaar', human: '36 tot 40 uur per week', ai: '24/7 (168 uur per week)' },
+      { label: 'Bereikbaarheid', human: '36 tot 40 uur per week', ai: '24/7 (168 uur per week)' },
       { label: 'Gesprekken tegelijk', human: 'Eén', ai: 'Meerdere tegelijk' },
       { label: 'Talen', human: 'Eén, soms twee', ai: 'Meer dan 80, met native stemmen' },
       { label: 'Opstarten', human: 'Werving, daarna weken inwerken', ai: 'Een paar minuten; instructies op elk moment aan te passen' },
@@ -329,10 +329,10 @@ export const UI_COMPONENTS = {
   security: {
     items: [
       { title: 'Toestemming en afmelden', text: 'Toestemming voor terugbellen, afhandeling van weigeringen, toegestane beltijden en uitsluitingslijst.' },
-      { title: 'Gegevensbescherming', text: 'Versleuteling tijdens verzending, toegang beveiligd per account en instelbare bewaartermijn.' },
+      { title: 'Gegevensbescherming', text: 'Versleuteling tijdens transport, toegang beveiligd per account en instelbare bewaartermijn.' },
       { title: 'Traceerbaarheid', text: 'Gespreksgeschiedenis, transcripties en activiteitenlogboek voor elk account.' },
       { title: 'Toegangsbeheer', text: 'Elke klant heeft een eigen beveiligde omgeving; de agent heeft alleen toegang tot de informatie die u hem geeft.' },
-      { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering van gesprekken en opnames, bewaartermijn. Verwerkersovereenkomst (DPA) op aanvraag.' },
+      { title: 'Voorbereid op regelgeving', text: 'Hulpmiddelen om de AVG toe te passen: informatie, inzagerecht, verwijdering van gesprekken en opnames, bewaartermijn. Verwerkersovereenkomst (DPA) opgenomen in de voorwaarden (artikel 8); ondertekende versie op aanvraag.' },
       { title: 'Infrastructuur', text: 'Platform gehost bij erkende cloudproviders, met back-ups en monitoring.' },
     ],
     title: 'Beveiliging en compliance voor uw AI-gesprekken',
@@ -371,22 +371,22 @@ export const UI_COMPONENTS = {
     ],
     langLabel: 'Taal',
     accents: { fr: 'Frans uit Parijs', 'en-gb': 'Brits Engels', 'en-au': 'Australisch Engels', it: 'Italiaans', pl: 'Pools', nl: 'Nederlands', he: 'Israëlisch Hebreeuws' },
-    sector: 'Uw vakgebied',
-    modeLabel: 'Hoe wilt u het proberen',
+    sector: 'Uw sector',
+    modeLabel: 'Hoe wilt u het proberen?',
     modeBrowser: 'In deze browser',
     modePhone: 'Bel mijn telefoon',
     stageLabel: 'Uw demo-agent',
     voiceTag: (name: string) => `Stem van ${name}`,
-    browserText: 'Onze assistent opent hier. Start het spraakgesprek of typ, en vertel uw vakgebied en de rol die ze moet spelen.',
+    browserText: 'Onze assistent wordt hier geopend. Start het spraakgesprek of typ een bericht, en vertel haar uw sector en welke rol ze moet spelen.',
     browserCta: (name: string) => `Praat met ${name}`,
     browserOpening: 'Openen…',
     browserLegal: 'Uw browser vraagt toegang tot de microfoon voor het spraakgesprek.',
-    browserError: 'De assistent kon niet worden geopend. Probeer het opnieuw of kies „Bel mijn telefoon”.',
+    browserError: 'De assistent kon niet worden geopend. Probeer het opnieuw of kies “Bel mijn telefoon”.',
     dialogTitle: (name: string) => `Gesprek met ${name}`,
     close: 'Sluiten',
     firstName: 'Uw voornaam',
     phone: 'Uw telefoonnummer',
-    consent: 'Ik ga ermee akkoord dat de AI-demonstratieagent mij belt.',
+    consent: 'Ik ga ermee akkoord dat de AI-demoagent mij belt.',
     consentRequired: 'Vink het vakje aan om het gesprek te ontvangen.',
     sendFailed: 'De aanvraag kon niet worden verzonden.',
     sending: 'Verzenden…',
@@ -400,25 +400,25 @@ export const UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, ${male ? 'mannenstem' : 'vrouwenstem'}`,
   },
 
-  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbiers', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Esthetische klinieken', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
+  industryMarquee: ['Loodgieters', 'Elektriciens', 'Tandartspraktijken', 'Klinieken', 'Makelaars', 'Verhuurbeheer', 'Garages', 'Schadeherstel', 'Kapsalons', 'Barbershops', 'Schoonheidssalons', 'Restaurants', 'Hotels', 'Advocaten', 'Accountants', 'E-commerce', 'Assurantie- en hypotheekadviseurs', 'VvE-beheer', 'Esthetische klinieken', 'Fysiotherapeuten', 'Osteopaten', 'Dierenartsen'],
 
   // Zelfde volgorde als de vlaggen van de component.
-  languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'België', 'Zwitserland', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds', 'Hebreeuws'],
+  languageMarquee: ['Frans', 'Engels', 'Spaans', 'Duits', 'Italiaans', 'Portugees', 'Nederlands', 'Belgisch-Frans', 'Zwitsers-Frans', 'Canadees-Frans', 'Arabisch', 'Pools', 'Roemeens', 'Turks', 'Zweeds', 'Hebreeuws'],
 
   agentTeam: {
     // Zelfde volgorde als de iconen en links van de component.
     agents: [
       { name: 'AI-receptionist', role: 'Neemt elk gesprek aan, filtert en verbindt door wat belangrijk is.' },
       { name: 'Afsprakenagent', role: 'Boekt, bevestigt, herinnert en regelt verplaatsingen.' },
-      { name: 'Kwalificatieagent', role: 'Stelt uw vragen en maakt overzichten klaar om mee aan de slag te gaan.' },
+      { name: 'Kwalificatieagent', role: 'Stelt uw vragen en levert kant-en-klare dossiers aan.' },
       { name: 'Supportagent', role: 'Antwoordt op basis van uw documenten, escaleert gevoelige gevallen.' },
-      { name: 'Opvolgagent', role: 'Bevestigt, volgt offertes op en brengt uw contacten weer in beweging.' },
+      { name: 'Opvolgagent', role: 'Bevestigt, volgt offertes op en heractiveert slapende klanten.' },
       { name: 'Berichtenagent', role: 'Antwoordt en bevestigt via sms, WhatsApp en Instagram.' },
     ],
     title: 'Stel uw team van AI-agents samen',
     intro: 'Elke agent heeft een duidelijke rol. Activeer de agents die uw bedrijf nodig heeft; ze delen dezelfde geschiedenis en dezelfde informatie.',
     custom: 'Een specifiek scenario nodig? Wij stellen een agent op maat in.',
-    virtualNote: 'Jade, Daan, Katie en hun collega’s zijn virtuele AI-agents: hun gezichten zijn gegenereerde illustraties, geen echte mensen.',
+    virtualNote: 'Onze agents zijn virtuele AI-agents: hun gezichten zijn gegenereerde illustraties, geen echte mensen.',
   },
 
   sectorShowcase: {
@@ -428,16 +428,16 @@ export const UI_COMPONENTS = {
   },
 
   scenarioExplorer: {
-    chooseTrade: 'Kies uw branche',
+    chooseTrade: 'Kies uw sector',
     answering: (agentName: string) => `${agentName} neemt op`,
     replay: 'Gesprek opnieuw afspelen',
     benefitsTitle: 'Wat het voor u verandert',
-    planLabel: 'Aanbevolen pakket',
+    planLabel: 'Aanbevolen abonnement',
     tryLive: 'Probeer dit scenario live',
   },
 
   useCaseTabs: {
-    ariaLabel: 'Soorten gebruik',
+    ariaLabel: 'Toepassingen',
     // Zelfde volgorde als de iconen van de component.
     tabs: {
       entrants: {
@@ -448,7 +448,7 @@ export const UI_COMPONENTS = {
           { title: 'Klantenservice', text: 'Antwoorden op basis van uw documenten, zonder wachtrij.' },
           { title: 'Kwalificatie', text: 'De juiste vragen gesteld voordat er wordt doorgegeven.' },
           { title: 'Doorverbinden', text: 'Overdracht naar uw team wanneer het ertoe doet.' },
-          { title: 'Spoedgevallen', text: 'Sortering volgens uw regels en directe melding.' },
+          { title: 'Spoedgevallen', text: 'Triage volgens uw regels, met directe melding.' },
         ],
       },
       sortants: {
@@ -500,7 +500,7 @@ export const UI_COMPONENTS = {
     // Zelfde volgorde als de iconen en mock-ups van de component.
     stages: [
       { key: 'Aantrekken', title: 'Vang elke aanvraag op', items: ['Landingspagina’s per sector', 'Webwidget: praten of teruggebeld worden', 'Lokale nummers en doorschakeling van uw lijn', '24/7 antwoord op gesprekken en berichten'] },
-      { key: 'Converteren', title: 'Maak van aanvragen klanten', items: ['Kwalificatie volgens uw criteria', 'Leads binnen enkele minuten teruggebeld', 'Afspraken direct in uw agenda', 'CRM-kaart automatisch aangemaakt'] },
+      { key: 'Converteren', title: 'Maak van aanvragen klanten', items: ['Kwalificatie volgens uw criteria', 'Leads binnen enkele minuten teruggebeld', 'Afspraken direct in uw agenda', 'Contact automatisch aangemaakt in uw CRM'] },
       { key: 'Binden', title: 'Blijf in contact met uw klanten', items: ['Bevestigingen en herinneringen', 'Support op basis van uw documenten', 'Opvolging, verlengingen en enquêtes', 'WhatsApp, sms, Instagram'] },
       { key: 'Meten', title: 'Stuur bij op basis van echte cijfers', items: ['Volumes, gespreksduur en resultaten', 'Geboekte afspraken en doorverbindingen', 'Minutenverbruik en meldingen', 'Gesprekken terugluisteren en transcripties'] },
     ],
@@ -535,7 +535,7 @@ export const UI_COMPONENTS = {
     call: {
       agent: 'Receptieagent',
       meta: 'Inkomend gesprek · 01:24',
-      client: 'Goedendag, ik wil graag een afspraak maken.',
+      client: 'Goedemorgen, ik wil graag een afspraak maken.',
       reply: 'Natuurlijk. Is het voor een eerste bezoek?',
     },
     calendar: {
@@ -570,7 +570,7 @@ export const UI_COMPONENTS = {
       steps: [
         { title: 'Nieuw formulier', source: 'Website' },
         { title: 'Lead bellen', source: 'Verkoopagent' },
-        { title: 'Kaart aanmaken', source: 'CRM' },
+        { title: 'Contact aanmaken', source: 'CRM' },
         { title: 'Bevestiging sturen', source: 'WhatsApp' },
       ],
     },
@@ -611,7 +611,7 @@ export const UI_COMPONENTS = {
     support: {
       client: 'Mijn bestelling is niet aangekomen.',
       agent: 'Ik kijk het na. Kunt u mij het bestelnummer geven?',
-      found: 'Antwoord gevonden in „leveringsvoorwaarden.pdf”',
+      found: 'Antwoord gevonden in “leveringsvoorwaarden.pdf”',
     },
   },
 };

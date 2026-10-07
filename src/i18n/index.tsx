@@ -8,7 +8,14 @@ import { DEFAULT_LOCALE, LANG_OF, asLocale, type Locale } from './locales';
 import { MARKETS, type Market, type PlanSlug } from './markets';
 import type { OfferText } from './content/fr/offers';
 import { PERSONAS } from '@/data/personas';
+import { withFrenchTypography } from './typography';
 
+
+/** Contenu français avec espaces insécables (calculé une seule fois). */
+const FR_TYPO = withFrenchTypography(CONTENT.fr) as typeof CONTENT.fr;
+
+/** Séparateur de milliers toujours affiché (le type TypeScript ne connaît pas encore la valeur « always »). */
+const GROUP = 'always' as unknown as boolean;
 export type Content = typeof fr;
 export type { Locale, Market, PlanSlug };
 
@@ -43,12 +50,13 @@ const PLAN_ORDER: PlanSlug[] = ['decouverte', 'receptionniste', 'assistant', 'ce
 export function getI18n(rawLocale: unknown) {
   const locale = asLocale(rawLocale);
   const market = MARKETS[locale];
-  const c = CONTENT[LANG_OF[locale]] as Content;
+  const c = (LANG_OF[locale] === 'fr' ? FR_TYPO : CONTENT[LANG_OF[locale]]) as Content;
 
-  const num = (n: number, digits = 0) => n.toLocaleString(market.numberLocale, { minimumFractionDigits: digits, maximumFractionDigits: digits });
-  /** Montant dans la devise du marché, au format local (ex. « 99 $ » en français, « $99 » en anglais). */
+  // useGrouping « always » : 1.000 en italien et en polonais, identique côté serveur et navigateur (sinon erreur d’hydratation).
+  const num = (n: number, digits = 0) => n.toLocaleString(market.numberLocale, { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: GROUP });
+  /** Montant dans la devise du marché, au format local (ex. « 99 $US » en français, « US$99 » en anglais) : le symbole précise le dollar américain. */
   const money = (n: number, digits = 0) =>
-    new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'narrowSymbol', minimumFractionDigits: digits, maximumFractionDigits: digits }).format(n);
+    new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'symbol', minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: GROUP }).format(n);
   const perMin = (price: number, minutes: number) => money(price / minutes, 2);
 
   const L = c.offerLabels;

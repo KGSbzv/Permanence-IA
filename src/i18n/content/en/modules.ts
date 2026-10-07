@@ -41,7 +41,7 @@ export const MODULES: Module[] = [
     intro: 'Connect your calendar: the agent offers free slots, books, confirms and handles rescheduling and cancellations without your team stepping in.',
     uses: ['Fill free slots', 'Reduce missed appointments', 'Free reception from scheduling calls'],
     steps: [
-      { title: 'Connect your calendar', text: 'Google, Outlook, Cal.com or Calendly.' },
+      { title: 'Connect your calendar', text: 'Google Calendar, Outlook and more, through Cal.com or Calendly.' },
       { title: 'Set your rules', text: 'Durations, notice periods, appointment types and practitioners.' },
       { title: 'The agent books', text: 'It offers slots, confirms and sends the summary.' },
     ],
@@ -91,7 +91,7 @@ export const MODULES: Module[] = [
       { title: 'Track the results', text: 'Reached, interested, to call back.' },
     ],
     cases: ['Confirmations', 'Quote follow-ups', 'Renewals and upsells'],
-    integrations: ['Leads', 'CRM', 'Block list'],
+    integrations: ['Leads', 'CRM', 'Exclusion list'],
     from: 'assistant', mock: 'campaign',
   },
   {
@@ -140,10 +140,10 @@ export const MODULES: Module[] = [
     from: 'receptionniste', mock: 'prompt',
   },
   {
-    slug: 'flow-builder', name: 'Flow builder', family: 'Automation',
+    slug: 'flow-builder', name: 'Automated workflows', family: 'Automation',
     short: 'No-code call automation: visual scenarios connected to over 300 tools.',
     title: 'Build your scenarios with drag and drop',
-    intro: 'Chain the steps: new lead, call, CRM update, confirmation message. The flow builder connects the agent to over 300 tools.',
+    intro: 'Chain the steps: new lead, call, CRM update, confirmation message. Automated workflows connect the agent to over 300 tools.',
     uses: ['Automate after-call tasks', 'Connect the agent to your tools', 'Avoid retyping data'],
     steps: [
       { title: 'Choose a trigger', text: 'Form, end of call, new lead.' },
@@ -203,7 +203,7 @@ export const MODULES: Module[] = [
     slug: 'relance-anciens-clients', name: 'Lapsed customer win-back', family: 'Automation',
     short: 'Inactive customers called back to rebook: revenue that is already sitting in your customer list.',
     title: 'Bring back customers you haven’t heard from in a while',
-    intro: 'Your customer list is full of happy customers who simply forgot to come back: annual check-up, service, MOT, haircut, treatment. The agent calls them one by one, reminds them of their last visit, offers two specific slots and books. You only call your own customers, people you already have a relationship with.',
+    intro: 'Your customer list is full of happy customers who simply forgot to come back: annual check-up, service, MOT, haircut, treatment. The agent calls them one by one, reminds them of their last visit, offers two specific slots and books. You only call customers who have agreed to be contacted.',
     uses: ['Win back customers who haven’t visited in 6 to 18 months', 'Fill gaps in your schedule', 'Follow up quotes that got no reply', 'Offer seasonal servicing'],
     steps: [
       { title: 'Choose the customers', text: 'An export from your software or calendar: name, phone, last service.' },

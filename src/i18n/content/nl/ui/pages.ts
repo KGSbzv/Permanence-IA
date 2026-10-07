@@ -5,20 +5,20 @@ import type { Block, ChatLine, LegalSection, LegalVars, Rich, Span } from '../..
 
 export type { Block, ChatLine, LegalSection, LegalVars, Rich, Span };
 
-const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
+const ADDRESS = '1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001';
 
 export const UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Demo AI-telefoonassistent — probeer live · ${brand}`,
+      title: (brand: string) => `Demo AI-telefoonassistent: probeer hem live · ${brand}`,
       description: 'Hoor hoe een AI-telefoonassistent klinkt: praat live met de agent of ontvang een demogesprek voor uw sector. Gratis en vrijblijvend, probeer het nu.',
     },
     h1: 'Probeer onze AI-telefoonassistent nu live',
     intro: 'Laat uw nummer achter en kies uw sector: de agent belt u en speelt een scenario uit uw vak. U hoort zijn stem, zijn tempo en de manier waarop hij een aanvraag kwalificeert.',
-    widgetHint: 'Liever meteen? Klik op de ballon rechtsonder in beeld: onze assistent antwoordt u gesproken of schriftelijk.',
-    formTitle: 'Ontvang mijn demonstratiegesprek',
+    widgetHint: 'Liever meteen proberen? Klik op de chatknop rechtsonder in beeld: onze assistent antwoordt u via spraak of chat.',
+    formTitle: 'Vraag uw demogesprek aan',
     formIntro: 'Gratis gesprek, op het tijdstip van uw keuze.',
-    submit: 'Ontvang het demogesprek',
+    submit: 'Demogesprek aanvragen',
     hearTitle: 'Wat u te horen krijgt',
     hearIntro: 'Een voorbeeldgesprek in een tandartspraktijk: de agent herkent de vraag, stelt een tijdslot voor en maakt het overzicht klaar voor het team.',
     steps: [
@@ -26,7 +26,7 @@ export const UI_PAGES = {
       { title: 'De agent belt u', text: 'Hij speelt een scenario uit uw vak.' },
       { title: 'U test vrijuit', text: 'Stel uw vragen, verander van gedachten, onderbreek hem.' },
     ],
-    liveCallTitle: 'Tandartsagent',
+    liveCallTitle: 'Agent voor de tandartspraktijk',
     scenariosTitle: 'Kies uw scenario',
   },
 
@@ -37,15 +37,15 @@ export const UI_PAGES = {
     },
     h1: 'Laat uw nummer achter, wij bellen u terug',
     intro: 'Wij publiceren geen telefoonnummer: wij bellen u terug, op het tijdslot dat u kiest. U kunt ons ook mailen.',
-    commercialTitle: 'Terugbellen door verkoop',
+    commercialTitle: 'Terugbelverzoek: verkoop',
     commercialText: 'Vragen over de abonnementen, demonstratie, offerte op maat.',
-    supportTitle: 'Terugbellen door support',
+    supportTitle: 'Terugbelverzoek: support',
     supportText: 'Klanten: configuratie, nummers, integraties.',
     emailTitle: 'E-mail',
     legal: (brand: string, company: string) => `${brand} is een merk van ${company}, ${ADDRESS}, Verenigde Staten.`,
     tabsLabel: 'Soort aanvraag',
     tabCommercial: 'Verkoop en demo',
-    tabSupport: 'Klantenservice',
+    tabSupport: 'Support',
   },
 
   faq: {
@@ -67,7 +67,7 @@ export const UI_PAGES = {
     h1: (minutes: number) => `Test de AI-telefoonassistent met ${minutes} gratis minuten`,
     intro: (days: number) => `Maak uw account aan, kies het abonnement dat u wilt testen en probeer uw agent ${days} dagen lang in uw eigen bedrijf.`,
     points: (days: number) => [
-      `Betaalkaart gevraagd bij activering, ${days} dagen lang wordt er niets afgeschreven`,
+      `Creditcard gevraagd bij activering; ${days} dagen lang wordt er niets afgeschreven`,
       'Zeg in uw klantomgeving op vóór het einde van de proefperiode en u betaalt niets',
       'Live demo en webwidget inbegrepen',
       'Begeleiding bij de eerste configuratie',
@@ -92,20 +92,20 @@ export const UI_PAGES = {
     phone: 'Telefoon',
     sector: 'Sector',
     sectorPlaceholder: 'Kies…',
-    sectorOther: 'Andere branche',
+    sectorOther: 'Andere sector',
     plan: 'Gewenst abonnement',
-    planPrice: (price: string) => ` — ${price} excl. btw/maand`,
+    planPrice: (price: string) => ` — ${price} per maand excl. btw`,
     planFree: ' — gratis',
-    planQuote: ' — op offerte',
+    planQuote: ' — prijs op aanvraag',
     terms: [
       'Ik ga akkoord met de ',
       { a: 'algemene voorwaarden', href: '/cgu' },
-      ' en het ',
+      ', heb het ',
       { a: 'privacybeleid', href: '/confidentialite' },
-      ', en ermee dat ik word teruggebeld voor het instellen van mijn account.',
+      ' gelezen en wil worden teruggebeld voor het instellen van mijn account.',
     ] as Rich,
     termsRequired: 'Ga akkoord met de voorwaarden om teruggebeld te worden.',
-    sendError: 'De aanmelding kon niet worden verzonden.',
+    sendError: 'De aanmelding kon niet worden verzonden. Probeer het opnieuw.',
     sending: 'Verzenden…',
     submit: 'Bel mij terug',
   },
@@ -117,7 +117,7 @@ export const UI_PAGES = {
     },
     breadcrumb: 'Help',
     h1: 'Help bij uw klantomgeving: uw AI-telefoonassistent instellen',
-    intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (ballon rechtsonder) u verder in uw eigen taal, dus ook in het Nederlands, schriftelijk of gesproken.',
+    intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (chatknop rechtsonder) u verder in uw eigen taal, dus ook in het Nederlands, schriftelijk of gesproken.',
     openSpace: 'Open mijn klantomgeving',
     chatLabel: 'Voorbeeld van een gesprek met de hulpassistent',
     chatTitle: (brand: string) => `Help ${brand}`,
@@ -132,10 +132,10 @@ export const UI_PAGES = {
     menuTitle: 'De menu’s van de klantomgeving, vertaald',
     colMenu: 'Menu (Engels)',
     colLabel: 'In het Nederlands',
-    colText: 'Waarvoor dient het',
+    colText: 'Waarvoor gebruikt u het',
     glossaryTitle: 'Kleine woordenlijst',
     moreBefore: 'Staat uw vraag hier niet bij? Mail naar ',
-    moreAfter: ' of vraag een terugbelverzoek aan via de contactpagina.',
+    moreAfter: ' of doe een terugbelverzoek via de contactpagina.',
   },
 
   about: {
@@ -144,11 +144,11 @@ export const UI_PAGES = {
       description: (brand: string, company: string) => `${brand} maakt telefoonservice voor bedrijven toegankelijk: AI-spraakagents die elk gesprek beantwoorden. Een merk van ${company}.`,
     },
     h1: 'Elk gesprek verdient een antwoord',
-    intro: (brand: string) => `${brand} is ontstaan uit een eenvoudige vaststelling: kleine bedrijven en zzp’ers verliezen klanten omdat niemand op het juiste moment kan opnemen.`,
+    intro: (brand: string) => `${brand} is ontstaan vanuit een simpele constatering: kleine bedrijven en zzp’ers verliezen klanten omdat niemand op het juiste moment kan opnemen.`,
     photoAlt: 'Een ondernemer bekijkt haar telefoon op kantoor',
     paragraphs: [
       'Vakmensen, praktijken, kantoren, garages, salons, restaurants: uw team is bezig met uw klanten. Ondertussen gaat de telefoon.',
-      'Wij stellen AI-spraakagents tot uw beschikking die als virtuele receptionist opnemen, kwalificeren, afspraken boeken en terugbellen. Zo blijft uw telefonische bereikbaarheid op orde, ingesteld op uw vak, met duidelijke prijzen en zonder verplichtingen.',
+      'Wij leveren AI-spraakagents die als virtuele receptionist opnemen, kwalificeren, afspraken boeken en terugbellen. Zo blijft uw telefonische bereikbaarheid op orde, ingesteld op uw vak, met duidelijke prijzen en zonder verplichtingen.',
     ],
     principlesTitle: 'Onze principes',
     principles: [
@@ -163,7 +163,7 @@ export const UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Beveiliging en AVG van uw AI-telefonie · ${brand}`,
-      description: (brand: string) => `Toestemming, versleuteling tijdens verzending, bewaartermijn en traceerbaarheid: zo beschermt ${brand} de gesprekken van uw AI-telefoonassistent.`,
+      description: (brand: string) => `Toestemming, versleuteling tijdens transport, bewaartermijn en traceerbaarheid: zo beschermt ${brand} de gesprekken van uw AI-telefoonassistent.`,
     },
     h1: 'Beveiliging en AVG-compliance van uw AI-telefoongesprekken',
     intro: 'Uw gesprekken bevatten persoonsgegevens. Hier leest u welke beveiligingsmaatregelen er zijn en welke instellingen u hebt om de AVG na te leven.',
@@ -173,24 +173,24 @@ export const UI_PAGES = {
       'Een gesprek of contact op verzoek verwijderen',
       'Uitsluitingslijst voor uitgaande gesprekken',
       'Toegestane beltijden',
-      'Vermelding „AI-assistent” aan het begin van het gesprek',
+      'Melding “AI-assistent” aan het begin van elk gesprek (altijd actief, formulering aanpasbaar)',
       'Opname in- of uitschakelen, aan het begin van het gesprek aan de beller gemeld',
       'Woorden of onderwerpen die de agent nooit mag aansnijden (prijsopgaven, diagnoses, advies)',
     ],
     infraTitle: 'Een oplossing op gecertificeerde infrastructuur',
     infraIntro: 'Onze oplossing (agents, geplande terugbelgesprekken, routering, website en klantomgeving) draait op de infrastructuur van een gecertificeerde technische leverancier. Die certificeringen zijn van de leverancier; we kozen hem zodat u hetzelfde niveau krijgt.',
-    infraItems: ['Leverancier gecertificeerd volgens ISO/IEC 27001:2022 (informatiebeveiliging) en ISO 9001:2015 (kwaliteit)', 'AES-256-versleuteling van opgeslagen gegevens en TLS tijdens verzending', 'Toegang op basis van rollen, tweestapsverificatie en auditlogs', 'Automatische back-ups en herstel over meerdere zones', 'AVG-conform, instelbare bewaartermijnen en automatische verwijdering', 'Betalingen via Stripe, PCI-DSS niveau 1 gecertificeerd'],
+    infraItems: ['Leverancier gecertificeerd volgens ISO/IEC 27001:2022 (informatiebeveiliging) en ISO 9001:2015 (kwaliteit)', 'AES-256-versleuteling van opgeslagen gegevens en TLS tijdens transport', 'Toegang op basis van rollen, tweestapsverificatie en auditlogs', 'Automatische back-ups en herstel over meerdere zones', 'Ingericht op AVG-naleving, met instelbare bewaartermijnen en automatische verwijdering', 'Betalingen via Stripe, gecertificeerd volgens PCI DSS Level 1'],
     commitmentsTitle: 'Onze toezeggingen',
     commitments: [
       'De agent stelt zich voor als AI en doet zich niet voor als mens',
-      'Uw campagnes mogen alleen contacten bellen die daarmee hebben ingestemd; een ingebouwde blokkeerlijst sluit de anderen uit',
+      'Uw campagnes mogen alleen contacten bellen die daarmee hebben ingestemd; een ingebouwde uitsluitingslijst sluit wie bezwaar maakt uit',
       'Geen medische, juridische of financiële diagnose door de agent',
-      'Uw gegevens worden nooit verkocht; ze worden gebruikt om de dienst te leveren en te verbeteren',
+      'Uw gegevens worden nooit verkocht: ze worden gebruikt om de dienst te leveren; alleen geaggregeerde of geanonimiseerde gegevens dienen om hem te verbeteren',
       'Begeleiding bij het aanpassen van uw privacyverklaringen',
-      'Verwerkersovereenkomst (DPA) op eenvoudig verzoek',
+      'Verwerkersovereenkomst (DPA) opgenomen in de voorwaarden (artikel 8); ondertekende versie op aanvraag',
       'Recht op verwijdering: een gesprek, de opname en de transcriptie worden op verzoek gewist',
-      'De agent meldt dat het gesprek wordt opgenomen; wie dat niet wil, kan ons in plaats daarvan schrijven',
-      'Uitgaande campagnes: u bewaart het bewijs van de grondslag (klantrelatie of toestemming); in Nederland is voor telemarketing aan consumenten sinds 1 juli 2021 voorafgaande toestemming of een bestaande klantrelatie nodig, in Frankrijk sinds 11 augustus 2026 voorafgaande toestemming',
+      'De agent meldt dat het gesprek wordt opgenomen; wie dat niet wil, kan vragen om per e-mail te worden gecontacteerd',
+      'Uitgaande campagnes: u bewaart het bewijs van de toestemming; in Nederland is voor telemarketing aan consumenten (ook eenmanszaken en zzp’ers) sinds 1 juli 2021 in principe voorafgaande toestemming nodig (artikel 11.7 Telecommunicatiewet)',
     ],
     rights: ['Voor vragen of om uw rechten uit te oefenen: ', { a: 'privacybeleid', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -226,18 +226,18 @@ export const UI_PAGES = {
 
   terms: {
     meta: {
-      title: (brand: string) => `Algemene voorwaarden (gebruik en verkoop) — ${brand}`,
-      description: (brand: string) => `Lees de algemene gebruiks- en verkoopvoorwaarden die van toepassing zijn op de abonnementen en diensten van de AI-telefoniedienst van ${brand}.`,
+      title: (brand: string) => `Algemene voorwaarden — ${brand}`,
+      description: (brand: string) => `Lees de algemene voorwaarden die van toepassing zijn op de abonnementen en diensten van de AI-telefoniedienst van ${brand}.`,
     },
-    h1: 'Algemene gebruiks- en verkoopvoorwaarden',
-    updated: 'Van toepassing op professionals en bedrijven • Laatst bijgewerkt: 6 oktober 2026',
+    h1: 'Algemene voorwaarden',
+    updated: 'Van toepassing op zakelijke klanten • Laatst bijgewerkt: 6 oktober 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
           title: 'Artikel 1 — Definities en aanvaarding',
           body: [
-            { p: ['Deze algemene gebruiks- en verkoopvoorwaarden (de „Voorwaarden”) regelen de toegang tot en het gebruik van de diensten die onder het merk ', { strong: brand }, ` worden aangeboden door ${company}, een Limited Liability Company uit de staat Wyoming (Verenigde Staten), ${ADDRESS} („wij”).`] },
+            { p: ['Deze algemene voorwaarden (de „Voorwaarden”) regelen de toegang tot en het gebruik van de diensten die onder het merk ', { strong: brand }, ` worden aangeboden door ${company}, een Limited Liability Company uit de staat Wyoming (Verenigde Staten), ${ADDRESS} („wij”).`] },
             {
               ul: [
                 [{ strong: 'Dienst:' }, ` het softwareplatform, de klantomgeving ${appHost}, de AI-spraak- en chatagents, de webwidget, berichtenkanalen (WhatsApp, sms, Messenger, Instagram), campagnes, automatiseringen, telefoonnummers, SIP-koppeling en alle bijbehorende functies.`],
@@ -248,7 +248,7 @@ export const UI_PAGES = {
                 [{ strong: 'Tegoed:' }, ' vooruitbetaalde minuten, berichtentegoed en opwaarderingen.'],
               ],
             },
-            { p: 'De Dienst is uitsluitend bestemd voor professionals die handelen in de uitoefening van hun beroep of bedrijf; hij wordt niet aan consumenten aangeboden. Door een account aan te maken, het aanvaardingsvakje aan te vinken of de Dienst te gebruiken, aanvaardt de Klant de Voorwaarden. Wie ze aanvaardt, verklaart minstens 18 jaar oud te zijn en bevoegd om de entiteit die hij vertegenwoordigt te binden.' },
+            { p: 'De Dienst is uitsluitend bestemd voor professionals die handelen in de uitoefening van hun beroep of bedrijf; hij wordt niet aan consumenten aangeboden. Door een account aan te maken, het selectievakje voor aanvaarding aan te vinken of de Dienst te gebruiken, aanvaardt de Klant de Voorwaarden. Wie ze aanvaardt, verklaart minstens 18 jaar oud te zijn en bevoegd om de entiteit die hij vertegenwoordigt te binden.' },
           ],
         },
         {
@@ -267,11 +267,11 @@ export const UI_PAGES = {
         {
           title: 'Artikel 3 — Gratis proefperiode, geen herroepingsrecht en geen terugbetaling',
           body: [
-            { p: 'Bij zijn eerste betaalde abonnement krijgt de Klant een gratis proefperiode van veertien (14) opeenvolgende kalenderdagen, inclusief 30 belminuten, beperkt tot één proefperiode per rechtspersoon, inschrijvingsnummer of betaalmiddel:' },
+            { p: 'Bij zijn eerste betaalde abonnement krijgt de Klant een gratis proefperiode van veertien (14) opeenvolgende kalenderdagen, inclusief 30 belminuten, beperkt tot één proefperiode per rechtspersoon, KvK-nummer of ander registratienummer, of betaalmiddel:' },
             {
               ul: [
-                [{ strong: 'Betaalmiddel:' }, ' bij activering van de proefperiode wordt een betaalkaart gevraagd. Tijdens de 14 proefdagen wordt niets afgeschreven.'],
-                [{ strong: 'Gebruikslimiet:' }, ' gesprekken zijn tijdens de proefperiode beperkt tot 30 minuten; daarboven worden ze gepauzeerd tot het abonnement start. Sommige functies (nummers, uitgaande campagnes, berichten) kunnen tijdens de proefperiode beperkt zijn.'],
+                [{ strong: 'Betaalmiddel:' }, ' bij activering van de proefperiode wordt een creditcard gevraagd. Tijdens de 14 proefdagen wordt niets afgeschreven.'],
+                [{ strong: 'Gebruikslimiet:' }, ' gesprekken zijn tijdens de proefperiode beperkt tot 30 minuten; daarna worden gesprekken opgeschort tot het abonnement ingaat. Sommige functies (nummers, uitgaande campagnes, berichten) kunnen tijdens de proefperiode beperkt zijn.'],
                 [{ strong: 'Einde van de proefperiode:' }, ' na 14 dagen start het gekozen abonnement en wordt de eerste periode (maand of jaar) afgeschreven, tenzij de Klant vóór die datum in de klantomgeving heeft opgezegd; dan wordt niets afgeschreven.'],
               ],
             },
@@ -285,7 +285,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Prijzen zijn in Amerikaanse dollars (USD), exclusief belastingen. Toepasselijke belastingen worden bij betaling berekend op basis van het land en de fiscale situatie van de Klant (met of zonder btw-nummer) en komen voor zijn rekening. Moet de Klant bronbelasting inhouden, dan verhoogt hij zijn betaling zodat wij het gefactureerde bedrag ontvangen.',
-                'Abonnementen worden vooruitbetaald, per maand of per jaar naar keuze van de Klant (jaarlijkse facturatie levert twee maanden gratis op), via onze betaaldienstverlener Stripe. Het abonnement wordt stilzwijgend verlengd met een periode van dezelfde duur en de Klant machtigt de bijbehorende terugkerende afschrijvingen. Bij jaarlijkse facturatie worden de inbegrepen minuten elke maand toegekend en is de Dienst identiek.',
+                'Abonnementen worden vooruitbetaald, per maand of per jaar naar keuze van de Klant (jaarlijkse facturatie levert twee maanden gratis op), via onze betaaldienstverlener Stripe. Het abonnement wordt stilzwijgend verlengd met een periode van dezelfde duur en de Klant geeft toestemming voor de bijbehorende terugkerende afschrijvingen. Bij jaarlijkse facturatie worden de inbegrepen minuten elke maand toegekend en is de Dienst identiek.',
                 'Gebruik boven het abonnement (extra minuten, berichten, telefoonnummers, kosten van operators of Meta) wordt van het tegoed afgeschreven of gefactureerd tegen de geldende tarieven op de pagina Prijzen of in de klantomgeving.',
                 ['De Klant kan op elk moment zonder opzegtermijn opzeggen via zijn dashboard ', { strong: appHost }, '. De opzegging gaat in aan het einde van de reeds betaalde periode (de lopende maand of, bij jaarlijkse facturatie, het lopende jaar), zonder terugbetaling (artikel 3). De Klant kan op elk moment van abonnement wisselen of tegoed opwaarderen; de voorwaarden van de wijziging staan in de klantomgeving.'],
                 'Wij kunnen onze prijzen wijzigen met een aankondiging van 30 dagen per e-mail of in de klantomgeving; de nieuwe prijs geldt vanaf de volgende verlenging. Een Klant die niet akkoord gaat, zegt vóór die datum op. Doorberekende kosten van derden (operators, Meta) kunnen wijzigen binnen de termijnen die deze derden opleggen.',
@@ -302,7 +302,7 @@ export const UI_PAGES = {
             { p: 'De Klant gebruikt de Dienst in overeenstemming met het toepasselijke recht en de Voorwaarden. Verboden zijn met name:' },
             {
               ul: [
-                'elke onrechtmatige, frauduleuze, misleidende of misbruikende activiteit, waaronder phishing en vishing, oplichting en het zich voordoen als een persoon, bedrijf of overheidsinstantie;',
+                'elke onrechtmatige, frauduleuze, misleidende of anderszins oneigenlijke activiteit, waaronder phishing en vishing, oplichting en het zich voordoen als een persoon, bedrijf of overheidsinstantie;',
                 'intimidatie, bedreigingen en haatdragende, discriminerende, lasterlijke of gewelddadige inhoud, of inhoud die inbreuk maakt op rechten van derden;',
                 'ongevraagde gesprekken en berichten of massale verzending zonder toestemming, en elke omzeiling van een afmelding;',
                 'gebruik met een hoog risico: het vervangen of bellen van hulpdiensten; medische, juridische, financiële, verzekerings-, krediet-, arbeids- of huisvestingsbeslissingen baseren op de agent zonder gekwalificeerde menselijke controle; incasso buiten het toepasselijke wettelijke kader; geautomatiseerde politieke of verkiezingsgesprekken of -berichten; inhoud voor volwassenen of seksuele inhoud en elke inhoud waarbij minderjarigen betrokken zijn; kansspelen, wapens, drugs of gereguleerde producten zonder vergunning;',
@@ -323,10 +323,10 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Toestemming:' }, ' vóór elk geautomatiseerd, uitgaand of commercieel gesprek of bericht (spraak, sms, WhatsApp) verkrijgt hij de wettelijk vereiste toestemmingen, bewaart hij het bewijs daarvan en respecteert hij elke afmelding onmiddellijk (trefwoord STOP, mondeling of schriftelijk verzoek).'],
-                [{ strong: 'Belregisters:' }, ' hij raadpleegt en respecteert de toepasselijke registers en regels: de Nederlandse regels (voorafgaande toestemming of een bestaande klantrelatie, Bel-me-niet Register), in Frankrijk de uitdrukkelijke voorafgaande toestemming voor telemarketing sinds 11 augustus 2026 (artikel L223-1 van de Code de la consommation), TPS en CTPS (Verenigd Koninkrijk), het Do Not Call Register (Australië), het Registro pubblico delle opposizioni (Italië) en de Poolse regels die voorafgaande toestemming voor telemarketing vereisen.'],
+                [{ strong: 'Belregisters:' }, ' hij raadpleegt en respecteert de toepasselijke registers en regels: de Nederlandse regels (artikel 11.7 Telecommunicatiewet: voorafgaande toestemming of een bestaande klantrelatie; Bel-me-niet Register), in Frankrijk de uitdrukkelijke voorafgaande toestemming voor telemarketing sinds 11 augustus 2026 (artikel L223-1 van de Code de la consommation), TPS en CTPS (Verenigd Koninkrijk), het Do Not Call Register (Australië), het Registro pubblico delle opposizioni (Italië) en de Poolse regels die voorafgaande toestemming voor telemarketing vereisen.'],
                 [{ strong: 'Tijden en frequentie:' }, ' hij respecteert de toegestane beldagen, -tijden en -frequentie.'],
                 [{ strong: 'Nummerweergave:' }, ' hij toont een geldig, aan hem toegewezen nummer, vervalst geen nummers en maakt zich duidelijk bekend.'],
-                [{ strong: 'Transparantie:' }, ' hij laat Ontvangers vanaf het begin van het contact duidelijk weten dat zij met een AI-systeem communiceren (met name op grond van de Europese AI-verordening) en, waar de wet dat vereist, dat het gesprek wordt opgenomen of uitgeschreven, en vraagt hun toestemming wanneer die vereist is.'],
+                [{ strong: 'Transparantie:' }, ' hij laat Ontvangers vanaf het begin van het contact duidelijk weten dat zij met een AI-systeem communiceren (met name op grond van artikel 50 van de AI-verordening, Verordening (EU) 2024/1689) en, waar de wet dat vereist, dat het gesprek wordt opgenomen of uitgeschreven, en vraagt hun toestemming wanneer die vereist is.'],
                 [{ strong: 'Platforms:' }, ' hij volgt het beleid van Meta (WhatsApp Business, Messenger, Instagram), waaronder goedkeuring van sjablonen en gespreksvensters, en de regels van operators (registratie van afzenders, alfanumerieke afzender-ID’s). Deze derden kunnen een account of nummer beperken zonder dat wij aansprakelijk zijn.'],
               ],
             },
@@ -351,7 +351,7 @@ export const UI_PAGES = {
         {
           title: 'Artikel 8 — Klantgegevens en gegevensbescherming',
           body: [
-            { p: ['Voor persoonsgegevens van Ontvangers die via de Dienst worden verwerkt, is de Klant verwerkingsverantwoordelijke en treden wij op als verwerker (artikel 28 AVG en gelijkwaardige wetgeving). Dit artikel en het ', { a: 'privacybeleid', href: '/confidentialite' }, ' vormen de verwerkersovereenkomst; een ondertekende overeenkomst kan worden gesloten in het kader van een Maatwerk-abonnement. Wij:'] },
+            { p: ['Voor persoonsgegevens van Ontvangers die via de Dienst worden verwerkt, is de Klant verwerkingsverantwoordelijke en treden wij op als verwerker (artikel 28 AVG en gelijkwaardige wetgeving). Dit artikel en het ', { a: 'privacybeleid', href: '/confidentialite' }, ' vormen de verwerkersovereenkomst (DPA); een ondertekende versie is op aanvraag beschikbaar. Wij:'] },
             {
               ul: [
                 'verwerken de gegevens uitsluitend op gedocumenteerde instructies van de Klant (de Voorwaarden en zijn instellingen), tenzij de wet anders vereist, en melden het als een instructie ons onrechtmatig lijkt;',
@@ -370,7 +370,7 @@ export const UI_PAGES = {
         {
           title: 'Artikel 9 — Diensten van derden en integraties',
           body: [
-            { p: 'De Dienst steunt op of koppelt met derden: telecomoperators, Meta (WhatsApp, Messenger, Instagram), agenda’s, CRM-systemen, automatiseringstools, AI- en betaaldienstverleners. Hun voorwaarden zijn van toepassing en de Klant aanvaardt ze wanneer zij dat vereisen. Door een integratie in te schakelen, machtigt de Klant ons om de nodige gegevens ermee uit te wisselen. Wij hebben geen zeggenschap over deze diensten en zijn niet verantwoordelijk voor hun beschikbaarheid, hun wijzigingen of de verwerking van gegevens die op verzoek van de Klant aan hen worden verstrekt.' },
+            { p: 'De Dienst maakt gebruik van of koppelt met diensten van derden: telecomoperators, Meta (WhatsApp, Messenger, Instagram), agenda’s, CRM-systemen, automatiseringstools, AI- en betaaldienstverleners. Hun voorwaarden zijn van toepassing en de Klant aanvaardt ze wanneer zij dat vereisen. Door een integratie in te schakelen, machtigt de Klant ons om de nodige gegevens ermee uit te wisselen. Wij hebben geen zeggenschap over deze diensten en zijn niet verantwoordelijk voor hun beschikbaarheid, hun wijzigingen of de verwerking van gegevens die op verzoek van de Klant aan hen worden verstrekt.' },
           ],
         },
         {
@@ -379,7 +379,7 @@ export const UI_PAGES = {
             {
               ul: [
                 `De Dienst, de software, interfaces en documentatie, het merk ${brand} en de logo’s behoren toe aan ons of onze licentiegevers en worden onder meer beschermd door ${legal.copyrightLaw}. Buiten de hieronder beschreven licentie verkrijgt de Klant geen rechten.`,
-                'Wij verlenen de Klant, voor de duur van zijn abonnement, een beperkte, niet-exclusieve, niet-overdraagbare, niet-sublicentieerbare en herroepbare licentie om de Dienst te gebruiken voor zijn interne bedrijfsdoeleinden.',
+                'Wij verlenen de Klant, voor de duur van zijn abonnement, een beperkte, niet-exclusieve, niet-overdraagbare, niet in sublicentie te geven en herroepbare licentie om de Dienst te gebruiken voor zijn interne bedrijfsdoeleinden.',
                 'De Klant behoudt zijn rechten op de Klantinhoud. Hij verleent ons een wereldwijde, kosteloze, niet-exclusieve licentie om deze te hosten, te kopiëren, te verwerken, door te geven en weer te geven, en door onze subverwerkers te laten verwerken, uitsluitend voor zover nodig om de Dienst te leveren, te beveiligen en te ondersteunen en de wet na te leven. Hij garandeert over de nodige rechten te beschikken.',
                 'Suggesties en feedback van de Klant mogen vrij, kosteloos en zonder tijdslimiet worden gebruikt.',
                 'De Klant gebruikt onze merken niet zonder schriftelijke toestemming. Wij mogen de naam en het logo van de Klant als referentie vermelden, tenzij hij daartegen per e-mail bezwaar maakt.',
@@ -402,7 +402,7 @@ export const UI_PAGES = {
                 'Wij kunnen de Dienst doorontwikkelen, functies toevoegen, wijzigen of schrappen en van dienstverlener wisselen. Waar redelijkerwijs mogelijk kondigen wij het schrappen van een essentiële functie van een betaald abonnement vooraf aan.',
                 'Bèta-, preview- of experimentele functies worden geleverd zoals ze zijn, zonder verplichting, en kunnen op elk moment worden stopgezet.',
                 'Wij hebben een inspanningsverplichting. Er geldt geen gegarandeerd serviceniveau (SLA), tenzij schriftelijk overeengekomen in een Maatwerk-overeenkomst. De Dienst is afhankelijk van internet, operators en onze dienstverleners; gepland onderhoud (zo mogelijk aangekondigd) of spoedonderhoud kan hem onderbreken.',
-                'Redelijk-gebruikslimieten (gelijktijdige gesprekken, doorvoer, volumes) kunnen van toepassing zijn.',
+                'Limieten voor redelijk gebruik (fair use: gelijktijdige gesprekken, doorvoer, volumes) kunnen van toepassing zijn.',
               ],
             },
           ],
@@ -479,7 +479,7 @@ export const UI_PAGES = {
         {
           title: 'Artikel 20 — Overdracht en zeggenschapswijziging',
           body: [
-            { p: 'Wij mogen de Voorwaarden geheel of gedeeltelijk overdragen, ook bij fusie, overname, reorganisatie of verkoop van activa, zonder toestemming van de Klant en na hem te hebben geïnformeerd, en onze verplichtingen geheel of gedeeltelijk uitbesteden. De Klant mag de Voorwaarden niet overdragen zonder onze voorafgaande schriftelijke toestemming; hij meldt ons elke zeggenschapswijziging, waarna wij kunnen beëindigen als de nieuwe eigenaar een concurrent is of niet door onze controle komt.' },
+            { p: 'Wij mogen de Voorwaarden geheel of gedeeltelijk overdragen, ook bij fusie, overname, reorganisatie of verkoop van activa, zonder toestemming van de Klant en na hem te hebben geïnformeerd, en onze verplichtingen geheel of gedeeltelijk uitbesteden. De Klant mag de Voorwaarden niet overdragen zonder onze voorafgaande schriftelijke toestemming; hij meldt ons elke zeggenschapswijziging, waarna wij kunnen beëindigen als de nieuwe eigenaar een concurrent is of onze verificatie niet doorstaat.' },
           ],
         },
         {
@@ -489,7 +489,7 @@ export const UI_PAGES = {
               ul: [
                 [{ strong: 'Volledige overeenkomst:' }, ' de Voorwaarden, de pagina Prijzen, de details van het gekozen abonnement, het ', { a: 'privacybeleid', href: '/confidentialite' }, ' en, in voorkomend geval, een ondertekende Maatwerk-overeenkomst vormen de volledige overeenkomst en vervangen alle eerdere afspraken. Inkoopvoorwaarden van de Klant zijn niet van toepassing.'],
                 [{ strong: 'Rangorde:' }, ' een ondertekende Maatwerk-overeenkomst, dan de Voorwaarden, dan het privacybeleid, dan de pagina Prijzen en de documentatie.'],
-                [{ strong: 'Partiële nietigheid en geen afstand:' }, ' een ongeldige bepaling wordt vervangen door de geldige bepaling die het dichtst in de buurt komt en de overige blijven van kracht; het niet uitoefenen van een recht houdt geen afstand daarvan in.'],
+                [{ strong: 'Gedeeltelijke nietigheid en geen afstand van recht:' }, ' een ongeldige bepaling wordt vervangen door de geldige bepaling die het dichtst in de buurt komt en de overige blijven van kracht; het niet uitoefenen van een recht houdt geen afstand daarvan in.'],
                 [{ strong: 'Kennisgevingen:' }, ' wij schrijven naar het e-mailadres van het account of in de klantomgeving; de Klant schrijft ons via ', mail, '. De Klant aanvaardt elektronische communicatie en facturen.'],
                 [{ strong: 'Wijzigingen:' }, ' wij kunnen de Voorwaarden wijzigen; belangrijke wijzigingen worden ten minste 15 dagen vóór de inwerkingtreding per e-mail of op de website aangekondigd, tenzij wettelijke of beveiligingseisen anders vereisen. Voortgezet gebruik geldt als aanvaarding; een Klant die niet akkoord gaat, zegt vóór die datum op.'],
                 [{ strong: 'Taal:' }, ' de Voorwaarden worden in meerdere talen gepubliceerd. Bij verschillen gaat de Engelse versie voor.'],
@@ -523,7 +523,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Verwerkingsverantwoordelijke:' }, ` voor de website, formulieren en terugbelverzoeken, gesprekken met onze eigen AI-assistenten, klantaccounts, facturatie en onze eigen marketing is ${company} verwerkingsverantwoordelijke.`],
-                [{ strong: 'Verwerker:' }, ' voor gesprekken, berichten en contacten die door de agents van onze klanten worden afgehandeld, is de klant verwerkingsverantwoordelijke ten opzichte van zijn eigen bellers en contacten; wij handelen namens en op instructie van de klant. Bent u benaderd door de agent van een klantbedrijf, wendt u zich dan eerst tot dat bedrijf; wij sturen elk verzoek dat wij ontvangen aan hem door.'],
+                [{ strong: 'Verwerker:' }, ' voor gesprekken, berichten en contacten die door de agents van onze klanten worden afgehandeld, is de klant verwerkingsverantwoordelijke ten opzichte van zijn eigen bellers en contacten; wij handelen namens en op instructie van de klant. Bent u benaderd door de agent van een klantbedrijf, wendt u zich dan eerst tot dat bedrijf; wij sturen elk verzoek dat wij ontvangen aan dat bedrijf door.'],
               ],
             },
           ],
@@ -534,7 +534,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Formulieren op de website' }, ' (terugbellen, demo, begeleiding bij de proefperiode): naam, telefoonnummer, e-mail, bedrijf, sector, gewenst tijdstip, bericht en toestemming.'],
-                [{ strong: 'Gesprekken met onze AI-assistenten' }, ' (chatbubbel op de website, receptioniste, demogesprekken, commerciële en supportterugbelacties, hulp in de klantomgeving): geschreven inhoud, audio-opname van spraakgesprekken, transcriptie, samenvatting en geëxtraheerde informatie (behoefte, overwogen abonnement, gemeld probleem).'],
+                [{ strong: 'Gesprekken met onze AI-assistenten' }, ' (chatbubbel op de website, AI-receptionist, demogesprekken, terugbelgesprekken voor verkoop en support, hulp in de klantomgeving): geschreven inhoud, audio-opname van spraakgesprekken, transcriptie, samenvatting en geëxtraheerde informatie (behoefte, overwogen abonnement, gemeld probleem).'],
                 [{ strong: 'Klantaccount' }, ': identiteit en contactgegevens van gebruikers, bedrijfsgegevens, inloggegevens, instellingen en instructies van agents, kennisbanken, contactlijsten, gespreks- en berichtengeschiedenis, verbruik van minuten en tegoed, supportverzoeken.'],
                 [{ strong: 'Gegevens die wij voor onze klanten verwerken' }, ': nummers en namen van bellers of contacten, gespreksinhoud, berichten, opnames, transcripties, afspraken en leadgegevens.'],
                 [{ strong: 'Facturatie' }, ': abonnement, facturen, factuuradres, btw-nummer, betaalstatus. Kaartgegevens worden ingevoerd bij en bewaard door Stripe; wij hebben er nooit toegang toe.'],
@@ -582,6 +582,7 @@ export const UI_PAGES = {
                 [{ strong: 'Supabase' }, ': database van verzoeken, aanmeldingen en gespreksverslagen (Verenigde Staten).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ': hosting van de website (Verenigde Staten).'],
                 [{ strong: 'Zoho' }, ': verzending van service- en opvolgmails.'],
+                [{ strong: 'Google (Google Analytics 4)' }, ': bezoekersstatistieken, alleen met uw toestemming; doorgifte naar de Verenigde Staten valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).'],
                 [{ strong: 'Door de klant ingeschakelde integraties' }, ' (agenda’s, CRM, automatiseringstools), onze professionele adviseurs, autoriteiten waar de wet dat vereist, en een eventuele overnemende partij bij een fusie of verkoop.'],
               ],
             },
@@ -621,7 +622,7 @@ export const UI_PAGES = {
         {
           title: 'Beveiliging',
           body: [
-            { p: 'Gegevens worden versleuteld tijdens overdracht (TLS) en in rust (AES-256). Toegang is rolgebaseerd, beveiligd met authenticatie en vastgelegd in auditlogs; tweestapsverificatie is beschikbaar voor klanten; er worden regelmatig back-ups gemaakt en technische sleutels worden bewaard in kluizen voor geheimen. Onze technische platformleverancier is ISO 27001-gecertificeerd. Omdat geen enkel systeem onfeilbaar is, melden wij datalekken aan de autoriteiten en aan betrokkenen wanneer de wet dat vereist.' },
+            { p: 'Gegevens worden versleuteld tijdens overdracht (TLS) en in rust (AES-256). Toegang is rolgebaseerd, beveiligd met authenticatie en vastgelegd in auditlogs; tweestapsverificatie is beschikbaar voor klanten; er worden regelmatig back-ups gemaakt en technische sleutels worden bewaard in beveiligde sleutelkluizen (secret vaults). Onze technische platformleverancier is ISO 27001-gecertificeerd. Omdat geen enkel systeem onfeilbaar is, melden wij datalekken aan de autoriteiten en aan betrokkenen wanneer de wet dat vereist.' },
           ],
         },
         {
@@ -641,7 +642,7 @@ export const UI_PAGES = {
         {
           title: 'Uw rechten uitoefenen en klachten',
           body: [
-            { p: ['Mail naar ', mail, ` of schrijf naar ${company}, ${ADDRESS}, Verenigde Staten. Wij kunnen u vragen uw identiteit aan te tonen. Wij antwoorden binnen 30 dagen; bij complexe verzoeken kan deze termijn met twee maanden worden verlengd (u hoort dat dan van ons). Dit is kosteloos, tenzij een verzoek kennelijk ongegrond of buitensporig is. Als wij uw gegevens namens een klant verwerken, sturen wij uw verzoek aan die klant door.`] },
+            { p: ['Mail naar ', mail, ` of schrijf naar ${company}, ${ADDRESS}, Verenigde Staten. Wij kunnen u vragen uw identiteit aan te tonen. Wij antwoorden binnen één maand; bij complexe verzoeken kan deze termijn met twee maanden worden verlengd (u hoort dat dan van ons). Dit is kosteloos, tenzij een verzoek kennelijk ongegrond of buitensporig is. Als wij uw gegevens namens een klant verwerken, sturen wij uw verzoek aan die klant door.`] },
             { p: `U kunt een klacht indienen bij ${legal.dataAuthority}, of bij de gegevensbeschermingsautoriteit van het land waar u woont of werkt, zoals de CNIL (Frankrijk), de Garante per la protezione dei dati personali (Italië), de UODO (Polen), het ICO (Verenigd Koninkrijk) of de FDPIC (Zwitserland). In Australië dient u eerst bij ons een klacht in: wij reageren binnen 30 dagen, waarna u zich tot het OAIC kunt wenden.` },
           ],
         },
@@ -654,7 +655,7 @@ export const UI_PAGES = {
         {
           title: 'Marketing, gesprekken en afmelden',
           body: [
-            { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, voorafgaande toestemming in Frankrijk, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
+            { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
             { p: 'Gesprekken en berichten van onze klanten vallen onder hun verantwoordelijkheid: richt uw bezwaar aan hen; als u contact met ons opneemt, sturen wij het door.' },
           ],
         },
@@ -689,23 +690,22 @@ export const UI_PAGES = {
   legalNotice: {
     meta: {
       title: (brand: string) => `Juridische informatie — ${brand}`,
-      description: (brand: string) => `Juridische informatie, gegevens over de uitgever, de hosting en het auteursrecht van het platform ${brand}.`,
+      description: (brand: string) => `Juridische informatie, gegevens over de beheerder, de hosting en het auteursrecht van het platform ${brand}.`,
     },
     h1: 'Juridische informatie',
     updated: 'Laatst bijgewerkt: 29 september 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
-        title: '1. Uitgever van de website',
+        title: '1. Beheerder van de website',
         body: [
-          { p: ['De website die bereikbaar is op het adres ', { strong: 'https://permanenceia.com' }, ' wordt uitgegeven door de vennootschap ', { strong: company }, '.'] },
+          { p: ['De website die bereikbaar is op het adres ', { strong: 'https://permanenceia.com' }, ' wordt beheerd door de vennootschap ', { strong: company }, '.'] },
           {
             ul: [
               [{ strong: 'Handelsnaam:' }, ` ${brand}`],
               [{ strong: 'Rechtsvorm:' }, ' Limited Liability Company (LLC), staat Wyoming, Verenigde Staten'],
               [{ strong: 'Registratienummer:' }, ' 2026-001905061'],
               [{ strong: 'Statutaire zetel:' }, ' 1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001, Verenigde Staten'],
-              [{ strong: 'Contact-e-mail:' }, ` ${email}`],
-              [{ strong: 'Verantwoordelijke uitgever:' }, ` de wettelijk vertegenwoordiger van ${company}.`],
+              [{ strong: 'E-mail:' }, ` ${email}`],
             ],
           },
         ],
@@ -716,17 +716,17 @@ export const UI_PAGES = {
           { p: 'De commerciële website en de applicatie worden gehost door:' },
           {
             ul: [
-              [{ strong: 'Front-endplatform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, VS. Hostingregio: us-east4 (Noord-Virginia, Verenigde Staten).'],
-              [{ strong: 'Databases & Opslag:' }, ' Supabase Inc., infrastructuur in de Verenigde Staten (AWS-regio us-east-1, Virginia).'],
-              [{ strong: 'Telefoonnetwerk & Spraaksynthese:' }, ' Cloudinfrastructuur voor spraaktelefonie.'],
+              [{ strong: 'Front-endplatform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, Verenigde Staten. Hostingregio: us-east4 (Noord-Virginia, Verenigde Staten).'],
+              [{ strong: 'Databases en opslag:' }, ' Supabase Inc., infrastructuur in de Verenigde Staten (AWS-regio us-east-1, Virginia).'],
+              [{ strong: 'Telefoonnetwerk en spraaksynthese:' }, ' cloudinfrastructuur voor spraaktelefonie.'],
             ],
           },
         ],
       },
       {
-        title: '3. Intellectueel eigendom',
+        title: '3. Intellectuele eigendom',
         body: [
-          { p: ['Het merk ', { strong: brand }, `, het logo (de ballon in stand-by, de geluidsgolven en de beschikbaarheidsstip) en alle huisstijlen, teksten, gespreksscripts, infographics en broncodes op de website zijn exclusief eigendom van ${company}.`] },
+          { p: ['Het merk ', { strong: brand }, `, het logo (de spraakballon in ruststand, de geluidsgolven en de stip die beschikbaarheid aangeeft) en alle huisstijlelementen, teksten, gespreksscripts, infographics en de broncode op de website zijn exclusief eigendom van ${company}.`] },
           { p: `Elke verveelvoudiging, verspreiding, wijziging of elk gebruik zonder voorafgaande schriftelijke toestemming is uitdrukkelijk verboden en vormt een inbreuk in de zin van ${legal.copyrightLaw}.` },
         ],
       },
@@ -743,13 +743,16 @@ export const UI_PAGES = {
   cookies: {
     meta: {
       title: (brand: string) => `Cookiebeleid — ${brand}`,
-      description: (brand: string) => `Welke cookies de website van ${brand} gebruikt: alleen strikt noodzakelijke cookies, geen advertentiecookies. Lees het cookiebeleid.`,
+      description: (brand: string) => `Welke cookies de website van ${brand} gebruikt: doeleinden, bewaartermijnen en het beheer van uw toestemming.`,
     },
     h1: 'Cookiebeleid',
     paragraphs: (siteHost: string, appHost: string) => [
-      `De website ${siteHost} gebruikt uitsluitend cookies die strikt noodzakelijk zijn voor de werking ervan (beveiliging, load balancing). Er worden op dit moment geen advertentiecookies of analytische cookies van derden geplaatst.`,
-      'Als er tools voor bezoekersstatistieken of advertenties worden toegevoegd, vraagt een banner om uw toestemming voordat er iets wordt geplaatst, en wordt deze pagina bijgewerkt met de lijst van cookies, hun doel en hun bewaartermijn.',
-      `De klantomgeving (${appHost}) gebruikt sessiecookies die nodig zijn om in te loggen.`,
+      `Strikt noodzakelijke cookies: de website ${siteHost} plaatst de cookies die nodig zijn voor de werking ervan (beveiliging, load balancing). Daarvoor is geen toestemming nodig.`,
+      `Toestemmingscookie: de cookie pia_consent onthoudt uw keuze (accepteren of weigeren) gedurende 6 maanden, op het domein permanenceia.com en in de klantomgeving (${appHost}).`,
+      'Bezoekersstatistieken, alleen met uw toestemming: Google Analytics 4 (Google Ireland Ltd / Google LLC) meet het bezoek aan de website en de effectiviteit van onze campagnes, in de vorm van geaggregeerde statistieken. Geplaatste cookies: _ga en _ga_<ID>, maximaal 13 maanden bewaard. Gegevens kunnen naar de Verenigde Staten worden doorgegeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',
+      'Er worden geen advertentie- of targetingcookies geplaatst.',
+      'U kunt uw keuze op elk moment wijzigen via de link “Cookies beheren” onderaan elke pagina. Weigeren heeft geen invloed op het gebruik van de website.',
+      `De widget van onze assistent, geladen vanaf ${appHost}, kan technische opslag gebruiken die nodig is voor het gesprek. De klantomgeving (${appHost}) gebruikt sessiecookies die nodig zijn om in te loggen.`,
     ],
     questions: 'Vragen: ',
   },
@@ -759,15 +762,15 @@ export const UI_PAGES = {
       title: (brand: string) => `Blog: AI-telefoonassistent en bereikbaarheid · ${brand}`,
       description: 'Artikelen van experts, praktijkvoorbeelden en uitgebreide gidsen om de telefonische conversie van uw bedrijf te verbeteren met AI-spraakagents.',
     },
-    eyebrow: 'Kennis & inzichten',
-    h1: 'Het journaal van de AI-receptie',
+    eyebrow: 'Kennis en inzichten',
+    h1: 'Blog over AI-telefonie en bereikbaarheid',
     intro: 'Strategieën voor telefonische conversie, analyses van regelgeving en concrete ervaringen van professionals.',
-    searchPlaceholder: 'Zoek een artikel...',
+    searchPlaceholder: 'Zoek een artikel…',
     all: 'Alle artikelen',
     categories: {
       productivite: 'Productiviteit',
       conformite: 'Compliance',
-      'cas-client': 'Klantcase',
+      'cas-client': 'Klantverhalen',
       technique: 'Techniek',
     },
     read: 'Lezen',
@@ -781,9 +784,9 @@ export const UI_PAGES = {
     articleTitle: (title: string, brand: string) => `${title} | Blog ${brand}`,
     backToList: 'Terug naar het artikeloverzicht',
     readTime: (t: string) => `${t} leestijd`,
-    publisher: (brand: string) => `${brand} Publicaties`,
+    publisher: (brand: string) => `Redactie ${brand}`,
     ctaEyebrow: 'Ga aan de slag',
-    ctaTitle: 'Klaar om uw bedrijf uit te rusten met een AI-telefoniedienst?',
+    ctaTitle: 'Klaar om uw telefoon te laten beantwoorden door AI?',
     ctaText: (days: number, minutes: number) => `Test onze spraakagent vandaag nog ${days} dagen lang in de praktijk, met ${minutes} minuten inbegrepen en zonder verplichtingen.`,
     ctaButton: 'Gratis starten',
   },

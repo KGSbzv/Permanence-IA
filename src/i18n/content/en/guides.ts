@@ -233,7 +233,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Variables and post-call data',
         list: [
-          '"Variables" tab: add fields such as {customer_name} to personalise each call.',
+          '"Variables" tab: add fields such as {{customer_name}} to personalise each call.',
           '"Post-Call" tab: define what to extract from each call (appointment booked, level of interest…). You can ask the AI: "What data should I collect?"',
         ],
       },
@@ -253,12 +253,13 @@ export const GUIDES: Guide[] = [
           'Aim for 5 to 10 seconds: hello, business name, question.',
           'Use punctuation for pauses ("…" adds a beat).',
           'Write numbers the way they should be spoken.',
-          'Example: "Good morning, Martin & Co, Julie speaking… How can I help?"',
+          'Example: "Good morning, Martin & Co, this is Julie, the firm’s virtual assistant… How can I help?"',
+          'The greeting must say that the caller is speaking with an AI assistant.',
         ],
       },
       {
         title: 'Recorded greeting',
-        text: 'For a fully human feel, you can upload an audio file that plays when the call is answered.',
+        text: 'For a more personal touch, you can upload an audio file that plays when the call is answered. It must still say that the caller is speaking with an AI assistant.',
         steps: [
           'Record the greeting somewhere quiet (under 10 seconds).',
           'Upload the file in the agent’s settings and switch playback on.',
@@ -525,7 +526,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Get a number and assign it to an agent',
     summary: 'Buy a dedicated number from your account, or keep your own, then connect it to your agent.',
-    plan: 'Dedicated numbers from {numberFrom} a month depending on the country; the number included depends on your plan.',
+    plan: 'Dedicated numbers from {numberFrom} a month depending on the country; how many you can have depends on your plan.',
     sections: [
       {
         title: 'Buy a number',
@@ -769,7 +770,7 @@ export const GUIDES: Guide[] = [
           'To change the settings: pause the campaign, make your changes, then restart it. Nothing is lost.',
           'Fallback option: after the last call attempt, send a single SMS or WhatsApp template.',
         ],
-        tip: 'Start with 2 or 3 attempts during office hours in your contacts’ country, and always honour opt-out requests ("Blacklist" menu).',
+        tip: 'Start with 2 or 3 attempts during office hours in your contacts’ country, and always honour opt-out requests (exclusion list, "Blacklist" menu).',
       },
     ],
     related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
@@ -1003,17 +1004,18 @@ export const GUIDES: Guide[] = [
     slug: 'qui-peut-on-appeler',
     category: 'outbound',
     title: 'Who can your agent call?',
-    summary: 'The rules to follow before an outbound call campaign: consent, customer relationship, calling hours, opt-outs and transparency.',
+    summary: 'The rules to follow before an outbound call campaign: consent, calling hours, opt-outs and transparency.',
     plan: 'Campaigns: from the Assistant plan. This guide is for information only and is not legal advice.',
     sections: [
       {
         title: 'The golden rule',
-        text: 'Only call people you have a legitimate, provable reason to speak to: they asked for a callback, they agreed to be contacted, or the call is about a contract or service they have with you. Keep proof of that basis (form, date, channel).',
+        text: 'Only call people who asked for a callback or agreed to be contacted, and keep proof of it (form, date, channel). A call strictly about an ongoing service, such as confirming an appointment, is not the same as a sales call, but do not assume that your existing customers can always be called without their agreement: check the rules that apply to you.',
       },
       {
         title: 'In the United Kingdom',
         list: [
           'Screen your numbers against the TPS (individuals) and the CTPS (businesses) before any marketing call, unless the person has specifically agreed to calls from you.',
+          'Marketing calls made by an automated system, such as an AI agent, may require prior consent under PECR: when in doubt, get it first.',
           'Apply PECR and UK GDPR: identify your business, give a valid number to call back, and honour any objection immediately.',
           'A callback the person asked for, an appointment to confirm or a follow-up on an ongoing service is not cold calling.',
           'Bought lists and numbers scraped from directories are best avoided.',
@@ -1030,8 +1032,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'In other countries',
         list: [
-          'France: since 11 August 2026, telephone marketing to consumers requires their prior, free and explicit consent (Article L223-1 of the French Consumer Code), and it is up to you to prove it.',
-          'Italy: Registro pubblico delle opposizioni. Poland: prior consent to telephone marketing. Netherlands: prior consent or an existing customer relationship.',
+          'Each country has its own rules: prior consent, a national do-not-call register, permitted calling hours. Check them before calling contacts abroad.',
           'If in doubt, apply the strictest rule.',
         ],
       },
@@ -1040,7 +1041,7 @@ export const GUIDES: Guide[] = [
         list: [
           'The agent says at the start that it is an AI and that the call is recorded.',
           'It gives the real reason for the call ("you asked us to call you back on…").',
-          'If the person no longer wants to be called, add their number to the "Blacklist" menu: it will be excluded from every campaign.',
+          'If the person no longer wants to be called, add their number to the exclusion list ("Blacklist" menu): it will be excluded from every campaign.',
           'Call at reasonable times, on weekdays, in the contact’s local time.',
         ],
         tip: 'Before importing a list, note its source, the date of the relationship and the lawful basis. If you are ever audited, that record is what protects you.',
@@ -1072,7 +1073,7 @@ export const GUIDES: Guide[] = [
           'The agent gives no price, guarantee or advice you haven’t approved.',
           'It answers your 5 most common questions correctly.',
           'The recording announcement is there if calls are recorded.',
-          'Numbers not to call are in the "Blacklist" before any campaign.',
+          'Numbers not to call are on the exclusion list ("Blacklist" menu) before any campaign.',
           'You have listened to three full recordings and you are happy with the tone.',
         ],
         tip: 'Note what isn’t right, fix the instructions or the knowledge base, then rerun only the tests concerned.',
@@ -1100,7 +1101,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Listen back to 10 calls',
         steps: [
-          '"Calls" menu: pick 10 random calls from the month.',
+          '"Calls history" menu: pick 10 random calls from the month.',
           'For each one: was the request understood? was the right action taken? are you happy with the tone?',
           'Only change the instructions if the same problem comes up at least twice.',
         ],

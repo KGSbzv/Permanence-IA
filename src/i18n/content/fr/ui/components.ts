@@ -17,7 +17,7 @@ export const UI_COMPONENTS = {
       resources: 'Ressources',
     },
     resources: {
-      demo: 'Démo live',
+      demo: 'Démo en direct',
       integrations: 'Intégrations',
       security: 'Sécurité et conformité',
       faq: 'Questions fréquentes',
@@ -43,14 +43,14 @@ export const UI_COMPONENTS = {
     cols: {
       platform: 'Plateforme',
       allFeatures: 'Toutes les fonctionnalités',
-      offers: 'Offres',
+      offers: 'Forfaits',
       recharges: 'Recharges de minutes',
-      compare: 'Comparer les offres',
+      compare: 'Comparer les forfaits',
       sectors: 'Secteurs',
       resources: 'Ressources',
     },
     resources: {
-      demo: 'Démo live',
+      demo: 'Démo en direct',
       integrations: 'Intégrations',
       faq: 'Questions fréquentes',
       help: 'Aide de l’espace client',
@@ -70,7 +70,7 @@ export const UI_COMPONENTS = {
 
   callbackModal: {
     titleSupport: 'Demander un rappel du support',
-    titleCommercial: 'Laissez votre numéro, on vous rappelle',
+    titleCommercial: 'Laissez votre numéro, nous vous rappelons',
     intro: 'Choisissez votre créneau. Nous ne publions aucun numéro : c’est nous qui vous rappelons.',
     close: 'Fermer',
   },
@@ -98,7 +98,7 @@ export const UI_COMPONENTS = {
 
   ctas: {
     primary: 'Démarrer l’essai de 14 jours',
-    demo: 'Essayer en live notre agent',
+    demo: 'Essayer notre agent en direct',
     callback: 'Être rappelé',
   },
 
@@ -108,7 +108,7 @@ export const UI_COMPONENTS = {
     sendFailed: 'La demande n’a pas pu être envoyée.',
     retry: (email: string) => `Réessayez ou écrivez à ${email}.`,
     sentTitle: 'Demande de rappel envoyée',
-    sentText: 'Nous vous rappelons au créneau choisi. Un email de confirmation vous est envoyé si vous l’avez indiqué.',
+    sentText: 'Nous vous rappelons au créneau choisi. Si vous avez coché WhatsApp, la confirmation y arrive.',
     name: 'Nom',
     phone: 'Téléphone',
     sector: 'Secteur',
@@ -124,7 +124,7 @@ export const UI_COMPONENTS = {
     },
     preciseLabel: 'Date et heure (votre heure locale)',
     email: 'Email',
-    emailHint: '(pour la confirmation)',
+    emailHint: '(pour vous écrire si besoin)',
     need: 'Votre besoin',
     needPlaceholder: 'Ex. : je rate des appels le soir, je veux automatiser les rendez-vous…',
     consent: (brand: string) => `J’accepte d’être rappelé au numéro indiqué, y compris par un agent vocal IA de ${brand}. Mes données servent uniquement à traiter ma demande.`,
@@ -141,7 +141,7 @@ export const UI_COMPONENTS = {
       { title: 'Répondez même hors horaires', text: 'Soirs, week-ends, pendant vos rendez-vous : chaque appel reçoit une réponse.' },
       { title: 'Qualifiez automatiquement', text: 'L’agent pose vos questions et vous transmet une demande complète.' },
       { title: 'Réservez des rendez-vous', text: 'Directement dans votre agenda ; confirmation et rappel par SMS ou WhatsApp dès le forfait Assistant.' },
-      { title: 'Rappelez les prospects plus vite', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
+      { title: 'Rappelez vos prospects plus vite', text: 'Un formulaire rempli devient un appel en quelques minutes.' },
       { title: 'Gardez l’humain pour l’important', text: 'Transfert vers votre équipe quand la situation l’exige.' },
     ],
     seeAgent: 'Voir l’agent en détail',
@@ -155,16 +155,16 @@ export const UI_COMPONENTS = {
     // Même ordre que les icônes du composant : téléphonie, automatisation, CRM, messages, agenda, pilotage, sécurité.
     families: [
       { name: 'Téléphonie', items: ['Appels entrants et sortants', 'Numéro dédié en option', 'Intégration SIP', 'Transfert vers un humain', 'Identification de l’appelant'] },
-      { name: 'Automatisation', items: ['Consignes de l’agent', 'Scénarios automatisés sans code', 'Assistant d’automatisation', '300+ outils connectables'] },
+      { name: 'Automatisation', items: ['Consignes de l’agent', 'Scénarios automatisés sans code', 'Assistant d’automatisation', 'Plus de 300 outils connectables'] },
       { name: 'CRM et données', items: ['Tri et qualification des demandes', 'Base de connaissances', 'Historique des appels', 'Webhooks et API'] },
-      { name: 'Messages', items: ['SMS', 'WhatsApp et templates', 'Messenger et Instagram', 'Widget web'] },
+      { name: 'Messages', items: ['SMS', 'WhatsApp et modèles de messages', 'Messenger et Instagram', 'Widget web'] },
       { name: 'Agenda', items: ['Prise de rendez-vous', 'Confirmations et rappels', 'Reports et annulations'] },
       { name: 'Pilotage', items: ['Tableau de bord', 'Rapports détaillés', 'Rôles et permissions'] },
-      { name: 'Sécurité', items: ['Consentement et opt-out', 'Rétention configurable', 'Chiffrement en transit', 'Journal des actions'] },
+      { name: 'Sécurité', items: ['Consentement et droit d’opposition', 'Durée de conservation configurable', 'Chiffrement en transit', 'Journal des actions'] },
     ],
     centerTitle: 'Votre agent vocal IA',
     centerText: 'Au centre : un agent configuré pour votre activité. Autour : tout ce qu’il peut utiliser.',
-    perOffer: 'Voir ce qui est inclus par offre',
+    perOffer: 'Voir ce qui est inclus dans chaque forfait',
   },
 
   steps: {
@@ -172,19 +172,19 @@ export const UI_COMPONENTS = {
   },
 
   demoBlock: {
-    title: 'Essayez en live notre agent maintenant',
+    title: 'Essayez notre agent en direct, dès maintenant',
     intro: 'Parlez à l’agent depuis votre navigateur, ou faites-le sonner sur votre propre téléphone : 30 secondes suffisent pour juger la voix et la façon dont il traite une demande de votre secteur.',
-    launchTitle: 'Lancer la démo live',
+    launchTitle: 'Lancer la démo en direct',
     launchText: 'Une conversation réelle, sans installation.',
-    callbackTitle: 'Me faire rappeler',
+    callbackTitle: 'Être rappelé',
     callbackText: 'L’agent vous appelle au créneau choisi.',
     formTitle: 'Recevoir un appel de démonstration',
     formText: 'Gratuit, sans engagement. Vous entendez la voix et la façon dont l’agent qualifie une demande.',
-    submit: 'Me faire rappeler',
+    submit: 'Être rappelé',
   },
 
   sectorCards: {
-    seePage: (sectorLower: string) => `Voir la page ${sectorLower}`,
+    seePage: (sectorLower: string) => `Voir la page « ${sectorLower.charAt(0).toUpperCase()}${sectorLower.slice(1)} »`,
   },
 
   pricingCards: {
@@ -192,7 +192,7 @@ export const UI_COMPONENTS = {
     negotiated: 'Prix à la minute négocié',
     mostChosen: 'Recommandé',
     perMinute: (label: string) => `soit ${label}`,
-    details: 'Détail de l’offre',
+    details: 'Détail du forfait',
     billing: 'Période de facturation',
     monthly: 'Mensuel',
     annual: 'Annuel',
@@ -211,7 +211,7 @@ export const UI_COMPONENTS = {
     pricePerMonth: 'Prix HT / mois',
     includedMinutes: 'Minutes incluses',
     extraMinute: 'Minute supplémentaire',
-    phoneNumber: 'Acquisition d’un numéro',
+    phoneNumber: 'Numéro dédié (en option)',
     phoneNumberFrom: (price: string) => `dès ${price} / mois`,
     showAll: (n: number) => `Voir tous les modules (${n})`,
     showLess: 'Réduire le comparatif',
@@ -226,11 +226,11 @@ export const UI_COMPONENTS = {
     groups: [
       { key: 'llm', title: 'Modèles de langage', text: 'Le cerveau de l’agent : il comprend la demande et décide quoi répondre.' },
       { key: 's2s', title: 'Voix en temps réel', text: 'Modèles qui écoutent et parlent directement, pour les conversations les plus naturelles.' },
-      { key: 'tts', title: 'Synthèse vocale', text: 'Des centaines de voix naturelles, dans plus de 30 langues.' },
+      { key: 'tts', title: 'Synthèse vocale', text: 'Des centaines de voix naturelles, dans plus de 80 langues.' },
       { key: 'stt', title: 'Transcription', text: 'Reconnaissance de la parole rapide, même au téléphone.' },
       { key: 'channels', title: 'Canaux', text: 'Le même agent répond partout où vos clients vous écrivent ou vous appellent.' },
     ],
-    noKeys: ['Aucune clé API à gérer', 'Changez de modèle ou de voix en un clic', 'Une seule facture, en dollars HT'],
+    noKeys: ['Aucune clé API à gérer', 'Changez de modèle ou de voix en un clic', 'Une seule facture, en dollars US hors taxes'],
     note: 'Marques citées à titre descriptif : elles appartiennent à leurs propriétaires et désignent les technologies disponibles dans l’espace client, sans partenariat avec ces sociétés. La liste évolue avec la plateforme.',
     channelNames: { phone: 'Téléphone', sip: 'SIP', widget: 'Widget web', email: 'Email' },
   },
@@ -252,7 +252,7 @@ export const UI_COMPONENTS = {
       { title: 'Dépassements répétés', text: 'Nous vous proposons le forfait supérieur.' },
       { title: 'Recharges fréquentes', text: 'Votre tableau de bord vous indique que vous payez trop cher pour votre usage.' },
     ],
-    ruleCustom: (minutes: string) => `Au-delà de ${minutes} min régulières`,
+    ruleCustom: (minutes: string) => `Au-delà de ${minutes} min par mois, de façon régulière`,
     ruleCustomText: 'Nous construisons une offre sur mesure.',
     case1Minutes: (minutes: string) => `${minutes} min ce mois-ci`,
     case1Plan: (plan: string) => `${plan} + une recharge de crédit`,
@@ -261,8 +261,8 @@ export const UI_COMPONENTS = {
     case2Minutes: (minutes: string) => `${minutes} min chaque mois`,
     case2Plan: (plan: string) => `Passez au forfait ${plan}`,
     case2Note: (price: string, minutes: string, total: string, smallerPlan: string) =>
-      `${price} HT pour ${minutes} min, contre ≈ ${total} avec ${smallerPlan} + minutes supplémentaires. Moins cher, et de la marge.`,
-    case3Minutes: (minutes: string) => `${minutes} min régulières`,
+      `${price} HT pour ${minutes} min, contre ≈ ${total} HT avec ${smallerPlan} et des minutes supplémentaires. Moins cher, et de la marge.`,
+    case3Minutes: (minutes: string) => `${minutes} min chaque mois`,
     case3Plan: 'Offre sur mesure',
     case3Note: (plan: string) => `Au-delà du forfait ${plan}, nous négocions un prix à la minute adapté à votre volume.`,
     title: 'Ajoutez des minutes ou changez de forfait, au bon moment',
@@ -292,11 +292,11 @@ export const UI_COMPONENTS = {
     bestPlan: 'Forfait le moins cher pour ce volume',
     planCost: (plan: string) => `Coût ${plan}`,
     withExtra: (minutes: string, price: string) => `dont ${minutes} min supplémentaires à ${price}`,
-    customAbove: (minutes: string) => `Au-delà de ${minutes} min régulières, demandez une offre sur mesure.`,
+    customAbove: (minutes: string) => `Au-delà de ${minutes} min par mois de façon régulière, demandez une offre sur mesure.`,
     effectivePerMinute: 'Prix réel par minute',
     humanCost: 'Coût d’un accueil humain',
     savings: 'Économie mensuelle',
-    noSavings: 'À ce volume, l’agent coûte un peu plus qu’une personne, mais répond 24/7 et en parallèle.',
+    noSavings: 'À ce volume, l’agent coûte un peu plus qu’une personne, mais il répond 24 h/24 et prend plusieurs appels à la fois.',
     recovered: 'Chiffre d’affaires récupéré (estimation)',
     recoveredDetail: (calls: string) => `${calls} appels manqués rattrapés par mois`,
     netBenefit: 'Bénéfice mensuel estimé',
@@ -314,7 +314,7 @@ export const UI_COMPONENTS = {
     human: 'Poste d’accueil à temps plein',
     ai: 'Agent IA',
     rows: [
-      { label: 'Coût mensuel', human: 'Au moins le SMIC (1 867 € brut par mois en 2026), plus les charges patronales', ai: 'Dès {from} HT par mois (350 min), ou {payg} la minute sans abonnement' },
+      { label: 'Coût mensuel', human: 'Au moins le coût d’un salarié au SMIC, cotisations patronales comprises', ai: 'Dès {from} HT par mois (350 min), ou {payg} la minute sans abonnement' },
       { label: 'Heures couvertes', human: '35 h par semaine', ai: '24 h/24, 7 j/7 (168 h par semaine)' },
       { label: 'Appels en même temps', human: 'Un seul', ai: 'Plusieurs en parallèle' },
       { label: 'Langues', human: 'Une, parfois deux', ai: 'Plus de 80, avec des voix natives' },
@@ -323,16 +323,16 @@ export const UI_COMPONENTS = {
       { label: 'Régularité', human: 'Variable selon la charge et l’heure', ai: 'Les mêmes règles à chaque appel' },
       { label: 'Notes après l’appel', human: 'Manuelles, quand on a le temps', ai: 'Résumé, transcription et données extraites automatiquement' },
     ],
-    note: 'Un humain reste indispensable pour les cas sensibles : l’agent lui transmet un résumé et organise le rappel. Beaucoup de clients gardent leur accueil et confient à l’agent les débordements, la pause déjeuner, le soir et le week-end. Sans frais de mise en service, sans engagement.',
+    note: 'Un humain reste indispensable pour les cas sensibles : l’agent lui transmet un résumé et organise le rappel. Vous pouvez aussi garder votre accueil et confier à l’agent les débordements, la pause déjeuner, le soir et le week-end. Sans frais de mise en service, sans engagement.',
   },
 
   security: {
     items: [
-      { title: 'Consentement et opt-out', text: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
+      { title: 'Consentement et droit d’opposition', text: 'Consentement au rappel, gestion des refus, plages d’appel autorisées et liste d’exclusion.' },
       { title: 'Protection des données', text: 'Chiffrement en transit, accès protégé par compte et durée de conservation configurable.' },
       { title: 'Traçabilité', text: 'Historique des appels, transcriptions et journal des actions pour chaque compte.' },
       { title: 'Contrôle des accès', text: 'Chaque client dispose de son espace sécurisé ; l’agent n’accède qu’aux informations que vous lui donnez.' },
-      { title: 'Préparation réglementaire', text: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression des appels et enregistrements, rétention. Accord de traitement des données (DPA) sur demande.' },
+      { title: 'Préparation réglementaire', text: 'Outils pour appliquer le RGPD : information, droit d’accès, suppression des appels et enregistrements, rétention. Accord de traitement des données (DPA) intégré aux Conditions (article 8) ; version signée sur demande.' },
       { title: 'Infrastructure', text: 'Plateforme hébergée chez des fournisseurs cloud reconnus, avec sauvegardes et surveillance.' },
     ],
     title: 'Sécurité et conformité pour vos appels IA',
@@ -354,7 +354,7 @@ export const UI_COMPONENTS = {
   finalCta: {
     title: 'Prêt à automatiser vos appels ?',
     primary: 'Démarrer l’essai de 14 jours',
-    demo: 'Voir la démo live',
+    demo: 'Voir la démo en direct',
     advisorTitle: 'Parler à un conseiller',
     advisorText: 'Laissez votre numéro : nous vous rappelons pour répondre à vos questions.',
   },
@@ -367,7 +367,7 @@ export const UI_COMPONENTS = {
     roles: [
       { name: 'Réceptionniste', text: 'Répond aux appels, renseigne et prend les rendez-vous.' },
       { name: 'Commercial', text: 'Qualifie les demandes et repère les projets à rappeler.' },
-      { name: 'Support', text: 'Répond aux questions de vos clients et escalade si besoin.' },
+      { name: 'Support', text: 'Répond aux questions de vos clients et transmet à un humain si besoin.' },
     ],
     langLabel: 'Langue',
     accents: { fr: 'Français de Paris', 'en-gb': 'Anglais britannique', 'en-au': 'Anglais australien', it: 'Italien', pl: 'Polonais', nl: 'Néerlandais', he: 'Hébreu israélien' },
@@ -393,17 +393,17 @@ export const UI_COMPONENTS = {
     phoneCta: 'Faire sonner mon téléphone',
     phoneLegal: 'Appel gratuit, sans engagement. Votre numéro sert uniquement à cette démonstration.',
     sentTitle: 'C’est noté',
-    sentText: (name: string) => `${name} vous appelle dans les minutes qui suivent pendant les heures d’ouverture (du lundi au samedi, 9 h – 19 h). Gardez votre téléphone à portée de main.`,
+    sentText: (name: string) => `${name} vous appelle dans les minutes qui suivent, aux heures d’ouverture (du lundi au samedi, de 9 h à 19 h, heure de Paris). Gardez votre téléphone à portée de main.`,
     again: 'Faire un autre essai',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'agent vocal' : 'agente vocale'} IA (${accent})`,
     voiceLabel: 'Voix',
     voiceOption: (name: string, male: boolean) => `${name}, voix ${male ? 'masculine' : 'féminine'}`,
   },
 
-  industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Médecine esthétique', 'Kinés', 'Ostéopathes', 'Vétérinaires'],
+  industryMarquee: ['Plombiers', 'Électriciens', 'Cabinets dentaires', 'Cliniques', 'Agences immobilières', 'Gestion locative', 'Garages', 'Carrosseries', 'Salons de coiffure', 'Barbiers', 'Instituts de beauté', 'Restaurants', 'Hôtels', 'Avocats', 'Experts-comptables', 'E-commerce', 'Courtiers', 'Syndics', 'Médecine esthétique', 'Kinésithérapeutes', 'Ostéopathes', 'Vétérinaires'],
 
   // Même ordre que les drapeaux du composant.
-  languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Belgique', 'Suisse', 'Québécois', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois', 'Hébreu'],
+  languageMarquee: ['Français', 'Anglais', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Néerlandais', 'Français de Belgique', 'Français de Suisse', 'Français du Québec', 'Arabe', 'Polonais', 'Roumain', 'Turc', 'Suédois', 'Hébreu'],
 
   agentTeam: {
     // Même ordre que les icônes et liens du composant.
@@ -411,20 +411,20 @@ export const UI_COMPONENTS = {
       { name: 'Réceptionniste IA', role: 'Répond à chaque appel, filtre et transfère ce qui compte.' },
       { name: 'Agent rendez-vous', role: 'Réserve, confirme, rappelle et gère les reports.' },
       { name: 'Agent qualification', role: 'Pose vos questions et prépare des fiches prêtes à traiter.' },
-      { name: 'Agent support', role: 'Répond depuis vos documents, escalade les cas sensibles.' },
+      { name: 'Agent support', role: 'Répond depuis vos documents, transmet les cas sensibles à votre équipe.' },
       { name: 'Agent relance', role: 'Confirme, relance les devis et réactive vos contacts.' },
       { name: 'Agent messages', role: 'Répond et confirme par SMS, WhatsApp et Instagram.' },
     ],
     title: 'Construisez votre équipe d’agents IA',
     intro: 'Chaque agent a un rôle précis. Activez ceux dont votre entreprise a besoin ; ils partagent le même historique et les mêmes informations.',
     custom: 'Besoin d’un scénario particulier ? Nous configurons un agent sur mesure.',
-    virtualNote: 'Jade, Daan, Katie et leurs collègues sont des agents IA virtuels : leurs visages sont des illustrations générées, pas des personnes réelles.',
+    virtualNote: 'Nos agents sont des agents IA virtuels : leurs visages sont des illustrations générées, pas des personnes réelles.',
   },
 
   sectorShowcase: {
     chooseSector: 'Choisir un secteur',
-    agentFor: (sectorLower: string) => `Agent ${sectorLower}`,
-    seeSolution: (sectorLower: string) => `Voir la solution ${sectorLower}`,
+    agentFor: (sectorLower: string) => `Agent · ${sectorLower.charAt(0).toUpperCase()}${sectorLower.slice(1)}`,
+    seeSolution: (sectorLower: string) => `Voir la solution « ${sectorLower.charAt(0).toUpperCase()}${sectorLower.slice(1)} »`,
   },
 
   scenarioExplorer: {
@@ -432,7 +432,7 @@ export const UI_COMPONENTS = {
     answering: (agentName: string) => `${agentName} décroche`,
     replay: 'Rejouer l’appel',
     benefitsTitle: 'Ce que ça change pour vous',
-    planLabel: 'Offre conseillée',
+    planLabel: 'Forfait conseillé',
     tryLive: 'Essayer ce scénario en direct',
   },
 
@@ -499,7 +499,7 @@ export const UI_COMPONENTS = {
     ariaLabel: 'Étapes du parcours',
     // Même ordre que les icônes et maquettes du composant.
     stages: [
-      { key: 'Attirer', title: 'Captez chaque demande', items: ['Landing pages par secteur', 'Widget web : parler ou être rappelé', 'Numéros locaux et renvoi de votre ligne', 'Réponse 24/7 aux appels et messages'] },
+      { key: 'Attirer', title: 'Captez chaque demande', items: ['Pages d’atterrissage par secteur', 'Widget web : parler ou être rappelé', 'Renvoi de votre ligne ou numéro dédié', 'Réponse 24/7 aux appels et messages'] },
       { key: 'Convertir', title: 'Transformez les demandes en clients', items: ['Qualification selon vos critères', 'Rappel des prospects en quelques minutes', 'Prise de rendez-vous dans votre agenda', 'Fiche CRM créée automatiquement'] },
       { key: 'Fidéliser', title: 'Gardez le lien avec vos clients', items: ['Confirmations et rappels', 'Support répondant depuis vos documents', 'Relances, renouvellements et enquêtes', 'WhatsApp, SMS, Instagram'] },
       { key: 'Mesurer', title: 'Pilotez avec des chiffres réels', items: ['Volumes, durées et résultats', 'Rendez-vous pris et transferts', 'Usage des minutes et alertes', 'Écoute des appels et transcriptions'] },
@@ -577,8 +577,8 @@ export const UI_COMPONENTS = {
     numbers: {
       title: 'Vos lignes',
       rows: [
-        { country: 'France', kind: 'Numéro local', agent: 'Agent d’accueil' },
-        { country: 'Belgique', kind: 'Numéro local', agent: 'Agent rendez-vous' },
+        { country: 'Votre numéro', kind: 'Renvoi d’appel', agent: 'Agent d’accueil' },
+        { country: 'Royaume-Uni', kind: 'Numéro dédié', agent: 'Agent rendez-vous' },
         { country: 'Votre standard', kind: 'Trunk SIP', agent: 'Renvoi hors horaires' },
       ],
     },
@@ -594,7 +594,7 @@ export const UI_COMPONENTS = {
     },
     whatsapp: {
       title: 'WhatsApp · Confirmation',
-      confirmation: 'Votre rendez-vous est confirmé mardi à 9 h 30. Répondez 2 pour le déplacer.',
+      confirmation: 'Votre rendez-vous est confirmé pour mardi à 9 h 30. Répondez 2 pour le déplacer.',
       reply: 'Parfait, merci !',
     },
     campaign: {

@@ -20,20 +20,20 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   demo: {
     meta: {
       title: (brand: string) => `Demo asystenta głosowego AI na żywo · ${brand}`,
-      description: 'Porozmawiaj z asystentem głosowym AI na żywo lub odbierz połączenie demo dopasowane do Twojej branży. Bezpłatnie i bez zobowiązań — wypróbuj teraz.',
+      description: 'Porozmawiaj z asystentem głosowym AI na żywo lub zamów połączenie demo dopasowane do Twojej branży. Bezpłatnie i bez zobowiązań — wypróbuj teraz.',
     },
     h1: 'Wypróbuj naszego asystenta głosowego AI na żywo',
     intro: 'Zostaw numer i wybierz branżę: agent zadzwoni do Ciebie i odegra scenariusz z Twojej branży. Usłyszysz jego głos, tempo i sposób, w jaki kwalifikuje zgłoszenie.',
-    widgetHint: 'Wolisz od razu? Kliknij dymek w prawym dolnym rogu ekranu: nasza asystentka odpowie głosowo lub na piśmie.',
-    formTitle: 'Odbierz połączenie demonstracyjne',
+    widgetHint: 'Nie chcesz czekać? Kliknij dymek w prawym dolnym rogu ekranu: nasza asystentka odpowie głosowo lub na piśmie.',
+    formTitle: 'Zamów połączenie demonstracyjne',
     formIntro: 'Bezpłatne połączenie, w wybranym przez Ciebie terminie.',
-    submit: 'Odbierz połączenie demo',
+    submit: 'Zamów połączenie demo',
     hearTitle: 'Co usłyszysz',
-    hearIntro: 'Przykład rozmowy w gabinecie stomatologicznym: agent rozpoznaje sprawę, proponuje termin i przygotowuje kartę dla zespołu.',
+    hearIntro: 'Przykład rozmowy w gabinecie stomatologicznym: agent rozpoznaje sprawę, proponuje termin i przygotowuje dla zespołu notatkę ze zgłoszeniem.',
     steps: [
       { title: 'Zostawiasz numer', text: 'Wraz z branżą i preferowanym terminem.' },
       { title: 'Agent do Ciebie dzwoni', text: 'Odgrywa scenariusz z Twojej branży.' },
-      { title: 'Testujesz bez ograniczeń', text: 'Zadawaj pytania, zmieniaj zdanie, przerywaj mu.' },
+      { title: 'Testujesz swobodnie', text: 'Zadawaj pytania, zmieniaj zdanie, przerywaj mu.' },
     ],
     liveCallTitle: 'Agent gabinetu stomatologicznego',
     scenariosTitle: 'Wybierz scenariusz',
@@ -54,7 +54,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     legal: (brand: string, company: string) => `${brand} jest marką firmy ${company}, ${ADDRESS}, Stany Zjednoczone.`,
     tabsLabel: 'Rodzaj zgłoszenia',
     tabCommercial: 'Sprzedaż i demo',
-    tabSupport: 'Obsługa klienta',
+    tabSupport: 'Wsparcie techniczne',
   },
 
   faq: {
@@ -76,7 +76,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     h1: (m: number) => `Odbierz ${m} ${plural(m, 'darmową minutę', 'darmowe minuty', 'darmowych minut')}`,
     intro: (d: number) => `Załóż konto, wybierz pakiet do przetestowania i wypróbuj asystenta głosowego AI w swojej firmie przez ${days(d)}.`,
     points: (d: number) => [
-      `Karta wymagana przy aktywacji, przez ${days(d)} nic nie jest pobierane`,
+      `Karta wymagana przy aktywacji — przez ${days(d)} nie pobieramy żadnych opłat`,
       'Anuluj w panelu klienta przed końcem okresu próbnego: nic nie zapłacisz',
       'Demo na żywo i widżet na stronę w cenie',
       'Pomoc przy pierwszej konfiguracji',
@@ -121,11 +121,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
 
   help: {
     meta: {
-      title: (brand: string) => `Pomoc do panelu klienta — ${brand}`,
+      title: (brand: string) => `Przewodnik po panelu klienta — ${brand}`,
       description: 'Przewodnik po panelu klienta w języku polskim: tłumaczenie menu, tworzenie agenta, numery, kalendarz, widżet, minuty i rozliczenia.',
     },
     breadcrumb: 'Pomoc',
-    h1: 'Pomoc do Twojego panelu klienta',
+    h1: 'Przewodnik po Twoim panelu klienta',
     intro: 'Twój panel klienta jest wyświetlany po angielsku. Ten przewodnik tłumaczy każde menu i prowadzi Cię krok po kroku. W panelu asystentka pomocy (dymek w prawym dolnym rogu) również odpowiada na pytania w Twoim języku, na piśmie lub głosowo.',
     openSpace: 'Otwórz panel klienta',
     chatLabel: 'Przykładowa rozmowa z asystentką pomocy',
@@ -133,7 +133,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     chatMode: 'Na piśmie lub głosowo',
     chat: [
       { me: true, text: 'Gdzie mogę dokupić minuty?' },
-      { text: ['W prawym górnym rogu otwórz menu profilu i kliknij ', { b: 'Add credits' }, ' (doładowanie środków). Wybierz doładowanie: środki nie wygasają.'] },
+      { text: ['W prawym górnym rogu otwórz menu profilu i kliknij ', { b: 'Add credits' }, ' (doładowanie kredytów). Wybierz kwotę: kredyty nie wygasają.'] },
       { me: true, text: 'A jak umieścić agenta na mojej stronie?' },
       { text: ['Otwórz swojego agenta w ', { b: 'Assistants' }, ', sekcja ', { b: 'Web widget' }, ' (widżet na stronę): włącz go, a następnie skopiuj podany kod. Zrobimy to razem?'] },
     ] as ChatLine[],
@@ -153,11 +153,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string, company: string) => `${brand} pomaga firmom odbierać każde połączenie dzięki asystentom głosowym AI i automatycznej obsłudze połączeń. Marka firmy ${company}.`,
     },
     h1: 'Każde połączenie zasługuje na odpowiedź',
-    intro: (brand: string) => `${brand} powstała z prostej obserwacji: małe firmy tracą klientów, bo nikt nie może odebrać telefonu we właściwym momencie.`,
+    intro: (brand: string) => `Marka ${brand} powstała z prostej obserwacji: małe firmy tracą klientów, bo nikt nie może odebrać telefonu we właściwym momencie.`,
     photoAlt: 'Właścicielka firmy sprawdza telefon w swoim biurze',
     paragraphs: [
       'Rzemieślnicy, gabinety, biura, warsztaty, salony, restauracje: Twój zespół jest zajęty obsługą klientów. W tym czasie dzwoni telefon.',
-      'Udostępniamy agentów głosowych AI, którzy odbierają telefony, kwalifikują zgłoszenia, umawiają wizyty i oddzwaniają, skonfigurowanych dla Twojej branży, z przejrzystymi cenami i bez zobowiązań.',
+      'Udostępniamy agentów głosowych AI skonfigurowanych dla Twojej branży, którzy odbierają telefony, kwalifikują zgłoszenia, umawiają wizyty i oddzwaniają — w przejrzystych cenach i bez zobowiązań.',
     ],
     principlesTitle: 'Nasze zasady',
     principles: [
@@ -182,13 +182,13 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Usunięcie rozmowy lub kontaktu na żądanie',
       'Lista wykluczeń dla połączeń wychodzących',
       'Dozwolone godziny połączeń',
-      'Informacja „asystent AI” na początku rozmowy',
+      'Informacja „asystent AI” na początku rozmowy: zawsze aktywna (treść można dostosować)',
       'Nagrywanie włączane lub wyłączane, ogłaszane dzwoniącemu na początku rozmowy',
       'Słowa lub tematy, których agent nigdy nie porusza (wyceny, diagnozy, porady)',
     ],
     infraTitle: 'Rozwiązanie zbudowane na certyfikowanej infrastrukturze',
-    infraIntro: 'Nasze rozwiązanie (agenci, zaplanowane oddzwonienia, przekierowania, strona i panel klienta) działa na infrastrukturze certyfikowanego dostawcy technicznego. Certyfikaty należą do dostawcy; wybraliśmy go, aby zapewnić Ci ten sam poziom wymagań.',
-    infraItems: ['Dostawca z certyfikatami ISO/IEC 27001:2022 (bezpieczeństwo informacji) i ISO 9001:2015 (jakość)', 'Szyfrowanie AES-256 danych w spoczynku i TLS w transmisji', 'Dostęp według ról, uwierzytelnianie dwuskładnikowe i dzienniki audytu', 'Automatyczne kopie zapasowe i odtwarzanie w kilku strefach', 'Zgodność z RODO, konfigurowalny okres przechowywania i automatyczne usuwanie', 'Płatności obsługiwane przez Stripe z certyfikatem PCI-DSS poziomu 1'],
+    infraIntro: 'Nasze rozwiązanie (agenci, zaplanowane oddzwonienia, przekierowania, strona i panel klienta) działa na infrastrukturze certyfikowanego dostawcy technicznego. Certyfikaty należą do dostawcy; wybraliśmy go, aby zapewnić Ci ten sam poziom bezpieczeństwa.',
+    infraItems: ['Dostawca z certyfikatami ISO/IEC 27001:2022 (bezpieczeństwo informacji) i ISO 9001:2015 (jakość)', 'Szyfrowanie AES-256 danych w spoczynku i TLS w transmisji', 'Dostęp według ról, uwierzytelnianie dwuskładnikowe i dzienniki audytu', 'Automatyczne kopie zapasowe i odtwarzanie w kilku strefach', 'Zgodność z RODO, konfigurowalny okres przechowywania i automatyczne usuwanie', 'Płatności obsługiwane przez Stripe z certyfikatem PCI DSS poziomu 1'],
     commitmentsTitle: 'Nasze zobowiązania',
     commitments: [
       'Agent przedstawia się jako AI i nie podszywa się pod człowieka',
@@ -196,10 +196,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Agent nie stawia diagnoz medycznych, prawnych ani finansowych',
       'Twoje dane nigdy nie są sprzedawane; służą do świadczenia i ulepszania usługi',
       'Pomoc w dostosowaniu klauzul informacyjnych',
-      'Umowa powierzenia przetwarzania danych (DPA) na każde życzenie',
+      'Umowa powierzenia przetwarzania danych (DPA) jest częścią Regulaminu (art. 8); wersja podpisana na życzenie',
       'Prawo do usunięcia danych: połączenie, jego nagranie i transkrypcja są usuwane na żądanie',
       'Agent informuje o nagrywaniu rozmowy; osoba, która się nie zgadza, może zamiast tego napisać do nas',
-      'Kampanie wychodzące: zachowujesz dowód podstawy prawnej (relacja z klientem lub zgoda); w Polsce marketing telefoniczny wymaga uprzedniej zgody abonenta (Prawo komunikacji elektronicznej, RODO), a we Francji taki wymóg obowiązuje od 11 sierpnia 2026 r.',
+      'Kampanie wychodzące: dzwonisz wyłącznie do klientów, którzy wyrazili zgodę na kontakt telefoniczny (art. 398 PKE), i przechowujesz dowód tej zgody; w Polsce marketing telefoniczny i automatyczne systemy wywołujące wymagają uprzedniej zgody abonenta lub użytkownika końcowego, także wobec firm (art. 398 ustawy – Prawo komunikacji elektronicznej).',
     ],
     rights: ['W razie pytań lub w celu skorzystania ze swoich praw: ', { a: 'polityka prywatności', href: '/confidentialite' }, '.'] as Rich,
   },
@@ -238,8 +238,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       title: (brand: string) => `Regulamin (warunki korzystania i sprzedaży) — ${brand}`,
       description: (brand: string) => `Zapoznaj się z ogólnymi warunkami korzystania i sprzedaży dotyczącymi pakietów i usług telefonicznej recepcji AI ${brand}.`,
     },
-    h1: 'Ogólne Warunki Korzystania i Sprzedaży (Regulamin)',
-    updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 6 października 2026',
+    h1: 'Ogólne warunki korzystania i sprzedaży (Regulamin)',
+    updated: 'Dotyczy przedsiębiorców i firm • Ostatnia aktualizacja: 6 października 2026 r.',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -285,7 +285,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
               ],
             },
             { p: 'Umowy zawierane między przedsiębiorcami nie przewidują prawa odstąpienia przysługującego konsumentom. Okres próbny pozwala przetestować Usługę przed jakąkolwiek płatnością i bezpłatnie ją anulować przed jego końcem.' },
-            { p: [{ strong: 'Każdy opłacony okres jest należny w całości i nie podlega zwrotowi' }, ', nawet częściowemu, w tym w razie wypowiedzenia, niekorzystania, przejścia na niższy pakiet, zawieszenia lub zamknięcia konta, a także za niewykorzystaną część okresu rocznego. Kredyty nie podlegają zwrotowi, nie są zbywalne i nie można ich wymienić na gotówkę; zakupiony kredyt nie wygasa, dopóki konto jest otwarte, i przepada z chwilą jego zamknięcia.'] },
+            { p: [{ strong: 'Każdy opłacony okres jest należny w całości i nie podlega zwrotowi' }, ', nawet częściowemu, w tym w razie wypowiedzenia, niekorzystania, przejścia na niższy pakiet, zawieszenia lub zamknięcia konta, a także za niewykorzystaną część okresu rocznego. Kredyty nie podlegają zwrotowi, nie są zbywalne i nie można ich wymienić na gotówkę; zakupione kredyty nie wygasają, dopóki konto jest otwarte, i przepadają z chwilą jego zamknięcia.'] },
           ],
         },
         {
@@ -295,8 +295,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
               ul: [
                 'Ceny podane są w dolarach amerykańskich (USD), bez podatków. Należne podatki są naliczane przy płatności w zależności od kraju Klienta i jego statusu podatkowego (z numerem VAT lub bez) i obciążają Klienta. Jeżeli Klient musi pobrać podatek u źródła, powiększa płatność tak, abyśmy otrzymali zafakturowaną kwotę.',
                 'Pakiety są płatne z góry, miesięcznie lub rocznie według wyboru Klienta (rozliczenie roczne daje dwa miesiące gratis), za pośrednictwem naszego operatora płatności Stripe. Subskrypcja odnawia się automatycznie na okres tej samej długości, a Klient upoważnia nas do pobierania cyklicznych płatności. Przy rozliczeniu rocznym minuty w pakiecie są przydzielane co miesiąc, a Usługa jest identyczna.',
-                'Użycie ponad pakiet (dodatkowe minuty, wiadomości, numery telefonów, opłaty naliczane przez operatorów lub Meta) jest pobierane z kredytu lub fakturowane według aktualnych stawek podanych na stronie Cennik lub w panelu klienta.',
-                ['Klient może wypowiedzieć subskrypcję w każdej chwili, bez okresu wypowiedzenia, w panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu (bieżącego miesiąca lub, przy rozliczeniu rocznym, bieżącego roku), bez zwrotu (artykuł 3). Klient może w każdej chwili zmienić pakiet lub doładować kredyt; zasady zmiany są podane w panelu klienta.'],
+                'Użycie ponad pakiet (dodatkowe minuty, wiadomości, numery telefonów, opłaty naliczane przez operatorów lub Meta) jest pobierane z kredytów lub fakturowane według aktualnych stawek podanych na stronie „Cennik” lub w panelu klienta.',
+                ['Klient może wypowiedzieć subskrypcję w każdej chwili, bez okresu wypowiedzenia, w panelu ', { strong: appHost }, '. Wypowiedzenie staje się skuteczne z końcem już opłaconego okresu (bieżącego miesiąca lub, przy rozliczeniu rocznym, bieżącego roku), bez zwrotu (artykuł 3). Klient może w każdej chwili zmienić pakiet lub doładować kredyty; zasady zmiany są podane w panelu klienta.'],
                 'Możemy zmienić ceny z 30-dniowym wyprzedzeniem, informując e-mailem lub w panelu klienta; nowa cena obowiązuje od następnego odnowienia. Klient, który jej nie akceptuje, wypowiada subskrypcję przed tą datą. Opłaty podmiotów trzecich przenoszone na Klienta (operatorzy, Meta) mogą się zmieniać w terminach narzuconych przez te podmioty.',
                 'W razie nieudanej lub opóźnionej płatności możemy zawiesić całość lub część Usługi do czasu uregulowania należności, bez przedłużania okresu. Od nieopłaconych kwot naliczamy odsetki w wysokości 1,5% miesięcznie lub, jeśli jest niższa, maksymalnej dopuszczalnej stopy, a także ustawową rekompensatę za koszty odzyskiwania należności, jeśli ma zastosowanie, oraz faktycznie poniesione koszty windykacji.',
                 'Każde zakwestionowanie płatności (chargeback) bez wcześniejszej reklamacji skierowanej do nas skutkuje natychmiastowym zawieszeniem konta; wszystkie należności stają się natychmiast wymagalne wraz z kosztami obciążenia zwrotnego i windykacji.',
@@ -332,10 +332,10 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Zgoda:' }, ' przed każdym zautomatyzowanym, wychodzącym lub marketingowym połączeniem lub wiadomością (głos, SMS, WhatsApp) uzyskuje zgody wymagane przez prawo, przechowuje dowody ich udzielenia i niezwłocznie respektuje każdy sprzeciw (słowo STOP, prośba ustna lub pisemna).'],
-                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: polskie przepisy wymagające uprzedniej zgody na marketing telefoniczny (Prawo komunikacji elektronicznej), we Francji uprzednia, wyraźna zgoda osoby na telemarketing od 11 sierpnia 2026 r. (art. L223-1 francuskiego Kodeksu konsumenckiego), TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
+                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: w Polsce — wymóg uprzedniej zgody abonenta lub użytkownika końcowego na marketing bezpośredni z użyciem telefonu i automatycznych systemów wywołujących, także wobec firm (art. 398 ustawy – Prawo komunikacji elektronicznej); TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
                 [{ strong: 'Godziny i częstotliwość:' }, ' przestrzega dozwolonych dni, godzin i częstotliwości połączeń.'],
                 [{ strong: 'Identyfikacja:' }, ' prezentuje ważny, przydzielony mu numer, nie podszywa się pod cudze numery i jasno się przedstawia.'],
-                [{ strong: 'Przejrzystość:' }, ' od początku rozmowy wyraźnie informuje Odbiorców, że komunikują się z systemem sztucznej inteligencji (w szczególności zgodnie z unijnym aktem w sprawie sztucznej inteligencji), a jeżeli wymaga tego prawo — że rozmowa jest nagrywana lub transkrybowana, i uzyskuje ich zgodę, gdy jest wymagana.'],
+                [{ strong: 'Przejrzystość:' }, ' od początku rozmowy wyraźnie informuje Odbiorców, że komunikują się z systemem sztucznej inteligencji (w szczególności zgodnie z art. 50 rozporządzenia (UE) 2024/1689 — aktu w sprawie sztucznej inteligencji), a jeżeli wymaga tego prawo — że rozmowa jest nagrywana lub transkrybowana, i uzyskuje ich zgodę, gdy jest wymagana.'],
                 [{ strong: 'Platformy:' }, ' przestrzega zasad Meta (WhatsApp Business, Messenger, Instagram), w tym zatwierdzania szablonów i okien rozmów, oraz zasad operatorów (rejestracja nadawców, nadpisy alfanumeryczne). Podmioty te mogą ograniczyć konto lub numer bez naszej odpowiedzialności.'],
               ],
             },
@@ -360,7 +360,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Artykuł 8 — Dane Klienta i ochrona danych osobowych',
           body: [
-            { p: ['W odniesieniu do danych osobowych Odbiorców przetwarzanych w ramach Usługi Klient jest administratorem, a my działamy jako podmiot przetwarzający (art. 28 RODO i odpowiednie przepisy). Niniejszy artykuł i ', { a: 'polityka prywatności', href: '/confidentialite' }, ' stanowią umowę powierzenia przetwarzania danych; podpisaną umowę można zawrzeć w ramach pakietu „Na miarę”. My:'] },
+            { p: ['W odniesieniu do danych osobowych Odbiorców przetwarzanych w ramach Usługi Klient jest administratorem, a my działamy jako podmiot przetwarzający (art. 28 RODO i odpowiednie przepisy). Niniejszy artykuł i ', { a: 'polityka prywatności', href: '/confidentialite' }, ' stanowią umowę powierzenia przetwarzania danych; wersję podpisaną udostępniamy na życzenie. My:'] },
             {
               ul: [
                 'przetwarzamy dane wyłącznie na udokumentowane polecenie Klienta (Warunki i jego ustawienia), chyba że obowiązek wynika z prawa, i informujemy go, jeśli polecenie wydaje się niezgodne z prawem;',
@@ -387,12 +387,12 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           body: [
             {
               ul: [
-                `Usługa, jej oprogramowanie, interfejsy i dokumentacja, marka ${brand} i jej logotypy należą do nas lub naszych licencjodawców i podlegają ochronie, w szczególności na podstawie przepisów: ${legal.copyrightLaw}. Klient nie nabywa żadnych praw poza licencją opisaną poniżej.`,
+                `Usługa, jej oprogramowanie, interfejsy i dokumentacja, marka ${brand} i jej logotypy należą do nas lub naszych licencjodawców i podlegają ochronie, w szczególności na podstawie przepisów ${legal.copyrightLaw}. Klient nie nabywa żadnych praw poza licencją opisaną poniżej.`,
                 'Udzielamy Klientowi, na czas trwania subskrypcji, ograniczonej, niewyłącznej, niezbywalnej, bez prawa sublicencji i odwołalnej licencji na korzystanie z Usługi na jego wewnętrzne potrzeby zawodowe.',
                 'Klient zachowuje prawa do Treści Klienta. Udziela nam ogólnoświatowej, nieodpłatnej i niewyłącznej licencji na ich przechowywanie, kopiowanie, przetwarzanie, przesyłanie i wyświetlanie oraz powierzanie ich przetwarzania naszym podwykonawcom, wyłącznie w zakresie niezbędnym do świadczenia, zabezpieczania i wsparcia Usługi oraz przestrzegania prawa. Zapewnia, że posiada niezbędne prawa.',
                 'Sugestie i opinie Klienta możemy wykorzystywać swobodnie, nieodpłatnie i bez ograniczeń czasowych.',
                 'Klient nie używa naszych znaków towarowych bez pisemnej zgody. Możemy wskazywać nazwę i logo Klienta jako referencję, chyba że sprzeciwi się temu e-mailem.',
-                ['Aby zgłosić treść bezprawną lub naruszenie praw autorskich, napisz na adres ', mail, ', wskazując utwór, lokalizację treści, swoje dane kontaktowe i oświadczenie o działaniu w dobrej wierze. Możemy usunąć treść i zawiesić konta, które wielokrotnie naruszają prawa.'],
+                ['Aby zgłosić treść bezprawną lub naruszenie praw autorskich, należy napisać na adres ', mail, ', wskazując utwór, lokalizację treści, dane kontaktowe zgłaszającego i oświadczenie o działaniu w dobrej wierze. Możemy usunąć treść i zawiesić konta, które wielokrotnie naruszają prawa.'],
               ],
             },
           ],
@@ -411,7 +411,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 'Możemy rozwijać Usługę, dodawać, zmieniać lub wycofywać funkcje oraz zmieniać dostawców. O wycofaniu kluczowej funkcji płatnego pakietu informujemy z wyprzedzeniem, jeżeli jest to rozsądnie możliwe.',
                 'Funkcje beta, wersje zapoznawcze i eksperymentalne są udostępniane w stanie, w jakim są, bez zobowiązań, i mogą zostać wycofane w każdej chwili.',
                 'Naszym zobowiązaniem jest dołożenie należytej staranności. Nie obowiązuje żaden gwarantowany poziom usług (SLA), chyba że uzgodniono go na piśmie w umowie „Na miarę”. Usługa zależy od internetu, operatorów i naszych dostawców; planowane (zapowiadane w miarę możliwości) lub pilne prace konserwacyjne mogą ją przerwać.',
-                'Mogą obowiązywać limity rozsądnego użycia (połączenia równoczesne, przepustowość, wolumeny).',
+                'Mogą obowiązywać limity rozsądnego użycia (jednoczesne połączenia, przepustowość, wolumeny).',
               ],
             },
           ],
@@ -521,14 +521,14 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Prywatność',
     h1: 'Polityka prywatności',
     intro: 'Jakie dane zbieramy, w jakim celu, komu je przekazujemy, jak długo je przechowujemy i jak możesz skorzystać ze swoich praw.',
-    updated: 'Ostatnia aktualizacja: 6 października 2026',
+    updated: 'Ostatnia aktualizacja: 6 października 2026 r.',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
         {
           title: 'Kim jesteśmy i jaka jest nasza rola',
           body: [
-            { p: [`${brand} jest marką firmy ${company}, spółki typu Limited Liability Company zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, `. Dane osobowe przetwarzamy zgodnie z przepisami o ochronie danych: ${legal.privacyLaw}, oraz innymi obowiązującymi przepisami.`] },
+            { p: [`${brand} jest marką firmy ${company}, spółki typu Limited Liability Company zarejestrowanej w stanie Wyoming (Stany Zjednoczone), ${ADDRESS}. Kontakt: `, mail, `. Dane osobowe przetwarzamy zgodnie z przepisami ${legal.privacyLaw} i innymi obowiązującymi przepisami.`] },
             {
               ul: [
                 [{ strong: 'Administrator:' }, ` w odniesieniu do strony internetowej, formularzy i próśb o oddzwonienie, rozmów z naszymi asystentkami AI, kont klientów, rozliczeń i naszego marketingu administratorem jest ${company}.`],
@@ -545,7 +545,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Formularze na stronie' }, ' (oddzwonienie, demo, pomoc w okresie próbnym): imię i nazwisko, telefon, e-mail, firma, branża, preferowany termin, wiadomość i zgoda.'],
                 [{ strong: 'Rozmowy z naszymi asystentkami AI' }, ' (dymek na stronie, recepcjonistka, połączenia demonstracyjne, oddzwonienia handlowe i wsparcia, pomoc w panelu klienta): treść pisemna, nagranie audio rozmów głosowych, transkrypcja, podsumowanie i wyodrębnione informacje (potrzeba, rozważany pakiet, zgłoszony problem).'],
                 [{ strong: 'Konto klienta' }, ': tożsamość i dane kontaktowe użytkowników, informacje o firmie, dane logowania, ustawienia i instrukcje agentów, bazy wiedzy, listy kontaktów, historia połączeń i wiadomości, zużycie minut i kredytów, zgłoszenia do wsparcia.'],
-                [{ strong: 'Dane przetwarzane dla naszych klientów' }, ': numery i nazwiska dzwoniących lub kontaktów, treść połączeń, wiadomości, nagrania, transkrypcje, wizyty i karty potencjalnych klientów.'],
+                [{ strong: 'Dane przetwarzane dla naszych klientów' }, ': numery i nazwiska dzwoniących lub kontaktów, treść połączeń, wiadomości, nagrania, transkrypcje, wizyty i dane potencjalnych klientów (leady).'],
                 [{ strong: 'Rozliczenia' }, ': pakiet, faktury, adres rozliczeniowy, numer VAT, status płatności. Dane karty są wprowadzane i przechowywane przez Stripe; nigdy nie mamy do nich dostępu.'],
                 [{ strong: 'Dane techniczne' }, ': adres IP, urządzenie i przeglądarka, logi połączeń i bezpieczeństwa, pliki cookie.'],
                 [{ strong: 'Dane otrzymane od podmiotów trzecich' }, ': integracje włączone przez klienta (kalendarze, CRM, WhatsApp, Messenger, Instagram), metadane połączeń i wiadomości od operatorów, informacje o płatnościach i zapobieganiu oszustwom od Stripe oraz publiczne informacje o firmach wykorzystywane do weryfikacji konta.'],
@@ -583,7 +583,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             { p: 'Twoje dane przekazujemy wyłącznie odbiorcom, którzy ich potrzebują, związanym zobowiązaniami do poufności i ochrony danych:' },
             {
               ul: [
-                [{ strong: 'Nasz dostawca platformy technicznej' }, ': agenci głosowi, widżety, panel klienta, transkrypcja, synteza mowy i automatyzacje. Dostawca ten ma siedzibę w Unii Europejskiej (Rumunia), posiada certyfikat ISO 27001 i przechowuje dane w Europejskim Obszarze Gospodarczym i/lub w Stanach Zjednoczonych.'],
+                [{ strong: 'Nasz dostawca platformy technicznej' }, ': agenci głosowi, widżety, panel klienta, transkrypcja, synteza mowy i automatyzacje. Dostawca ten ma siedzibę w Unii Europejskiej (Rumunia), posiada certyfikat ISO 27001 i przechowuje dane w Europejskim Obszarze Gospodarczym lub w Stanach Zjednoczonych.'],
                 [{ strong: 'Twilio i inni operatorzy telekomunikacyjni' }, ': kierowanie połączeń i SMS-ów, numery telefonów.'],
                 [{ strong: 'Meta' }, ' (WhatsApp, Messenger, Instagram): gdy klient korzysta z tych kanałów.'],
                 [{ strong: 'Dostawcy AI, głosu i transkrypcji' }, ': rozumienie, odpowiadanie, synteza mowy i transkrypcja.'],
@@ -591,7 +591,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Supabase' }, ': baza danych próśb, rejestracji i podsumowań rozmów (Stany Zjednoczone).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ': hosting strony (Stany Zjednoczone).'],
                 [{ strong: 'Zoho' }, ': wysyłka e-maili serwisowych i kontaktowych.'],
-                [{ strong: 'Integracje włączone przez klienta' }, ' (kalendarze, CRM, narzędzia automatyzacji), nasi doradcy zawodowi, organy władzy, gdy wymaga tego prawo, oraz ewentualny nabywca w razie połączenia lub sprzedaży.'],
+            [{ strong: 'Google (Google Analytics 4)' }, ': pomiar ruchu na stronie, wyłącznie za Twoją zgodą; przekazywanie danych do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).'],
+                [{ strong: 'Integracje włączone przez klienta' }, ' (kalendarze, CRM, narzędzia automatyzacji), nasi doradcy prawni i podatkowi oraz audytorzy, organy władzy, gdy wymaga tego prawo, oraz ewentualny nabywca w razie połączenia lub sprzedaży.'],
               ],
             },
           ],
@@ -599,7 +600,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Przekazywanie danych za granicę',
           body: [
-            { p: 'Nasza spółka i kilku dostawców znajdują się w Stanach Zjednoczonych; nasz dostawca platformy technicznej ma siedzibę w Unii Europejskiej i przechowuje dane w EOG i/lub w Stanach Zjednoczonych. Przekazywanie danych jest szyfrowane i zabezpieczone:' },
+            { p: 'Nasza spółka i kilku dostawców znajdują się w Stanach Zjednoczonych; nasz dostawca platformy technicznej ma siedzibę w Unii Europejskiej i przechowuje dane w EOG lub w Stanach Zjednoczonych. Przekazywanie danych jest szyfrowane i zabezpieczone:' },
             {
               ul: [
                 'Unia Europejska i EOG: Ramy ochrony danych UE–USA, jeżeli odbiorca jest nimi objęty, a w przeciwnym razie standardowe klauzule umowne Komisji Europejskiej, w razie potrzeby z dodatkowymi środkami.',
@@ -630,7 +631,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Bezpieczeństwo',
           body: [
-            { p: 'Dane są szyfrowane podczas przesyłania (TLS) i w spoczynku (AES-256). Dostęp jest przydzielany według ról, chroniony uwierzytelnianiem i rejestrowany w logach audytowych; klienci mogą włączyć uwierzytelnianie dwuskładnikowe; regularnie wykonujemy kopie zapasowe, a klucze techniczne przechowujemy w sejfach na sekrety. Nasz dostawca platformy technicznej posiada certyfikat ISO 27001. Ponieważ żaden system nie jest niezawodny, zgłaszamy naruszenia ochrony danych organom i osobom, których dotyczą, gdy wymaga tego prawo.' },
+            { p: 'Dane są szyfrowane podczas przesyłania (TLS) i w spoczynku (AES-256). Dostęp jest przydzielany według ról, chroniony uwierzytelnianiem i rejestrowany w logach audytowych; klienci mogą włączyć uwierzytelnianie dwuskładnikowe; regularnie wykonujemy kopie zapasowe, a klucze techniczne przechowujemy w zabezpieczonych menedżerach sekretów. Nasz dostawca platformy technicznej posiada certyfikat ISO 27001. Ponieważ żaden system nie jest niezawodny, zgłaszamy naruszenia ochrony danych organom i osobom, których dotyczą, gdy wymaga tego prawo.' },
           ],
         },
         {
@@ -638,7 +639,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           body: [
             {
               ul: [
-                [{ strong: 'Unia Europejska i EOG' }, ' (w tym Polska, Francja, Włochy i Niderlandy): dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie, sprzeciw (bezwarunkowy wobec marketingu bezpośredniego), wycofanie zgody oraz prawo do niepodlegania decyzji opartej wyłącznie na zautomatyzowanym przetwarzaniu.'],
+                [{ strong: 'Unia Europejska i EOG' }, ' (w tym Polska, Francja, Włochy i Niderlandy): dostęp, sprostowanie, usunięcie, ograniczenie przetwarzania, przenoszenie danych, sprzeciw (bezwarunkowy wobec marketingu bezpośredniego), wycofanie zgody oraz prawo do niepodlegania decyzji opartej wyłącznie na zautomatyzowanym przetwarzaniu.'],
                 [{ strong: 'Wielka Brytania' }, ': te same prawa na podstawie UK GDPR i Data Protection Act 2018.'],
                 [{ strong: 'Szwajcaria' }, ': prawa przewidziane w federalnej ustawie o ochronie danych (FADP).'],
                 [{ strong: 'Australia' }, ': prawo dostępu i sprostowania na podstawie Australian Privacy Principles oraz możliwość kontaktu z nami anonimowo lub pod pseudonimem, gdy jest to możliwe.'],
@@ -651,7 +652,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Wykonywanie praw i skargi',
           body: [
             { p: ['Napisz na adres ', mail, ` lub do ${company}, ${ADDRESS}, Stany Zjednoczone. Możemy poprosić o potwierdzenie tożsamości. Odpowiadamy w ciągu 30 dni; w przypadku złożonych żądań termin może zostać przedłużony o dwa miesiące (poinformujemy Cię o tym). Złożenie żądania jest bezpłatne, chyba że jest ono ewidentnie nieuzasadnione lub nadmierne. Jeżeli przetwarzamy Twoje dane w imieniu klienta, przekazujemy mu Twoje żądanie.`] },
-            { p: `Możesz wnieść skargę do organu nadzorczego: ${legal.dataAuthority}, albo do organu ochrony danych w kraju, w którym mieszkasz lub pracujesz, np. CNIL (Francja), Garante per la protezione dei dati personali (Włochy), Autoriteit Persoonsgegevens (Niderlandy), ICO (Wielka Brytania) lub FDPIC (Szwajcaria). W Australii najpierw złóż skargę do nas: odpowiadamy w ciągu 30 dni, a następnie możesz zwrócić się do OAIC.` },
+            { p: `Możesz wnieść skargę do organu nadzorczego — ${legal.dataAuthority} — albo do organu ochrony danych w kraju, w którym mieszkasz lub pracujesz, np. CNIL (Francja), Garante per la protezione dei dati personali (Włochy), Autoriteit Persoonsgegevens (Niderlandy), ICO (Wielka Brytania) lub FDPIC (Szwajcaria). W Australii najpierw złóż skargę do nas: odpowiadamy w ciągu 30 dni, a następnie możesz zwrócić się do OAIC.` },
           ],
         },
         {
@@ -663,7 +664,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Marketing, połączenia i rezygnacja',
           body: [
-            { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (uprzednia zgoda we Francji, TPS/CTPS, Do Not Call Register, Registro delle opposizioni itp.).'] },
+            { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (w Polsce uprzednia zgoda na marketing telefoniczny, także wobec firm — art. 398 Prawa komunikacji elektronicznej; TPS/CTPS, Do Not Call Register, Registro pubblico delle opposizioni itp.).'] },
             { p: 'Za połączenia i wiadomości wysyłane przez naszych klientów odpowiadają oni sami: skieruj do nich swój sprzeciw; jeżeli skontaktujesz się z nami, przekażemy go.' },
           ],
         },
@@ -698,15 +699,15 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
   legalNotice: {
     meta: {
       title: (brand: string) => `Nota prawna — ${brand}`,
-      description: (brand: string) => `Nota prawna: informacje o wydawcy, hostingu i prawach autorskich platformy ${brand}.`,
+      description: (brand: string) => `Nota prawna: informacje o właścicielu serwisu, hostingu i prawach autorskich platformy ${brand}.`,
     },
     h1: 'Nota prawna',
-    updated: 'Ostatnia aktualizacja: 29 września 2026',
+    updated: 'Ostatnia aktualizacja: 29 września 2026 r.',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
       {
-        title: '1. Wydawca strony',
+        title: '1. Właściciel serwisu',
         body: [
-          { p: ['Strona internetowa dostępna pod adresem ', { strong: 'https://permanenceia.com' }, ' jest wydawana przez spółkę ', { strong: company }, '.'] },
+          { p: ['Właścicielem i operatorem serwisu dostępnego pod adresem ', { strong: 'https://permanenceia.com' }, ' jest spółka ', { strong: company }, '.'] },
           {
             ul: [
               [{ strong: 'Nazwa handlowa:' }, ` ${brand}`],
@@ -714,7 +715,6 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
               [{ strong: 'Numer rejestrowy:' }, ' 2026-001905061'],
               [{ strong: 'Siedziba:' }, ' 1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001, Stany Zjednoczone'],
               [{ strong: 'E-mail kontaktowy:' }, ` ${email}`],
-              [{ strong: 'Osoba odpowiedzialna za publikację:' }, ` przedstawiciel prawny ${company}.`],
             ],
           },
         ],
@@ -734,8 +734,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: '3. Własność intelektualna',
         body: [
-          { p: ['Marka ', { strong: brand }, `, logo (dymek w trybie czuwania, fale głosowe i punkt dostępności), a także wszystkie elementy identyfikacji wizualnej, teksty, skrypty rozmów, infografiki i kody źródłowe zamieszczone na stronie stanowią wyłączną własność ${company}.`] },
-          { p: `Wszelkie powielanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie bez uprzedniej pisemnej zgody jest zabronione i stanowi naruszenie praw podlegające sankcjom przewidzianym w przepisach: ${legal.copyrightLaw}.` },
+          { p: ['Marka ', { strong: brand }, `, logo (dymek rozmowy, fale dźwiękowe i kropka statusu), a także wszystkie elementy identyfikacji wizualnej, teksty, skrypty rozmów, infografiki i kody źródłowe zamieszczone na stronie stanowią wyłączną własność ${company}.`] },
+          { p: `Wszelkie powielanie, rozpowszechnianie, modyfikowanie lub wykorzystywanie bez uprzedniej pisemnej zgody jest zabronione i stanowi naruszenie praw podlegające sankcjom przewidzianym w przepisach ${legal.copyrightLaw}.` },
         ],
       },
       {
@@ -755,9 +755,12 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Polityka plików cookie',
     paragraphs: (siteHost: string, appHost: string) => [
-      `Strona ${siteHost} używa wyłącznie plików cookie niezbędnych do jej działania (bezpieczeństwo, równoważenie obciążenia). Obecnie nie są zapisywane żadne reklamowe ani zewnętrzne analityczne pliki cookie.`,
-      'Jeśli zostaną dodane narzędzia analityczne lub reklamowe, przed zapisaniem jakichkolwiek plików cookie pojawi się baner z prośbą o zgodę, a ta strona zostanie zaktualizowana o listę plików cookie, ich cel i okres przechowywania.',
-      `Panel klienta (${appHost}) używa sesyjnych plików cookie niezbędnych do logowania.`,
+      `Pliki cookie niezbędne: strona ${siteHost} zapisuje pliki cookie konieczne do jej działania (bezpieczeństwo, równoważenie obciążenia). Nie wymagają one Twojej zgody.`,
+      `Plik cookie zgody: plik pia_consent zapamiętuje Twój wybór (akceptacja lub odmowa) przez 6 miesięcy, w domenie permanenceia.com i w panelu klienta (${appHost}).`,
+      'Pomiar ruchu, wyłącznie za Twoją zgodą: Google Analytics 4 (Google Ireland Ltd / Google LLC) mierzy ruch na stronie i skuteczność naszych kampanii w postaci zbiorczych statystyk. Zapisywane pliki cookie: _ga i _ga_<ID>, przechowywane maksymalnie 13 miesięcy. Dane mogą być przekazywane do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',
+      'Nie zapisujemy żadnych reklamowych ani śledzących plików cookie.',
+      'Zdanie możesz zmienić w każdej chwili za pomocą linku „Ustawienia cookie” na dole każdej strony. Odmowa nie ogranicza korzystania ze strony.',
+      `Widżet naszej asystentki, ładowany z ${appHost}, może korzystać z technicznej pamięci przeglądarki niezbędnej do prowadzenia rozmowy. Panel klienta (${appHost}) używa sesyjnych plików cookie niezbędnych do logowania.`,
     ],
     questions: 'Pytania: ',
   },
@@ -768,9 +771,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: 'Artykuły i poradniki o tym, jak agenci głosowi AI pomagają zamieniać rozmowy telefoniczne w klientów.',
     },
     eyebrow: 'Zasoby i wiedza',
-    h1: 'Dziennik recepcji AI',
+    h1: 'Blog o recepcji AI',
     intro: 'Strategie skutecznej obsługi telefonicznej, analizy przepisów i konkretne doświadczenia przedsiębiorców.',
-    searchPlaceholder: 'Szukaj artykułu...',
+    searchPlaceholder: 'Szukaj artykułu…',
     all: 'Wszystkie artykuły',
     categories: {
       productivite: 'Produktywność',
@@ -789,7 +792,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     articleTitle: (title: string, brand: string) => `${title} | Blog ${brand}`,
     backToList: 'Powrót do listy artykułów',
     readTime: (t: string) => `Czas czytania: ${t}`,
-    publisher: (brand: string) => `${brand} Publications`,
+    publisher: (brand: string) => `Redakcja ${brand}`,
     ctaEyebrow: 'Przejdź do działania',
     ctaTitle: 'Chcesz wyposażyć swoją firmę w recepcję AI?',
     ctaText: (d: number, m: number) => `Przetestuj już dziś naszego agenta głosowego w rzeczywistych warunkach przez ${days(d)}, z ${m} ${plural(m, 'minutą', 'minutami', 'minutami')} w cenie i bez zobowiązań.`,

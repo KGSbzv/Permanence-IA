@@ -50,12 +50,12 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     startFree: 'Zacznij za darmo',
     login: 'Logowanie',
     gdpr: 'Wbudowane narzędzia RODO',
-    encryption: 'Szyfrowanie podczas przesyłania',
+    encryption: 'Szyfrowanie transmisji',
     cols: {
       platform: 'Platforma',
       allFeatures: 'Wszystkie funkcje',
       offers: 'Pakiety',
-      recharges: 'Doładowania minut',
+      recharges: 'Doładowania kredytów',
       compare: 'Porównaj pakiety',
       sectors: 'Branże',
       resources: 'Zasoby',
@@ -96,7 +96,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   },
 
   liveCall: {
-    title: 'Agent recepcji',
+    title: 'Recepcjonistka AI',
     leadTitle: 'Utworzone zgłoszenie',
     ariaLabel: 'Przykład rozmowy obsłużonej przez agenta',
     ended: 'Rozmowa zakończona · podsumowanie wysłane',
@@ -119,7 +119,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sendFailed: 'Nie udało się wysłać zgłoszenia.',
     retry: (email: string) => `Spróbuj ponownie lub napisz na adres ${email}.`,
     sentTitle: 'Prośba o oddzwonienie wysłana',
-    sentText: 'Oddzwonimy w wybranym terminie. Jeśli podano adres e-mail, wyślemy na niego potwierdzenie.',
+    sentText: 'Oddzwonimy w wybranym terminie. Jeśli zaznaczono opcję WhatsApp, potwierdzenie otrzymasz właśnie tam.',
     name: 'Imię i nazwisko',
     phone: 'Telefon',
     sector: 'Branża',
@@ -135,7 +135,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     },
     preciseLabel: 'Data i godzina (czas lokalny)',
     email: 'E-mail',
-    emailHint: '(do potwierdzenia)',
+    emailHint: '(opcjonalnie)',
     need: 'Czego potrzebujesz',
     needPlaceholder: 'Np. tracę połączenia wieczorami, chcę zautomatyzować umawianie wizyt…',
     consent: (brand: string) => `Wyrażam zgodę na kontakt telefoniczny pod podanym numerem, również przez agenta głosowego AI ${brand}. Moje dane posłużą wyłącznie do obsługi mojego zgłoszenia.`,
@@ -144,14 +144,14 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     optional: '(opcjonalnie)',
     volume: 'Liczba połączeń miesięcznie',
     volumeOptions: ['Mniej niż 200', 'Od 200 do 1000', 'Ponad 1000'],
-    phoneInvalid: 'Proszę podać prawidłowy numer telefonu, np. 512 345 678.',
+    phoneInvalid: 'Podaj prawidłowy numer telefonu, np. 512 345 678.',
   },
 
   benefits: {
     items: [
-      { title: 'Odbieraj także poza godzinami pracy', text: 'Wieczory, weekendy, czas wizyt: każde połączenie zostaje odebrane.' },
+      { title: 'Odbieraj także poza godzinami pracy', text: 'Wieczory, weekendy, chwile, gdy obsługujesz klienta: każde połączenie zostaje odebrane.' },
       { title: 'Kwalifikuj automatycznie', text: 'Agent zadaje Twoje pytania i przekazuje Ci kompletne zgłoszenie.' },
-      { title: 'Umawiaj wizyty', text: 'Bezpośrednio w Twoim kalendarzu, z potwierdzeniem (przypomnienia SMS i WhatsApp od pakietu Asystent).' },
+      { title: 'Umawiaj wizyty', text: 'Bezpośrednio w Twoim kalendarzu, z potwierdzeniem (przypomnienia SMS i WhatsApp od pakietu Asystent wzwyż).' },
       { title: 'Szybciej oddzwaniaj do leadów', text: 'Wypełniony formularz zamienia się w rozmowę w ciągu kilku minut.' },
       { title: 'Zostaw człowiekowi to, co ważne', text: 'Przekazanie rozmowy zespołowi, gdy sytuacja tego wymaga.' },
     ],
@@ -166,12 +166,12 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     // Ta sama kolejność co ikony komponentu: telefonia, automatyzacja, CRM, wiadomości, kalendarz, zarządzanie, bezpieczeństwo.
     families: [
       { name: 'Telefonia', items: ['Połączenia przychodzące i wychodzące', 'Opcjonalny numer dedykowany', 'Integracja SIP', 'Przekazanie rozmowy człowiekowi', 'Identyfikacja dzwoniącego'] },
-      { name: 'Automatyzacja', items: ['Edytor promptów', 'Flow builder bez kodu', 'Asystent automatyzacji', '300+ narzędzi do podłączenia'] },
+      { name: 'Automatyzacja', items: ['Edytor promptów', 'Scenariusze automatyzacji bez kodu', 'Asystent automatyzacji', '300+ narzędzi do podłączenia'] },
       { name: 'CRM i dane', items: ['Leady i wstępna kwalifikacja', 'Baza wiedzy', 'Historia połączeń', 'Webhooki i API'] },
       { name: 'Wiadomości', items: ['SMS', 'WhatsApp i szablony', 'Messenger i Instagram', 'Widżet na stronę'] },
       { name: 'Kalendarz', items: ['Umawianie wizyt', 'Potwierdzenia i przypomnienia', 'Zmiany terminów i odwołania'] },
       { name: 'Zarządzanie', items: ['Pulpit', 'Szczegółowe raporty', 'Role i uprawnienia'] },
-      { name: 'Bezpieczeństwo', items: ['Zgody i rezygnacje', 'Konfigurowalny okres przechowywania', 'Szyfrowanie podczas przesyłania', 'Dziennik działań'] },
+      { name: 'Bezpieczeństwo', items: ['Zgody i rezygnacje', 'Konfigurowalny okres przechowywania', 'Szyfrowanie transmisji', 'Dziennik działań'] },
     ],
     centerTitle: 'Twój agent głosowy AI',
     centerText: 'W centrum: agent skonfigurowany dla Twojej działalności. Wokół: wszystko, z czego może korzystać.',
@@ -189,7 +189,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     launchText: 'Prawdziwa rozmowa, bez instalacji.',
     callbackTitle: 'Zamów oddzwonienie',
     callbackText: 'Agent zadzwoni do Ciebie w wybranym terminie.',
-    formTitle: 'Odbierz połączenie demonstracyjne',
+    formTitle: 'Zamów połączenie demonstracyjne',
     formText: 'Bezpłatnie, bez zobowiązań. Usłyszysz głos agenta i sposób, w jaki kwalifikuje zgłoszenie.',
     submit: 'Zamów oddzwonienie',
   },
@@ -208,7 +208,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     monthly: 'Miesięcznie',
     annual: 'Rocznie',
     twoMonthsFree: '2 miesiące gratis',
-    billedYearly: (price: string) => `płatne ${price} netto za rok`,
+    billedYearly: (price: string) => `płatne z góry ${price} netto rocznie`,
     save: (amount: string) => `oszczędzasz ${amount}`,
     phoneNumber: (price: string) => `+ dedykowany numer od ${price} / mies.`,
   },
@@ -222,7 +222,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     pricePerMonth: 'Cena netto / mies.',
     includedMinutes: 'Minuty w cenie',
     extraMinute: 'Dodatkowa minuta',
-    phoneNumber: 'Zakup numeru',
+    phoneNumber: 'Dedykowany numer (opcja)',
     phoneNumberFrom: (price: string) => `od ${price} / mies.`,
     showAll: (n: number) => `Pokaż wszystkie moduły (${n})`,
     showLess: 'Zwiń porównanie',
@@ -237,7 +237,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     groups: [
       { key: 'llm', title: 'Modele językowe', text: 'Mózg agenta: rozumie zgłoszenie i decyduje, co odpowiedzieć.' },
       { key: 's2s', title: 'Głos w czasie rzeczywistym', text: 'Modele, które słuchają i mówią bezpośrednio, zapewniając najbardziej naturalne rozmowy.' },
-      { key: 'tts', title: 'Synteza mowy', text: 'Setki naturalnych głosów w ponad 30 językach.' },
+      { key: 'tts', title: 'Synteza mowy', text: 'Setki naturalnych głosów w ponad 80 językach.' },
       { key: 'stt', title: 'Transkrypcja', text: 'Szybkie rozpoznawanie mowy, także przez telefon.' },
       { key: 'channels', title: 'Kanały', text: 'Ten sam agent odpowiada wszędzie tam, gdzie klienci do Ciebie piszą lub dzwonią.' },
     ],
@@ -247,8 +247,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   },
 
   recharges: {
-    title: 'Doładowania środków',
-    text: 'Środki pokrywają minuty ponad limit pakietu. Nie wygasają i są dostępne od razu.',
+    title: 'Doładowania kredytów',
+    text: 'Kredyty pokrywają minuty ponad limit pakietu. Nie wygasają i są dostępne od razu.',
     rechargeCol: 'Doładowanie netto',
     approxMinutes: (n: string) => `≈ ${n} min`,
     cheaperTitle: 'Pakiet pozostaje tańszy',
@@ -266,7 +266,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     ruleCustom: (minutes: string) => `Powyżej ${minutes} min regularnie`,
     ruleCustomText: 'Przygotujemy ofertę na miarę.',
     case1Minutes: (minutes: string) => `${minutes} min w tym miesiącu`,
-    case1Plan: (plan: string) => `${plan} + doładowanie środków`,
+    case1Plan: (plan: string) => `${plan} + doładowanie kredytów`,
     case1Note: (price: string, extraMinutes: string, extraPrice: string, total: string) =>
       `${price} + ${extraMinutes} min × ${extraPrice} ≈ ${total} netto. Jednorazowe przekroczenie: doładowanie wystarczy.`,
     case2Minutes: (minutes: string) => `${minutes} min co miesiąc`,
@@ -295,26 +295,26 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     callsPerMonth: 'Połączenia miesięcznie',
     avgDuration: 'Średni czas połączenia',
     hourlyCost: 'Godzinowy koszt pracownika (z narzutami)',
-    missedRate: 'Obecnie nieodebrane połączenia',
+    missedRate: 'Odsetek nieodebranych połączeń',
     customerValue: 'Średnia wartość nowego klienta',
     min: ' min',
     perHour: ' / godz.',
     minutesMonth: 'Minuty miesięcznie',
     bestPlan: 'Najtańszy pakiet dla tego wolumenu',
     planCost: (plan: string) => `Koszt pakietu ${plan}`,
-    withExtra: (minutes: string, price: string) => `w tym ${minutes} dodatkowych min po ${price}`,
+    withExtra: (minutes: string, price: string) => `w tym ${minutes} ${plural(toInt(minutes), 'dodatkowa minuta', 'dodatkowe minuty', 'dodatkowych minut')} po ${price}`,
     customAbove: (minutes: string) => `Powyżej ${minutes} min regularnie poproś o ofertę na miarę.`,
     effectivePerMinute: 'Rzeczywista cena za minutę',
     humanCost: 'Koszt recepcji obsługiwanej przez człowieka',
     savings: 'Miesięczna oszczędność',
     noSavings: 'Przy tym wolumenie agent kosztuje nieco więcej niż pracownik, ale odpowiada 24/7 i obsługuje wiele połączeń jednocześnie.',
     recovered: 'Odzyskany przychód (szacunek)',
-    recoveredDetail: (calls: string) => `${calls} nieodebranych połączeń odzyskanych miesięcznie`,
+    recoveredDetail: (calls: string) => `${calls} ${plural(toInt(calls), 'nieodebrane połączenie odzyskane', 'nieodebrane połączenia odzyskane', 'nieodebranych połączeń odzyskanych')} miesięcznie`,
     netBenefit: 'Szacowany miesięczny zysk',
     roi: (x: string) => `Zwrot: ${x} × cena pakietu`,
     perMonth: ' / mies.',
     assumptions: (wrapUp: number, conversion: number) =>
-      `Założenia: ${wrapUp} min obsługi po każdym połączeniu w przypadku pracownika, ${conversion} % nieodebranych połączeń zamienia się w klientów. Ceny netto w dolarach amerykańskich; numer telefonu płatny dodatkowo. Szacunek orientacyjny, do porównania z Twoimi danymi.`,
+      `Założenia: ${wrapUp} min obsługi po każdym połączeniu w przypadku pracownika, ${conversion}% nieodebranych połączeń zamienia się w klientów. Ceny netto w dolarach amerykańskich; numer telefonu płatny dodatkowo. Szacunek orientacyjny, do porównania z Twoimi danymi.`,
     cta: 'Wypróbuj za darmo',
   },
 
@@ -334,16 +334,16 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { label: 'Powtarzalność', human: 'Zależna od obciążenia i pory dnia', ai: 'Te same zasady przy każdym połączeniu' },
       { label: 'Notatki po rozmowie', human: 'Ręczne, gdy jest czas', ai: 'Podsumowanie, transkrypcja i dane wyodrębniane automatycznie' },
     ],
-    note: 'Człowiek pozostaje niezbędny w delikatnych sprawach: agent przekazuje mu podsumowanie i organizuje oddzwonienie. Wielu klientów zachowuje recepcję i powierza agentowi nadmiar połączeń, przerwę obiadową, wieczory i weekendy. Bez opłaty aktywacyjnej, bez zobowiązań.',
+    note: 'Człowiek pozostaje niezbędny w delikatnych sprawach: agent przekazuje mu podsumowanie i organizuje oddzwonienie. Wielu klientów zachowuje recepcję i powierza agentowi nadmiar połączeń, przerwę w pracy, wieczory i weekendy. Bez opłaty aktywacyjnej, bez zobowiązań.',
   },
 
   security: {
     items: [
       { title: 'Zgody i rezygnacje', text: 'Zgoda na oddzwonienie, obsługa odmów, dozwolone godziny połączeń i lista wykluczeń.' },
-      { title: 'Ochrona danych', text: 'Szyfrowanie podczas przesyłania, dostęp chroniony kontem i konfigurowalny okres przechowywania.' },
+      { title: 'Ochrona danych', text: 'Szyfrowanie transmisji, dostęp chroniony kontem i konfigurowalny okres przechowywania.' },
       { title: 'Rozliczalność', text: 'Historia połączeń, transkrypcje i dziennik działań dla każdego konta.' },
       { title: 'Kontrola dostępu', text: 'Każdy klient ma własny, zabezpieczony panel; agent ma dostęp tylko do informacji, które mu przekażesz.' },
-      { title: 'Przygotowanie do wymogów prawnych', text: 'Narzędzia do stosowania RODO: obowiązek informacyjny, prawo dostępu, usuwanie połączeń i nagrań, okres przechowywania. Umowa powierzenia przetwarzania danych (DPA) na życzenie.' },
+      { title: 'Przygotowanie do wymogów prawnych', text: 'Narzędzia do stosowania RODO: obowiązek informacyjny, prawo dostępu, usuwanie połączeń i nagrań, okres przechowywania. Umowa powierzenia przetwarzania danych (DPA) jest częścią Regulaminu (art. 8); wersja podpisana na życzenie.' },
       { title: 'Infrastruktura', text: 'Platforma hostowana u uznanych dostawców chmury, z kopiami zapasowymi i monitoringiem.' },
     ],
     title: 'Bezpieczeństwo i zgodność Twoich połączeń AI',
@@ -358,7 +358,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voicesTitle: 'Naturalne głosy w Twoim języku',
     voicesText: 'Ponad 80 języków i wiele akcentów. Agent rozpoznaje język dzwoniącego i odpowiada w tym samym języku.',
     numbersTitle: 'Twój numer lub numer dedykowany',
-    numbersText: 'Zachowaj swój numer (przekierowanie połączeń, import z Twilio lub Telnyx, połączenie SIP z centralą) lub weź opcjonalny numer dedykowany, płatny co miesiąc oprócz pakietu.',
+    numbersText: 'Zachowaj swój numer (przekierowanie połączeń, import z Twilio lub Telnyx, połączenie SIP z centralą) lub kup opcjonalny numer dedykowany, płatny co miesiąc oprócz pakietu.',
     telephonyOptions: 'Zobacz opcje telefonii',
   },
 
@@ -376,23 +376,23 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     roleLabel: 'Rola agenta',
     // Ta sama kolejność co kule w komponencie.
     roles: [
-      { name: 'Recepcjonistka', text: 'Odbiera połączenia, udziela informacji i umawia wizyty.' },
-      { name: 'Sprzedaż', text: 'Kwalifikuje zapytania i wskazuje projekty do oddzwonienia.' },
+      { name: 'Recepcja', text: 'Odbiera połączenia, udziela informacji i umawia wizyty.' },
+      { name: 'Sprzedaż', text: 'Kwalifikuje zapytania i wskazuje, do kogo warto oddzwonić.' },
       { name: 'Wsparcie', text: 'Odpowiada na pytania klientów i w razie potrzeby przekazuje sprawę dalej.' },
     ],
     langLabel: 'Język',
-    accents: { fr: 'Francuski paryski', 'en-gb': 'Angielski brytyjski', 'en-au': 'Angielski australijski', it: 'Włoski', pl: 'Polski', nl: 'Niderlandzki', he: 'Hebrajski (Izrael)' },
+    accents: { fr: 'Francuski (Paryż)', 'en-gb': 'Angielski brytyjski', 'en-au': 'Angielski australijski', it: 'Włoski', pl: 'Polski', nl: 'Niderlandzki', he: 'Hebrajski (Izrael)' },
     sector: 'Twoja branża',
     modeLabel: 'Jak wypróbować',
     modeBrowser: 'W tej przeglądarce',
-    modePhone: 'Zadzwoń do mnie',
+    modePhone: 'Zadzwońcie do mnie',
     stageLabel: 'Twój agent demo',
     voiceTag: (name: string) => `Głos: ${name}`,
     browserText: 'Nasza asystentka otworzy się tutaj. Rozpocznij rozmowę głosową lub napisz i podaj swoją branżę oraz rolę do odegrania.',
-    browserCta: (name: string) => `Porozmawiaj z: ${name}`,
+    browserCta: (name: string) => `Porozmawiaj teraz (${name})`,
     browserOpening: 'Otwieranie…',
     browserLegal: 'Przeglądarka poprosi o dostęp do mikrofonu na potrzeby rozmowy głosowej.',
-    browserError: 'Nie udało się otworzyć asystentki. Spróbuj ponownie lub wybierz „Zadzwoń do mnie”.',
+    browserError: 'Nie udało się otworzyć asystentki. Spróbuj ponownie lub wybierz „Zadzwońcie do mnie”.',
     dialogTitle: (name: string) => `Rozmowa: ${name}`,
     close: 'Zamknij',
     firstName: 'Twoje imię',
@@ -411,7 +411,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voiceOption: (name: string, male: boolean) => `${name}, głos ${male ? 'męski' : 'żeński'}`,
   },
 
-  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Brokerzy', 'Zarządcy wspólnot', 'Medycyna estetyczna', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
+  industryMarquee: ['Hydraulicy', 'Elektrycy', 'Gabinety stomatologiczne', 'Kliniki', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Pośrednicy ubezpieczeniowi', 'Zarządcy wspólnot', 'Medycyna estetyczna', 'Fizjoterapeuci', 'Osteopaci', 'Weterynarze'],
 
   // Ta sama kolejność co flagi komponentu.
   languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki', 'Hebrajski'],
@@ -421,7 +421,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     agents: [
       { name: 'Recepcjonistka AI', role: 'Odbiera każde połączenie, filtruje i przekazuje to, co ważne.' },
       { name: 'Agent ds. wizyt', role: 'Rezerwuje, potwierdza, przypomina i obsługuje zmiany terminów.' },
-      { name: 'Agent ds. kwalifikacji', role: 'Zadaje Twoje pytania i przygotowuje karty gotowe do obsługi.' },
+      { name: 'Agent ds. kwalifikacji', role: 'Zadaje Twoje pytania i przygotowuje zgłoszenia gotowe do obsługi.' },
       { name: 'Agent wsparcia', role: 'Odpowiada na podstawie Twoich dokumentów, przekazuje dalej sprawy wrażliwe.' },
       { name: 'Agent ds. ponownego kontaktu', role: 'Potwierdza, przypomina o wycenach i odnawia kontakt z klientami.' },
       { name: 'Agent wiadomości', role: 'Odpowiada i potwierdza przez SMS, WhatsApp i Instagram.' },
@@ -429,7 +429,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: 'Zbuduj swój zespół agentów AI',
     intro: 'Każdy agent ma określoną rolę. Włącz tych, których potrzebuje Twoja firma; korzystają z tej samej historii i tych samych informacji.',
     custom: 'Potrzebujesz nietypowego scenariusza? Skonfigurujemy agenta na miarę.',
-    virtualNote: 'Jade, Daan, Katie i ich współpracownicy to wirtualni agenci AI: ich twarze to wygenerowane ilustracje, a nie prawdziwe osoby.',
+    virtualNote: 'Nasi agenci to wirtualni agenci AI: ich twarze to wygenerowane ilustracje, a nie prawdziwe osoby.',
   },
 
   sectorShowcase: {
@@ -443,7 +443,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     answering: (agentName: string) => `${agentName} odbiera`,
     replay: 'Odtwórz rozmowę jeszcze raz',
     benefitsTitle: 'Co to zmienia dla Ciebie',
-    planLabel: 'Polecany plan',
+    planLabel: 'Polecany pakiet',
     tryLive: 'Wypróbuj ten scenariusz na żywo',
   },
 
@@ -488,12 +488,12 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   },
 
   platformGrid: {
-    simultaneousTitle: 'Połączenia równoczesne',
+    simultaneousTitle: 'Jednoczesne połączenia',
     simultaneousText: 'Bez kolejki: agent obsługuje kilka połączeń jednocześnie na tej samej linii.',
     knowledgeTitle: 'Baza wiedzy',
     knowledgeText: 'Pliki PDF, strony Twojej witryny, procedury: agent odpowiada na podstawie Twoich informacji.',
-    promptTitle: 'Asystent promptów',
-    promptText: 'Opisz cel rozmowy: asystent krok po kroku ustawi zachowanie agenta.',
+    promptTitle: 'Kreator promptów',
+    promptText: 'Opisz cel rozmowy: kreator krok po kroku ustawi zachowanie agenta.',
     transferTitle: 'Przekazanie rozmowy człowiekowi',
     transferText: 'Gdy klient o to poprosi lub sytuacja tego wymaga, rozmowa trafia do Twojego zespołu.',
     aiAgent: 'Agent AI',
@@ -511,7 +511,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     // Ta sama kolejność co ikony i makiety komponentu.
     stages: [
       { key: 'Przyciągaj', title: 'Przechwytuj każde zapytanie', items: ['Strony docelowe dla branż', 'Widżet na stronę: rozmowa lub oddzwonienie', 'Numery lokalne i przekierowanie Twojej linii', 'Odpowiedź 24/7 na połączenia i wiadomości'] },
-      { key: 'Konwertuj', title: 'Zamieniaj zapytania w klientów', items: ['Kwalifikacja według Twoich kryteriów', 'Oddzwanianie do leadów w kilka minut', 'Umawianie wizyt w Twoim kalendarzu', 'Automatycznie tworzona karta w CRM'] },
+      { key: 'Konwertuj', title: 'Zamieniaj zapytania w klientów', items: ['Kwalifikacja według Twoich kryteriów', 'Oddzwanianie do leadów w kilka minut', 'Umawianie wizyt w Twoim kalendarzu', 'Automatycznie tworzony wpis w CRM'] },
       { key: 'Utrzymuj', title: 'Utrzymuj kontakt z klientami', items: ['Potwierdzenia i przypomnienia', 'Wsparcie odpowiadające na podstawie Twoich dokumentów', 'Ponowne kontakty, odnowienia i ankiety', 'WhatsApp, SMS, Instagram'] },
       { key: 'Mierz', title: 'Zarządzaj na podstawie rzeczywistych danych', items: ['Wolumeny, czas trwania i wyniki', 'Umówione wizyty i przekazane rozmowy', 'Zużycie minut i alerty', 'Odsłuch nagrań i transkrypcje'] },
     ],
@@ -521,7 +521,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     // Ta sama kolejność co kolory etykiet komponentu.
     calls: [
       { who: 'Nowy pacjent', what: 'Wizyta we wtorek 9:30', tag: 'Zarezerwowano' },
-      { who: 'Przeciek wody', what: 'Prośba o pilne oddzwonienie', tag: 'Pilne' },
+      { who: 'Wyciek wody', what: 'Prośba o pilne oddzwonienie', tag: 'Pilne' },
       { who: 'Kupujący, 3 pokoje', what: 'Prezentacja w sobotę 11:00', tag: 'Zakwalifikowany' },
       { who: 'Pytanie o godziny', what: 'Udzielono odpowiedzi', tag: 'Rozwiązane' },
     ],
@@ -544,7 +544,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
 
   mock: {
     call: {
-      agent: 'Agent recepcji',
+      agent: 'Recepcjonistka AI',
       meta: 'Połączenie przychodzące · 01:24',
       client: 'Dzień dobry, chciałbym umówić wizytę.',
       reply: 'Oczywiście. Czy to pierwsza wizyta?',
@@ -553,7 +553,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       days: ['Pon', 'Wt', 'Śr', 'Czw', 'Pt'],
       week: 'Tydzień 42',
       added: 'Wizyta dodana przez agenta',
-      slot: 'Wtorek · 9:30 – 10:00',
+      slot: 'Wtorek · 9:30–10:00',
     },
     transcript: {
       label: 'Transkrypcja',
@@ -581,14 +581,14 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       steps: [
         { title: 'Nowy formularz', source: 'Strona WWW' },
         { title: 'Zadzwoń do leada', source: 'Agent sprzedaży' },
-        { title: 'Utwórz kartę', source: 'CRM' },
+        { title: 'Utwórz wpis', source: 'CRM' },
         { title: 'Wyślij potwierdzenie', source: 'WhatsApp' },
       ],
     },
     numbers: {
       title: 'Twoje linie',
       rows: [
-        { country: 'Polska', kind: 'Numer lokalny', agent: 'Agent recepcji' },
+        { country: 'Polska', kind: 'Numer lokalny', agent: 'Recepcjonistka AI' },
         { country: 'Wielka Brytania', kind: 'Numer lokalny', agent: 'Agent ds. wizyt' },
         { country: 'Twoja centrala', kind: 'Trunk SIP', agent: 'Przekierowanie poza godzinami pracy' },
       ],

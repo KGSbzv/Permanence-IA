@@ -20,37 +20,37 @@ export interface LegalVars {
 }
 export interface ChatLine { me?: boolean; text: Rich }
 
-const ADDRESS = '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001';
+const ADDRESS = '1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001';
 
 export const UI_PAGES = {
   demo: {
     meta: {
-      title: (brand: string) => `Démo agent vocal IA : essayez-le en live · ${brand}`,
+      title: (brand: string) => `Démo agent vocal IA : essayez-le en direct · ${brand}`,
       description: 'Démo gratuite de notre agent vocal IA : parlez-lui ou recevez un appel adapté à votre secteur. Sans engagement, laissez votre numéro.',
     },
-    h1: 'Essayez en live notre agent vocal IA',
+    h1: 'Essayez notre agent vocal IA en direct',
     intro: 'Laissez votre numéro et choisissez votre secteur : l’agent vous appelle et joue un scénario de votre métier. Vous entendez sa voix, son rythme et la façon dont il qualifie une demande.',
-    widgetHint: 'Vous préférez tout de suite ? Cliquez sur la bulle en bas à droite de l’écran : notre assistante vous répond à l’oral ou par écrit.',
+    widgetHint: 'Vous voulez essayer tout de suite ? Cliquez sur la bulle en bas à droite de l’écran : notre assistante vous répond à l’oral ou par écrit.',
     formTitle: 'Recevoir mon appel de démonstration',
     formIntro: 'Appel gratuit, au créneau de votre choix.',
     submit: 'Recevoir l’appel de démo',
     hearTitle: 'Ce que vous allez entendre',
-    hearIntro: 'Un exemple d’appel dans un cabinet dentaire : la réceptionniste virtuelle identifie la demande, propose un créneau et prépare la fiche pour l’équipe.',
+    hearIntro: 'Un exemple d’appel dans un cabinet dentaire : l’agent identifie la demande, propose un créneau et prépare la fiche pour l’équipe.',
     steps: [
       { title: 'Vous laissez votre numéro', text: 'Avec votre secteur et votre créneau.' },
       { title: 'L’agent vous appelle', text: 'Il joue un scénario de votre métier.' },
       { title: 'Vous testez librement', text: 'Posez vos questions, changez d’avis, interrompez-le.' },
     ],
-    liveCallTitle: 'Agent dentaire',
+    liveCallTitle: 'Accueil cabinet dentaire',
     scenariosTitle: 'Choisissez votre scénario',
   },
 
   contact: {
     meta: {
       title: (brand: string) => `Contact : un conseiller vous rappelle · ${brand}`,
-      description: 'Une question sur le standard téléphonique IA ? Laissez votre numéro, on vous rappelle au créneau choisi : démo, devis sur mesure ou support.',
+      description: 'Une question sur le standard téléphonique IA ? Laissez votre numéro, nous vous rappelons au créneau choisi : démo, devis sur mesure ou support.',
     },
-    h1: 'Laissez votre numéro, on vous rappelle',
+    h1: 'Laissez votre numéro, nous vous rappelons',
     intro: 'Nous ne publions pas de numéro : c’est nous qui vous rappelons, au créneau que vous choisissez. Vous pouvez aussi nous écrire.',
     commercialTitle: 'Rappel commercial',
     commercialText: 'Questions sur les offres, démonstration, devis sur mesure.',
@@ -66,7 +66,7 @@ export const UI_PAGES = {
   faq: {
     meta: {
       title: (brand: string) => `FAQ standard téléphonique IA et agent vocal · ${brand}`,
-      description: (brand: string) => `Fonctionnement, SIP, agenda, WhatsApp, RGPD, essai et tarifs : toutes les réponses sur le standard téléphonique IA ${brand}. Consultez la FAQ.`,
+      description: (brand: string) => `Fonctionnement, SIP, agenda, WhatsApp, RGPD, essai et tarifs : toutes les réponses sur le standard téléphonique IA de ${brand}. Consultez la FAQ.`,
     },
     h1: 'Questions fréquentes sur le standard téléphonique IA',
     intro: 'Vous ne trouvez pas votre réponse ? Laissez votre numéro, un conseiller vous rappelle.',
@@ -76,15 +76,15 @@ export const UI_PAGES = {
 
   trial: {
     meta: {
-      title: (days: number, minutes: number, brand: string) => `Essai gratuit agent vocal IA — ${days} jours · ${brand}`,
+      title: (days: number, minutes: number, brand: string) => `Essai gratuit agent vocal IA, ${days} jours · ${brand}`,
       description: (days: number, minutes: number, brand: string) => `Essai gratuit de l’agent vocal IA ${brand} : ${days} jours, ${minutes} minutes incluses, rien n’est débité pendant l’essai. Créez votre compte.`,
     },
-    h1: (minutes: number) => `Réclamez vos ${minutes} minutes gratuites`,
+    h1: (minutes: number) => `Profitez de vos ${minutes} minutes offertes`,
     intro: (days: number) => `Créez votre compte, choisissez le forfait à tester et essayez votre agent vocal IA sur votre activité pendant ${days} jours.`,
     points: (days: number) => [
       `Carte demandée à l’activation, rien n’est débité pendant ${days} jours`,
       'Annulez depuis votre espace avant la fin de l’essai : vous ne payez rien',
-      'Démo live et widget web inclus',
+      'Démo en direct et widget web inclus',
       'Accompagnement pour la première configuration',
     ],
     createTitle: 'Créer mon compte',
@@ -99,7 +99,7 @@ export const UI_PAGES = {
     sentTitle: 'Votre demande est enregistrée',
     sentText: 'Un conseiller vous rappelle pour configurer votre premier agent avec vous.',
     sentCta: 'Créer mon compte maintenant',
-    formTitle: 'Préférez être accompagné ?',
+    formTitle: 'Vous préférez être accompagné ?',
     formIntro: 'Laissez vos coordonnées : un conseiller vous rappelle pour démarrer l’essai avec vous.',
     name: 'Nom et prénom',
     company: 'Entreprise',
@@ -108,26 +108,26 @@ export const UI_PAGES = {
     sector: 'Secteur',
     sectorPlaceholder: 'Choisir…',
     sectorOther: 'Autre activité',
-    plan: 'Offre souhaitée',
+    plan: 'Forfait souhaité',
     planPrice: (price: string) => ` — ${price} HT/mois`,
     planFree: ' — gratuit',
     planQuote: ' — sur devis',
     terms: [
       'J’accepte les ',
       { a: 'conditions générales', href: '/cgu' },
-      ' et la ',
+      ' et d’être rappelé pour la mise en place de mon compte. Mes données sont traitées selon la ',
       { a: 'politique de confidentialité', href: '/confidentialite' },
-      ', et d’être rappelé pour la mise en place de mon compte.',
+      '.',
     ] as Rich,
     termsRequired: 'Acceptez les conditions pour être rappelé.',
-    sendError: 'L’inscription n’a pas pu être envoyée.',
+    sendError: 'Votre demande n’a pas pu être envoyée.',
     sending: 'Envoi…',
     submit: 'Être rappelé',
   },
 
   help: {
     meta: {
-      title: (brand: string) => `Aide de l’espace client — ${brand}`,
+      title: (brand: string) => `Aide de l’espace client · ${brand}`,
       description: 'Guide en français de votre espace client : traduction des menus, création d’un agent, numéros, agenda, widget, minutes et facturation.',
     },
     breadcrumb: 'Aide',
@@ -155,7 +155,7 @@ export const UI_PAGES = {
 
   about: {
     meta: {
-      title: (brand: string) => `À propos — agents vocaux IA pour TPE et PME · ${brand}`,
+      title: (brand: string) => `À propos : agents vocaux IA pour TPE et PME · ${brand}`,
       description: (brand: string, company: string) => `${brand} aide les TPE et PME à répondre à chaque appel grâce à des agents vocaux IA. Une marque de ${company}. Découvrez notre approche.`,
     },
     h1: 'Chaque appel mérite une réponse',
@@ -170,7 +170,7 @@ export const UI_PAGES = {
       'L’agent se présente honnêtement comme une IA',
       'L’humain garde la main sur les cas importants',
       'Des prix HT affichés, sans frais cachés',
-      'Pas de chiffre ni de promesse que nous ne pouvons pas prouver',
+      'Pas de chiffre ni de promesse que nous ne puissions prouver',
     ],
     legal: (brand: string, company: string) => `${brand} est une marque de ${company}, société enregistrée dans l’État du Wyoming (États-Unis) sous le numéro 2026-001905061.`,
   },
@@ -178,7 +178,7 @@ export const UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Sécurité et RGPD de l’agent vocal IA · ${brand}`,
-      description: (brand: string) => `Consentement, opt-out, chiffrement en transit, rétention configurable : comment ${brand} protège les données de vos appels, dans le respect du RGPD.`,
+      description: (brand: string) => `Consentement, droit d’opposition, chiffrement en transit, durée de conservation configurable : comment ${brand} protège les données de vos appels, dans le respect du RGPD.`,
     },
     h1: 'Sécurité et conformité de vos appels IA',
     intro: 'Vos appels contiennent des données personnelles. Voici les protections en place et les réglages dont vous disposez pour respecter le RGPD.',
@@ -188,31 +188,31 @@ export const UI_PAGES = {
       'Suppression d’un appel ou d’un contact à la demande',
       'Liste d’exclusion pour les appels sortants',
       'Plages horaires d’appel autorisées',
-      'Mention « assistant IA » en début d’appel',
+      'Annonce « assistant IA » en début d’appel (toujours active, formulation personnalisable)',
       'Enregistrement activable ou non, annoncé à l’appelant en début d’appel',
       'Mots ou sujets que l’agent ne doit jamais aborder (devis chiffrés, diagnostic, conseil)',
     ],
     infraTitle: 'Une solution construite sur une infrastructure certifiée',
-    infraIntro: 'Notre solution (agents, rappels programmés, routage, site et espace client) fonctionne sur l’infrastructure d’un prestataire technique certifié. Ces certifications sont les siennes ; nous les choisissons pour vous offrir le même niveau d’exigence.',
-    infraItems: ['Prestataire certifié ISO/IEC 27001:2022 (sécurité de l’information) et ISO 9001:2015 (qualité)', 'Chiffrement AES-256 des données au repos et TLS en transit', 'Contrôle des accès par rôle, double authentification et journaux d’audit', 'Sauvegardes automatiques et reprise d’activité sur plusieurs zones', 'Conformité RGPD, durées de conservation configurables et suppression automatique', 'Paiements traités par Stripe, certifié PCI-DSS niveau 1'],
+    infraIntro: 'Notre solution (agents, rappels programmés, routage, site et espace client) fonctionne sur l’infrastructure d’un prestataire technique certifié. Ces certifications sont les siennes ; nous l’avons choisi pour vous garantir ce niveau d’exigence.',
+    infraItems: ['Prestataire certifié ISO/IEC 27001:2022 (sécurité de l’information) et ISO 9001:2015 (qualité)', 'Chiffrement AES-256 des données au repos et TLS en transit', 'Contrôle des accès par rôle, double authentification et journaux d’audit', 'Sauvegardes automatiques et reprise d’activité sur plusieurs zones', 'Outils de conformité RGPD, durées de conservation configurables et suppression automatique', 'Paiements traités par Stripe, certifié PCI-DSS niveau 1'],
     commitmentsTitle: 'Nos engagements',
     commitments: [
       'L’agent se présente comme une IA et ne se fait pas passer pour un humain',
-      'Vos campagnes n’appellent que des contacts qui l’ont accepté ; une liste d’exclusion intégrée écarte les autres',
+      'Vos campagnes ne doivent appeler que des contacts qui y ont consenti ; une liste d’exclusion intégrée écarte ceux qui s’y opposent',
       'Aucun diagnostic médical, juridique ou financier par l’agent',
-      'Vos données ne sont jamais vendues : elles servent à fournir et à améliorer le service',
+      'Vos données ne sont jamais vendues : elles servent à fournir le service ; seules des données agrégées ou anonymisées servent à l’améliorer',
       'Accompagnement pour adapter vos mentions d’information',
-      'Accord de traitement des données (DPA) fourni sur simple demande',
+      'Accord de traitement des données (DPA) intégré aux Conditions (article 8) ; version signée sur demande',
       'Droit à l’effacement : un appel, son enregistrement et sa transcription sont supprimés sur demande',
-      'L’agent annonce l’enregistrement de l’appel ; une personne qui refuse peut nous écrire à la place',
-      'Rappels et confirmations (appels sortants) : vous gardez la preuve de la base légale (relation client ou consentement) ; en France, le démarchage téléphonique exige le consentement préalable de la personne depuis le 11 août 2026',
+      'L’agent annonce l’enregistrement de l’appel ; une personne qui refuse peut demander à être recontactée par écrit',
+      'Rappels et confirmations (appels sortants) : vous gardez la preuve de la base légale (relation client ou consentement) ; en France, le démarchage téléphonique des consommateurs exige leur consentement préalable depuis le 11 août 2026',
     ],
     rights: ['Pour toute question ou demande d’exercice de droits : ', { a: 'politique de confidentialité', href: '/confidentialite' }, '.'] as Rich,
   },
 
   accessibility: {
     meta: {
-      title: (brand: string) => `Déclaration d’accessibilité — ${brand}`,
+      title: (brand: string) => `Déclaration d’accessibilité · ${brand}`,
       description: (brand: string) => `Niveau d’accessibilité du site ${brand}, aménagements réalisés, limites connues et contact pour signaler une difficulté.`,
     },
     h1: 'Déclaration d’accessibilité',
@@ -220,9 +220,10 @@ export const UI_PAGES = {
     intro: (brand: string, company: string) => `${brand} est un service de ${company}, société enregistrée dans l’État du Wyoming (États-Unis). Nous voulons que chacun puisse utiliser ce site, y compris les personnes en situation de handicap.`,
     sections: [
       { title: 'Niveau visé', items: ['Le site vise la conformité au niveau AA des règles WCAG 2.1 (et, pour Israël, à la norme IS 5568).', 'Statut : partiellement conforme. Les points non conformes connus sont listés plus bas et sont en cours de correction.'] },
-      { title: 'Aménagements réalisés', items: ['Langue et sens de lecture déclarés sur chaque page (dont l’hébreu, de droite à gauche).', 'Navigation complète au clavier, lien d’accès direct au contenu, focus visible.', 'Titres hiérarchisés, textes alternatifs sur les images informatives, formulaires étiquetés.', 'Contrastes renforcés, texte agrandissable jusqu’à 200 % sans perte d’information, mise en page adaptée au mobile.', 'Animations réduites quand le système le demande (préférence « réduire les animations »).'] },
+      { title: 'Aménagements réalisés', items: ['Langue et sens de lecture déclarés sur chaque page (dont l’hébreu, de droite à gauche).', 'Navigation complète au clavier, lien d’accès direct au contenu, focus visible.', 'Titres hiérarchisés, textes alternatifs sur les images informatives, formulaires étiquetés.', 'Contrastes améliorés (quelques textes secondaires sont en cours de correction), texte agrandissable jusqu’à 200 % sans perte d’information, mise en page adaptée au mobile.', 'Animations réduites quand le système le demande (préférence « réduire les animations »).'] },
       { title: 'Limites connues', items: ['La fenêtre de discussion et de démonstration vocale est fournie par notre prestataire technique : son accessibilité au clavier et aux lecteurs d’écran peut être incomplète. Le formulaire de rappel et l’adresse email restent toujours disponibles.', 'L’espace client (app.permanenceia.com) est en anglais et relève de la plateforme de notre prestataire.', 'Certains documents PDF (présentation commerciale) ne sont pas entièrement balisés.'] },
       { title: 'Évaluation', items: ['Évaluation interne réalisée le 7 octobre 2026 sur l’ensemble des pages publiques, avec des outils automatiques et une vérification manuelle (clavier, contrastes, lecteur d’écran).'] },
+      { title: 'Voies de recours', items: ['Si vous nous avez signalé une difficulté d’accès et que vous n’avez pas obtenu de réponse satisfaisante, vous pouvez saisir le Défenseur des droits :', 'par le formulaire en ligne sur le site du Défenseur des droits (defenseurdesdroits.fr) ;', 'auprès de l’un de ses délégués, présents dans chaque département ;', 'par courrier gratuit, sans affranchissement : Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07.'] },
     ],
     contactTitle: 'Signaler une difficulté',
     contact: (company: string, email: string) => `Responsable accessibilité : ${company}. Écrivez-nous à ${email} en décrivant la page et la difficulté rencontrée : nous vous répondons sous 5 jours ouvrés et vous proposons une solution adaptée (information dans un autre format, aide par email ou par téléphone).`,
@@ -230,7 +231,7 @@ export const UI_PAGES = {
 
   notFound: {
     meta: {
-      title: (brand: string) => `Page introuvable — ${brand}`,
+      title: (brand: string) => `Page introuvable · ${brand}`,
       description: 'Cette page n’existe pas ou a été déplacée.',
     },
     h1: 'Cette page n’existe pas ou a été déplacée',
@@ -241,10 +242,10 @@ export const UI_PAGES = {
 
   terms: {
     meta: {
-      title: (brand: string) => `Conditions générales (CGU / CGV) — ${brand}`,
+      title: (brand: string) => `Conditions générales (CGU/CGV) · ${brand}`,
       description: (brand: string) => `Consultez les conditions générales d’utilisation et de vente applicables aux forfaits et services de standard téléphonique IA ${brand}.`,
     },
-    h1: 'Conditions Générales d’Utilisation & de Vente (CGU/CGV)',
+    h1: 'Conditions générales d’utilisation et de vente (CGU/CGV)',
     updated: 'Applicables aux professionnels et entreprises • Dernière mise à jour : 6 octobre 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
@@ -300,7 +301,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Les prix sont exprimés en dollars US (USD), hors taxes. Les taxes applicables sont calculées au paiement selon le pays du Client et sa situation fiscale (avec ou sans numéro de TVA) et sont à sa charge. Si une retenue à la source s’impose au Client, il majore son paiement afin que nous recevions le montant facturé.',
-                'Les forfaits sont payables d’avance, mensuellement ou annuellement au choix du Client (la facturation annuelle offre deux mois), via notre prestataire de paiement Stripe. L’abonnement est reconduit tacitement pour une période de même durée, et le Client autorise les prélèvements correspondants. En facturation annuelle, les minutes incluses sont attribuées chaque mois et le Service est identique.',
+                'Les forfaits sont payables d’avance, mensuellement ou annuellement au choix du Client (deux mois offerts en facturation annuelle), via notre prestataire de paiement Stripe. L’abonnement est reconduit tacitement pour une période de même durée, et le Client autorise les prélèvements correspondants. En facturation annuelle, les minutes incluses sont attribuées chaque mois et le Service est identique.',
                 'Les usages au-delà du forfait (minutes supplémentaires, messages, numéros de téléphone, frais facturés par les opérateurs ou par Meta) sont débités sur le crédit ou facturés aux tarifs en vigueur indiqués sur la page Tarifs ou dans l’espace client.',
                 ['Le Client peut résilier à tout moment, sans préavis, depuis son tableau de bord ', { strong: appHost }, '. La résiliation prend effet au terme de la période déjà payée (le mois ou, en facturation annuelle, l’année en cours), sans remboursement (article 3). Le Client peut changer de forfait ou recharger son crédit à tout moment ; les modalités du changement sont indiquées dans l’espace client.'],
                 'Nous pouvons modifier nos prix moyennant un préavis de 30 jours par email ou dans l’espace client ; le nouveau prix s’applique à compter du renouvellement suivant. Le Client qui le refuse résilie avant cette date. Les frais de tiers répercutés (opérateurs, Meta) peuvent évoluer dans les délais imposés par ces tiers.',
@@ -338,7 +339,7 @@ export const UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Consentement :' }, ' il obtient, avant tout appel ou message automatisé, sortant ou commercial (voix, SMS, WhatsApp), les consentements exigés par la loi, en conserve la preuve et respecte immédiatement toute opposition (mot STOP, demande orale ou écrite).'],
-                [{ strong: 'Listes d’opposition :' }, ' il respecte les règles et registres applicables : en France, consentement préalable exprès de la personne au démarchage téléphonique depuis le 11 août 2026 (article L223-1 du Code de la consommation), TPS et CTPS (Royaume-Uni), Do Not Call Register (Australie), Registro pubblico delle opposizioni (Italie), règles polonaises exigeant le consentement préalable au démarchage téléphonique, règles néerlandaises (consentement préalable ou relation client existante, Bel-me-niet Register).'],
+                [{ strong: 'Listes d’opposition :' }, ' il respecte les règles et registres applicables : en France, consentement préalable des consommateurs au démarchage téléphonique depuis le 11 août 2026 (article L223-1 du Code de la consommation), TPS et CTPS (Royaume-Uni), Do Not Call Register (Australie), Registro pubblico delle opposizioni (Italie), règles polonaises exigeant le consentement préalable au démarchage téléphonique, règles néerlandaises (consentement préalable ou relation client existante, Bel-me-niet Register).'],
                 [{ strong: 'Horaires et fréquence :' }, ' il respecte les jours, heures et fréquences d’appel autorisés.'],
                 [{ strong: 'Identification :' }, ' il présente un numéro valide qui lui est attribué, n’usurpe aucun numéro et s’identifie clairement.'],
                 [{ strong: 'Transparence :' }, ' il informe clairement les Destinataires, dès le début de l’échange, qu’ils interagissent avec un système d’intelligence artificielle (conformément notamment au règlement européen sur l’IA) et, lorsque la loi l’exige, que l’appel est enregistré ou transcrit, et recueille leur accord lorsqu’il est requis.'],
@@ -366,7 +367,7 @@ export const UI_PAGES = {
         {
           title: 'Article 8 — Données du Client et protection des données',
           body: [
-            { p: ['Pour les données personnelles des Destinataires traitées via le Service, le Client est responsable du traitement et nous agissons comme sous-traitant (article 28 du RGPD et textes équivalents). Le présent article et la ', { a: 'politique de confidentialité', href: '/confidentialite' }, ' constituent l’accord de traitement des données ; un accord signé peut être conclu dans le cadre d’un forfait Sur mesure. Nous :'] },
+            { p: ['Pour les données personnelles des Destinataires traitées via le Service, le Client est responsable du traitement et nous agissons comme sous-traitant (article 28 du RGPD et textes équivalents). Le présent article et la ', { a: 'politique de confidentialité', href: '/confidentialite' }, ' constituent l’accord de traitement des données (DPA) ; une version signée est fournie sur demande. Nous :'] },
             {
               ul: [
                 'traitons les données uniquement sur les instructions documentées du Client (les Conditions et ses réglages), sauf obligation légale, et l’informons si une instruction nous paraît illicite ;',
@@ -414,7 +415,7 @@ export const UI_PAGES = {
           body: [
             {
               ul: [
-                'Nous pouvons faire évoluer le Service, ajouter, modifier ou retirer des fonctions et changer de prestataires. Nous prévenons, lorsque c’est raisonnablement possible, du retrait d’une fonction essentielle d’un forfait payant.',
+                'Nous pouvons faire évoluer le Service, ajouter, modifier ou retirer des fonctions et changer de prestataires. Lorsque c’est raisonnablement possible, nous informons le Client à l’avance du retrait d’une fonction essentielle d’un forfait payant.',
                 'Les fonctions bêta, en avant-première ou expérimentales sont fournies en l’état, sans engagement, et peuvent être arrêtées à tout moment.',
                 'Nous sommes tenus d’une obligation de moyens. Aucun niveau de service garanti (SLA) ne s’applique, sauf stipulation écrite dans un contrat Sur mesure. Le Service dépend d’internet, des opérateurs et de nos prestataires ; des maintenances, annoncées si possible, ou urgentes, peuvent l’interrompre.',
                 'Des limites d’usage raisonnable (appels simultanés, débits, volumes) peuvent s’appliquer.',
@@ -461,7 +462,7 @@ export const UI_PAGES = {
         {
           title: 'Article 16 — Indemnisation par le Client',
           body: [
-            { p: `Le Client nous défend, nous indemnise et nous garantit, ainsi que nos dirigeants, salariés, sous-traitants et prestataires, contre toute réclamation, perte, amende, sanction, condamnation et tous frais (y compris d’avocat raisonnables) résultant : de son Contenu Client et de la configuration de ses agents ; de ses appels, messages et campagnes ; de l’absence de consentement, du non-respect d’une opposition ou d’une liste d’opposition ; de toute violation du droit des télécommunications, de la prospection, de l’IA ou des données personnelles ; d’un manquement aux Conditions ; de toute réclamation d’un Destinataire, d’un Utilisateur, d’un opérateur, de Meta, de notre prestataire de plateforme technique ou d’une autorité liée à son usage. Le Client reconnaît que ${company} peut être tenue envers ses propres prestataires des manquements de ses clients. Nous informons le Client de la réclamation ; il ne peut conclure de transaction mettant une obligation à notre charge sans notre accord.` },
+            { p: `Le Client nous défend, nous indemnise et nous garantit, ainsi que nos dirigeants, salariés, sous-traitants et prestataires, contre toute réclamation, perte, amende, sanction, condamnation et tous frais (y compris des honoraires d’avocat raisonnables) résultant : de son Contenu Client et de la configuration de ses agents ; de ses appels, messages et campagnes ; de l’absence de consentement, du non-respect d’une opposition ou d’une liste d’opposition ; de toute violation du droit des télécommunications, de la prospection, de l’IA ou des données personnelles ; d’un manquement aux Conditions ; de toute réclamation d’un Destinataire, d’un Utilisateur, d’un opérateur, de Meta, de notre prestataire de plateforme technique ou d’une autorité liée à son usage. Le Client reconnaît que ${company} peut être tenue envers ses propres prestataires des manquements de ses clients. Nous informons le Client de la réclamation ; il ne peut conclure de transaction mettant une obligation à notre charge sans notre accord.` },
           ],
         },
         {
@@ -477,10 +478,10 @@ export const UI_PAGES = {
               ul: [
                 `Les Conditions sont régies par le ${legal.governingLaw}, à l’exclusion de ses règles de conflit de lois et de la Convention des Nations unies sur la vente internationale de marchandises.`,
                 ['Avant toute procédure, la partie qui se plaint adresse une réclamation écrite (pour nous : ', mail, ') ; les parties recherchent une solution amiable pendant 30 jours.'],
-                `À défaut, tout litige né des Conditions ou du Service est tranché définitivement par un arbitrage confidentiel et contraignant, administré par l’American Arbitration Association (AAA) selon son Règlement d’arbitrage commercial (ou, pour un litige international, par son International Centre for Dispute Resolution), devant un arbitre unique, siégeant à Cheyenne (Wyoming), en langue anglaise. La sentence pourra être confirmée et exécutée par le ${legal.court} ou par toute juridiction compétente.`,
+                `À défaut, tout litige né des Conditions ou du Service est tranché définitivement par un arbitrage confidentiel et contraignant, administré par l’American Arbitration Association (AAA) selon son Règlement d’arbitrage commercial (ou, pour un litige international, par son International Centre for Dispute Resolution), devant un arbitre unique, siégeant à Cheyenne (Wyoming), en langue anglaise. La sentence pourra être confirmée et exécutée par les ${legal.court} ou par toute juridiction compétente.`,
                 [{ strong: 'Renonciation aux actions collectives :' }, ' les litiges sont tranchés uniquement à titre individuel, à l’exclusion de toute action de groupe, collective ou représentative et de tout arbitrage consolidé. Si cette renonciation est jugée inapplicable à une demande, celle-ci est portée devant les juridictions ci-dessous et non en arbitrage.'],
                 'Chaque partie peut demander à toute juridiction compétente des mesures urgentes ou conservatoires (notamment pour protéger sa propriété intellectuelle ou ses informations confidentielles ou faire cesser un usage abusif du Service), sans constitution de garantie dans la mesure permise. Chaque partie peut saisir une juridiction des petits litiges pour une demande individuelle relevant de sa compétence, et nous pouvons agir en recouvrement des sommes impayées devant toute juridiction compétente.',
-                `Tout litige non soumis à l’arbitrage relève de la compétence exclusive du ${legal.court}.`,
+                `Tout litige non soumis à l’arbitrage relève de la compétence exclusive des ${legal.court}.`,
               ],
             },
           ],
@@ -521,7 +522,7 @@ export const UI_PAGES = {
 
   privacy: {
     meta: {
-      title: (brand: string) => `Politique de confidentialité — ${brand}`,
+      title: (brand: string) => `Politique de confidentialité · ${brand}`,
       description: (brand: string) => `Comment ${brand} traite vos données : demandes de rappel, agents IA et enregistrements, compte client, facturation Stripe, prestataires et vos droits.`,
     },
     breadcrumb: 'Confidentialité',
@@ -534,7 +535,7 @@ export const UI_PAGES = {
         {
           title: 'Qui nous sommes et notre rôle',
           body: [
-            { p: [`${brand} est une marque de ${company}, Limited Liability Company immatriculée dans l’État du Wyoming (États-Unis), ${ADDRESS}. Contact : `, mail, `. Nous traitons les données personnelles conformément au ${legal.privacyLaw} et aux autres lois applicables.`] },
+            { p: [`${brand} est une marque de ${company}, Limited Liability Company immatriculée dans l’État du Wyoming (États-Unis), ${ADDRESS}. Contact : `, mail, `. Nous traitons les données personnelles conformément au ${legal.privacyLaw}, ainsi qu’aux autres lois applicables.`] },
             {
               ul: [
                 [{ strong: 'Responsable du traitement :' }, ` pour le site, les formulaires et demandes de rappel, les échanges avec nos propres assistantes IA, les comptes clients, la facturation et notre prospection, ${company} est responsable du traitement.`],
@@ -596,6 +597,7 @@ export const UI_PAGES = {
                 [{ strong: 'Stripe' }, ' : abonnements, paiements, factures et calcul des taxes (certifié PCI-DSS niveau 1).'],
                 [{ strong: 'Supabase' }, ' : base de données des demandes, inscriptions et comptes rendus d’échanges (États-Unis).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ' : hébergement du site (États-Unis).'],
+                [{ strong: 'Google (Google Analytics 4)' }, ' : mesure d’audience, uniquement avec votre consentement ; transfert vers les États-Unis encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).'],
                 [{ strong: 'Zoho' }, ' : envoi des emails de service et de suivi.'],
                 [{ strong: 'Intégrations activées par le client' }, ' (agendas, CRM, outils d’automatisation), nos conseils professionnels, les autorités lorsque la loi l’exige, et un éventuel acquéreur en cas de fusion ou de cession.'],
               ],
@@ -657,7 +659,7 @@ export const UI_PAGES = {
           title: 'Exercer vos droits et réclamations',
           body: [
             { p: ['Écrivez à ', mail, ` ou à ${company}, ${ADDRESS}, États-Unis. Nous pouvons vous demander de justifier de votre identité. Nous répondons dans un délai de 30 jours, prolongeable de deux mois pour les demandes complexes (vous en serez informé). La démarche est gratuite, sauf demande manifestement infondée ou excessive. Si nous traitons vos données pour le compte d’un client, nous lui transmettons votre demande.`] },
-            { p: `Vous pouvez introduire une réclamation auprès de ${legal.dataAuthority}, ou de l’autorité de protection des données de votre pays de résidence ou de travail : notamment la CNIL (France), le Garante per la protezione dei dati personali (Italie), l’UODO (Pologne), l’Autoriteit Persoonsgegevens (Pays-Bas), l’ICO (Royaume-Uni), le PFPDT (Suisse). En Australie, adressez-nous d’abord votre plainte : nous répondons sous 30 jours ; vous pouvez ensuite saisir l’OAIC.` },
+            { p: `Vous pouvez introduire une réclamation auprès de ${legal.dataAuthority}, ou de l’autorité de protection des données de votre pays de résidence ou de travail  : notamment l’Autorité de protection des données (Belgique), le PFPDT (Suisse), le Garante per la protezione dei dati personali (Italie), l’UODO (Pologne), l’Autoriteit Persoonsgegevens (Pays-Bas) ou l’ICO (Royaume-Uni). En Australie, adressez-nous d’abord votre plainte : nous répondons sous 30 jours ; vous pouvez ensuite saisir l’OAIC.` },
           ],
         },
         {
@@ -669,7 +671,7 @@ export const UI_PAGES = {
         {
           title: 'Prospection, appels et désinscription',
           body: [
-            { p: ['Nous ne vous appelons qu’à votre demande ou avec votre accord, et notre agent se présente comme une IA. Vous pouvez à tout moment dire que vous ne souhaitez plus être appelé, répondre STOP à un SMS, utiliser le lien de désinscription d’un email ou écrire à ', mail, ' : nous vous inscrivons sur notre liste d’opposition interne. Pour notre propre prospection, nous respectons les listes d’opposition au démarchage applicables (consentement préalable en France, TPS/CTPS, Do Not Call Register, Registro delle opposizioni…).'] },
+            { p: ['Nous ne vous appelons qu’à votre demande ou avec votre accord, et notre agent se présente comme une IA. Vous pouvez à tout moment dire que vous ne souhaitez plus être appelé, répondre STOP à un SMS, utiliser le lien de désinscription d’un email ou écrire à ', mail, ' : nous vous inscrivons sur notre liste d’opposition interne. Pour notre propre prospection, nous respectons les listes d’opposition au démarchage applicables (consentement préalable des consommateurs en France, TPS/CTPS, Do Not Call Register, Registro delle opposizioni…).'] },
             { p: 'Les appels et messages envoyés par nos clients relèvent de leur responsabilité : adressez-leur votre opposition ; nous la leur transmettrons si vous nous contactez.' },
           ],
         },
@@ -703,21 +705,21 @@ export const UI_PAGES = {
 
   legalNotice: {
     meta: {
-      title: (brand: string) => `Mentions légales — ${brand}`,
+      title: (brand: string) => `Mentions légales · ${brand}`,
       description: (brand: string) => `Mentions légales, informations sur l’éditeur, l’hébergement et les droits d’auteur de la plateforme ${brand}.`,
     },
-    h1: 'Mentions Légales',
+    h1: 'Mentions légales',
     updated: 'Dernière mise à jour : 29 septembre 2026',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Éditeur du site',
         body: [
-          { p: ["Le site internet accessible à l'adresse ", { strong: 'https://permanenceia.com' }, ' est édité par la société ', { strong: company }, '.'] },
+          { p: ['Le site internet accessible à l’adresse ', { strong: 'https://permanenceia.com' }, ' est édité par la société ', { strong: company }, '.'] },
           {
             ul: [
               [{ strong: 'Nom commercial :' }, ` ${brand}`],
               [{ strong: 'Statut :' }, ' Limited Liability Company (LLC), État du Wyoming, États-Unis'],
-              [{ strong: "Numéro d'enregistrement :" }, ' 2026-001905061'],
+              [{ strong: 'Numéro d’enregistrement :' }, ' 2026-001905061'],
               [{ strong: 'Siège social :' }, ' 1603 Capitol Ave, Suite 413G-2408, Cheyenne, WY 82001, États-Unis'],
               [{ strong: 'Email de contact :' }, ` ${email}`],
               [{ strong: 'Directeur de la publication :' }, ` le représentant légal de ${company}.`],
@@ -728,11 +730,12 @@ export const UI_PAGES = {
       {
         title: '2. Hébergement de la plateforme',
         body: [
-          { p: "Le site vitrine commercial et l'application sont hébergés par :" },
+          { p: 'Le site et les services sont hébergés par :' },
           {
             ul: [
-              [{ strong: 'Plateforme front-end :' }, " Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Région d'hébergement : us-east4 (Virginie du Nord, États-Unis)."],
-              [{ strong: 'Bases de données & Stockage :' }, ' Supabase Inc., infrastructures situées aux États-Unis (région AWS us-east-1, Virginie).'],
+              [{ strong: 'Site vitrine :' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, États-Unis. Région d’hébergement : us-east4 (Virginie du Nord, États-Unis).'],
+              [{ strong: 'Bases de données et stockage du site :' }, ' Supabase Inc., infrastructures situées aux États-Unis (région AWS us-east-1, Virginie).'],
+              [{ strong: 'Espace client et agents vocaux :' }, ` l’espace client (${appHost}), les agents et leurs données sont hébergés par notre prestataire de plateforme technique, établi dans l’Union européenne (Roumanie), sur des serveurs situés dans l’Espace économique européen et/ou aux États-Unis.`],
             ],
           },
         ],
@@ -740,15 +743,15 @@ export const UI_PAGES = {
       {
         title: '3. Propriété intellectuelle',
         body: [
-          { p: ['La marque ', { strong: brand }, `, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l'ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes sources figurant sur le site sont la propriété exclusive de ${company}.`] },
+          { p: ['La marque ', { strong: brand }, `, le logo (la bulle en veille, les ondes vocales et le point de disponibilité), ainsi que l’ensemble des chartes graphiques, textes, scripts conversationnels, infographies et codes source figurant sur le site sont la propriété exclusive de ${company}.`] },
           { p: 'Toute reproduction, distribution, modification ou utilisation sans accord écrit préalable est formellement interdite et constitue une contrefaçon sanctionnée par le ' + legal.copyrightLaw + '.' },
         ],
       },
       {
         title: '4. Limitation de responsabilité',
         body: [
-          { p: `${brand} s'efforce d'assurer au mieux de ses possibilités l'exactitude des informations diffusées sur le site. Toutefois, ${brand} ne saurait être tenue responsable des interruptions de service réseau, des pannes inhérentes aux opérateurs de télécommunication tiers ou des inexactitudes contextuelles ponctuelles formulées par les modèles de traitement automatique de la parole lors des conversations en direct.` },
-          { p: "Le client professionnel demeure seul responsable des consignes et règles métier qu'il programme pour son standard téléphonique." },
+          { p: `${brand} s’efforce d’assurer au mieux de ses possibilités l’exactitude des informations diffusées sur le site. Toutefois, ${brand} ne saurait être tenue responsable des interruptions de service réseau, des pannes inhérentes aux opérateurs de télécommunication tiers ou des inexactitudes ponctuelles dans les réponses générées par l’intelligence artificielle lors des conversations.` },
+          { p: 'Le client professionnel demeure seul responsable des consignes et règles métier qu’il programme pour son standard téléphonique.' },
         ],
       },
     ],
@@ -756,14 +759,17 @@ export const UI_PAGES = {
 
   cookies: {
     meta: {
-      title: (brand: string) => `Politique cookies — ${brand}`,
-      description: (brand: string) => `Cookies et traceurs utilisés sur le site ${brand}.`,
+      title: (brand: string) => `Politique cookies · ${brand}`,
+      description: (brand: string) => `Liste des cookies et traceurs du site ${brand} : finalités, durées de conservation et gestion de votre consentement.`,
     },
     h1: 'Politique cookies',
     paragraphs: (siteHost: string, appHost: string) => [
-      `Le site ${siteHost} utilise uniquement les cookies strictement nécessaires à son fonctionnement (sécurité, équilibrage de charge). Aucun cookie publicitaire ni de mesure d’audience tiers n’est déposé à ce jour.`,
-      'Si des outils de mesure d’audience ou de publicité sont ajoutés, un bandeau vous demandera votre consentement avant tout dépôt, et cette page sera mise à jour avec la liste des cookies, leur finalité et leur durée.',
-      `L’espace client (${appHost}) utilise des cookies de session nécessaires à la connexion.`,
+      `Cookies strictement nécessaires : le site ${siteHost} dépose les cookies indispensables à son fonctionnement (sécurité, équilibrage de charge). Ils ne demandent pas votre consentement.`,
+      `Cookie de consentement : le cookie pia_consent mémorise votre choix (accepter ou refuser) pendant 6 mois, sur le domaine permanenceia.com et sur l’espace client (${appHost}).`,
+      'Mesure d’audience, avec votre accord seulement : Google Analytics 4 (Google Ireland Ltd / Google LLC) mesure l’audience du site et l’efficacité de nos campagnes, sous forme de statistiques agrégées. Cookies déposés : _ga et _ga_<ID>, conservés 13 mois au plus. Un transfert de données vers les États-Unis est possible ; il est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',
+      'Aucun cookie publicitaire ni de ciblage n’est déposé.',
+      'Vous pouvez changer d’avis à tout moment avec le lien « Gérer les cookies » en bas de chaque page. Refuser n’empêche pas d’utiliser le site.',
+      `Le widget de notre assistante, chargé depuis ${appHost}, peut utiliser un stockage technique nécessaire à la conversation. L’espace client (${appHost}) utilise des cookies de session nécessaires à la connexion.`,
     ],
     questions: 'Questions : ',
   },
@@ -773,32 +779,32 @@ export const UI_PAGES = {
       title: (brand: string) => `Blog accueil téléphonique et agents IA · ${brand}`,
       description: 'Guides et retours d’expérience sur l’accueil téléphonique, la prise de rendez-vous et les agents vocaux IA en entreprise. Lisez nos articles.',
     },
-    eyebrow: 'Ressources & Insights',
-    h1: 'Le Journal de la Réception IA',
-    intro: "Stratégies de conversion téléphonique, analyses réglementaires et retours d'expérience concrets de professionnels.",
-    searchPlaceholder: 'Rechercher un article...',
+    eyebrow: 'Ressources et analyses',
+    h1: 'Le journal de l’accueil téléphonique IA',
+    intro: 'Stratégies de conversion téléphonique, analyses réglementaires et retours d’expérience concrets de professionnels.',
+    searchPlaceholder: 'Rechercher un article…',
     all: 'Tous les articles',
     categories: {
       productivite: 'Productivité',
       conformite: 'Conformité',
-      'cas-client': 'Cas Client',
+      'cas-client': 'Cas clients',
       technique: 'Technique',
     },
     read: 'Lire',
     notFound: {
-      title: (brand: string) => `Article non trouvé | ${brand}`,
+      title: (brand: string) => `Article introuvable · ${brand}`,
       description: 'Cet article n’existe pas ou a été déplacé.',
       h1: 'Article introuvable',
-      text: "L'article que vous cherchez n'existe pas ou a été déplacé.",
+      text: 'L’article que vous cherchez n’existe pas ou a été déplacé.',
       back: 'Retour aux articles',
     },
-    articleTitle: (title: string, brand: string) => `${title} | Blog ${brand}`,
+    articleTitle: (title: string, brand: string) => `${title} · Blog ${brand}`,
     backToList: 'Retour à la liste des articles',
     readTime: (t: string) => `${t} de lecture`,
-    publisher: (brand: string) => `${brand} Publications`,
-    ctaEyebrow: "Passez à l'action",
-    ctaTitle: "Prêt à équiper votre entreprise d'un standard IA ?",
-    ctaText: (days: number, minutes: number) => `Testez dès aujourd'hui notre agent vocal en conditions réelles pendant ${days} jours, avec ${minutes} minutes incluses et sans engagement.`,
+    publisher: (brand: string) => `${brand}`,
+    ctaEyebrow: 'Passez à l’action',
+    ctaTitle: 'Prêt à équiper votre entreprise d’un standard IA ?',
+    ctaText: (days: number, minutes: number) => `Testez dès aujourd’hui notre agent vocal en conditions réelles pendant ${days} jours, avec ${minutes} minutes incluses et sans engagement.`,
     ctaButton: 'Démarrer l’essai de 14 jours',
   },
 };

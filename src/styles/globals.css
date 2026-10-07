@@ -10,13 +10,17 @@
     @apply bg-white font-sans text-[17px] leading-relaxed text-slate antialiased;
   }
   h1, h2, h3, h4 { @apply font-display text-ink; }
+  /* Mots longs (néerlandais, polonais, URL) : coupure plutôt que débordement horizontal sur mobile. */
+  h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; }
+  bdi { overflow-wrap: anywhere; }
   :focus-visible { @apply outline-none ring-2 ring-signal ring-offset-2; }
   ::selection { @apply bg-signal-soft text-ink; }
 }
 
 @layer components {
   .wrap { @apply mx-auto w-full max-w-6xl px-4 sm:px-6; }
-  .btn { @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg px-5 py-3 font-semibold transition-colors disabled:opacity-60; }
+  /* Boutons sur une ligne dès 640 px ; en dessous, le libellé peut passer à la ligne plutôt que déborder. */
+  .btn { @apply inline-flex max-w-full items-center justify-center gap-2 text-center sm:whitespace-nowrap rounded-lg px-5 py-3 font-semibold transition-colors disabled:opacity-60; }
   .btn-primary { @apply btn bg-ink text-white hover:bg-ink-soft; }
   .btn-signal { @apply btn bg-signal-deep text-white hover:bg-ink-soft; }
   .btn-ghost { @apply btn border border-line bg-white text-ink hover:border-ink; }

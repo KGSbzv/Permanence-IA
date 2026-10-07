@@ -15,7 +15,7 @@ export default function Securite() {
           <Heading as="h1" title={t.h1} intro={t.intro} />
         </div>
       </section>
-      <Section><SecurityBlock /></Section>
+      <Section><SecurityBlock bare /></Section>
       <Section tone="night">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <Heading dark title={t.infraTitle} intro={t.infraIntro} />

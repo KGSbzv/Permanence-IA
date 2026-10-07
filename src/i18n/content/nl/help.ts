@@ -10,14 +10,14 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Calls history', label: 'Gespreksgeschiedenis', text: 'Elk gesprek met opname, transcriptie, samenvatting en geëxtraheerde gegevens.' },
   { en: 'Knowledge base', label: 'Kennisbank', text: 'Documenten en webpagina’s die de agent tijdens het gesprek raadpleegt.' },
   { en: 'Mid call tools / MCP', label: 'Tools tijdens het gesprek', text: 'Acties die de agent live uitvoert: een aanvraag naar uw CRM sturen, een gegeven controleren…' },
-  { en: 'Blacklist', label: 'Blokkeerlijst', text: 'Nummers die nooit gebeld mogen worden.' },
+  { en: 'Blacklist', label: 'Uitsluitingslijst', text: 'Nummers die nooit gebeld mogen worden.' },
   { en: 'Campaigns', label: 'Campagnes', text: 'Uitgaande gesprekken naar een lijst met contacten (herinneringen, opvolging, afspraken maken).' },
   { en: 'Leads', label: 'Contacten / prospects', text: 'Geïmporteerde of aangemaakte contacten, met hun status.' },
-  { en: 'Inbox', label: 'Berichten', text: 'Geschreven gesprekken op één plek: webwidget, WhatsApp, sms, Messenger, Instagram.' },
+  { en: 'Inbox', label: 'Berichten', text: 'Schriftelijke gesprekken op één plek: webwidget, WhatsApp, sms, Messenger, Instagram.' },
   { en: 'Channels → WhatsApp / Messenger & Instagram', label: 'Kanalen', text: 'Uw berichtenaccounts koppelen.' },
   { en: 'Get new phone number', label: 'Nummer aanvragen', text: 'Een eigen nummer kopen (optie, per maand betaald, prijs zichtbaar vóór de aankoop).' },
   { en: 'Your phone numbers', label: 'Uw nummers', text: 'Uw nummers, import via Twilio / Telnyx en de SIP-koppeling.' },
-  { en: 'Automate platform', label: 'Automatiseringen', text: 'No-code flow builder gekoppeld aan meer dan 300 tools (Assistent-abonnement en hoger).' },
+  { en: 'Automate platform', label: 'Automatiseringen', text: 'No-code automatiseringen gekoppeld aan meer dan 300 tools (Assistent-abonnement en hoger).' },
   { en: 'Change plan', label: 'Abonnement wijzigen', text: 'Overstappen op een groter of kleiner abonnement.' },
   { en: 'Add credits', label: 'Tegoed toevoegen', text: 'Een opwaardering van minuten kopen; het tegoed vervalt niet.' },
   { en: 'Billing info', label: 'Facturatie', text: 'Betaalmethode, facturen, abonnement en opzegging.' },
@@ -31,11 +31,11 @@ export const HELP_TASKS: HelpTask[] = [
     title: 'Uw eerste spraakagent aanmaken',
     steps: [
       'Menu Assistants, daarna Create (aanmaken).',
-      'General: kies Receive phone calls (gesprekken ontvangen) of Make phone calls (gesprekken voeren), geef een naam op en kies de tijdzone.',
+      'General: kies Receive phone calls (gesprekken ontvangen) of Make phone calls (zelf bellen), geef een naam op en kies de tijdzone.',
       'Voice & speech (stem): taal Dutch, kies daarna een stem en luister ernaar.',
       'Brain & prompt (brein en instructies): beschrijf uw bedrijf en wat de agent wel en niet moet doen. De schrijfassistent (AI Prompt Editor) kan dit voor u opstellen.',
       'Greeting (begroeting): de eerste zin die de agent uitspreekt.',
-      'Klik op Create assistant en daarna op Test assistant om vanuit uw browser met de agent te praten.',
+      'Klik op Create assistant. Test daarna met Test assistant (testchat) of Speak with your assistant (spraakgesprek in de browser).',
     ],
   },
   {
@@ -51,7 +51,7 @@ export const HELP_TASKS: HelpTask[] = [
     steps: [
       'De eenvoudigste manier: koop een nummer via Get new phone number en selecteer het in de agent (General → Phone number).',
       'Wilt u uw huidige nummer behouden? Stel bij uw provider een doorschakeling naar dit nieuwe nummer in.',
-      'Hebt u al Twilio, Telnyx of een SIP-centrale: Your phone numbers, daarna import of SIP (alle abonnementen).',
+      'Hebt u al Twilio, Telnyx of een SIP-centrale? Ga dan naar Your phone numbers en kies import of SIP (alle abonnementen).',
     ],
   },
   {
@@ -95,7 +95,7 @@ export const HELP_TASKS: HelpTask[] = [
     title: 'Minuten toevoegen of van abonnement wisselen',
     steps: [
       'Eenmalig: Add credits (tegoed toevoegen) en kies een opwaardering. Het tegoed vervalt niet.',
-      'Gaat u er vaak overheen: Change plan; het grotere abonnement is per minuut goedkoper.',
+      'Gaat u er vaak overheen? Kies dan een groter abonnement via Change plan: dat is per minuut goedkoper.',
     ],
   },
   {

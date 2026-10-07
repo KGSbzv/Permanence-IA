@@ -47,7 +47,7 @@ export default function Navbar() {
       </p>
       <div ref={ref} className="wrap flex h-16 items-center gap-6">
         <Logo height={40} />
-        <nav aria-label={t.mainNav} className="hidden flex-1 items-center gap-1 lg:flex">
+        <nav aria-label={t.mainNav} className="hidden flex-1 items-center gap-1 xl:flex">
           {MENUS.map((m) => (
             <div key={m.label} className="relative">
               <button
@@ -70,18 +70,18 @@ export default function Navbar() {
           ))}
           <Link href="/tarifs" className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.pricing}</Link>
         </nav>
-        <div className="ms-auto hidden items-center gap-2 lg:flex">
+        <div className="ms-auto hidden items-center gap-2 xl:flex">
           <LanguageSwitcher id="lang-desktop" />
           <a href={LOGIN_URL} className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.login}</a>
           <Link href={SIGNUP_URL} className="btn-primary py-2.5">{t.startFree}</Link>
         </div>
-        <button type="button" className="ms-auto rounded-md p-2 text-ink lg:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
+        <button type="button" className="ms-auto rounded-md p-2 text-ink xl:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
           {mobile ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {mobile && (
-        <nav aria-label={t.mobileNav} className="max-h-[75vh] overflow-y-auto border-t border-line bg-white px-4 pb-6 lg:hidden">
+        <nav aria-label={t.mobileNav} className="max-h-[75vh] overflow-y-auto border-t border-line bg-white px-4 pb-6 xl:hidden">
           {MENUS.map((m) => (
             <details key={m.label} className="border-b border-line py-2">
               <summary className="disclosure flex cursor-pointer items-center justify-between py-2 font-display font-semibold text-ink">

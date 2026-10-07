@@ -1,5 +1,6 @@
 // Bandeau de consentement aux cookies de mesure et de publicité (RGPD, UK GDPR, loi israélienne).
 // Accepter et refuser ont le même poids ; le choix est mémorisé 6 mois et modifiable depuis le pied de page.
+// z-[75] : au-dessus de la bulle fermée du widget (z-index 70), pour que les boutons restent accessibles sur mobile.
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '@/i18n';
@@ -23,7 +24,7 @@ export default function ConsentBanner() {
   const choose = (v: 'granted' | 'denied') => { saveConsent(v); setOpen(false); };
 
   return (
-    <div role="dialog" aria-live="polite" aria-label={t.title} className="fixed inset-x-3 bottom-[5.5rem] z-[60] mx-auto max-w-xl rounded-2xl border border-line bg-white p-5 shadow-float lg:bottom-6 lg:start-6 lg:end-auto lg:mx-0">
+    <div role="dialog" aria-live="polite" aria-label={t.title} className="fixed inset-x-3 bottom-[5.5rem] z-[75] mx-auto max-w-xl rounded-2xl border border-line bg-white p-5 shadow-float lg:bottom-6 lg:start-6 lg:end-auto lg:mx-0">
       <p className="font-display font-semibold text-ink">{t.title}</p>
       <p className="mt-1.5 text-[14px] leading-relaxed">
         {t.text} <Link href="/cookies" className="font-semibold text-signal-deep hover:underline">{t.policy}</Link>

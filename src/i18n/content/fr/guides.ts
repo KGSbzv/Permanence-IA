@@ -47,7 +47,7 @@ export const GUIDES_UI = {
   indexIntro: 'Une fiche par tâche, avec les libellés exacts de l’interface (en anglais) et leur explication en français.',
   breadcrumb: 'Guides',
   meta: {
-    title: (title: string, brand: string) => `${title} — Guide ${brand}`,
+    title: (title: string, brand: string) => `${title} · Guide ${brand}`,
   },
   eyebrow: (category: string) => `Guide · ${category}`,
   planLabel: 'Disponibilité',
@@ -199,7 +199,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Les 5 blocs d’une bonne consigne',
         list: [
-          'Rôle et identité : « Tu es l’assistante d’accueil du cabinet X, spécialisé en… »',
+          'Rôle et identité : « Tu es l’assistante virtuelle (IA) du cabinet X, spécialisé en… Tu dis dès le début de l’appel que tu es une IA. »',
           'Style : ton, vouvoiement, phrases courtes, pas de jargon.',
           'Informations clés : services, horaires, tarifs, adresse.',
           'Règles : ce qu’il faut vérifier, quand transférer, ce qu’il ne faut jamais promettre.',
@@ -260,7 +260,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Variables et données après appel',
         list: [
-          'Onglet « Variables » : ajoutez des champs comme {customer_name} pour personnaliser chaque appel.',
+          'Onglet « Variables » : ajoutez des champs comme {{customer_name}} pour personnaliser chaque appel.',
           'Onglet « Post-Call » : définissez les informations à extraire de chaque appel (rendez-vous pris, niveau d’intérêt…). Vous pouvez demander à l’IA : « Quelles données devrais-je collecter ? »',
         ],
       },
@@ -280,12 +280,13 @@ export const GUIDES: Guide[] = [
           'Visez 5 à 10 secondes : salutation, nom de l’entreprise, question.',
           'Utilisez la ponctuation pour les pauses (« … » marque un temps).',
           'Écrivez les nombres comme ils doivent être prononcés et gardez les accents.',
-          'Exemple : « Bonjour, cabinet Martin, Julie à l’appareil… Que puis-je faire pour vous ? »',
+          'Annoncez que l’interlocuteur est une IA et, si c’est le cas, que l’appel est enregistré (obligation du règlement européen sur l’IA).',
+          'Exemple : « Bonjour, cabinet Martin, Julie, l’assistante virtuelle du cabinet… Que puis-je faire pour vous ? »',
         ],
       },
       {
         title: 'Le message d’accueil enregistré',
-        text: 'Pour un rendu parfaitement humain, vous pouvez importer un fichier audio joué au décroché.',
+        text: 'Pour un rendu plus naturel, vous pouvez importer un fichier audio joué au décroché. L’accueil doit rester transparent : il indique que la suite de l’appel est assurée par un assistant IA.',
         steps: [
           'Enregistrez l’accueil au calme (moins de 10 secondes).',
           'Importez le fichier dans les réglages de l’agent et activez sa lecture.',
@@ -783,7 +784,7 @@ export const GUIDES: Guide[] = [
         title: 'Créer la campagne',
         steps: [
           'Menu « Campaigns », créez une campagne : nom, canal (« Call », « WhatsApp » ou « SMS ») et agent.',
-          'Horaires : une ou plusieurs plages par jour (par exemple 9 h–12 h et 14 h–18 h) et les jours autorisés.',
+          'Horaires : une ou plusieurs plages par jour (par exemple 10 h–13 h et 14 h–20 h en semaine, les plages autorisées en France pour le démarchage des consommateurs) et les jours autorisés.',
           'Relances : nombre de tentatives (1 à 5) et délai entre deux tentatives ; choisissez si un répondeur compte comme une tentative.',
           'Option « Retry until goal completed » : la campagne rappelle jusqu’à ce que l’objectif soit atteint (un champ oui/non des données après appel, par exemple rendez-vous pris).',
           'Ajoutez les contacts (saisie, import de fichier) puis cliquez sur « Start Campaign ».',
@@ -796,7 +797,7 @@ export const GUIDES: Guide[] = [
           'Pour modifier les réglages : mettez la campagne en pause, modifiez, puis relancez. Rien n’est perdu.',
           'Option de repli : après le dernier essai d’appel, envoyer une fois un SMS ou un modèle WhatsApp.',
         ],
-        tip: 'Commencez par 2 ou 3 tentatives aux heures de bureau du pays de vos contacts, et respectez toujours les demandes d’opposition (menu « Blacklist »).',
+        tip: 'Commencez par 2 ou 3 tentatives aux heures autorisées dans le pays de vos contacts (en France : du lundi au vendredi, 10 h–13 h et 14 h–20 h), et respectez toujours les demandes d’opposition (menu « Blacklist »).',
       },
     ],
     related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
@@ -965,7 +966,7 @@ export const GUIDES: Guide[] = [
         title: 'Le décompte des minutes',
         list: [
           'Les minutes consommées par chaque appel apparaissent dans « Calls history ».',
-          'Les minutes incluses se renouvellent chaque mois, à la date de votre abonnement.',
+          'Les minutes incluses se renouvellent chaque mois, à la date anniversaire de votre abonnement.',
           'Les appels de test (navigateur ou téléphone) consomment aussi des minutes.',
         ],
       },
@@ -973,7 +974,7 @@ export const GUIDES: Guide[] = [
         title: 'Où gérer quoi',
         list: [
           '« Add credits » : acheter une recharge ; le crédit ne périme pas.',
-          '« Change plan » : changer de forfait. Si vous dépassez souvent, le forfait supérieur revient moins cher à la minute.',
+          '« Change plan » : changer de forfait. Si vous dépassez souvent vos minutes incluses, le forfait supérieur revient moins cher à la minute.',
           '« Billing info » : moyen de paiement, factures et abonnement.',
           '« Limits » : ce que votre forfait autorise (agents, appels simultanés, numéros…).',
         ],
@@ -1040,7 +1041,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'En France',
         list: [
-          'Depuis le 11 août 2026, le démarchage téléphonique de particuliers exige leur consentement préalable, libre et explicite (article L223-1 du Code de la consommation) ; Bloctel a disparu. C’est à vous de prouver ce consentement.',
+          'Depuis le 11 août 2026, la prospection téléphonique des consommateurs exige leur accord préalable, libre et explicite (opt-in, article L223-1 du Code de la consommation). C’est à vous de prouver ce consentement. Bloctel reste utile pour certains contrats conclus avant cette date : faites vérifier votre situation par un juriste.',
           'Un rappel demandé par la personne, un rendez-vous à confirmer ou un suivi lié à une prestation en cours ne sont pas du démarchage : ils restent possibles.',
           'Fichiers achetés ou récupérés sur des annuaires et des portails : à proscrire pour les particuliers sans consentement prouvé.',
           'Entre professionnels, informez la personne et respectez immédiatement toute demande d’opposition.',
@@ -1061,7 +1062,7 @@ export const GUIDES: Guide[] = [
           'L’agent dit dès le début qu’il est une IA et que l’appel est enregistré.',
           'Il donne la raison réelle de l’appel (« vous nous aviez demandé un rappel le… »).',
           'Si la personne ne veut plus être appelée, ajoutez son numéro au menu « Blacklist » : il sera exclu de toutes les campagnes.',
-          'Appelez à des heures raisonnables, en semaine, à l’heure locale du contact.',
+          'En France, le démarchage des consommateurs n’est autorisé que du lundi au vendredi, de 10 h à 13 h et de 14 h à 20 h, hors jours fériés. Ailleurs, respectez les horaires locaux du contact.',
         ],
         tip: 'Avant d’importer un fichier, notez sa source, la date de la relation et la base légale. En cas de contrôle, c’est cette fiche qui vous protège.',
       },
@@ -1090,7 +1091,7 @@ export const GUIDES: Guide[] = [
           'Un mot d’urgence de votre métier (fuite, douleur, panne) déclenche la consigne prévue.',
           'Le comportement hors horaires correspond à ce que vous voulez.',
           'L’agent ne donne ni prix, ni garantie, ni conseil que vous n’avez pas validés.',
-          'Il répond juste aux 5 questions qu’on vous pose le plus souvent.',
+          'Il répond correctement aux 5 questions qu’on vous pose le plus souvent.',
           'L’annonce de l’enregistrement est présente si les appels sont enregistrés.',
           'Les numéros à ne pas appeler sont dans la « Blacklist » avant toute campagne.',
           'Vous avez réécouté trois enregistrements complets et vous êtes d’accord avec le ton.',
@@ -1120,7 +1121,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Réécoutez 10 appels',
         steps: [
-          'Menu « Calls » : prenez 10 appels au hasard du mois.',
+          'Menu « Calls history » : prenez 10 appels au hasard du mois.',
           'Pour chacun : la demande a-t-elle été comprise ? la bonne action a-t-elle été faite ? le ton vous convient-il ?',
           'Ne corrigez les consignes que si le même problème revient au moins deux fois.',
         ],

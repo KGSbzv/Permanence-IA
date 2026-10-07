@@ -1,21 +1,21 @@
 Processo: richiamate, follow-up e assistenza (PermanenceIA)
 
 0. Chi siamo
-- PermanenceIA (www.permanenceia.com) fornisce agenti vocali e conversazionali AI, in white label, alle piccole e medie imprese: risposta telefonica 24 ore su 24, presa di appuntamenti, qualificazione dei contatti, ricontatti e assistenza.
+- PermanenceIA (www.permanenceia.com) fornisce agenti vocali e conversazionali AI alle piccole e medie imprese: risposta telefonica 24 ore su 24, prenotazione degli appuntamenti, qualificazione dei contatti, ricontatti e assistenza.
 - PermanenceIA è un marchio di SINAY STRATEGIC LLC, società registrata nello Stato del Wyoming (Stati Uniti). Contatto scritto: contact@permanenceia.com.
 - I nostri agenti sono intelligenze artificiali e si presentano come tali. All'inizio di ogni chiamata l'agente dice di essere un assistente AI e che la chiamata viene registrata.
 - Il sito esiste in sei lingue: francese (Francia e paesi francofoni), inglese (Regno Unito e Australia), italiano, polacco, olandese ed ebraico (Israele). I prezzi sono gli stessi ovunque, in dollari USA, IVA esclusa.
-- Le nostre linee: in Israele il numero 02-376-7085 (+972 2-376-7085) riceve risposta 24 ore su 24 dalla nostra agente AI in ebraico. Negli altri mercati il contatto avviene tramite la demo live del sito, la bolla di chat e voce (widget), la richiesta di richiamata, Messenger e l'email.
+- Contatti: sul mercato italiano non pubblichiamo un numero di telefono; il contatto avviene tramite la demo live del sito, la bolla di chat e voce (widget), la richiesta di richiamata, Messenger e l'email.
 
 1. Cosa riceve l'agente in una richiamata
 - Quando una persona richiede una richiamata su www.permanenceia.com (commerciale, demo o assistenza), la chiamata in uscita riceve: customer_name (nome), company (azienda), sector (settore, per le richieste commerciali) e request_note (dettagli).
-- request_note contiene l'esigenza o il problema descritto e, se la persona ne ha scelto uno, la dicitura "Créneau souhaité : …" (scritta in francese) con l'orario preferito.
-- L'agente parte da queste informazioni e non richiede ciò che è già noto. Apre la chiamata richiamando la richiesta reale ("Ci aveva chiesto di essere richiamato riguardo a…").
+- request_note contiene l'esigenza o il problema descritto e, se la persona ne ha scelto uno, la dicitura "Créneau souhaité : …" (scritta in francese) con l'orario preferito. Non leggerla mai ad alta voce in francese: tradurla (ad esempio "Aveva indicato di preferire domani mattina"). Anche il campo sector può arrivare come codice in francese (es. "dentaire-cliniques"): usare il nome italiano del settore (es. "studi dentistici e cliniche").
+- L'agente parte da queste informazioni e non richiede ciò che è già noto. Apre la chiamata richiamando la richiesta reale ("Ci aveva chiesto una richiamata riguardo a…").
 - Le richiamate riguardano solo persone che le hanno richieste: non sono chiamate di telemarketing.
 
 2. Richiamata a un orario preciso
 - Quando la persona vuole essere richiamata in un momento preciso, l'agente chiede giorno, data, ora e fuso orario (per impostazione predefinita l'ora del paese della persona) e li rilegge una volta per conferma.
-- L'agente registra l'orario in parole (ad esempio "giovedì 9 ottobre alle 14:30, ora italiana") e, per le richieste di richiamata commerciale, anche in formato ISO 8601 con lo scostamento orario (ad esempio 2026-10-09T14:30:00+02:00). La richiamata viene quindi programmata automaticamente in quel momento, negli orari di chiamata della campagna.
+- L'agente registra l'orario in parole (ad esempio "venerdì 9 ottobre alle 14:30, ora italiana") e, per le richieste di richiamata commerciale, anche in formato ISO 8601 con lo scostamento orario (ad esempio 2026-10-09T14:30:00+02:00). La richiamata viene quindi programmata automaticamente in quel momento, negli orari di chiamata della campagna.
 - Il numero di telefono viene annotato in formato internazionale (+39…, +33…, +44…, +61…, +48…, +31…, +972…) e riletto cifra per cifra. L'agente chiede anche l'email e il consenso esplicito della persona a essere richiamata.
 - Se la persona non è disponibile al momento della chiamata, l'agente propone un nuovo orario preciso e lo registra.
 
@@ -31,9 +31,9 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - L'agente fa una diagnosi passo dopo passo, una verifica alla volta, basandosi sulla base di conoscenza e sulle guide dell'area clienti.
 - In PermanenceIA non esiste il trasferimento di chiamata in diretta verso un operatore umano. L'escalation avviene in due modi: una richiesta di richiamata da parte di un consulente, oppure un ticket di assistenza. In entrambi i casi l'agente scrive un riepilogo di tre frasi (chi, quale problema, cosa è già stato provato o cosa ci si aspetta).
 - Da non confondere: gli agenti che i nostri clienti configurano per la propria azienda possono invece trasferire le chiamate al team del cliente (strumento "Call transfer", incluso in tutti i piani).
-- Se il problema non è risolto (o si tratta di un bug, di fatturazione o dell'account), l'agente crea un ticket di assistenza con descrizione, gravità (bloccante, fastidioso, minore) e un orario di richiamata; il team viene avvisato via email.
+- Se il problema non è risolto (o si tratta di un bug, di fatturazione o dell'account), l'agente crea un ticket di assistenza con descrizione, gravità (bloccante, importante, minore) e un orario di richiamata; il team viene avvisato via email.
 - Se la persona chiede di parlare con un operatore umano, l'agente non discute: crea un ticket o una richiesta di richiamata affinché un consulente la richiami, e lo dice chiaramente.
-- L'agente non promette mai rimborsi, note di credito, sconti né gesti commerciali: queste richieste vengono inoltrate al team tramite ticket.
+- L'agente non promette mai rimborsi, note di credito, sconti né omaggi o condizioni di favore: queste richieste vengono inoltrate al team tramite ticket.
 - Contatto scritto: contact@permanenceia.com.
 
 5. Consultazione della scheda cliente
@@ -45,17 +45,17 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 6. Area clienti (app.permanenceia.com)
 - Interfaccia in inglese, con un assistente di aiuto multilingue integrato (bolla in basso a destra) che guida il cliente nella sua lingua, per iscritto o a voce. La pagina Aiuto del sito traduce ogni menu e propone guide passo passo.
 - Accesso con email e password, oppure con un account Google o LinkedIn.
-- Calendari Google, Outlook, Cal.com e Calendly collegabili con tutti i piani.
+- Calendari Google e Outlook collegabili tramite Cal.com o Calendly, con tutti i piani.
 - Numeri: acquisto di un numero dedicato dall'area clienti (da 5,99 $ IVA esclusa al mese a seconda del paese, prezzo esatto mostrato prima dell'acquisto). Paesi disponibili: Stati Uniti, Canada, Regno Unito, Australia, Italia, Paesi Bassi, Polonia, Danimarca, Finlandia, Romania, Israele, Sudafrica. Il numero non è incluso nel piano.
-- Mantenere il proprio numero (o un numero di un paese non in elenco, ad esempio la Francia): inoltro di chiamata presso l'operatore, importazione Twilio o Telnyx, oppure connessione SIP (tutti i piani).
+- Mantenere il proprio numero (o un numero di un paese non in elenco): deviazione di chiamata presso l'operatore, importazione Twilio o Telnyx, oppure connessione SIP (tutti i piani).
 - WhatsApp, SMS, Messenger e Instagram con tutti i piani, pagati con i crediti messaggi (100 crediti = 1 $, una risposta scritta dell'AI ≈ 2 crediti).
-- Campagne in uscita, flow builder, automazioni e voce clonata a partire dal piano Assistant.
+- Campagne in uscita, scenari automatizzati, automazioni e voce clonata a partire dal piano Assistant.
 
 7. Piani (dollari USA, IVA esclusa)
 - Receptionist: 99 $ al mese, 350 minuti. Minuto extra 0,39 $. 1 agente, 2 chiamate simultanee, 1 numero, 1 base di conoscenza.
 - Assistant: 249 $ al mese, 1.000 minuti. Minuto extra 0,36 $. 3 agenti, 5 chiamate simultanee, 3 numeri, 3 campagne, automazioni (5.000 esecuzioni al mese), 1 voce clonata, 1.000 crediti messaggi al mese.
-- Call Center: 499 $ al mese, 2.300 minuti. Minuto extra 0,32 $. Agenti, campagne e basi illimitati, 20 chiamate simultanee, 10 numeri, 3 voci clonate, 50.000 automazioni al mese, dashboard personalizzate, assistenza prioritaria, 3.000 crediti messaggi al mese.
-- Su misura: oltre 2.500 minuti regolari, su preventivo (prezzo al minuto negoziato, multi-sede, SLA).
+- Call Center: 499 $ al mese, 2.300 minuti. Minuto extra 0,32 $. Agenti, campagne e basi di conoscenza illimitati, 20 chiamate simultanee, 10 numeri, 3 voci clonate, 50.000 automazioni al mese, dashboard personalizzate, assistenza prioritaria, 3.000 crediti messaggi al mese.
+- Su misura: oltre 2.500 minuti al mese, su preventivo (prezzo al minuto negoziato, multi-sede, SLA).
 - Fatturazione annuale: 990 $, 2.490 $ o 4.990 $ all'anno, cioè 2 mesi in omaggio, pagati in anticipo; minuti assegnati ogni mese, prezzo del minuto extra invariato.
 - Pagamento a consumo, senza abbonamento: 0,39 $ al minuto, credito senza scadenza, stesse funzioni del piano Receptionist.
 - Ricariche di credito: 39, 89, 159, 299 o 725 $.
@@ -65,6 +65,6 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 
 8. Regole di chiamata e conformità
 - Italia: prima di una campagna di telemarketing verso privati, i numeri vanno verificati sul Registro pubblico delle opposizioni (RPO), che dal 2022 comprende anche i cellulari. L'iscrizione al Registro revoca i consensi dati in precedenza, salvo le eccezioni previste dalla legge. Una richiamata richiesta, un appuntamento da confermare o il seguito di un servizio in corso restano possibili. Non chiamare mai liste acquistate.
-- Protezione dei dati: GDPR e Codice privacy; autorità di controllo: il Garante per la protezione dei dati personali. DPA (accordo sul trattamento dei dati) fornito su richiesta, diritto alla cancellazione (chiamata, registrazione e trascrizione cancellate su richiesta), conservazione delle registrazioni di 90 giorni dalla chiamata per impostazione predefinita (durata del nostro fornitore tecnico), modificabile dal cliente, regolabile dal cliente. Crittografia TLS e AES-256, fornitore certificato ISO 27001.
-- Altri paesi: in Francia, dall'11 agosto 2026, il telemarketing verso privati richiede il loro consenso preventivo (Bloctel non esiste più); nel Regno Unito si applicano TPS e PECR, in Australia il Do Not Call Register; altrove valgono le regole locali.
+- Protezione dei dati: GDPR e Codice privacy; autorità di controllo: il Garante per la protezione dei dati personali. DPA (accordo sul trattamento dei dati) integrato nelle Condizioni (articolo 8), versione firmata su richiesta; diritto alla cancellazione (chiamata, registrazione e trascrizione cancellate su richiesta), conservazione delle registrazioni di 90 giorni dalla chiamata per impostazione predefinita (durata del nostro fornitore tecnico), modificabile dal cliente. Dati ospitati su server nello Spazio economico europeo e/o negli Stati Uniti, con garanzie adeguate. Crittografia TLS e AES-256, fornitore certificato ISO 27001.
+- Altri paesi: nel Regno Unito si applicano TPS e PECR, in Australia il Do Not Call Register; altrove valgono le regole locali.
 - Emergenze: l'agente non sostituisce mai i soccorsi. Invita a chiamare il numero di emergenza locale: Italia 112, Francia 112 o 15, Regno Unito 999, Australia 000, Polonia e Paesi Bassi 112, Israele 101 (ambulanza), 100 (polizia), 102 (vigili del fuoco).

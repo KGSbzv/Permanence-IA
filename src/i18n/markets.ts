@@ -97,7 +97,7 @@ export const MARKETS: Record<Locale, Market> = {
   fr: {
     ...SHARED, localCurrencies: ['EUR', 'CHF'], hourlyCost: 20, locale: 'fr', hreflang: 'fr', ogLocale: 'fr_FR', country: 'France et francophonie',
     brand: 'Permanence IA', tagline: 'Agents vocaux intelligents', numberLocale: 'fr-FR',
-    legal: { governingLaw: 'droit de l’État du Wyoming (États-Unis)', court: 'Tribunal compétent du comté de Laramie (Wyoming, États-Unis)', dataAuthority: 'la Commission nationale de l’informatique et des libertés (CNIL)', privacyLaw: 'Règlement (UE) 2016/679 (RGPD) et loi Informatique et Libertés', copyrightLaw: 'Code de la propriété intellectuelle', mandatoryNote: '' },
+    legal: { governingLaw: 'droit de l’État du Wyoming (États-Unis)', court: 'tribunaux de l’État et fédéraux du comté de Laramie (Wyoming, États-Unis)', dataAuthority: 'la Commission nationale de l’informatique et des libertés (CNIL)', privacyLaw: 'règlement (UE) 2016/679 (RGPD) et à la loi n° 78-17 dite « Informatique et Libertés »', copyrightLaw: 'Code de la propriété intellectuelle', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: SALES_WIDGET,
   },
   'en-gb': {
@@ -116,25 +116,25 @@ export const MARKETS: Record<Locale, Market> = {
   it: {
     ...SHARED, localCurrencies: ['EUR'], hourlyCost: 18, locale: 'it', hreflang: 'it', ogLocale: 'it_IT', country: 'Italia',
     brand: 'PermanenceIA', tagline: 'Assistente telefonico AI', numberLocale: 'it-IT',
-    legal: { governingLaw: 'legge dello Stato del Wyoming (Stati Uniti)', court: 'tribunale della contea di Laramie (Wyoming, Stati Uniti)', dataAuthority: 'il Garante per la protezione dei dati personali', privacyLaw: 'Regolamento (UE) 2016/679 (GDPR) e D.Lgs. 196/2003 (Codice privacy)', copyrightLaw: 'Legge 22 aprile 1941, n. 633 sul diritto d’autore', mandatoryNote: '' },
+    legal: { governingLaw: 'legge dello Stato del Wyoming (Stati Uniti)', court: 'tribunale della contea di Laramie (Wyoming, Stati Uniti)', dataAuthority: 'il Garante per la protezione dei dati personali', privacyLaw: 'Regolamento (UE) 2016/679 (GDPR), del D.Lgs. 196/2003 (Codice privacy)', copyrightLaw: 'legge 22 aprile 1941, n. 633 (legge sul diritto d’autore)', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: 'eb44bd48-491c-47c1-9c21-016f45678728',
   },
   pl: {
-    ...SHARED, localCurrencies: ['PLN'], hourlyCost: 10, locale: 'pl', hreflang: 'pl', ogLocale: 'pl_PL', country: 'Polska',
+    ...SHARED, localCurrencies: ['PLN'], hourlyCost: 13, locale: 'pl', hreflang: 'pl', ogLocale: 'pl_PL', country: 'Polska',
     brand: 'PermanenceAI', tagline: 'Inteligentny asystent telefoniczny', numberLocale: 'pl-PL',
-    legal: { governingLaw: 'prawu stanu Wyoming (Stany Zjednoczone)', court: 'sąd właściwy dla hrabstwa Laramie (Wyoming, Stany Zjednoczone)', dataAuthority: 'Prezes Urzędu Ochrony Danych Osobowych (UODO)', privacyLaw: 'Rozporządzenie (UE) 2016/679 (RODO) oraz ustawa o ochronie danych osobowych', copyrightLaw: 'ustawa z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych', mandatoryNote: '' },
+    legal: { governingLaw: 'prawu stanu Wyoming (Stany Zjednoczone)', court: 'sąd właściwy dla hrabstwa Laramie (Wyoming, Stany Zjednoczone)', dataAuthority: 'Prezesa Urzędu Ochrony Danych Osobowych (PUODO)', privacyLaw: 'rozporządzenia (UE) 2016/679 (RODO) oraz ustawy z dnia 10 maja 2018 r. o ochronie danych osobowych', copyrightLaw: 'ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: '83d46ff1-caac-4132-afa3-e03e3f1d4b0b',
   },
   nl: {
     ...SHARED, localCurrencies: ['EUR'], hourlyCost: 22, locale: 'nl', hreflang: 'nl', ogLocale: 'nl_NL', country: 'Nederland',
-    brand: 'PermanenceAI', tagline: 'AI-telefonieassistent', numberLocale: 'nl-NL',
+    brand: 'PermanenceAI', tagline: 'AI-telefoonassistent', numberLocale: 'nl-NL',
     legal: { governingLaw: 'het recht van de staat Wyoming (Verenigde Staten)', court: 'de bevoegde rechter in Laramie County (Wyoming, Verenigde Staten)', dataAuthority: 'de Autoriteit Persoonsgegevens', privacyLaw: 'de Algemene verordening gegevensbescherming (AVG)', copyrightLaw: 'de Auteurswet', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: '8fec85f2-1c9e-4af7-b48e-1925a1f34764',
   },
   he: {
     ...SHARED, localCurrencies: ['ILS'], hourlyCost: 15, locale: 'he', hreflang: 'he', ogLocale: 'he_IL', country: 'ישראל',
     brand: 'PermanenceAI', tagline: 'מענה טלפוני חכם 24/7', numberLocale: 'he-IL',
-    legal: { governingLaw: 'דיני מדינת ויומינג, ארצות הברית', court: 'בתי המשפט המוסמכים במחוז לרמי, ויומינג, ארצות הברית', dataAuthority: 'הרשות להגנת הפרטיות', privacyLaw: 'חוק הגנת הפרטיות, התשמ״א-1981 ותקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017', copyrightLaw: 'חוק זכות יוצרים, התשס״ח-2007', mandatoryNote: '' },
+    legal: { governingLaw: 'דיני מדינת ויומינג, ארצות הברית', court: 'בתי המשפט המוסמכים במחוז לרמי, ויומינג, ארצות הברית', dataAuthority: 'הרשות להגנת הפרטיות', privacyLaw: 'חוק הגנת הפרטיות, התשמ״א-1981 (לרבות תיקון מס׳ 13) ותקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017', copyrightLaw: 'חוק זכות יוצרים, התשס״ח-2007', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: 'd8bde5e6-bb6d-435c-8934-3c1131c964e9',
     // Ligne israélienne (Autocalls 11784), agent entrant 21314 (נועה).
     phone: { e164: '+97223767085', display: '02-376-7085', label: 'התקשרו אלינו, 24/7', note: 'נועה, סוכנת ה-AI שלנו, עונה בעברית – וזו גם ההדגמה הכי טובה.' },

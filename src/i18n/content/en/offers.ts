@@ -20,15 +20,15 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI receptionist that answers every call, 24/7',
     pitch: 'The Receptionist plan picks up your calls, answers common questions, books appointments and sends you a clear summary of every request. Simple to set up, no complexity.',
     cta: 'Choose Receptionist',
-    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 phone number and 1 knowledge base', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger (message credits as needed)'],
+    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 knowledge base; 1 dedicated number possible (optional, from $5.99 excl. tax / month)', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger (message credits as needed)'],
   },
   assistant: {
     name: 'Assistant',
     audience: 'Local businesses with steady call volume',
     title: 'An AI assistant that qualifies, follows up and automates your enquiries',
-    pitch: 'The Assistant plan adds three agents, follow-up campaigns, the flow builder connected to over 300 tools and a cloned voice, so you convert more enquiries.',
+    pitch: 'The Assistant plan adds three agents, follow-up campaigns, no-code automations connected to over 300 tools and a cloned voice, so you convert more enquiries.',
     cta: 'Choose Assistant',
-    highlights: ['Everything in Receptionist, plus:', '3 agents, 5 concurrent calls', '3 numbers, 3 knowledge bases, 3 in-call tools', '3 follow-up campaigns', 'Flow builder and automations (5,000 runs / month)', '1 cloned voice', '1,000 message credits a month (≈ 500 written replies)'],
+    highlights: ['Everything in Receptionist, plus:', '3 agents, 5 concurrent calls', '3 knowledge bases, 3 in-call tools; up to 3 dedicated numbers (optional, from $5.99 excl. tax / month)', '3 follow-up campaigns', 'No-code automations (5,000 runs / month)', '1 cloned voice', '1,000 message credits a month (≈ 500 written replies)'],
   },
   'centre-appels': {
     name: 'Call Centre',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'A complete AI call centre to organise reception, bookings and support',
     pitch: 'The Call Centre plan removes the limits: unlimited agents and campaigns, 20 concurrent calls, custom dashboards, priority support and the best per-minute price.',
     cta: 'Choose Call Centre',
-    highlights: ['Everything in Assistant, plus:', 'Unlimited agents, campaigns and knowledge bases', '20 concurrent calls, 10 numbers', '3 cloned voices, 50,000 automations / month', 'Custom dashboards', 'Priority support', '3,000 message credits a month (≈ 1,500 written replies)'],
+    highlights: ['Everything in Assistant, plus:', 'Unlimited agents, campaigns and knowledge bases', '20 concurrent calls; up to 10 dedicated numbers (optional, from $5.99 excl. tax / month)', '3 cloned voices, 50,000 automations / month', 'Custom dashboards', 'Priority support', '3,000 message credits a month (≈ 1,500 written replies)'],
   },
   'sur-mesure': {
     name: 'Custom',
@@ -85,7 +85,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'AI prompt editor', detail: 'A writing assistant sets the agent’s behaviour, tone and rules.', cells: all(true) },
       { label: 'Knowledge bases', detail: 'PDFs, web pages and procedures the agent refers to during the call.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
       { label: 'Mid-call tools', detail: 'Live actions: check availability, look up a record, query your software.', cells: { decouverte: '1', receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
-      { label: 'Flow builder', detail: 'Visual no-code scenarios: triggers, conditions and actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
+      { label: 'Automated workflows', detail: 'Visual no-code scenarios: triggers, conditions and actions.', cells: { decouverte: false, receptionniste: false, assistant: true, 'centre-appels': true, 'sur-mesure': true } },
       { label: 'Automation platform', detail: 'Over 300 tools you can connect: CRM, Google Sheets, Slack, email…', cells: { decouverte: false, receptionniste: false, assistant: '5,000 runs / month', 'centre-appels': '50,000 runs / month', 'sur-mesure': 'Custom' } },
       { label: 'AI connector', detail: 'Run your account from ChatGPT or Claude: create an agent, review calls, trigger actions.', cells: all(true) },
     ],
@@ -93,7 +93,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Calendar and capture',
     rows: [
-      { label: 'Calendar integration', detail: 'Google, Outlook, Cal.com, Calendly: the agent books straight into your calendar.', cells: all(true) },
+      { label: 'Calendar integration', detail: 'Google Calendar, Outlook and more through Cal.com or Calendly: the agent books straight into your calendar.', cells: all(true) },
       { label: 'Web widget', detail: 'Call and callback button to add to your website.', cells: all(true) },
       { label: 'Leads', detail: 'Prospect records created from your calls.', cells: all(true) },
     ],
@@ -110,10 +110,10 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telephony',
     rows: [
-      { label: 'Phone numbers', detail: 'Dedicated numbers bought from your customer area, billed monthly depending on the country.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Custom' } },
+      { label: 'Phone numbers', detail: 'Maximum number of dedicated numbers. Optional, bought from your customer area, from $5.99 excl. tax / month depending on the country.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Custom' } },
       { label: 'SIP connection', detail: 'Keep your numbers and phone system: SIP connection, Twilio or Telnyx import.', cells: all(true) },
       { label: 'Your own mobile as caller ID', detail: 'Verify your number so it is displayed on outbound calls.', cells: paid(true) },
-      { label: 'Block list', detail: 'Numbers the agent never calls.', cells: all(true) },
+      { label: 'Exclusion list', detail: 'Numbers the agent never calls.', cells: all(true) },
     ],
   },
   {

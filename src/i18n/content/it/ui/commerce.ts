@@ -9,7 +9,7 @@ import type { UI_COMMERCE as FR_UI_COMMERCE } from '../../fr/ui/commerce';
 // del settore o del modulo; se il nome manca, si usa il formato generico.
 const SECTOR_SEO: Record<string, { title: string; description: (days: number, minutes: number) => string }> = {
   'E-commerce': { title: 'Assistenza clienti AI per e-commerce', description: (days) => `Assistenza clienti AI per negozi online: stato degli ordini, resi e domande sui prodotti gestiti a ogni ora, al telefono e via messaggio. Provi gratis ${days} giorni.` },
-  'Broker assicurativi e del credito': { title: 'Assistente telefonico AI per broker', description: (days) => `Assistente telefonico AI per broker assicurativi e del credito: richieste di preventivo richiamate subito, documenti sollecitati, appuntamenti fissati. Provi gratis ${days} giorni.` },
+  'Broker assicurativi e mediatori creditizi': { title: 'Assistente telefonico AI per broker', description: (days) => `Assistente telefonico AI per broker e mediatori creditizi: preventivi richiamati subito, documenti sollecitati, appuntamenti fissati. Provi gratis ${days} giorni.` },
   'Gestione immobiliare e condomini': { title: 'Assistente AI per amministratori di immobili', description: (days) => `Assistente telefonico AI per gestione immobiliare e condomini: guasti degli inquilini smistati giorno e notte, visite qualificate. Provi gratis ${days} giorni.` },
   'Medicina e chirurgia estetica': { title: 'Segreteria AI per medicina estetica', description: (days) => `Segreteria telefonica AI per medicina estetica: consulenze prenotate, appuntamenti confermati il giorno prima, nessun consiglio medico. Provi gratis ${days} giorni.` },
   'Servizi a domicilio': {
@@ -42,7 +42,7 @@ const SECTOR_SEO: Record<string, { title: string; description: (days: number, mi
   },
   'Estetica e benessere': {
     title: 'Prenotazioni per centro estetico e spa',
-    description: (days) => `Prenotazioni telefoniche per centro estetico, spa e nail bar: trattamenti prenotati mentre Lei è in cabina. Provi gratis ${days} giorni.`,
+    description: (days) => `Prenotazioni telefoniche per centro estetico, spa e centro unghie: trattamenti prenotati mentre Lei è in cabina. Provi gratis ${days} giorni.`,
   },
   'Ristoranti e hotel': {
     title: 'Prenotazioni ristorante al telefono con l’AI',
@@ -81,7 +81,7 @@ const FEATURE_SEO: Record<string, string> = {
   'WhatsApp e messaggi': 'Risposte automatiche su WhatsApp e SMS',
   'Base di conoscenza': 'Base di conoscenza per l’agente vocale AI',
   'Editor di prompt': 'Editor di prompt per l’agente vocale AI',
-  'Flow builder': 'Flow builder: automazioni senza codice',
+  'Scenari automatizzati': 'Scenari automatizzati senza codice',
   'SIP e numeri': 'Centralino virtuale: SIP e numeri',
   Report: 'Report e statistiche delle chiamate',
   'Widget web': 'Widget di richiamata per il sito web',
@@ -105,7 +105,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       booking: {
         title: { before: 'Automatizzi ', kw: 'appuntamenti e promemoria', after: '' },
         text: 'Studi, saloni, officine, agenzie: prenotazioni telefoniche automatiche. L’agente si collega al Suo calendario, propone gli orari liberi, prenota e conferma. Spostamenti e disdette compresi.',
-        points: ['Calendario in tempo reale: Google, Outlook, Cal.com, Calendly', 'Conferma via SMS o WhatsApp (dal piano Assistant)', 'Promemoria il giorno prima dell’appuntamento (dal piano Assistant)'],
+        points: ['Calendario in tempo reale: Google Calendar, Outlook… tramite Cal.com o Calendly', 'Conferma via SMS o WhatsApp (a partire dal piano Assistant)', 'Promemoria il giorno prima dell’appuntamento (a partire dal piano Assistant)'],
         link: 'Scopra la gestione appuntamenti',
       },
       support: {
@@ -134,7 +134,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
         { title: 'Crei il Suo account', text: `Scelga il Suo piano: ${days} giorni gratuiti, ${minutes} minuti inclusi, nessun addebito durante la prova.` },
         { title: 'Descriva la Sua attività', text: 'Servizi, orari, domande frequenti, regole di trasferimento.' },
         { title: 'Provi l’agente', text: 'Lo ascolti nella demo dal vivo e regoli tono e risposte.' },
-        { title: 'Colleghi le Sue chiamate', text: 'Inoltro della Sua linea, nuovo numero o SIP, e widget sul Suo sito.' },
+        { title: 'Colleghi le Sue chiamate', text: 'Deviazione della Sua linea, nuovo numero o SIP, e widget sul Suo sito.' },
       ],
     },
     sectors: {
@@ -144,12 +144,12 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     integrations: {
       title: 'Collegato ai Suoi strumenti',
-      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra con ciò che usa già. Il flow builder collega oltre 300 strumenti senza codice, allo stesso modo di Zapier o Make.',
+      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra con ciò che usa già. Gli scenari automatizzati collegano oltre 300 strumenti senza codice, come Zapier o Make.',
       link: 'Veda tutte le integrazioni',
     },
     pricing: {
       title: 'Piani chiari, prezzi IVA esclusa',
-      intro: 'Scelga in base al Suo volume di chiamate. Più il piano è grande, meno costa il minuto.',
+      intro: 'Scelga in base al Suo volume di chiamate. Più grande è il piano, meno costa ogni minuto.',
       compare: 'Confronti tutte le funzioni incluse',
     },
     faq: {
@@ -171,12 +171,12 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     hero: {
       title: 'Scelga il piano adatto al Suo volume di chiamate',
       intro: (days: number, minutes: number) =>
-        `Prezzi dell’assistente telefonico AI, tutti indicati IVA esclusa. Più il piano è grande, meno costa il minuto. La prova gratuita comprende ${days} giorni e ${minutes} minuti di chiamate inclusi.`,
+        `Prezzi dell’assistente telefonico AI, tutti indicati IVA esclusa. Più grande è il piano, meno costa ogni minuto. La prova gratuita comprende ${days} giorni e ${minutes} minuti di chiamate inclusi.`,
       moreMinutes: 'Le servono più minuti? Aggiunga una ricarica in qualsiasi momento.',
     },
     matrix: {
       title: 'Cosa è incluso nella Sua area clienti',
-      intro: 'Ogni riga corrisponde a una pagina o a una funzione che ritrova nella Sua area clienti. Nient’altro è nascosto dietro un pulsante.',
+      intro: 'Ogni riga corrisponde a una pagina o a una funzione che ritrova nella Sua area clienti. Nessuna funzione nascosta.',
     },
     recharges: {
       title: 'Le servono più minuti?',
@@ -230,7 +230,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
 
   recharges: {
     meta: {
-      title: (brand: string) => `Ricariche di minuti per l’assistente AI · ${brand}`,
+      title: (brand: string) => `Ricariche di credito per l’assistente AI · ${brand}`,
       description: (price: string, minutes: string) =>
         `Ricariche da ${price} IVA esclusa per ${minutes} minuti extra del Suo assistente telefonico AI. Aggiunga minuti quando vuole o passi al piano superiore.`,
     },
@@ -259,7 +259,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',
-      intro: 'Autoscuole, palestre, e-commerce, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
+      intro: 'Autoscuole, palestre, formazione, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
       primary: 'Inizi gratis',
       demo: 'Provi dal vivo il nostro agente',
     },
@@ -273,7 +273,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
         SECTOR_SEO[name]?.description(days, minutes) ?? `${name}: ${short}. Prova gratuita di ${days} giorni, ${minutes} minuti inclusi, prezzi IVA esclusa.`,
     },
     breadcrumb: 'Settori',
-    liveCallTitle: (name: string) => `Agente ${name.toLowerCase()}`,
+    liveCallTitle: (name: string) => `Agente per ${name.toLowerCase()}`,
     change: {
       title: 'Cosa cambia quando l’agente risponde al posto Suo',
       intro: (targets: string) => `${targets}. Nel Suo settore, ogni chiamata senza risposta è una richiesta che va altrove.`,
@@ -293,7 +293,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     pricing: {
       title: 'Prezzi IVA esclusa, senza vincoli né costi di attivazione',
       intro: (sectorName: string, offerName: string, days: number, minutes: number) =>
-        `Per il settore ${sectorName.toLowerCase()}, consigliamo il piano ${offerName}. Inizi con la prova gratuita: ${days} giorni e ${minutes} minuti inclusi.`,
+        `Per il settore «${sectorName}» consigliamo il piano ${offerName}. Inizi con la prova gratuita: ${days} giorni e ${minutes} minuti inclusi.`,
       link: (offerName: string) => `Veda i dettagli del piano ${offerName}`,
     },
     faq: { title: (name: string) => `Domande frequenti — ${name}` },
@@ -312,7 +312,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Tutto ciò che serve per automatizzare le Sue chiamate',
-      intro: 'Il Suo centralino virtuale AI in tredici moduli, attivati in base al Suo piano, dalla Sua area clienti.',
+      intro: 'Il Suo centralino virtuale AI in quattordici moduli, attivati in base al Suo piano, dalla Sua area clienti.',
     },
     overview: { title: 'Panoramica' },
   },
@@ -321,7 +321,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (name: string, brand: string) => `${FEATURE_SEO[name] ?? `${name} — agente vocale AI`} · ${brand}`,
       /** `short` è la frase sul vantaggio del modulo, senza punto finale. */
-      description: (short: string, offerName: string, days: number) => `${short}. Incluso dal piano ${offerName}. Prova gratuita di ${days} giorni.`,
+      description: (short: string, offerName: string, days: number) => `${short}. Incluso a partire dal piano ${offerName}. Prova gratuita di ${days} giorni.`,
     },
     breadcrumb: 'Funzionalità',
     eyebrow: (family: string, name: string) => `${family} · ${name}`,
@@ -340,25 +340,25 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   },
 
   integrations: {
-    tools: { title: 'Oltre 300 strumenti con le automazioni', intro: 'Con la piattaforma di automazione (dal piano Assistant), ogni chiamata può alimentare i vostri strumenti: email, chat del team, CRM, negozio online, pagamenti, fogli di calcolo. Eccone alcuni.' },
+    tools: { title: 'Oltre 300 strumenti con le automazioni', intro: 'Con la piattaforma di automazione (a partire dal piano Assistant), ogni chiamata può alimentare i Suoi strumenti: email, chat del team, CRM, negozio online, pagamenti, fogli di calcolo. Eccone alcuni.' },
     meta: {
       title: (brand: string) => `Integrazioni — calendario, CRM, WhatsApp, SIP · ${brand}`,
       description: 'Colleghi l’assistente telefonico AI a Google Calendar, Outlook, Cal.com, Calendly, HubSpot, Zoho, WhatsApp, SIP e oltre 300 strumenti senza codice.',
     },
     hero: {
       title: 'Collegato agli strumenti che usa già',
-      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra nella Sua organizzazione, e il flow builder collega oltre 300 strumenti senza codice.',
+      intro: 'Calendario, CRM, messaggistica, telefonia: l’agente si integra nella Sua organizzazione, e gli scenari automatizzati collegano oltre 300 strumenti senza codice.',
     },
     flow: {
       title: { before: 'Costruisca le Sue automazioni ', kw: 'senza codice', after: '' },
-      text: 'Un modulo compilato, una chiamata terminata, un nuovo lead: ogni evento può avviare una serie di azioni nei Suoi strumenti, allo stesso modo di Zapier o Make, direttamente dalla Sua area clienti.',
+      text: 'Un modulo compilato, una chiamata terminata, un nuovo lead: ogni evento può avviare una serie di azioni nei Suoi strumenti, come Zapier o Make, direttamente dalla Sua area clienti.',
       points: ['Oltre 300 strumenti disponibili', 'Drag and drop, nessuno sviluppo', 'Test prima dell’attivazione'],
-      link: 'Scopra il flow builder',
+      link: 'Scopra gli scenari automatizzati',
     },
     api: {
       title: { before: 'Webhook e API per ', kw: 'i Suoi sistemi', after: '' },
-      text: 'Su tutti i piani, riceva ogni fine chiamata e i relativi dati estratti nei Suoi sistemi, oppure gestisca l’agente dal Suo software.',
-      points: ['Webhook dopo ogni chiamata', 'Variabili estratte: esito, interesse, fascia oraria', 'Strumenti durante la chiamata, dal piano Assistant'],
+      text: 'Su tutti i piani, riceva nei Suoi sistemi i dati di ogni chiamata conclusa, oppure gestisca l’agente dal Suo software.',
+      points: ['Webhook dopo ogni chiamata', 'Variabili estratte: esito, interesse, fascia oraria', 'Strumenti durante la chiamata, a partire dal piano Assistant'],
     },
   },
 };

@@ -42,7 +42,7 @@ export const SECTORS: Sector[] = [
       { q: 'What happens in the evening and at weekends?', a: 'The agent picks up at any hour. You choose what it does depending on the time: transfer to the on-call technician for a genuine emergency, or a callback scheduled for the next morning for everything else.' },
       { q: 'Can I limit my service area?', a: 'Yes. Enter your towns or postcodes: the agent politely tells callers outside your area and only creates the requests you can handle.' },
       { q: 'Do I get a summary before calling back?', a: 'Yes. Every call produces a record with the request, address, urgency and preferred time slot, available in your dashboard.' },
-      { q: 'Can the agent follow up my quotes and call customers for servicing?', a: 'Yes, with campaigns on the Assistant plan. 48 hours after a quote goes unanswered, the agent calls the customer, answers their questions and offers a date. Before winter or summer, it calls your customers for their annual service. It only calls your own customers, people you already have a relationship with.' },
+      { q: 'Can the agent follow up my quotes and call customers for servicing?', a: 'Yes, with campaigns on the Assistant plan. 48 hours after a quote goes unanswered, the agent calls the customer, answers their questions and offers a date. Before winter or summer, it calls your customers for their annual service. It only calls customers who have agreed to be contacted, and it says at the start that it is an AI.' },
     ],
   },
   {
@@ -81,8 +81,8 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'Does the agent give medical advice?', a: 'No. The agent sticks to admin: it makes no diagnosis and gives no medical advice. For pain or a dental emergency, it follows the instruction you have defined: emergency slot, priority callback or call transfer.' },
       { q: 'Can it handle several practitioners?', a: 'Yes. Each dentist or clinician can have their own appointment types, durations and availability in the connected calendar.' },
-      { q: 'Does it work with my appointment software?', a: 'The agent books directly into Google Calendar, Outlook, Cal.com or Calendly. If your appointments live in other software, it takes the full request and your team confirms it; a connection through an API or webhooks is possible depending on your tool.' },
-      { q: 'Where is call data stored?', a: 'Recordings and transcripts are kept for the retention period you choose, and can be deleted at any time.' },
+      { q: 'Does it work with my appointment software?', a: 'The agent books directly into your calendar through Cal.com or Calendly (which connect to Google Calendar, Outlook and others). If your appointments live in other software, it takes the full request and your team confirms it; a connection through an API or webhooks is possible depending on your tool.' },
+      { q: 'Where is call data stored?', a: 'Recordings and transcripts are stored on servers in the European Economic Area and/or the United States, with appropriate safeguards. They are kept for 90 days by default (you can change this) and can be deleted at any time.' },
       { q: 'Can it reduce missed appointments?', a: 'Yes. The day before, the agent confirms the appointment by phone or message; if the patient can’t make it, it offers another slot straight away and frees the place for someone else. It can also call patients who haven’t been in for a long time, as long as they are already registered with your practice.' },
     ],
   },
@@ -121,9 +121,9 @@ export const SECTORS: Sector[] = [
     lead: [{ label: 'Patient', value: 'New' }, { label: 'Reason', value: 'Knee rehab' }, { label: 'Slot', value: 'Monday 6 pm' }, { label: 'Practitioner', value: 'Thomas' }],
     faq: [
       { q: 'Does the agent give medical advice?', a: 'No. It sticks to admin: no diagnosis, no treatment advice. For acute pain or an urgent situation, it follows the instruction you have defined: directing the caller to emergency services, a priority callback or a call transfer.' },
-      { q: 'Does it work with my appointment software?', a: 'The agent books directly into Google Calendar, Outlook, Cal.com or Calendly. If your diary lives in other software, it takes the full request and you confirm it; a connection through an API or webhooks is possible depending on your tool.' },
+      { q: 'Does it work with my appointment software?', a: 'The agent books directly into your calendar through Cal.com or Calendly (which connect to Google Calendar, Outlook and others). If your diary lives in other software, it takes the full request and you confirm it; a connection through an API or webhooks is possible depending on your tool.' },
       { q: 'Can it handle several practitioners in a multidisciplinary clinic?', a: 'Yes. Each practitioner has their own session types, durations and availability. The agent directs the patient to the right profession and the right practitioner based on their request.' },
-      { q: 'Where is call data stored?', a: 'Recordings and transcripts are kept for the retention period you choose and can be deleted at any time. You can limit questions to the reason needed to book the appointment.' },
+      { q: 'Where is call data stored?', a: 'Recordings and transcripts are stored on servers in the European Economic Area and/or the United States, with appropriate safeguards. They are kept for 90 days by default (you can change this) and can be deleted at any time. You can limit questions to the reason needed to book the appointment.' },
       { q: 'Can it fill last-minute cancellations?', a: 'Yes. When a patient cancels, the agent offers the slot to patients who asked to be told when something comes up. You stay in control of the list and the rules.' },
     ],
   },
@@ -164,7 +164,7 @@ export const SECTORS: Sector[] = [
       { q: 'Does the agent give veterinary advice?', a: 'No. It makes no diagnosis and prescribes nothing. It asks the questions in your triage protocol (species, symptoms, since when) and follows the instruction you have defined: transfer to the vet, priority callback or referral to the out-of-hours service.' },
       { q: 'Can it send vaccination reminders?', a: 'Yes, from the Assistant plan: a campaign contacts owners who have opted in by call, SMS or WhatsApp when a booster is due, and offers an appointment. You choose the list, the message and the times.' },
       { q: 'What about nights and weekends?', a: 'You decide: transfer to the on-call vet, the contact details of the emergency service you work with, or a message with a callback in the morning. Either way, the phone never rings unanswered.' },
-      { q: 'Can it handle several vets?', a: 'Yes. Each vet has their own consultation types, durations and availability in the connected calendar (Google, Outlook, Cal.com or Calendly).' },
+      { q: 'Can it handle several vets?', a: 'Yes. Each vet has their own consultation types, durations and availability in the connected calendar (Google Calendar, Outlook and others, through Cal.com or Calendly).' },
     ],
   },
   {
@@ -281,7 +281,7 @@ export const SECTORS: Sector[] = [
     ],
     lead: [{ label: 'Service', value: 'Roots + cut' }, { label: 'Duration', value: '1 hr 45 min' }, { label: 'Stylist', value: 'Sophie' }, { label: 'Slot', value: 'Saturday 9:30 am' }],
     faq: [
-      { q: 'How does the agent know how much time to block out?', a: 'You give it your service menu with durations: men’s cut, colour, balayage, beard trim. It asks whatever is missing, such as hair length or the type of colour, and books the matching duration in the connected calendar (Google, Outlook, Cal.com or Calendly).' },
+      { q: 'How does the agent know how much time to block out?', a: 'You give it your service menu with durations: men’s cut, colour, balayage, beard trim. It asks whatever is missing, such as hair length or the type of colour, and books the matching duration in the connected calendar (Google Calendar, Outlook and others, through Cal.com or Calendly).' },
       { q: 'My barber shop also takes walk-ins. Does that work?', a: 'Yes. Enter your walk-in hours: the agent shares them and offers an appointment to clients who would rather not wait.' },
       { q: 'Can it quote our prices?', a: 'Yes, the prices you give it. For services priced on consultation (weddings, updos, smoothing treatments), it takes the request and passes it on to you.' },
       { q: 'How can we reduce no-shows?', a: 'From the Assistant plan, a reminder goes out automatically the day before by SMS or WhatsApp, with the option to reschedule. Any slot freed up becomes available to book again.' },
@@ -474,7 +474,7 @@ export const SECTORS: Sector[] = [
     offer: 'assistant',
     ctas: ['Start for free', 'Request a callback'],
     call: [
-      { who: 'agent', text: 'Hello, you asked for a life cover quote on our website a few minutes ago.' },
+      { who: 'agent', text: 'Hello, this is the brokerage’s AI assistant. You asked for a life cover quote on our website a few minutes ago.' },
       { who: 'client', text: 'Yes, it’s for a house purchase in February.' },
       { who: 'agent', text: 'How much is the mortgage, and do you already have an offer from your lender?' },
       { who: 'client', text: 'About 240,000, the offer should arrive next week.' },
@@ -483,7 +483,7 @@ export const SECTORS: Sector[] = [
     faq: [
       { q: 'Does the agent give advice?', a: 'No. It recommends no product and gives no financial opinion. It gathers information, answers practical questions (documents, timescales, appointments) and books a slot with an adviser.' },
       { q: 'Can it call back enquiries left on my website?', a: 'Yes, with campaigns on the Assistant plan: the person asked to be called back, so the call is legitimate. It goes out within minutes, during the hours you allow.' },
-      { q: 'What about bought lead lists?', a: 'Best avoided. Marketing calls must respect the TPS in the UK and the Do Not Call Register in Australia, and you must be able to prove consent where it is required. Call your clients and the prospects who asked, and honour any objection.' },
+      { q: 'What about bought lead lists?', a: 'Best avoided. Marketing calls must respect the TPS in the UK and the Do Not Call Register in Australia, and you must be able to prove consent where it is required. Only call clients who have agreed to be contacted and prospects who asked, and honour any objection.' },
       { q: 'Can it chase missing documents and renewals?', a: 'Yes, with your clients: the agent reminds them which documents are needed, offers to send them and gets in touch before a policy renews to set up a review appointment.' },
     ],
   },
@@ -564,7 +564,7 @@ export const SECTORS: Sector[] = [
       { q: 'Does the agent give medical advice?', a: 'No. It doesn’t discuss suitability, results or risks. It answers practical questions and offers a consultation with the practitioner for everything else.' },
       { q: 'Can it quote our prices?', a: 'Only the ones you allow, for example the consultation fee. For procedures, it explains that the practitioner provides a quote after the consultation.' },
       { q: 'How can we reduce no-shows?', a: 'From the Assistant plan, the agent confirms every appointment the day before by phone or message, and offers another slot if the patient can’t make it.' },
-      { q: 'Where is call data stored?', a: 'In your secure area, for the retention period you set. You can delete a call, its recording and its transcript at any time.' },
+      { q: 'Where is call data stored?', a: 'In your secure area, on servers in the European Economic Area and/or the United States, with appropriate safeguards. Data is kept for 90 days by default (you can change this), and you can delete a call, its recording and its transcript at any time.' },
     ],
   },
 ];

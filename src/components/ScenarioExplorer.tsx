@@ -78,7 +78,7 @@ function Stage({ s, Icon }: { s: Sector; Icon: React.ElementType }) {
 
 /** Mini-appel : l’agent du marché décroche, la conversation se déroule, puis la demande est créée. */
 function AnswerCard({ s, armed }: { s: Sector; armed: boolean }) {
-  const { c, persona } = useI18n();
+  const { c, persona, locale } = useI18n();
   const tc = c.ui.components.liveCall;
   const t = c.ui.components.scenarioExplorer;
   const total = s.call.length + 1; // les répliques puis la fiche
@@ -120,7 +120,7 @@ function AnswerCard({ s, armed }: { s: Sector; armed: boolean }) {
         <div className="flex items-center justify-between gap-3 border-t border-line pt-3">
           <p className="flex min-w-0 items-center gap-1.5 text-[13px] font-semibold text-ink">
             <CheckCircle2 className="h-4 w-4 shrink-0 text-ok" aria-hidden />
-            <span className="truncate">{tc.leadTitle} : {s.lead[0]?.value}</span>
+            <span className="min-w-0">{tc.leadTitle}{locale === 'fr' ? '\u00a0: ' : ': '}{s.lead[0]?.value}</span>
           </p>
           <button type="button" onClick={() => setRun((r) => r + 1)} tabIndex={done ? 0 : -1}
             className="inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold text-signal-deep hover:bg-signal-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-signal">

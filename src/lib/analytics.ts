@@ -20,9 +20,8 @@ export function saveConsent(value: 'granted' | 'denied') {
     const domain = location.hostname.endsWith('permanenceia.com') ? '; domain=.permanenceia.com' : '';
     document.cookie = `${CONSENT_COOKIE}=${value}${domain}; path=/; max-age=${60 * 60 * 24 * 180}; samesite=lax; secure`;
   } catch { /* cookies bloqués : le choix vaut pour cette page seulement */ }
-  gtag()?.('consent', 'update', {
-    analytics_storage: value, ad_storage: value, ad_user_data: value, ad_personalization: value,
-  });
+  // Seule la mesure d’audience suit le choix : aucun cookie publicitaire (ad_*) n’est jamais autorisé.
+  gtag()?.('consent', 'update', { analytics_storage: value });
 }
 
 /** Événement GA4 (ignoré tant que la balise n’est pas chargée). */
@@ -36,7 +35,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
 var m = /(?:^|;\\s*)pia_consent=(granted|denied)/.exec(document.cookie);
-if (m) gtag('consent', 'update', { ad_storage: m[1], analytics_storage: m[1], ad_user_data: m[1], ad_personalization: m[1] });
+if (m) gtag('consent', 'update', { analytics_storage: m[1] });
 gtag('js', new Date());
 gtag('config', '${GA_ID}', { linker: { domains: ['permanenceia.com', 'app.permanenceia.com'] } });
 `;

@@ -12,7 +12,9 @@ export function middleware(req: NextRequest) {
     // Chemin assigné sur une origine fixe : un chemin « //autre-site » ne peut pas changer de domaine.
     const url = new URL('https://www.permanenceia.com');
     const prefix = req.nextUrl.locale && req.nextUrl.locale !== DEFAULT_LOCALE ? `/${req.nextUrl.locale}` : '';
-    url.pathname = prefix + '/' + req.nextUrl.pathname.replace(/^\/+/, '');
+    // « /he » et non « /he/ » (sinon une seconde redirection) ; la racine française reste « / ».
+    const path = req.nextUrl.pathname.replace(/^\/+/, '');
+    url.pathname = prefix ? `${prefix}${path ? `/${path}` : ''}` : `/${path}`;
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, 301);
   }

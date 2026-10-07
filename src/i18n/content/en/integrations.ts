@@ -5,8 +5,8 @@ import type { Integration } from '../fr/integrations';
 export type { Integration } from '../fr/integrations';
 
 export const INTEGRATIONS: Integration[] = [
-  { name: 'Google Calendar', category: 'Calendar', text: 'Free slots and live bookings.', mark: 'G', color: '#4285F4' },
-  { name: 'Outlook', category: 'Calendar', text: 'Microsoft calendar kept in sync.', mark: 'O', color: '#0A64AD' },
+  { name: 'Google Calendar', category: 'Calendar', text: 'Free slots and live bookings, through Cal.com or Calendly.', mark: 'G', color: '#4285F4' },
+  { name: 'Outlook', category: 'Calendar', text: 'Microsoft calendar kept in sync, through Cal.com or Calendly.', mark: 'O', color: '#0A64AD' },
   { name: 'Cal.com', category: 'Calendar', text: 'Appointment types and teams.', mark: 'C', color: '#111827' },
   { name: 'Calendly', category: 'Calendar', text: 'Bookings on your events.', mark: 'C', color: '#006BFF' },
   { name: 'HubSpot', category: 'CRM', text: 'Contacts and deals kept up to date.', mark: 'H', color: '#FF7A59' },
@@ -20,5 +20,5 @@ export const INTEGRATIONS: Integration[] = [
   { name: 'Twilio', category: 'Telephony', text: 'Import your numbers.', mark: 'T', color: '#F22F46' },
   { name: 'Telnyx', category: 'Telephony', text: 'Import your numbers.', mark: 'Tx', color: '#00C08B' },
   { name: 'Webhooks', category: 'Developers', text: 'Events sent to your systems.', mark: '{ }', color: '#0FA3C4' },
-  { name: '300+ tools', category: 'Automations', text: 'Through the no-code flow builder.', mark: '+', color: '#22306A' },
+  { name: '300+ tools', category: 'Automations', text: 'Through no-code automated workflows.', mark: '+', color: '#22306A' },
 ];

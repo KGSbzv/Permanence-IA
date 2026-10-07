@@ -27,7 +27,7 @@ interface LayoutProps {
 const localeUrl = (l: Locale, path: string) =>
   l === DEFAULT_LOCALE ? `${SITE.url}${path}` : `${SITE.url}/${l}${path === '/' ? '' : path}`;
 
-export default function Layout({ children, title, description, ogImage = '/og-image.jpg', jsonLd, breadcrumbs, noindex }: LayoutProps) {
+export default function Layout({ children, title, description, ogImage, jsonLd, breadcrumbs, noindex }: LayoutProps) {
   const { asPath } = useRouter();
   const { openCallbackModal } = useCallbackModal();
   const { locale, market, c, path: localePath } = useI18n();
@@ -62,7 +62,7 @@ export default function Layout({ children, title, description, ogImage = '/og-im
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={url} />
-        <meta property="og:image" content={`${SITE.url}${ogImage}`} />
+        <meta property="og:image" content={`${SITE.url}${ogImage ?? `/og/og-${locale}.jpg`}`} />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content={market.ogLocale} />
         <meta name="twitter:card" content="summary_large_image" />

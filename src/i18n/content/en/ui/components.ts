@@ -112,7 +112,7 @@ export const UI_COMPONENTS = {
     sendFailed: 'Your request could not be sent.',
     retry: (email: string) => `Please try again or email ${email}.`,
     sentTitle: 'Callback request sent',
-    sentText: 'We will call you back at the time you chose. A confirmation email is sent if you provided one.',
+    sentText: 'We will call you back at the time you chose. If you ticked WhatsApp, the confirmation will arrive there.',
     name: 'Name',
     phone: 'Phone',
     sector: 'Sector',
@@ -128,7 +128,7 @@ export const UI_COMPONENTS = {
     },
     preciseLabel: 'Date and time (your local time)',
     email: 'Email',
-    emailHint: '(for confirmation)',
+    emailHint: '(optional)',
     need: 'What you need',
     needPlaceholder: 'E.g. I miss calls in the evening, I want to automate bookings…',
     consent: (brand: string) => `I agree to be called back on the number provided, including by a ${brand} AI voice agent. My data is used only to handle my request.`,
@@ -159,7 +159,7 @@ export const UI_COMPONENTS = {
     // Same order as the component's icons: telephony, automation, CRM, messages, calendar, management, security.
     families: [
       { name: 'Telephony', items: ['Inbound and outbound calls', 'Optional dedicated number', 'SIP integration', 'Transfer to a person', 'Caller identification'] },
-      { name: 'Automation', items: ['Prompt editor', 'No-code flow builder', 'Automation assistant', '300+ tools you can connect'] },
+      { name: 'Automation', items: ['Prompt editor', 'No-code automated workflows', 'Automation assistant', '300+ tools you can connect'] },
       { name: 'CRM and data', items: ['Leads and pre-qualification', 'Knowledge base', 'Call history', 'Webhooks and API'] },
       { name: 'Messages', items: ['SMS', 'WhatsApp and templates', 'Messenger and Instagram', 'Web widget'] },
       { name: 'Calendar', items: ['Appointment booking', 'Confirmations and reminders', 'Rescheduling and cancellations'] },
@@ -230,7 +230,7 @@ export const UI_COMPONENTS = {
     groups: [
       { key: 'llm', title: 'Language models', text: 'The agent’s brain: it understands the request and decides how to respond.' },
       { key: 's2s', title: 'Real-time voice', text: 'Models that listen and speak directly, for the most natural conversations.' },
-      { key: 'tts', title: 'Text-to-speech', text: 'Hundreds of natural voices, in more than 30 languages.' },
+      { key: 'tts', title: 'Text-to-speech', text: 'Hundreds of natural voices, in more than 80 languages.' },
       { key: 'stt', title: 'Transcription', text: 'Fast speech recognition, even over the phone.' },
       { key: 'channels', title: 'Channels', text: 'The same agent answers wherever your customers message or call you.' },
     ],
@@ -336,7 +336,7 @@ export const UI_COMPONENTS = {
       { title: 'Data protection', text: 'Encryption in transit, account-protected access and configurable retention periods.' },
       { title: 'Traceability', text: 'Call history, transcripts and an activity log for every account.' },
       { title: 'Access control', text: 'Each customer has their own secure area; the agent only accesses the information you give it.' },
-      { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion of calls and recordings, retention. Data processing agreement (DPA) on request.' },
+      { title: 'Regulatory readiness', text: 'Tools to apply data protection law: information, right of access, deletion of calls and recordings, retention. Data processing agreement (DPA) built into the Terms (Article 8); signed version on request.' },
       { title: 'Infrastructure', text: 'Platform hosted with established cloud providers, with backups and monitoring.' },
     ],
     title: 'Security and compliance for your AI calls',
@@ -422,7 +422,7 @@ export const UI_COMPONENTS = {
     title: 'Build your team of AI agents',
     intro: 'Each agent has a specific role. Turn on the ones your business needs; they share the same history and the same information.',
     custom: 'Need a particular scenario? We set up a custom agent.',
-    virtualNote: 'Jade, Daan, Katie and their colleagues are virtual AI agents: their faces are generated illustrations, not real people.',
+    virtualNote: 'Our agents are virtual AI agents: their faces are generated illustrations, not real people.',
   },
 
   sectorShowcase: {

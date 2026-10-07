@@ -124,7 +124,7 @@ export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
     <ol className={`grid gap-6 sm:grid-cols-2 ${steps.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'}`}>
       {steps.map((s, i) => (
         <li key={s.title} className="relative rounded-2xl border border-line bg-white p-6">
-          <span className="font-display text-sm font-bold text-signal">{c.ui.components.steps.step(i + 1)}</span>
+          <span className="font-display text-sm font-bold text-signal-deep">{c.ui.components.steps.step(i + 1)}</span>
           <h3 className="mt-2 text-h3 font-semibold">{s.title}</h3>
           <p className="mt-1.5 text-[15px]">{s.text}</p>
         </li>
@@ -587,7 +587,7 @@ export function cheapestPlan(minutes: number, offers: Offer[]) {
 
 /** Calculateur de retour sur investissement : volume d’appels → forfait, prix réel à la minute, économie et bénéfice. */
 export function EconomyBlock() {
-  const { c, market, offers, offer, money, num } = useI18n();
+  const { c, market, offers, offer, money, num, locale } = useI18n();
   const t = c.ui.components.economy;
   const [calls, setCalls] = useState(300);
   const [duration, setDuration] = useState(3);
@@ -609,11 +609,11 @@ export function EconomyBlock() {
   const fields = [
     { group: t.yourCalls, items: [
       { id: 'roi-calls', label: t.callsPerMonth, v: calls, set: setCalls, min: 20, max: 3000, step: 10, show: (n: number) => num(n) },
-      { id: 'roi-dur', label: t.avgDuration, v: duration, set: setDuration, min: 1, max: 10, step: 0.5, show: (n: number) => `${n.toLocaleString(market.numberLocale)}${t.min}` },
+      { id: 'roi-dur', label: t.avgDuration, v: duration, set: setDuration, min: 1, max: 10, step: 0.5, show: (n: number) => `${num(n, n % 1 ? 1 : 0)}${t.min}` },
     ] },
     { group: t.yourCosts, items: [
       { id: 'roi-hourly', label: t.hourlyCost, v: hourly, set: setHourly, min: 10, max: 60, step: 1, show: (n: number) => `${money(n)}${t.perHour}` },
-      { id: 'roi-missed', label: t.missedRate, v: missed, set: setMissed, min: 0, max: 50, step: 5, show: (n: number) => `${n} %` },
+      { id: 'roi-missed', label: t.missedRate, v: missed, set: setMissed, min: 0, max: 50, step: 5, show: (n: number) => (locale === 'fr' ? `${n}\u00a0%` : `${n}%`) },
       { id: 'roi-value', label: t.customerValue, v: value, set: setValue, min: 0, max: 2000, step: 10, show: (n: number) => money(n) },
     ] },
   ];
@@ -650,14 +650,14 @@ export function EconomyBlock() {
           <dl className="space-y-3 py-6 text-[15px]">
             <div className="flex justify-between gap-4"><dt>{t.humanCost}</dt><dd className="font-semibold text-white">{money(human)}{t.perMonth}</dd></div>
             <div className="flex justify-between gap-4"><dt>{t.planCost(best.offer.name)}</dt><dd className="font-semibold text-white">− {money(best.total)}</dd></div>
-            <div className="flex justify-between gap-4 border-t border-white/10 pt-3"><dt>{t.savings}</dt><dd className="font-semibold text-white">{money(savings)}</dd></div>
-            {savings < 0 && <p className="text-sm">{t.noSavings}</p>}
+            <div className="flex justify-between gap-4 border-t border-white/10 pt-3"><dt>{t.savings}</dt><dd className="font-semibold text-white">{savings < 0 ? `− ${money(-savings)}` : money(savings)}</dd></div>
             <div className="flex justify-between gap-4"><dt>{t.recovered}<span className="block text-sm text-white/55">{t.recoveredDetail(num(missedCalls))}</span></dt><dd className="font-semibold text-white">+ {money(recovered)}</dd></div>
           </dl>
+          {savings < 0 && <p className="-mt-3 mb-4 text-sm">{t.noSavings}</p>}
           <div className="rounded-2xl bg-white/[.06] p-5">
             <p className="text-sm">{t.netBenefit}</p>
             <p className="font-display text-[2.5rem] font-bold leading-tight text-white">{money(benefit)}<span className="text-lg font-semibold text-white/60">{t.perMonth}</span></p>
-            {ratio > 1 && <p className="mt-1 text-sm text-signal-glow">{t.roi(ratio.toLocaleString(market.numberLocale, { maximumFractionDigits: 1 }))}</p>}
+            {ratio > 1 && <p className="mt-1 text-sm text-signal-glow">{t.roi(num(ratio, 1))}</p>}
           </div>
           <Link href={SIGNUP_URL} className="btn-signal mt-6 w-full justify-center">{t.cta}</Link>
         </div>
@@ -708,10 +708,19 @@ export function HumanVsAi() {
 
 const SECURITY_ICONS: React.ElementType[] = [UserCheck, Lock, ScrollText, KeyRound, ShieldCheck, Globe2];
 
-export function SecurityBlock() {
+/** Bloc sécurité ; `bare` (page /securite, qui a déjà son titre) : seulement la grille des garanties. */
+export function SecurityBlock({ bare = false }: { bare?: boolean }) {
   const { c } = useI18n();
   const tx = c.ui.components.security;
   const items = tx.items.map((it, n) => ({ icon: SECURITY_ICONS[n] || ShieldCheck, t: it.title, d: it.text }));
+  const grid = (
+    <div className={`grid gap-x-8 gap-y-6 rounded-3xl border border-line bg-white p-6 sm:grid-cols-2 sm:p-8 ${bare ? 'lg:grid-cols-3' : ''}`}>
+      {items.map((i) => (
+        <div key={i.t}><p className="flex items-center gap-2 font-display font-semibold text-ink"><i.icon className="h-4 w-4 text-signal" aria-hidden />{i.t}</p><p className="mt-1.5 text-[15px]">{i.d}</p></div>
+      ))}
+    </div>
+  );
+  if (bare) return grid;
   return (
     <div className="grid gap-10 lg:grid-cols-[1fr_1.5fr]">
       <div>
@@ -721,11 +730,7 @@ export function SecurityBlock() {
           <Link href="/confidentialite" className="text-signal-deep hover:underline">{tx.privacy}</Link>
         </div>
       </div>
-      <div className="grid gap-x-8 gap-y-6 rounded-3xl border border-line bg-white p-6 sm:grid-cols-2 sm:p-8">
-        {items.map((i) => (
-          <div key={i.t}><p className="flex items-center gap-2 font-display font-semibold text-ink"><i.icon className="h-4 w-4 text-signal" aria-hidden />{i.t}</p><p className="mt-1.5 text-[15px]">{i.d}</p></div>
-        ))}
-      </div>
+      {grid}
     </div>
   );
 }

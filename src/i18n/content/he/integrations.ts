@@ -5,8 +5,8 @@ import type { Integration } from '../fr/integrations';
 export type { Integration } from '../fr/integrations';
 
 export const INTEGRATIONS: Integration[] = [
-  { name: 'Google Calendar', category: 'יומן', text: 'זמנים פנויים וקביעת תורים בזמן אמת.', mark: 'G', color: '#4285F4' },
-  { name: 'Outlook', category: 'יומן', text: 'יומן Microsoft מסונכרן תמיד.', mark: 'O', color: '#0A64AD' },
+  { name: 'Google Calendar', category: 'יומן', text: 'זמנים פנויים וקביעת תורים בזמן אמת, דרך Cal.com או Calendly.', mark: 'G', color: '#4285F4' },
+  { name: 'Outlook', category: 'יומן', text: 'יומן Microsoft, מחובר דרך Cal.com או Calendly.', mark: 'O', color: '#0A64AD' },
   { name: 'Cal.com', category: 'יומן', text: 'סוגי פגישות וצוותים.', mark: 'C', color: '#111827' },
   { name: 'Calendly', category: 'יומן', text: 'קביעת פגישות לפי סוגי האירועים שלכם.', mark: 'C', color: '#006BFF' },
   { name: 'HubSpot', category: 'CRM', text: 'אנשי קשר ועסקאות מעודכנים.', mark: 'H', color: '#FF7A59' },

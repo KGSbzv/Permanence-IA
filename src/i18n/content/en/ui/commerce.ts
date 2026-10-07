@@ -45,7 +45,7 @@ export const UI_COMMERCE = {
       booking: {
         title: { before: 'Automate ', kw: 'appointment booking and reminders', after: '' },
         text: 'Practices, salons, garages, agencies: the agent connects to your calendar, offers free slots, books and confirms. Rescheduling and cancellations included.',
-        points: ['Live calendar: Google, Outlook, Cal.com, Calendly', 'Confirmation by SMS or WhatsApp (from the Assistant plan)', 'Reminder the day before the appointment (from the Assistant plan)'],
+        points: ['Live calendar: Google Calendar, Outlook and more, through Cal.com or Calendly', 'Confirmation by SMS or WhatsApp (from the Assistant plan)', 'Reminder the day before the appointment (from the Assistant plan)'],
         link: 'See appointment booking',
       },
       support: {
@@ -84,7 +84,7 @@ export const UI_COMMERCE = {
     },
     integrations: {
       title: 'Connected to your tools',
-      intro: 'Calendar, CRM, messaging, telephony: the agent works with what you already use. The flow builder connects over 300 tools without code, in the same way as Zapier or Make.',
+      intro: 'Calendar, CRM, messaging, telephony: the agent works with what you already use. Our no-code automations connect over 300 tools, in the same way as Zapier or Make.',
       link: 'See all integrations',
     },
     pricing: {
@@ -199,7 +199,7 @@ export const UI_COMMERCE = {
     },
     other: {
       title: 'Your business isn’t on the list?',
-      intro: 'Driving schools, gyms, e-commerce, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
+      intro: 'Driving schools, gyms, training providers, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
       primary: 'Start for free',
       demo: 'Try our agent live',
     },
@@ -252,7 +252,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Everything you need to automate your calls',
-      intro: 'Thirteen modules of AI phone answering software, turned on according to your plan, from your customer area.',
+      intro: 'Fourteen modules of AI phone answering software, turned on according to your plan, from your customer area.',
     },
     overview: { title: 'Overview' },
   },
@@ -287,13 +287,13 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Connected to the tools you already use',
-      intro: 'Calendar, CRM, messaging, telephony: your AI receptionist fits into the way you work, and the flow builder connects over 300 tools without code.',
+      intro: 'Calendar, CRM, messaging, telephony: your AI receptionist fits into the way you work, and no-code automations connect over 300 tools.',
     },
     flow: {
       title: { before: 'Build your automations ', kw: 'without code', after: '' },
       text: 'A completed form, a finished call, a new lead: each event can trigger a series of actions in your tools, in the same way as Zapier or Make, straight from your customer area.',
       points: ['Over 300 tools available', 'Drag and drop, no development', 'Tests before activation'],
-      link: 'See the flow builder',
+      link: 'See automated workflows',
     },
     api: {
       title: { before: 'Webhooks and API for ', kw: 'your systems', after: '' },

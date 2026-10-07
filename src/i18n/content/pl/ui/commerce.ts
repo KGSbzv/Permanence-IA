@@ -34,9 +34,9 @@ const SECTOR_SEO_TITLE: Record<string, string> = {
   'Restauracje i hotele': 'Rezerwacje telefoniczne: restauracje i hotele',
   'Kancelarie i biura rachunkowe': 'Sekretariat kancelarii i biura rachunkowego',
   'E-commerce': 'Obsługa klienta sklepu internetowego 24/7',
-  'Brokerzy ubezpieczeniowi i kredytowi': 'Obsługa telefoniczna dla brokerów i doradców',
+  'Pośrednicy ubezpieczeniowi i kredytowi': 'Obsługa telefoniczna dla pośredników i doradców',
   'Zarządzanie najmem i wspólnotami': 'Zgłoszenia najemców i mieszkańców 24/7',
-  'Medycyna i chirurgia estetyczna': 'Rejestracja pacjentów kliniki medycyny estetycznej',
+  'Medycyna i chirurgia estetyczna': 'Rejestracja pacjentów medycyny estetycznej',
 };
 /** Tytuł korzyści według branży (pełne zdania, żeby zachować poprawną odmianę); brak klucza → „Twojej firmy”. */
 const SECTOR_BENEFITS_TITLE: Record<string, string> = {
@@ -65,10 +65,11 @@ const FEATURE_SEO_TITLE: Record<string, string> = {
   'WhatsApp i wiadomości': 'WhatsApp, SMS i Messenger z asystentem AI',
   'Baza wiedzy': 'Baza wiedzy dla asystenta głosowego AI',
   'Edytor promptów': 'Edytor promptów asystenta głosowego AI',
-  'Flow builder': 'Flow builder: automatyzacje bez kodu',
+  'Scenariusze automatyzacji': 'Scenariusze automatyzacji bez kodu',
   'SIP i numery': 'Trunk SIP, przekierowanie i numery telefonu',
   'Raporty': 'Raporty i analityka połączeń telefonicznych',
   'Widżet na stronę': 'Widżet oddzwonienia i rozmowy na stronę WWW',
+  'Reaktywacja dawnych klientów': 'Reaktywacja dawnych klientów przez telefon z AI',
 };
 
 export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
@@ -83,13 +84,13 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       intro: 'Inteligentny asystent telefoniczny dla Twojej firmy: agenci głosowi AI odbierają każde połączenie, zadają właściwe pytania, umawiają wizyty i przekazują Ci czytelne podsumowanie. Dostępni 24/7, skonfigurowani dla Twojej branży, gotowi do pracy w kilka minut.',
       photoAlt: 'Właścicielka firmy czyta na telefonie podsumowanie rozmowy',
     },
-    showcase: { title: 'Zobacz agenta w akcji w Twojej branży', intro: 'Wybierz branżę: rozmowa się odbywa, a zgłoszenie trafia do Ciebie gotowe do obsługi.' },
-    benefits: { title: 'Co agent robi dla Twojej firmy', intro: 'Wirtualna recepcjonistka przygotowana do Twojej działalności, która pracuje, gdy Twój zespół nie może odebrać telefonu.' },
+    showcase: { title: 'Zobacz agenta w akcji w Twojej branży', intro: 'Wybierz branżę: zobacz przebieg rozmowy i zgłoszenie, które trafia do Ciebie gotowe do obsługi.' },
+    benefits: { title: 'Co agent robi dla Twojej firmy', intro: 'Wirtualna recepcjonistka dopasowana do Twojej działalności, która pracuje, gdy Twój zespół nie może odebrać telefonu.' },
     features: {
       booking: {
         title: { before: 'Zautomatyzuj ', kw: 'umawianie wizyt przez telefon', after: ' i przypomnienia' },
         text: 'Gabinety, salony, warsztaty, biura: agent łączy się z Twoim kalendarzem, proponuje wolne terminy, rezerwuje i potwierdza. Także zmiany terminów i odwołania.',
-        points: ['Kalendarz na bieżąco: Google, Outlook, Cal.com, Calendly', 'Potwierdzenie SMS-em lub przez WhatsApp (od pakietu Asystent)', 'Przypomnienie dzień przed wizytą (od pakietu Asystent)'],
+        points: ['Kalendarz na bieżąco: Cal.com lub Calendly (także z Google i Outlookiem)', 'Potwierdzenie SMS-em lub przez WhatsApp (od pakietu Asystent wzwyż)', 'Przypomnienie dzień przed wizytą (od pakietu Asystent wzwyż)'],
         link: 'Zobacz umawianie wizyt',
       },
       support: {
@@ -100,7 +101,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       },
       leads: {
         title: { before: 'Kwalifikuj i ', kw: 'szybciej oddzwaniaj', after: ' do potencjalnych klientów' },
-        text: 'Formularz wypełniony na Twojej stronie zamienia się w rozmowę w ciągu kilku minut. Agent kwalifikuje, przypomina się i przygotowuje kartę, którą Twój zespół może od razu obsłużyć.',
+        text: 'Formularz wypełniony na Twojej stronie zamienia się w rozmowę w ciągu kilku minut. Agent kwalifikuje, przypomina się i przygotowuje zgłoszenie, które Twój zespół może od razu obsłużyć.',
         points: ['Wstępna kwalifikacja według Twoich kryteriów', 'Automatyczne przypomnienia i potwierdzenia', 'Kampanie do kontaktów, które wyraziły zgodę'],
         link: 'Zobacz kwalifikację leadów',
       },
@@ -128,7 +129,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     integrations: {
       title: 'Połączony z Twoimi narzędziami',
-      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent integruje się z tym, czego już używasz. Flow builder łączy ponad 300 narzędzi bez kodu, na tej samej zasadzie co Zapier czy Make.',
+      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent integruje się z tym, czego już używasz. Scenariusze automatyzacji łączą ponad 300 narzędzi bez kodu, na tej samej zasadzie co Zapier czy Make.',
       link: 'Zobacz wszystkie integracje',
     },
     pricing: {
@@ -173,7 +174,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       primary: 'Zacznij za darmo',
       demo: 'Zobacz demo na żywo',
     },
-    finalCta: (m: number) => `Zacznij z ${m} ${plural(m, 'darmową minutą', 'darmowymi minutami', 'darmowymi minutami')}`,
+    finalCta: (m: number) => `Zacznij od ${m} ${m === 1 ? 'darmowej minuty' : 'darmowych minut'}`,
   },
 
   offer: {
@@ -216,7 +217,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Doładowania minut dla asystenta głosowego AI — ${brand}`,
       description: (price: string, mins: string) =>
-        `Doładowania środków od ${price} netto za ${mins} ${plural(toInt(mins), 'dodatkową minutę', 'dodatkowe minuty', 'dodatkowych minut')}. Dokupuj minuty w dowolnym momencie; przejdź na wyższy pakiet, gdy rośnie liczba połączeń.`,
+        `Doładowania kredytów od ${price} netto za ${mins} ${plural(toInt(mins), 'dodatkową minutę', 'dodatkowe minuty', 'dodatkowych minut')}. Dokupuj minuty w dowolnym momencie; przejdź na wyższy pakiet, gdy rośnie liczba połączeń.`,
     },
     hero: {
       title: 'Dokupuj minuty w dowolnym momencie',
@@ -226,8 +227,8 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       title: 'Jak to działa',
       steps: (min: string, max: string) => [
         { title: 'Śledź wykorzystanie', text: 'Pulpit pokazuje zużyte i pozostałe minuty.' },
-        { title: 'Doładuj środki', text: `Doładowanie od ${min} do ${max}, jednym kliknięciem w panelu klienta.` },
-        { title: 'Działaj bez przerw', text: 'Środki pokrywają minuty ponad limit pakietu i nie wygasają.' },
+        { title: 'Doładuj kredyty', text: `Doładowanie od ${min} do ${max}, jednym kliknięciem w panelu klienta.` },
+        { title: 'Działaj bez przerw', text: 'Kredyty pokrywają minuty ponad limit pakietu i nie wygasają.' },
       ],
     },
   },
@@ -243,7 +244,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     other: {
       title: 'Twojej branży nie ma na liście?',
-      intro: 'Szkoły jazdy, siłownie i kluby fitness, e-commerce, rekrutacja, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
+      intro: 'Szkoły jazdy, siłownie i kluby fitness, szkolenia i edukacja, rekrutacja, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
       primary: 'Zacznij za darmo',
       demo: 'Wypróbuj naszego agenta na żywo',
     },
@@ -296,7 +297,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Wszystko, czego potrzebujesz do automatycznej obsługi połączeń',
-      intro: 'Trzynaście modułów, włączanych zależnie od pakietu, w Twoim panelu klienta.',
+      intro: 'Czternaście modułów, dostępnych zależnie od pakietu, w Twoim panelu klienta.',
     },
     overview: { title: 'Przegląd' },
   },
@@ -324,25 +325,25 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
   },
 
   integrations: {
-    tools: { title: 'Ponad 300 narzędzi dzięki automatyzacjom', intro: 'Dzięki platformie automatyzacji (od pakietu Asystent) każda rozmowa może zasilać Twoje narzędzia: e-mail, komunikator zespołu, CRM, sklep internetowy, płatności, arkusze. Oto kilka z nich.' },
+    tools: { title: 'Ponad 300 narzędzi dzięki automatyzacjom', intro: 'Dzięki platformie automatyzacji (od pakietu Asystent wzwyż) każda rozmowa może zasilać Twoje narzędzia: e-mail, komunikator zespołu, CRM, sklep internetowy, płatności, arkusze. Oto kilka z nich.' },
     meta: {
       title: (brand: string) => `Integracje — kalendarz, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Połącz asystenta głosowego AI z Kalendarzem Google, Outlookiem, Cal.com, Calendly, HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',
+      description: 'Połącz asystenta głosowego AI z Cal.com i Calendly (a przez nie z Kalendarzem Google i Outlookiem), HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',
     },
     hero: {
       title: 'Połączony z narzędziami, których już używasz',
-      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent wpasowuje się w Twoją organizację, a flow builder łączy ponad 300 narzędzi bez kodu.',
+      intro: 'Kalendarz, CRM, komunikatory, telefonia: agent wpasowuje się w Twoją organizację, a scenariusze automatyzacji łączą ponad 300 narzędzi bez kodu.',
     },
     flow: {
       title: { before: 'Twórz automatyzacje ', kw: 'bez kodu', after: '' },
       text: 'Wypełniony formularz, zakończona rozmowa, nowy lead: każde zdarzenie może uruchomić sekwencję działań w Twoich narzędziach, na tej samej zasadzie co Zapier czy Make, bezpośrednio z Twojego panelu.',
       points: ['Ponad 300 dostępnych narzędzi', 'Przeciągnij i upuść, bez programowania', 'Testy przed aktywacją'],
-      link: 'Zobacz flow builder',
+      link: 'Zobacz scenariusze automatyzacji',
     },
     api: {
       title: { before: 'Webhooki i API dla ', kw: 'Twoich systemów', after: '' },
-      text: 'We wszystkich pakietach otrzymujesz każde zakończenie rozmowy wraz z wyodrębnionymi danymi we własnych systemach lub sterujesz agentem z poziomu swojego oprogramowania.',
-      points: ['Webhook po każdej rozmowie', 'Wyodrębnione zmienne: wynik, zainteresowanie, termin', 'Narzędzia w trakcie rozmowy, od pakietu Asystent'],
+      text: 'We wszystkich pakietach po każdej rozmowie Twoje systemy otrzymują jej wynik i wyodrębnione dane; możesz też sterować agentem z poziomu własnego oprogramowania.',
+      points: ['Webhook po każdej rozmowie', 'Wyodrębnione zmienne: wynik, zainteresowanie, termin', 'Narzędzia w trakcie rozmowy, od pakietu Asystent wzwyż'],
     },
   },
 };

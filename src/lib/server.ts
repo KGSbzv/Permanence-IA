@@ -50,7 +50,7 @@ export async function dbUpdate(table: string, query: string, patch: Record<strin
   if (!res.ok) throw new Error(`Supabase ${table} ${res.status}`);
 }
 
-export async function sendMail(to: string, subject: string, text: string, html?: string) {
+export async function sendMail(to: string, subject: string, text: string, html?: string, fromName = 'Permanence IA') {
   if (!process.env.ZOHO_SMTP_USER || !process.env.ZOHO_SMTP_PASS) throw new Error('SMTP Zoho non configuré');
   const transporter = nodemailer.createTransport({
     host: process.env.ZOHO_SMTP_HOST || 'smtp.zoho.com',
@@ -58,7 +58,7 @@ export async function sendMail(to: string, subject: string, text: string, html?:
     secure: true,
     auth: { user: process.env.ZOHO_SMTP_USER, pass: process.env.ZOHO_SMTP_PASS },
   });
-  await transporter.sendMail({ from: `Permanence IA <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
+  await transporter.sendMail({ from: `${fromName} <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
 }
 
 /** Jeton secret des webhooks : en-tête x-webhook-token, ou ?token=… car Autocalls n’envoie pas d’en-têtes personnalisés. */
@@ -77,11 +77,12 @@ const DIAL: Record<string, { cc: string; keepZero?: boolean }> = {
 };
 
 /** Numéro au format international (+33…). Un numéro national est converti selon la langue du site. Null si illisible. */
-export function toE164(raw: string, locale = 'fr') {
+export function toE164(raw: string, locale = 'fr', cc?: string) {
   const s = raw.replace(/[\s.\-()/]/g, '');
   if (/^\+\d{8,15}$/.test(s)) return s;
   if (/^00\d{8,15}$/.test(s)) return `+${s.slice(2)}`;
-  const d = DIAL[locale] || DIAL.fr;
+  // Indicatif choisi dans le formulaire (prioritaire sur la langue du site) ; l’Italie garde le 0 initial.
+  const d = cc && /^\d{1,3}$/.test(cc) ? { cc, keepZero: cc === '39' } : DIAL[locale] || DIAL.fr;
   if (/^\d{6,12}$/.test(s)) {
     if (d.keepZero || !s.startsWith('0')) return `+${d.cc}${s}`;
     return `+${d.cc}${s.slice(1)}`;

@@ -124,7 +124,10 @@ function codeMail(lang: string, code: string) {
   const list = CODE_MAIL[key] ? [CODE_MAIL[key]] : [CODE_MAIL.fr, CODE_MAIL.en];
   const block = (t: (typeof list)[number]) => `<div dir="${t.dir || 'ltr'}" style="text-align:${t.dir ? 'right' : 'left'}"><p>${t.hello}</p><p>${t.line}</p><p style="font-size:28px;font-weight:bold;letter-spacing:4px" dir="ltr">${esc(code)}</p><p>${t.valid} ${t.ignore}</p></div>`;
   return {
-    subject: `${list.map((t) => t.subject).join(' · ')} : ${code}`,
+    // Espace avant les deux-points seulement en français.
+    subject: `${list.map((t) => t.subject).join(' · ')}${key === 'fr' || !CODE_MAIL[key] ? ' :' : ':'} ${code}`,
+    // Nom d’expéditeur = marque du marché (Permanence IA, PermanenceIA en Italie, PermanenceAI ailleurs).
+    from: key === 'it' ? 'PermanenceIA' : key !== 'fr' && CODE_MAIL[key] ? 'PermanenceAI' : 'Permanence IA',
     text: list.map((t) => `${t.hello}\n\n${t.line} ${code}\n${t.valid} ${t.ignore}`).join('\n\n—\n\n'),
     html: list.map(block).join('<hr>'),
   };
@@ -150,7 +153,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await logEvent('otp_send', email);
         const code = codeFor(email, Math.floor(Date.now() / WINDOW_MS));
         const m = codeMail(String(b.lang || ''), code);
-        await sendMail(email, m.subject, m.text, m.html);
+        await sendMail(email, m.subject, m.text, m.html, m.from);
       })().catch((e) => console.error('[agent-account] send_code:', e.message));
       await Promise.race([work, sleep(6000)]);
       await sleep(Math.max(0, 6000 - (Date.now() - started)));

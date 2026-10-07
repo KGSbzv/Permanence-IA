@@ -116,6 +116,55 @@ export function CTAs({
 
 /* ---------- Formulaire de rappel (doc 94 : nom, téléphone, secteur, besoin) ---------- */
 
+/** Champs facultatifs de contexte (site web, priorités) : libellés par langue, envoyés à l’agent de rappel en clair. */
+const PROFILE_TEXT: Record<string, { website: string; websiteHint: string; goals: string; options: string[] }> = {
+  fr: { website: 'Site web', websiteHint: 'pour que l’agent prépare l’appel', goals: 'Vos priorités', options: ['Ne plus manquer d’appels', 'Prise de rendez-vous', 'Qualifier les prospects', 'Support client', 'Appels sortants et relances', 'Autre'] },
+  en: { website: 'Website', websiteHint: 'so the agent can prepare the call', goals: 'Your priorities', options: ['Stop missing calls', 'Appointment booking', 'Lead qualification', 'Customer support', 'Outbound calls and follow-ups', 'Other'] },
+  it: { website: 'Sito web', websiteHint: 'per preparare la chiamata', goals: 'Le Sue priorità', options: ['Non perdere più chiamate', 'Prenotazione degli appuntamenti', 'Qualificare i contatti', 'Assistenza clienti', 'Chiamate in uscita e ricontatti', 'Altro'] },
+  pl: { website: 'Strona internetowa', websiteHint: 'aby agent przygotował rozmowę', goals: 'Priorytety', options: ['Koniec z nieodebranymi połączeniami', 'Umawianie wizyt', 'Kwalifikacja leadów', 'Obsługa klienta', 'Połączenia wychodzące', 'Inne'] },
+  nl: { website: 'Website', websiteHint: 'zodat de agent het gesprek kan voorbereiden', goals: 'Uw prioriteiten', options: ['Geen gemiste oproepen meer', 'Afspraken inplannen', 'Leads kwalificeren', 'Klantenservice', 'Uitgaande gesprekken en opvolging', 'Anders'] },
+  he: { website: 'אתר אינטרנט', websiteHint: 'כדי שהסוכנת תתכונן לשיחה', goals: 'מה חשוב לכם', options: ['לא לפספס שיחות', 'קביעת תורים', 'סינון לידים', 'שירות לקוחות', 'שיחות יוצאות ומעקב', 'אחר'] },
+};
+const profileText = (locale: string) => PROFILE_TEXT[locale.startsWith('en') ? 'en' : locale] || PROFILE_TEXT.en;
+
+/** Adresse de site lisible (sans protocole ni espaces), ou rien si ce n’est pas une adresse plausible. */
+export const cleanWebsite = (v: FormDataEntryValue | null) => {
+  const s = String(v || '').trim().replace(/^https?:\/\//i, '').replace(/\/$/, '').slice(0, 120);
+  return /^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(s) ? s : '';
+};
+
+/** Site web et priorités (facultatifs) : contexte transmis à l’agent qui rappelle, pour préparer l’appel. */
+export function ProfileFields({ labelClassName, dark = false, optional }: { labelClassName: string; dark?: boolean; optional: string }) {
+  const { locale } = useI18n();
+  const pt = profileText(locale);
+  const label = labelClassName;
+  const t = { optional };
+  return (
+    <>
+          <div>
+            <label htmlFor="cb-site" className={label}>{pt.website} <span className="font-normal text-slate-light">{t.optional}</span></label>
+            {/* « site_url » et non « website » : ce dernier nom est réservé au champ piège anti-robots. */}
+            <input id="cb-site" name="site_url" type="text" inputMode="url" autoComplete="url" placeholder="www.…" className="field" dir="ltr" aria-describedby="cb-site-hint" />
+            <p id="cb-site-hint" className={`mt-1 text-xs ${dark ? 'text-white/60' : 'text-slate-light'}`}>{pt.websiteHint}</p>
+          </div>
+          <fieldset>
+            <legend className={label}>{pt.goals} <span className="font-normal text-slate-light">{t.optional}</span></legend>
+            <div className="flex flex-wrap gap-2">
+              {pt.options.map((o) => (
+                <label key={o} className={`inline-flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-sm has-[:checked]:border-signal has-[:checked]:bg-signal-soft has-[:checked]:text-ink ${dark ? 'border-white/25 text-white/85' : 'border-line'}`}>
+                  <input type="checkbox" name="goals" value={o} className="h-3.5 w-3.5 accent-[#0FA3C4]" />{o}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </>
+  );
+}
+
+/** Ligne de contexte « Website: … — Priorities: … » ajoutée à la note de la demande. */
+export const profileNote = (f: FormData) => [cleanWebsite(f.get('site_url')) && `Website: ${cleanWebsite(f.get('site_url'))}`,
+  f.getAll('goals').length && `Priorities: ${f.getAll('goals').join(', ')}`].filter(Boolean).join(' — ');
+
 export function CallbackForm({
   type = 'commercial', sector = '', compact = false, dark = false, submitLabel, onDone,
 }: { type?: 'commercial' | 'support' | 'demo'; sector?: string; compact?: boolean; dark?: boolean; submitLabel?: string; onDone?: () => void }) {
@@ -135,10 +184,11 @@ export function CallbackForm({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: f.get('name'), phone: f.get('phone'), email: f.get('email'),
+          name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), email: f.get('email'),
           sector: f.get('sector'),
           // Entreprise et volume (facultatifs) : ajoutés à la note lue par l’agent avant le rappel.
-          note: [f.get('note'), f.get('company') && `Company: ${f.get('company')}`, f.get('volume') && `Calls/month: ${f.get('volume')}`].filter(Boolean).join(' — ') || undefined,
+          // Contexte lu par l’agent de rappel avant l’appel (et conservé dans le dossier du client).
+          note: [f.get('note'), f.get('company') && `Company: ${f.get('company')}`, profileNote(f), f.get('volume') && `Calls/month: ${f.get('volume')}`].filter(Boolean).join(' — ') || undefined,
           slot: f.get('slot') || 'asap',
           // Créneau précis : date et heure locales du visiteur, avec son fuseau horaire (rappel programmé).
           callAt: f.get('slot') === 'precise' ? f.get('callAt') : undefined,
@@ -172,7 +222,7 @@ export function CallbackForm({
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
         <div><label htmlFor="cb-name" className={label}>{t.name}</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
         <div><label htmlFor="cb-company" className={label}>{t.company} <span className="font-normal text-slate-light">{t.optional}</span></label><input id="cb-company" name="company" autoComplete="organization" className="field" /></div>
-        <div><label htmlFor="cb-phone" className={label}>{t.phone}</label><input id="cb-phone" name="phone" type="tel" required minLength={8} pattern="[+0-9][0-9 .()\-]{6,}" autoComplete="tel" className="field" onInvalid={(e) => e.currentTarget.setCustomValidity(t.phoneInvalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} /></div>
+        <PhoneField id="cb-phone" label={t.phone} labelClassName={label} />
         <div>
           <label htmlFor="cb-sector" className={label}>{t.sector}</label>
           <select id="cb-sector" name="sector" defaultValue={sector} className="field">
@@ -209,6 +259,7 @@ export function CallbackForm({
       {!compact && (
         <div><label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{t.emailHint}</span></label><input id="cb-email" name="email" type="email" autoComplete="email" className="field" /></div>
       )}
+      {!compact && type !== 'support' && <ProfileFields labelClassName={label} dark={dark} optional={t.optional} />}
       <div><label htmlFor="cb-note" className={label}>{t.need}</label><textarea id="cb-note" name="note" rows={compact ? 2 : 3} className="field" placeholder={t.needPlaceholder} /></div>
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
         <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
@@ -226,6 +277,49 @@ export function CallbackForm({
     </form>
   );
 }
+
+/* ---------- Téléphone : indicatif pays + numéro ---------- */
+
+/** Indicatifs proposés (marchés servis et voisins). La valeur envoyée est l’indicatif sans « + ». */
+const DIAL_CODES: { id: string; flag: string; cc: string }[] = [
+  { id: 'FR', flag: '🇫🇷', cc: '33' }, { id: 'BE', flag: '🇧🇪', cc: '32' }, { id: 'CH', flag: '🇨🇭', cc: '41' },
+  { id: 'LU', flag: '🇱🇺', cc: '352' }, { id: 'MC', flag: '🇲🇨', cc: '377' }, { id: 'CA', flag: '🇨🇦', cc: '1' },
+  { id: 'GB', flag: '🇬🇧', cc: '44' }, { id: 'IE', flag: '🇮🇪', cc: '353' }, { id: 'AU', flag: '🇦🇺', cc: '61' },
+  { id: 'NZ', flag: '🇳🇿', cc: '64' }, { id: 'IT', flag: '🇮🇹', cc: '39' }, { id: 'PL', flag: '🇵🇱', cc: '48' },
+  { id: 'NL', flag: '🇳🇱', cc: '31' }, { id: 'IL', flag: '🇮🇱', cc: '972' }, { id: 'US', flag: '🇺🇸', cc: '1' },
+  { id: 'DE', flag: '🇩🇪', cc: '49' }, { id: 'ES', flag: '🇪🇸', cc: '34' }, { id: 'PT', flag: '🇵🇹', cc: '351' },
+];
+const DEFAULT_COUNTRY: Record<string, string> = { fr: 'FR', 'en-gb': 'GB', 'en-au': 'AU', it: 'IT', pl: 'PL', nl: 'NL', he: 'IL' };
+const DIAL_LABEL: Record<string, string> = { fr: 'Indicatif pays', 'en-gb': 'Country code', 'en-au': 'Country code', it: 'Prefisso internazionale', pl: 'Numer kierunkowy kraju', nl: 'Landcode', he: 'קידומת מדינה' };
+/** Motif valable aussi en mode « v » des navigateurs récents (parenthèses et tiret échappés). */
+export const PHONE_PATTERN = '[+0-9\\(][0-9 .\\(\\)\\-]{6,}';
+
+/**
+ * Champ téléphone avec indicatif pays : un numéro saisi sans « + » est complété avec l’indicatif choisi
+ * (un 0470… belge n’est plus pris pour un numéro français). Envoie `phone` et `cc` dans le formulaire.
+ */
+export function PhoneField({ id, label, className = 'field', placeholder, hideLabel = false, labelClassName = '' }: {
+  id: string; label: string; className?: string; placeholder?: string; hideLabel?: boolean; labelClassName?: string;
+}) {
+  const { c, locale } = useI18n();
+  const invalid = c.ui.components.callbackForm.phoneInvalid;
+  return (
+    <div>
+      {!hideLabel && <label htmlFor={id} className={labelClassName}>{label}</label>}
+      <div className="flex gap-2" dir="ltr">
+        <select name="cc" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} defaultValue={DEFAULT_COUNTRY[locale] || 'FR'} className={`${className} w-auto shrink-0 pe-7`}>
+          {DIAL_CODES.map((d) => <option key={d.id} value={d.id}>{d.flag} +{d.cc}</option>)}
+        </select>
+        <input id={id} name="phone" type="tel" required minLength={6} pattern={PHONE_PATTERN} autoComplete="tel-national" placeholder={placeholder}
+          aria-label={hideLabel ? label : undefined} className={`${className} min-w-0 flex-1`}
+          onInvalid={(e) => e.currentTarget.setCustomValidity(invalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} />
+      </div>
+    </div>
+  );
+}
+
+/** Indicatif (chiffres) correspondant au pays choisi dans PhoneField. */
+export const dialCode = (id: FormDataEntryValue | null) => DIAL_CODES.find((d) => d.id === id)?.cc;
 
 /* ---------- WhatsApp : discuter avec l’agent IA (prérempli dans la langue du site) ---------- */
 

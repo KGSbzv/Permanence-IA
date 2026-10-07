@@ -28,7 +28,7 @@ export const GUIDES_UI: typeof FR_UI = {
   relatedTitle: 'Gerelateerde gidsen',
   allGuides: 'Alle gidsen',
   openSpace: 'Mijn omgeving openen',
-  helpBefore: 'Hulp nodig? In uw omgeving antwoordt de hulpassistent (ballon rechtsonder) in uw taal. U kunt ook mailen naar ',
+  helpBefore: 'Hulp nodig? In uw omgeving antwoordt de hulpassistent (chatknop rechtsonder) in uw taal. U kunt ook mailen naar ',
   helpAfter: '.',
 };
 
@@ -117,7 +117,7 @@ export const GUIDES: Guide[] = [
         title: '1. De testchat: voor de instructies',
         text: 'De snelste manier om de logica van het gesprek te controleren, zonder stem.',
         steps: [
-          'Open de agent en klik op “Test assistant” (ballonpictogram).',
+          'Open de agent en klik op “Test assistant” (chatpictogram).',
           'Schrijf zoals een klant dat zou doen: de agent antwoordt met dezelfde instructies en dezelfde tools als aan de telefoon.',
           'Controleer of hij de vragen begrijpt, de juiste gegevens verzamelt en zijn tools gebruikt.',
         ],
@@ -162,17 +162,17 @@ export const GUIDES: Guide[] = [
         text: 'De instructies (“System prompt”, sectie “Brain & prompt”) zijn het brein van de agent: zijn identiteit, wat hij weet, hoe hij praat en wat hij nooit mag doen. U kunt ze op drie manieren aanpassen: met de schrijfassistent (“AI Prompt Editor”), de visuele editor (“Flow Builder”) of door de tekst rechtstreeks te bewerken.',
       },
       {
-        title: 'Vertrekken vanuit een sjabloon',
+        title: 'Beginnen met een sjabloon',
         steps: [
           'Klik in de agent, in de sectie met instructies, op “Templates”.',
-          'Kies het sjabloon dat het dichtst bij uw gebruik ligt (receptie, afspraken maken, support, kwalificatie…).',
+          'Kies het sjabloon dat het dichtst bij uw situatie ligt (receptie, afspraken maken, support, kwalificatie…).',
           'Pas het aan uw bedrijf aan.',
         ],
       },
       {
         title: 'De 5 bouwstenen van goede instructies',
         list: [
-          'Rol en identiteit: “Je bent de receptioniste van praktijk X, gespecialiseerd in…”',
+          'Rol en identiteit: “Je bent de virtuele assistent (AI) van praktijk X, gespecialiseerd in…”',
           'Stijl: toon, aanspreekvorm (u of je), korte zinnen, geen vakjargon.',
           'Belangrijke informatie: diensten, openingstijden, tarieven, adres.',
           'Regels: wat gecontroleerd moet worden, wanneer doorverbinden, wat nooit beloofd mag worden.',
@@ -191,7 +191,7 @@ export const GUIDES: Guide[] = [
           'Te lang: gedetailleerde informatie hoort in de kennisbank.',
           'Vergeten situaties: geef aan wat er moet gebeuren bij een spoedgeval, een boze beller of een vraag die er niets mee te maken heeft.',
         ],
-        tip: 'Uw instructies evolueren: lees regelmatig de gesprekstranscripties terug en voeg de gevallen toe die niet goed werden afgehandeld.',
+        tip: 'Instructies zijn nooit af: lees regelmatig de gesprekstranscripties terug en voeg de gevallen toe die niet goed werden afgehandeld.',
       },
     ],
     related: ['editeur-de-prompt-ia', 'flow-builder', 'base-de-connaissances'],
@@ -208,7 +208,7 @@ export const GUIDES: Guide[] = [
         steps: [
           'Menu “Assistants”, open uw agent (hij moet minstens één keer zijn opgeslagen).',
           'Klik in de sectie met instructies, tabblad “AI Prompt Editor”, op “Launch AI Prompt Editor”.',
-          'Kies of u verdergaat met uw huidige instructies, opnieuw begint of vertrekt vanuit een sjabloon.',
+          'Kies of u verdergaat met uw huidige instructies, opnieuw begint of met een sjabloon begint.',
         ],
       },
       {
@@ -218,7 +218,7 @@ export const GUIDES: Guide[] = [
           '“Maak de toon hartelijker.”',
           '“Voeg ons retourbeleid toe: 30 dagen zonder opgave van reden.”',
           '“Voeg instructies toe om met een ontevreden klant om te gaan.”',
-          'De snelkoppelingen “Make it more concise”, “Improve clarity”… voeren de gebruikelijke aanpassingen uit.',
+          'De snelknoppen “Make it more concise”, “Improve clarity”… voeren de gebruikelijke aanpassingen uit.',
         ],
       },
       {
@@ -233,7 +233,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Variabelen en gegevens na het gesprek',
         list: [
-          'Tabblad “Variables”: voeg velden toe zoals {customer_name} om elk gesprek te personaliseren.',
+          'Tabblad “Variables”: voeg velden toe zoals {{customer_name}} om elk gesprek te personaliseren.',
           'Tabblad “Post-Call”: bepaal welke informatie uit elk gesprek wordt gehaald (afspraak gemaakt, mate van interesse…). U kunt de AI vragen: “Welke gegevens zou ik moeten verzamelen?”',
         ],
       },
@@ -252,13 +252,13 @@ export const GUIDES: Guide[] = [
         list: [
           'Mik op 5 tot 10 seconden: begroeting, bedrijfsnaam, vraag.',
           'Gebruik leestekens voor pauzes (“…” geeft een korte stilte).',
-          'Schrijf getallen zoals ze uitgesproken moeten worden en vergeet de accenten niet.',
-          'Voorbeeld: “Goedemorgen, praktijk Jansen, u spreekt met Julie… Waarmee kan ik u helpen?”',
+          'Schrijf getallen zoals ze uitgesproken moeten worden en schrijf moeilijke namen fonetisch.',
+          'Voorbeeld: “Goedemorgen, praktijk Jansen, u spreekt met Julie, de virtuele assistent van de praktijk… Waarmee kan ik u helpen?”',
         ],
       },
       {
         title: 'De opgenomen begroeting',
-        text: 'Voor een volkomen menselijke indruk kunt u een audiobestand uploaden dat bij het opnemen wordt afgespeeld.',
+        text: 'U kunt ook een audiobestand uploaden dat wordt afgespeeld zodra de agent opneemt, bijvoorbeeld ingesproken door iemand van uw team. Vermeld ook in die opname dat de beller met een AI-assistent spreekt.',
         steps: [
           'Neem de begroeting op in een rustige ruimte (korter dan 10 seconden).',
           'Upload het bestand in de instellingen van de agent en schakel het afspelen in.',
@@ -267,7 +267,7 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Controleren',
-        text: 'Bel de agent en luister: uitspraak, pauzes, volume en de overgang naar het gesprek. Voorzie een begroeting per taal als de agent meerdere talen spreekt.',
+        text: 'Bel de agent en luister: uitspraak, pauzes, volume en de overgang naar het gesprek. Zorg voor een begroeting per taal als de agent meerdere talen spreekt.',
       },
     ],
     related: ['choisir-la-voix', 'consignes-system-prompt', 'tester-son-agent'],
@@ -316,7 +316,7 @@ export const GUIDES: Guide[] = [
     plan: 'Vanaf het Assistent-abonnement.',
     sections: [
       {
-        title: 'Wanneer gebruiken',
+        title: 'Wanneer gebruikt u de Flow Builder?',
         text: 'De Flow Builder is ideaal voor een gestructureerd script met meerdere vertakkingen (kwalificatie, afspraken maken in meerdere stappen). Voor een eenvoudig en vrij gesprek volstaan geschreven instructies.',
       },
       {
@@ -324,7 +324,7 @@ export const GUIDES: Guide[] = [
         steps: [
           'Open de agent, sectie met instructies, tabblad “Flow Builder”.',
           'Klik op “Launch Flow Builder”.',
-          'Vertrek vanuit het bestaande scenario, een lege pagina of een sjabloon.',
+          'Begin met het bestaande scenario, een lege pagina of een sjabloon.',
         ],
       },
       {
@@ -342,7 +342,7 @@ export const GUIDES: Guide[] = [
         steps: [
           'Voeg een blok toe met “+ Add Node”.',
           'Voeg in een blok “Speak” of “Prompt” uitkomsten toe (“Add Outcome”): “Geïnteresseerd”, “Niet geïnteresseerd”, “Later terugbellen”…',
-          'Verbind elke uitkomst met het volgende blok door een lijn te trekken vanaf het uitgangspunt.',
+          'Verbind elke uitkomst met het volgende blok door een lijn te trekken vanaf het aansluitpunt van die uitkomst.',
           'Klik op “Save”.',
         ],
         tip: 'Exporteer uw scenario regelmatig (“Export JSON”) om er een kopie van te bewaren. Test elk pad voordat u het in gebruik neemt.',
@@ -376,7 +376,7 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        title: 'Goede praktijken',
+        title: 'Tips',
         list: [
           'Korte inhoud, met duidelijke titels en opsommingen.',
           'Openbare webpagina’s: sommige beveiligde websites blokkeren het uitlezen (status “Failed”). Exporteer de inhoud in dat geval als pdf en upload die.',
@@ -412,7 +412,7 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        title: 'Zodat de uitnodiging wordt verstuurd',
+        title: 'Zorgen dat de uitnodiging wordt verstuurd',
         list: [
           'Voeg een e-mailvariabele toe aan de agent en vul die in voor uw contacten, of vraag de agent om het adres te noteren.',
           'Meerdere soorten afspraken? Klik op “+” naast “Appointment Scheduling” om er meer toe te voegen.',
@@ -442,7 +442,7 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'De locatie van de afspraak instellen in Calendly',
-        text: 'De agent kan geen videovergaderlink aanmaken. Open in Calendly het type afspraak en stel de locatie (“Location”) in op “Custom” (aanbevolen) of “Phone Call”. Een afspraak die alleen via video kan (Meet, Zoom, Teams) laat de boeking mislukken: voeg minstens een van deze opties toe.',
+        text: 'De agent kan geen videovergaderlink aanmaken. Open in Calendly het type afspraak en stel de locatie (“Location”) in op “Custom” (aanbevolen) of “Phone Call”. Een afspraak die alleen via video kan (Meet, Zoom, Teams) laat de boeking mislukken: voeg minstens één van deze opties toe.',
       },
       {
         title: 'Meerdere agenda’s',
@@ -471,7 +471,7 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        title: 'Verder gaan',
+        title: 'Meer mogelijkheden',
         list: [
           'Maatwerktools raadplegen uw software live (voorraad, klantdossier…).',
           'Na het gesprek sturen automatiseringen de resultaten naar uw CRM, Google Sheets of per e-mail.',
@@ -531,7 +531,7 @@ export const GUIDES: Guide[] = [
         title: 'Een nummer kopen',
         steps: [
           'Menu “Get new phone number”.',
-          'Kies het land en het type (lokaal, nationaal, gratis, afhankelijk van de beschikbaarheid): de maandprijs wordt vóór de aankoop getoond.',
+          'Kies het land en het type (in Nederland bijvoorbeeld geografisch zoals 020 of 010, landelijk 085/088 of gratis 0800, afhankelijk van de beschikbaarheid): de maandprijs wordt vóór de aankoop getoond.',
           'Bevestig: het nummer verschijnt in “Your phone numbers”.',
         ],
         text: 'Staat het gewenste nummer er niet tussen? Neem contact met ons op: wij kunnen het bij de provider aanvragen (bewijsstukken afhankelijk van het land, doorgaans 1 tot 3 werkdagen).',
@@ -655,7 +655,7 @@ export const GUIDES: Guide[] = [
         title: 'Regels om na te leven',
         list: [
           'Geef alleen nummers weer waarvan u houder bent of die u mag gebruiken.',
-          'Sommige landen verbieden het weergeven van een buitenlands of niet-geverifieerd nummer.',
+          'Sommige landen verbieden het weergeven van een buitenlands of niet-geverifieerd nummer. In Nederland blokkeren providers gesprekken uit het buitenland die een Nederlands nummer weergeven (anti-spoofing): test daarom altijd vooraf of uw nummer goed doorkomt.',
         ],
         tip: 'Bel vóór een grote campagne uw eigen telefoon om het weergegeven nummer te controleren.',
       },
@@ -686,7 +686,7 @@ export const GUIDES: Guide[] = [
         steps: [
           'Test in het live voorbeeld bovenaan de pagina (“Reset Data” simuleert een nieuwe bezoeker).',
           'Sla op en kopieer daarna de code uit de sectie “Embed Code”.',
-          'Plak die vlak vóór de tag </body> van uw website, of geef hem door aan uw webmaster.',
+          'Plak die vlak vóór de tag </body> van uw website, of geef hem door aan uw webbouwer.',
         ],
         tip: 'Sla altijd op voordat u de code kopieert: de widget laadt zijn instellingen vanuit uw omgeving. Voor spraak is een website met HTTPS vereist.',
       },
@@ -749,7 +749,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Gesprekken: een agent “Make phone calls” met een nummer, en beschikbare minuten.',
           'WhatsApp: een gekoppelde afzender en een goedgekeurd sjabloon. Sms: een nummer dat sms ondersteunt. Beide gebruiken berichtcredits.',
-          'Contacten die ermee hebben ingestemd benaderd te worden.',
+          'Contacten die ermee hebben ingestemd om benaderd te worden (zie de gids “Wie mag uw agent bellen?”).',
         ],
       },
       {
@@ -769,7 +769,7 @@ export const GUIDES: Guide[] = [
           'Instellingen wijzigen: pauzeer de campagne, pas aan en start opnieuw. Er gaat niets verloren.',
           'Terugvaloptie: na de laatste belpoging eenmalig een sms of een WhatsApp-sjabloon sturen.',
         ],
-        tip: 'Begin met 2 of 3 pogingen tijdens de kantooruren van het land van uw contacten, en respecteer altijd bezwaren (menu “Blacklist”).',
+        tip: 'Begin met 2 of 3 pogingen tijdens de kantooruren van het land van uw contacten, en respecteer altijd bezwaren (uitsluitingslijst, menu “Blacklist”).',
       },
     ],
     related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
@@ -802,7 +802,7 @@ export const GUIDES: Guide[] = [
         title: 'De contacten beheren',
         list: [
           'Statussen: “Created” (te bellen), “Processing”, “Rescheduled” (nieuwe poging gepland), “Completed”, “Max Retries”.',
-          'Een contact terugzetten op “Created” laat het opnieuw bellen; het op “Completed” zetten stopt de gesprekken.',
+          'Zet u een contact terug op “Created”, dan wordt het opnieuw gebeld; zet u het op “Completed”, dan stoppen de gesprekken.',
           'Secundaire nummers: worden op volgorde gebeld als het hoofdnummer niet opneemt (alleen belcampagnes).',
           'Filters, bulkverwijdering en CSV-export zijn beschikbaar in de lijst.',
         ],
@@ -817,7 +817,7 @@ export const GUIDES: Guide[] = [
     slug: 'historique-des-appels',
     category: 'results',
     title: 'Uw gesprekken en conversaties terugvinden',
-    summary: 'Opnames beluisteren, transcripties lezen en geschreven gesprekken opvolgen.',
+    summary: 'Opnames beluisteren, transcripties lezen en schriftelijke gesprekken opvolgen.',
     plan: 'Alle abonnementen.',
     sections: [
       {
@@ -829,8 +829,8 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        title: 'De geschreven gesprekken',
-        text: 'Het menu “Inbox” bundelt de geschreven gesprekken met uw agents:',
+        title: 'De schriftelijke gesprekken',
+        text: 'Het menu “Inbox” bundelt de schriftelijke gesprekken met uw agents:',
         list: [
           '“Web widget”: de gesprekken via uw website, met de formuliergegevens.',
           '“WhatsApp”: de WhatsApp-gesprekken, met de status van het 24-uursvenster.',
@@ -878,7 +878,7 @@ export const GUIDES: Guide[] = [
         title: 'Deze gegevens gebruiken',
         list: [
           'Automatisch opnieuw bellen binnen een campagne zolang het doel niet is bereikt.',
-          'Uw CRM of een Google Sheets-blad bijwerken of uw team verwittigen met automatiseringen.',
+          'Uw CRM of een Google Sheets-blad bijwerken of uw team een melding sturen met automatiseringen.',
         ],
       },
     ],
@@ -889,7 +889,7 @@ export const GUIDES: Guide[] = [
     category: 'results',
     title: 'Aan de slag met automatiseringen',
     summary: 'Gespreksresultaten automatisch naar uw CRM, Google Sheets, Slack of per e-mail sturen.',
-    plan: 'Vanaf het Assistent-abonnement (5.000 runs per maand, 50.000 met Callcenter).',
+    plan: 'Vanaf het Assistent-abonnement (5.000 automatiseringsruns per maand, 50.000 met Callcenter).',
     sections: [
       {
         title: 'Het principe',
@@ -906,7 +906,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Uw eerste scenario maken',
         steps: [
-          'Open “Automate platform” en maak een flow aan (of vertrek vanuit een sjabloon).',
+          'Open “Automate platform” en maak een flow aan (of begin met een sjabloon).',
           'Kies de trigger “Call Ended”.',
           'Voeg een actie toe: een rij in Google Sheets, een contact in uw CRM, een e-mail of een Slack-bericht aan het team.',
           'Voeg de gespreksgegevens (samenvatting, nummer, geëxtraheerde velden) in de actie in.',
@@ -930,7 +930,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Uw maandabonnement, met inbegrepen belminuten.',
           'De minuten boven uw abonnement, betaald met uw tegoed (“Credits”: 100 credits = $ 1).',
-          'WhatsApp-berichten, sms’jes en geschreven antwoorden van de AI, betaald met berichtcredits.',
+          'WhatsApp-berichten, sms’jes en schriftelijke antwoorden van de AI, betaald met berichtcredits.',
           'Eigen nummers, vanaf {numberFrom} per maand, afhankelijk van het land.',
         ],
       },
@@ -960,7 +960,7 @@ export const GUIDES: Guide[] = [
     slug: 'renvoi-d-appel',
     category: 'phone',
     title: 'Uw eigen nummer houden met doorschakelen',
-    summary: 'Laat de agent alleen opnemen als u niet opneemt, in gesprek bent of buiten openingstijden, zonder van nummer te wisselen.',
+    summary: 'Laat de agent alleen opnemen als u zelf niet opneemt, in gesprek bent of gesloten bent, zonder van nummer te wisselen.',
     plan: 'Alle abonnementen. Doorschakelen wordt gefactureerd door uw provider.',
     sections: [
       {
@@ -969,13 +969,13 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Doorschakelcodes op een mobiele telefoon',
-        text: 'Bij de meeste toestellen en providers toetst u de code, dan het nummer van de agent in internationaal formaat, gevolgd door # en de beltoets:',
+        text: 'Bij KPN, Vodafone en Odido (en de meeste andere providers) toetst u de code, dan het nummer van de agent in internationaal formaat (+31… of 0031…), gevolgd door # en de beltoets. U kunt doorschakelen ook instellen in de app van uw provider.',
         list: [
-          'Als u niet opneemt: **61*nummer van de agent# (vaak kunt u de wachttijd toevoegen, bijvoorbeeld **61*nummer**20#).',
+          'Als u niet opneemt: **61*nummer van de agent# (u kunt de wachttijd toevoegen, van 5 tot 30 seconden, bijvoorbeeld **61*nummer**20#).',
           'Als u in gesprek bent: **67*nummer van de agent#',
           'Als uw telefoon uit staat of geen bereik heeft: **62*nummer van de agent#',
           'Alle gesprekken, altijd: **21*nummer van de agent#',
-          'Uitschakelen: ##61#, ##67#, ##62# of ##21#, of ##002# om alles te annuleren.',
+          'Uitschakelen: ##61#, ##67#, ##62# of ##21#, of ##002# om alles te annuleren (let op: ##002# schakelt ook de doorschakeling naar uw voicemail uit).',
         ],
       },
       {
@@ -994,7 +994,7 @@ export const GUIDES: Guide[] = [
           '’s Avonds en in het weekend: altijd doorschakelen na sluitingstijd, uitschakelen bij opening (sommige centrales plannen dit automatisch).',
           'Piekmomenten: doorschakelen bij bezet is genoeg, de agent neemt gesprekken parallel aan.',
         ],
-        tip: 'Uw provider rekent doorschakelen af als een gesprek naar het nummer van de agent: controleer uw bundel, zeker als dat nummer in het buitenland staat. Voor een lokaal nummer kunt u ook uw Twilio- of Telnyx-nummers importeren of uw telefooncentrale via SIP koppelen.',
+        tip: 'Uw provider rekent doorschakelen af als een gesprek naar het nummer van de agent: controleer uw bundel: doorschakelen naar een buitenlands nummer valt meestal buiten uw belbundel. Voor een lokaal nummer kunt u ook uw Twilio- of Telnyx-nummers importeren of uw telefooncentrale via SIP koppelen.',
       },
     ],
     related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
@@ -1013,8 +1013,8 @@ export const GUIDES: Guide[] = [
       {
         title: 'In Nederland',
         list: [
-          'Sinds 1 juli 2021 mag u consumenten alleen telefonisch benaderen voor marketing als ze daar vooraf toestemming voor hebben gegeven, of als ze al klant bij u zijn (of in de afgelopen drie jaar waren). Het Bel-me-niet Register is daarmee niet meer de hoofdregel.',
-          'Bij een bestaande klantrelatie: bel alleen over vergelijkbare producten of diensten, en bied in elk gesprek de mogelijkheid om bezwaar te maken.',
+          'Sinds 1 juli 2021 mag u consumenten (ook eenmanszaken en zzp’ers) alleen telefonisch benaderen voor marketing als ze daar vooraf toestemming voor hebben gegeven. Voor bestaande klanten bestaat een uitzondering, maar die geldt alleen onder strikte voorwaarden: ga er niet van uit dat u uw eigen klanten altijd mag bellen. Het veiligst is om alleen klanten te bellen die hebben aangegeven dat ze benaderd willen worden.',
+          'Belt u bedrijven voor marketing, raadpleeg dan het Bel-me-niet Register. Bied in elk gesprek de mogelijkheid om bezwaar te maken.',
           'Een terugbelverzoek van de persoon zelf, een afspraak bevestigen of opvolging van een lopende dienst is geen telemarketing: dat blijft mogelijk.',
           'Gekochte bestanden of nummers uit gidsen en portalen: niet gebruiken voor consumenten zonder aantoonbare toestemming.',
           'De AVG blijft van toepassing op alle gegevens die u verwerkt. Toezicht: de Autoriteit Persoonsgegevens (privacy) en de ACM (telemarketing).',
@@ -1023,7 +1023,6 @@ export const GUIDES: Guide[] = [
       {
         title: 'In andere landen',
         list: [
-          'Frankrijk: sinds 11 augustus 2026 is voorafgaande, uitdrukkelijke toestemming van consumenten verplicht voor telemarketing; Bloctel bestaat niet meer.',
           'Verenigd Koninkrijk: controleer de registers TPS en CTPS en pas de PECR en de UK GDPR toe.',
           'Australië: controleer het Do Not Call Register en de Spam Act voor berichten.',
           'Italië: Registro pubblico delle opposizioni. Polen: voorafgaande toestemming voor telemarketing.',
@@ -1035,10 +1034,10 @@ export const GUIDES: Guide[] = [
         list: [
           'De agent zegt meteen aan het begin dat hij een AI is en dat het gesprek wordt opgenomen.',
           'Hij noemt de echte reden van het gesprek (“u vroeg ons op … om terug te bellen”).',
-          'Wil iemand niet meer gebeld worden, zet het nummer dan in het menu “Blacklist”: het wordt uitgesloten van alle campagnes.',
+          'Wil iemand niet meer gebeld worden, zet het nummer dan op de uitsluitingslijst (menu “Blacklist”): het wordt uitgesloten van alle campagnes.',
           'Bel op redelijke tijden, op werkdagen, in de lokale tijd van het contact.',
         ],
-        tip: 'Noteer voordat u een bestand importeert de bron, de datum van de klantrelatie en de grondslag. Bij een controle is dat overzicht uw bescherming.',
+        tip: 'Noteer voordat u een bestand importeert de bron, de datum van de toestemming en de grondslag. Bij een controle is dat overzicht uw bescherming.',
       },
     ],
     related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
@@ -1047,7 +1046,7 @@ export const GUIDES: Guide[] = [
     slug: 'verifier-avant-mise-en-ligne',
     category: 'start',
     title: 'De 12 controles voordat uw agent live gaat',
-    summary: 'Een checklist om af te werken voordat u de lijn openzet: zo voorkomt u de meeste problemen in de eerste week.',
+    summary: 'Een checklist om af te werken voordat uw agent live gaat: zo voorkomt u de meeste problemen in de eerste week.',
     plan: 'Alle abonnementen.',
     sections: [
       {
@@ -1066,8 +1065,8 @@ export const GUIDES: Guide[] = [
           'Het gedrag buiten openingstijden is zoals u wilt.',
           'De agent geeft geen prijzen, garanties of adviezen die u niet hebt goedgekeurd.',
           'Hij beantwoordt de 5 vragen die u het vaakst krijgt correct.',
-          'De melding van opname is aanwezig als gesprekken worden opgenomen.',
-          'Nummers die niet gebeld mogen worden, staan in de “Blacklist” vóór elke campagne.',
+          'De agent meldt dat het gesprek wordt opgenomen (als u opneemt).',
+          'Nummers die niet gebeld mogen worden, staan vóór elke campagne op de uitsluitingslijst (“Blacklist”).',
           'U hebt drie volledige opnames teruggeluisterd en bent tevreden over de toon.',
         ],
         tip: 'Noteer wat niet goed gaat, pas de instructies of de kennisbank aan en herhaal alleen de betreffende tests.',
@@ -1090,12 +1089,12 @@ export const GUIDES: Guide[] = [
           'Geboekte afspraken of geplande terugbelverzoeken.',
           'Geschatte waarde: afspraken × gemiddelde waarde van een klant.',
         ],
-        text: 'Verbruikte minuten zijn om uw abonnement te volgen, niet om het resultaat te meten: kijk eerst naar wat de gesprekken hebben opgeleverd.',
+        text: 'Verbruikte minuten zeggen iets over uw abonnement, niet over het resultaat: kijk eerst naar wat de gesprekken hebben opgeleverd.',
       },
       {
         title: 'Luister 10 gesprekken terug',
         steps: [
-          'Menu “Calls”: kies willekeurig 10 gesprekken van de maand.',
+          'Menu “Calls history”: kies willekeurig 10 gesprekken van de maand.',
           'Bij elk gesprek: is de vraag begrepen? is de juiste actie uitgevoerd? bevalt de toon u?',
           'Pas de instructies alleen aan als hetzelfde probleem minstens twee keer terugkomt.',
         ],
@@ -1105,9 +1104,9 @@ export const GUIDES: Guide[] = [
         list: [
           'De agenda is nog gekoppeld (een hernoemde of verwijderde agenda stopt het boeken).',
           'Automatiseringen en webhooks draaien zonder fouten.',
-          'Uw openingstijden, prijzen en vakanties zijn actueel in de kennisbank.',
+          'Uw openingstijden, prijzen, vakantiesluitingen en feestdagen (Koningsdag, Hemelvaart, Pinksteren) zijn actueel in de kennisbank.',
         ],
-        tip: 'Blok 20 minuten op de eerste werkdag van elke maand. Een agent die regelmatig wordt nagelopen, blijft scherp; een vergeten agent raakt uit koers.',
+        tip: 'Plan 20 minuten in op de eerste werkdag van elke maand. Een agent die regelmatig wordt nagelopen, blijft scherp; een vergeten agent raakt uit koers.',
       },
     ],
     related: ['historique-des-appels', 'donnees-apres-appel', 'automatisations'],

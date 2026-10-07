@@ -14,6 +14,8 @@ function tooMany(ip: string) {
 }
 /** Marqueur posé par le serveur : accord WhatsApp et langue du message (lu aussi après un appel manqué). */
 const waMark = (lang: string) => `[WA:${lang}] confirmation WhatsApp demandée`;
+// Créneaux du formulaire (valeurs fixes en français) : en anglais pour les agents des autres pays, qui les résument dans leur langue.
+const SLOT_EN: Record<string, string> = { 'Aujourd’hui après-midi': 'this afternoon', 'Demain matin': 'tomorrow morning', 'Demain après-midi': 'tomorrow afternoon' };
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -35,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // Langue du site (fr, en-gb, en-au, it, pl, nl) ; « intl » = demande enregistrée par un agent pendant un appel.
   const lang = typeof locale === 'string' ? locale : 'fr';
-  const e164 = toE164(String(phone), lang);
+  const e164 = toE164(String(phone), lang, typeof b.cc === 'string' ? b.cc : undefined);
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
   const fromAgent = isAuthorized(req) && (lang === 'intl' || Boolean(agent));
@@ -81,7 +83,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         name, phone: e164, company: company || '', sector: sector || '', call_at: callAt.toISOString(),
         // Les automatisations Autocalls basculent sur la campagne de la voix masculine quand body.voice === 'male'.
         ...(voice ? { voice } : {}),
-        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
+        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);

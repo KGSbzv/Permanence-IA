@@ -46,7 +46,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       platform: 'Piattaforma',
       allFeatures: 'Tutte le funzionalità',
       offers: 'Piani',
-      recharges: 'Ricariche di minuti',
+      recharges: 'Ricariche di credito',
       compare: 'Confronta i piani',
       sectors: 'Settori',
       resources: 'Risorse',
@@ -110,11 +110,11 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sendFailed: 'Non è stato possibile inviare la richiesta.',
     retry: (email: string) => `Riprovi o scriva a ${email}.`,
     sentTitle: 'Richiesta di richiamata inviata',
-    sentText: 'La richiamiamo nella fascia oraria scelta. Se ha indicato un’email, riceverà una conferma.',
+    sentText: 'La richiamiamo nella fascia oraria scelta. Se ha selezionato WhatsApp, riceverà lì la conferma.',
     name: 'Nome',
     phone: 'Telefono',
     sector: 'Settore',
-    choose: 'Scegli…',
+    choose: 'Selezioni…',
     otherSector: 'Altra attività',
     when: 'Quando possiamo richiamarLa?',
     slots: {
@@ -122,11 +122,11 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       todayAfternoon: 'Oggi pomeriggio',
       tomorrowMorning: 'Domani mattina',
       tomorrowAfternoon: 'Domani pomeriggio',
-      precise: "In un giorno e un'ora precisi",
+      precise: 'In un giorno e a un’ora precisi',
     },
     preciseLabel: 'Data e ora (ora locale)',
     email: 'Email',
-    emailHint: '(per la conferma)',
+    emailHint: '(facoltativa)',
     need: 'La Sua esigenza',
     needPlaceholder: 'Es.: perdo chiamate la sera, voglio automatizzare gli appuntamenti…',
     consent: (brand: string) => `Accetto di essere richiamato al numero indicato, anche da un agente vocale AI di ${brand}. I miei dati sono utilizzati esclusivamente per gestire la mia richiesta.`,
@@ -142,7 +142,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     items: [
       { title: 'Risponda anche fuori orario', text: 'Sera, fine settimana, durante i Suoi appuntamenti: ogni chiamata riceve una risposta.' },
       { title: 'Qualifichi in automatico', text: 'L’agente pone le Sue domande e Le invia una richiesta completa.' },
-      { title: 'Prenoti appuntamenti', text: 'Direttamente nel Suo calendario, con conferma e promemoria (dal piano Assistant).' },
+      { title: 'Prenoti appuntamenti', text: 'Direttamente nel Suo calendario, con conferma e promemoria (a partire dal piano Assistant).' },
       { title: 'Richiami i lead più in fretta', text: 'Un modulo compilato diventa una chiamata in pochi minuti.' },
       { title: 'Lasci alle persone ciò che conta', text: 'Trasferimento al Suo team quando la situazione lo richiede.' },
     ],
@@ -157,7 +157,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     // Stesso ordine delle icone del componente: telefonia, automazione, CRM, messaggi, calendario, monitoraggio, sicurezza.
     families: [
       { name: 'Telefonia', items: ['Chiamate in entrata e in uscita', 'Numero dedicato opzionale', 'Integrazione SIP', 'Trasferimento a un operatore', 'Identificazione del chiamante'] },
-      { name: 'Automazione', items: ['Editor di prompt', 'Flow builder senza codice', 'Assistente per le automazioni', 'Oltre 300 strumenti collegabili'] },
+      { name: 'Automazione', items: ['Editor di prompt', 'Editor di automazioni senza codice', 'Assistente per le automazioni', 'Oltre 300 strumenti collegabili'] },
       { name: 'CRM e dati', items: ['Lead e prequalificazione', 'Base di conoscenza', 'Cronologia chiamate', 'Webhook e API'] },
       { name: 'Messaggi', items: ['SMS', 'WhatsApp e template', 'Messenger e Instagram', 'Widget web'] },
       { name: 'Calendario', items: ['Gestione appuntamenti', 'Conferme e promemoria', 'Spostamenti e disdette'] },
@@ -186,7 +186,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   },
 
   sectorCards: {
-    seePage: (sectorLower: string) => `Veda la pagina ${sectorLower}`,
+    seePage: (sectorLower: string) => `Veda la pagina «${sectorLower.charAt(0).toUpperCase()}${sectorLower.slice(1)}»`,
   },
 
   pricingCards: {
@@ -215,8 +215,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     extraMinute: 'Minuto aggiuntivo',
     phoneNumber: 'Acquisto di un numero',
     phoneNumberFrom: (price: string) => `da ${price} / mese`,
-    showAll: (n: number) => `Vedi tutti i moduli (${n})`,
-    showLess: 'Riduci il confronto',
+    showAll: (n: number) => `Mostra tutti i moduli (${n})`,
+    showLess: 'Mostra meno',
     legendIncluded: 'Incluso',
     legendNotIncluded: 'Non incluso',
     legendLimit: 'Numero = limite del piano',
@@ -228,7 +228,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     groups: [
       { key: 'llm', title: 'Modelli linguistici', text: 'Il cervello dell’agente: comprende la richiesta e decide cosa rispondere.' },
       { key: 's2s', title: 'Voce in tempo reale', text: 'Modelli che ascoltano e parlano direttamente, per le conversazioni più naturali.' },
-      { key: 'tts', title: 'Sintesi vocale', text: 'Centinaia di voci naturali, in oltre 30 lingue.' },
+      { key: 'tts', title: 'Sintesi vocale', text: 'Centinaia di voci naturali, in oltre 80 lingue.' },
       { key: 'stt', title: 'Trascrizione', text: 'Riconoscimento vocale rapido, anche al telefono.' },
       { key: 'channels', title: 'Canali', text: 'Lo stesso agente risponde ovunque i Suoi clienti Le scrivano o La chiamino.' },
     ],
@@ -254,7 +254,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { title: 'Superamenti ripetuti', text: 'Le proponiamo il piano superiore.' },
       { title: 'Ricariche frequenti', text: 'La Sua dashboard Le segnala che sta pagando troppo per il Suo utilizzo.' },
     ],
-    ruleCustom: (minutes: string) => `Oltre ${minutes} min regolari`,
+    ruleCustom: (minutes: string) => `Oltre ${minutes} min al mese`,
     ruleCustomText: 'Costruiamo un’offerta su misura.',
     case1Minutes: (minutes: string) => `${minutes} min questo mese`,
     case1Plan: (plan: string) => `${plan} + una ricarica di credito`,
@@ -264,8 +264,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     case2Plan: (plan: string) => `Passi al piano ${plan}`,
     case2Note: (price: string, minutes: string, total: string, smallerPlan: string) =>
       `${price} IVA esclusa per ${minutes} min, contro ≈ ${total} con ${smallerPlan} + minuti extra. Costa meno, e Le lascia margine.`,
-    case3Minutes: (minutes: string) => `${minutes} min regolari`,
-    case3Plan: 'Offerta su misura',
+    case3Minutes: (minutes: string) => `${minutes} min al mese`,
+    case3Plan: 'Piano su misura',
     case3Note: (plan: string) => `Oltre il piano ${plan}, negoziamo un prezzo al minuto adatto al Suo volume.`,
     title: 'Aggiunga minuti o cambi piano, al momento giusto',
     intro: 'Le indichiamo quando basta una ricarica e quando il piano superiore diventa più conveniente.',
@@ -294,7 +294,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     bestPlan: 'Piano più conveniente per questo volume',
     planCost: (plan: string) => `Costo ${plan}`,
     withExtra: (minutes: string, price: string) => `di cui ${minutes} min aggiuntivi a ${price}`,
-    customAbove: (minutes: string) => `Oltre ${minutes} min regolari, richieda un’offerta su misura.`,
+    customAbove: (minutes: string) => `Oltre ${minutes} min al mese, richieda un’offerta su misura.`,
     effectivePerMinute: 'Prezzo reale al minuto',
     humanCost: 'Costo di una reception con personale',
     savings: 'Risparmio mensile',
@@ -305,7 +305,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     roi: (x: string) => `Ritorno: ${x} volte il prezzo del piano`,
     perMonth: ' / mese',
     assumptions: (wrapUp: number, conversion: number) =>
-      `Ipotesi: ${wrapUp} min di lavorazione dopo ogni chiamata per un dipendente, il ${conversion} % delle chiamate perse diventa cliente. Prezzi IVA esclusa in dollari USA; numero di telefono escluso. Stima indicativa, da confrontare con i Suoi dati.`,
+      `Ipotesi: ${wrapUp} min di lavorazione dopo ogni chiamata per un dipendente, il ${conversion}% delle chiamate perse diventa cliente. Prezzi IVA esclusa in dollari USA; numero di telefono escluso. Stima indicativa, da confrontare con i Suoi dati.`,
     cta: 'Provi gratis',
   },
 
@@ -334,7 +334,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
       { title: 'Protezione dei dati', text: 'Crittografia in transito, accesso protetto da account e periodo di conservazione configurabile.' },
       { title: 'Tracciabilità', text: 'Cronologia delle chiamate, trascrizioni e registro delle attività per ogni account.' },
       { title: 'Controllo degli accessi', text: 'Ogni cliente dispone della propria area protetta; l’agente accede solo alle informazioni che Lei gli fornisce.' },
-      { title: 'Preparazione normativa', text: 'Strumenti per applicare il GDPR: informativa, diritto di accesso, cancellazione di chiamate e registrazioni, conservazione. Accordo sul trattamento dei dati (DPA) su richiesta.' },
+      { title: 'Conformità normativa', text: 'Strumenti per applicare il GDPR: informativa, diritto di accesso, cancellazione di chiamate e registrazioni, conservazione. Accordo sul trattamento dei dati (DPA) integrato nelle Condizioni (articolo 8); versione firmata su richiesta.' },
       { title: 'Infrastruttura', text: 'Piattaforma ospitata presso fornitori cloud affermati, con backup e monitoraggio.' },
     ],
     title: 'Sicurezza e conformità per le Sue chiamate AI',
@@ -349,7 +349,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     voicesTitle: 'Voci naturali nella Sua lingua',
     voicesText: 'Oltre 80 lingue e numerosi accenti. L’agente rileva la lingua di chi chiama e risponde nella stessa lingua.',
     numbersTitle: 'Il Suo numero o un numero dedicato',
-    numbersText: 'Mantenga il Suo numero (inoltro di chiamata, importazione da Twilio o Telnyx, connessione SIP al Suo centralino) oppure scelga un numero dedicato come opzione, fatturato mensilmente in aggiunta al piano.',
+    numbersText: 'Mantenga il Suo numero (deviazione di chiamata, importazione da Twilio o Telnyx, connessione SIP al Suo centralino) oppure scelga un numero dedicato come opzione, fatturato mensilmente in aggiunta al piano.',
     telephonyOptions: 'Veda le opzioni di telefonia',
   },
 
@@ -392,12 +392,12 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     consentRequired: 'Spunti la casella per ricevere la chiamata.',
     sendFailed: 'Non è stato possibile inviare la richiesta.',
     sending: 'Invio…',
-    phoneCta: 'Fate squillare il mio telefono',
+    phoneCta: 'Mi chiami adesso',
     phoneLegal: 'Gratuito e senza impegno. Il Suo numero serve solo per questa demo.',
     sentTitle: 'Richiesta ricevuta',
-    sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00 – 19:00). Tenga il telefono a portata di mano.`,
-    again: 'Fare un’altra prova',
-    portraitAlt: (name: string, accent: string, male = false) => `${name}, agente vocale IA, voce ${male ? 'maschile' : 'femminile'} (${accent})`,
+    sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00-19:00, ora italiana). Tenga il telefono a portata di mano.`,
+    again: 'Riprovi',
+    portraitAlt: (name: string, accent: string, male = false) => `${name}, agente vocale AI, voce ${male ? 'maschile' : 'femminile'} (${accent})`,
     voiceLabel: 'Voce',
     voiceOption: (name: string, male: boolean) => `${name}, voce ${male ? 'maschile' : 'femminile'}`,
   },
@@ -405,7 +405,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   industryMarquee: ['Idraulici', 'Elettricisti', 'Studi dentistici', 'Cliniche', 'Agenzie immobiliari', 'Gestione affitti', 'Officine', 'Carrozzerie', 'Parrucchieri', 'Barbieri', 'Centri estetici', 'Ristoranti', 'Hotel', 'Avvocati', 'Commercialisti', 'E-commerce', 'Broker', 'Amministratori di condominio', 'Medicina estetica', 'Fisioterapisti', 'Osteopati', 'Veterinari'],
 
   // Stesso ordine delle bandiere del componente.
-  languageMarquee: ['Francese', 'Inglese', 'Spagnolo', 'Tedesco', 'Italiano', 'Portoghese', 'Olandese', 'Belgio', 'Svizzera', 'Québec', 'Arabo', 'Polacco', 'Rumeno', 'Turco', 'Svedese', 'Ebraico'],
+  languageMarquee: ['Francese', 'Inglese', 'Spagnolo', 'Tedesco', 'Italiano', 'Portoghese', 'Olandese', 'Francese (Belgio)', 'Francese (Svizzera)', 'Francese (Québec)', 'Arabo', 'Polacco', 'Rumeno', 'Turco', 'Svedese', 'Ebraico'],
 
   agentTeam: {
     // Stesso ordine delle icone e dei link del componente.
@@ -420,13 +420,13 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     title: 'Costruisca il Suo team di agenti AI',
     intro: 'Ogni agente ha un ruolo preciso. Attivi quelli di cui la Sua azienda ha bisogno; condividono la stessa cronologia e le stesse informazioni.',
     custom: 'Le serve uno scenario particolare? Configuriamo un agente su misura.',
-    virtualNote: 'Jade, Daan, Katie e i loro colleghi sono agenti IA virtuali: i volti sono illustrazioni generate, non persone reali.',
+    virtualNote: 'I nostri agenti sono agenti AI virtuali: i volti sono illustrazioni generate, non persone reali.',
   },
 
   sectorShowcase: {
     chooseSector: 'Scelga un settore',
-    agentFor: (sectorLower: string) => `Agente ${sectorLower}`,
-    seeSolution: (sectorLower: string) => `Veda la soluzione ${sectorLower}`,
+    agentFor: (sectorLower: string) => `Agente per ${sectorLower}`,
+    seeSolution: (sectorLower: string) => `Scopra la soluzione per ${sectorLower}`,
   },
 
   scenarioExplorer: {
@@ -434,7 +434,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     answering: (agentName: string) => `${agentName} risponde`,
     replay: 'Riascolti la chiamata',
     benefitsTitle: 'Cosa cambia per Lei',
-    planLabel: 'Offerta consigliata',
+    planLabel: 'Piano consigliato',
     tryLive: 'Provi questo scenario dal vivo',
   },
 
@@ -471,7 +471,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
           { title: 'SMS', text: 'Riepilogo dopo ogni chiamata.' },
           { title: 'Instagram e Messenger', text: 'Messaggi diretti centralizzati.' },
           { title: 'Widget web', text: 'Parlare con l’agente o essere richiamati dal Suo sito.' },
-          { title: 'Lista d’attesa', text: 'Avvisare quando si libera uno slot.' },
+          { title: 'Lista d’attesa', text: 'Avvisare quando si libera un posto.' },
           { title: 'Cronologia unica', text: 'Chiamate e messaggi nello stesso posto.' },
         ],
       },
@@ -548,7 +548,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     },
     transcript: {
       label: 'Trascrizione',
-      question: 'Può indicarmi il Suo budget indicativo?',
+      question: 'Qual è il Suo budget orientativo?',
       answer: 'Intorno ai 300.000 euro.',
       summaryLabel: 'Riepilogo:',
       summary: ' acquisto, budget 300.000 €, visita richiesta sabato.',

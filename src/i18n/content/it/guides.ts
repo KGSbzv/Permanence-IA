@@ -27,8 +27,8 @@ export const GUIDES_UI: typeof FR_UI = {
   tipLabel: 'Consiglio',
   relatedTitle: 'Guide correlate',
   allGuides: 'Tutte le guide',
-  openSpace: 'Apri la mia area',
-  helpBefore: 'Serve aiuto? Nella Sua area, l’assistente di supporto (fumetto in basso a destra) risponde nella Sua lingua. Può anche scrivere a ',
+  openSpace: 'Apra la Sua area',
+  helpBefore: 'Serve aiuto? Nella Sua area, l’assistente di supporto (bolla in basso a destra) risponde nella Sua lingua. Può anche scrivere a ',
   helpAfter: '.',
 };
 
@@ -37,7 +37,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'agent-vocal-ia',
     category: 'start',
-    title: 'Che cos’è un agente vocale IA?',
+    title: 'Che cos’è un agente vocale AI?',
     summary: 'Il ruolo di un agente, i suoi componenti e cosa può fare per Lei, sia nelle chiamate in entrata sia in quelle in uscita.',
     sections: [
       {
@@ -58,7 +58,7 @@ export const GUIDES: Guide[] = [
           'Le istruzioni («System prompt»): il ruolo, il tono e le regole dell’agente.',
           'Il messaggio di benvenuto («Initial message»): la prima frase pronunciata.',
           'La voce («Voice»): una voce della libreria o la Sua voce clonata.',
-          'Gli strumenti («Tools»): trasferimento, fine chiamata, presa di appuntamenti, strumenti su misura.',
+          'Gli strumenti («Tools»): trasferimento, fine chiamata, prenotazione degli appuntamenti, strumenti su misura.',
           'La base di conoscenza («Knowledge base»): i Suoi documenti e le Sue pagine web.',
         ],
       },
@@ -76,7 +76,7 @@ export const GUIDES: Guide[] = [
         title: 'Creare l’agente',
         steps: [
           'Acceda ad app.permanenceia.com e apra il menu «Assistants», poi «Create».',
-          'Scelga il tipo: «Receive phone calls» per rispondere alle chiamate, «Make phone calls» per chiamare (campagne, richiami).',
+          'Scelga il tipo: «Receive phone calls» per rispondere alle chiamate, «Make phone calls» per chiamare (campagne, richiamate).',
           'Indichi un nome interno (ad esempio «Accoglienza studio») e verifichi il fuso orario.',
           'Scelga la lingua, poi la voce («Voice & speech»), e la ascolti.',
           'Scriva le istruzioni («Brain & prompt») e la frase di benvenuto («Greeting»).',
@@ -85,14 +85,14 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Aggiungere gli strumenti utili',
-        text: 'In «Tools & actions», aggiunga ciò di cui l’agente ha bisogno: trasferimento di chiamata, fine chiamata, presa di appuntamenti, strumenti su misura.',
+        text: 'In «Tools & actions», aggiunga ciò di cui l’agente ha bisogno: trasferimento di chiamata, fine chiamata, prenotazione degli appuntamenti, strumenti su misura.',
       },
       {
         title: 'Collegare e provare',
         list: [
           'Agente in entrata: gli assegni un numero (sezione «General», campo «Phone number»).',
           'Agente in uscita: lo colleghi a una campagna o lo provi facendosi chiamare.',
-          'In ogni caso, lo provi prima di metterlo in servizio.',
+          'In ogni caso, lo provi prima di attivarlo.',
         ],
       },
       {
@@ -111,13 +111,13 @@ export const GUIDES: Guide[] = [
     slug: 'tester-son-agent',
     category: 'start',
     title: 'Provare il Suo agente (chat, browser, telefono)',
-    summary: 'I tre modi per provare un agente prima della messa in servizio, e quando usare ciascuno.',
+    summary: 'I tre modi per provare un agente prima dell’attivazione, e quando usare ciascuno.',
     sections: [
       {
         title: '1. La chat di prova: per le istruzioni',
         text: 'Il modo più rapido per verificare la logica della conversazione, senza voce.',
         steps: [
-          'Apra l’agente e clicchi su «Test assistant» (icona a fumetto).',
+          'Apra l’agente e clicchi su «Test assistant» (icona della chat).',
           'Scriva come farebbe un cliente: l’agente risponde con le stesse istruzioni e gli stessi strumenti usati al telefono.',
           'Verifichi che comprenda le richieste, raccolga le informazioni corrette e utilizzi i suoi strumenti.',
         ],
@@ -165,18 +165,18 @@ export const GUIDES: Guide[] = [
         title: 'Partire da un modello',
         steps: [
           'Nell’agente, sezione delle istruzioni, clicchi su «Templates».',
-          'Scelga il modello più vicino al Suo utilizzo (accoglienza, presa di appuntamenti, assistenza, qualificazione…).',
+          'Scelga il modello più vicino al Suo utilizzo (accoglienza, prenotazione degli appuntamenti, assistenza, qualificazione…).',
           'Lo adatti alla Sua attività.',
         ],
       },
       {
         title: 'I 5 blocchi di buone istruzioni',
         list: [
-          'Ruolo e identità: «Sei l’assistente di accoglienza dello studio X, specializzato in…»',
+          'Ruolo e identità: «Sei l’assistente virtuale (AI) di accoglienza dello studio X, specializzato in… Ti presenti sempre come assistente virtuale.»',
           'Stile: tono, uso del Lei, frasi brevi, niente gergo tecnico.',
           'Informazioni chiave: servizi, orari, tariffe, indirizzo.',
           'Regole: cosa verificare, quando trasferire, cosa non promettere mai.',
-          'Procedure: come gestire le situazioni frequenti (presa di appuntamento, reclamo, urgenza).',
+          'Procedure: come gestire le situazioni frequenti (prenotazione di un appuntamento, reclamo, urgenza).',
         ],
       },
       {
@@ -189,7 +189,7 @@ export const GUIDES: Guide[] = [
           'Troppo vaghe: «Sii disponibile» non basta.',
           'Troppo rigide: scrivere ogni battuta rende la conversazione artificiale.',
           'Troppo lunghe: le informazioni dettagliate vanno nella base di conoscenza.',
-          'Situazioni dimenticate: specifichi cosa fare in caso di urgenza, di rabbia o di domanda fuori tema.',
+          'Situazioni dimenticate: specifichi cosa fare in caso di urgenza, di cliente arrabbiato o di domanda fuori tema.',
         ],
         tip: 'Le Sue istruzioni evolvono: rilegga regolarmente le trascrizioni delle chiamate e aggiunga i casi gestiti male.',
       },
@@ -213,10 +213,10 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Chiedere una modifica',
-        text: 'Scriva la Sua richiesta nella chat a sinistra, in linguaggio comune. Esempi:',
+        text: 'Scriva la Sua richiesta nella chat a sinistra, in linguaggio naturale. Esempi:',
         list: [
           '«Rendi il tono più caloroso.»',
-          '«Aggiungi la nostra politica di reso: 30 giorni senza giustificazione.»',
+          '«Aggiungi la nostra politica di reso: 30 giorni, senza bisogno di motivazione.»',
           '«Aggiungi istruzioni per gestire un cliente insoddisfatto.»',
           'Le scorciatoie «Make it more concise», «Improve clarity»… eseguono i ritocchi più comuni.',
         ],
@@ -228,13 +228,13 @@ export const GUIDES: Guide[] = [
           'Accetti o rifiuti ogni modifica («Accept» / «Reject»), oppure tutte insieme («Accept All» / «Reject All»).',
           'Clicchi su «Save» per salvare.',
         ],
-        tip: 'Una modifica alla volta dà risultati migliori. Rilegga sempre prima di accettare: Lei conosce la Sua attività meglio dell’IA.',
+        tip: 'Una modifica alla volta dà risultati migliori. Rilegga sempre prima di accettare: Lei conosce la Sua attività meglio dell’AI.',
       },
       {
         title: 'Variabili e dati dopo la chiamata',
         list: [
-          'Scheda «Variables»: aggiunga campi come {customer_name} per personalizzare ogni chiamata.',
-          'Scheda «Post-Call»: definisca le informazioni da estrarre da ogni chiamata (appuntamento fissato, livello di interesse…). Può chiedere all’IA: «Quali dati dovrei raccogliere?»',
+          'Scheda «Variables»: aggiunga campi come {{customer_name}} per personalizzare ogni chiamata.',
+          'Scheda «Post-Call»: definisca le informazioni da estrarre da ogni chiamata (appuntamento fissato, livello di interesse…). Può chiedere all’AI: «Quali dati dovrei raccogliere?»',
         ],
       },
     ],
@@ -253,12 +253,12 @@ export const GUIDES: Guide[] = [
           'Punti a 5–10 secondi: saluto, nome dell’azienda, domanda.',
           'Usi la punteggiatura per le pause («…» indica una pausa).',
           'Scriva i numeri come devono essere pronunciati e mantenga gli accenti.',
-          'Esempio: «Buongiorno, studio Rossi, sono Giulia… Come posso aiutarLa?»',
+          'Esempio: «Buongiorno, studio Rossi, sono Giulia, l’assistente virtuale dello studio… Come posso aiutarLa?»',
         ],
       },
       {
         title: 'Il messaggio di benvenuto registrato',
-        text: 'Per un risultato perfettamente umano, può caricare un file audio riprodotto alla risposta.',
+        text: 'Per un benvenuto con la Sua voce, può caricare un file audio riprodotto alla risposta; il messaggio deve comunque precisare che risponde un assistente virtuale (AI).',
         steps: [
           'Registri il benvenuto in un ambiente silenzioso (meno di 10 secondi).',
           'Carichi il file nelle impostazioni dell’agente e ne attivi la riproduzione.',
@@ -277,14 +277,14 @@ export const GUIDES: Guide[] = [
     category: 'assistant',
     title: 'Scegliere o clonare una voce',
     summary: 'Selezionare una voce della libreria, importarne una o clonare la Sua.',
-    plan: 'Voci della libreria: tutti i piani. Voci clonate: dal piano Assistant.',
+    plan: 'Voci della libreria: tutti i piani. Voci clonate: a partire dal piano Assistant.',
     sections: [
       {
         title: 'Scegliere una voce',
         steps: [
           'Apra l’agente, sezione «Voice & speech».',
           'Scelga la lingua, poi il fornitore della voce («TTS Provider»).',
-          'Sfogli le voci (uomo, donna, accento) e le ascolti prima di confermare.',
+          'Sfogli le voci (maschili, femminili, per accento) e le ascolti prima di confermare.',
         ],
       },
       {
@@ -313,11 +313,11 @@ export const GUIDES: Guide[] = [
     category: 'assistant',
     title: 'Progettare uno scenario con il Flow Builder',
     summary: 'Disegnare una conversazione a blocchi collegati, con più percorsi a seconda delle risposte.',
-    plan: 'Dal piano Assistant.',
+    plan: 'A partire dal piano Assistant.',
     sections: [
       {
         title: 'Quando usarlo',
-        text: 'Il Flow Builder è ideale per uno script strutturato con più diramazioni (qualificazione, presa di appuntamento in più fasi). Per una conversazione semplice e libera, bastano le istruzioni scritte.',
+        text: 'Il Flow Builder è ideale per uno script strutturato con più diramazioni (qualificazione, prenotazione di un appuntamento in più fasi). Per una conversazione semplice e libera, bastano le istruzioni scritte.',
       },
       {
         title: 'Aprire il Flow Builder',
@@ -332,7 +332,7 @@ export const GUIDES: Guide[] = [
         list: [
           '«Start»: l’inizio della chiamata e la frase di benvenuto (uno solo per scenario).',
           '«Speak»: una frase detta parola per parola.',
-          '«Prompt»: un’istruzione che l’IA riformula in base al contesto.',
+          '«Prompt»: un’istruzione che l’AI riformula in base al contesto.',
           '«Action»: trasferire la chiamata, fissare un appuntamento o avviare uno strumento su misura.',
           '«End»: riagganciare, trasferire o passare la mano a un altro agente.',
         ],
@@ -345,7 +345,7 @@ export const GUIDES: Guide[] = [
           'Colleghi ogni esito al blocco successivo tracciando una linea dal suo punto di uscita.',
           'Clicchi su «Save».',
         ],
-        tip: 'Esporti regolarmente il Suo scenario («Export JSON») per conservarne una copia. Provi ogni percorso prima della messa in servizio.',
+        tip: 'Esporti regolarmente il Suo scenario («Export JSON») per conservarne una copia. Provi ogni percorso prima dell’attivazione.',
       },
     ],
     related: ['consignes-system-prompt', 'editeur-de-prompt-ia', 'tester-son-agent'],
@@ -390,7 +390,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'rendez-vous-cal-com',
     category: 'tools',
-    title: 'Presa di appuntamenti con Cal.com',
+    title: 'Prenotazione appuntamenti con Cal.com',
     summary: 'Collegare Cal.com perché l’agente consulti le Sue disponibilità e prenoti durante la chiamata.',
     plan: 'Tutti i piani.',
     sections: [
@@ -426,8 +426,8 @@ export const GUIDES: Guide[] = [
   {
     slug: 'rendez-vous-calendly',
     category: 'tools',
-    title: 'Presa di appuntamenti con Calendly',
-    summary: 'Collegare Calendly perché l’agente verifichi gli slot e prenoti direttamente durante la chiamata.',
+    title: 'Prenotazione appuntamenti con Calendly',
+    summary: 'Collegare Calendly perché l’agente verifichi le disponibilità e prenoti direttamente durante la chiamata.',
     plan: 'Tutti i piani.',
     sections: [
       {
@@ -454,7 +454,7 @@ export const GUIDES: Guide[] = [
   {
     slug: 'outils-de-l-agent',
     category: 'tools',
-    title: 'Strumenti dell’agente: trasferimento, fine, tastiera',
+    title: 'Strumenti dell’agente: trasferimento, fine chiamata, tastiera',
     summary: 'Le azioni integrate che l’agente può avviare durante la chiamata e come configurarle.',
     sections: [
       {
@@ -466,7 +466,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Fine chiamata («End call»): l’agente riaggancia con cortesia, ad esempio quando il cliente saluta.',
           'Trasferimento («Call transfer»): l’agente passa la chiamata a una persona o a un altro numero. Indichi il numero e quando trasferire (urgenza, richiesta di un consulente, cliente pronto all’acquisto).',
-          'Presa di appuntamenti («Appointment Scheduling»): Cal.com o Calendly, a loro volta collegati a Google o Outlook.',
+          'Prenotazione degli appuntamenti («Appointment Scheduling»): Cal.com o Calendly, a loro volta collegati a Google o Outlook.',
           'Tasti della tastiera («DTMF»): l’agente digita numeri per navigare in un risponditore automatico o comporre un interno.',
         ],
       },
@@ -502,7 +502,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Aggiunga i parametri che l’agente chiederà al cliente: nome, tipo (testo, numero intero, decimale, sì/no) e descrizione con il formato atteso («numero d’ordine nel formato ORD-12345»).',
           'Un parametro può comparire nell’indirizzo: https://api.esempio.com/ordini/{order_id}.',
-          'I campi fissi («Static fields») vengono inviati a ogni chiamata senza che l’IA li modifichi.',
+          'I campi fissi («Static fields») vengono inviati a ogni chiamata senza che l’AI li modifichi.',
           'Variabili automatiche: {{customer_phone}} (numero del cliente), {{current_date}}, {{current_time}}, {{assistant_name}}…',
         ],
       },
@@ -525,7 +525,7 @@ export const GUIDES: Guide[] = [
     category: 'phone',
     title: 'Ottenere un numero e assegnarlo a un agente',
     summary: 'Acquistare un numero dedicato dalla Sua area, o mantenere il Suo, e poi collegarlo al Suo agente.',
-    plan: 'Numeri dedicati a partire da {numberFrom} al mese a seconda del Paese; il numero incluso dipende dal piano.',
+    plan: 'Numeri dedicati a partire da {numberFrom} al mese a seconda del Paese; il numero di linee incluse dipende dal piano.',
     sections: [
       {
         title: 'Acquistare un numero',
@@ -547,8 +547,8 @@ export const GUIDES: Guide[] = [
       {
         title: 'Mantenere il Suo numero attuale',
         list: [
-          'La soluzione più semplice: attivi presso il Suo operatore un inoltro di chiamata verso il nuovo numero.',
-          'Ha Twilio o Telnyx: importi i Suoi numeri.',
+          'La soluzione più semplice: attivi presso il Suo operatore una deviazione di chiamata verso il nuovo numero.',
+          'Ha già un account Twilio o Telnyx: importi i Suoi numeri.',
           'Ha un centralino o un operatore SIP: lo colleghi via SIP (tutti i piani).',
         ],
         tip: 'Dopo ogni modifica, chiami il numero per verificare che l’agente risponda.',
@@ -610,7 +610,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Due modi per collegarsi',
         list: [
-          '«SIP Extension»: l’agente diventa un interno del Suo centralino (ad esempio l’interno 1011). Ideale per provare o instradare determinate chiamate verso l’IA.',
+          '«SIP Extension»: l’agente diventa un interno del Suo centralino (ad esempio l’interno 1011). Ideale per provare o instradare determinate chiamate verso l’AI.',
           '«Phone Number (DID)»: un numero completo viene collegato all’agente, sia in entrata sia in uscita.',
         ],
       },
@@ -684,7 +684,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Provare e poi installare',
         steps: [
-          'Provi il widget nell’anteprima dal vivo in cima alla pagina («Reset Data» simula un nuovo visitatore).',
+          'Provi il widget nell’anteprima in tempo reale in cima alla pagina («Reset Data» simula un nuovo visitatore).',
           'Salvi, poi copi il codice della sezione «Embed Code».',
           'Lo incolli subito prima del tag </body> del Suo sito, oppure lo trasmetta al Suo webmaster.',
         ],
@@ -728,7 +728,7 @@ export const GUIDES: Guide[] = [
         title: 'Le regole di WhatsApp',
         list: [
           'Quando un cliente Le scrive, può rispondergli liberamente per 24 ore.',
-          'Per scrivere per primo o ricontattare dopo 24 ore, serve un modello di messaggio («Template») approvato da Meta: di servizio, di marketing o di autenticazione.',
+          'Per scrivere per primo o ricontattare dopo 24 ore, serve un modello di messaggio («Template») approvato da Meta: di utilità («Utility»), di marketing o di autenticazione.',
           'Un nuovo mittente è limitato a circa 250 conversazioni al giorno; il limite aumenta se i Suoi messaggi sono ben accolti (pochi blocchi e segnalazioni).',
         ],
       },
@@ -742,21 +742,21 @@ export const GUIDES: Guide[] = [
     category: 'outbound',
     title: 'Avviare una campagna di chiamate (o di messaggi)',
     summary: 'Far chiamare un elenco di contatti dal Suo agente, con orari, nuovi tentativi e obiettivi.',
-    plan: 'Dal piano Assistant.',
+    plan: 'A partire dal piano Assistant.',
     sections: [
       {
         title: 'Prima di iniziare',
         list: [
           'Chiamate: un agente «Make phone calls» con un numero, e minuti disponibili.',
           'WhatsApp: un mittente collegato e un modello approvato. SMS: un numero abilitato agli SMS. Entrambi utilizzano i crediti messaggi.',
-          'Contatti che hanno accettato di essere contattati.',
+          'Contatti che hanno dato il consenso a essere chiamati e numeri verificati nel Registro pubblico delle opposizioni (per le chiamate commerciali).',
         ],
       },
       {
         title: 'Creare la campagna',
         steps: [
           'Menu «Campaigns», crei una campagna: nome, canale («Call», «WhatsApp» o «SMS») e agente.',
-          'Orari: una o più fasce al giorno (ad esempio 9–12 e 14–18) e i giorni consentiti.',
+          'Orari: una o più fasce al giorno (ad esempio 9–13 e 14:30–18:30) e i giorni consentiti.',
           'Nuovi tentativi: numero di tentativi (da 1 a 5) e intervallo tra due tentativi; scelga se una segreteria telefonica conta come tentativo.',
           'Opzione «Retry until goal completed»: la campagna richiama finché l’obiettivo non è raggiunto (un campo sì/no dei dati dopo la chiamata, ad esempio appuntamento fissato).',
           'Aggiunga i contatti (inserimento manuale, importazione di un file), poi clicchi su «Start Campaign».',
@@ -793,7 +793,7 @@ export const GUIDES: Guide[] = [
         title: 'Importare',
         steps: [
           'Menu «Leads» (o scheda contatti della campagna), poi «Import Leads».',
-          'Scelga la campagna, il formato dei numeri e, se necessario, il numero di numeri secondari.',
+          'Scelga la campagna, il formato dei numeri e, se necessario, quanti numeri secondari usare.',
           'Associ ogni colonna al campo corretto (rilevamento automatico), poi avvii l’importazione.',
           'Le righe non valide o duplicate vengono ignorate ed elencate in un rapporto scaricabile.',
         ],
@@ -852,12 +852,12 @@ export const GUIDES: Guide[] = [
     slug: 'donnees-apres-appel',
     category: 'results',
     title: 'Estrarre le informazioni da ogni chiamata',
-    summary: 'Definire i dati che l’IA estrae dopo ogni chiamata e inviarli ai Suoi strumenti.',
+    summary: 'Definire i dati che l’AI estrae dopo ogni chiamata e inviarli ai Suoi strumenti.',
     plan: 'Tutti i piani.',
     sections: [
       {
         title: 'Definire i dati da estrarre',
-        text: 'Dopo ogni chiamata, l’IA rilegge la conversazione e compila i campi che Lei ha definito («Post-call evaluation»). Due campi esistono per impostazione predefinita: «status» (obiettivo raggiunto, sì/no) e «summary» (riepilogo).',
+        text: 'Dopo ogni chiamata, l’AI rilegge la conversazione e compila i campi che Lei ha definito («Post-call evaluation»). Due campi esistono per impostazione predefinita: «status» (obiettivo raggiunto, sì/no) e «summary» (riepilogo).',
         steps: [
           'Apra l’agente, sezione dei dati dopo la chiamata.',
           'Aggiunga un campo: nome in minuscolo senza spazi (ad esempio appuntamento_fissato), tipo (testo, numero, sì/no) e descrizione precisa.',
@@ -889,7 +889,7 @@ export const GUIDES: Guide[] = [
     category: 'results',
     title: 'Primi passi con le automazioni',
     summary: 'Inviare automaticamente i risultati delle chiamate al Suo CRM, a Google Sheets, a Slack o via email.',
-    plan: 'Dal piano Assistant (5.000 esecuzioni al mese, 50.000 con Call Center).',
+    plan: 'A partire dal piano Assistant (5.000 esecuzioni al mese, 50.000 con Call Center).',
     sections: [
       {
         title: 'Il principio',
@@ -912,7 +912,7 @@ export const GUIDES: Guide[] = [
           'Inserisca i dati della chiamata (riepilogo, numero, campi estratti) nell’azione.',
           'Provi ogni passaggio, poi pubblichi il flow.',
         ],
-        tip: 'Esempi comuni: aggiornare HubSpot dopo ogni chiamata, aggiungere un contatto qualificato a una campagna di richiamo, inviare il riepilogo via email.',
+        tip: 'Esempi comuni: aggiornare HubSpot dopo ogni chiamata, aggiungere un contatto qualificato a una campagna di ricontatto, inviare il riepilogo via email.',
       },
     ],
     related: ['donnees-apres-appel', 'outils-sur-mesure', 'historique-des-appels'],
@@ -930,7 +930,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Il Suo piano mensile, con minuti di chiamata inclusi.',
           'I minuti oltre il piano, pagati con il Suo credito («Credits»: 100 crediti = 1 $).',
-          'I messaggi WhatsApp, gli SMS e le risposte scritte dell’IA, pagati con i crediti messaggi.',
+          'I messaggi WhatsApp, gli SMS e le risposte scritte dell’AI, pagati con i crediti messaggi.',
           'I numeri dedicati, a partire da {numberFrom} al mese a seconda del Paese.',
         ],
       },
@@ -955,46 +955,46 @@ export const GUIDES: Guide[] = [
     ],
     related: ['tester-son-agent', 'acheter-un-numero', 'campagnes-d-appels'],
   },
-  // ---------- Aggiunte (playbook): inoltro di chiamata, regole per le chiamate in uscita, verifiche, controllo mensile ----------
+  // ---------- Aggiunte (playbook): deviazione di chiamata, regole per le chiamate in uscita, verifiche, controllo mensile ----------
   {
     slug: 'renvoi-d-appel',
     category: 'phone',
-    title: 'Mantenere il Suo numero con l’inoltro di chiamata',
+    title: 'Mantenere il Suo numero con la deviazione di chiamata',
     summary: 'Far rispondere l’agente solo quando Lei non risponde, quando è occupato o fuori orario, senza cambiare numero.',
-    plan: 'Tutti i piani. L’inoltro viene addebitato dal Suo operatore.',
+    plan: 'Tutti i piani. La deviazione viene addebitata dal Suo operatore.',
     sections: [
       {
         title: 'Il principio',
-        text: 'Il Suo numero resta sui biglietti da visita, sul sito e negli annunci. Presso il Suo operatore attiva un inoltro verso il numero dell’agente: tutte le chiamate, oppure solo quelle a cui non risponde. Per i Suoi clienti non cambia nulla.',
+        text: 'Il Suo numero resta sui biglietti da visita, sul sito e negli annunci. Presso il Suo operatore attiva una deviazione di chiamata (detta anche inoltro) verso il numero dell’agente: tutte le chiamate, oppure solo quelle a cui non risponde. Per i Suoi clienti non cambia nulla.',
       },
       {
-        title: 'I codici di inoltro sul cellulare',
-        text: 'Con la maggior parte dei cellulari e degli operatori, digiti il codice seguito dal numero dell’agente in formato internazionale, poi # e il tasto di chiamata:',
+        title: 'I codici di deviazione sul cellulare',
+        text: 'Con la maggior parte dei cellulari e degli operatori, digiti il codice seguito dal numero dell’agente in formato internazionale (per un numero fisso italiano lo 0 resta: +39 02…), poi # e il tasto di chiamata. In alternativa: iPhone «Impostazioni › Telefono › Inoltro chiamate», Android «Telefono › Impostazioni › Deviazione chiamate», oppure l’app del Suo operatore.',
         list: [
-          'Se non risponde: **61*numero dell’agente# (spesso può aggiungere il ritardo prima dell’inoltro, per esempio **61*numero**20#).',
+          'Se non risponde: **61*numero dell’agente# (spesso può aggiungere il ritardo prima della deviazione, per esempio **61*numero**20#).',
           'Se la linea è occupata: **67*numero dell’agente#',
           'Se il telefono è spento o non raggiungibile: **62*numero dell’agente#',
           'Tutte le chiamate, sempre: **21*numero dell’agente#',
-          'Per disattivare: ##61#, ##67#, ##62# o ##21#, oppure ##002# per annullare tutto.',
+          'Per disattivare: ##61#, ##67#, ##62# o ##21#, oppure ##002# per annullare tutto (attenzione: disattiva anche la deviazione verso la segreteria telefonica dell’operatore).',
         ],
       },
       {
-        title: 'Su una linea fissa o un modem',
+        title: 'Su una linea fissa (fibra/ADSL) o un centralino',
         steps: [
           'Apra l’area clienti del Suo operatore (o il menu del Suo centralino).',
-          'Cerchi «inoltro di chiamata» o «trasferimento di chiamata».',
-          'Scelga il tipo di inoltro (su mancata risposta, su occupato o permanente) e inserisca il numero dell’agente.',
+          'Cerchi «deviazione di chiamata», «trasferimento di chiamata» o «inoltro di chiamata» (i nomi variano da operatore a operatore).',
+          'Scelga il tipo di deviazione (su mancata risposta, su occupato o permanente) e inserisca il numero dell’agente.',
           'Salvi, poi chiami il Suo numero da un altro telefono per verificare.',
         ],
       },
       {
         title: 'L’impostazione giusta per la Sua attività',
         list: [
-          'Vuole restare Lei al telefono: inoltro su mancata risposta (dopo 15–20 secondi) e su occupato.',
-          'Sera e fine settimana: inoltro permanente alla chiusura, disattivato all’apertura (alcuni centralini lo programmano).',
-          'Picchi di chiamate: basta l’inoltro su occupato, l’agente gestisce le chiamate in parallelo.',
+          'Vuole restare Lei al telefono: deviazione su mancata risposta (dopo 15–20 secondi) e su occupato.',
+          'Sera e fine settimana: deviazione permanente alla chiusura, disattivato all’apertura (alcuni centralini lo programmano).',
+          'Picchi di chiamate: basta la deviazione su occupato, l’agente gestisce le chiamate in parallelo.',
         ],
-        tip: 'L’inoltro viene addebitato dal Suo operatore come una chiamata verso il numero dell’agente: verifichi la Sua tariffa, soprattutto se il numero è estero. Per un numero locale può anche importare i Suoi numeri Twilio o Telnyx oppure collegare il Suo centralino via SIP.',
+        tip: 'La deviazione viene addebitata dal Suo operatore come una chiamata verso il numero dell’agente: verifichi la Sua tariffa, soprattutto se il numero è estero. Per un numero locale può anche importare i Suoi numeri Twilio o Telnyx oppure collegare il Suo centralino via SIP.',
       },
     ],
     related: ['acheter-un-numero', 'connexion-sip', 'importer-twilio-telnyx'],
@@ -1002,9 +1002,9 @@ export const GUIDES: Guide[] = [
   {
     slug: 'qui-peut-on-appeler',
     category: 'outbound',
-    title: 'Chi può far chiamare dal Suo agente?',
+    title: 'Chi può chiamare con il Suo agente?',
     summary: 'Le regole da rispettare prima di una campagna di chiamate in uscita: consenso, rapporto con il cliente, orari, opposizione e trasparenza.',
-    plan: 'Campagne: dal piano Assistant. Questa guida è informativa e non sostituisce una consulenza legale.',
+    plan: 'Campagne: a partire dal piano Assistant. Questa guida è informativa e non sostituisce una consulenza legale.',
     sections: [
       {
         title: 'La regola d’oro',
@@ -1013,8 +1013,8 @@ export const GUIDES: Guide[] = [
       {
         title: 'In Italia',
         list: [
-          'Prima di chiamare per finalità commerciali, verifichi i numeri nel Registro pubblico delle opposizioni, che oggi copre anche i numeri di cellulare: chi è iscritto non può essere chiamato senza un Suo consenso specifico.',
-          'Serve una base giuridica valida ai sensi del GDPR (consenso libero, specifico e documentato, oppure un rapporto contrattuale in corso), e la prova spetta a Lei.',
+          'Prima di chiamare per finalità commerciali, verifichi i numeri nel Registro pubblico delle opposizioni, che oggi copre anche i numeri di cellulare: chi è iscritto non può essere chiamato per finalità commerciali, salvo consenso specifico rilasciato a Lei dopo l’iscrizione. Consulti il Registro prima di ogni campagna.',
+          'Serve una base giuridica valida ai sensi del GDPR e dell’art. 130 del Codice privacy (consenso libero, specifico e documentato, oppure un rapporto contrattuale in corso), e la prova spetta a Lei.',
           'Una richiamata chiesta dalla persona, un appuntamento da confermare o un follow-up legato a un servizio in corso non sono telemarketing: restano possibili.',
           'Liste acquistate o ricavate da elenchi e portali: da evitare. Il Garante per la protezione dei dati personali sanziona regolarmente il telemarketing senza consenso.',
         ],
@@ -1022,7 +1022,6 @@ export const GUIDES: Guide[] = [
       {
         title: 'Negli altri Paesi',
         list: [
-          'Francia: dall’11 agosto 2026 il telemarketing verso i privati richiede il loro consenso preventivo, libero ed esplicito.',
           'Regno Unito: verifichi i registri TPS e CTPS e applichi il PECR e lo UK GDPR. Australia: Do Not Call Register e Spam Act per i messaggi.',
           'Polonia: consenso preventivo al marketing telefonico. Paesi Bassi: consenso preventivo o rapporto commerciale esistente.',
           'In caso di dubbio, applichi la regola più severa.',
@@ -1031,12 +1030,12 @@ export const GUIDES: Guide[] = [
       {
         title: 'Durante la chiamata',
         list: [
-          'L’agente dice fin dall’inizio di essere un’IA e che la chiamata è registrata.',
+          'L’agente dice fin dall’inizio di essere un’AI e che la chiamata è registrata.',
           'Indica il motivo reale della chiamata («ci aveva chiesto di essere richiamato il…»).',
-          'Se la persona non vuole più essere chiamata, aggiunga il suo numero al menu «Blacklist»: sarà escluso da tutte le campagne.',
-          'Chiami in orari ragionevoli, nei giorni feriali, secondo l’ora locale del contatto.',
+          'Se la persona non vuole più essere chiamata, aggiunga il suo numero al menu «Blacklist» (lista di esclusione): sarà escluso da tutte le campagne.',
+          'Chiami in orari ragionevoli, dal lunedì al venerdì, secondo l’ora locale del contatto.',
         ],
-        tip: 'Prima di importare una lista, annoti la fonte, la data del rapporto e la base giuridica. In caso di controllo, è questa scheda a tutelarLa.',
+        tip: 'Prima di importare una lista, annoti la fonte, la data del consenso o del rapporto e la base giuridica. In caso di controllo, è questa documentazione a tutelarLa.',
       },
     ],
     related: ['campagnes-d-appels', 'contacts-leads', 'numero-presente'],
@@ -1055,17 +1054,17 @@ export const GUIDES: Guide[] = [
       {
         title: 'La lista di controllo',
         steps: [
-          'Il messaggio di benvenuto cita la Sua azienda, dice che si tratta di un’IA e pone una sola domanda chiara.',
+          'Il messaggio di benvenuto cita la Sua azienda, dice che si tratta di un’AI e pone una sola domanda chiara.',
           'Il nome della Sua azienda è pronunciato correttamente (altrimenti lo scriva in modo fonetico nelle istruzioni).',
           'Un appuntamento preso al telefono compare nel Suo calendario in meno di un minuto.',
           'Riceve il riepilogo della chiamata (email o dashboard).',
           'La richiesta «voglio parlare con qualcuno» attiva il trasferimento o la richiamata prevista.',
-          'Una parola d’urgenza del Suo mestiere (perdita, dolore, guasto) attiva l’istruzione prevista.',
+          'Una parola che segnala un’urgenza nel Suo settore (perdita d’acqua, dolore, guasto) attiva l’istruzione prevista.',
           'Il comportamento fuori orario corrisponde a ciò che vuole.',
           'L’agente non dà prezzi, garanzie o consigli che Lei non ha approvato.',
           'Risponde correttamente alle 5 domande che Le fanno più spesso.',
           'L’avviso di registrazione è presente se le chiamate vengono registrate.',
-          'I numeri da non chiamare sono nella «Blacklist» prima di qualsiasi campagna.',
+          'I numeri da non chiamare sono nella «Blacklist» (lista di esclusione) prima di qualsiasi campagna.',
           'Ha riascoltato tre registrazioni complete e il tono La convince.',
         ],
         tip: 'Annoti ciò che non va, corregga le istruzioni o la base di conoscenza, poi ripeta solo le prove interessate.',
@@ -1077,11 +1076,11 @@ export const GUIDES: Guide[] = [
     slug: 'point-mensuel',
     category: 'results',
     title: 'Fare il punto ogni mese in 20 minuti',
-    summary: 'I quattro numeri da guardare, le chiamate da riascoltare e le impostazioni da rivedere perché il Suo agente resti valido nel tempo.',
+    summary: 'I quattro indicatori da guardare, le chiamate da riascoltare e le impostazioni da rivedere perché il Suo agente resti valido nel tempo.',
     plan: 'Tutti i piani.',
     sections: [
       {
-        title: 'I 4 numeri che contano',
+        title: 'I 4 indicatori che contano',
         list: [
           'Numero di chiamate gestite dall’agente.',
           'Richieste qualificate (con un’esigenza reale e i recapiti).',
@@ -1103,7 +1102,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Il calendario è sempre collegato (un calendario rinominato o eliminato interrompe le prenotazioni).',
           'Automazioni e webhook funzionano senza errori.',
-          'Orari, prezzi e chiusure sono aggiornati nella base di conoscenza.',
+          'Orari, prezzi, ferie e chiusure (es. Ferragosto, festività) sono aggiornati nella base di conoscenza.',
         ],
         tip: 'Si riservi 20 minuti il primo giorno lavorativo di ogni mese. Un agente rivisto regolarmente resta preciso; un agente dimenticato perde colpi.',
       },
