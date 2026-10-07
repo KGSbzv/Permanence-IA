@@ -133,8 +133,9 @@ function codeMail(lang: string, code: string) {
   };
 }
 
-/** Assistants autorisés à reconnaître un numéro (UUID non publiés) : WhatsApp, lignes UK et Israël. */
-const IDENTIFY_ASSISTANTS = new Set(['798c2ab1-b454-40fb-b16c-711fc68eff50', '6b50ad79-6c28-4950-afc2-e1fafd152def', '78f36e5d-1c24-45c5-ac69-fb20b641b02e', '21358', '21376', '21314']);
+/** Assistants autorisés à reconnaître un numéro : UUID non publiés (aucun widget public), qui servent de clé partagée
+ *  avec l’outil Autocalls « identifier_contact ». Jamais d’identifiant numérique, devinable. */
+const IDENTIFY_ASSISTANTS = new Set(['798c2ab1-b454-40fb-b16c-711fc68eff50', '6b50ad79-6c28-4950-afc2-e1fafd152def', '78f36e5d-1c24-45c5-ac69-fb20b641b02e']);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -145,8 +146,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Reconnaissance d’un contact par son numéro (premier message WhatsApp, appel entrant) : seulement pour nos
   // assistants non publics (pas les widgets du site), et réponse minimale : prénom, profil, langue, dernière demande.
   if (b.action === 'identify') {
-    if (!IDENTIFY_ASSISTANTS.has(String(b.assistant || ''))) return res.status(403).json({ known: false });
-    if (tooMany(`identify:${ip}`, 60)) return res.status(429).json({ known: false });
+    if (!IDENTIFY_ASSISTANTS.has(String(b.assistant || ''))) {
+      console.warn('[agent-account] identify refusé (assistant non autorisé, format :', /^\d+$/.test(String(b.assistant)) ? 'numérique' : 'autre', ')');
+      return res.status(403).json({ known: false });
+    }
+    // Plafonds : par adresse et global (toutes adresses confondues) sur chaque instance.
+    if (tooMany(`identify:${ip}`, 60) || tooMany('identify:all', 300)) return res.status(429).json({ known: false });
     const phone = String(b.phone || '').replace(/[^\d+]/g, '');
     if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro non reconnu : identifie le besoin à partir du message.' });
     const rows = await dbSelect<{ name: string; email: string | null; type: string; agent: string | null; created_at: string; note: string | null }>(
