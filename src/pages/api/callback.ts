@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
 import { NOTIFY_TO, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
@@ -40,9 +41,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Moment du rappel : date précise (formulaire ou agent), créneau du formulaire, sinon dès que possible.
   const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
   const scheduled = callAt.getTime() > Date.now() + 60_000;
+  // Case WhatsApp du formulaire (accord séparé, décoché par défaut) : confirmation envoyée sur WhatsApp.
+  const wantsWhatsApp = (b.whatsapp === true || b.whatsapp === 'true') && !fromAgent && Boolean(e164);
   const row = {
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
-    slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '), note: note || null, type: type === 'support' ? 'support' : 'commercial',
+    slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
+    note: [note, wantsWhatsApp && 'WhatsApp : confirmation demandée'].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
@@ -85,7 +89,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
   ]);
   // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
-  const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée'))]);
+  const [call, wa] = await Promise.allSettled([
+    db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée')),
+    // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
+    wantsWhatsApp
+      ? (scheduled
+        ? sendCallbackConfirmation({ lang: campaignLang, phone: e164 as string, name: String(name), callAt, tz: b.tz, kind, voice })
+        : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: String(name).trim().split(/\s+/)[0] }, String(name)))
+      : Promise.resolve(null),
+  ]);
+  if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   if (call.status === 'rejected') console.error('[callback] campagne:', call.reason?.message);
@@ -93,5 +106,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (db.status === 'rejected' && mail.status === 'rejected') {
     return res.status(502).json({ error: 'Impossible d’enregistrer la demande pour le moment.' });
   }
-  return res.status(200).json({ success: true, stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued: call.status === 'fulfilled' });
+  return res.status(200).json({ success: true, stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued: call.status === 'fulfilled', whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined });
 }

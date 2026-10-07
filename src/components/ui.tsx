@@ -3,7 +3,7 @@ import { track } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
-import { DEMO_URL, SIGNUP_URL, SITE } from '@/data/site';
+import { DEMO_URL, SIGNUP_URL, SITE, whatsappUrl } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
 
@@ -143,7 +143,7 @@ export function CallbackForm({
           // Créneau précis : date et heure locales du visiteur, avec son fuseau horaire (rappel programmé).
           callAt: f.get('slot') === 'precise' ? f.get('callAt') : undefined,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          consentCall: true, website: f.get('website') || undefined, type: type === 'support' ? 'support' : 'commercial',
+          consentCall: true, whatsapp: Boolean(f.get('whatsapp')), website: f.get('website') || undefined, type: type === 'support' ? 'support' : 'commercial',
           agent: type === 'demo' ? 'Démo live' : undefined, locale,
         }),
       });
@@ -214,11 +214,46 @@ export function CallbackForm({
         <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
         <span>{t.consent(market.brand)}</span>
       </label>
+      {/* Accord séparé et facultatif (décoché) : confirmation du rappel envoyée par WhatsApp. */}
+      <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
+        <input type="checkbox" name="whatsapp" className="mt-1 h-4 w-4 accent-[#25D366]" />
+        <span className="inline-flex items-start gap-1.5"><WhatsAppIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#25D366]" />{c.site.whatsapp.optIn}</span>
+      </label>
       {error && <p role="alert" className={`text-sm font-medium ${dark ? 'text-red-300' : 'text-red-700'}`}>{error}</p>}
       <button type="submit" disabled={state === 'sending'} className={dark ? 'btn-signal' : 'btn-primary'}>
         <PhoneCall className="h-4 w-4" aria-hidden /> {state === 'sending' ? t.sending : submitLabel ?? t.submit}
       </button>
     </form>
+  );
+}
+
+/* ---------- WhatsApp : discuter avec l’agent IA (prérempli dans la langue du site) ---------- */
+
+export function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden fill="currentColor">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.46-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.24-.64.8-.78.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.23-.73-.66-1.23-1.47-1.37-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.08.14-1.18-.06-.11-.22-.17-.47-.29Z" />
+    </svg>
+  );
+}
+
+/** Lien WhatsApp : « card » (carte claire avec la note), « dark » (pied de page), « button » (bouton plein). */
+export function WhatsAppLink({ variant = 'card', place, className = '' }: { variant?: 'card' | 'dark' | 'button'; place: string; className?: string }) {
+  const { c, locale } = useI18n();
+  const t = c.site.whatsapp;
+  const href = whatsappUrl(t.prefill);
+  const onClick = () => track('whatsapp_click', { language: locale, place });
+  if (variant === 'dark') {
+    return <a href={href} target="_blank" rel="noopener" onClick={onClick} className={`flex items-center gap-2 text-[15px] text-white hover:text-signal-glow ${className}`}><WhatsAppIcon className="h-4 w-4 text-[#25D366]" /><span>{t.cta}</span></a>;
+  }
+  if (variant === 'button') {
+    return <a href={href} target="_blank" rel="noopener" onClick={onClick} className={`inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 font-semibold text-[#0B3B24] hover:bg-[#1FBF5B] ${className}`}><WhatsAppIcon />{t.cta}</a>;
+  }
+  return (
+    <a href={href} target="_blank" rel="noopener" onClick={onClick} className={`inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-ink shadow-card hover:border-[#25D366] ${className}`}>
+      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#25D366] text-white"><WhatsAppIcon /></span>
+      <span><span className="block font-display font-semibold">{t.cta}</span><span className="block text-sm text-slate">{t.note}</span></span>
+    </a>
   );
 }
 

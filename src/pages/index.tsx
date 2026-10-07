@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Layout from '@/components/Layout';
 import LiveDemo from '@/components/LiveDemo';
 import Mock from '@/components/Mock';
-import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges, WhatsAppLink } from '@/components/ui';
 import {
   Benefits, EconomyBlock, FeatureRow, FinalCTA, GrowthBlock, IncludedStack, IntegrationsGrid, PricingCards,
   SectorCards, SecurityBlock, Steps, VoicesNumbers,
@@ -44,12 +44,15 @@ export default function Home() {
                 <PhoneForwarded className="mt-0.5 h-5 w-5 shrink-0 text-signal" aria-hidden />
                 <span><strong className="font-semibold text-ink">{c.site.keepNumber.title}.</strong> {c.site.keepNumber.text}</span>
               </p>
-              {market.phone && (
-                <a href={`tel:${market.phone.e164}`} className="mt-5 inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-ink shadow-card hover:border-signal">
-                  <Phone className="h-5 w-5 shrink-0 text-signal" aria-hidden />
-                  <span><span className="block font-display font-semibold">{market.phone.label} · <bdi dir="ltr">{market.phone.display}</bdi></span><span className="block text-sm text-slate">{market.phone.note}</span></span>
-                </a>
-              )}
+              <div className="mt-5 flex flex-wrap gap-3">
+                {market.phone && (
+                  <a href={`tel:${market.phone.e164}`} className="inline-flex items-center gap-3 rounded-2xl border border-line bg-white px-4 py-3 text-ink shadow-card hover:border-signal">
+                    <Phone className="h-5 w-5 shrink-0 text-signal" aria-hidden />
+                    <span><span className="block font-display font-semibold">{market.phone.label} · <bdi dir="ltr">{market.phone.display}</bdi></span><span className="block text-sm text-slate">{market.phone.note}</span></span>
+                  </a>
+                )}
+                <WhatsAppLink place="home_hero" />
+              </div>
             </div>
           </div>
           <div id={LIVE_DEMO_ID} tabIndex={-1} className="mt-10 scroll-mt-24 outline-none lg:mt-12"><LiveDemo sector={sector} /></div>

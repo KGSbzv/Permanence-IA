@@ -5,7 +5,12 @@ export const SITE = {
   appUrl: 'https://app.permanenceia.com',
   email: 'contact@permanenceia.com',
   company: 'SINAY STRATEGIC LLC',
+  /** Numéro WhatsApp Business (expéditeur Autocalls 521), servi par l’agent IA multilingue. */
+  whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' },
 };
+
+/** Lien « cliquer pour discuter » WhatsApp avec un premier message prérempli dans la langue du visiteur. */
+export const whatsappUrl = (text: string) => `https://wa.me/${SITE.whatsapp.e164.slice(1)}?text=${encodeURIComponent(text)}`;
 
 // Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';

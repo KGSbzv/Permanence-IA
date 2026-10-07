@@ -132,10 +132,10 @@ export function langFromPhone(e164: string) {
 /* ---------- Rappels programmés ---------- */
 
 /** Fuseau par défaut de chaque langue du site, quand le navigateur n’en fournit pas. */
-const TZ: Record<string, string> = {
+export const TZ: Record<string, string> = {
   fr: 'Europe/Paris', 'en-gb': 'Europe/London', 'en-au': 'Australia/Sydney', it: 'Europe/Rome', pl: 'Europe/Warsaw', nl: 'Europe/Amsterdam', he: 'Asia/Jerusalem',
 };
-const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
+export const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
 
 /** Écart (ms) entre l’heure locale d’un fuseau et l’heure UTC, à un instant donné. */
 function tzOffset(at: Date, tz: string) {
