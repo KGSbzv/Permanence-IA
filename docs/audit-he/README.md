@@ -143,3 +143,7 @@ Par ordre de valeur commerciale.
 | 9 | FAQ Israël et compléments par secteur | rédaction | 0,5-1 j |
 
 Seuil de publication recommandé : actions 1 à 7 faites, 8 engagée.
+
+## Mise à jour du 7 octobre 2026 (après les correctifs de `main`)
+
+Les commits `6b45f8b`, `5626c11` et `8c8a071` ont corrigé une grande partie des constats ci-dessus : contradiction sur le numéro, référence française, contresens, terminologie, genre de נועה, isolation des codes, contraste, page d'accessibilité. Un nouveau bloquant commun à toutes les langues est apparu depuis : la page Cookies dit encore qu'aucun cookie de mesure d'audience n'est déposé, alors que GA4 est chargé depuis le commit `9f7cbeb`. Sur mobile, la bulle du widget empêche aussi de répondre au bandeau cookies. Voir [`../audit-transverse.md`](../audit-transverse.md), points T1 et T2.
