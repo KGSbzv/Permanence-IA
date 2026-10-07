@@ -255,7 +255,7 @@ Facturen staan in "Billing info". Het btw-nummer is optioneel: het wordt ingevul
 
 D13. Abonnement wijzigen of opzeggen
 - Wijzigen: "Change plan", op elk moment; de wijziging wordt getoond vóór bevestiging.
-- Opzeggen: klantomgeving, onderdeel "Billing", knop "Cancel subscription", op elk moment, kosteloos; gaat in aan het einde van de betaalde periode, zonder terugbetaling. De persoon niet met beloftes vasthouden. Eén vraag is mogelijk: "Mag ik vragen wat er niet werkte? Daar leren we van." Daarna uitleggen hoe het werkt.
+- Opzeggen: klantomgeving, onderdeel "Billing info", knop "Cancel subscription", op elk moment, kosteloos; gaat in aan het einde van de betaalde periode, zonder terugbetaling. De persoon niet met beloftes vasthouden. Eén vraag is mogelijk: "Mag ik vragen wat er niet werkte? Daar leren we van." Daarna uitleggen hoe het werkt.
 
 D14. Einde proefperiode
 De einddatum noemen. 7 dagen vóór het einde van de proefperiode wordt een herinneringsmail gestuurd. Zonder opzegging start het gekozen abonnement en wordt de eerste periode afgeschreven. Om niets te betalen, vóór het einde opzeggen in de klantomgeving. Geen verlenging van de proefperiode beloven: vraagt de persoon daarom, dan een ticket.

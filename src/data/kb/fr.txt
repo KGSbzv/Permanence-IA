@@ -61,7 +61,7 @@ Processus : rappels, suivi et support (Permanence IA)
 - Recharges de crédit : 39, 89, 159, 299 ou 725 $.
 - Aucun frais de mise en service, aucun engagement.
 - Essai gratuit de 14 jours avec 30 minutes : une carte est demandée, rien n'est débité pendant l'essai ; annulation sans frais avant la fin. Un seul essai par entreprise ou moyen de paiement.
-- Résiliation à tout moment depuis l'espace client, rubrique Billing (facturation), bouton « Cancel subscription » ; elle prend effet à la fin de la période déjà payée. Pendant l'essai, une résiliation avant la fin des 14 jours n'entraîne aucun débit ; un email de rappel est envoyé 7 jours avant la fin de l'essai. Les périodes payées et les crédits ne sont pas remboursés.
+- Résiliation à tout moment depuis l'espace client, rubrique Billing info (facturation), bouton « Cancel subscription » ; elle prend effet à la fin de la période déjà payée. Pendant l'essai, une résiliation avant la fin des 14 jours n'entraîne aucun débit ; un email de rappel est envoyé 7 jours avant la fin de l'essai. Les périodes payées et les crédits ne sont pas remboursés.
 
 8. Règles d'appel et conformité
 - France : depuis le 11 août 2026, la prospection téléphonique des consommateurs exige leur accord préalable (opt-in). Bloctel reste utile pour certains contrats conclus avant cette date (à faire vérifier par un juriste). Un rappel demandé, un rendez-vous à confirmer ou le suivi d'une prestation en cours restent possibles.

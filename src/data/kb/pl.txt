@@ -61,7 +61,7 @@ Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 - Doładowania kredytów: 39, 89, 159, 299 lub 725 $.
 - Brak opłaty za uruchomienie, brak zobowiązania.
 - Bezpłatny okres próbny 14 dni z 30 minutami: wymagana jest karta, w trakcie okresu próbnego nic nie jest pobierane; rezygnacja bez kosztów przed jego końcem. Jeden okres próbny na firmę lub metodę płatności.
-- Rezygnacja w dowolnym momencie w panelu klienta: sekcja Billing (rozliczenia), przycisk "Cancel subscription"; skuteczna z końcem już opłaconego okresu. Rezygnacja w okresie próbnym, przed upływem 14 dni, nie powoduje żadnego obciążenia; 7 dni przed końcem okresu próbnego wysyłamy e-mail z przypomnieniem. Opłacone okresy i kredyty nie podlegają zwrotowi.
+- Rezygnacja w dowolnym momencie w panelu klienta: sekcja Billing info (rozliczenia), przycisk "Cancel subscription"; skuteczna z końcem już opłaconego okresu. Rezygnacja w okresie próbnym, przed upływem 14 dni, nie powoduje żadnego obciążenia; 7 dni przed końcem okresu próbnego wysyłamy e-mail z przypomnieniem. Opłacone okresy i kredyty nie podlegają zwrotowi.
 
 8. Zasady dzwonienia i zgodność z przepisami
 - Polska: marketing bezpośredni przez telefon i z użyciem automatycznych systemów wywołujących wymaga uprzedniej zgody abonenta, także wobec firm i własnych klientów (art. 398 ustawy – Prawo komunikacji elektronicznej). Oddzwonienie, o które ktoś poprosił, potwierdzenie wizyty lub kontakt w sprawie trwającej usługi pozostają możliwe.

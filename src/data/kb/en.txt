@@ -61,7 +61,7 @@ Process: callbacks, follow-up and support (PermanenceAI)
 - Credit top-ups: $39, $89, $159, $299 or $725.
 - No setup fee, no commitment.
 - 14-day free trial with 30 minutes: a card is requested, nothing is charged during the trial; cancel free of charge before it ends. One trial per business or payment method.
-- Cancel at any time from the customer area: Billing, "Cancel subscription" button; cancellation takes effect at the end of the period already paid. During the trial, cancelling before the 14 days are up means nothing is charged; a reminder email is sent 7 days before the trial ends. Paid periods and credits are not refunded.
+- Cancel at any time from the customer area: Billing info, "Cancel subscription" button; cancellation takes effect at the end of the period already paid. During the trial, cancelling before the 14 days are up means nothing is charged; a reminder email is sent 7 days before the trial ends. Paid periods and credits are not refunded.
 
 8. Calling rules and compliance
 - United Kingdom: sales calls to people who have not given consent must be screened against the TPS (Telephone Preference Service) and, for businesses, the CTPS, under PECR. Automated marketing calls require prior consent; treat sales calls made by an AI agent the same way to be safe. Marketing texts and emails require consent (or the soft opt-in for existing customers). Regulator: the ICO. Data protection: UK GDPR and the Data Protection Act 2018.

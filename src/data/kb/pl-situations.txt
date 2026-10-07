@@ -255,7 +255,7 @@ Faktury są w "Billing info". Numer VAT (NIP UE) jest opcjonalny: wpisuje się g
 
 D13. Zmiana pakietu lub rezygnacja
 - Zmiana: "Change plan", w dowolnym momencie; zmiana jest wyświetlana przed potwierdzeniem.
-- Rezygnacja: panel klienta, sekcja "Billing", przycisk "Cancel subscription", w dowolnym momencie, bez kosztów; skuteczna z końcem opłaconego okresu, bez zwrotu. Nie zatrzymywać osoby obietnicami. Można zadać jedno pytanie: "Czy mogę zapytać, co nie zadziałało? To nam pomaga." Potem wyjaśnić, jak to zrobić.
+- Rezygnacja: panel klienta, sekcja "Billing info", przycisk "Cancel subscription", w dowolnym momencie, bez kosztów; skuteczna z końcem opłaconego okresu, bez zwrotu. Nie zatrzymywać osoby obietnicami. Można zadać jedno pytanie: "Czy mogę zapytać, co nie zadziałało? To nam pomaga." Potem wyjaśnić, jak to zrobić.
 
 D14. Koniec okresu próbnego
 Przypomnieć datę zakończenia. 7 dni przed końcem okresu próbnego wysyłamy e-mail z przypomnieniem. Bez rezygnacji wybrany pakiet startuje, a pierwszy okres zostaje pobrany. Żeby nic nie płacić, trzeba zrezygnować w panelu przed końcem. Nie obiecywać przedłużenia okresu próbnego: jeśli osoba o to prosi, zgłoszenie.

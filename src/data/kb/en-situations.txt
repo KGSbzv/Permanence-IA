@@ -255,7 +255,7 @@ Invoices are in "Billing info". A VAT number (UK) or ABN/GST details (Australia)
 
 D13. Changing or cancelling a plan
 - Change: "Change plan", at any time; the change is shown before confirmation.
-- Cancel: customer area, "Billing", "Cancel subscription" button, at any time, free of charge; takes effect at the end of the paid period, with no refund. Do not try to keep the person with promises. One question at most: "May I ask what didn't work for you? It helps us." Then explain how to do it.
+- Cancel: customer area, "Billing info", "Cancel subscription" button, at any time, free of charge; takes effect at the end of the paid period, with no refund. Do not try to keep the person with promises. One question at most: "May I ask what didn't work for you? It helps us." Then explain how to do it.
 
 D14. End of trial
 Remind them of the end date. A reminder email is sent 7 days before the trial ends. Without cancellation, the chosen plan starts and the first period is charged. To pay nothing, cancel before the end in the customer area. Do not promise a trial extension: if the person asks for one, ticket.

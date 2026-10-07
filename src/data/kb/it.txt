@@ -61,7 +61,7 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - Ricariche di credito: 39, 89, 159, 299 o 725 $.
 - Nessun costo di attivazione, nessun vincolo.
 - Prova gratuita di 14 giorni con 30 minuti: viene richiesta una carta, nulla viene addebitato durante la prova; disdetta senza costi prima della fine. Una sola prova per azienda o metodo di pagamento.
-- Disdetta in qualsiasi momento dall'area clienti: sezione Billing (fatturazione), pulsante "Cancel subscription"; ha effetto alla fine del periodo già pagato. Durante la prova, la disdetta prima della fine dei 14 giorni non comporta alcun addebito; un'email di promemoria viene inviata 7 giorni prima della fine della prova. I periodi pagati e i crediti non vengono rimborsati.
+- Disdetta in qualsiasi momento dall'area clienti: sezione Billing info (fatturazione), pulsante "Cancel subscription"; ha effetto alla fine del periodo già pagato. Durante la prova, la disdetta prima della fine dei 14 giorni non comporta alcun addebito; un'email di promemoria viene inviata 7 giorni prima della fine della prova. I periodi pagati e i crediti non vengono rimborsati.
 
 8. Regole di chiamata e conformità
 - Italia: prima di una campagna di telemarketing verso privati, i numeri vanno verificati sul Registro pubblico delle opposizioni (RPO), che dal 2022 comprende anche i cellulari. L'iscrizione al Registro revoca i consensi dati in precedenza, salvo le eccezioni previste dalla legge. Una richiamata richiesta, un appuntamento da confermare o il seguito di un servizio in corso restano possibili. Non chiamare mai liste acquistate.

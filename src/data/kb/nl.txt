@@ -61,7 +61,7 @@ Proces: terugbellen, opvolging en support (PermanenceAI)
 - Tegoed opwaarderen: $39, $89, $159, $299 of $725.
 - Geen opstartkosten, geen verplichting.
 - Gratis proefperiode van 14 dagen met 30 minuten: er wordt een creditcard gevraagd, tijdens de proefperiode wordt niets afgeschreven; kosteloos opzeggen vóór het einde. Eén proefperiode per bedrijf of betaalmiddel.
-- Op elk moment opzegbaar in de klantomgeving: onderdeel Billing (facturatie), knop "Cancel subscription"; de opzegging gaat in aan het einde van de al betaalde periode. Tijdens de proefperiode leidt opzeggen vóór het einde van de 14 dagen niet tot een afschrijving; 7 dagen vóór het einde van de proefperiode wordt een herinneringsmail gestuurd. Betaalde periodes en tegoeden worden niet terugbetaald.
+- Op elk moment opzegbaar in de klantomgeving: onderdeel Billing info (facturatie), knop "Cancel subscription"; de opzegging gaat in aan het einde van de al betaalde periode. Tijdens de proefperiode leidt opzeggen vóór het einde van de 14 dagen niet tot een afschrijving; 7 dagen vóór het einde van de proefperiode wordt een herinneringsmail gestuurd. Betaalde periodes en tegoeden worden niet terugbetaald.
 
 8. Belregels en compliance
 - Nederland: telemarketing naar consumenten (ook eenmanszaken en zzp'ers) vereist in principe hun voorafgaande toestemming (Telecommunicatiewet art. 11.7, sinds 1 juli 2021; toezicht door de ACM). De agent zegt nooit dat eigen klanten altijd zonder toestemming gebeld mogen worden: campagnes gaan naar klanten die ermee hebben ingestemd om benaderd te worden. Een terugbelverzoek, een afspraak die bevestigd moet worden of de opvolging van een lopende dienst blijven mogelijk.

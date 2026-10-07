@@ -255,7 +255,7 @@ Le fatture si trovano in "Billing info". La partita IVA è facoltativa: si inser
 
 D13. Cambiare piano o disdire
 - Cambiare: "Change plan", in qualsiasi momento, la modifica viene mostrata prima della conferma.
-- Disdire: area clienti, sezione "Billing", pulsante "Cancel subscription", in qualsiasi momento, senza costi; effetto alla fine del periodo pagato, senza rimborso. Non trattenere la persona con promesse. Una sola domanda possibile: "Posso chiederLe che cosa non ha funzionato? Ci aiuta a migliorare." Poi spiegare come fare.
+- Disdire: area clienti, sezione "Billing info", pulsante "Cancel subscription", in qualsiasi momento, senza costi; effetto alla fine del periodo pagato, senza rimborso. Non trattenere la persona con promesse. Una sola domanda possibile: "Posso chiederLe che cosa non ha funzionato? Ci aiuta a migliorare." Poi spiegare come fare.
 
 D14. Fine della prova
 Ricordare la data di fine. Un'email di promemoria viene inviata 7 giorni prima della fine della prova. Senza disdetta, il piano scelto parte e il primo periodo viene addebitato. Per non pagare nulla, disdire prima della fine dall'area clienti. Non promettere proroghe della prova: se la persona lo chiede, ticket.

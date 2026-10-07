@@ -255,7 +255,7 @@ Les factures sont dans « Billing info ». Le numéro de TVA est facultatif : il
 
 D13. Changer ou résilier son forfait
 - Changer : « Change plan », à tout moment, le changement est affiché avant confirmation.
-- Résilier : espace client, rubrique « Billing », bouton « Cancel subscription », à tout moment, sans frais ; effet à la fin de la période payée, sans remboursement. Ne pas retenir la personne par des promesses. Une seule question possible : « Puis-je vous demander ce qui n'a pas marché ? Cela nous aide. » Puis expliquer comment faire.
+- Résilier : espace client, rubrique « Billing info », bouton « Cancel subscription », à tout moment, sans frais ; effet à la fin de la période payée, sans remboursement. Ne pas retenir la personne par des promesses. Une seule question possible : « Puis-je vous demander ce qui n'a pas marché ? Cela nous aide. » Puis expliquer comment faire.
 
 D14. Fin d'essai
 Rappeler la date de fin. Un email de rappel est envoyé 7 jours avant la fin de l'essai. Sans annulation, le forfait choisi démarre et la première période est prélevée. Pour ne rien payer, annuler avant la fin dans l'espace. Ne pas promettre de prolongation d'essai : si la personne la demande, ticket.
