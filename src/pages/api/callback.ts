@@ -12,7 +12,8 @@ function tooMany(ip: string) {
   if (hits.size > 5000) hits.clear();
   return recent.length > 20;
 }
-const WA_MARK = '[WA] confirmation WhatsApp demandée';
+/** Marqueur posé par le serveur : accord WhatsApp et langue du message (lu aussi après un appel manqué). */
+const waMark = (lang: string) => `[WA:${lang}] confirmation WhatsApp demandée`;
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -48,7 +49,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     name, phone: e164 || String(phone).trim(), email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
-    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && WA_MARK].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${locale && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
@@ -100,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
     const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164 as string)}&created_at=gte.${since}&limit=4`);
     if (recent.length > 3) throw new Error('trop de demandes pour ce numéro cette semaine');
-    const day = await dbSelect('callbacks', `select=id&note=like.*${encodeURIComponent('[WA]')}*&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=31`);
+    const day = await dbSelect('callbacks', `select=id&note=like.*${encodeURIComponent('[WA:')}*&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=31`);
     if (day.length > 30) throw new Error('plafond quotidien de messages WhatsApp atteint');
     // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
     return scheduled
