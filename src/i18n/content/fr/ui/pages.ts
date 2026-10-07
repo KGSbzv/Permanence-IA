@@ -571,7 +571,7 @@ export const UI_PAGES = {
                 [{ strong: 'Facturer, tenir la comptabilité, respecter nos obligations fiscales et répondre aux autorités' }, ' : obligation légale.'],
                 [{ strong: 'Sécuriser la plateforme, prévenir la fraude et les abus, faire respecter nos conditions, nous défendre en justice, améliorer nos assistantes à partir de nos propres échanges et de statistiques agrégées' }, ' : intérêt légitime.'],
                 [{ strong: 'Prospection auprès de professionnels' }, ' : intérêt légitime ou consentement lorsque la loi l’exige ; vous pouvez vous y opposer à tout moment.'],
-                [{ strong: 'Cookies de mesure d’audience' }, ' : votre consentement.'],
+                [{ strong: 'Cookies de mesure d’audience et de mesure publicitaire (pixel Meta)' }, ' : votre consentement.'],
               ],
             },
           ],
@@ -598,6 +598,7 @@ export const UI_PAGES = {
                 [{ strong: 'Supabase' }, ' : base de données des demandes, inscriptions et comptes rendus d’échanges (États-Unis).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ' : hébergement du site (États-Unis).'],
                 [{ strong: 'Google (Google Analytics 4)' }, ' : mesure d’audience, uniquement avec votre consentement ; transfert vers les États-Unis encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).'],
+                [{ strong: 'Meta Platforms Ireland Ltd (pixel Meta)' }, ' : mesure de l’efficacité de nos publicités sur Facebook et Instagram, uniquement avec votre consentement ; transfert possible vers les États-Unis encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).'],
                 [{ strong: 'Zoho' }, ' : envoi des emails de service et de suivi.'],
                 [{ strong: 'Intégrations activées par le client' }, ' (agendas, CRM, outils d’automatisation), nos conseils professionnels, les autorités lorsque la loi l’exige, et un éventuel acquéreur en cas de fusion ou de cession.'],
               ],
@@ -678,7 +679,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies et « Do Not Track »',
           body: [
-            { p: ['Le site utilise des cookies essentiels à son fonctionnement et à sa sécurité et, uniquement avec votre consentement, des cookies de mesure d’audience. Il n’utilise pas de cookies publicitaires. Les détails et le réglage de vos choix figurent sur la page ', { a: 'cookies', href: '/cookies' }, '. Faute de norme commune, nous ne répondons pas différemment aux signaux « Do Not Track » ; nous ne suivons pas votre navigation sur d’autres sites à des fins publicitaires.'] },
+            { p: ['Le site utilise des cookies essentiels à son fonctionnement et à sa sécurité et, uniquement avec votre consentement, des cookies de mesure d’audience (Google Analytics) et de mesure publicitaire (pixel Meta). Les détails et le réglage de vos choix figurent sur la page ', { a: 'cookies', href: '/cookies' }, '. Faute de norme commune, nous ne répondons pas différemment aux signaux « Do Not Track » ; nous ne suivons pas votre navigation sur d’autres sites à des fins publicitaires.'] },
           ],
         },
         {
@@ -767,8 +768,9 @@ export const UI_PAGES = {
       `Cookies strictement nécessaires : le site ${siteHost} dépose les cookies indispensables à son fonctionnement (sécurité, équilibrage de charge). Ils ne demandent pas votre consentement.`,
       `Cookie de consentement : le cookie pia_consent mémorise votre choix (accepter ou refuser) pendant 6 mois, sur le domaine permanenceia.com et sur l’espace client (${appHost}).`,
       'Mesure d’audience, avec votre accord seulement : Google Analytics 4 (Google Ireland Ltd / Google LLC) mesure l’audience du site et l’efficacité de nos campagnes, sous forme de statistiques agrégées. Cookies déposés : _ga et _ga_<ID>, conservés 13 mois au plus. Un transfert de données vers les États-Unis est possible ; il est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',
-      'Aucun cookie publicitaire ni de ciblage n’est déposé.',
-      'Vous pouvez changer d’avis à tout moment avec le lien « Gérer les cookies » en bas de chaque page. Refuser n’empêche pas d’utiliser le site.',
+      'Mesure publicitaire, avec votre accord seulement : le pixel Meta (Meta Platforms Ireland Ltd) mesure l’efficacité de nos publicités sur Facebook et Instagram (visites, demandes de rappel, clics vers WhatsApp ou le téléphone). Il dépose notamment le cookie _fbp, conservé 3 mois au plus. Aucune donnée saisie dans nos formulaires (nom, email, téléphone) n’est transmise à Meta. Meta peut transférer des données vers les États-Unis (Meta Platforms, Inc.) ; ce transfert est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',
+      'Sans votre accord, aucun de ces cookies n’est déposé et le pixel Meta n’est pas chargé.',
+      'Vous pouvez changer d’avis et retirer votre consentement à tout moment avec le lien « Gérer les cookies » en bas de chaque page. Refuser n’empêche pas d’utiliser le site.',
       `Le widget de notre assistante, chargé depuis ${appHost}, peut utiliser un stockage technique nécessaire à la conversation. L’espace client (${appHost}) utilise des cookies de session nécessaires à la connexion.`,
     ],
     questions: 'Questions : ',

@@ -555,7 +555,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Fatturare, tenere la contabilità, adempiere agli obblighi fiscali e rispondere alle autorità' }, ': obbligo di legge.'],
                 [{ strong: 'Proteggere la piattaforma, prevenire frodi e abusi, far rispettare le nostre condizioni, difenderci in giudizio, migliorare le nostre assistenti a partire dalle nostre conversazioni e da statistiche aggregate' }, ': legittimo interesse.'],
                 [{ strong: 'Marketing verso professionisti' }, ': legittimo interesse o consenso ove richiesto dalla legge; può opporsi in qualsiasi momento.'],
-                [{ strong: 'Cookie analitici' }, ': il Suo consenso.'],
+                [{ strong: 'Cookie analitici e di misurazione pubblicitaria (pixel di Meta)' }, ': il Suo consenso.'],
               ],
             },
           ],
@@ -582,6 +582,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Supabase' }, ': database di richieste, iscrizioni e resoconti delle conversazioni (Stati Uniti).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ': hosting del sito (Stati Uniti).'],
                 [{ strong: 'Google (Google Analytics 4)' }, ': misurazione dell’audience, solo con il Suo consenso; trasferimento verso gli Stati Uniti tutelato dal Data Privacy Framework UE-USA.'],
+                [{ strong: 'Meta Platforms Ireland Ltd (pixel di Meta)' }, ': misurazione dell’efficacia delle nostre pubblicità su Facebook e Instagram, solo con il Suo consenso; trasferimento verso gli Stati Uniti tutelato dal Data Privacy Framework UE-USA.'],
                 [{ strong: 'Zoho' }, ': invio delle email di servizio e di follow-up.'],
                 [{ strong: 'Integrazioni attivate dal cliente' }, ' (calendari, CRM, strumenti di automazione), i nostri consulenti professionali, le autorità ove la legge lo richieda e un eventuale acquirente in caso di fusione o cessione.'],
               ],
@@ -662,7 +663,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Cookie e «Do Not Track»',
           body: [
-            { p: ['Il sito utilizza cookie essenziali al suo funzionamento e alla sua sicurezza e, solo con il Suo consenso, cookie analitici. Non utilizza cookie pubblicitari. I dettagli e la gestione delle Sue scelte si trovano nella pagina ', { a: 'Cookie policy', href: '/cookies' }, '. In assenza di uno standard comune, non rispondiamo in modo diverso ai segnali «Do Not Track»; non tracciamo la Sua navigazione su altri siti a fini pubblicitari.'] },
+            { p: ['Il sito utilizza cookie essenziali al suo funzionamento e alla sua sicurezza e, solo con il Suo consenso, cookie analitici (Google Analytics) e di misurazione pubblicitaria (pixel di Meta). I dettagli e la gestione delle Sue scelte si trovano nella pagina ', { a: 'Cookie policy', href: '/cookies' }, '. In assenza di uno standard comune, non rispondiamo in modo diverso ai segnali «Do Not Track»; non tracciamo la Sua navigazione su altri siti a fini pubblicitari.'] },
           ],
         },
         {
@@ -750,8 +751,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       `Cookie strettamente necessari: il sito ${siteHost} utilizza i cookie indispensabili al suo funzionamento (sicurezza, bilanciamento del carico). Non richiedono il Suo consenso.`,
       `Cookie «pia_consent»: memorizza la Sua scelta (accettare o rifiutare) per 6 mesi, sul dominio permanenceia.com e nell’area clienti (${appHost}), dove sono utilizzati anche i cookie di sessione necessari per l’accesso.`,
       'Solo con il Suo consenso: Google Analytics 4 (Google Ireland Ltd / Google LLC), cookie «_ga» e «_ga_<ID>», durata massima di 13 mesi, per misurare l’audience del sito e l’efficacia delle nostre campagne (statistiche aggregate). I dati possono essere trasferiti negli Stati Uniti nell’ambito del Data Privacy Framework UE-USA.',
-      'Non viene installato alcun cookie pubblicitario né di profilazione.',
-      'Può cambiare idea in qualsiasi momento con il link «Gestisci i cookie» in fondo a ogni pagina; il rifiuto non impedisce di utilizzare il sito.',
+      'Solo con il Suo consenso: il pixel di Meta (Meta Platforms Ireland Ltd) misura l’efficacia delle nostre pubblicità su Facebook e Instagram (visite, richieste di richiamata, clic verso WhatsApp o il telefono). Installa cookie come «_fbp», con durata massima di 3 mesi. Nessun dato inserito nei nostri moduli (nome, email, telefono) viene trasmesso a Meta. Meta può trasferire dati negli Stati Uniti (Meta Platforms, Inc.) nell’ambito del Data Privacy Framework UE-USA.',
+      'Senza il Suo consenso nessuno di questi cookie viene installato e il pixel di Meta non viene caricato.',
+      'Può cambiare idea e revocare il consenso in qualsiasi momento con il link «Gestisci i cookie» in fondo a ogni pagina; il rifiuto non impedisce di utilizzare il sito.',
       `Il widget della nostra assistente (caricato da ${appHost}) può utilizzare una memorizzazione tecnica necessaria alla conversazione.`,
     ],
     questions: 'Domande: ',

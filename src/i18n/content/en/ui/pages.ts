@@ -555,7 +555,7 @@ export const UI_PAGES = {
                 [{ strong: 'Billing, accounting, tax compliance and responding to authorities' }, ': legal obligation.'],
                 [{ strong: 'Securing the platform, preventing fraud and abuse, enforcing our terms, defending legal claims, improving our assistants from our own conversations and aggregated statistics' }, ': legitimate interests.'],
                 [{ strong: 'Marketing to businesses' }, ': legitimate interests, or consent where the law requires it; you can object at any time.'],
-                [{ strong: 'Analytics cookies' }, ': your consent.'],
+                [{ strong: 'Analytics and advertising measurement cookies (Meta Pixel)' }, ': your consent.'],
               ],
             },
           ],
@@ -582,6 +582,7 @@ export const UI_PAGES = {
                 [{ strong: 'Supabase' }, ': database of requests, sign-ups and conversation summaries (United States).'],
                 [{ strong: 'Google Cloud (Firebase)' }, ': website hosting (United States).'],
                 [{ strong: 'Google (Google Analytics 4)' }, ': website audience measurement, only with your consent; transfers to the United States are covered by the Data Privacy Framework.'],
+                [{ strong: 'Meta Platforms Ireland Ltd (Meta Pixel)' }, ': measuring how our ads perform on Facebook and Instagram, only with your consent; transfers to the United States are covered by the Data Privacy Framework.'],
                 [{ strong: 'Zoho' }, ': sending service and follow-up emails.'],
                 [{ strong: 'Integrations enabled by the customer' }, ' (calendars, CRMs, automation tools), our professional advisers, authorities where the law requires, and any acquirer in a merger or sale.'],
               ],
@@ -662,7 +663,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies and “Do Not Track”',
           body: [
-            { p: ['The website uses cookies that are essential to its operation and security and, only with your consent, analytics cookies. It does not use advertising cookies. Details and your choices are on the ', { a: 'cookies', href: '/cookies' }, ' page. As there is no common standard, we do not respond differently to “Do Not Track” signals; we do not track your browsing on other websites for advertising.'] },
+            { p: ['The website uses cookies that are essential to its operation and security and, only with your consent, analytics cookies (Google Analytics) and advertising measurement cookies (Meta Pixel). Details and your choices are on the ', { a: 'cookies', href: '/cookies' }, ' page. As there is no common standard, we do not respond differently to “Do Not Track” signals; we do not track your browsing on other websites for advertising.'] },
           ],
         },
         {
@@ -750,8 +751,9 @@ export const UI_PAGES = {
       `Strictly necessary cookies: the ${siteHost} website and the customer area (${appHost}) use cookies that are essential for them to work (security, load balancing, logging in). They do not require your consent.`,
       `Your choice: the pia_consent cookie remembers whether you accepted or declined measurement cookies. It lasts 6 months and applies to ${siteHost} and the customer area.`,
       'Only with your consent: Google Analytics 4 (Google Ireland Ltd / Google LLC) sets the _ga and _ga_<ID> cookies, for no more than 13 months, to measure visits to the site and how well our campaigns perform (aggregated statistics). Data may be transferred to the United States under the EU–US Data Privacy Framework.',
-      'No advertising or targeting cookies are set.',
-      'You can change your mind at any time using the “Manage cookies” link at the bottom of every page. Declining won’t stop you using the site.',
+      'Only with your consent: the Meta Pixel (Meta Platforms Ireland Ltd) measures how well our ads perform on Facebook and Instagram (visits, callback requests, clicks to WhatsApp or to call us). It sets cookies such as _fbp, for no more than 3 months. Nothing you enter in our forms (name, email, phone number) is sent to Meta. Meta may transfer data to the United States (Meta Platforms, Inc.) under the EU–US Data Privacy Framework.',
+      'Without your consent, none of these cookies is set and the Meta Pixel is not loaded.',
+      'You can change your mind and withdraw your consent at any time using the “Manage cookies” link at the bottom of every page. Declining won’t stop you using the site.',
       `The assistant widget, loaded from ${appHost}, may use technical storage needed for the conversation to work.`,
     ],
     questions: 'Questions: ',

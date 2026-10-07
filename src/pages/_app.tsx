@@ -7,12 +7,14 @@ import CallbackModal from '@/components/CallbackModal';
 import TrialNudge from '@/components/TrialNudge';
 import ConsentBanner from '@/components/ConsentBanner';
 import { useEffect } from 'react';
-import { track } from '@/lib/analytics';
+import { loadMetaPixel, readConsent, track } from '@/lib/analytics';
 import '@/styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { locale } = router;
+  // Pixel Meta chargé d’emblée seulement si le visiteur a déjà accepté (sinon, au clic sur « Accepter »).
+  useEffect(() => { if (readConsent() === 'granted') loadMetaPixel(); }, []);
   // Pages vues lors des changements de page côté client, et clics utiles (essai, inscription, appel).
   useEffect(() => {
     const onRoute = (url: string) => track('page_view', { page_location: window.location.origin + url, page_title: document.title });

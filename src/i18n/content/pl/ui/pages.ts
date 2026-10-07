@@ -564,7 +564,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Fakturowanie, księgowość, obowiązki podatkowe i odpowiedzi na żądania organów' }, ': obowiązek prawny.'],
                 [{ strong: 'Zabezpieczenie platformy, zapobieganie oszustwom i nadużyciom, egzekwowanie naszych warunków, obrona przed roszczeniami, ulepszanie naszych asystentek na podstawie naszych własnych rozmów i zagregowanych statystyk' }, ': prawnie uzasadniony interes.'],
                 [{ strong: 'Marketing skierowany do firm' }, ': prawnie uzasadniony interes lub zgoda, jeśli wymaga jej prawo; możesz w każdej chwili wnieść sprzeciw.'],
-                [{ strong: 'Analityczne pliki cookie' }, ': Twoja zgoda.'],
+                [{ strong: 'Analityczne pliki cookie i pomiar skuteczności reklam (piksel Meta)' }, ': Twoja zgoda.'],
               ],
             },
           ],
@@ -592,6 +592,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
                 [{ strong: 'Google Cloud (Firebase)' }, ': hosting strony (Stany Zjednoczone).'],
                 [{ strong: 'Zoho' }, ': wysyłka e-maili serwisowych i kontaktowych.'],
             [{ strong: 'Google (Google Analytics 4)' }, ': pomiar ruchu na stronie, wyłącznie za Twoją zgodą; przekazywanie danych do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).'],
+            [{ strong: 'Meta Platforms Ireland Ltd (piksel Meta)' }, ': pomiar skuteczności naszych reklam na Facebooku i Instagramie, wyłącznie za Twoją zgodą; przekazywanie danych do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).'],
                 [{ strong: 'Integracje włączone przez klienta' }, ' (kalendarze, CRM, narzędzia automatyzacji), nasi doradcy prawni i podatkowi oraz audytorzy, organy władzy, gdy wymaga tego prawo, oraz ewentualny nabywca w razie połączenia lub sprzedaży.'],
               ],
             },
@@ -671,7 +672,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Pliki cookie i „Do Not Track”',
           body: [
-            { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie. Nie używa plików cookie reklamowych. Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; nie śledzimy Twojej aktywności na innych stronach w celach reklamowych.'] },
+            { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie (Google Analytics) i plików cookie do pomiaru skuteczności reklam (piksel Meta). Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; nie śledzimy Twojej aktywności na innych stronach w celach reklamowych.'] },
           ],
         },
         {
@@ -758,8 +759,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       `Pliki cookie niezbędne: strona ${siteHost} zapisuje pliki cookie konieczne do jej działania (bezpieczeństwo, równoważenie obciążenia). Nie wymagają one Twojej zgody.`,
       `Plik cookie zgody: plik pia_consent zapamiętuje Twój wybór (akceptacja lub odmowa) przez 6 miesięcy, w domenie permanenceia.com i w panelu klienta (${appHost}).`,
       'Pomiar ruchu, wyłącznie za Twoją zgodą: Google Analytics 4 (Google Ireland Ltd / Google LLC) mierzy ruch na stronie i skuteczność naszych kampanii w postaci zbiorczych statystyk. Zapisywane pliki cookie: _ga i _ga_<ID>, przechowywane maksymalnie 13 miesięcy. Dane mogą być przekazywane do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',
-      'Nie zapisujemy żadnych reklamowych ani śledzących plików cookie.',
-      'Zdanie możesz zmienić w każdej chwili za pomocą linku „Ustawienia cookie” na dole każdej strony. Odmowa nie ogranicza korzystania ze strony.',
+      'Pomiar skuteczności reklam, wyłącznie za Twoją zgodą: piksel Meta (Meta Platforms Ireland Ltd) mierzy skuteczność naszych reklam na Facebooku i Instagramie (odwiedziny, prośby o oddzwonienie, kliknięcia w WhatsApp lub numer telefonu). Zapisuje m.in. plik cookie _fbp, przechowywany maksymalnie 3 miesiące. Dane wpisane w naszych formularzach (imię i nazwisko, e-mail, telefon) nie są przekazywane do Meta. Meta może przekazywać dane do Stanów Zjednoczonych (Meta Platforms, Inc.) na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',
+      'Bez Twojej zgody żaden z tych plików cookie nie jest zapisywany, a piksel Meta nie jest ładowany.',
+      'Zdanie możesz zmienić, a zgodę wycofać, w każdej chwili za pomocą linku „Ustawienia cookie” na dole każdej strony. Odmowa nie ogranicza korzystania ze strony.',
       `Widżet naszej asystentki, ładowany z ${appHost}, może korzystać z technicznej pamięci przeglądarki niezbędnej do prowadzenia rozmowy. Panel klienta (${appHost}) używa sesyjnych plików cookie niezbędnych do logowania.`,
     ],
     questions: 'Pytania: ',

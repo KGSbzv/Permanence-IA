@@ -555,7 +555,7 @@ export const UI_PAGES = {
                 [{ strong: 'Factureren, boekhouden, fiscale verplichtingen en het beantwoorden van verzoeken van autoriteiten' }, ': wettelijke verplichting.'],
                 [{ strong: 'Het platform beveiligen, fraude en misbruik voorkomen, onze voorwaarden handhaven, ons verdedigen in rechte, onze assistenten verbeteren op basis van onze eigen gesprekken en geaggregeerde statistieken' }, ': gerechtvaardigd belang.'],
                 [{ strong: 'Marketing aan bedrijven' }, ': gerechtvaardigd belang, of toestemming waar de wet dat vereist; u kunt altijd bezwaar maken.'],
-                [{ strong: 'Analytische cookies' }, ': uw toestemming.'],
+                [{ strong: 'Analytische cookies en advertentiemeting (Meta-pixel)' }, ': uw toestemming.'],
               ],
             },
           ],
@@ -583,6 +583,7 @@ export const UI_PAGES = {
                 [{ strong: 'Google Cloud (Firebase)' }, ': hosting van de website (Verenigde Staten).'],
                 [{ strong: 'Zoho' }, ': verzending van service- en opvolgmails.'],
                 [{ strong: 'Google (Google Analytics 4)' }, ': bezoekersstatistieken, alleen met uw toestemming; doorgifte naar de Verenigde Staten valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).'],
+                [{ strong: 'Meta Platforms Ireland Ltd (Meta-pixel)' }, ': meten van de resultaten van onze advertenties op Facebook en Instagram, alleen met uw toestemming; doorgifte naar de Verenigde Staten valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).'],
                 [{ strong: 'Door de klant ingeschakelde integraties' }, ' (agenda’s, CRM, automatiseringstools), onze professionele adviseurs, autoriteiten waar de wet dat vereist, en een eventuele overnemende partij bij een fusie of verkoop.'],
               ],
             },
@@ -662,7 +663,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies en „Do Not Track”',
           body: [
-            { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies. Er worden geen advertentiecookies gebruikt. Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen uw surfgedrag op andere websites niet voor advertentiedoeleinden.'] },
+            { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies (Google Analytics) en cookies voor advertentiemeting (Meta-pixel). Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen uw surfgedrag op andere websites niet voor advertentiedoeleinden.'] },
           ],
         },
         {
@@ -750,8 +751,9 @@ export const UI_PAGES = {
       `Strikt noodzakelijke cookies: de website ${siteHost} plaatst de cookies die nodig zijn voor de werking ervan (beveiliging, load balancing). Daarvoor is geen toestemming nodig.`,
       `Toestemmingscookie: de cookie pia_consent onthoudt uw keuze (accepteren of weigeren) gedurende 6 maanden, op het domein permanenceia.com en in de klantomgeving (${appHost}).`,
       'Bezoekersstatistieken, alleen met uw toestemming: Google Analytics 4 (Google Ireland Ltd / Google LLC) meet het bezoek aan de website en de effectiviteit van onze campagnes, in de vorm van geaggregeerde statistieken. Geplaatste cookies: _ga en _ga_<ID>, maximaal 13 maanden bewaard. Gegevens kunnen naar de Verenigde Staten worden doorgegeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',
-      'Er worden geen advertentie- of targetingcookies geplaatst.',
-      'U kunt uw keuze op elk moment wijzigen via de link “Cookies beheren” onderaan elke pagina. Weigeren heeft geen invloed op het gebruik van de website.',
+      'Advertentiemeting, alleen met uw toestemming: de Meta-pixel (Meta Platforms Ireland Ltd) meet de resultaten van onze advertenties op Facebook en Instagram (bezoeken, terugbelverzoeken, klikken naar WhatsApp of de telefoon). De pixel plaatst onder meer de cookie _fbp, maximaal 3 maanden bewaard. Gegevens die u in onze formulieren invult (naam, e-mail, telefoonnummer) worden niet aan Meta doorgegeven. Meta kan gegevens naar de Verenigde Staten (Meta Platforms, Inc.) doorgeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',
+      'Zonder uw toestemming wordt geen van deze cookies geplaatst en wordt de Meta-pixel niet geladen.',
+      'U kunt uw keuze op elk moment wijzigen of uw toestemming intrekken via de link “Cookies beheren” onderaan elke pagina. Weigeren heeft geen invloed op het gebruik van de website.',
       `De widget van onze assistent, geladen vanaf ${appHost}, kan technische opslag gebruiken die nodig is voor het gesprek. De klantomgeving (${appHost}) gebruikt sessiecookies die nodig zijn om in te loggen.`,
     ],
     questions: 'Vragen: ',
