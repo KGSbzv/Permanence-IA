@@ -663,7 +663,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies en „Do Not Track”',
           body: [
-            { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies (Google Analytics) en cookies voor advertentiemeting (Meta-pixel). Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen uw surfgedrag op andere websites niet voor advertentiedoeleinden.'] },
+            { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies (Google Analytics) en cookies voor advertentiemeting (Meta-pixel). Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen zelf uw surfgedrag op andere websites niet. Als u de Meta-pixel accepteert, kan Meta uw bezoek wel koppelen aan uw Facebook- of Instagram-account om onze advertenties te meten en te tonen.'] },
           ],
         },
         {

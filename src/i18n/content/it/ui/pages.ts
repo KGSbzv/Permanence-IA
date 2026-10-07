@@ -663,7 +663,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Cookie e «Do Not Track»',
           body: [
-            { p: ['Il sito utilizza cookie essenziali al suo funzionamento e alla sua sicurezza e, solo con il Suo consenso, cookie analitici (Google Analytics) e di misurazione pubblicitaria (pixel di Meta). I dettagli e la gestione delle Sue scelte si trovano nella pagina ', { a: 'Cookie policy', href: '/cookies' }, '. In assenza di uno standard comune, non rispondiamo in modo diverso ai segnali «Do Not Track»; non tracciamo la Sua navigazione su altri siti a fini pubblicitari.'] },
+            { p: ['Il sito utilizza cookie essenziali al suo funzionamento e alla sua sicurezza e, solo con il Suo consenso, cookie analitici (Google Analytics) e di misurazione pubblicitaria (pixel di Meta). I dettagli e la gestione delle Sue scelte si trovano nella pagina ', { a: 'Cookie policy', href: '/cookies' }, '. In assenza di uno standard comune, non rispondiamo in modo diverso ai segnali «Do Not Track»; non tracciamo noi stessi la Sua navigazione su altri siti. Se accetta il pixel di Meta, Meta può tuttavia collegare la Sua visita al Suo account Facebook o Instagram per misurare e mostrare i nostri annunci.'] },
           ],
         },
         {

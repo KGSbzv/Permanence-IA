@@ -663,7 +663,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies and “Do Not Track”',
           body: [
-            { p: ['The website uses cookies that are essential to its operation and security and, only with your consent, analytics cookies (Google Analytics) and advertising measurement cookies (Meta Pixel). Details and your choices are on the ', { a: 'cookies', href: '/cookies' }, ' page. As there is no common standard, we do not respond differently to “Do Not Track” signals; we do not track your browsing on other websites for advertising.'] },
+            { p: ['The website uses cookies that are essential to its operation and security and, only with your consent, analytics cookies (Google Analytics) and advertising measurement cookies (Meta Pixel). Details and your choices are on the ', { a: 'cookies', href: '/cookies' }, ' page. As there is no common standard, we do not respond differently to “Do Not Track” signals; we do not track your browsing on other websites ourselves. If you accept the Meta Pixel, however, Meta may link your visit to your Facebook or Instagram account to measure and deliver our ads.'] },
           ],
         },
         {

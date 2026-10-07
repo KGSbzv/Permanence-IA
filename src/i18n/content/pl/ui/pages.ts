@@ -672,7 +672,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Pliki cookie i „Do Not Track”',
           body: [
-            { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie (Google Analytics) i plików cookie do pomiaru skuteczności reklam (piksel Meta). Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; nie śledzimy Twojej aktywności na innych stronach w celach reklamowych.'] },
+            { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie (Google Analytics) i plików cookie do pomiaru skuteczności reklam (piksel Meta). Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; sami nie śledzimy Twojej aktywności na innych stronach. Jeśli zaakceptujesz piksel Meta, Meta może jednak powiązać Twoją wizytę z Twoim kontem na Facebooku lub Instagramie, aby mierzyć skuteczność i wyświetlać nasze reklamy.'] },
           ],
         },
         {

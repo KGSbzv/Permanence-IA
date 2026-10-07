@@ -679,7 +679,7 @@ export const UI_PAGES = {
         {
           title: 'Cookies et « Do Not Track »',
           body: [
-            { p: ['Le site utilise des cookies essentiels à son fonctionnement et à sa sécurité et, uniquement avec votre consentement, des cookies de mesure d’audience (Google Analytics) et de mesure publicitaire (pixel Meta). Les détails et le réglage de vos choix figurent sur la page ', { a: 'cookies', href: '/cookies' }, '. Faute de norme commune, nous ne répondons pas différemment aux signaux « Do Not Track » ; nous ne suivons pas votre navigation sur d’autres sites à des fins publicitaires.'] },
+            { p: ['Le site utilise des cookies essentiels à son fonctionnement et à sa sécurité et, uniquement avec votre consentement, des cookies de mesure d’audience (Google Analytics) et de mesure publicitaire (pixel Meta). Les détails et le réglage de vos choix figurent sur la page ', { a: 'cookies', href: '/cookies' }, '. Faute de norme commune, nous ne répondons pas différemment aux signaux « Do Not Track » ; nous ne suivons pas nous-mêmes votre navigation sur d’autres sites. Si vous acceptez le pixel Meta, Meta peut en revanche relier votre visite à votre compte Facebook ou Instagram pour mesurer et diffuser nos publicités.'] },
           ],
         },
         {
