@@ -49,6 +49,8 @@ export function loadMetaPixel() {
   script.async = true;
   script.src = 'https://connect.facebook.net/en_US/fbevents.js';
   document.head.appendChild(script);
+  // Pas de configuration automatique ni de correspondance avancée : aucune donnée de formulaire n’est lue par le pixel.
+  f('set', 'autoConfig', false, META_PIXEL_ID);
   f('init', META_PIXEL_ID);
   f('track', 'PageView');
 }
