@@ -255,10 +255,10 @@ Faktury są w "Billing info". Numer VAT (NIP UE) jest opcjonalny: wpisuje się g
 
 D13. Zmiana pakietu lub rezygnacja
 - Zmiana: "Change plan", w dowolnym momencie; zmiana jest wyświetlana przed potwierdzeniem.
-- Rezygnacja: "Billing info", w dowolnym momencie, bez kosztów; skuteczna z końcem opłaconego okresu, bez zwrotu. Nie zatrzymywać osoby obietnicami. Można zadać jedno pytanie: "Czy mogę zapytać, co nie zadziałało? To nam pomaga." Potem wyjaśnić, jak to zrobić.
+- Rezygnacja: panel klienta, sekcja "Billing", przycisk "Cancel subscription", w dowolnym momencie, bez kosztów; skuteczna z końcem opłaconego okresu, bez zwrotu. Nie zatrzymywać osoby obietnicami. Można zadać jedno pytanie: "Czy mogę zapytać, co nie zadziałało? To nam pomaga." Potem wyjaśnić, jak to zrobić.
 
 D14. Koniec okresu próbnego
-Przypomnieć datę zakończenia. Bez rezygnacji wybrany pakiet startuje, a pierwszy okres zostaje pobrany. Żeby nic nie płacić, trzeba zrezygnować w panelu przed końcem. Nie obiecywać przedłużenia okresu próbnego: jeśli osoba o to prosi, zgłoszenie.
+Przypomnieć datę zakończenia. 7 dni przed końcem okresu próbnego wysyłamy e-mail z przypomnieniem. Bez rezygnacji wybrany pakiet startuje, a pierwszy okres zostaje pobrany. Żeby nic nie płacić, trzeba zrezygnować w panelu przed końcem. Nie obiecywać przedłużenia okresu próbnego: jeśli osoba o to prosi, zgłoszenie.
 
 D15. Dostęp do konta
 Logowanie e-mailem i hasłem albo przez Google lub LinkedIn. Zapomniane hasło: link do resetu na stronie logowania. Agent nie widzi, nie podaje i nie zmienia żadnego hasła. Utracony e-mail lub zablokowane konto: zgłoszenie "dostęp do konta".
@@ -350,8 +350,10 @@ Asystentka pomocy (dymek w prawym dolnym rogu app.permanenceia.com) prowadzi kli
 
 F5. Kredyty na wiadomości
 - Opłacają komunikację pisemną: odpowiedzi AI na WhatsAppie, w SMS-ach, Messengerze, Instagramie i czacie oraz wysyłane wiadomości.
-- 100 kredytów = 1 $. Jedna pisemna odpowiedź AI ≈ 2 kredyty; SMS lub szablon WhatsApp zależnie od kraju.
-- Asystent: 1000 kredytów miesięcznie (≈ 500 odpowiedzi). Call center: 3000 (≈ 1500). Recepcjonistka: kanały dostępne, kredyty doładowywane według potrzeb ("Add credits").
+- Koszty: pisemna odpowiedź AI (czat na stronie, WhatsApp, Messenger, Instagram) = 3 kredyty; wiadomość WhatsApp odebrana lub wysłana w ramach sesji = 1,4 kredytu; wysłany SMS = 2 kredyty (może się różnić w zależności od operatora lub kraju); wiadomość szablonowa WhatsApp (template) = stawka Meta zależna od kraju i kategorii, z narzutem; połączenia WhatsApp rozliczane w minutach.
+- W cenie co miesiąc: Recepcjonistka 200 kredytów (≈ 65 odpowiedzi), Asystent 1000 (≈ 330), Call center 3000 (≈ 1000), Na miarę według wyceny indywidualnej. Dla okresu próbnego nie potwierdzono żadnych kredytów: nie obiecywać ich.
+- Więcej kredytów: zamiana minut w panelu klienta, 1 minuta = 9 kredytów. Nigdy nie podawać równowartości w dolarach.
+- Saldo widoczne w panelu klienta. Przy 0 kredytów odpowiedzi pisemne oraz wysyłka SMS-ów i wiadomości WhatsApp zostają wstrzymane do czasu doładowania.
 
 F6. Co potrafi każdy kanał
 - Telefon: wszystko (powitanie, wizyty, przełączanie do zespołu klienta, kampanie).

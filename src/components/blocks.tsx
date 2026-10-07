@@ -499,6 +499,65 @@ export function RechargeTables() {
   );
 }
 
+// Crédits de messages inclus chaque mois, relevés dans la configuration des forfaits de l’espace client.
+// Toute modification dans l’admin doit être reportée ici, dans la matrice (offers.ts), la FAQ et les bases de connaissances.
+const MESSAGE_CREDITS: { slug: 'receptionniste' | 'assistant' | 'centre-appels'; credits: number; replies: number }[] = [
+  { slug: 'receptionniste', credits: 200, replies: 65 },
+  { slug: 'assistant', credits: 1000, replies: 330 },
+  { slug: 'centre-appels', credits: 3000, replies: 1000 },
+];
+
+/** Messages écrits : coût de chaque usage en crédits, comment obtenir des crédits et ce qui se passe à 0. */
+export function MessageCreditsBox() {
+  const { c, offer, num } = useI18n();
+  const t = c.ui.commerce.tarifs.messageCredits;
+  return (
+    <div className="rounded-2xl border border-line bg-white p-6 sm:p-8">
+      <h3 className="text-h3 font-semibold">{t.title}</h3>
+      <p className="mt-1 max-w-prose text-[15px]">{t.intro}</p>
+      <div className="mt-6 grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+        <div className="overflow-x-auto">
+          <table className="w-full text-[15px]">
+            <thead>
+              <tr className="border-b border-line text-start text-sm text-slate">
+                <th className="py-2 text-start font-medium">{t.usageCol}</th>
+                <th className="w-2/5 py-2 text-end font-medium">{t.costCol}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {t.rows.map((r) => (
+                <tr key={r.label} className="border-b border-line align-top last:border-0">
+                  <td className="py-2.5 pe-4 text-ink">{r.label}</td>
+                  <td className="py-2.5 text-end font-semibold text-ink">{r.cost}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="mt-3 text-sm text-slate-light">{t.smsNote}</p>
+        </div>
+        <div className="rounded-xl bg-paper p-5">
+          <h4 className="font-display font-semibold text-ink">{t.getTitle}</h4>
+          <p className="mt-2 text-sm">{t.included}</p>
+          <ul className="mt-2 space-y-2 text-[15px]">
+            {MESSAGE_CREDITS.map((p) => (
+              <li key={p.slug} className="flex flex-col sm:flex-row sm:justify-between sm:gap-3">
+                <span className="text-ink">{offer(p.slug).name}</span>
+                <span className="font-semibold text-ink sm:text-end">{t.includedValue(num(p.credits), num(p.replies))}</span>
+              </li>
+            ))}
+            <li className="flex flex-col sm:flex-row sm:justify-between sm:gap-3">
+              <span className="text-ink">{offer('sur-mesure').name}</span>
+              <span className="font-semibold text-ink sm:text-end">{c.offerLabels.onQuote}</span>
+            </li>
+          </ul>
+          <p className="mt-4 text-sm">{t.convert}</p>
+        </div>
+      </div>
+      <p className="mt-6 border-t border-line pt-4 text-[15px]">{t.balance}</p>
+    </div>
+  );
+}
+
 /** Règles d’évolution : recharge pour un dépassement ponctuel, forfait supérieur pour un usage régulier. */
 export function GrowthBlock() {
   const { c, offer, money, num } = useI18n();

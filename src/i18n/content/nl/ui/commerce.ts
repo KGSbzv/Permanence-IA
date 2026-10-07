@@ -174,6 +174,26 @@ export const UI_COMMERCE = {
       intro: 'Een opwaardering helpt u door een drukke maand. Bij een vast volume blijft het grotere abonnement de voordeligste oplossing.',
       link: 'Hoe opwaarderen werkt',
     },
+    // Kader 'Schriftelijke berichten': kosten overgenomen uit de creditinstellingen van de klantomgeving.
+    messageCredits: {
+      title: 'Schriftelijke berichten: prijzen in credits',
+      intro: 'Schriftelijke AI-antwoorden en verzonden berichten (websitechat, WhatsApp, Messenger, Instagram, sms) worden afgeboekt van uw saldo aan berichtcredits.',
+      usageCol: 'Gebruik',
+      costCol: 'Kosten in credits',
+      rows: [
+        { label: 'Schriftelijk AI-antwoord (websitechat, WhatsApp, Messenger, Instagram)', cost: '3 credits' },
+        { label: 'WhatsApp-bericht ontvangen of verzonden binnen een sessie', cost: '1,4 credits' },
+        { label: 'WhatsApp-sjabloonbericht (template)', cost: 'Tarief van Meta per land en categorie, met toeslag' },
+        { label: 'Verzonden sms', cost: '2 credits' },
+        { label: 'WhatsApp-gesprek', cost: 'Gefactureerd in minuten' },
+      ],
+      smsNote: 'De kosten van een sms kunnen per provider of land verschillen.',
+      getTitle: 'Credits krijgen',
+      included: 'Elke maand inbegrepen in uw abonnement:',
+      includedValue: (credits: string, replies: string) => `${credits} credits / maand (≈ ${replies} antwoorden)`,
+      convert: 'Of zet minuten om in uw klantomgeving: 1 minuut = 9 credits.',
+      balance: 'Uw saldo ziet u in de klantomgeving. Bij 0 credits stoppen schriftelijke antwoorden en het verzenden van sms- en WhatsApp-berichten tot u opwaardeert.',
+    },
     faq: {
       title: 'Vragen over de prijzen',
       intro: 'Twijfelt u welk abonnement bij u past? Laat u terugbellen, of probeer de agent live.',

@@ -168,6 +168,26 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       intro: 'Doładowanie pomaga w intensywniejszym miesiącu. Przy regularnym wolumenie wyższy pakiet pozostaje najkorzystniejszym rozwiązaniem.',
       link: 'Jak działają doładowania',
     },
+    // Ramka „Wiadomości pisemne”: koszty przepisane z konfiguracji kredytów w panelu klienta.
+    messageCredits: {
+      title: 'Wiadomości pisemne: ceny w kredytach',
+      intro: 'Pisemne odpowiedzi AI i wysyłane wiadomości (czat na stronie, WhatsApp, Messenger, Instagram, SMS) są odliczane od Twojego salda kredytów na wiadomości.',
+      usageCol: 'Użycie',
+      costCol: 'Koszt w kredytach',
+      rows: [
+        { label: 'Pisemna odpowiedź AI (czat na stronie, WhatsApp, Messenger, Instagram)', cost: '3 kredyty' },
+        { label: 'Wiadomość WhatsApp odebrana lub wysłana w ramach sesji', cost: '1,4 kredytu' },
+        { label: 'Wiadomość szablonowa WhatsApp (template)', cost: 'Stawka Meta zależna od kraju i kategorii, z narzutem' },
+        { label: 'Wysłany SMS', cost: '2 kredyty' },
+        { label: 'Połączenie WhatsApp', cost: 'Rozliczane w minutach' },
+      ],
+      smsNote: 'Koszt SMS-a może się różnić w zależności od operatora lub kraju.',
+      getTitle: 'Jak uzyskać kredyty',
+      included: 'Co miesiąc w cenie pakietu:',
+      includedValue: (credits: string, replies: string) => `${credits} kredytów / mies. (≈ ${replies} odpowiedzi)`,
+      convert: 'Możesz też zamienić minuty na kredyty w panelu klienta: 1 minuta = 9 kredytów.',
+      balance: 'Saldo sprawdzisz w panelu klienta. Przy 0 kredytów odpowiedzi pisemne oraz wysyłka SMS-ów i wiadomości WhatsApp zostają wstrzymane do czasu doładowania.',
+    },
     faq: {
       title: 'Pytania o ceny',
       intro: 'Nie wiesz, który pakiet wybrać? Zamów rozmowę lub wypróbuj agenta na żywo.',

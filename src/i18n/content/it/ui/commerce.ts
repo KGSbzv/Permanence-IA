@@ -183,6 +183,26 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       intro: 'La ricarica copre un mese più intenso. Per un volume regolare, il piano superiore resta la soluzione più conveniente.',
       link: 'Come funzionano le ricariche',
     },
+    // Riquadro «Messaggi scritti»: costi ripresi dalla configurazione dei crediti dell’area clienti.
+    messageCredits: {
+      title: 'Messaggi scritti: prezzi in crediti',
+      intro: 'Le risposte scritte dell’AI e i messaggi inviati (chat del sito, WhatsApp, Messenger, Instagram, SMS) vengono scalati dal Suo saldo di crediti messaggi.',
+      usageCol: 'Utilizzo',
+      costCol: 'Costo in crediti',
+      rows: [
+        { label: 'Risposta scritta dell’AI (chat del sito, WhatsApp, Messenger, Instagram)', cost: '3 crediti' },
+        { label: 'Messaggio WhatsApp ricevuto o inviato in sessione', cost: '1,4 crediti' },
+        { label: 'Messaggio modello WhatsApp (template)', cost: 'Tariffa di Meta in base al paese e alla categoria, maggiorata' },
+        { label: 'SMS inviato', cost: '2 crediti' },
+        { label: 'Chiamata WhatsApp', cost: 'Fatturata in minuti' },
+      ],
+      smsNote: 'Il costo di un SMS può variare in base all’operatore o al paese.',
+      getTitle: 'Come ottenere crediti',
+      included: 'Inclusi ogni mese nel Suo piano:',
+      includedValue: (credits: string, replies: string) => `${credits} crediti / mese (≈ ${replies} risposte)`,
+      convert: 'Oppure converta minuti dalla Sua area clienti: 1 minuto = 9 crediti.',
+      balance: 'Il saldo è consultabile nell’area clienti. A 0 crediti, le risposte scritte e gli invii di SMS o WhatsApp si interrompono fino alla ricarica.',
+    },
     faq: {
       title: 'Domande sui prezzi',
       intro: 'Ha un dubbio sul piano giusto per Lei? Si faccia richiamare, oppure provi l’agente dal vivo.',

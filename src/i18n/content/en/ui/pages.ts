@@ -230,7 +230,7 @@ export const UI_PAGES = {
       description: (brand: string) => `The terms and conditions of use and sale that apply to ${brand} AI receptionist and phone answering plans and services.`,
     },
     h1: 'Terms and Conditions of Use and Sale',
-    updated: 'Applicable to professionals and businesses • Last updated: 6 October 2026',
+    updated: 'Applicable to professionals and businesses • Last updated: 7 October 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -272,7 +272,7 @@ export const UI_PAGES = {
               ul: [
                 [{ strong: 'Payment method:' }, ' a card is required to activate the trial. Nothing is charged during the 14-day trial.'],
                 [{ strong: 'Usage cap:' }, ' calls are limited to 30 minutes during the trial; beyond that they are paused until the subscription starts. Some features (numbers, outbound campaigns, messaging) may be restricted during the trial.'],
-                [{ strong: 'End of trial:' }, ' after 14 days, the chosen plan starts and the first period (monthly or annual) is charged, unless the Customer has cancelled from the customer area before then, in which case nothing is charged.'],
+                [{ strong: 'End of trial:' }, ' after 14 days, the chosen plan starts and the first period (monthly or annual) is charged, unless the Customer has cancelled from the customer area before then, in which case nothing is charged. A reminder email is sent to the Customer 7 days before the trial ends.'],
               ],
             },
             { p: 'Business-to-business contracts carry no statutory cancellation (cooling-off) right. The free trial lets the Customer test the Service before paying anything and cancel free of charge before it ends.' },
@@ -287,7 +287,8 @@ export const UI_PAGES = {
                 'Prices are in US dollars (USD), excluding taxes. Applicable taxes are calculated at checkout according to the Customer’s country and tax status (with or without a VAT number) and are payable by the Customer. If the Customer must withhold tax, it grosses up its payment so that we receive the invoiced amount.',
                 'Plans are payable in advance, monthly or annually at the Customer’s choice (annual billing gives two months free), through our payment provider Stripe. The subscription renews automatically for a period of the same length, and the Customer authorises the corresponding recurring charges. With annual billing, included minutes are allocated each month and the Service is identical.',
                 'Usage beyond the plan (extra minutes, messages, phone numbers, fees charged by carriers or Meta) is deducted from credit or charged at the current rates shown on the Pricing page or in the customer area.',
-                ['The Customer may cancel at any time, without notice, from its dashboard at ', { strong: appHost }, '. Cancellation takes effect at the end of the period already paid (the current month or, with annual billing, the current year), with no refund (Article 3). The Customer may change plan or top up credit at any time; the terms of the change are shown in the customer area.'],
+                [{ strong: 'Message credits:' }, ' they cover the written exchanges of the Service: written AI replies (website chat, WhatsApp, Messenger, Instagram), WhatsApp messages and SMS. Each use is deducted from the Customer’s credit balance: 3 credits per written AI reply; 1.4 credits per WhatsApp message received or sent within a session; 2 credits per SMS sent, an amount that may vary by carrier or country; for a WhatsApp template message, Meta’s rate by country and category, plus a margin. WhatsApp calls are billed in minutes. Credits are included each month according to the plan or obtained by converting minutes from the customer area (1 minute = 9 credits). The balance can be checked in the customer area; when it reaches 0, written replies and SMS or WhatsApp sending are suspended until the balance is topped up.'],
+                ['The Customer may cancel at any time, without notice, from its customer area at ', { strong: appHost }, ', under Billing, using the "Cancel subscription" button. During the trial, cancelling before the 14 days are up results in no charge. After the trial, cancellation takes effect at the end of the period already paid (the current month or, with annual billing, the current year), with no refund (Article 3). The Customer may change plan or top up credit at any time; the terms of the change are shown in the customer area.'],
                 'We may change our prices on 30 days’ notice by email or in the customer area; the new price applies from the next renewal. A Customer who does not accept it cancels before that date. Third-party fees passed through to the Customer (carriers, Meta) may change on the timescales those third parties impose.',
                 'If a payment fails or is late, we may suspend all or part of the Service until it is settled, without extending the period. Unpaid sums bear interest at 1.5% per month or, if lower, the maximum lawful rate, plus any statutory fixed compensation for recovery costs and the recovery costs actually incurred.',
                 'Any payment dispute (chargeback) raised without first contacting us leads to immediate suspension of the account; all sums owed become due at once, together with chargeback and recovery costs.',

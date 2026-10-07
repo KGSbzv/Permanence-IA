@@ -115,5 +115,5 @@ export const HELP_GLOSSARY: MenuEntry[] = [
   { en: 'Post-call evaluation', label: 'Analisi dopo la chiamata', text: 'Le informazioni estratte automaticamente da ogni chiamata (nome, esigenza, appuntamento…).' },
   { en: 'Variables', label: 'Variabili', text: 'Campi personalizzati come {{customer_name}}, compilati per ogni contatto.' },
   { en: 'Voicemail', label: 'Segreteria', text: 'Cosa fa l’agente se trova una segreteria telefonica.' },
-  { en: 'Credits', label: 'Credito', text: '100 crediti = 1 $. Serve per i minuti extra e per i messaggi (WhatsApp, SMS).' },
+  { en: 'Credits', label: 'Credito', text: 'Il Suo saldo di credito. Serve per i minuti extra e per i messaggi scritti (risposte dell’AI, WhatsApp, SMS); il costo di ogni utilizzo è indicato nella pagina Prezzi.' },
 ];

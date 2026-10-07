@@ -116,5 +116,5 @@ export const HELP_GLOSSARY: MenuEntry[] = [
   { en: 'Post-call evaluation', label: 'Analyse après appel', text: 'Les informations extraites automatiquement de chaque appel (nom, besoin, rendez-vous…).' },
   { en: 'Variables', label: 'Variables', text: 'Champs personnalisés comme {{customer_name}}, remplis pour chaque contact.' },
   { en: 'Voicemail', label: 'Répondeur', text: 'Ce que fait l’agent s’il tombe sur une messagerie.' },
-  { en: 'Credits', label: 'Crédit', text: '100 crédits = 1 $. Sert aux minutes supplémentaires et aux messages (WhatsApp, SMS).' },
+  { en: 'Credits', label: 'Crédit', text: 'Votre solde de crédit. Il sert aux minutes supplémentaires et aux messages écrits (réponses de l’IA, WhatsApp, SMS) ; le coût de chaque usage est indiqué sur la page Tarifs.' },
 ];

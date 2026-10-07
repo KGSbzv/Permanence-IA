@@ -174,6 +174,26 @@ export const UI_COMMERCE = {
       intro: 'La recharge dépanne un mois chargé. Pour un volume régulier, le forfait supérieur reste la solution la plus économique.',
       link: 'Comment fonctionnent les recharges',
     },
+    // Encadré « Messages écrits » : coûts relevés dans la configuration des crédits de l’espace client.
+    messageCredits: {
+      title: 'Messages écrits : prix en crédits',
+      intro: 'Les réponses écrites de l’IA et les messages envoyés (chat du site, WhatsApp, Messenger, Instagram, SMS) sont décomptés de votre solde de crédits de messages.',
+      usageCol: 'Usage',
+      costCol: 'Coût en crédits',
+      rows: [
+        { label: 'Réponse écrite de l’IA (chat du site, WhatsApp, Messenger, Instagram)', cost: '3 crédits' },
+        { label: 'Message WhatsApp reçu ou envoyé en session', cost: '1,4 crédit' },
+        { label: 'Message modèle WhatsApp (template)', cost: 'Tarif de Meta selon le pays et la catégorie, majoré' },
+        { label: 'SMS envoyé', cost: '2 crédits' },
+        { label: 'Appel WhatsApp', cost: 'Facturé en minutes' },
+      ],
+      smsNote: 'Le coût d’un SMS peut varier selon l’opérateur ou le pays.',
+      getTitle: 'Obtenir des crédits',
+      included: 'Inclus chaque mois dans votre forfait :',
+      includedValue: (credits: string, replies: string) => `${credits} crédits / mois (≈ ${replies} réponses)`,
+      convert: 'Ou convertissez des minutes depuis votre espace client : 1 minute = 9 crédits.',
+      balance: 'Votre solde se consulte dans l’espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s’arrêtent jusqu’à la recharge.',
+    },
     faq: {
       title: 'Questions sur les tarifs',
       intro: 'Un doute sur le forfait de votre agent vocal IA ? Faites-vous rappeler, ou essayez l’agent en direct.',

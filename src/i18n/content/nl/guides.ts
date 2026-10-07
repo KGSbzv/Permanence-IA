@@ -929,7 +929,7 @@ export const GUIDES: Guide[] = [
         title: 'Wat u betaalt',
         list: [
           'Uw maandabonnement, met inbegrepen belminuten.',
-          'De minuten boven uw abonnement, betaald met uw tegoed (“Credits”: 100 credits = $ 1).',
+          'De minuten boven uw abonnement, betaald met uw tegoed (“Credits”).',
           'WhatsApp-berichten, sms’jes en schriftelijke antwoorden van de AI, betaald met berichtcredits.',
           'Eigen nummers, vanaf {numberFrom} per maand, afhankelijk van het land.',
         ],

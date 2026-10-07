@@ -929,7 +929,7 @@ export const GUIDES: Guide[] = [
         title: 'Cosa paga',
         list: [
           'Il Suo piano mensile, con minuti di chiamata inclusi.',
-          'I minuti oltre il piano, pagati con il Suo credito («Credits»: 100 crediti = 1 $).',
+          'I minuti oltre il piano, pagati con il Suo credito («Credits»).',
           'I messaggi WhatsApp, gli SMS e le risposte scritte dell’AI, pagati con i crediti messaggi.',
           'I numeri dedicati, a partire da {numberFrom} al mese a seconda del Paese.',
         ],

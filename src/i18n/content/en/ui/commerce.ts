@@ -123,6 +123,26 @@ export const UI_COMMERCE = {
       intro: 'A top-up covers a busy month. For regular volume, the next plan up is still the most economical option.',
       link: 'How top-ups work',
     },
+    // "Written messages" box: costs taken from the credit settings of the customer area.
+    messageCredits: {
+      title: 'Written messages: prices in credits',
+      intro: 'Written AI replies and messages sent (website chat, WhatsApp, Messenger, Instagram, SMS) are deducted from your message credit balance.',
+      usageCol: 'Use',
+      costCol: 'Cost in credits',
+      rows: [
+        { label: 'Written AI reply (website chat, WhatsApp, Messenger, Instagram)', cost: '3 credits' },
+        { label: 'WhatsApp message received or sent within a session', cost: '1.4 credits' },
+        { label: 'WhatsApp template message', cost: 'Meta rate by country and category, plus a margin' },
+        { label: 'SMS sent', cost: '2 credits' },
+        { label: 'WhatsApp call', cost: 'Billed in minutes' },
+      ],
+      smsNote: 'The cost of an SMS may vary by carrier or country.',
+      getTitle: 'Getting credits',
+      included: 'Included every month in your plan:',
+      includedValue: (credits: string, replies: string) => `${credits} credits / month (≈ ${replies} replies)`,
+      convert: 'Or convert minutes from your customer area: 1 minute = 9 credits.',
+      balance: 'You can check your balance in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until you top up.',
+    },
     faq: {
       title: 'Questions about pricing',
       intro: 'Not sure which AI answering service plan suits you? Request a callback, or try the agent live.',

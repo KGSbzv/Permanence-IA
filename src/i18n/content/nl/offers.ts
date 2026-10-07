@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-receptionist die elk gesprek aanneemt, 24 uur per dag',
     pitch: 'Met het Receptionist-abonnement worden uw gesprekken aangenomen, veelgestelde vragen beantwoord, afspraken ingepland en ontvangt u van elke aanvraag een duidelijke samenvatting. Eenvoudig in te stellen, zonder gedoe.',
     cta: 'Kies Receptionist',
-    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 3,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger (berichtcredits naar gebruik)'],
+    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 3,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger, 200 berichtcredits per maand (≈ 65 schriftelijke antwoorden)'],
   },
   assistant: {
     name: 'Assistent',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-assistent die uw aanvragen kwalificeert, opvolgt en automatiseert',
     pitch: 'Het Assistent-abonnement voegt drie agents, opvolgcampagnes, no-code automatiseringen gekoppeld aan meer dan 300 tools en een gekloonde stem toe, zodat u meer aanvragen omzet in klanten.',
     cta: 'Kies Assistent',
-    highlights: ['Alles van Receptionist, plus:', '3 agents, 5 gelijktijdige gesprekken', 'Tot 3 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand), 3 kennisbanken, 3 tools tijdens het gesprek', '3 opvolgcampagnes', 'Flow builder en automatiseringen (5.000 automatiseringsruns / maand)', '1 gekloonde stem', '1.000 berichtcredits per maand (≈ 500 schriftelijke antwoorden)'],
+    highlights: ['Alles van Receptionist, plus:', '3 agents, 5 gelijktijdige gesprekken', 'Tot 3 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand), 3 kennisbanken, 3 tools tijdens het gesprek', '3 opvolgcampagnes', 'Flow builder en automatiseringen (5.000 automatiseringsruns / maand)', '1 gekloonde stem', '1.000 berichtcredits per maand (≈ 330 schriftelijke antwoorden)'],
   },
   'centre-appels': {
     name: 'Callcenter',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een volledig AI-callcenter voor ontvangst, afspraken en support',
     pitch: 'Het Callcenter-abonnement heft de limieten op: een onbeperkt aantal agents en campagnes, 20 gelijktijdige gesprekken, eigen dashboards, prioriteitssupport en de laagste prijs per minuut.',
     cta: 'Kies Callcenter',
-    highlights: ['Alles van Assistent, plus:', 'Onbeperkt aantal agents, campagnes en kennisbanken', '20 gelijktijdige gesprekken, tot 10 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand)', '3 gekloonde stemmen, 50.000 automatiseringsruns / maand', 'Eigen dashboards', 'Prioriteitssupport', '3.000 berichtcredits per maand (≈ 1.500 schriftelijke antwoorden)'],
+    highlights: ['Alles van Assistent, plus:', 'Onbeperkt aantal agents, campagnes en kennisbanken', '20 gelijktijdige gesprekken, tot 10 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand)', '3 gekloonde stemmen, 50.000 automatiseringsruns / maand', 'Eigen dashboards', 'Prioriteitssupport', '3.000 berichtcredits per maand (≈ 1.000 schriftelijke antwoorden)'],
   },
   'sur-mesure': {
     name: 'Maatwerk',
@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Uitgaande campagnes', detail: 'Opvolging, bevestigingen en herinneringen die automatisch worden gebeld.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
       { label: 'Sms en WhatsApp', detail: 'Schriftelijk contact op één plek, betaald met berichtcredits.', cells: all(true) },
       { label: 'Messenger en Instagram', detail: 'Berichten van sociale netwerken in dezelfde inbox.', cells: all(true) },
-      { label: 'Inbegrepen berichtcredits', detail: 'Maandelijks gratis credits voor schriftelijk contact (WhatsApp, sms, Messenger, chat). 100 credits = $ 1, een AI-antwoord ≈ 2 credits. Zonder inbegrepen credits waardeert u op naar gebruik.', cells: { decouverte: false, receptionniste: 'Naar gebruik', assistant: '1.000 / maand (≈ 500 antwoorden)', 'centre-appels': '3.000 / maand (≈ 1.500 antwoorden)', 'sur-mesure': 'Op maat' } },
+      { label: 'Inbegrepen berichtcredits', detail: 'Credits die elke maand worden toegekend voor schriftelijk contact (websitechat, WhatsApp, Messenger, Instagram, sms). Een schriftelijk AI-antwoord kost 3 credits. Meer nodig? Zet minuten om in uw klantomgeving: 1 minuut = 9 credits.', cells: { decouverte: false, receptionniste: '200 / maand (≈ 65 antwoorden)', assistant: '1.000 / maand (≈ 330 antwoorden)', 'centre-appels': '3.000 / maand (≈ 1.000 antwoorden)', 'sur-mesure': 'Op aanvraag' } },
     ],
   },
   {

@@ -26,7 +26,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place.',
     cta: 'Choisir Réceptionniste',
-    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 3,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger (crédits de messages en option)'],
+    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 3,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger, 200 crédits de messages par mois (≈ 65 réponses écrites)'],
   },
   assistant: {
     name: 'Assistant',
@@ -34,7 +34,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch: 'Le forfait Assistant passe à trois agents et ajoute les rappels et confirmations automatiques, les scénarios automatisés reliés à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
-    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 bases de connaissances, 3 outils pendant l’appel', '3 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 campagnes de relance', 'Scénarios automatisés (5 000 exécutions d’automatisation / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
+    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 bases de connaissances, 3 outils pendant l’appel', '3 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 campagnes de relance', 'Scénarios automatisés (5 000 exécutions d’automatisation / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 330 réponses écrites)'],
   },
   'centre-appels': {
     name: 'Centre d’appels',
@@ -42,7 +42,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch: 'Le forfait Centre d’appels lève les limites : agents et campagnes illimités, 20 appels simultanés, tableaux de bord personnalisés, support prioritaire et le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
-    highlights: ['Tout Assistant, et en plus :', 'Agents, campagnes et bases de connaissances illimités', '20 appels simultanés', '10 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 voix clonées, 50 000 exécutions d’automatisation / mois', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages par mois (≈ 1 500 réponses écrites)'],
+    highlights: ['Tout Assistant, et en plus :', 'Agents, campagnes et bases de connaissances illimités', '20 appels simultanés', '10 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 voix clonées, 50 000 exécutions d’automatisation / mois', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages par mois (≈ 1 000 réponses écrites)'],
   },
   'sur-mesure': {
     name: 'Sur mesure',
@@ -114,7 +114,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Rappels et confirmations', detail: 'Relances, confirmations et rappels passés automatiquement par téléphone.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
       { label: 'SMS et WhatsApp', detail: 'Échanges écrits centralisés, payés avec les crédits de messages.', cells: all(true) },
       { label: 'Messenger et Instagram', detail: 'Messages des réseaux sociaux dans la même boîte.', cells: all(true) },
-      { label: 'Crédits de messages inclus', detail: 'Crédits offerts chaque mois pour les échanges écrits (WhatsApp, SMS, Messenger, chat). 100 crédits = 1 $, une réponse de l’IA ≈ 2 crédits. Sans crédits inclus, vous rechargez selon votre usage.', cells: { decouverte: false, receptionniste: 'Non inclus (recharge)', assistant: '1 000 / mois (≈ 500 réponses)', 'centre-appels': '3 000 / mois (≈ 1 500 réponses)', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Crédits de messages inclus', detail: 'Crédits attribués chaque mois pour les échanges écrits (chat du site, WhatsApp, Messenger, Instagram, SMS). Une réponse écrite de l’IA coûte 3 crédits. Pour en avoir plus, convertissez des minutes depuis votre espace : 1 minute = 9 crédits.', cells: { decouverte: false, receptionniste: '200 / mois (≈ 65 réponses)', assistant: '1 000 / mois (≈ 330 réponses)', 'centre-appels': '3 000 / mois (≈ 1 000 réponses)', 'sur-mesure': 'Sur devis' } },
     ],
   },
   {

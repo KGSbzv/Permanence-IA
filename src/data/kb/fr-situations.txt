@@ -255,10 +255,10 @@ Les factures sont dans « Billing info ». Le numéro de TVA est facultatif : il
 
 D13. Changer ou résilier son forfait
 - Changer : « Change plan », à tout moment, le changement est affiché avant confirmation.
-- Résilier : « Billing info », à tout moment, sans frais ; effet à la fin de la période payée, sans remboursement. Ne pas retenir la personne par des promesses. Une seule question possible : « Puis-je vous demander ce qui n'a pas marché ? Cela nous aide. » Puis expliquer comment faire.
+- Résilier : espace client, rubrique « Billing », bouton « Cancel subscription », à tout moment, sans frais ; effet à la fin de la période payée, sans remboursement. Ne pas retenir la personne par des promesses. Une seule question possible : « Puis-je vous demander ce qui n'a pas marché ? Cela nous aide. » Puis expliquer comment faire.
 
 D14. Fin d'essai
-Rappeler la date de fin. Sans annulation, le forfait choisi démarre et la première période est prélevée. Pour ne rien payer, annuler avant la fin dans l'espace. Ne pas promettre de prolongation d'essai : si la personne la demande, ticket.
+Rappeler la date de fin. Un email de rappel est envoyé 7 jours avant la fin de l'essai. Sans annulation, le forfait choisi démarre et la première période est prélevée. Pour ne rien payer, annuler avant la fin dans l'espace. Ne pas promettre de prolongation d'essai : si la personne la demande, ticket.
 
 D15. Accès au compte
 Connexion par email et mot de passe, ou via Google ou LinkedIn. Mot de passe oublié : lien de réinitialisation sur la page de connexion. L'agent ne voit, ne donne et ne modifie aucun mot de passe. Email perdu ou compte bloqué : ticket « accès au compte ».
@@ -350,8 +350,10 @@ L'assistante d'aide (bulle en bas à droite de app.permanenceia.com) guide le cl
 
 F5. Crédits de messages
 - Ils paient les échanges écrits : réponses de l'IA sur WhatsApp, SMS, Messenger, Instagram et chat, et messages envoyés.
-- 100 crédits = 1 $. Une réponse écrite de l'IA ≈ 2 crédits ; un SMS ou un modèle WhatsApp selon le pays.
-- Assistant : 1 000 crédits par mois (≈ 500 réponses). Centre d'appels : 3 000 (≈ 1 500). Réceptionniste : canaux disponibles, crédit ajouté selon l'usage (« Add credits »).
+- Coûts : réponse écrite de l'IA (chat du site, WhatsApp, Messenger, Instagram) = 3 crédits ; message WhatsApp reçu ou envoyé en session = 1,4 crédit ; SMS envoyé = 2 crédits (peut varier selon l'opérateur ou le pays) ; message modèle WhatsApp (template) = tarif de Meta selon le pays et la catégorie, majoré ; appels WhatsApp facturés en minutes.
+- Inclus chaque mois : Réceptionniste 200 crédits (≈ 65 réponses), Assistant 1 000 (≈ 330), Centre d'appels 3 000 (≈ 1 000), Sur mesure sur devis. Aucun crédit n'est confirmé pour l'essai gratuit : ne pas en promettre.
+- En obtenir plus : convertir des minutes depuis l'espace client, 1 minute = 9 crédits. Ne jamais donner d'équivalence en dollars.
+- Solde visible dans l'espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s'arrêtent jusqu'à la recharge.
 
 F6. Ce que chaque canal peut faire
 - Téléphone : tout (accueil, rendez-vous, transfert vers l'équipe du client, campagnes).

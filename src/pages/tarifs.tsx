@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
-import { BillingProvider, EconomyBlock, FinalCTA, HumanVsAi, GrowthBlock, IncludedStack, MatrixTable, PricingCards, RechargeTables } from '@/components/blocks';
+import { BillingProvider, EconomyBlock, FinalCTA, HumanVsAi, GrowthBlock, IncludedStack, MatrixTable, MessageCreditsBox, PricingCards, RechargeTables } from '@/components/blocks';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
@@ -68,6 +68,8 @@ export default function Tarifs() {
         <Heading title={t.recharges.title} intro={t.recharges.intro} />
         <div className="mt-10"><RechargeTables /></div>
         <Link href="/offres/recharges" className="mt-6 inline-block font-semibold text-signal-deep hover:underline">{t.recharges.link}</Link>
+        {/* Encadré des messages écrits : coût de chaque usage en crédits, obtention des crédits, solde à 0. */}
+        <div id="credits-messages" className="mt-14 scroll-mt-24"><MessageCreditsBox /></div>
       </Section>
 
       <Section tone="paper"><GrowthBlock /></Section>

@@ -113,5 +113,5 @@ export const HELP_GLOSSARY: MenuEntry[] = [
   { en: 'Post-call evaluation', label: 'Analiza po rozmowie', text: 'Informacje automatycznie wyodrębniane z każdej rozmowy (imię i nazwisko, potrzeba, wizyta…).' },
   { en: 'Variables', label: 'Zmienne', text: 'Pola własne, np. {{customer_name}}, uzupełniane dla każdego kontaktu.' },
   { en: 'Voicemail', label: 'Poczta głosowa', text: 'Co robi agent, gdy trafi na pocztę głosową.' },
-  { en: 'Credits', label: 'Kredyty', text: '100 kredytów = 1 $. Służą do opłacania dodatkowych minut i wiadomości (WhatsApp, SMS).' },
+  { en: 'Credits', label: 'Kredyty', text: 'Saldo Twoich kredytów. Służą do opłacania dodatkowych minut i wiadomości pisemnych (odpowiedzi AI, WhatsApp, SMS); koszt każdego użycia podajemy na stronie Cennik.' },
 ];

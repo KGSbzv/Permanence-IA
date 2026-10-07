@@ -255,10 +255,10 @@ Le fatture si trovano in "Billing info". La partita IVA è facoltativa: si inser
 
 D13. Cambiare piano o disdire
 - Cambiare: "Change plan", in qualsiasi momento, la modifica viene mostrata prima della conferma.
-- Disdire: "Billing info", in qualsiasi momento, senza costi; effetto alla fine del periodo pagato, senza rimborso. Non trattenere la persona con promesse. Una sola domanda possibile: "Posso chiederLe che cosa non ha funzionato? Ci aiuta a migliorare." Poi spiegare come fare.
+- Disdire: area clienti, sezione "Billing", pulsante "Cancel subscription", in qualsiasi momento, senza costi; effetto alla fine del periodo pagato, senza rimborso. Non trattenere la persona con promesse. Una sola domanda possibile: "Posso chiederLe che cosa non ha funzionato? Ci aiuta a migliorare." Poi spiegare come fare.
 
 D14. Fine della prova
-Ricordare la data di fine. Senza disdetta, il piano scelto parte e il primo periodo viene addebitato. Per non pagare nulla, disdire prima della fine dall'area clienti. Non promettere proroghe della prova: se la persona lo chiede, ticket.
+Ricordare la data di fine. Un'email di promemoria viene inviata 7 giorni prima della fine della prova. Senza disdetta, il piano scelto parte e il primo periodo viene addebitato. Per non pagare nulla, disdire prima della fine dall'area clienti. Non promettere proroghe della prova: se la persona lo chiede, ticket.
 
 D15. Accesso all'account
 Accesso con email e password, oppure tramite Google o LinkedIn. Password dimenticata: link di reimpostazione nella pagina di accesso. L'agente non vede, non fornisce e non modifica alcuna password. Email persa o account bloccato: ticket "accesso all'account".
@@ -350,8 +350,10 @@ L'assistente di aiuto (bolla in basso a destra di app.permanenceia.com) guida il
 
 F5. Crediti messaggi
 - Pagano gli scambi scritti: risposte dell'AI su WhatsApp, SMS, Messenger, Instagram e chat, e messaggi inviati.
-- 100 crediti = 1 $. Una risposta scritta dell'AI ≈ 2 crediti; un SMS o un modello WhatsApp a seconda del paese.
-- Assistant: 1.000 crediti al mese (≈ 500 risposte). Call Center: 3.000 (≈ 1.500). Receptionist: canali disponibili, credito aggiunto in base all'uso ("Add credits").
+- Costi: risposta scritta dell'AI (chat del sito, WhatsApp, Messenger, Instagram) = 3 crediti; messaggio WhatsApp ricevuto o inviato in sessione = 1,4 crediti; SMS inviato = 2 crediti (può variare in base all'operatore o al paese); messaggio modello WhatsApp (template) = tariffa di Meta in base al paese e alla categoria, maggiorata; chiamate WhatsApp fatturate in minuti.
+- Inclusi ogni mese: Receptionist 200 crediti (≈ 65 risposte), Assistant 1.000 (≈ 330), Call Center 3.000 (≈ 1.000), Su misura su preventivo. Nessun credito è confermato per la prova gratuita: non prometterne.
+- Per averne di più: convertire minuti dall'area clienti, 1 minuto = 9 crediti. Non dare mai un'equivalenza in dollari.
+- Saldo visibile nell'area clienti. A 0 crediti, le risposte scritte e gli invii di SMS o WhatsApp si interrompono fino alla ricarica.
 
 F6. Cosa può fare ogni canale
 - Telefono: tutto (accoglienza, appuntamenti, trasferimento al team del cliente, campagne).

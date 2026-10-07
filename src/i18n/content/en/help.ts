@@ -115,5 +115,5 @@ export const HELP_GLOSSARY: MenuEntry[] = [
   { en: 'Post-call evaluation', label: 'Post-call analysis', text: 'The information automatically extracted from each call (name, need, appointment…).' },
   { en: 'Variables', label: 'Variables', text: 'Custom fields such as {{customer_name}}, filled in for each contact.' },
   { en: 'Voicemail', label: 'Voicemail', text: 'What the agent does if it reaches a voicemail.' },
-  { en: 'Credits', label: 'Credit', text: '100 credits = $1. Used for extra minutes and messages (WhatsApp, SMS).' },
+  { en: 'Credits', label: 'Credit', text: 'Your credit balance. Used for extra minutes and written messages (AI replies, WhatsApp, SMS); the cost of each use is shown on the Pricing page.' },
 ];

@@ -115,5 +115,5 @@ export const HELP_GLOSSARY: MenuEntry[] = [
   { en: 'Post-call evaluation', label: 'Analyse na het gesprek', text: 'De gegevens die automatisch uit elk gesprek worden gehaald (naam, behoefte, afspraak…).' },
   { en: 'Variables', label: 'Variabelen', text: 'Eigen velden zoals {{customer_name}}, ingevuld voor elk contact.' },
   { en: 'Voicemail', label: 'Voicemail', text: 'Wat de agent doet als hij op een voicemail uitkomt.' },
-  { en: 'Credits', label: 'Tegoed', text: '100 credits = $ 1. Wordt gebruikt voor extra minuten en berichten (WhatsApp, sms).' },
+  { en: 'Credits', label: 'Tegoed', text: 'Uw tegoed. Wordt gebruikt voor extra minuten en schriftelijke berichten (AI-antwoorden, WhatsApp, sms); de kosten per gebruik staan op de pagina Prijzen.' },
 ];

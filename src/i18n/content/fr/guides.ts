@@ -957,7 +957,7 @@ export const GUIDES: Guide[] = [
         title: 'Ce que vous payez',
         list: [
           'Votre forfait mensuel, avec des minutes d’appel incluses.',
-          'Les minutes au-delà du forfait, payées avec votre crédit (« Credits » : 100 crédits = 1 $).',
+          'Les minutes au-delà du forfait, payées avec votre crédit (« Credits »).',
           'Les messages WhatsApp, SMS et réponses écrites de l’IA, payés avec les crédits de messages.',
           'Les numéros dédiés, à partir de {numberFrom} par mois selon le pays.',
         ],

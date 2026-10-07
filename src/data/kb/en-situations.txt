@@ -255,10 +255,10 @@ Invoices are in "Billing info". A VAT number (UK) or ABN/GST details (Australia)
 
 D13. Changing or cancelling a plan
 - Change: "Change plan", at any time; the change is shown before confirmation.
-- Cancel: "Billing info", at any time, free of charge; takes effect at the end of the paid period, with no refund. Do not try to keep the person with promises. One question at most: "May I ask what didn't work for you? It helps us." Then explain how to do it.
+- Cancel: customer area, "Billing", "Cancel subscription" button, at any time, free of charge; takes effect at the end of the paid period, with no refund. Do not try to keep the person with promises. One question at most: "May I ask what didn't work for you? It helps us." Then explain how to do it.
 
 D14. End of trial
-Remind them of the end date. Without cancellation, the chosen plan starts and the first period is charged. To pay nothing, cancel before the end in the customer area. Do not promise a trial extension: if the person asks for one, ticket.
+Remind them of the end date. A reminder email is sent 7 days before the trial ends. Without cancellation, the chosen plan starts and the first period is charged. To pay nothing, cancel before the end in the customer area. Do not promise a trial extension: if the person asks for one, ticket.
 
 D15. Account access
 Sign-in with email and password, or via Google or LinkedIn. Forgotten password: reset link on the sign-in page. The agent never sees, gives out or changes a password. Lost email or locked account: "account access" ticket.
@@ -351,8 +351,10 @@ The help assistant (bubble at the bottom right of app.permanenceia.com) guides c
 
 F5. Message credits
 - They pay for written exchanges: AI replies on WhatsApp, SMS, Messenger, Instagram and chat, and messages sent.
-- 100 credits = $1. One written AI reply ≈ 2 credits; an SMS or a WhatsApp template depending on the country.
-- Assistant: 1,000 credits a month (≈ 500 replies). Call Centre: 3,000 (≈ 1,500). Receptionist: channels available, credit added according to use ("Add credits").
+- Costs: written AI reply (website chat, WhatsApp, Messenger, Instagram) = 3 credits; WhatsApp message received or sent within a session = 1.4 credits; SMS sent = 2 credits (may vary by carrier or country); WhatsApp template message = Meta's rate by country and category, plus a margin; WhatsApp calls billed in minutes.
+- Included each month: Receptionist 200 credits (≈ 65 replies), Assistant 1,000 (≈ 330), Call Centre 3,000 (≈ 1,000), Custom on quotation. No credits are confirmed for the free trial: do not promise any.
+- Getting more: convert minutes in the customer area, 1 minute = 9 credits. Never give a dollar equivalent.
+- Balance shown in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until the balance is topped up.
 
 F6. What each channel can do
 - Phone: everything (greeting, appointments, transfer to the customer's team, campaigns).

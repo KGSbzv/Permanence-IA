@@ -930,7 +930,7 @@ export const GUIDES: Guide[] = [
         title: 'What you pay for',
         list: [
           'Your monthly plan, with call minutes included.',
-          'Minutes beyond your plan, paid for from your credit ("Credits": 100 credits = $1).',
+          'Minutes beyond your plan, paid for from your credit ("Credits").',
           'WhatsApp messages, SMS and written AI replies, paid for with message credits.',
           'Dedicated numbers, from {numberFrom} a month depending on the country.',
         ],
