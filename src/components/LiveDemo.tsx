@@ -2,6 +2,7 @@
 // « Dans ce navigateur » ouvre l'assistante Autocalls de la langue choisie (même page widget que embed.js,
 // ouverte d'office) dans une fenêtre ; « Sur mon téléphone » envoie une demande de rappel à /api/callback.
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
+import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
@@ -314,6 +315,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
       const cfg = await res.json();
       if (cfg.widget_enabled === false) throw new Error();
       setDialog(widgetUrl(id, cfg, { demo_role: ROLE_NOTE[role], demo_language: NATIVE[lang], demo_sector: sectorName }));
+      track('demo_start', { mode: 'browser', demo_language: lang, sector, voice: gender });
       setState('idle');
     } catch {
       setState('error'); setError(t.browserError);
@@ -337,6 +339,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
       });
       if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendFailed); }
       setState('sent');
+      track('generate_lead', { lead_type: 'demo_call', demo_language: lang, sector, voice: gender });
     } catch (err: any) { setState('error'); setError(err.message || t.sendFailed); }
   }
 

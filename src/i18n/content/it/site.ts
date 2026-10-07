@@ -12,4 +12,5 @@ export const SITE_TEXT: typeof FR_SITE_TEXT = {
   talkNow: 'Parli subito con il nostro agente',
   talkNowSub: 'Demo dal vivo, gratuita, senza registrazione',
   rechargeFreeAmount: 'L’importo è libero: lo inserisca nella Sua area clienti (Add credits). Gli importi sopra sono esempi.',
+  consent: { title: 'Cookie di misurazione', text: 'Con il Suo consenso usiamo cookie per misurare le visite e l’efficacia dei nostri annunci. Se rifiuta, può comunque usare il sito.', accept: 'Accetta', reject: 'Rifiuta', policy: 'Maggiori informazioni', manage: 'Gestisci i cookie' },
 };

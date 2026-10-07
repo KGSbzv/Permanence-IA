@@ -10,4 +10,5 @@ export const SITE_TEXT = {
   talkNow: 'Talk to our agent right now',
   talkNowSub: 'Live demo, free, no sign-up',
   rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',
+  consent: { title: 'Measurement cookies', text: 'With your consent, we use cookies to measure visits and how well our ads perform. Declining won’t stop you using the site.', accept: 'Accept', reject: 'Decline', policy: 'Learn more', manage: 'Manage cookies' },
 };

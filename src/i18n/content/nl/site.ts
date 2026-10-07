@@ -10,4 +10,5 @@ export const SITE_TEXT = {
   talkNow: 'Praat nu direct met onze agent',
   talkNowSub: 'Live demo, gratis, zonder aanmelden',
   rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
+  consent: { title: 'Meetcookies', text: 'Met uw toestemming gebruiken wij cookies om bezoeken en de resultaten van onze advertenties te meten. Weigeren heeft geen invloed op het gebruik van de site.', accept: 'Accepteren', reject: 'Weigeren', policy: 'Meer informatie', manage: 'Cookies beheren' },
 };

@@ -1,4 +1,5 @@
 import React, { useId, useState } from 'react';
+import { track } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
@@ -146,6 +147,7 @@ export function CallbackForm({
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendFailed);
       setState('sent'); onDone?.();
+      track('generate_lead', { lead_type: type, language: locale, form: 'callback' });
     } catch (err: any) {
       setState('error'); setError(`${err.message} ${t.retry(SITE.email)}`);
     }
