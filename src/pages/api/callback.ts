@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
+import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
 import { NOTIFY_TO, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
@@ -89,14 +89,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
   ]);
   // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
+  // Message WhatsApp : mêmes garde-fous que l’appel automatique (demande enregistrée, zone couverte,
+  // 3 demandes par numéro sur 7 jours), plus un plafond de 30 messages par 24 h.
+  const sendWhatsApp = async () => {
+    if (!wantsWhatsApp) return null;
+    if (db.status !== 'fulfilled') throw new Error('demande non enregistrée');
+    if (!isAutoCallable(e164 as string)) throw new Error(`numéro hors zone : ${e164}`);
+    const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
+    const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164 as string)}&created_at=gte.${since}&limit=4`);
+    if (recent.length > 3) throw new Error('trop de demandes pour ce numéro cette semaine');
+    const day = await dbSelect('callbacks', `select=id&note=ilike.*WhatsApp*&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=31`);
+    if (day.length > 30) throw new Error('plafond quotidien de messages WhatsApp atteint');
+    // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
+    return scheduled
+      ? sendCallbackConfirmation({ lang: campaignLang, phone: e164 as string, name: String(name), callAt, tz: b.tz, kind, voice })
+      : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: safeFirstName(name, campaignLang) });
+  };
   const [call, wa] = await Promise.allSettled([
     db.status === 'fulfilled' ? queueCall() : Promise.reject(new Error('demande non enregistrée')),
-    // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
-    wantsWhatsApp
-      ? (scheduled
-        ? sendCallbackConfirmation({ lang: campaignLang, phone: e164 as string, name: String(name), callAt, tz: b.tz, kind, voice })
-        : sendTemplate('pia_welcome_whatsapp', campaignLang, e164 as string, { 1: String(name).trim().split(/\s+/)[0] }, String(name)))
-      : Promise.resolve(null),
+    sendWhatsApp(),
   ]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);

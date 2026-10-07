@@ -14,6 +14,18 @@ const INTL: Record<string, string> = { fr: 'fr-FR', 'en-gb': 'en-GB', 'en-au': '
 /** Conseillère du rappel support dans chaque langue (mêmes prénoms que l’agent WhatsApp et l’espace client). */
 const SUPPORT_NAME: Record<string, string> = { fr: 'Lucie', 'en-gb': 'Katie', 'en-au': 'Charlotte', it: 'Manuela', pl: 'Lena', nl: 'Emma', he: 'נועה' };
 
+/** Formule neutre quand le prénom saisi n’est pas un simple prénom (« Bonjour {{1}}, … »). */
+const NEUTRAL: Record<string, string> = { fr: 'Madame, Monsieur', 'en-gb': 'there', 'en-au': 'there', it: 'gentile cliente', pl: 'Szanowni Państwo', nl: 'klant', he: 'לכם' };
+
+/**
+ * Prénom sûr pour un message envoyé depuis notre numéro : lettres, espaces, apostrophes et traits d’union
+ * seulement (ni chiffres, ni liens, ni @), 30 caractères au plus ; sinon formule neutre.
+ */
+export function safeFirstName(raw: unknown, lang: string) {
+  const first = String(raw ?? '').trim().split(/\s+/)[0] || '';
+  return new RegExp("^\\p{L}[\\p{L}\\p{M}'’-]{0,29}$", 'u').test(first) ? first : NEUTRAL[lang] || NEUTRAL['en-gb'];
+}
+
 interface Template { id: number; name: string; language: string; status: string }
 let cache: { at: number; list: Template[] } | null = null;
 
@@ -37,14 +49,14 @@ async function templates() {
 }
 
 /** Envoie le modèle `name` dans la langue du site ; erreur si le modèle n’est pas (encore) approuvé. */
-export async function sendTemplate(name: string, lang: string, phone: string, variables: Record<string, string>, recipientName?: string) {
+export async function sendTemplate(name: string, lang: string, phone: string, variables: Record<string, string>) {
   const language = TEMPLATE_LANG[lang];
   if (!language) throw new Error(`langue WhatsApp inconnue : ${lang}`);
   const tpl = (await templates()).find((t) => t.name === name && t.language === language && String(t.status).toLowerCase() === 'approved');
   if (!tpl) throw new Error(`modèle ${name}/${language} non approuvé`);
   return call('/send', {
     method: 'POST',
-    body: JSON.stringify({ sender_id: WHATSAPP_SENDER_ID, template_id: tpl.id, recipient_phone: phone, recipient_name: recipientName, variables }),
+    body: JSON.stringify({ sender_id: WHATSAPP_SENDER_ID, template_id: tpl.id, recipient_phone: phone, recipient_name: variables[1], variables }),
   });
 }
 
@@ -56,11 +68,11 @@ export function sendCallbackConfirmation(opts: { lang: string; phone: string; na
   const { lang } = opts;
   const zone = typeof opts.tz === 'string' && validTz(opts.tz) ? opts.tz : TZ[lang] || TZ.fr;
   const intl = INTL[lang] || 'fr-FR';
-  const first = opts.name.trim().split(/\s+/)[0] || opts.name;
+  const first = safeFirstName(opts.name, lang);
   const voices = VOICES[(lang in VOICES ? lang : 'fr') as Locale];
   const advisor = opts.kind === 'support' ? SUPPORT_NAME[lang] || 'Lucie' : voices[opts.voice === 'male' ? 'male' : 'female'].name;
   // En hébreu, le modèle dit déjà « ביום » : pas de jour de la semaine, pour éviter « ביום יום שלישי ».
   const date = new Intl.DateTimeFormat(intl, { timeZone: zone, ...(lang === 'he' ? {} : { weekday: 'long' }), day: 'numeric', month: 'long' }).format(opts.callAt);
   const time = new Intl.DateTimeFormat(intl, { timeZone: zone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(opts.callAt);
-  return sendTemplate('pia_callback_confirmed', lang, opts.phone, { 1: first, 2: advisor, 3: date, 4: time }, opts.name);
+  return sendTemplate('pia_callback_confirmed', lang, opts.phone, { 1: first, 2: advisor, 3: date, 4: time });
 }
