@@ -4,7 +4,7 @@
 //
 // GET ?lang=fr|en-gb|en-au|it|pl|nl|he  (ou ?tz=Europe/Paris)  → aucune donnée personnelle, pas de jeton.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { describeLocal, offsetLabel, zoneFor } from '@/lib/server';
+import { calendarDays, describeLocal, localToUtc, offsetLabel, zoneFor } from '@/lib/server';
 
 const LANGS = ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl', 'he'];
 
@@ -13,11 +13,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const tz = zoneFor(req.query.tz, lang);
   const now = new Date();
   const ymd = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' });
-  const weekday = new Intl.DateTimeFormat('en-GB', { timeZone: tz, weekday: 'long' });
-  const days = Array.from({ length: 14 }, (_, i) => {
-    // Même heure que maintenant, jour par jour : le décalage suit le changement d’heure (fin octobre).
-    const d = new Date(now.getTime() + i * 86_400_000);
-    return { date: ymd.format(d), weekday: weekday.format(d), utc_offset: offsetLabel(d, tz), ...(i === 0 ? { label: 'today' } : i === 1 ? { label: 'tomorrow' } : {}) };
+  const weekday = new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', weekday: 'long' });
+  const days = calendarDays(tz, 14).map((date, i) => {
+    // Décalage pris à midi local de chaque date : celui des heures de rappel, changement d’heure compris.
+    const noon = localToUtc(`${date}T12:00`, tz) as Date;
+    return { date, weekday: weekday.format(new Date(`${date}T00:00:00Z`)), utc_offset: offsetLabel(noon, tz), ...(i === 0 ? { label: 'today' } : i === 1 ? { label: 'tomorrow' } : {}) };
   });
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({

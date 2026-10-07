@@ -1,0 +1,8 @@
+permanenceia.com. 3600 IN TXT "stripe-verification=2496e15e7f6d90cf0125cc87f8af1e9d6936842e39455636b495e2ec12e18a71"
+bwnon64fru2vaegvdxjrhzymh5x2hitj._domainkey.permanenceia.com. 3600 IN CNAME bwnon64fru2vaegvdxjrhzymh5x2hitj.dkim.custom-email-domain.stripe.com.
+dblrlwzjfdwu3h3ywx42ao3xpz6iqz5d._domainkey.permanenceia.com. 3600 IN CNAME dblrlwzjfdwu3h3ywx42ao3xpz6iqz5d.dkim.custom-email-domain.stripe.com.
+lyq6izsxfizjmhpqy5aaos2dvx6a6hmg._domainkey.permanenceia.com. 3600 IN CNAME lyq6izsxfizjmhpqy5aaos2dvx6a6hmg.dkim.custom-email-domain.stripe.com.
+mbqtdcp5kygvcplyo3fcj3ygj3eqderq._domainkey.permanenceia.com. 3600 IN CNAME mbqtdcp5kygvcplyo3fcj3ygj3eqderq.dkim.custom-email-domain.stripe.com.
+tutxg75awyo6zm6e2ybzojs3hojcinns._domainkey.permanenceia.com. 3600 IN CNAME tutxg75awyo6zm6e2ybzojs3hojcinns.dkim.custom-email-domain.stripe.com.
+xc2ekv746xhei3vjbovqc365zib525ky._domainkey.permanenceia.com. 3600 IN CNAME xc2ekv746xhei3vjbovqc365zib525ky.dkim.custom-email-domain.stripe.com.
+bounce.permanenceia.com. 3600 IN CNAME custom-email-domain.stripe.com.

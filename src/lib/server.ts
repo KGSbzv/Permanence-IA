@@ -159,7 +159,7 @@ export function tzOffset(at: Date, tz: string) {
 }
 
 /** Heure locale « AAAA-MM-JJTHH:MM » d’un fuseau → instant UTC. */
-function localToUtc(local: string, tz: string) {
+export function localToUtc(local: string, tz: string) {
   const m = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(local);
   if (!m) return null;
   const guess = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
@@ -168,8 +168,16 @@ function localToUtc(local: string, tz: string) {
 
 /** Date du jour (AAAA-MM-JJ) dans un fuseau, décalée de `days` jours. */
 function dayIn(tz: string, days: number) {
-  const d = new Date(Date.now() + days * 86_400_000);
-  return new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+  return calendarDays(tz, days + 1)[days];
+}
+
+/**
+ * Les `count` prochaines dates du calendrier local (AAAA-MM-JJ), aujourd’hui compris. Calcul sur le calendrier,
+ * pas par pas de 24 h : aucune date sautée ni répétée autour d’un changement d’heure.
+ */
+export function calendarDays(tz: string, count: number) {
+  const [y, m, d] = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date()).split('-').map(Number);
+  return Array.from({ length: count }, (_, i) => new Date(Date.UTC(y, m - 1, d + i)).toISOString().slice(0, 10));
 }
 
 // Créneaux du formulaire du site (valeurs fixes, quelle que soit la langue) → heure locale du rappel.
