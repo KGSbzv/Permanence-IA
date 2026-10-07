@@ -20,13 +20,13 @@ export const UI_PAGES = {
     formIntro: 'Gratis gesprek, op het tijdstip van uw keuze.',
     submit: 'Demogesprek aanvragen',
     hearTitle: 'Wat u te horen krijgt',
-    hearIntro: 'Een voorbeeldgesprek in een tandartspraktijk: de agent herkent de vraag, stelt een tijdslot voor en maakt het overzicht klaar voor het team.',
+    hearIntro: 'Een voorbeeldgesprek bij een loodgieter: de agent herkent de spoed, plant het bezoek in en maakt het overzicht klaar voor het team.',
     steps: [
       { title: 'U laat uw nummer achter', text: 'Met uw sector en uw tijdslot.' },
       { title: 'De agent belt u', text: 'Hij speelt een scenario uit uw vak.' },
       { title: 'U test vrijuit', text: 'Stel uw vragen, verander van gedachten, onderbreek hem.' },
     ],
-    liveCallTitle: 'Agent voor de tandartspraktijk',
+    liveCallTitle: 'Agent voor de loodgieter',
     scenariosTitle: 'Kies uw scenario',
   },
 

@@ -33,21 +33,26 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
-/* ---------- Petite orbe (choix du rôle) ---------- */
+/* ---------- Onde de voix (choix du rôle) ---------- */
 
-function MiniOrb({ hue, active }: { hue: [string, string, string]; active: boolean }) {
+/** Hauteurs relatives des barres : une voix qui parle, un profil propre à chaque rôle. */
+const BARS = [[0.45, 0.8, 1, 0.7, 0.4], [0.6, 1, 0.55, 0.9, 0.5], [0.4, 0.65, 0.9, 1, 0.6]];
+
+function VoiceWave({ hue, bars, active }: { hue: [string, string, string]; bars: number[]; active: boolean }) {
   const [hi, mid, edge] = hue;
   return (
     <span
       aria-hidden
-      className={`relative block h-14 w-14 overflow-hidden rounded-full transition-transform duration-300 ${active ? 'scale-110' : 'scale-95 opacity-70 group-hover:opacity-100'}`}
-      style={{ background: `radial-gradient(circle at 32% 28%, ${hi} 0%, ${mid} 45%, ${edge} 100%)` }}
+      className={`relative flex h-14 w-14 items-center justify-center gap-[3px] rounded-2xl transition-all duration-300 ${active ? 'scale-105 shadow-[0_8px_24px_rgba(5,10,30,.45)]' : 'scale-95 opacity-60 group-hover:opacity-90'}`}
+      style={{ background: `radial-gradient(circle at 30% 25%, ${hi}55 0%, ${mid} 55%, ${edge} 100%)` }}
     >
-      <span
-        className="absolute -inset-2 animate-[spin_9s_linear_infinite] opacity-60 mix-blend-screen motion-reduce:animate-none"
-        style={{ background: `conic-gradient(from 0deg, transparent 0 30%, ${hi}99 45%, transparent 60% 80%, ${mid}cc 92%, transparent)` }}
-      />
-      <span className="absolute inset-0 rounded-full shadow-[inset_0_-6px_14px_rgba(10,18,51,.55)]" />
+      {bars.map((h, i) => (
+        <span
+          key={i}
+          className={`block w-[4px] origin-center rounded-full bg-white ${active ? 'animate-wave motion-reduce:animate-none' : ''}`}
+          style={{ height: `${Math.round(h * 26)}px`, animationDelay: `${i * 0.12}s`, opacity: active ? 0.95 : 0.75 }}
+        />
+      ))}
     </span>
   );
 }
@@ -232,7 +237,8 @@ function AssistantDialog({ src, title, closeLabel, onClose }: { src: string; tit
       const d = e.data;
       if (d?.type !== 'voice-assistant-widget' || d.action !== 'resize') return;
       if (d.size === 'small') onClose();
-      else if (d.size === 'expanded') setSize({ width: d.width || '400px', height: d.height || '600px' });
+      // Jamais plus petit que la taille d'origine : un redimensionnement trop court coupait le bouton « Démarrer ».
+      else if (d.size === 'expanded') setSize({ width: `max(${d.width || '400px'}, 380px)`, height: `max(${d.height || '600px'}, 600px)` });
     };
     window.addEventListener('message', onMessage, true);
     // La bulle globale est masquée le temps de la conversation, pour ne pas avoir deux assistantes à l'écran.
@@ -351,9 +357,10 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
 
   return (
     <div className="overflow-hidden rounded-[28px] bg-night text-white shadow-float ring-1 ring-white/10">
-      <div className="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)]">
+      {/* Grand écran : réglages à gauche ; à droite, l’agent puis l’action (essai navigateur ou rappel). */}
+      <div className="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)_auto]">
         {/* Scène : l'orbe de l'agent choisi */}
-        <div className="relative order-first min-h-[300px] overflow-hidden bg-[radial-gradient(120%_90%_at_50%_40%,#141E47_0%,#0A1233_70%)] sm:min-h-[380px] lg:order-last lg:min-h-full">
+        <div className="relative order-first min-h-[300px] overflow-hidden bg-[radial-gradient(120%_90%_at_50%_40%,#141E47_0%,#0A1233_70%)] sm:min-h-[360px] lg:col-start-2 lg:row-start-1">
           {/* Cercles concentriques : la ligne qui reste ouverte */}
           <div aria-hidden className="absolute inset-0 opacity-40 [background:repeating-radial-gradient(circle_at_50%_44%,transparent_0_46px,rgba(90,211,236,.08)_47px,transparent_48px)]" />
           <div className="absolute inset-x-0 top-0 bottom-[30%] [container-type:size] sm:bottom-[26%]">
@@ -381,7 +388,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         </div>
 
         {/* Réglages */}
-        <div className="p-5 sm:p-8">
+        <div className="p-5 sm:p-8 lg:col-start-1 lg:row-span-2 lg:row-start-1">
           {showHeader && (
             <>
               <Heading className="font-display text-[1.6rem] font-bold leading-tight text-white sm:text-[1.9rem]">{t.title}</Heading>
@@ -396,7 +403,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 <label key={r.name} className="group cursor-pointer text-center">
                   <input type="radio" name={`${uid}-role`} value={i} checked={role === i} onChange={() => setRole(i)} className="peer sr-only" />
                   <span className={`flex flex-col items-center gap-2 rounded-2xl px-1 py-3 transition-colors ${role === i ? 'bg-white/[.07]' : 'hover:bg-white/[.04]'} ${focusRing}`}>
-                    <MiniOrb hue={HUES[i]} active={role === i} />
+                    <VoiceWave hue={HUES[i]} bars={BARS[i]} active={role === i} />
                     <span className={`text-[13.5px] font-semibold leading-tight ${role === i ? 'text-white' : 'text-white/60'}`}>{r.name}</span>
                   </span>
                 </label>
@@ -460,7 +467,11 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
             </select>
           </label>
 
-          <fieldset className="mt-5">
+        </div>
+
+        {/* Action : essayer dans le navigateur ou recevoir l’appel */}
+        <div className="px-5 pb-6 sm:px-8 sm:pb-8 lg:col-start-2 lg:row-start-2 lg:bg-[#0A1233] lg:pt-1">
+          <fieldset>
             <legend className="sr-only">{t.modeLabel}</legend>
             <div className="grid grid-cols-2 rounded-xl bg-white/[.06] p-1 ring-1 ring-white/10">
               {(['browser', 'phone'] as const).map((m) => (

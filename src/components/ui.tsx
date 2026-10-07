@@ -281,15 +281,17 @@ export function CallbackForm({
 /* ---------- Téléphone : indicatif pays + numéro ---------- */
 
 /** Indicatifs proposés (marchés servis et voisins). La valeur envoyée est l’indicatif sans « + ». */
-const DIAL_CODES: { id: string; flag: string; cc: string }[] = [
-  { id: 'FR', flag: '🇫🇷', cc: '33' }, { id: 'BE', flag: '🇧🇪', cc: '32' }, { id: 'CH', flag: '🇨🇭', cc: '41' },
-  { id: 'LU', flag: '🇱🇺', cc: '352' }, { id: 'MC', flag: '🇲🇨', cc: '377' }, { id: 'CA', flag: '🇨🇦', cc: '1' },
-  { id: 'GB', flag: '🇬🇧', cc: '44' }, { id: 'IE', flag: '🇮🇪', cc: '353' }, { id: 'AU', flag: '🇦🇺', cc: '61' },
-  { id: 'NZ', flag: '🇳🇿', cc: '64' }, { id: 'IT', flag: '🇮🇹', cc: '39' }, { id: 'PL', flag: '🇵🇱', cc: '48' },
-  { id: 'NL', flag: '🇳🇱', cc: '31' }, { id: 'IL', flag: '🇮🇱', cc: '972' }, { id: 'US', flag: '🇺🇸', cc: '1' },
-  { id: 'DE', flag: '🇩🇪', cc: '49' }, { id: 'ES', flag: '🇪🇸', cc: '34' }, { id: 'PT', flag: '🇵🇹', cc: '351' },
+const DIAL_CODES: { id: string; flag: string; cc: string; ex: string }[] = [
+  { id: 'FR', flag: '🇫🇷', cc: '33', ex: '06 12 34 56 78' }, { id: 'BE', flag: '🇧🇪', cc: '32', ex: '0470 12 34 56' }, { id: 'CH', flag: '🇨🇭', cc: '41', ex: '078 123 45 67' },
+  { id: 'LU', flag: '🇱🇺', cc: '352', ex: '621 123 456' }, { id: 'MC', flag: '🇲🇨', cc: '377', ex: '06 12 34 56 78' }, { id: 'CA', flag: '🇨🇦', cc: '1', ex: '514 555 0123' },
+  { id: 'GB', flag: '🇬🇧', cc: '44', ex: '07123 456789' }, { id: 'IE', flag: '🇮🇪', cc: '353', ex: '085 123 4567' }, { id: 'AU', flag: '🇦🇺', cc: '61', ex: '0412 345 678' },
+  { id: 'NZ', flag: '🇳🇿', cc: '64', ex: '021 123 4567' }, { id: 'IT', flag: '🇮🇹', cc: '39', ex: '312 345 6789' }, { id: 'PL', flag: '🇵🇱', cc: '48', ex: '512 345 678' },
+  { id: 'NL', flag: '🇳🇱', cc: '31', ex: '06 12345678' }, { id: 'IL', flag: '🇮🇱', cc: '972', ex: '050-123-4567' }, { id: 'US', flag: '🇺🇸', cc: '1', ex: '212 555 0123' },
+  { id: 'DE', flag: '🇩🇪', cc: '49', ex: '0151 23456789' }, { id: 'ES', flag: '🇪🇸', cc: '34', ex: '612 34 56 78' }, { id: 'PT', flag: '🇵🇹', cc: '351', ex: '912 345 678' },
 ];
 const DEFAULT_COUNTRY: Record<string, string> = { fr: 'FR', 'en-gb': 'GB', 'en-au': 'AU', it: 'IT', pl: 'PL', nl: 'NL', he: 'IL' };
+/** « par exemple » devant le format attendu, affiché dans le champ (le libellé reste dans aria-label ou au-dessus). */
+const EXAMPLE: Record<string, string> = { fr: 'ex.', 'en-gb': 'e.g.', 'en-au': 'e.g.', it: 'es.', pl: 'np.', nl: 'bijv.', he: 'לדוגמה' };
 const DIAL_LABEL: Record<string, string> = { fr: 'Indicatif pays', 'en-gb': 'Country code', 'en-au': 'Country code', it: 'Prefisso internazionale', pl: 'Numer kierunkowy kraju', nl: 'Landcode', he: 'קידומת מדינה' };
 /** Motif valable aussi en mode « v » des navigateurs récents (parenthèses et tiret échappés). */
 export const PHONE_PATTERN = '[+0-9\\(][0-9 .\\(\\)\\-]{7,}';
@@ -303,14 +305,19 @@ export function PhoneField({ id, label, className = 'field', placeholder, hideLa
 }) {
   const { c, locale } = useI18n();
   const invalid = c.ui.components.callbackForm.phoneInvalid;
+  const [country, setCountry] = useState(DEFAULT_COUNTRY[locale] || 'FR');
+  const ex = DIAL_CODES.find((d) => d.id === country)?.ex;
+  // Le sélecteur garde sa largeur naturelle : on retire un éventuel « w-full » hérité de la classe du champ.
+  const selectClass = className.replace(/\bw-full\b/g, '');
   return (
     <div>
       {!hideLabel && <label htmlFor={id} className={labelClassName}>{label}</label>}
       <div className="flex gap-2" dir="ltr">
-        <select name="cc" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} defaultValue={DEFAULT_COUNTRY[locale] || 'FR'} className={`${className} w-auto shrink-0 pe-7`}>
+        <select name="cc" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} value={country} onChange={(e) => setCountry(e.target.value)} className={`${selectClass} w-[5.75rem] shrink-0 pe-6 sm:w-[6.75rem] sm:pe-7`}>
           {DIAL_CODES.map((d) => <option key={d.id} value={d.id}>{d.flag} +{d.cc}</option>)}
         </select>
-        <input id={id} name="phone" type="tel" required minLength={8} pattern={PHONE_PATTERN} autoComplete="tel-national" placeholder={placeholder}
+        <input id={id} name="phone" type="tel" inputMode="tel" required minLength={8} pattern={PHONE_PATTERN} autoComplete="tel-national"
+          placeholder={ex ? `${EXAMPLE[locale] || 'e.g.'} ${ex}` : placeholder}
           aria-label={hideLabel ? label : undefined} className={`${className} min-w-0 flex-1`}
           onInvalid={(e) => e.currentTarget.setCustomValidity(invalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} />
       </div>

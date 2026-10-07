@@ -388,7 +388,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     modePhone: 'Zadzwońcie do mnie',
     stageLabel: 'Twój agent demo',
     voiceTag: (name: string) => `Głos: ${name}`,
-    browserText: 'Nasza asystentka otworzy się tutaj. Rozpocznij rozmowę głosową lub napisz i podaj swoją branżę oraz rolę do odegrania.',
+    browserText: 'Po kliknięciu na tej stronie otworzy się okno: porozmawiaj z agentem przez mikrofon albo do niego napisz. Agent zna już wybraną rolę i branżę.',
     browserCta: (name: string) => `Porozmawiaj teraz (${name})`,
     browserOpening: 'Otwieranie…',
     browserLegal: 'Przeglądarka poprosi o dostęp do mikrofonu na potrzeby rozmowy głosowej.',

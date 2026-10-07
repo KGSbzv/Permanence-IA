@@ -35,13 +35,13 @@ export const UI_PAGES = {
     formIntro: 'Appel gratuit, au créneau de votre choix.',
     submit: 'Recevoir l’appel de démo',
     hearTitle: 'Ce que vous allez entendre',
-    hearIntro: 'Un exemple d’appel dans un cabinet dentaire : l’agent identifie la demande, propose un créneau et prépare la fiche pour l’équipe.',
+    hearIntro: 'Un exemple d’appel chez un plombier : l’agent identifie l’urgence, organise l’intervention et prépare la fiche pour l’équipe.',
     steps: [
       { title: 'Vous laissez votre numéro', text: 'Avec votre secteur et votre créneau.' },
       { title: 'L’agent vous appelle', text: 'Il joue un scénario de votre métier.' },
       { title: 'Vous testez librement', text: 'Posez vos questions, changez d’avis, interrompez-le.' },
     ],
-    liveCallTitle: 'Accueil cabinet dentaire',
+    liveCallTitle: 'Accueil plomberie',
     scenariosTitle: 'Choisissez votre scénario',
   },
 

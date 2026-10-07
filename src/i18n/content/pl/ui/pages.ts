@@ -29,13 +29,13 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     formIntro: 'Bezpłatne połączenie, w wybranym przez Ciebie terminie.',
     submit: 'Zamów połączenie demo',
     hearTitle: 'Co usłyszysz',
-    hearIntro: 'Przykład rozmowy w gabinecie stomatologicznym: agent rozpoznaje sprawę, proponuje termin i przygotowuje dla zespołu notatkę ze zgłoszeniem.',
+    hearIntro: 'Przykład rozmowy z firmą hydrauliczną: agent rozpoznaje pilną sprawę, umawia wizytę i przygotowuje dla zespołu notatkę ze zgłoszeniem.',
     steps: [
       { title: 'Zostawiasz numer', text: 'Wraz z branżą i preferowanym terminem.' },
       { title: 'Agent do Ciebie dzwoni', text: 'Odgrywa scenariusz z Twojej branży.' },
       { title: 'Testujesz swobodnie', text: 'Zadawaj pytania, zmieniaj zdanie, przerywaj mu.' },
     ],
-    liveCallTitle: 'Agent gabinetu stomatologicznego',
+    liveCallTitle: 'Agent firmy hydraulicznej',
     scenariosTitle: 'Wybierz scenariusz',
   },
 

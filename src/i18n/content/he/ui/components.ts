@@ -379,7 +379,7 @@ export const UI_COMPONENTS = {
     modePhone: 'בטלפון שלי',
     stageLabel: 'סוכן ההדגמה שלכם',
     voiceTag: (name: string) => `הקול של ${name}`,
-    browserText: 'הסוכן שלנו נפתח כאן. התחילו שיחה קולית או כתבו לו, וספרו לו מה התחום שלכם ואיזה תפקיד לשחק.',
+    browserText: 'בלחיצה ייפתח חלון בעמוד הזה: דברו עם הסוכן במיקרופון או כתבו לו. הוא כבר יודע איזה תפקיד ותחום בחרתם.',
     browserCta: (name: string) => `דברו עם ${name}`,
     browserOpening: 'פותחים…',
     browserLegal: 'הדפדפן יבקש גישה למיקרופון עבור השיחה הקולית.',

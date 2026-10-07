@@ -377,7 +377,7 @@ export const UI_COMPONENTS = {
     modePhone: 'Bel mijn telefoon',
     stageLabel: 'Uw demo-agent',
     voiceTag: (name: string) => `Stem van ${name}`,
-    browserText: 'Onze assistent wordt hier geopend. Start het spraakgesprek of typ een bericht, en vertel haar uw sector en welke rol ze moet spelen.',
+    browserText: 'Na een klik opent er een venster op deze pagina: praat met de agent via uw microfoon of typ een bericht. De agent kent de gekozen rol en sector al.',
     browserCta: (name: string) => `Praat met ${name}`,
     browserOpening: 'Openen…',
     browserLegal: 'Uw browser vraagt toegang tot de microfoon voor het spraakgesprek.',

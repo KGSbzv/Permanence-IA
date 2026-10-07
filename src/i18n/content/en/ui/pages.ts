@@ -20,13 +20,13 @@ export const UI_PAGES = {
     formIntro: 'Free call, at a time that suits you.',
     submit: 'Get the demo call',
     hearTitle: 'What you will hear',
-    hearIntro: 'An example call to a dental practice: the agent identifies the request, offers a slot and prepares the record for the team.',
+    hearIntro: 'An example call to a plumber: the agent identifies the emergency, arranges the visit and prepares the record for the team.',
     steps: [
       { title: 'You leave your number', text: 'With your sector and preferred time.' },
       { title: 'The agent calls you', text: 'It plays out a scenario from your trade.' },
       { title: 'You test it freely', text: 'Ask questions, change your mind, interrupt it.' },
     ],
-    liveCallTitle: 'Dental agent',
+    liveCallTitle: 'Plumbing agent',
     scenariosTitle: 'Choose your scenario',
   },
 

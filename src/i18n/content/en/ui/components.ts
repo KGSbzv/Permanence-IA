@@ -381,7 +381,7 @@ export const UI_COMPONENTS = {
     modePhone: 'Ring my phone',
     stageLabel: 'Your demo agent',
     voiceTag: (name: string) => `${name}’s voice`,
-    browserText: 'Our assistant opens right here. Start the voice conversation or type, and tell it your trade and the role to play.',
+    browserText: 'Click and a window opens on this page: talk to the agent through your microphone or type to it. It already knows the role and trade you picked.',
     browserCta: (name: string) => `Talk to ${name}`,
     browserOpening: 'Opening…',
     browserLegal: 'Your browser will ask for microphone access for the voice conversation.',

@@ -20,13 +20,13 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     formIntro: 'Chiamata gratuita, nella fascia oraria che preferisce.',
     submit: 'Richieda la chiamata demo',
     hearTitle: 'Cosa ascolterà',
-    hearIntro: 'Un esempio di chiamata in uno studio dentistico: l’agente identifica la richiesta, propone un orario e prepara la scheda per il team.',
+    hearIntro: 'Un esempio di chiamata a un idraulico: l’agente riconosce l’urgenza, organizza l’intervento e prepara la scheda per il team.',
     steps: [
       { title: 'Lasci il Suo numero', text: 'Con il Suo settore e la fascia oraria preferita.' },
       { title: 'L’agente La chiama', text: 'Simula uno scenario della Sua attività.' },
       { title: 'Provi liberamente', text: 'Faccia domande, cambi idea, lo interrompa.' },
     ],
-    liveCallTitle: 'Agente per studio dentistico',
+    liveCallTitle: 'Agente per idraulico',
     scenariosTitle: 'Scelga il Suo scenario',
   },
 
