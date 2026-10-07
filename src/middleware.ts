@@ -19,8 +19,12 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  // Seules les pages sans préfixe (donc en français) sont concernées ; les robots gardent l’URL demandée.
-  if (req.nextUrl.locale !== DEFAULT_LOCALE || BOT.test(req.headers.get('user-agent') || '')) return NextResponse.next();
+  // Seules les pages sans préfixe (donc en français) sont concernées.
+  // Seule une vraie navigation de navigateur (en-tête Sec-Fetch-Dest: document) est redirigée selon la langue :
+  // les robots (Google, Autocalls qui lit les pages pour les bases de connaissances, aperçus de liens) et les outils
+  // reçoivent toujours la page demandée, dans la langue de l’URL.
+  const browserNavigation = req.headers.get('sec-fetch-dest') === 'document';
+  if (req.nextUrl.locale !== DEFAULT_LOCALE || !browserNavigation || BOT.test(req.headers.get('user-agent') || '')) return NextResponse.next();
   const saved = req.cookies.get('NEXT_LOCALE')?.value;
   const target = isLocale(saved) ? saved : detectLocale(req.headers.get('accept-language'));
   if (target === DEFAULT_LOCALE) return NextResponse.next();
