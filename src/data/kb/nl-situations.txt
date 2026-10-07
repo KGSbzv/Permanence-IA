@@ -37,7 +37,7 @@ Minuten per maand ≈ gesprekken per maand × gemiddelde duur (vaak 2 tot 4 minu
 - Ongeveer 1.700 tot 2.500 minuten: Callcenter ($499, 2.300 minuten, daarna $0,32).
 - Structureel boven 2.500 minuten, of meerdere vestigingen: Maatwerk, op aanvraag. Een terugbelgesprek met een adviseur voorstellen.
 Formulering: "Met ongeveer 600 minuten per maand is het abonnement Receptionist het voordeligst. Wilt u openstaande offertes automatisch nabellen, dan heeft u het abonnement Assistent nodig."
-Het eigen nummer is niet inbegrepen (vanaf $5,99 per maand, afhankelijk van het land): dat vermelden bij het noemen van een totaalprijs.
+Het eigen nummer is niet inbegrepen (vanaf $3,99 per maand, afhankelijk van het land): dat vermelden bij het noemen van een totaalprijs.
 
 A4. Jaarlijkse facturatie: wanneer erover beginnen
 - Alleen als de persoon een abonnement heeft gekozen of vraagt hoe de kosten omlaag kunnen.
@@ -78,7 +78,7 @@ A8. Bezwaren
 - "Ik moet erover nadenken." → "Natuurlijk. Waar twijfelt u nog over?" Daarna de proefperiode voorstellen (14 dagen wordt er niets afgeschreven) of een terugbelafspraak op een vaste datum.
 - "Stuur me maar een e-mail." → "Graag. Naar welk adres?" Zeggen wat er wordt gestuurd (link naar de proefperiode, abonnementen) en dan een terugbelafspraak met datum voorstellen om het te bespreken. Geen bijlage beloven die niet bestaat.
 - "Waarom een creditcard voor de proefperiode?" → "Om misbruik te voorkomen en zonder onderbreking verder te kunnen als u blijft. In de 14 dagen wordt niets afgeschreven, en u zegt vóór het einde met één klik op in uw klantomgeving."
-- "Is het nummer inbegrepen?" → "Nee, het abonnement omvat de minuten en de functies. Een eigen nummer komt erbij vanaf $5,99 per maand, afhankelijk van het land. U kunt ook uw huidige nummer houden, zonder kosten van onze kant." Erbij vertellen dat een Nederlands nummer direct in de klantomgeving te koop is, en dat het huidige nummer via doorschakelen, import of SIP gekoppeld kan worden.
+- "Is het nummer inbegrepen?" → "Nee, het abonnement omvat de minuten en de functies. Een eigen nummer komt erbij vanaf $3,99 per maand, afhankelijk van het land. U kunt ook uw huidige nummer houden, zonder kosten van onze kant." Erbij vertellen dat een Nederlands nummer direct in de klantomgeving te koop is, en dat het huidige nummer via doorschakelen, import of SIP gekoppeld kan worden.
 - "Ik heb geen tijd om dit op te zetten." → "Een eerste agent staat binnen een paar minuten klaar op basis van uw gegevens. Voor een volledige configuratie moet u rekenen op één à twee dagen, en de hulpassistent in de klantomgeving begeleidt u in het Nederlands."
 - "En de gegevens, de AVG?" → "De gegevens worden versleuteld, de bewaartermijn is instelbaar, u kunt een gesprek op verzoek laten verwijderen, en de verwerkersovereenkomst (DPA) is opgenomen in onze voorwaarden; een ondertekende versie krijgt u op verzoek. De gegevens staan op servers in de Europese Economische Ruimte en/of de Verenigde Staten, met passende waarborgen. Uw privacyverklaring moet u nog wel afstemmen op uw eigen bedrijf."
 - "En de AI Act?" → "De belangrijkste regel voor u is transparantie: de agent zegt vanaf het begin dat hij een AI is. Dat staat standaard al zo ingesteld. Voor een juridische analyse van uw situatie kunt u het beste uw adviseur raadplegen."
@@ -165,7 +165,7 @@ De interface is in het Engels: de exacte namen noemen en vertalen.
 3. Agenda: "Tools & actions" → "Appointment Scheduling", Cal.com (API-sleutel, "Sync Event") of Calendly ("Connect to Calendly", "Load Events"). Google en Outlook koppelt u via Cal.com of Calendly. Bij Calendly moet de locatie van de afspraak "Custom" of "Phone Call" zijn, niet alleen een videogesprek.
 4. Testen: testchat ("Test assistant"), gesprek in de browser ("Speak with your assistant", zonder mogelijkheid tot doorverbinden), daarna een echt telefoongesprek. Spraaktests verbruiken minuten.
 5. Nummer, naar keuze:
-   - een nummer kopen ("Get new phone number"), vanaf $5,99 per maand afhankelijk van het land, en het toewijzen in "General" → "Phone number";
+   - een nummer kopen ("Get new phone number"), vanaf $3,99 per maand afhankelijk van het land, en het toewijzen in "General" → "Phone number";
    - het eigen nummer houden via doorschakelen. Op de meeste mobiele telefoons: **61*nummer van de agent# als u niet opneemt (met vertraging: **61*nummer**20#), **67*nummer# bij in gesprek, **62*nummer# als de telefoon uit staat, **21*nummer# voor alle oproepen. Uitschakelen: ##61#, ##67#, ##62#, ##21#, of ##002# om alles te annuleren. Doorschakelen wordt door de provider in rekening gebracht, vooral naar een buitenlands nummer;
    - nummers van Twilio of Telnyx importeren, of een telefooncentrale via SIP koppelen ("Your phone numbers" → "Integrate SIP trunk").
    Een Nederlands nummer koopt u direct (eerste optie); voor landen die niet in de lijst staan, kiest u een van de laatste drie opties.

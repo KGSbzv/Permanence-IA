@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Una receptionist AI che risponde a ogni chiamata, 24 ore su 24',
     pitch: 'Il piano Receptionist gestisce le Sue chiamate, risponde alle domande frequenti, fissa gli appuntamenti e Le invia un riepilogo chiaro di ogni richiesta. Semplice da attivare, senza complicazioni.',
     cta: 'Scelga Receptionist',
-    highlights: ['1 agente vocale AI che risponde 24/7', '2 chiamate simultanee', '1 numero dedicato possibile (opzione da 5,99 $ al mese, IVA esclusa) e 1 base di conoscenza', 'Calendario collegato e widget web', 'Trasferimento di chiamata al Suo team', 'SMS, WhatsApp e Messenger (crediti messaggi secondo l’uso)'],
+    highlights: ['1 agente vocale AI che risponde 24/7', '2 chiamate simultanee', '1 numero dedicato possibile (opzione da 3,99 $ al mese, IVA esclusa) e 1 base di conoscenza', 'Calendario collegato e widget web', 'Trasferimento di chiamata al Suo team', 'SMS, WhatsApp e Messenger (crediti messaggi secondo l’uso)'],
   },
   assistant: {
     name: 'Assistant',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un assistente AI che qualifica, ricontatta e automatizza le Sue richieste',
     pitch: 'Il piano Assistant porta a tre gli agenti e aggiunge le campagne di ricontatto, gli scenari automatizzati collegati a oltre 300 strumenti e una voce clonata, per convertire più richieste.',
     cta: 'Scelga Assistant',
-    highlights: ['Tutto Receptionist, e in più:', '3 agenti, 5 chiamate simultanee', '3 numeri dedicati possibili (opzione da 5,99 $ al mese, IVA esclusa), 3 basi di conoscenza, 3 strumenti in chiamata', '3 campagne di ricontatto', 'Scenari automatizzati e automazioni (5.000 esecuzioni / mese)', '1 voce clonata', '1.000 crediti messaggi al mese (≈ 500 risposte scritte)'],
+    highlights: ['Tutto Receptionist, e in più:', '3 agenti, 5 chiamate simultanee', '3 numeri dedicati possibili (opzione da 3,99 $ al mese, IVA esclusa), 3 basi di conoscenza, 3 strumenti in chiamata', '3 campagne di ricontatto', 'Scenari automatizzati e automazioni (5.000 esecuzioni / mese)', '1 voce clonata', '1.000 crediti messaggi al mese (≈ 500 risposte scritte)'],
   },
   'centre-appels': {
     name: 'Call Center',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un call center AI completo per organizzare accoglienza, appuntamenti e assistenza',
     pitch: 'Il piano Call Center alza i limiti: agenti e campagne illimitati, 20 chiamate simultanee, dashboard personalizzate, assistenza prioritaria e il miglior prezzo al minuto.',
     cta: 'Scelga Call Center',
-    highlights: ['Tutto Assistant, e in più:', 'Agenti, campagne e basi di conoscenza illimitati', '20 chiamate simultanee, 10 numeri dedicati possibili (opzione da 5,99 $ al mese, IVA esclusa)', '3 voci clonate, 50.000 automazioni / mese', 'Dashboard personalizzate', 'Assistenza prioritaria', '3.000 crediti messaggi al mese (≈ 1.500 risposte scritte)'],
+    highlights: ['Tutto Assistant, e in più:', 'Agenti, campagne e basi di conoscenza illimitati', '20 chiamate simultanee, 10 numeri dedicati possibili (opzione da 3,99 $ al mese, IVA esclusa)', '3 voci clonate, 50.000 automazioni / mese', 'Dashboard personalizzate', 'Assistenza prioritaria', '3.000 crediti messaggi al mese (≈ 1.500 risposte scritte)'],
   },
   'sur-mesure': {
     name: 'Su misura',
@@ -110,7 +110,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telefonia',
     rows: [
-      { label: 'Numeri di telefono', detail: 'Numeri dedicati possibili, in opzione da 5,99 $ al mese, IVA esclusa (non inclusi nel piano): acquistati dalla Sua area clienti, fatturati mensilmente in base al paese.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Su misura' } },
+      { label: 'Numeri di telefono', detail: 'Numeri dedicati possibili, in opzione da 3,99 $ al mese, IVA esclusa (non inclusi nel piano): acquistati dalla Sua area clienti, fatturati mensilmente in base al paese.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Su misura' } },
       { label: 'Connessione SIP', detail: 'Mantenga i Suoi numeri e il Suo centralino: connessione SIP, importazione da Twilio o Telnyx.', cells: all(true) },
       { label: 'Il Suo cellulare come numero visualizzato', detail: 'Verifichi il Suo numero perché venga mostrato nelle chiamate in uscita.', cells: paid(true) },
       { label: 'Lista di esclusione', detail: 'Numeri che l’agente non chiama mai.', cells: all(true) },

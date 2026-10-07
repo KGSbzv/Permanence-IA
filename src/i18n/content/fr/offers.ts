@@ -26,7 +26,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place.',
     cta: 'Choisir Réceptionniste',
-    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 5,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger (crédits de messages en option)'],
+    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 3,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger (crédits de messages en option)'],
   },
   assistant: {
     name: 'Assistant',
@@ -34,7 +34,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un assistant IA qui qualifie, relance et automatise vos demandes',
     pitch: 'Le forfait Assistant passe à trois agents et ajoute les rappels et confirmations automatiques, les scénarios automatisés reliés à plus de 300 outils et une voix clonée, pour convertir plus de demandes.',
     cta: 'Choisir Assistant',
-    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 bases de connaissances, 3 outils pendant l’appel', '3 numéros dédiés possibles, en option dès 5,99 $ HT/mois', '3 campagnes de relance', 'Scénarios automatisés (5 000 exécutions d’automatisation / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
+    highlights: ['Tout Réceptionniste, et en plus :', '3 agents, 5 appels simultanés', '3 bases de connaissances, 3 outils pendant l’appel', '3 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 campagnes de relance', 'Scénarios automatisés (5 000 exécutions d’automatisation / mois)', '1 voix clonée', '1 000 crédits de messages par mois (≈ 500 réponses écrites)'],
   },
   'centre-appels': {
     name: 'Centre d’appels',
@@ -42,7 +42,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Un centre d’appels IA complet pour structurer accueil, rendez-vous et support',
     pitch: 'Le forfait Centre d’appels lève les limites : agents et campagnes illimités, 20 appels simultanés, tableaux de bord personnalisés, support prioritaire et le meilleur prix à la minute.',
     cta: 'Choisir Centre d’appels',
-    highlights: ['Tout Assistant, et en plus :', 'Agents, campagnes et bases de connaissances illimités', '20 appels simultanés', '10 numéros dédiés possibles, en option dès 5,99 $ HT/mois', '3 voix clonées, 50 000 exécutions d’automatisation / mois', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages par mois (≈ 1 500 réponses écrites)'],
+    highlights: ['Tout Assistant, et en plus :', 'Agents, campagnes et bases de connaissances illimités', '20 appels simultanés', '10 numéros dédiés possibles, en option dès 3,99 $ HT/mois', '3 voix clonées, 50 000 exécutions d’automatisation / mois', 'Tableaux de bord personnalisés', 'Support prioritaire', '3 000 crédits de messages par mois (≈ 1 500 réponses écrites)'],
   },
   'sur-mesure': {
     name: 'Sur mesure',
@@ -120,7 +120,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Téléphonie',
     rows: [
-      { label: 'Numéros dédiés (en option)', detail: 'Nombre maximal de numéros dédiés, achetés en option depuis votre espace (dès 5,99 $ HT/mois selon le pays) : le numéro n’est pas inclus dans le forfait.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Sur mesure' } },
+      { label: 'Numéros dédiés (en option)', detail: 'Nombre maximal de numéros dédiés, achetés en option depuis votre espace (dès 3,99 $ HT/mois selon le pays) : le numéro n’est pas inclus dans le forfait.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Sur mesure' } },
       { label: 'Connexion SIP', detail: 'Gardez vos numéros et votre standard : connexion SIP, import Twilio ou Telnyx.', cells: all(true) },
       { label: 'Votre numéro affiché en sortant', detail: 'Vérifiez votre numéro pour qu’il s’affiche lors des appels sortants.', cells: paid(true) },
       { label: 'Liste d’exclusion', detail: 'Numéros que l’agent n’appelle jamais.', cells: all(true) },

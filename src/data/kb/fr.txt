@@ -46,7 +46,7 @@ Processus : rappels, suivi et support (Permanence IA)
 - Interface en anglais, avec un assistant d'aide multilingue intégré (bulle en bas à droite) qui guide dans la langue du client, par écrit ou à voix haute. La page Aide du site traduit chaque menu et propose des guides pas à pas.
 - Connexion par email et mot de passe, ou avec un compte Google ou LinkedIn.
 - Agendas : Cal.com et Calendly connectables sur tous les forfaits ; Google Agenda et Outlook se relient à travers eux (pas de connexion directe).
-- Numéros : achat d'un numéro dédié depuis l'espace (à partir de 5,99 $ HT par mois selon le pays, prix exact affiché avant l'achat). Pays proposés : États-Unis, Canada, Royaume-Uni, Australie, Italie, Pays-Bas, Pologne, Danemark, Finlande, Roumanie, Israël, Afrique du Sud. Le numéro n'est pas inclus dans le forfait.
+- Numéros : achat d'un numéro dédié depuis l'espace (à partir de 3,99 $ HT par mois selon le pays, prix exact affiché avant l'achat). Pays proposés : États-Unis, Canada, Royaume-Uni, Australie, Italie, Pays-Bas, Pologne, Danemark, Finlande, Roumanie, Israël, Afrique du Sud. Le numéro n'est pas inclus dans le forfait.
 - Numéro français ou conservation de son numéro : renvoi d'appel chez l'opérateur, import Twilio ou Telnyx, ou connexion SIP (tous les forfaits).
 - WhatsApp, SMS, Messenger et Instagram sur tous les forfaits, payés avec les crédits de messages (100 crédits = 1 $, une réponse écrite de l'IA ≈ 2 crédits).
 - Campagnes sortantes, scénarios automatisés (plateforme d'automatisation) et voix clonée à partir du forfait Assistant.

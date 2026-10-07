@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI receptionist that answers every call, 24/7',
     pitch: 'The Receptionist plan picks up your calls, answers common questions, books appointments and sends you a clear summary of every request. Simple to set up, no complexity.',
     cta: 'Choose Receptionist',
-    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 knowledge base; 1 dedicated number possible (optional, from $5.99 excl. tax / month)', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger (message credits as needed)'],
+    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 knowledge base; 1 dedicated number possible (optional, from $3.99 excl. tax / month)', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger (message credits as needed)'],
   },
   assistant: {
     name: 'Assistant',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI assistant that qualifies, follows up and automates your enquiries',
     pitch: 'The Assistant plan adds three agents, follow-up campaigns, no-code automations connected to over 300 tools and a cloned voice, so you convert more enquiries.',
     cta: 'Choose Assistant',
-    highlights: ['Everything in Receptionist, plus:', '3 agents, 5 concurrent calls', '3 knowledge bases, 3 in-call tools; up to 3 dedicated numbers (optional, from $5.99 excl. tax / month)', '3 follow-up campaigns', 'No-code automations (5,000 runs / month)', '1 cloned voice', '1,000 message credits a month (≈ 500 written replies)'],
+    highlights: ['Everything in Receptionist, plus:', '3 agents, 5 concurrent calls', '3 knowledge bases, 3 in-call tools; up to 3 dedicated numbers (optional, from $3.99 excl. tax / month)', '3 follow-up campaigns', 'No-code automations (5,000 runs / month)', '1 cloned voice', '1,000 message credits a month (≈ 500 written replies)'],
   },
   'centre-appels': {
     name: 'Call Centre',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'A complete AI call centre to organise reception, bookings and support',
     pitch: 'The Call Centre plan removes the limits: unlimited agents and campaigns, 20 concurrent calls, custom dashboards, priority support and the best per-minute price.',
     cta: 'Choose Call Centre',
-    highlights: ['Everything in Assistant, plus:', 'Unlimited agents, campaigns and knowledge bases', '20 concurrent calls; up to 10 dedicated numbers (optional, from $5.99 excl. tax / month)', '3 cloned voices, 50,000 automations / month', 'Custom dashboards', 'Priority support', '3,000 message credits a month (≈ 1,500 written replies)'],
+    highlights: ['Everything in Assistant, plus:', 'Unlimited agents, campaigns and knowledge bases', '20 concurrent calls; up to 10 dedicated numbers (optional, from $3.99 excl. tax / month)', '3 cloned voices, 50,000 automations / month', 'Custom dashboards', 'Priority support', '3,000 message credits a month (≈ 1,500 written replies)'],
   },
   'sur-mesure': {
     name: 'Custom',
@@ -110,7 +110,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telephony',
     rows: [
-      { label: 'Phone numbers', detail: 'Maximum number of dedicated numbers. Optional, bought from your customer area, from $5.99 excl. tax / month depending on the country.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Custom' } },
+      { label: 'Phone numbers', detail: 'Maximum number of dedicated numbers. Optional, bought from your customer area, from $3.99 excl. tax / month depending on the country.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Custom' } },
       { label: 'SIP connection', detail: 'Keep your numbers and phone system: SIP connection, Twilio or Telnyx import.', cells: all(true) },
       { label: 'Your own mobile as caller ID', detail: 'Verify your number so it is displayed on outbound calls.', cells: paid(true) },
       { label: 'Exclusion list', detail: 'Numbers the agent never calls.', cells: all(true) },

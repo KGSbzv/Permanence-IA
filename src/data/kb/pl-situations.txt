@@ -37,7 +37,7 @@ Minuty miesięcznie ≈ połączenia miesięcznie × średni czas rozmowy (częs
 - Około 1700 do 2500 minut: Call center (499 $, 2300 minut, potem 0,32 $).
 - Powyżej 2500 minut regularnie albo kilka lokalizacji: Na miarę, wycena indywidualna. Zaproponować oddzwonienie przez doradcę.
 Sformułowanie: "Przy około 600 minutach miesięcznie najkorzystniejszy będzie pakiet Recepcjonistka. Jeśli chcą Państwo automatycznie dzwonić w sprawie oczekujących wycen, potrzebny będzie pakiet Asystent."
-Dedykowany numer nie jest wliczony (od 5,99 $ miesięcznie, zależnie od kraju): powiedzieć o tym, podając cenę całkowitą.
+Dedykowany numer nie jest wliczony (od 3,99 $ miesięcznie, zależnie od kraju): powiedzieć o tym, podając cenę całkowitą.
 
 A4. Rozliczenie roczne: kiedy o nim mówić
 - Mówić o nim tylko wtedy, gdy osoba wybrała już pakiet albo pyta, jak obniżyć koszt.
@@ -78,7 +78,7 @@ A8. Zastrzeżenia
 - "Muszę się zastanowić." → "Oczywiście. Co budzi Państwa wątpliwości?" Następnie zaproponować okres próbny (przez 14 dni nic nie jest pobierane) lub oddzwonienie w konkretnym terminie.
 - "Proszę przesłać mi e-mail." → "Chętnie. Na jaki adres?" Powiedzieć, co zostanie wysłane (link do okresu próbnego, pakiety), potem zaproponować oddzwonienie w ustalonym terminie, żeby o tym porozmawiać. Nie obiecywać załącznika, który nie istnieje.
 - "Dlaczego karta przy okresie próbnym?" → "Żeby zapobiec nadużyciom i żeby usługa działała bez przerwy, jeśli zdecydują się Państwo zostać. Przez 14 dni nic nie jest pobierane, a zrezygnować można jednym kliknięciem w panelu przed końcem."
-- "Czy numer jest w cenie?" → "Nie, pakiet obejmuje minuty i funkcje. Dedykowany numer kosztuje dodatkowo od 5,99 $ miesięcznie, zależnie od kraju. Mogą Państwo też zachować obecny numer bez żadnych opłat z naszej strony." Dodać, że polski numer można kupić w panelu, a obecny numer zachować przez przekierowanie, import lub SIP.
+- "Czy numer jest w cenie?" → "Nie, pakiet obejmuje minuty i funkcje. Dedykowany numer kosztuje dodatkowo od 3,99 $ miesięcznie, zależnie od kraju. Mogą Państwo też zachować obecny numer bez żadnych opłat z naszej strony." Dodać, że polski numer można kupić w panelu, a obecny numer zachować przez przekierowanie, import lub SIP.
 - "Nie mam czasu tego wdrażać." → "Pierwszy agent jest gotowy w kilka minut na podstawie Państwa informacji. Na pełną konfigurację trzeba liczyć jeden do dwóch dni, a asystentka pomocy w panelu poprowadzi Państwa po polsku."
 - "A dane, RODO?" → "Dane są szyfrowane, okres przechowywania można ustawić, rozmowę można usunąć na żądanie, a umowa powierzenia przetwarzania danych jest częścią Regulaminu; wersję podpisaną udostępniamy na prośbę. Klauzule informacyjne trzeba jeszcze dostosować do Państwa działalności."
 - "A AI Act?" → "Główna zasada dla Państwa to przejrzystość: agent od początku mówi, że jest AI. Domyślnie już tak jest. Analizę prawną Państwa sytuacji najlepiej skonsultować z prawnikiem."
@@ -165,7 +165,7 @@ Interfejs jest po angielsku: podawać dokładne nazwy i je tłumaczyć.
 3. Kalendarz: "Tools & actions" → "Appointment Scheduling", Cal.com (klucz API, "Sync Event") lub Calendly ("Connect to Calendly", "Load Events"). Google i Outlook łączy się przez Cal.com lub Calendly. W Calendly miejsce spotkania musi być ustawione na "Custom" lub "Phone Call", a nie wyłącznie na wideorozmowę.
 4. Test: czat testowy ("Test assistant"), połączenie w przeglądarce ("Speak with your assistant", bez możliwości przełączenia), potem prawdziwe połączenie telefoniczne. Testy głosowe zużywają minuty.
 5. Numer, do wyboru:
-   - kupić numer ("Get new phone number"), od 5,99 $ miesięcznie zależnie od kraju, a potem przypisać go w "General" → "Phone number";
+   - kupić numer ("Get new phone number"), od 3,99 $ miesięcznie zależnie od kraju, a potem przypisać go w "General" → "Phone number";
    - zachować własny numer przez przekierowanie połączeń. W większości telefonów komórkowych: **61*numer agenta# gdy Państwo nie odbierają (z opóźnieniem: **61*numer**20#), **67*numer# gdy linia jest zajęta, **62*numer# gdy telefon jest wyłączony, **21*numer# dla wszystkich połączeń. Wyłączenie: ##61#, ##67#, ##62#, ##21# lub ##002#, aby anulować wszystko. Przekierowanie jest płatne u operatora, zwłaszcza na numer zagraniczny;
    - zaimportować numery z Twilio lub Telnyx albo podłączyć centralę przez SIP ("Your phone numbers" → "Integrate SIP trunk").
    Dla numeru z kraju spoza listy dostępnych krajów stosuje się jedną z tych trzech ostatnich opcji.

@@ -37,7 +37,7 @@ Minuti al mese ≈ chiamate al mese × durata media (spesso da 2 a 4 minuti).
 - Da circa 1.700 a 2.500 minuti: Call Center (499 $, 2.300 minuti, poi 0,32 $).
 - Oltre 2.500 minuti al mese, o più sedi: Su misura, su preventivo. Proporre una richiamata da parte di un consulente.
 Formulazione: "Con circa 600 minuti al mese, il piano Receptionist è il più conveniente. Se vuole ricontattare automaticamente i preventivi in sospeso, Le servirà il piano Assistant."
-Il numero dedicato non è incluso (da 5,99 $ al mese a seconda del paese): dirlo quando si comunica un prezzo totale.
+Il numero dedicato non è incluso (da 3,99 $ al mese a seconda del paese): dirlo quando si comunica un prezzo totale.
 
 A4. Fatturazione annuale: quando parlarne
 - Parlarne solo se la persona ha scelto un piano o chiede come ridurre il costo.
@@ -78,7 +78,7 @@ A8. Obiezioni
 - "Devo pensarci." → "Certo. Che cosa La fa esitare?" Poi proporre la prova (nulla viene addebitato per 14 giorni) o una richiamata in una data precisa.
 - "Mi mandi un'email." → "Volentieri. A quale indirizzo?" Dire cosa verrà inviato (link alla prova, piani), poi proporre una richiamata datata per parlarne. Non promettere allegati che non esistono.
 - "Perché serve una carta per la prova?" → "Per evitare abusi e partire senza interruzioni se decide di continuare. Nulla viene addebitato durante i 14 giorni, e può disdire con un clic dalla Sua area clienti prima della fine."
-- "Il numero è incluso?" → "No, il piano comprende i minuti e le funzioni. Un numero dedicato si aggiunge da 5,99 $ al mese a seconda del paese. Può anche mantenere il Suo numero attuale senza costi da parte nostra." Precisare che i numeri italiani si acquistano direttamente nell'area clienti; per un paese non in elenco si usa la deviazione di chiamata, l'importazione o il SIP.
+- "Il numero è incluso?" → "No, il piano comprende i minuti e le funzioni. Un numero dedicato si aggiunge da 3,99 $ al mese a seconda del paese. Può anche mantenere il Suo numero attuale senza costi da parte nostra." Precisare che i numeri italiani si acquistano direttamente nell'area clienti; per un paese non in elenco si usa la deviazione di chiamata, l'importazione o il SIP.
 - "Non ho tempo per configurarlo." → "Un primo agente è pronto in pochi minuti a partire dalle Sue informazioni. Per una configurazione completa conti uno o due giorni, e l'assistente di aiuto dell'area clienti La guida in italiano."
 - "E i dati, il GDPR?" → "I dati sono crittografati, la durata di conservazione è regolabile, può far cancellare una chiamata su richiesta, e l'accordo sul trattamento dei dati (DPA) è integrato nelle Condizioni (articolo 8), con una versione firmata su richiesta. Le Sue informative privacy vanno comunque adattate alla Sua attività."
 - "E l'AI Act?" → "La regola principale per Lei è la trasparenza: l'agente dice fin dall'inizio di essere un'AI. È già così per impostazione predefinita. Per un'analisi giuridica della Sua situazione, si rivolga al Suo consulente."
@@ -165,7 +165,7 @@ L'interfaccia è in inglese: citare le voci esatte e tradurle.
 3. Calendario: "Tools & actions" → "Appointment Scheduling", Cal.com (chiave API, "Sync Event") o Calendly ("Connect to Calendly", "Load Events"). Google e Outlook si collegano tramite Cal.com o Calendly. Con Calendly, il luogo dell'appuntamento deve essere "Custom" o "Phone Call", non solo una videochiamata.
 4. Test: chat di prova ("Test assistant"), chiamata dal browser ("Speak with your assistant", senza trasferimento possibile), poi una vera chiamata telefonica. I test vocali consumano minuti.
 5. Numero, a scelta:
-   - acquistare un numero ("Get new phone number"), da 5,99 $ al mese a seconda del paese, poi assegnarlo in "General" → "Phone number"; i numeri italiani sono disponibili;
+   - acquistare un numero ("Get new phone number"), da 3,99 $ al mese a seconda del paese, poi assegnarlo in "General" → "Phone number"; i numeri italiani sono disponibili;
    - mantenere il proprio numero con la deviazione di chiamata. Sulla maggior parte dei cellulari: **61*numero dell'agente# se non risponde (ritardo possibile: **61*numero**20#), **67*numero# se la linea è occupata, **62*numero# se il telefono è spento o irraggiungibile, **21*numero# per tutte le chiamate. Per disattivare: ##61#, ##67#, ##62#, ##21#, oppure ##002# per annullare tutto (attenzione: disattiva anche la deviazione verso la segreteria dell'operatore). La deviazione è fatturata dall'operatore, soprattutto verso un numero estero;
    - importare numeri Twilio o Telnyx, o collegare un centralino via SIP ("Your phone numbers" → "Integrate SIP trunk").
    Per un numero di un paese non in elenco, si usa una di queste ultime tre opzioni.

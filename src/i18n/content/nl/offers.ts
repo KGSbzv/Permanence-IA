@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-receptionist die elk gesprek aanneemt, 24 uur per dag',
     pitch: 'Met het Receptionist-abonnement worden uw gesprekken aangenomen, veelgestelde vragen beantwoord, afspraken ingepland en ontvangt u van elke aanvraag een duidelijke samenvatting. Eenvoudig in te stellen, zonder gedoe.',
     cta: 'Kies Receptionist',
-    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 5,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger (berichtcredits naar gebruik)'],
+    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 3,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger (berichtcredits naar gebruik)'],
   },
   assistant: {
     name: 'Assistent',
@@ -28,7 +28,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-assistent die uw aanvragen kwalificeert, opvolgt en automatiseert',
     pitch: 'Het Assistent-abonnement voegt drie agents, opvolgcampagnes, no-code automatiseringen gekoppeld aan meer dan 300 tools en een gekloonde stem toe, zodat u meer aanvragen omzet in klanten.',
     cta: 'Kies Assistent',
-    highlights: ['Alles van Receptionist, plus:', '3 agents, 5 gelijktijdige gesprekken', 'Tot 3 eigen nummers mogelijk (optie, vanaf $ 5,99 excl. btw/maand), 3 kennisbanken, 3 tools tijdens het gesprek', '3 opvolgcampagnes', 'Flow builder en automatiseringen (5.000 automatiseringsruns / maand)', '1 gekloonde stem', '1.000 berichtcredits per maand (≈ 500 schriftelijke antwoorden)'],
+    highlights: ['Alles van Receptionist, plus:', '3 agents, 5 gelijktijdige gesprekken', 'Tot 3 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand), 3 kennisbanken, 3 tools tijdens het gesprek', '3 opvolgcampagnes', 'Flow builder en automatiseringen (5.000 automatiseringsruns / maand)', '1 gekloonde stem', '1.000 berichtcredits per maand (≈ 500 schriftelijke antwoorden)'],
   },
   'centre-appels': {
     name: 'Callcenter',
@@ -36,7 +36,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een volledig AI-callcenter voor ontvangst, afspraken en support',
     pitch: 'Het Callcenter-abonnement heft de limieten op: een onbeperkt aantal agents en campagnes, 20 gelijktijdige gesprekken, eigen dashboards, prioriteitssupport en de laagste prijs per minuut.',
     cta: 'Kies Callcenter',
-    highlights: ['Alles van Assistent, plus:', 'Onbeperkt aantal agents, campagnes en kennisbanken', '20 gelijktijdige gesprekken, tot 10 eigen nummers mogelijk (optie, vanaf $ 5,99 excl. btw/maand)', '3 gekloonde stemmen, 50.000 automatiseringsruns / maand', 'Eigen dashboards', 'Prioriteitssupport', '3.000 berichtcredits per maand (≈ 1.500 schriftelijke antwoorden)'],
+    highlights: ['Alles van Assistent, plus:', 'Onbeperkt aantal agents, campagnes en kennisbanken', '20 gelijktijdige gesprekken, tot 10 eigen nummers mogelijk (optie, vanaf $ 3,99 excl. btw/maand)', '3 gekloonde stemmen, 50.000 automatiseringsruns / maand', 'Eigen dashboards', 'Prioriteitssupport', '3.000 berichtcredits per maand (≈ 1.500 schriftelijke antwoorden)'],
   },
   'sur-mesure': {
     name: 'Maatwerk',
@@ -110,7 +110,7 @@ export const MATRIX: MatrixGroup[] = [
   {
     group: 'Telefonie',
     rows: [
-      { label: 'Eigen telefoonnummers (optie)', detail: 'Maximaal aantal eigen nummers. Niet inbegrepen in het abonnement: als optie te koop in uw klantomgeving, vanaf $ 5,99 excl. btw per maand afhankelijk van het land.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Op maat' } },
+      { label: 'Eigen telefoonnummers (optie)', detail: 'Maximaal aantal eigen nummers. Niet inbegrepen in het abonnement: als optie te koop in uw klantomgeving, vanaf $ 3,99 excl. btw per maand afhankelijk van het land.', cells: { decouverte: '1', receptionniste: '1', assistant: '3', 'centre-appels': '10', 'sur-mesure': 'Op maat' } },
       { label: 'SIP-koppeling', detail: 'Behoud uw nummers en telefooncentrale: SIP-koppeling, import via Twilio of Telnyx.', cells: all(true) },
       { label: 'Uw eigen mobiele nummer als nummerweergave', detail: 'Verifieer uw nummer zodat het bij uitgaande gesprekken wordt weergegeven.', cells: paid(true) },
       { label: 'Uitsluitingslijst', detail: 'Nummers die de agent nooit belt.', cells: all(true) },

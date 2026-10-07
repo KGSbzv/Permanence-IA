@@ -46,7 +46,7 @@ Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 - Interfejs po angielsku, z wbudowanym wielojęzycznym asystentem pomocy (dymek w prawym dolnym rogu), który prowadzi klienta w jego języku, pisemnie lub głosowo. Strona Pomoc na naszej witrynie tłumaczy każde menu i zawiera przewodniki krok po kroku.
 - Logowanie e-mailem i hasłem albo kontem Google lub LinkedIn.
 - Kalendarz podłącza się w każdym pakiecie przez Cal.com lub Calendly; Kalendarz Google i Outlook łączy się za ich pośrednictwem.
-- Numery: zakup dedykowanego numeru w panelu (od 5,99 $ netto miesięcznie, zależnie od kraju; dokładna cena jest wyświetlana przed zakupem). Dostępne kraje: Stany Zjednoczone, Kanada, Wielka Brytania, Australia, Włochy, Holandia, Polska, Dania, Finlandia, Rumunia, Izrael, Republika Południowej Afryki. Numer nie jest wliczony w pakiet.
+- Numery: zakup dedykowanego numeru w panelu (od 3,99 $ netto miesięcznie, zależnie od kraju; dokładna cena jest wyświetlana przed zakupem). Dostępne kraje: Stany Zjednoczone, Kanada, Wielka Brytania, Australia, Włochy, Holandia, Polska, Dania, Finlandia, Rumunia, Izrael, Republika Południowej Afryki. Numer nie jest wliczony w pakiet.
 - Zachowanie własnego numeru (lub numer z kraju spoza listy): przekierowanie połączeń u operatora, import z Twilio lub Telnyx albo połączenie SIP (wszystkie pakiety).
 - WhatsApp, SMS, Messenger i Instagram we wszystkich pakietach, opłacane kredytami na wiadomości (100 kredytów = 1 $, jedna pisemna odpowiedź AI ≈ 2 kredyty).
 - Kampanie wychodzące, scenariusze automatyzacji i sklonowany głos od pakietu Asystent wzwyż.

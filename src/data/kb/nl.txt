@@ -46,13 +46,13 @@ Proces: terugbellen, opvolging en support (PermanenceAI)
 - Interface in het Engels, met een ingebouwde meertalige hulpassistent (chatknop rechtsonder) die de klant in zijn eigen taal begeleidt, schriftelijk of gesproken. De Help-pagina van de website vertaalt elk menu en biedt stapsgewijze handleidingen.
 - Inloggen met e-mail en wachtwoord, of met een Google- of LinkedIn-account.
 - Agenda's: Google Agenda en Outlook zijn koppelbaar via Cal.com of Calendly, in alle abonnementen.
-- Nummers: een eigen nummer kopen in de klantomgeving (vanaf $5,99 excl. btw per maand, afhankelijk van het land; de exacte prijs wordt vóór aankoop getoond). Beschikbare landen: Verenigde Staten, Canada, Verenigd Koninkrijk, Australië, Italië, Nederland, Polen, Denemarken, Finland, Roemenië, Israël, Zuid-Afrika. Het nummer is niet bij het abonnement inbegrepen.
+- Nummers: een eigen nummer kopen in de klantomgeving (vanaf $3,99 excl. btw per maand, afhankelijk van het land; de exacte prijs wordt vóór aankoop getoond). Beschikbare landen: Verenigde Staten, Canada, Verenigd Koninkrijk, Australië, Italië, Nederland, Polen, Denemarken, Finland, Roemenië, Israël, Zuid-Afrika. Het nummer is niet bij het abonnement inbegrepen.
 - Een nieuw Nederlands nummer koopt de klant direct in de klantomgeving. Het huidige nummer behouden, of een nummer gebruiken uit een land dat niet in de lijst staat (bijvoorbeeld België): doorschakelen bij de provider, import via Twilio of Telnyx, of een SIP-koppeling (alle abonnementen).
 - WhatsApp, sms, Messenger en Instagram in alle abonnementen, betaald met berichtcredits (100 credits = $1, een schriftelijk AI-antwoord ≈ 2 credits).
 - Uitgaande campagnes, flow builder, automatiseringen en gekloonde stem vanaf het abonnement Assistent.
 
 7. Abonnementen (Amerikaanse dollars, exclusief btw)
-- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39. 1 agent, 2 gelijktijdige gesprekken, 1 eigen nummer mogelijk (optie, vanaf $5,99 per maand), 1 kennisbank.
+- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39. 1 agent, 2 gelijktijdige gesprekken, 1 eigen nummer mogelijk (optie, vanaf $3,99 per maand), 1 kennisbank.
 - Assistent: $249 per maand, 1.000 minuten. Extra minuut $0,36. 3 agents, 5 gelijktijdige gesprekken, tot 3 eigen nummers (optie), 3 campagnes, automatiseringen (5.000 automatiseringsruns per maand), 1 gekloonde stem, 1.000 berichtcredits per maand.
 - Callcenter: $499 per maand, 2.300 minuten. Extra minuut $0,32. Onbeperkt aantal agents, campagnes en kennisbanken, 20 gelijktijdige gesprekken, tot 10 eigen nummers (optie), 3 gekloonde stemmen, 50.000 automatiseringsruns per maand, eigen dashboards, prioriteitssupport, 3.000 berichtcredits per maand.
 - Maatwerk: boven 2.500 minuten structureel, op aanvraag (minuutprijs in overleg, meerdere vestigingen, SLA).

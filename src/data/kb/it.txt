@@ -46,7 +46,7 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - Interfaccia in inglese, con un assistente di aiuto multilingue integrato (bolla in basso a destra) che guida il cliente nella sua lingua, per iscritto o a voce. La pagina Aiuto del sito traduce ogni menu e propone guide passo passo.
 - Accesso con email e password, oppure con un account Google o LinkedIn.
 - Calendari Google e Outlook collegabili tramite Cal.com o Calendly, con tutti i piani.
-- Numeri: acquisto di un numero dedicato dall'area clienti (da 5,99 $ IVA esclusa al mese a seconda del paese, prezzo esatto mostrato prima dell'acquisto). Paesi disponibili: Stati Uniti, Canada, Regno Unito, Australia, Italia, Paesi Bassi, Polonia, Danimarca, Finlandia, Romania, Israele, Sudafrica. Il numero non è incluso nel piano.
+- Numeri: acquisto di un numero dedicato dall'area clienti (da 3,99 $ IVA esclusa al mese a seconda del paese, prezzo esatto mostrato prima dell'acquisto). Paesi disponibili: Stati Uniti, Canada, Regno Unito, Australia, Italia, Paesi Bassi, Polonia, Danimarca, Finlandia, Romania, Israele, Sudafrica. Il numero non è incluso nel piano.
 - Mantenere il proprio numero (o un numero di un paese non in elenco): deviazione di chiamata presso l'operatore, importazione Twilio o Telnyx, oppure connessione SIP (tutti i piani).
 - WhatsApp, SMS, Messenger e Instagram con tutti i piani, pagati con i crediti messaggi (100 crediti = 1 $, una risposta scritta dell'AI ≈ 2 crediti).
 - Campagne in uscita, scenari automatizzati, automazioni e voce clonata a partire dal piano Assistant.

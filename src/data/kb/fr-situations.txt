@@ -37,7 +37,7 @@ Minutes par mois ≈ appels par mois × durée moyenne (souvent 2 à 4 minutes).
 - Environ 1 700 à 2 500 minutes : Centre d'appels (499 $, 2 300 minutes, puis 0,32 $).
 - Au-delà de 2 500 minutes régulières, ou plusieurs établissements : Sur mesure, sur devis. Proposer un rappel par un conseiller.
 Formulation : « Avec environ 600 minutes par mois, le forfait Réceptionniste est le plus économique. Si vous voulez rappeler automatiquement vos devis en attente, il faudra le forfait Assistant. »
-Le numéro dédié n'est pas inclus (à partir de 5,99 $ par mois selon le pays) : le dire quand on annonce un prix total.
+Le numéro dédié n'est pas inclus (à partir de 3,99 $ par mois selon le pays) : le dire quand on annonce un prix total.
 
 A4. Facturation annuelle : quand en parler
 - En parler seulement si la personne a choisi un forfait ou demande comment réduire le coût.
@@ -78,7 +78,7 @@ A8. Objections
 - « Je dois réfléchir. » → « Bien sûr. Qu'est-ce qui vous fait hésiter ? » Puis proposer l'essai (rien n'est débité pendant 14 jours) ou un rappel à une date précise.
 - « Envoyez-moi un email. » → « Volontiers. À quelle adresse ? » Dire ce qui sera envoyé (lien de l'essai, forfaits), puis proposer un rappel daté pour en parler. Ne pas promettre de pièce jointe qui n'existe pas.
 - « Pourquoi une carte pour l'essai ? » → « Pour éviter les abus et démarrer sans coupure si vous continuez. Rien n'est débité pendant les 14 jours, et vous annulez en un clic depuis votre espace avant la fin. »
-- « Le numéro est inclus ? » → « Non, le forfait comprend les minutes et les fonctions. Un numéro dédié s'ajoute à partir de 5,99 $ par mois selon le pays. Vous pouvez aussi garder votre numéro actuel sans frais de notre part. » Préciser que pour un numéro français, on passe par le renvoi d'appel, l'import ou le SIP.
+- « Le numéro est inclus ? » → « Non, le forfait comprend les minutes et les fonctions. Un numéro dédié s'ajoute à partir de 3,99 $ par mois selon le pays. Vous pouvez aussi garder votre numéro actuel sans frais de notre part. » Préciser que pour un numéro français, on passe par le renvoi d'appel, l'import ou le SIP.
 - « Je n'ai pas le temps de mettre ça en place. » → « Un premier agent est prêt en quelques minutes à partir de vos informations. Pour une configuration complète, comptez un à deux jours, et l'assistante d'aide de l'espace vous guide en français. »
 - « Et les données, le RGPD ? » → « Les données sont chiffrées, la durée de conservation est réglable, vous pouvez supprimer un appel sur demande, et l'accord de traitement des données est intégré à nos conditions, avec une version signée sur demande. Vos mentions d'information restent à adapter à votre activité. »
 - « Et l'AI Act ? » → « L'obligation de transparence (article 50 du règlement européen sur l'IA) impose d'informer la personne qu'elle parle à une IA : notre agent le fait dès la première phrase. Pour une analyse juridique de votre situation, voyez avec votre conseil. »
@@ -165,7 +165,7 @@ L'interface est en anglais : citer les libellés exacts et les traduire.
 3. Agenda : « Tools & actions » → « Appointment Scheduling », Cal.com (clé API, « Sync Event ») ou Calendly (« Connect to Calendly », « Load Events »). Google et Outlook se relient via Cal.com ou Calendly. Avec Calendly, le lieu du rendez-vous doit être « Custom » ou « Phone Call », pas uniquement une visio.
 4. Tester : chat de test (« Test assistant »), appel dans le navigateur (« Speak with your assistant », sans transfert possible), puis vrai appel téléphonique. Les tests vocaux consomment des minutes.
 5. Numéro, au choix :
-   - acheter un numéro (« Get new phone number »), à partir de 5,99 $ par mois selon le pays, puis l'attribuer dans « General » → « Phone number » ;
+   - acheter un numéro (« Get new phone number »), à partir de 3,99 $ par mois selon le pays, puis l'attribuer dans « General » → « Phone number » ;
    - garder son numéro par renvoi d'appel. Sur la plupart des mobiles : **61*numéro de l'agent# si vous ne répondez pas (délai possible : **61*numéro**20#), **67*numéro# si la ligne est occupée, **62*numéro# si le téléphone est éteint, **21*numéro# pour tous les appels. Désactiver : ##61#, ##67#, ##62#, ##21#, ou ##002# pour tout annuler. Le renvoi est facturé par l'opérateur, surtout vers un numéro étranger ;
    - importer des numéros Twilio ou Telnyx, ou connecter un standard en SIP (« Your phone numbers » → « Integrate SIP trunk »).
    Pour un numéro français, c'est l'une de ces trois dernières options.
