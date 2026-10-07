@@ -7,6 +7,8 @@ export const SITE = {
   company: 'SINAY STRATEGIC LLC',
   /** Numéro WhatsApp Business (expéditeur Autocalls 521), servi par l’agent IA multilingue. */
   whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' },
+  /** Page Facebook de la marque (en anglais). */
+  facebook: 'https://www.facebook.com/permanenceia',
 };
 
 /** Lien « cliquer pour discuter » WhatsApp avec un premier message prérempli dans la langue du visiteur. */

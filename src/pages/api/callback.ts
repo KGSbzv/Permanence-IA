@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
-import { NOTIFY_TO, clientIp, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -44,6 +44,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
   const fromAgent = isAuthorized(req) && (lang === 'intl' || Boolean(agent));
   const campaignLang = lang === 'intl' ? langFromPhone(e164 || '') : lang;
+  // Date fournie par un outil d’agent (champ call_at) : illisible, passée ou à plus de 30 jours → rien n’est
+  // enregistré et l’agent reçoit la date du jour pour redemander, au lieu d’un appel immédiat non souhaité.
+  const zone = zoneFor(b.tz, campaignLang);
+  const agentCallAt = typeof b.call_at === 'string' ? b.call_at.trim() : '';
+  if (agentCallAt) {
+    const { problem } = checkCallAt(agentCallAt, zone);
+    if (problem) {
+      return res.status(200).json({
+        success: false, error: `call_at ${problem}`,
+        message_for_agent: `The callback time "${agentCallAt}" is ${problem === 'unreadable' ? 'not a valid ISO 8601 date-time' : problem === 'past' ? 'in the past' : 'more than 30 days away'}. Now it is ${describeLocal(new Date(), zone, 'en-gb')} (${zone}). Nothing was saved: ask the person again for the day and time, read it back, then call this tool again with a correct call_at.`,
+      });
+    }
+  }
   // Moment du rappel : date précise (formulaire ou agent), créneau du formulaire, sinon dès que possible.
   const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
   const scheduled = callAt.getTime() > Date.now() + 60_000;
@@ -123,5 +136,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (db.status === 'rejected' && mail.status === 'rejected') {
     return res.status(502).json({ error: 'Impossible d’enregistrer la demande pour le moment.' });
   }
-  return res.status(200).json({ success: true, stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued: call.status === 'fulfilled', whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined });
+  // Date relue par l’agent pour confirmer le rendez-vous (dans la langue et le fuseau de la personne).
+  const scheduledFor = scheduled ? `${describeLocal(callAt, zone, campaignLang)} (${zone})` : 'as soon as possible, during calling hours';
+  return res.status(200).json({ success: true, scheduled_for: scheduledFor, stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued: call.status === 'fulfilled', whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined });
 }

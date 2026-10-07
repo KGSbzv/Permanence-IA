@@ -5,6 +5,7 @@ import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { OPEN_CONSENT_EVENT } from './ConsentBanner';
 import { SITE, LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
+import { BRAND_MARKS } from '@/data/brandMarks';
 import { useI18n } from '@/i18n';
 import { WhatsAppLink } from './ui';
 
@@ -32,6 +33,9 @@ export default function Footer() {
           <p className="max-w-xs text-[15px]">{t.tagline}</p>
           <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 text-[15px] text-white hover:text-signal-glow"><Mail className="h-4 w-4" aria-hidden />{SITE.email}</a>
           <WhatsAppLink variant="dark" place="footer" />
+          <a href={SITE.facebook} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[15px] text-white hover:text-signal-glow">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current" aria-hidden><path d={BRAND_MARKS.facebook.path} /></svg>Facebook
+          </a>
           {market.phone && <a href={`tel:${market.phone.e164}`} className="flex items-center gap-2 text-[15px] text-white hover:text-signal-glow"><Phone className="h-4 w-4" aria-hidden /><bdi dir="ltr">{market.phone.display}</bdi><span className="text-white/60">· {market.phone.label}</span></a>}
           <div className="flex gap-2 pt-1">
             <Link href={SIGNUP_URL} className="btn-signal py-2.5 text-sm">{t.startFree}</Link>

@@ -146,7 +146,7 @@ export const TZ: Record<string, string> = {
 export const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
 
 /** Écart (ms) entre l’heure locale d’un fuseau et l’heure UTC, à un instant donné. */
-function tzOffset(at: Date, tz: string) {
+export function tzOffset(at: Date, tz: string) {
   const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
     timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit',
   }).formatToParts(at).map((x) => [x.type, x.value]));
@@ -189,6 +189,38 @@ export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unk
   }
   if (!at || Number.isNaN(at.getTime()) || at.getTime() <= now) return new Date(now);
   return new Date(Math.min(at.getTime(), now + 30 * 86_400_000));
+}
+
+/** Locale d’affichage des dates pour chaque langue du site. */
+const DATE_LOCALE: Record<string, string> = { fr: 'fr-FR', 'en-gb': 'en-GB', 'en-au': 'en-AU', it: 'it-IT', pl: 'pl-PL', nl: 'nl-NL', he: 'he-IL' };
+
+/** Décalage « +02:00 » d’un fuseau à un instant donné. */
+export function offsetLabel(at: Date, tz: string) {
+  const min = Math.round(tzOffset(at, tz) / 60_000);
+  const a = Math.abs(min);
+  return `${min < 0 ? '-' : '+'}${String(Math.floor(a / 60)).padStart(2, '0')}:${String(a % 60).padStart(2, '0')}`;
+}
+
+/** Date et heure en toutes lettres dans la langue et le fuseau donnés (« vendredi 9 octobre 2026 à 14:30 »). */
+export function describeLocal(at: Date, tz: string, lang: string) {
+  return new Intl.DateTimeFormat(DATE_LOCALE[lang] || 'en-GB', {
+    timeZone: tz, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+  }).format(at);
+}
+
+/** Fuseau d’une langue du site, ou celui demandé s’il est valide. */
+export const zoneFor = (tz: unknown, lang: string) => (typeof tz === 'string' && validTz(tz) ? tz : TZ[lang] || TZ.fr);
+
+/**
+ * Contrôle d’une date de rappel fournie par un agent : illisible ou passée → motif (l’agent redemande la date),
+ * au lieu d’un appel immédiat que la personne n’a pas demandé.
+ */
+export function checkCallAt(raw: string, tz: string): { at?: Date; problem?: 'unreadable' | 'past' | 'too_far' } {
+  const at = /(?:[zZ]|[+-]\d{2}:?\d{2})$/.test(raw) ? new Date(raw) : localToUtc(raw, tz);
+  if (!at || Number.isNaN(at.getTime())) return { problem: 'unreadable' };
+  if (at.getTime() < Date.now() - 10 * 60_000) return { problem: 'past' };
+  if (at.getTime() > Date.now() + 30 * 86_400_000) return { problem: 'too_far' };
+  return { at };
 }
 
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));
