@@ -4,7 +4,7 @@
 
 **Réponses déjà reçues d'Autocalls (8 octobre) :**
 - **1. Notre solde à zéro :** si le client est créditeur, il continue à utiliser le système.
-- **2. Numéros dédiés :** l'abonnement du numéro s'annule, donc pas de renouvellement le mois suivant (le numéro de test 11806 ne sera pas reconduit).
+- **2. Numéros dédiés :** un numéro acheté par un client se renouvelle automatiquement chaque mois, avec le même numéro (documenté par Autocalls). Seul l'achat de test du 7 octobre (numéro 11806) a vu son abonnement annulé : il ne sera pas reconduit.
 - **8. Transferts :** la durée du transfert est décomptée des minutes (déjà indiqué ainsi dans la FAQ du site, 6 langues).
 - Autres questions : réponse attendue. Chaque question cite nos identifiants et ce qu'on a observé : la réponse dépend de notre compte, pas de la documentation générale.
 
