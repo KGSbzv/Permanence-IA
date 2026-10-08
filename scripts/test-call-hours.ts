@@ -39,6 +39,8 @@ async function main() {
   test('en-au : samedi 19:30 → lundi 9:00 (Sydney)', () => assert.equal(at('2026-10-10T19:30', 'en-au', 'Australia/Sydney'), '2026-10-11T22:00:00.000Z'));
   test('he : vendredi → dimanche 9:00', () => assert.equal(at('2026-10-09T10:00', 'he', 'Asia/Jerusalem'), '2026-10-11T06:00:00.000Z'));
   test('he : dimanche gardé', () => assert.equal(at('2026-10-11T15:00', 'he', 'Asia/Jerusalem'), '2026-10-11T12:00:00.000Z'));
+  test('he : 12:45 gardé (plage 9:00–13:00, comme les campagnes)', () => assert.equal(at('2026-10-11T12:45', 'he', 'Asia/Jerusalem'), '2026-10-11T09:45:00.000Z'));
+  test('he : 13:30 → 14:00', () => assert.equal(at('2026-10-11T13:30', 'he', 'Asia/Jerusalem'), '2026-10-11T11:00:00.000Z'));
   test('he : veille de fête au soir → lendemain de la fête 9:00', () => {
     // Dimanche 20 sept. 2026 20:00 ; lundi 21 sept. chômé (src/lib/relances/calendar.ts) → mardi 22 sept. 9:00.
     assert.equal(at('2026-09-20T20:00', 'he', 'Asia/Jerusalem', Date.parse('2026-09-15T08:00:00Z')), '2026-09-22T06:00:00.000Z');

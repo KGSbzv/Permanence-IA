@@ -23,7 +23,7 @@ const HOURS: Record<string, { days: number[]; ranges: Range[] }> = {
   it: { days: MON_SAT, ranges: [[hm(9), hm(13)], [hm(14, 30), hm(19)]] },
   pl: { days: MON_SAT, ranges: [[hm(9), hm(17, 30)]] },
   nl: { days: MON_SAT, ranges: [[hm(9), hm(17, 30)]] },
-  he: { days: SUN_THU, ranges: [[hm(9), hm(12, 30)], [hm(14), hm(19)]] },
+  he: { days: SUN_THU, ranges: [[hm(9), hm(13)], [hm(14), hm(19)]] },
 };
 const hoursOf = (lang: string) => HOURS[lang] || HOURS.fr;
 const zoneOf = (lang: string) => CALL_TZ[lang] || CALL_TZ.fr;

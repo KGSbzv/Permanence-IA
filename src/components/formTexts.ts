@@ -22,5 +22,5 @@ export const DATE_INVALID: Record<Locale, string> = {
   it: 'Scelga un orario entro i prossimi 30 giorni, dal lunedì al sabato, tra le 9:00 e le 13:00 o tra le 14:30 e le 19:00 (ora italiana).',
   pl: 'Wybierz termin w ciągu najbliższych 30 dni, od poniedziałku do soboty, między 9:00 a 17:30 (czasu polskiego).',
   nl: 'Kies een tijdstip binnen de komende 30 dagen, van maandag tot en met zaterdag, tussen 9:00 en 17:30 (Nederlandse tijd).',
-  he: 'נא לבחור מועד ב-30 הימים הקרובים, בימים א׳–ה׳ (לא בחגים), בין 9:00 ל-12:30 או בין 14:00 ל-19:00 (שעון ישראל).',
+  he: 'נא לבחור מועד ב-30 הימים הקרובים, בימים א׳–ה׳ (לא בחגים), בין 9:00 ל-13:00 או בין 14:00 ל-19:00 (שעון ישראל).',
 };
