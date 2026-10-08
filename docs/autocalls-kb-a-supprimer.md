@@ -62,6 +62,22 @@ Les 35 autres documents de cette base sont actifs et à garder. À supprimer :
 
 Réimport prévu ici aussi : quand les guides « assistante virtuelle » seront corrigés sur le site, recréer dans 6209 les 5 documents de guides concernés (25238 fr, 25250 en, 25255 it, 25260 pl, 25265 nl), puis supprimer les anciens.
 
+## 5. Réimport v11 du 8 octobre (12:10-12:41 UTC), documents remplacés
+
+Les commits de contenu 67b9c81 (src/data/kb : refus enregistré au lieu de « blacklist » ; FAQ ; texte des recharges sur /tarifs), 0b197f5 (politique de confidentialité : pixel Meta et responsabilité conjointe) et 6538d03 (résumés des guides en anglais, italien, polonais et hébreu) sont en ligne depuis 11:45 UTC environ. Seuls les documents dont la page source a changé ont été recréés (v11, tous « Active ») ; secteurs, sécurité, CGU et fonctionnalités n'ont pas changé et leurs v10 restent à garder, comme les guides français et néerlandais (25168, 25212, 25238, 25265).
+
+| Base | v11 actifs (à garder) | v10 remplacés (à supprimer) |
+|---|---|---|
+| 6163 Français | 25279 processus, 25275 situations, 25276 tarifs, 25277 FAQ, 25278 confidentialité | 25161, 25164, 25166, 25167, 25171, et 25274 (premier essai v11 de /kb/fr, resté 17 minutes « en traitement » puis actif : doublon de 25279, garder l'un des deux) |
+| 6166 English | 25280 processus, 25281 situations, 25282 tarifs, 25283 FAQ, 25284 guides, 25285 confidentialité | 25174, 25175, 25176, 25177, 25178, 25184 |
+| 6167 Italiano | 25286 processus, 25287 situations, 25288 tarifs, 25289 FAQ, 25291 guides, 25290 confidentialité | 25185, 25187, 25188, 25189, 25190, 25194 |
+| 6168 Polski | 25292 processus, 25293 situations, 25294 tarifs, 25295 FAQ, 25297 guides, 25296 confidentialité | 25197, 25198, 25199, 25200, 25201, 25205 |
+| 6169 Nederlands | 25298 processus, 25299 situations, 25300 tarifs, 25301 FAQ, 25302 confidentialité | 25208, 25209, 25210, 25211, 25216 |
+| 6180 עברית | 25303 processus, 25304 situations, 25305 tarifs, 25306 FAQ, 25308 guides, 25307 confidentialité | 25219, 25220, 25221, 25222, 25223, 25228 |
+| 6209 multilingue | FR 25309, 25310, 25311, 25312, 25313 ; EN 25314, 25315, 25316, 25317, 25318 ; IT 25319, 25320, 25321, 25322, 25323 ; PL 25324, 25325, 25326, 25327, 25328 ; NL 25329, 25330, 25331, 25332 ; HE 25333, 25334, 25335, 25336, 25337 | FR 25234, 25245, 25235, 25236, 25237, 25244 ; EN 25246, 25247, 25248, 25249, 25250 ; IT 25251, 25252, 25253, 25254, 25255 ; PL 25256, 25257, 25258, 25259, 25260 ; NL 25261, 25262, 25263, 25264 ; HE 25266, 25267, 25268, 25269, 25270 |
+
+Dans le tableau « Documents à garder (v10 actifs) » plus haut, les IDs de la dernière colonne ci-dessus ne sont donc plus à garder. Les agents lisent la base entière : aucun rattachement à modifier (6163 à 6180 et 6209 restent rattachées aux mêmes agents).
+
 ## Ordre conseillé
 
 1. Vérifier dans chaque base que les v10 du tableau « à garder » sont « Active ».
@@ -77,6 +93,6 @@ Les documents « site web » ne se mettent pas à jour seuls : Autocalls lit la 
 3. Liens à suivre (relative_links_limit) : 1 pour /kb/... , tarifs, FAQ, sécurité, CGU et confidentialité ; 50 pour /aide (pour inclure les guides) ; 30 pour /secteurs ; 20 pour /fonctionnalites.
 4. Ajouter ici les anciens IDs à supprimer.
 
-Réimport déjà prévu : les guides (/aide) contiennent encore l'exemple d'accueil « assistante virtuelle » (sans « IA ») en français, anglais, italien, polonais et néerlandais. Une fois ces textes corrigés et déployés, recréer les 5 documents « Guides » (25168, 25178, 25190, 25201, 25212) puis ajouter ces 5 IDs à la liste des documents à supprimer.
+Réimport déjà prévu : au 8 octobre à 12:40 UTC, les guides (/aide) contiennent encore l'exemple d'accueil « assistante virtuelle » (sans « IA ») en français, italien et néerlandais (src/i18n/content/fr, it et nl/guides.ts) ; l'anglais et le polonais sont corrigés et leurs guides ont été réimportés en v11 (point 5). Une fois ces trois textes corrigés et déployés, recréer les documents « Guides » 25168 (6163), 25291 (6167) et 25212 (6169), ainsi que 25238, 25323 et 25265 dans 6209, puis ajouter les anciens IDs à la liste des documents à supprimer.
 
 URL par base : 6163 sans préfixe ; 6166 /en-gb/ ; 6167 /it/ ; 6168 /pl/ ; 6169 /nl/ ; 6180 /he/. Les pages /kb/ n'ont pas de préfixe : /kb/fr, /kb/en, /kb/it, /kb/pl, /kb/nl, /kb/he et leurs versions « -situations ».
