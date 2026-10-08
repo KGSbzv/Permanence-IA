@@ -30,11 +30,7 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
    - Le premier va dans app.autocalls.ai/administrator/settings?tab=smtp (Save, puis Test).
    - Le second va dans Google Cloud > Secret Manager > ZOHO_SMTP_PASS > Nouvelle version.
    - Prévenir Claude, puis révoquer l'ancien. Garder celui des relances (RELANCES_IMAP_PASS).
-7. **Bases de connaissances : urgent.** Autocalls le confirme : les anciennes versions (v7, v9, v10) restent actives à côté des nouvelles, et les agents mélangent anciens et nouveaux prix. Deux options, détaillées dans docs/autocalls-kb-a-supprimer.md :
-   - A, recommandée : vous dites à Claude « oui, reconstruis les bases ». Il crée 7 bases neuves et y rattache les 41 agents. Il vous restera 7 anciennes bases entières à supprimer, quand vous voulez.
-   - B : vous supprimez vous-même 195 documents, base par base, avec les listes du document.
-
-   Claude ne supprime jamais de données définitivement.
+7. **Anciennes bases de connaissances.** Les 41 agents utilisent désormais 7 bases neuves et à jour (6213 à 6220, voir docs/autocalls-kb-a-supprimer.md). Il vous reste, sans urgence, à supprimer les 7 anciennes bases entières : 6163, 6166, 6167, 6168, 6169, 6180 et 6209. Plus aucun agent ne les lit.
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
 9. **Copie inutile du site.** Le projet Google permanentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
 
@@ -106,7 +102,6 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 - Relances en envoi réel : votre « go » est reçu, mais le contrôle de sécurité de Claude Code a bloqué le changement (envoi d'e-mails à de vrais contacts). Soit vous lancez la commande donnée par Claude, soit vous autorisez Claude à le faire.
 - Avec votre accord : page /admin, alerte d'erreurs, remplacement du jeton des webhooks, Google Analytics après accord aux cookies, libération des numéros, suppression des anciens documents.
 - Sans attendre :
-  - réimport dans Autocalls des pages modifiées le 8 octobre au soir (tarifs, FAQ, guides fr, it et nl, bases) ;
   - mention des préférences e-mail dans /confidentialite ;
   - modèles hébreux ;
   - polices gardées dans le dépôt.

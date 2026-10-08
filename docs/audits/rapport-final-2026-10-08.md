@@ -7,7 +7,6 @@ Le site en 7 langues, les formulaires, les 32 agents commerciaux, les e-mails et
 Ce qui bloque encore les ventes :
 - **Aucun test réel** de paiement, d'appel ou d'inscription n'a été fait. Claude n'a pas le droit de les faire.
 - **Stripe** marque le représentant du compte (Joseph Haddad) « Invalid ». Aucun examen n'est en cours, paiements et virements sont actifs, seules les Cartes Bancaires sont en pause.
-- **Les bases de connaissances** gardent d'anciennes versions actives : Autocalls confirme que les agents mélangent anciens et nouveaux prix. Leur suppression est à faire par vous (liste prête).
 - **Autocalls a répondu** à 22 questions sur 24 le 8 octobre au soir (section 10). Le forfait Réceptionniste reçoit ses 200 crédits, et la taxe automatique est coupée.
 - **L'avocat et le comptable** ne sont pas encore choisis.
 
@@ -57,7 +56,10 @@ Il y a eu 16 contrôles en échec :
 - **Partiel** : aucun envoi réel de bout en bout n'a été testé.
 
 **Agents IA et bases de connaissances**
-- 63 documents à jour (v11, n° 25275 à 25337) sont actifs dans les 7 bases, plus un doublon v11 actif (25274 dans 6163). Contrôle par l'API d'Autocalls (son accès technique). Les 7 bases restent marquées « failed » tant que les anciens documents en échec ne sont pas supprimés.
+- **Bases de connaissances reconstruites le 8 octobre au soir** (avec votre accord) :
+  - 7 bases neuves (6213 à 6220), une version par page, lues sur le site corrigé ;
+  - 95 documents actifs, aucun échec, et les 41 agents rattachés à la base de leur langue (contrôle indépendant : aucun reste sur une ancienne base, aucun blocage de conformité) ;
+  - les 7 anciennes bases ne sont plus lues et restent à supprimer par vous.
 - Prix, méthode commerciale et droit de refuser sont à jour sur les 32 agents.
 - L'outil « ne plus appeler » (ne_plus_appeler, 6243) a été ajouté dans la section Outils de 19 agents vocaux ; 6 autres le citaient déjà. L'outil voisin ne_plus_appeler_numero (6244) a été ajouté dans les règles du conseiller 21205 et des 14 widgets. Le scan de conformité d'Autocalls ne bloque aucun des 9 agents contrôlés (échantillon, pas les 33).
 
@@ -224,4 +226,6 @@ Le tableau complet, question par question, est dans docs/autocalls-questions-wha
 - Les données sont stockées chez AWS à Francfort. Pendant les appels, des fournisseurs d'IA situés aux États-Unis interviennent aussi, sauf si vous demandez le routage UE (décision 19). Autocalls n'est pas certifié HDS : les secteurs santé restent en pause. Gardez le DPA reçu hors du dépôt, qui est public.
 - Un assistant mis en pause par le contrôle de conformité : le client reçoit un e-mail en anglais à votre nom. Vous n'êtes pas prévenu. Pour le débloquer, envoyez l'ID de l'assistant à Autocalls.
 - L'inscription ne recueille ni téléphone ni accord WhatsApp. Pour les obtenir, il faudrait gérer l'inscription sur le site puis créer le compte par l'API (POST /white-label/register). C'est un chantier à décider plus tard.
+
+**Bases de connaissances (fait le 8 octobre au soir, avec votre accord).** Claude a créé 7 bases neuves à partir du site corrigé : 95 documents, tous actifs. Il y a rattaché les 41 agents. Les 7 anciennes bases (6163, 6166, 6167, 6168, 6169, 6180, 6209) ne sont plus lues ; à vous de les supprimer, sans urgence. Détail : docs/autocalls-kb-a-supprimer.md.
 
