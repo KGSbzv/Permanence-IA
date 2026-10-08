@@ -21,7 +21,8 @@ echo "Site : jeton accepté."
 
 ok=0; ko=0
 for id in $TOOLS; do
-  cur=$(curl -s -H "Authorization: Bearer $K" -H 'Accept: application/json' "$API/tools/$id")
+  cur=$(curl -s -w '\n%{http_code}' -H "Authorization: Bearer $K" -H 'Accept: application/json' "$API/tools/$id")
+  st=${cur##*$'\n'}; cur=${cur%$'\n'*}
   body=$(printf %s "$cur" | python3 -c '
 import json, os, sys, urllib.parse as u
 d = json.load(sys.stdin); d = d.get("data", d)
@@ -30,17 +31,31 @@ if p.netloc != "www.permanenceia.com": sys.exit("hôte inattendu")
 q = [(k, v) for k, v in u.parse_qsl(p.query, keep_blank_values=True) if k != "token"]
 ep = u.urlunsplit((p.scheme, p.netloc, p.path, u.urlencode(q), p.fragment))
 print(json.dumps({"endpoint": ep, "headers": [{"name": "Content-Type", "value": "application/json"}, {"name": "x-webhook-token", "value": os.environ["T"]}]}))
-' 2>/dev/null) || { echo "Outil $id : lecture impossible, laissé tel quel."; ko=$((ko+1)); continue; }
+' 2>/tmp/jeton-webhooks.err) || { echo "Outil $id : lecture impossible (code $st, $(printf %s "$cur" | python3 -c 'import json,sys
+try:
+  d=json.load(sys.stdin); d=d.get("data",d) if isinstance(d,dict) else d; print("champs : "+", ".join(sorted(d.keys())) if isinstance(d,dict) else type(d).__name__)
+except Exception as e: print("réponse non JSON")' 2>/dev/null); $(tail -1 /tmp/jeton-webhooks.err)), laissé tel quel."; ko=$((ko+1)); continue; }
   res=$(printf %s "$body" | curl -s -o /dev/null -w '%{http_code}' -X PUT -H "Authorization: Bearer $K" -H 'Content-Type: application/json' -H 'Accept: application/json' --data-binary @- "$API/tools/$id")
   path=$(printf %s "$body" | python3 -c 'import json,sys,urllib.parse as u; print(u.urlsplit(json.load(sys.stdin)["endpoint"]).path)')
   if [ "$res" = "200" ]; then echo "Outil $id : OK ($path, jeton dans l'en-tête)"; ok=$((ok+1)); else echo "Outil $id : ÉCHEC (code $res), laissé tel quel"; ko=$((ko+1)); fi
 done
 
-fid=$(curl -s -H "Authorization: Bearer $K" -H 'Accept: application/json' "$API/automate/flows" | python3 -c '
+lst=$(curl -s -w '\n%{http_code}' -H "Authorization: Bearer $K" -H 'Accept: application/json' "$API/automate/flows")
+lst_st=${lst##*$'\n'}; lst=${lst%$'\n'*}
+fid=$(printf %s "$lst" | python3 -c '
 import json, sys
-d = json.load(sys.stdin); m = [f["id"] for f in d.get("data", []) if f.get("name") == "Relais fin d’échange → site (PermanenceAI)".replace("’", "\x27")]
+want = "Relais fin d" + chr(39) + "échange → site (PermanenceAI)"
+try: d = json.load(sys.stdin)
+except Exception: print(""); sys.exit()
+rows = d.get("data", d) if isinstance(d, dict) else d
+rows = rows if isinstance(rows, list) else []
+m = [f.get("id") for f in rows if isinstance(f, dict) and (f.get("name") or f.get("displayName")) == want]
 print(m[0] if len(m) == 1 else "")
 ')
+if [ -z "$fid" ]; then echo "Relais : liste des automatisations, code $lst_st, $(printf %s "$lst" | python3 -c 'import json,sys
+try:
+  d=json.load(sys.stdin); r=d.get("data",d) if isinstance(d,dict) else d; print(str(len(r))+" automatisation(s)" if isinstance(r,list) else "format : "+", ".join(sorted(d.keys()))[:120])
+except Exception: print("réponse non JSON")' 2>/dev/null)"; fi
 if [ -z "$fid" ]; then echo "Relais : introuvable (ou en double), non modifié."; else
   rel=$(python3 -c '
 import json, os
