@@ -54,6 +54,14 @@ Les « Fonctionnalités — détail des modules (v7) » (24972 à 24977) sont re
 
 Une base apparaît « en échec » tant qu'elle contient un de ces documents. Ils ne contiennent rien : leur suppression ne retire aucune information.
 
+## 4. Base multilingue 6209 (créée le 8 octobre, 10:30-10:57 UTC)
+
+Les 35 autres documents de cette base sont actifs et à garder. À supprimer :
+- 25239 « FR — Fonctionnalités (v10) » : création en échec, vide (recréée aussitôt en 25240).
+- 25234 « FR — Processus (v10) » : resté 17 minutes en traitement, puis actif. Il fait doublon avec 25245 (même page /kb/fr) : garder l'un des deux.
+
+Réimport prévu ici aussi : quand les guides « assistante virtuelle » seront corrigés sur le site, recréer dans 6209 les 5 documents de guides concernés (25238 fr, 25250 en, 25255 it, 25260 pl, 25265 nl), puis supprimer les anciens.
+
 ## Ordre conseillé
 
 1. Vérifier dans chaque base que les v10 du tableau « à garder » sont « Active ».
