@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 import { useCallbackModal } from '@/context/CallbackContext';
-import { CallbackForm } from './ui';
+import { CallbackForm, keepPhone } from './ui';
 import { useI18n } from '@/i18n';
 
 export default function CallbackModal() {
   const { isOpen, options, closeCallbackModal } = useCallbackModal();
   const dialog = useRef<HTMLDivElement>(null);
-  const { c } = useI18n();
+  const { c, market } = useI18n();
   const t = c.ui.components.callbackModal;
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function CallbackModal() {
         <div className="mb-5 flex items-start justify-between gap-4">
           <div>
             <h2 id="cb-title" className="font-display text-2xl font-bold">{support ? t.titleSupport : t.titleCommercial}</h2>
-            <p className="mt-1 text-[15px]">{t.intro}</p>
+            <p className="mt-1 text-[15px]">{keepPhone(t.intro, market.phone?.display)}</p>
           </div>
           <button type="button" onClick={closeCallbackModal} aria-label={t.close} className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
         </div>

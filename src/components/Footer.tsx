@@ -59,10 +59,11 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-3 py-6 text-[13px] sm:flex-row sm:items-center sm:justify-between">
+        {/* Copyright sur sa propre ligne jusqu’à xl (texte long en hébreu) ; chaque lien reste entier et c’est le groupe qui passe à la ligne. */}
+        <div className="wrap flex flex-col gap-3 py-6 text-[13px] xl:flex-row xl:items-center xl:justify-between xl:gap-8">
           <p>{t.copyright(new Date().getFullYear(), market.brand, SITE.company)}</p>
-          <button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))} className="hover:text-white">{c.site.consent.manage}</button>
-          <ul className="flex flex-wrap gap-x-5 gap-y-1">
+          <ul className="flex shrink-0 flex-wrap gap-x-5 gap-y-1 whitespace-nowrap">
+            <li><button type="button" onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))} className="hover:text-white">{c.site.consent.manage}</button></li>
             <li><Link href="/mentions-legales" className="hover:text-white">{t.legal.notice}</Link></li>
             <li><Link href="/cgu" className="hover:text-white">{t.legal.terms}</Link></li>
             <li><Link href="/confidentialite" className="hover:text-white">{t.legal.privacy}</Link></li>

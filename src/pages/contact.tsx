@@ -1,6 +1,6 @@
 import React, { useId, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
-import { CallbackForm, Heading, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
+import { CallbackForm, Heading, keepPhone, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
 import Mock from '@/components/Mock';
 import { tabKeyTarget } from '@/components/tabs';
 import { SITE } from '@/data/site';
@@ -26,7 +26,7 @@ export default function Contact() {
       <section className="bg-paper">
         <div className="wrap grid gap-12 py-14 lg:grid-cols-[1fr_1.2fr] lg:py-20">
           <div>
-            <Heading as="h1" title={t.h1} intro={t.intro} />
+            <Heading as="h1" title={t.h1} intro={keepPhone(t.intro, market.phone?.display)} />
             <ul className="mt-10 space-y-5">
               {market.phone && <li className="flex gap-4"><Phone className="h-6 w-6 shrink-0 text-signal" aria-hidden /><div><p className="font-display font-semibold text-ink">{market.phone.label}</p><a href={`tel:${market.phone.e164}`} className="text-lg font-semibold text-signal-deep hover:underline"><bdi dir="ltr">{market.phone.display}</bdi></a><p className="text-[15px]">{market.phone.note}</p></div></li>}
               <li className="flex gap-4"><WhatsAppIcon className="h-6 w-6 shrink-0 text-[#25D366]" /><div><p className="font-display font-semibold text-ink">WhatsApp · <bdi dir="ltr">{SITE.whatsapp.display}</bdi></p><p className="text-[15px]">{c.site.whatsapp.note}</p><WhatsAppStarters place="contact" className="mt-3" /></div></li>

@@ -487,21 +487,22 @@ export function RechargeTables() {
   const plans = offers.filter((o) => o.extraMinute);
   return (
     <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-      <div className="overflow-x-auto rounded-2xl border border-line bg-white p-6">
+      <div className="overflow-x-auto rounded-2xl border border-line bg-white p-5 sm:p-6">
         <h3 className="text-h3 font-semibold">{t.title}</h3>
         <p className="mt-1 text-[15px]">{t.text}</p>
-        <table className="mt-4 w-full min-w-[460px] text-[15px]">
+        {/* Sans largeur minimale : sur téléphone, les 4 colonnes tiennent à l’écran (texte réduit, en-têtes sur 2 lignes). */}
+        <table className="mt-4 w-full text-sm sm:text-[15px]">
           <thead>
-            <tr className="border-b border-line text-start text-sm text-slate">
-              <th className="py-2 font-medium">{t.rechargeCol}</th>
-              {plans.map((o) => <th key={o.slug} className="py-2 text-end font-medium">{o.name}</th>)}
+            <tr className="border-b border-line text-start text-xs text-slate sm:text-sm">
+              <th className="py-2 pe-2 text-start align-bottom font-medium">{t.rechargeCol}</th>
+              {plans.map((o) => <th key={o.slug} className="py-2 ps-2 text-end align-bottom font-medium">{o.name}</th>)}
             </tr>
           </thead>
           <tbody>
             {market.recharges.map((amount) => (
               <tr key={amount} className="border-b border-line last:border-0">
-                <td className="py-2.5 font-semibold text-ink">{money(amount)}</td>
-                {plans.map((o) => <td key={o.slug} className="py-2.5 text-end text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
+                <td className="whitespace-nowrap py-2.5 pe-2 font-semibold text-ink">{money(amount)}</td>
+                {plans.map((o) => <td key={o.slug} className="whitespace-nowrap py-2.5 ps-2 text-end text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
               </tr>
             ))}
           </tbody>
@@ -797,8 +798,20 @@ export function HumanVsAi() {
   return (
     <div>
       <Heading title={t.title} intro={t.intro} />
-      <div className="mt-10 overflow-x-auto rounded-2xl border border-line bg-white">
-        <table className="w-full min-w-[640px] text-start text-[15px]">
+      {/* Téléphone : une carte par ligne, la colonne « agent IA » reste visible sans défilement horizontal. */}
+      <ul className="mt-8 space-y-3 sm:hidden">
+        {t.rows.map((r) => (
+          <li key={r.label} className="overflow-hidden rounded-2xl border border-line bg-white">
+            <p className="px-4 pb-2 pt-3 font-display font-semibold text-ink">{r.label}</p>
+            <dl className="text-[15px]">
+              <div className="border-t border-line px-4 py-2.5"><dt className="text-xs font-semibold uppercase tracking-wide text-slate">{t.human}</dt><dd className="mt-0.5">{fill(r.human)}</dd></div>
+              <div className="bg-signal-soft/60 px-4 py-2.5"><dt className="text-xs font-semibold uppercase tracking-wide text-signal-deep">{t.ai}</dt><dd className="mt-0.5 font-semibold text-ink">{fill(r.ai)}</dd></div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-10 hidden overflow-x-auto rounded-2xl border border-line bg-white sm:block">
+        <table className="w-full min-w-[600px] text-start text-[15px]">
           <caption className="sr-only">{t.caption}</caption>
           <thead>
             <tr className="border-b border-line">

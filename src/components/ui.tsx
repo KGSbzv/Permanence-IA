@@ -31,6 +31,25 @@ export function Heading({
   );
 }
 
+/**
+ * Numéro de téléphone cité dans un texte : jamais coupé en fin de ligne, lu de gauche à droite (hébreu compris).
+ * Le préfixe collé au numéro (« ל- » en hébreu) reste sur la même ligne que lui.
+ */
+export function keepPhone(text: string, display?: string): React.ReactNode {
+  if (!display || !text.includes(display)) return text;
+  const parts = text.split(display);
+  return parts.map((part, i) => {
+    if (i === parts.length - 1) return part;
+    const glued = part.match(/\S*$/)?.[0] ?? '';
+    return (
+      <React.Fragment key={i}>
+        {part.slice(0, part.length - glued.length)}
+        <span className="whitespace-nowrap">{glued}<bdi dir="ltr">{display}</bdi></span>
+      </React.Fragment>
+    );
+  });
+}
+
 /* ---------- Conversion ---------- */
 
 /** Au plus trois pastilles sur mobile ; les suivantes apparaissent à partir de sm. */
@@ -296,8 +315,6 @@ const DIAL_CODES: { id: string; flag: string; cc: string; ex: string }[] = [
   { id: 'DE', flag: '🇩🇪', cc: '49', ex: '0151 23456789' }, { id: 'ES', flag: '🇪🇸', cc: '34', ex: '612 34 56 78' }, { id: 'PT', flag: '🇵🇹', cc: '351', ex: '912 345 678' },
 ];
 const DEFAULT_COUNTRY: Record<string, string> = { fr: 'FR', 'en-gb': 'GB', 'en-au': 'AU', it: 'IT', pl: 'PL', nl: 'NL', he: 'IL' };
-/** « par exemple » devant le format attendu, affiché dans le champ (le libellé reste dans aria-label ou au-dessus). */
-const EXAMPLE: Record<string, string> = { fr: 'ex.', 'en-gb': 'e.g.', 'en-au': 'e.g.', it: 'es.', pl: 'np.', nl: 'bijv.', he: 'לדוגמה' };
 const DIAL_LABEL: Record<string, string> = { fr: 'Indicatif pays', 'en-gb': 'Country code', 'en-au': 'Country code', it: 'Prefisso internazionale', pl: 'Numer kierunkowy kraju', nl: 'Landcode', he: 'קידומת מדינה' };
 /** Motif valable aussi en mode « v » des navigateurs récents (parenthèses et tiret échappés). */
 export const PHONE_PATTERN = '[+0-9\\(][0-9 .\\(\\)\\-]{7,}';
@@ -312,6 +329,7 @@ export function PhoneField({ id, label, className = 'field', placeholder, hideLa
   const { c, locale } = useI18n();
   const invalid = c.ui.components.callbackForm.phoneInvalid;
   const [country, setCountry] = useState(DEFAULT_COUNTRY[locale] || 'FR');
+  // Exemple de numéro du pays choisi, sans préfixe « ex. » : il tient en entier dans les formulaires à 2 colonnes.
   const ex = DIAL_CODES.find((d) => d.id === country)?.ex;
   // Le sélecteur garde sa largeur naturelle : on retire un éventuel « w-full » hérité de la classe du champ.
   const selectClass = className.replace(/\bw-full\b/g, '');
@@ -319,11 +337,12 @@ export function PhoneField({ id, label, className = 'field', placeholder, hideLa
     <div>
       {!hideLabel && <label htmlFor={id} className={labelClassName}>{label}</label>}
       <div className="flex gap-2" dir="ltr">
-        <select name="cc" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} value={country} onChange={(e) => setCountry(e.target.value)} className={`${selectClass} w-[5.75rem] shrink-0 pe-6 sm:w-[6.75rem] sm:pe-7`}>
+        {/* Largeur prévue pour « 🇮🇱 +972 » ou « 🇦🇺 +61 » sans troncature, y compris en hébreu (dir ltr explicite). */}
+        <select name="cc" dir="ltr" aria-label={DIAL_LABEL[locale] || DIAL_LABEL['en-gb']} value={country} onChange={(e) => setCountry(e.target.value)} className={`${selectClass} w-[6.25rem] shrink-0 ps-2.5 pe-1.5`}>
           {DIAL_CODES.map((d) => <option key={d.id} value={d.id}>{d.flag} +{d.cc}</option>)}
         </select>
         <input id={id} name="phone" type="tel" inputMode="tel" required minLength={8} pattern={PHONE_PATTERN} autoComplete="tel-national"
-          placeholder={ex ? `${EXAMPLE[locale] || 'e.g.'} ${ex}` : placeholder}
+          placeholder={ex || placeholder}
           aria-label={hideLabel ? label : undefined} className={`${className} min-w-0 flex-1`}
           onInvalid={(e) => e.currentTarget.setCustomValidity(invalid)} onInput={(e) => e.currentTarget.setCustomValidity('')} />
       </div>

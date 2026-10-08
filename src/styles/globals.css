@@ -10,8 +10,12 @@
     @apply bg-white font-sans text-[17px] leading-relaxed text-slate antialiased;
   }
   h1, h2, h3, h4 { @apply font-display text-ink; }
-  /* Mots longs (néerlandais, polonais, URL) : coupure plutôt que débordement horizontal sur mobile. */
-  h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; }
+  /* Mots longs (néerlandais, polonais, URL) : coupure plutôt que débordement horizontal sur mobile.
+     Pas de césure automatique dans les grands titres (« ré-servés », « loca-taires ») sauf sur très petits écrans. */
+  h1, h2, h3 { overflow-wrap: break-word; }
+  h1, h2 { hyphens: manual; }
+  h3 { hyphens: auto; }
+  @media (max-width: 359.98px) { h1, h2 { hyphens: auto; } }
   bdi { overflow-wrap: anywhere; }
   :focus-visible { @apply outline-none ring-2 ring-signal ring-offset-2; }
   ::selection { @apply bg-signal-soft text-ink; }
@@ -51,14 +55,20 @@ iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*=
   z-index: 70 !important;
 }
 /* Sur téléphone, la bulle fermée (bouton + invitation) est réduite pour ne pas masquer les boutons de la page.
-   Largeur plafonnée : l’iframe capte les touches sur toute sa surface, même transparente ; le widget resserre
-   son invitation (texte tronqué) au lieu de la couper. La fenêtre ouverte (400px de large ou plein écran) garde sa taille. */
+   Largeur plafonnée : l’iframe capte les touches sur toute sa surface, même transparente. L’invitation du widget
+   mesure jusqu’à environ 295 px, calée à 16 px du bord droit de l’iframe : en dessous de 312 px, la photo de
+   l’assistante était coupée à gauche. La fenêtre ouverte (400px de large ou plein écran) garde sa taille. */
 @media (max-width: 639.98px) {
   iframe[src*="/web-widget/"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]),
   iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]) {
-    max-width: 280px !important;
+    max-width: 312px !important;
     transform: scale(0.78) !important;
     transform-origin: right bottom;
+  }
+  /* Hébreu : invitation plus courte (texte tronqué par le widget), 280 px suffisent et la bulle déborde moins sur la page. */
+  html[dir="rtl"] iframe[src*="/web-widget/"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]),
+  html[dir="rtl"] iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]) {
+    max-width: 280px !important;
   }
 }
 
