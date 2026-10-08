@@ -1,6 +1,12 @@
 # Questions à envoyer à Autocalls par WhatsApp (8 octobre 2026)
 
-4 messages, à envoyer dans l'ordre. Chaque question cite nos identifiants et ce qu'on a observé : la réponse dépend de notre compte, pas de la documentation générale.
+4 messages, à envoyer dans l'ordre.
+
+**Réponses déjà reçues d'Autocalls (8 octobre) :**
+- **1. Notre solde à zéro :** si le client est créditeur, il continue à utiliser le système.
+- **2. Numéros dédiés :** l'abonnement du numéro s'annule, donc pas de renouvellement le mois suivant (le numéro de test 11806 ne sera pas reconduit).
+- **8. Transferts :** la durée du transfert est décomptée des minutes (déjà indiqué ainsi dans la FAQ du site, 6 langues).
+- Autres questions : réponse attendue. Chaque question cite nos identifiants et ce qu'on a observé : la réponse dépend de notre compte, pas de la documentation générale.
 
 ## Message 1 — Facturation
 
