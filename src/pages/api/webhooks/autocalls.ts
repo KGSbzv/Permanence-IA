@@ -36,18 +36,20 @@ async function messageAfterMissedCall(phone: string) {
   // français avec un numéro +44 reçoit le message en français.
   const siteLang = /\[LANG:([a-z-]+)\]/.exec(req.note || '')?.[1];
   const lang = waLang || siteLang || langFromPhone(phone);
+  // Marché d’origine ([MKT:xx], site ou langue de l’agent) : numéro WhatsApp du modèle et du lien dans le SMS.
+  const market = /\[MKT:([a-z-]+)\]/.exec(req.note || '')?.[1] || lang;
   const first = safeFirstName(req.name, lang);
   // Accord WhatsApp donné sur le site → modèle WhatsApp ; s’il échoue (modèle pas encore approuvé par Meta…),
   // SMS de service comme pour les autres (hors États-Unis et Canada, qui exigent un enregistrement A2P).
   let channel: 'whatsapp' | 'sms' | null = null;
   let waError = '';
   if (waLang) {
-    try { await sendTemplate('pia_callback_missed', waLang, phone, { 1: first }); channel = 'whatsapp'; }
+    try { await sendTemplate('pia_callback_missed', waLang, phone, { 1: first }, { market }); channel = 'whatsapp'; }
     catch (e: any) { waError = e.message; console.error('[autocalls-webhook] WhatsApp rappel manqué, repli SMS :', waError); }
   }
   if (!channel) {
     if (phone.startsWith('+1')) return waError ? `WhatsApp en échec (${waError}), pas de SMS vers +1` : 'pas de SMS vers +1';
-    await sendMissedCallSms(lang, phone, first);
+    await sendMissedCallSms(lang, phone, first, market);
     channel = 'sms';
   }
   const label = channel === 'whatsapp' ? 'WhatsApp' : 'SMS';

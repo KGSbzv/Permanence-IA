@@ -22,6 +22,8 @@ const waMark = (lang: string) => `[WA:${lang}] confirmation WhatsApp demandée`;
 /** Marqueur de la langue de la campagne (langue du site) : SMS de repli après un appel manqué dans cette langue,
  *  même si l’indicatif du numéro est celui d’un autre pays. */
 const langMark = (lang: string) => `[LANG:${lang}]`;
+/** Site d’où vient la demande (ou langue de l’agent) : choisit le numéro WhatsApp du message « rappel manqué ». */
+const marketMark = (market: string) => `[MKT:${market}]`;
 // Créneaux du formulaire (valeurs fixes en français) : en anglais pour les agents des autres pays, qui les résument dans leur langue.
 const SLOT_EN: Record<string, string> = { 'Aujourd’hui après-midi': 'this afternoon', 'Demain matin': 'tomorrow morning', 'Demain après-midi': 'tomorrow afternoon' };
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
@@ -91,6 +93,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // formulaire (pour la démo, celle du site, la langue de la démo est gardée à part), sinon langue déclarée par
   // l’agent (« en » tranché par l’indicatif), sinon indicatif non ambigu ; à défaut, à valider à la main.
   const siteLocale = fromAgent ? undefined : isLocale(b.siteLocale) ? b.siteLocale : locale;
+  // Marché : le site d’où vient la demande (pas la langue d’une démo) ; pour un agent, la langue de la campagne.
+  // Seul le site israélien envoie ses WhatsApp depuis le numéro israélien.
+  const market = siteLocale ?? campaignLang;
   const resolved = resolveLocale({ siteLocale, agentLang: fromAgent ? b.language ?? locale : undefined, phone: e164 });
   // Cases marketing : seulement depuis un formulaire du site qui les affiche (booléen présent dans le corps).
   const siteForm = !fromAgent && typeof b.marketingEmail === 'boolean';
@@ -112,7 +117,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     name, phone: e164, email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
-    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang), marketMark(market)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${isLocale(locale) && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
@@ -195,8 +200,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (day.length > 30) throw new Error('plafond quotidien de messages WhatsApp atteint');
     // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
     return scheduled
-      ? sendCallbackConfirmation({ lang: campaignLang, phone: e164, name: String(name), callAt, tz: b.tz, kind, voice })
-      : sendTemplate('pia_welcome_whatsapp', campaignLang, e164, { 1: safeFirstName(name, campaignLang) });
+      ? sendCallbackConfirmation({ lang: campaignLang, market, phone: e164, name: String(name), callAt, tz: b.tz, kind, voice })
+      : sendTemplate('pia_welcome_whatsapp', campaignLang, e164, { 1: safeFirstName(name, campaignLang) }, { market });
   };
   // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
   const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall(db.value) : Promise.reject(new Error('demande non enregistrée'))]);

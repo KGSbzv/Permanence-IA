@@ -1,5 +1,8 @@
 // Constantes techniques communes à toutes les langues (URLs, routes). Les textes sont dans
-// src/i18n/content/<langue>/ et la marque, les prix et le widget dans src/i18n/markets.ts.
+// src/i18n/content/<langue>/ et la marque, les prix, le widget et le numéro WhatsApp dans src/i18n/markets.ts.
+import { asLocale } from '@/i18n/locales';
+import { MARKETS } from '@/i18n/markets';
+
 export const SITE = {
   url: 'https://www.permanenceia.com',
   appUrl: 'https://app.permanenceia.com',
@@ -7,14 +10,19 @@ export const SITE = {
   company: 'SINAY STRATEGIC LLC',
   /** Adresse postale de la société (pied des emails). */
   address: '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001, USA',
-  /** Numéro WhatsApp Business (expéditeur Autocalls 521), servi par l’agent IA multilingue. */
-  whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' },
   /** Page Facebook de la marque (en anglais). */
   facebook: 'https://www.facebook.com/permanenceia',
 };
 
+/**
+ * Numéro WhatsApp Business de la langue du site : le français (expéditeur Autocalls 521) partout, l’israélien
+ * (expéditeur 529, +972 3-382-7709) pour le site en hébreu seulement. Langue inconnue : français.
+ */
+export const whatsappFor = (locale: string) => MARKETS[asLocale(locale)].whatsapp;
+/** Lien wa.me du numéro WhatsApp de la langue, sans message prérempli (SMS, textes). */
+export const whatsappLink = (locale: string) => `https://wa.me/${whatsappFor(locale).e164.slice(1)}`;
 /** Lien « cliquer pour discuter » WhatsApp avec un premier message prérempli dans la langue du visiteur. */
-export const whatsappUrl = (text: string) => `https://wa.me/${SITE.whatsapp.e164.slice(1)}?text=${encodeURIComponent(text)}`;
+export const whatsappUrl = (text: string, locale: string) => `${whatsappLink(locale)}?text=${encodeURIComponent(text)}`;
 
 // Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';

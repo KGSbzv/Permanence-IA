@@ -3,6 +3,7 @@
 // Horloge simulée (paramètre `now` de resolveCallAt) : une date précise un jour non ouvré ou hors des plages du
 // marché est reportée au prochain créneau ouvré ; un numéro national reçu d’un agent sans indicatif n’est pas
 // converti au hasard ; seuls les indicatifs d’Afrique francophone partent vers la campagne française.
+// Numéros WhatsApp : l’israélien (expéditeur 529) pour l’hébreu seulement, avec repli sur le 521 (fetch simulé).
 import assert from 'node:assert/strict';
 
 for (const k of ['ZOHO_SMTP_USER', 'ZOHO_SMTP_PASS', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY']) delete process.env[k];
@@ -14,6 +15,9 @@ async function main() {
   let passed = 0;
   const test = (name: string, fn: () => void) => {
     try { fn(); passed++; console.log(`ok  ${name}`); } catch (e) { console.error(`ÉCHEC  ${name}`); throw e; }
+  };
+  const atest = async (name: string, fn: () => Promise<void>) => {
+    try { await fn(); passed++; console.log(`ok  ${name}`); } catch (e) { console.error(`ÉCHEC  ${name}`); throw e; }
   };
   // Jeudi 8 octobre 2026, 10:00 à Paris.
   const NOW = Date.parse('2026-10-08T08:00:00Z');
@@ -62,6 +66,134 @@ async function main() {
   test('langFromPhone : Afrique francophone et outre-mer → fr', () => {
     for (const p of ['+212612345678', '+221771234567', '+2250701234567', '+237612345678', '+243812345678', '+261321234567', '+262692123456', '+33612345678']) assert.equal(langFromPhone(p), 'fr', p);
   });
+
+  /* ---------- WhatsApp : numéro et expéditeur selon la langue (aucun réseau : fetch simulé) ---------- */
+
+  const { whatsappFor, whatsappLink, whatsappUrl } = await import('@/data/site');
+  const { sendersFor, sendTemplate, clearTemplateCache, WHATSAPP_SENDER_ID, WHATSAPP_SENDER_ID_IL } = await import('@/lib/whatsapp');
+  const { sendMissedCallSms } = await import('@/lib/sms');
+
+  test('WhatsApp : numéro israélien pour l’hébreu seulement', () => {
+    assert.equal(whatsappFor('he').e164, '+97233827709');
+    for (const l of ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl', 'xx']) assert.equal(whatsappFor(l).e164, '+33745460446', l);
+    assert.equal(whatsappLink('he'), 'https://wa.me/97233827709');
+    assert.equal(whatsappUrl('שלום', 'he'), `https://wa.me/97233827709?text=${encodeURIComponent('שלום')}`);
+    assert.equal(whatsappUrl('Bonjour', 'fr'), 'https://wa.me/33745460446?text=Bonjour');
+  });
+  test('WhatsApp : expéditeurs par langue (hébreu : 529 puis 521)', () => {
+    assert.deepEqual([WHATSAPP_SENDER_ID, WHATSAPP_SENDER_ID_IL], [521, 529]);
+    assert.deepEqual(sendersFor('he'), [529, 521]);
+    for (const l of ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl']) assert.deepEqual(sendersFor(l), [521], l);
+  });
+
+  // Faux Autocalls : modèles par expéditeur (liste, ou code d’erreur HTTP) et envois refusés par expéditeur.
+  const realFetch = globalThis.fetch;
+  const realWarn = console.warn;
+  let calls: { url: string; body?: any }[] = [];
+  let lists: Record<number, unknown[] | number> = {};
+  let refused = new Set<number>();
+  let failing = new Set<number>();
+  const warns: string[] = [];
+  const json = (status: number, data: unknown) => new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json' } });
+  globalThis.fetch = (async (input: unknown, init?: { body?: string }) => {
+    const url = String(input);
+    const body = init?.body ? JSON.parse(init.body) : undefined;
+    calls.push({ url, body });
+    const m = /\/whatsapp\/templates\?sender_id=(\d+)$/.exec(url);
+    if (m) { const l = lists[Number(m[1])]; return typeof l === 'number' ? json(l, {}) : json(200, { data: l ?? [] }); }
+    if (url.endsWith('/whatsapp/send')) return refused.has(body.sender_id) ? json(400, { error: 'refusé' }) : failing.has(body.sender_id) ? json(503, { error: 'indisponible' }) : json(200, { ok: true, sender: body.sender_id });
+    if (url.endsWith('/user/sms')) return json(200, { ok: true });
+    throw new Error(`réseau interdit dans les tests : ${url}`);
+  }) as typeof fetch;
+  console.warn = (...a: unknown[]) => { warns.push(a.join(' ')); };
+  process.env.AUTOCALLS_API_KEY = 'cle-de-test-sans-reseau';
+  const tpl = (id: number, language: string, status = 'APPROVED') => ({ id, name: 'pia_callback_missed', language, status });
+  const reset = (l: typeof lists, r: number[] = [], f: number[] = []) => { clearTemplateCache(); calls = []; lists = l; refused = new Set(r); failing = new Set(f); warns.length = 0; };
+  const sentFrom = () => calls.filter((c) => c.url.endsWith('/send')).map((c) => c.body.sender_id);
+  const listed = () => calls.map((c) => /sender_id=(\d+)/.exec(c.url)?.[1]).filter(Boolean).map(Number);
+  const send = (lang: string, market?: string) => sendTemplate('pia_callback_missed', lang, '+972501234567', { 1: 'דנה' }, { market });
+
+  try {
+    await atest('WhatsApp he : modèle pas encore approuvé sur le 529 → envoi par le 521', async () => {
+      reset({ 529: [tpl(9, 'he', 'PENDING')], 521: [tpl(1, 'he')] });
+      await send('he');
+      assert.deepEqual(listed(), [529, 521]);
+      assert.deepEqual(sentFrom(), [521]);
+      assert.equal(calls.at(-1)!.body.template_id, 1);
+      assert.equal(warns.length, 1);
+    });
+    await atest('WhatsApp he : modèle approuvé sur le 529 → envoi par le 529, le 521 n’est pas consulté', async () => {
+      reset({ 529: [tpl(9, 'he')], 521: [tpl(1, 'he')] });
+      await send('he');
+      assert.deepEqual(listed(), [529]);
+      assert.deepEqual(sentFrom(), [529]);
+      assert.equal(calls.at(-1)!.body.template_id, 9);
+    });
+    await atest('WhatsApp he : liste du 529 en erreur (500) → repli sur le 521', async () => {
+      reset({ 529: 500, 521: [tpl(1, 'he')] });
+      await send('he');
+      assert.deepEqual(sentFrom(), [521]);
+    });
+    await atest('WhatsApp he : envoi refusé par le 529 → nouvel essai par le 521', async () => {
+      reset({ 529: [tpl(9, 'he')], 521: [tpl(1, 'he')] }, [529]);
+      await send('he');
+      assert.deepEqual(sentFrom(), [529, 521]);
+    });
+    await atest('WhatsApp he : erreur 5xx à l’envoi par le 529 → pas de second envoi (doublon possible)', async () => {
+      reset({ 529: [tpl(9, 'he')], 521: [tpl(1, 'he')] }, [], [529]);
+      await assert.rejects(send('he'), /503/);
+      assert.deepEqual(sentFrom(), [529]);
+    });
+    await atest('WhatsApp he : échec de la liste du 529 gardé en mémoire (pas de nouvelle requête au 2e envoi)', async () => {
+      reset({ 529: 500, 521: [tpl(1, 'he')] });
+      await send('he');
+      await send('he');
+      assert.deepEqual(listed(), [529, 521]);
+      assert.deepEqual(sentFrom(), [521, 521]);
+    });
+    await atest('WhatsApp : démo en hébreu sur le site français → expéditeur 521 seulement (le marché décide)', async () => {
+      reset({ 529: [tpl(9, 'he')], 521: [tpl(1, 'he')] });
+      await send('he', 'fr');
+      assert.deepEqual(listed(), [521]);
+      assert.deepEqual(sentFrom(), [521]);
+    });
+    await atest('WhatsApp he : modèles mis en cache par expéditeur', async () => {
+      reset({ 529: [], 521: [tpl(1, 'he')] });
+      await send('he');
+      await send('he');
+      assert.deepEqual(listed(), [529, 521]);
+      assert.deepEqual(sentFrom(), [521, 521]);
+    });
+    await atest('WhatsApp he : approuvé nulle part → erreur du 521', async () => {
+      reset({ 529: [], 521: [] });
+      await assert.rejects(send('he'), /non approuvé \(expéditeur 521\)/);
+      assert.deepEqual(sentFrom(), []);
+    });
+    await atest('WhatsApp fr : 521 seulement, le 529 n’est jamais consulté', async () => {
+      reset({ 529: [tpl(9, 'fr')], 521: [tpl(1, 'fr')] });
+      await send('fr');
+      assert.deepEqual(listed(), [521]);
+      assert.deepEqual(sentFrom(), [521]);
+    });
+    await atest('SMS après appel manqué : lien WhatsApp israélien en hébreu, français ailleurs', async () => {
+      reset({});
+      await sendMissedCallSms('he', '+972501234567', 'דנה');
+      await sendMissedCallSms('fr', '+33612345678', 'Marie');
+      await sendMissedCallSms('xx', '+447700900123', 'Sam');
+      const [he, fr, other] = calls.map((c) => String(c.body.body));
+      assert.ok(he.endsWith('https://wa.me/97233827709'), he);
+      assert.ok(fr.endsWith('https://wa.me/33745460446'), fr);
+      assert.ok(other.endsWith('https://wa.me/33745460446'), other);
+      reset({});
+      await sendMissedCallSms('he', '+972501234567', 'דנה', 'fr');
+      assert.ok(String(calls[0].body.body).endsWith('https://wa.me/33745460446'), 'site français : lien +33 même en hébreu');
+    });
+  } finally {
+    globalThis.fetch = realFetch;
+    console.warn = realWarn;
+    delete process.env.AUTOCALLS_API_KEY;
+    clearTemplateCache();
+  }
 
   console.log(`\n${passed} tests réussis`);
 }

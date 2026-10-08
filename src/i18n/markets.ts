@@ -74,6 +74,11 @@ export interface Market {
   legal: MarketLegal;
   /** Numéro public du marché, décroché 24/7 par l’agent IA du pays (absent = pas de numéro affiché). */
   phone?: { e164: string; display: string; label: string; note: string };
+  /**
+   * Numéro WhatsApp Business du marché (liens wa.me, page contact, SMS) : le numéro français (expéditeur Autocalls 521)
+   * partout, sauf en Israël, qui a son propre expéditeur (529). Les envois de modèles suivent (src/lib/whatsapp.ts).
+   */
+  whatsapp: { e164: string; display: string };
   /** Assistant Autocalls du widget de vente pour ce pays (uuid). */
   widgetAssistantId: string;
   /** Forfaits de l’admin Autocalls facturés dans ce pays (à renseigner si les prix divergent). */
@@ -91,7 +96,8 @@ const basePlans = (): Record<PlanSlug, PlanPricing> => ({
 const baseRecharges = () => [39, 89, 159, 299, 725];
 // Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL, 21306 HE).
 const SALES_WIDGET = '2841fa2d-1fed-4fbc-b832-28b954d049a6';
-const SHARED = { currency: 'USD' as const, hourlyCost: 20, phoneNumberFrom: 3.99, paygMinute: 0.39, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 } };
+// WhatsApp : numéro français (expéditeur Autocalls 521), servi par l’agent IA multilingue, pour tous les marchés sauf Israël.
+const SHARED = { currency: 'USD' as const, hourlyCost: 20, phoneNumberFrom: 3.99, paygMinute: 0.39, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 }, whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' } };
 
 export const MARKETS: Record<Locale, Market> = {
   fr: {
@@ -138,6 +144,8 @@ export const MARKETS: Record<Locale, Market> = {
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: 'd8bde5e6-bb6d-435c-8934-3c1131c964e9',
     // Ligne israélienne (Autocalls 11826, depuis le 8 oct. 2026 ; avant : 11784), agent entrant 21314 (נועה).
     phone: { e164: '+97233827709', display: '03-382-7709', label: 'התקשרו אלינו, 24/7', note: 'נועה, סוכנת ה-AI שלנו, עונה בעברית – וזו גם ההדגמה הכי טובה.' },
+    // WhatsApp israélien : même numéro que la ligne (expéditeur Autocalls 529), réservé au site en hébreu, entrant et sortant.
+    whatsapp: { e164: '+97233827709', display: '03-382-7709' },
   },
 };
 

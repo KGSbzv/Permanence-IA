@@ -444,7 +444,7 @@ export function PhoneField({ id, label, className = 'field', placeholder, hideLa
 /** Indicatif (chiffres) correspondant au pays choisi dans PhoneField. */
 export const dialCode = (id: FormDataEntryValue | null) => DIAL_CODES.find((d) => d.id === id)?.cc;
 
-/* ---------- WhatsApp : discuter avec l’agent IA (prérempli dans la langue du site) ---------- */
+/* ---------- WhatsApp : discuter avec l’agent IA (prérempli dans la langue du site, numéro du marché) ---------- */
 
 export function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) {
   return (
@@ -458,7 +458,7 @@ export function WhatsAppIcon({ className = 'h-5 w-5' }: { className?: string }) 
 export function WhatsAppLink({ variant = 'card', place, className = '' }: { variant?: 'card' | 'dark' | 'button' | 'icon'; place: string; className?: string }) {
   const { c, locale } = useI18n();
   const t = c.site.whatsapp;
-  const href = whatsappUrl(t.prefill);
+  const href = whatsappUrl(t.prefill, locale);
   const onClick = () => track('whatsapp_click', { language: locale, place });
   if (variant === 'icon') {
     return <a href={href} target="_blank" rel="noopener" onClick={onClick} aria-label={t.cta} title={t.cta} className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#25D366] text-white hover:bg-[#1FBF5B] ${className}`}><WhatsAppIcon className="h-5 w-5" /></a>;
@@ -487,7 +487,7 @@ export function WhatsAppStarters({ place, dark = false, className = '' }: { plac
       <p className={`text-sm ${dark ? 'text-white/75' : 'text-slate'}`}>{t.startersIntro}</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {t.starters.map((s, i) => (
-          <a key={s.label} href={whatsappUrl(s.text)} target="_blank" rel="noopener" onClick={() => track('whatsapp_click', { language: locale, place, topic: i })}
+          <a key={s.label} href={whatsappUrl(s.text, locale)} target="_blank" rel="noopener" onClick={() => track('whatsapp_click', { language: locale, place, topic: i })}
             className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors ${dark ? 'border-white/25 text-white hover:border-[#25D366]' : 'border-line bg-white text-ink hover:border-[#25D366]'}`}>
             <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />{s.label}
           </a>

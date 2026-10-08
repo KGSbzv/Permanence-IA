@@ -1,4 +1,13 @@
-# Modèles WhatsApp de Permanence IA (expéditeur Autocalls 521, +33 7 45 46 04 46)
+# Modèles WhatsApp de Permanence IA
+
+Deux expéditeurs Autocalls :
+- **521, +33 7 45 46 04 46** : toutes les langues sauf le site israélien, et repli de l'hébreu.
+- **529, +972 3-382-7709** (même numéro que la ligne téléphonique israélienne) : site israélien seulement, entrant et sortant. Il est créé le 8 octobre 2026, relié à l'agent 21358 pour les réponses, avec un profil en hébreu publié.
+  - Ses 8 modèles hébreux (1171 à 1178) reprennent mot pour mot ceux du 521 (1145 à 1152). Ils ont été soumis à Meta le 8 octobre.
+  - Le site (src/lib/whatsapp.ts) les utilise dès leur approbation. Jusque-là, et en cas de modèle manquant ou de refus net, les messages du site israélien partent du 521.
+  - Le numéro est choisi selon le site d'où vient la demande, pas la langue d'une démo.
+
+## Expéditeur 521
 
 Relevé du 8 octobre 2026 (list-whatsapp-templates, statut approved) : les **48 modèles sont approuvés**. Il n'en reste aucun en attente ni refusé.
 
