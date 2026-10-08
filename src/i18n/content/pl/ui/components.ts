@@ -404,7 +404,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     phoneCta: 'Zadzwońcie do mnie',
     phoneLegal: 'Bezpłatnie i bez zobowiązań. Twój numer służy wyłącznie do tej demonstracji.',
     sentTitle: 'Zgłoszenie przyjęte',
-    sentText: (name: string) => `${name} zadzwoni w ciągu kilku minut w godzinach pracy (od poniedziałku do soboty, 9:00–19:00). Miej telefon pod ręką.`,
+    sentText: (name: string) => `${name} zadzwoni w ciągu kilku minut w godzinach pracy (od poniedziałku do soboty, 9:00–17:30, czasu polskiego). Miej telefon pod ręką.`,
     again: 'Spróbuj ponownie',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'agent głosowy' : 'agentka głosowa'} AI (${accent})`,
     voiceLabel: 'Głos',
@@ -414,7 +414,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   industryMarquee: ['Hydraulicy', 'Elektrycy', 'Biura nieruchomości', 'Zarządcy najmu', 'Warsztaty samochodowe', 'Blacharnie', 'Salony fryzjerskie', 'Barberzy', 'Gabinety kosmetyczne', 'Restauracje', 'Hotele', 'Kancelarie prawne', 'Biura rachunkowe', 'E-commerce', 'Pośrednicy ubezpieczeniowi', 'Zarządcy wspólnot', 'Weterynarze'],
 
   // Ta sama kolejność co flagi komponentu.
-  languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Belgia', 'Szwajcaria', 'Quebec', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki', 'Hebrajski'],
+  languageMarquee: ['Francuski', 'Angielski', 'Hiszpański', 'Niemiecki', 'Włoski', 'Portugalski', 'Niderlandzki', 'Francuski (Belgia)', 'Francuski (Szwajcaria)', 'Francuski (Quebec)', 'Arabski', 'Polski', 'Rumuński', 'Turecki', 'Szwedzki', 'Hebrajski'],
 
   agentTeam: {
     // Ta sama kolejność co ikony i linki komponentu.

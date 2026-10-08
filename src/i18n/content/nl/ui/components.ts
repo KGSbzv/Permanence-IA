@@ -393,7 +393,7 @@ export const UI_COMPONENTS = {
     phoneCta: 'Bel mijn telefoon',
     phoneLegal: 'Gratis en vrijblijvend. Uw nummer wordt alleen voor deze demo gebruikt.',
     sentTitle: 'Aanvraag ontvangen',
-    sentText: (name: string) => `${name} belt u binnen enkele minuten tijdens de openingstijden (maandag tot en met zaterdag, 9.00–19.00 uur). Houd uw telefoon bij de hand.`,
+    sentText: (name: string) => `${name} belt u binnen enkele minuten tijdens de openingstijden (maandag tot en met zaterdag, 9.00–17.30 uur, Nederlandse tijd). Houd uw telefoon bij de hand.`,
     again: 'Opnieuw proberen',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'mannelijke' : 'vrouwelijke'} AI-spraakagent (${accent})`,
     voiceLabel: 'Stem',

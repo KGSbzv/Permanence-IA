@@ -37,7 +37,7 @@ export const UI_PAGES = {
       description: 'Vragen over een AI-telefoonassistent voor uw bedrijf? Laat uw nummer achter, wij bellen u terug voor verkoop, demo of support. Kies uw tijdslot.',
     },
     h1: 'Laat uw nummer achter, wij bellen u terug',
-    intro: 'Geen telefoonlijn in Nederland: wij bellen u terug, op het tijdslot dat u kiest. U kunt ons ook schrijven via WhatsApp of e-mail.',
+    intro: 'Kies een tijdslot en wij bellen u terug, of stuur ons een bericht via WhatsApp (alleen geschreven berichten) of e-mail. Op WhatsApp antwoordt onze AI-agent 24/7.',
     commercialTitle: 'Terugbelverzoek: verkoop',
     commercialText: 'Vragen over de abonnementen, demonstratie, offerte op maat.',
     supportTitle: 'Terugbelverzoek: support',

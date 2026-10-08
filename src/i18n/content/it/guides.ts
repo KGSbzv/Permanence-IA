@@ -253,7 +253,8 @@ export const GUIDES: Guide[] = [
           'Punti a 5–10 secondi: saluto, nome dell’azienda, domanda.',
           'Usi la punteggiatura per le pause («…» indica una pausa).',
           'Scriva i numeri come devono essere pronunciati e mantenga gli accenti.',
-          'Esempio: «Buongiorno, studio Rossi, sono Giulia, l’assistente virtuale dello studio… Come posso aiutarLa?»',
+          'Dica che l’interlocutore parla con un’intelligenza artificiale e, se è il caso, che la chiamata è registrata (obbligo del regolamento europeo sull’IA).',
+          'Esempio: «Buongiorno, studio Rossi, sono Giulia, l’assistente AI dello studio… Come posso aiutarLa?»',
         ],
       },
       {

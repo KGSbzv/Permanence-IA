@@ -52,7 +52,7 @@ export const UI_PAGES = {
       description: 'Une question sur le standard téléphonique IA ? Laissez votre numéro, nous vous rappelons au créneau choisi : démo, devis sur mesure ou support.',
     },
     h1: 'Laissez votre numéro, nous vous rappelons',
-    intro: 'Pas de ligne téléphonique en France : c’est nous qui vous rappelons, au créneau que vous choisissez. Vous pouvez aussi nous écrire sur WhatsApp ou par email.',
+    intro: 'Choisissez votre créneau et nous vous rappelons, ou écrivez-nous sur WhatsApp (messages écrits uniquement) ou par email. Sur WhatsApp, notre agent IA répond 24 h/24.',
     commercialTitle: 'Rappel commercial',
     commercialText: 'Questions sur les offres, démonstration, devis sur mesure.',
     supportTitle: 'Rappel support',

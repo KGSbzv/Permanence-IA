@@ -253,7 +253,7 @@ export const GUIDES: Guide[] = [
           'Powitanie powinno trwać 5–10 sekund: powitanie, nazwa firmy, informacja, że mówi asystent AI, pytanie.',
           'Używaj interpunkcji do oznaczania pauz („…” oznacza chwilę przerwy).',
           'Zapisuj liczby tak, jak mają być wymawiane, i nie pomijaj polskich znaków.',
-          'Przykład: „Dzień dobry, gabinet Nowak, tu Anna, wirtualna asystentka gabinetu… W czym mogę pomóc?”',
+          'Przykład: „Dzień dobry, gabinet Nowak, tu Anna, asystentka AI gabinetu… W czym mogę pomóc?”',
         ],
       },
       {

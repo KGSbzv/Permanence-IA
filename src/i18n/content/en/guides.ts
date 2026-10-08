@@ -253,8 +253,8 @@ export const GUIDES: Guide[] = [
           'Aim for 5 to 10 seconds: hello, business name, question.',
           'Use punctuation for pauses ("…" adds a beat).',
           'Write numbers the way they should be spoken.',
-          'Example: "Good morning, Martin & Co, this is Julie, the firm’s virtual assistant… How can I help?"',
-          'The greeting must say that the caller is speaking with an AI assistant.',
+          'Example: "Good morning, Martin & Co, this is Julie, the firm’s AI assistant… How can I help?"',
+          'The greeting must say that the caller is speaking with an AI assistant and, if the call is recorded, say so too.',
         ],
       },
       {

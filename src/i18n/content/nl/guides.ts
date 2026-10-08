@@ -253,7 +253,8 @@ export const GUIDES: Guide[] = [
           'Mik op 5 tot 10 seconden: begroeting, bedrijfsnaam, vraag.',
           'Gebruik leestekens voor pauzes (“…” geeft een korte stilte).',
           'Schrijf getallen zoals ze uitgesproken moeten worden en schrijf moeilijke namen fonetisch.',
-          'Voorbeeld: “Goedemorgen, praktijk Jansen, u spreekt met Julie, de virtuele assistent van de praktijk… Waarmee kan ik u helpen?”',
+          'Zeg dat de beller met een AI-assistent spreekt en, indien van toepassing, dat het gesprek wordt opgenomen (verplicht volgens de Europese AI-verordening).',
+          'Voorbeeld: “Goedemorgen, praktijk Jansen, u spreekt met Julie, de AI-assistent van de praktijk… Waarmee kan ik u helpen?”',
         ],
       },
       {

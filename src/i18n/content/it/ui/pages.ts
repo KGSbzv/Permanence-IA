@@ -37,7 +37,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: 'Ha domande sull’assistente telefonico AI? Lasci il Suo numero, La richiamiamo noi: richiamata commerciale, demo o assistenza, nella fascia oraria scelta.',
     },
     h1: 'Lasci il Suo numero, La richiamiamo noi',
-    intro: 'Nessuna linea telefonica in Italia: siamo noi a richiamarLa, nella fascia oraria che sceglie. Può anche scriverci su WhatsApp o via email.',
+    intro: 'Scelga la fascia oraria e La richiamiamo noi, oppure ci scriva su WhatsApp (solo messaggi scritti) o via email. Su WhatsApp il nostro agente AI risponde 24 ore su 24.',
     commercialTitle: 'Richiamata commerciale',
     commercialText: 'Domande sui piani, dimostrazione, preventivo su misura.',
     supportTitle: 'Richiamata assistenza',

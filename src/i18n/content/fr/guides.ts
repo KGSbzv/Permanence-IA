@@ -281,7 +281,7 @@ export const GUIDES: Guide[] = [
           'Utilisez la ponctuation pour les pauses (« … » marque un temps).',
           'Écrivez les nombres comme ils doivent être prononcés et gardez les accents.',
           'Annoncez que l’interlocuteur est une IA et, si c’est le cas, que l’appel est enregistré (obligation du règlement européen sur l’IA).',
-          'Exemple : « Bonjour, cabinet Martin, Julie, l’assistante virtuelle du cabinet… Que puis-je faire pour vous ? »',
+          'Exemple : « Bonjour, cabinet Martin, Julie, l’assistante IA du cabinet… Que puis-je faire pour vous ? »',
         ],
       },
       {

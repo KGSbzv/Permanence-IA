@@ -46,7 +46,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: 'Zostaw numer, oddzwonimy: pytania o asystenta głosowego AI, demonstracja, wycena lub wsparcie. Wybierz dogodny termin rozmowy.',
     },
     h1: 'Zostaw numer, oddzwonimy',
-    intro: 'Nie mamy linii telefonicznej w Polsce: to my oddzwaniamy, w wybranym przez Ciebie terminie. Możesz też napisać do nas na WhatsAppie lub e-mailem.',
+    intro: 'Wybierz termin, a my oddzwonimy, albo napisz do nas na WhatsAppie (tylko wiadomości tekstowe) lub e-mailem. Na WhatsAppie nasz agent AI odpowiada całą dobę.',
     commercialTitle: 'Rozmowa handlowa',
     commercialText: 'Pytania o pakiety, demonstracja, wycena oferty na miarę.',
     supportTitle: 'Wsparcie techniczne',
