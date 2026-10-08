@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
+import { isOptedOut } from '@/lib/optout';
 import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
@@ -101,6 +102,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 3 rappels par numéro sur 7 jours (la demande, puis jusqu’à deux reprogrammations par un agent).
     // Un outil d’agent authentifié par le jeton n’est pas limité.
     if (!isAutoCallable(e164)) throw new Error(`numéro hors zone d’appel automatique : ${phone}`);
+    // Opposition « ne plus appeler » déjà reçue par un agent : plus aucun appel automatique, quelle que soit la source
+    // (site ou agent). L’équipe reçoit « À rappeler à la main » et décide avec la personne.
+    if (await isOptedOut(e164)) throw new Error('opposition « ne plus appeler » enregistrée pour ce numéro');
     if (!fromAgent) {
       const since = new Date(Date.now() - 7 * 86_400_000).toISOString();
       const recent = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(e164)}&created_at=gte.${since}&limit=4`);

@@ -364,7 +364,10 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
       setQueued(data.queued !== false);
       setState('sent');
       track('generate_lead', { lead_type: 'demo_call', demo_language: lang, sector, voice: gender });
-    } catch (err: any) { setState('error'); setError(err.message || t.sendFailed); }
+    } catch (err: any) {
+      // Panne réseau : fetch lève un TypeError au message du navigateur (« Failed to fetch », en anglais) → texte traduit.
+      setState('error'); setError((!(err instanceof TypeError) && err?.message) || t.sendFailed);
+    }
   }
 
   const legend = 'mb-2 text-[13px] font-medium text-white/60';

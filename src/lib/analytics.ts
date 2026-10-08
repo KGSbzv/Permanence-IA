@@ -27,7 +27,22 @@ export function saveConsent(value: 'granted' | 'denied') {
   // aucune balise Google Ads n’étant utilisée. La mesure publicitaire passe uniquement par le pixel Meta.
   gtag()?.('consent', 'update', { analytics_storage: value });
   if (value === 'granted') loadMetaPixel();
-  else { metaAllowed = false; fbq()?.('consent', 'revoke'); }
+  else { metaAllowed = false; fbq()?.('consent', 'revoke'); clearTrackingCookies(); }
+}
+
+/** Retrait du consentement : efface les identifiants déjà déposés (_ga, _ga_*, _gid, _fbp, _fbc),
+ *  sur le domaine courant et sur .permanenceia.com (domaine choisi par gtag.js et le pixel). */
+function clearTrackingCookies() {
+  try {
+    const host = location.hostname;
+    const domains = ['', `; domain=${host}`, `; domain=.${host.replace(/^www\./, '')}`];
+    if (host.endsWith('permanenceia.com')) domains.push('; domain=.permanenceia.com');
+    for (const part of document.cookie.split(';')) {
+      const name = part.split('=')[0].trim();
+      if (!/^(_ga(_.+)?|_gid|_gat(_.+)?|_fbp|_fbc)$/.test(name)) continue;
+      for (const d of domains) document.cookie = `${name}=; path=/${d}; max-age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    }
+  } catch { /* cookies bloqués : rien à effacer */ }
 }
 
 // ── Pixel Meta ─────────────────────────────────────────────────────────────

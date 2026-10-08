@@ -1,7 +1,8 @@
 // Webhook Autocalls : fin d’appel (post_call) et fin de conversation (widget, WhatsApp…).
 // Enregistre chaque échange et alerte l’équipe quand un prospect demande une démo ou un rappel.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, esc, isAuthorized, langFromPhone, sendMail } from '@/lib/server';
+import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, esc, isAuthorized, langFromPhone, sendMail, toE164 } from '@/lib/server';
+import { registerOptOut } from '@/lib/optout';
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
 
@@ -10,6 +11,8 @@ const HOT = ['rappel', 'rappel_commercial', 'demo', 'demo_planifiee', 'essai_gra
 const MISSED = ['no-answer', 'busy', 'voicemail'];
 const MISSED_OUTCOME = 'whatsapp_rappel_manque';
 const MISSED_SMS = 'sms_rappel_manque';
+// Refus d’être rappelé (opposition) ou mauvais numéro : rappels en attente annulés, équipe prévenue.
+const STOP = ['ne_plus_appeler', 'mauvais_contact'] as const;
 
 /**
  * Rappel sortant sans réponse : un seul message « nous avons essayé de vous joindre » par demande (7 jours) :
@@ -96,7 +99,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       );
     } catch (e: any) { console.error('[autocalls-webhook] email:', e.message); }
   }
-  const missed = kind === 'call' && p.type === 'outbound' && p.customer_phone
+  // Opposition : traitée avant le message « rappel manqué » (jamais de SMS à une personne qui a refusé).
+  const stop = STOP.find((o) => o === String(row.outcome));
+  if (stop && p.customer_phone) {
+    const phone = toE164(String(p.customer_phone), langFromPhone(String(p.customer_phone))) || String(p.customer_phone);
+    try {
+      const r = await registerOptOut({ phone, outcome: stop, source: `fin d’appel ${row.assistant_name || 'agent'} (${row.kind} ${row.external_id})`, reason: row.summary ?? undefined });
+      if (r.problems.length) console.error('[autocalls-webhook] opposition:', r.problems.join(' ; '));
+    } catch (e: any) { console.error('[autocalls-webhook] opposition:', e.message); }
+  }
+  const missed = !stop && kind === 'call' && p.type === 'outbound' && p.customer_phone
     && (MISSED.includes(String(p.status)) || /voicemail/i.test(String(p.ended_by || '')));
   if (missed) {
     try { console.log('[autocalls-webhook] rappel manqué :', await messageAfterMissedCall(String(p.customer_phone))); }
