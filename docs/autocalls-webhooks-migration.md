@@ -55,3 +55,15 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
 - **Valeur stockée en clair dans le flux :** le module HTTP d'Autocalls n'a pas de « connexion » pour stocker un secret. La valeur est masquée dans l'API, mais visible dans l'éditeur Automate.
 - **L'adresse du relais devient elle-même secrète** : elle ne doit pas être publiée, ni dans ce dépôt public, ni ailleurs. Son identifiant (le dernier segment de l'adresse) non plus. Une première version du relais a été désactivée le 8 octobre, parce que son identifiant avait été écrit ici par erreur ; elle n'avait jamais été reliée à un agent. Une fuite n'ouvrirait que les événements des 41 agents, plus le jeton des routes du site.
 - **Pas d'erreur visible si l'en-tête manque :** sur /api/callback, /api/agent/optout et /api/agent/account, une requête sans jeton est traitée comme venant du site, avec moins de droits. D'où les étapes pilotes et la vérification des journaux à chaque lot.
+
+## État au 8 octobre 2026, nuit
+
+- Jeton : le nouveau (WEBHOOK_TOKEN_NEXT) est en place. Il est vérifié par /api/webhooks/ping.
+- Les 11 outils pendant l'appel envoient le jeton dans l'en-tête.
+- Le relais porte le vrai jeton. Un événement de test neutre est passé par le relais jusqu'au site : exécution « SUCCEEDED », journal du site « mode=header ok=true », sans email ni SMS.
+- Webhooks des agents : **31 sur 56 passent par le relais.** Le contrôle de sécurité de Claude Code a refusé de basculer les 25 autres (motif : redirection de trafic).
+  - Ces 25 webhooks appellent toujours le site directement, avec l'ancien jeton dans l'adresse. Les deux chemins fonctionnent, le site acceptant les deux jetons.
+  - Restent sur le site, en fin d'appel : 21183, 21207, 21208, 21209, 21210, 21235, 21236, 21269, 21273, 21275, 21279, 21280, 21306, 21307, 21309, 21314, 21376.
+  - Restent sur le site, en fin de conversation : 21206, 21207, 21208, 21275, 21277, 21279, 21297, 21306.
+- Pour finir : soit le propriétaire autorise l'outil configure-assistant-webhook dans Claude Code, et Claude relance la bascule des 25 ; soit il colle lui-même l'adresse du relais dans ces agents (Autocalls > Assistants > agent > Webhooks).
+- L'étape 5 (retrait de l'ancien jeton) attend que plus aucun webhook n'appelle le site avec « ?token= ».
