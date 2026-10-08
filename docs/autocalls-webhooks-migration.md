@@ -27,23 +27,15 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
    openssl rand -hex 32 | tr -d '\n' | tee >(pbcopy) | gcloud secrets create WEBHOOK_TOKEN_NEXT --project snarecore-cacrs --data-file=- && firebase apphosting:secrets:grantaccess WEBHOOK_TOKEN_NEXT --backend voiceia --project snarecore-cacrs
    ```
    Prévenez Claude. Il ajoute WEBHOOK_TOKEN_NEXT au site, redéploie et vérifie.
-2. **Vous : les 11 outils pendant l'appel.** Dans Autocalls > Mid call tools, ouvrir les outils 6176, 6177, 6178, 6182, 6240, 6241, 6242, 6243, 6246, 6247 et 6248. Pour chacun, dans la même modification :
-   - retirer « ?token=… » de l'adresse ;
-   - ajouter l'en-tête `x-webhook-token`, avec pour valeur le nouveau jeton (coller) ;
-   - garder `Content-Type: application/json`.
+2. **Vous : un clic sur Run pour `bash scripts/jeton-webhooks.sh`** (fait le 8 octobre au soir à la place des collages à la main). Le script :
+   - lit le jeton et la clé Autocalls dans Secret Manager, sans les afficher ;
+   - vérifie que le site accepte le jeton (route /api/webhooks/ping), sinon il ne modifie rien ;
+   - pour les 11 outils (6176, 6177, 6178, 6182, 6240, 6241, 6242, 6243, 6246, 6247, 6248) : retire « ?token=… » de l'adresse et met le jeton dans l'en-tête `x-webhook-token`, avec `Content-Type: application/json` ;
+   - pose le jeton dans l'étape HTTP du relais « Relais fin d'échange → site (PermanenceAI) », retrouvé par son nom (scripts/relais-webhooks.json contient sa définition) ;
+   - n'affiche que les codes de réponse.
 
-   6243 a déjà l'en-tête : il suffit de remplacer sa valeur. Commencer par 6241 seul, puis faire un appel de test.
-3. **Vous : le relais.** Autocalls > Automate (https://app.autocalls.ai/automate), ouvrir l'automatisation « Relais fin d'échange → site (PermanenceAI) » préparée par Claude.
-
-   Ce qu'elle contient (créée et vérifiée le 8 octobre) :
-   - un déclencheur « Catch Webhook » ;
-   - une étape qui n'accepte que les 41 agents du compte ;
-   - une branche qui écarte l'événement de test fictif ;
-   - l'étape HTTP « Envoyer l'événement au site », réglée sur « Retry on all errors » : un refus du site apparaît comme un échec dans l'historique des exécutions, au lieu d'être perdu.
-
-   Elle est active mais reliée à aucun agent. Tant que le jeton provisoire est en place, le site refuse tout ce qu'elle envoie.
-   - Dans l'étape HTTP, remplacer la valeur provisoire de l'en-tête `x-webhook-token` par le nouveau jeton.
-   - Publier et activer.
+   Le relais n'accepte que les 41 agents du compte. Une branche écarte l'événement de test fictif « test-relais ». L'étape HTTP est réglée sur « Retry on all errors » : un refus du site apparaît comme un échec dans l'historique des exécutions. Le relais est actif mais relié à aucun agent tant que l'étape 4 n'est pas faite.
+3. **Claude : vérification** dans les journaux du site (mode=header ok=true) au premier appel qui utilise un outil.
 4. **Claude : rebascule des agents.** Il fait pointer, par lots, les webhooks des 41 agents vers le relais, et vérifie à chaque lot que les événements arrivent :
    - un agent pilote d'abord ;
    - puis les widgets ;
