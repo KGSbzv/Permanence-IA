@@ -50,6 +50,9 @@ export function loadMetaPixel() {
   script.src = 'https://connect.facebook.net/en_US/fbevents.js';
   document.head.appendChild(script);
   // Pas de configuration automatique ni de correspondance avancée : aucune donnée de formulaire n’est lue par le pixel.
+  // Sans identifiant, l’appel pose l’indicateur global (disableAutoConfig) que lisent aussi les modules microdata ;
+  // avec l’identifiant, il retire la configuration automatique de ce pixel, même si elle est activée dans Events Manager.
+  f('set', 'autoConfig', false);
   f('set', 'autoConfig', false, META_PIXEL_ID);
   f('init', META_PIXEL_ID);
   f('track', 'PageView');
