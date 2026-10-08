@@ -12,6 +12,7 @@ import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
 import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
+import { UI_RELANCES } from './ui/relances';
 
 export const it: typeof fr = {
   site: SITE_TEXT,
@@ -26,3 +27,6 @@ export const it: typeof fr = {
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };
+
+// Solleciti commerciali e messaggi del ciclo di vita: tenuti fuori da `it` come in francese (vedi fr/index.ts).
+export const RELANCES_IT = UI_RELANCES;
