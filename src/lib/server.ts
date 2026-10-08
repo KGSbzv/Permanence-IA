@@ -148,13 +148,23 @@ export function clientIp(req: NextApiRequest) {
   return parts.length >= 2 ? parts[parts.length - 2] : parts[0] || req.socket.remoteAddress || '';
 }
 
-/** Jeton secret des webhooks : en-tête x-webhook-token, ou ?token=… car Autocalls n’envoie pas d’en-têtes personnalisés. */
+/**
+ * Jeton secret des webhooks et des outils Autocalls : en-tête x-webhook-token (outils en appel, relais d’automatisation)
+ * ou ?token=… (webhooks d’agents, qui n’envoient pas d’en-têtes). Pendant le changement de jeton, WEBHOOK_TOKEN_NEXT est
+ * accepté aussi. Le mode utilisé (en-tête, adresse, aucun) est journalisé par route, jamais la valeur : il dira quand
+ * plus aucun appel n’utilise ?token=… et que l’ancien jeton peut être retiré.
+ */
 export function isAuthorized(req: NextApiRequest) {
-  const expected = process.env.WEBHOOK_TOKEN;
-  if (!expected) return false;
-  const got = Buffer.from(String(req.headers['x-webhook-token'] || req.query.token || ''));
-  const want = Buffer.from(expected);
-  return got.length === want.length && timingSafeEqual(got, want);
+  const header = req.headers['x-webhook-token'];
+  const mode = header ? 'header' : req.query.token ? 'query' : 'none';
+  const got = Buffer.from(String(header || req.query.token || ''));
+  const ok = [process.env.WEBHOOK_TOKEN, process.env.WEBHOOK_TOKEN_NEXT].some((expected) => {
+    if (!expected) return false;
+    const want = Buffer.from(expected);
+    return got.length === want.length && timingSafeEqual(got, want);
+  });
+  console.info(`[auth] ${String(req.url || '').split('?')[0]} mode=${mode} ok=${ok}`);
+  return ok;
 }
 
 /** Indicatif du pays visé par chaque langue du site, pour convertir un numéro saisi au format national. */

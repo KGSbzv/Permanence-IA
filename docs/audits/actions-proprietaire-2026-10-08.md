@@ -24,15 +24,11 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
    - Faire écouter les voix étrangères par des natifs.
 3. **Test d'inscription** avec une adresse Gmail. Le message de bienvenue doit arriver hors spam, et contact@ doit recevoir « Nouvelle inscription ». Le compte test yossef ne doit pouvoir ni appeler ni acheter.
 4. **Message 5 à Autocalls.** Envoyer le message 5 de docs/autocalls-questions-whatsapp.md : commission de 2,70 $ sur l'achat d'un numéro, et mot de passe SMTP visible. Le forfait Réceptionniste n'est plus à recréer : Autocalls lui donne 200 crédits, et Claude a lancé « Resync Billing Portal » (confirmé).
-5. **7 campagnes de rappel.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240, Save. Autocalls confirme qu'aucune API ne permet de le faire autrement.
-6. **Mot de passe Zoho visible dans Autocalls.**
-   - accounts.zoho.com > Sécurité > Mots de passe d'application : en créer deux.
-   - Le premier va dans app.autocalls.ai/administrator/settings?tab=smtp (Save, puis Test).
-   - Le second va dans Google Cloud > Secret Manager > ZOHO_SMTP_PASS > Nouvelle version.
-   - Prévenir Claude, puis révoquer l'ancien. Garder celui des relances (RELANCES_IMAP_PASS).
+5. **Campagnes de rappel.** Fait le 8 octobre au soir par Claude : les 20 campagnes sont à 2 tentatives toutes les 240 minutes (vérifié par l'API).
+6. **Mot de passe Zoho.** Fait : vous l'avez changé le 8 octobre.
 7. **Bases de connaissances.** Fait : vous avez supprimé les 7 anciennes bases, et Claude a vérifié le résultat (7 bases neuves actives, 95 documents actifs, 41 agents bien rattachés).
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
-9. **Copie inutile du site.** Le projet Google permanentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
+9. **Ancienne copie du site.** Fait le 8 octobre : Claude a supprimé le service App Hosting du projet permanentia-prod et désactivé ses 3 secrets (ancienne clé Autocalls comprise). Les deux adresses de la copie renvoient 404. Le projet Google lui-même reste ; vous pouvez le fermer dans la console si vous voulez.
 
 ## 2. Décisions à prendre
 
@@ -55,9 +51,9 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 16. Langues.
 17. Moyens de paiement Stripe.
 18. Qui rappelle pendant l'essai.
-19. Routage 100 % UE des appels : Autocalls le règle sur demande (aujourd'hui, des fournisseurs d'IA aux États-Unis traitent aussi les appels). → Le demander, après un appel test pour vérifier la qualité.
+19. Routage 100 % UE des appels : décidé le 8 octobre, on ne le demande pas. La politique de confidentialité annonce déjà des données dans l'EEE et/ou aux États-Unis, avec des garanties.
 20. Taxe automatique au paiement : Autocalls l'a coupée pour notre plateforme. → La faire réactiver quand le comptable aura choisi les immatriculations.
-21. Traduction de la plateforme (espace client, inscription, connexion, e-mails système) : 1 900 $ par langue, remise si plusieurs. Sans elle, ces écrans et e-mails restent en anglais. → À décider avant la publicité hors pays anglophones.
+21. Traduction de la plateforme : décidé le 8 octobre, on reste en anglais. L'assistante de l'espace client aide chaque client dans sa langue.
 22. Langue des factures Stripe : Claude a ajouté au webhook la pose automatique de la langue du client. → Créer une clé restreinte (voir section 3).
 
 ## 3. Comptes et tiers

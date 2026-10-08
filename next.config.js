@@ -21,8 +21,12 @@ const nextConfig = {
     ];
     // Autorise l’interface white-label à récupérer les logos et icônes du site.
     const cors = [{ key: 'Access-Control-Allow-Origin', value: 'https://app.autocalls.ai' }];
+    // Polices du dépôt (public/fonts) gardées un an par le navigateur, comme celles de next/font auparavant :
+    // renommer le fichier si une police change.
+    const fontCache = [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }];
     return [
       { source: '/:path*', headers: security },
+      { source: '/fonts/:path*', headers: fontCache },
       { source: '/logo/:path*', headers: cors },
       { source: '/agents/:path*', headers: cors },
       { source: '/icon-:size.png', headers: cors },

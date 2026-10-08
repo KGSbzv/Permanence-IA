@@ -20,7 +20,7 @@ module.exports = {
         accent: { DEFAULT: '#E2F5FA', glow: '#5AD3EC' },
       },
       fontFamily: {
-        // Polices hébergées par le site (next/font, src/pages/_app.tsx), exposées en variables CSS.
+        // Polices gardées dans le dépôt (public/fonts, src/styles/fonts.css), exposées en variables CSS.
         display: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
         sans: ['var(--font-figtree)', 'Figtree', 'system-ui', 'sans-serif'],
       },

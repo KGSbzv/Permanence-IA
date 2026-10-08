@@ -1,5 +1,6 @@
-/* Polices Figtree, Poppins et Heebo hébergées par le site (next/font, src/pages/_app.tsx) : aucune requête vers
-   Google avant le consentement. Les familles sont exposées en variables CSS (--font-figtree, --font-poppins, --font-heebo). */
+/* Polices Figtree, Poppins et Heebo gardées dans le dépôt (public/fonts, déclarées dans src/styles/fonts.css) : aucune
+   requête vers Google, ni au build ni avant le consentement. Les familles sont exposées en variables CSS
+   (--font-figtree, --font-poppins, --font-heebo). */
 
 @tailwind base;
 @tailwind components;

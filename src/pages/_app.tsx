@@ -8,15 +8,10 @@ import TrialNudge from '@/components/TrialNudge';
 import ConsentBanner from '@/components/ConsentBanner';
 import { useEffect } from 'react';
 import { loadMetaPixel, readConsent, track } from '@/lib/analytics';
-import { Figtree, Heebo, Poppins } from 'next/font/google';
+// Polices gardées dans le dépôt (public/fonts, déclarées dans fonts.css) : aucun téléchargement chez Google,
+// ni au build ni côté visiteur (donc rien avant le consentement), mêmes graisses qu’avant.
+import '@/styles/fonts.css';
 import '@/styles/globals.css';
-
-// Polices téléchargées au moment du build et servies par le site (aucune requête vers Google côté visiteur,
-// donc rien avant le consentement), mêmes graisses qu’avant.
-const figtree = Figtree({ subsets: ['latin', 'latin-ext'], weight: ['400', '500', '600', '700'], display: 'swap' });
-const poppins = Poppins({ subsets: ['latin', 'latin-ext'], weight: ['600', '700', '800'], display: 'swap' });
-// Hébreu seulement : pas de préchargement sur les autres langues.
-const heebo = Heebo({ subsets: ['hebrew', 'latin'], weight: ['400', '500', '600', '700', '800'], display: 'swap', preload: false });
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -42,14 +37,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      {/* Familles générées par next/font exposées sur :root (tailwind.config.js et globals.css les lisent). */}
-      <style jsx global>{`
-        :root {
-          --font-figtree: ${figtree.style.fontFamily};
-          --font-poppins: ${poppins.style.fontFamily};
-          --font-heebo: ${heebo.style.fontFamily};
-        }
-      `}</style>
       <Component {...pageProps} />
       <CallbackModal />
       <TrialNudge />

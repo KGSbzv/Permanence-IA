@@ -3,6 +3,14 @@ import { MARKETS } from '@/i18n/markets';
 import { asLocale, isRtl } from '@/i18n/locales';
 import { CONSENT_DEFAULT_SCRIPT, GA_ID } from '@/lib/analytics';
 
+// Fichiers latins de Figtree (texte) et de Poppins (titres), utiles dès le premier affichage de chaque page.
+const FONT_PRELOADS = [
+  '/fonts/figtree/figtree-latin-wght-normal.woff2',
+  '/fonts/poppins/poppins-latin-600-normal.woff2',
+  '/fonts/poppins/poppins-latin-700-normal.woff2',
+  '/fonts/poppins/poppins-latin-800-normal.woff2',
+];
+
 export default function Document({ __NEXT_DATA__ }: DocumentProps) {
   // Langue et sens d’écriture de la page (l’hébreu se lit de droite à gauche).
   const locale = asLocale(__NEXT_DATA__.locale);
@@ -18,6 +26,10 @@ export default function Document({ __NEXT_DATA__ }: DocumentProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#0E1B4D" />
+        {/* Préchargement des polices latines du site (src/styles/fonts.css) ; Heebo (hébreu) se charge à la demande. */}
+        {FONT_PRELOADS.map((href) => (
+          <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
+        ))}
         {/* Google Analytics 4 en mode consentement : rien n’est stocké avant l’accord du visiteur. */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
