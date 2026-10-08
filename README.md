@@ -1,119 +1,101 @@
-# Permanence IA — Plateforme d'Agents IA Spécialisés
+# Permanence IA — site public de l'agent vocal IA
 
-> L'accueil téléphonique, la qualification commerciale et le support 24h/24 par une équipe d'agents IA spécialisés, sans standardiste et sans numéro public.
-
----
-
-## 🎯 Vision & Positionnement
-
-**Permanence IA** transforme l'accueil et la relation client des TPE, PME et professions libérales (santé, dentaire, immobilier, artisans du bâtiment, cliniques, etc.) grâce à une équipe d'agents IA vocaux et omnicanaux.
-
-### Les 3 Principes Fondateurs
-1. **Règle Stricte « Zéro Numéro Public »** : Aucun numéro de téléphone surtaxé ou public n'est exposé. Les visiteurs demandent un rappel via le widget `CallbackModal` selon leurs disponibilités. Les agents IA rappellent proactivement.
-2. **Architecture « Attract → Convert → Engage → Measure »** : Inspirée des plateformes d'orchestration modernes, notre suite couvre l'intégralité du cycle de vie du prospect jusqu'au client fidèle.
-3. **Plan Gratuit Découverte (0 €)** : Accès immédiat au portail client et à la sandbox de configuration sans carte bancaire requise.
+Site marketing et d'inscription de **Permanence IA** (marque **PermanenceAI** hors France) : un agent vocal IA qui répond au téléphone 24 h/24, prend les rendez-vous, rappelle les prospects et envoie un résumé de chaque appel. Les agents, l'espace client et la facturation des clients tournent sur la plateforme **Autocalls en marque blanche** (`app.permanenceia.com`) ; ce dépôt contient le site `permanenceia.com` et ses routes API.
 
 ---
 
-## 🤖 Le Catalogue des 10 Agents IA
+## Offre (source : `src/i18n/markets.ts`)
 
-| Agent | Rôle principal | Déclencheur / Canal |
+| Forfait | Prix HT / mois | Minutes incluses | Minute supplémentaire |
+|---|---|---|---|
+| Réceptionniste | 99 $ | 350 | 0,39 $ |
+| Assistant | 249 $ | 1 000 | 0,36 $ |
+| Centre d'appels | 499 $ | 2 300 | 0,32 $ |
+| Sur mesure | sur devis | dès 2 500 | — |
+
+- Prix en dollars US, hors taxes ; facturation annuelle = 2 mois offerts.
+- **Essai gratuit : 14 jours, 30 minutes**, géré par la plateforme à la première souscription.
+- Paiement à l'usage sans abonnement : 0,39 $ la minute.
+- Numéro dédié en option, dès 3,99 $ HT par mois selon le pays (jamais inclus dans le forfait).
+
+Les chiffres affichés sur le site viennent tous de `src/i18n/markets.ts` (un marché par langue, prix séparables par pays).
+
+---
+
+## Langues et préfixes
+
+7 locales, chacune avec son marché (marque, numéro, horaires, devise de repère) :
+
+| Locale | Préfixe | Marché |
 |---|---|---|
-| **Agent Capture** | Accueil web instantané, réception des demandes | Formulaire interactif / Widget |
-| **Agent Commercial** | Rappel téléphonique intelligent, qualification des besoins | Appel sortant programmé |
-| **Agent Support** | Résolution niveau 1, création et suivi de tickets | Appel & Webhooks CRM |
-| **Agent Agenda** | Prise de rendez-vous synchronisée (Google, Doctolib, Outlook) | Vocal & SMS |
-| **Agent Réputation** | Collecte d'avis certifiés Google et e-réputation | SMS post-prestation (validé) |
-| **Agent Relance** | Réactivation de prospects et devis en attente | Campagnes sortantes contrôlées |
-| **Agent Contenu** | Rédaction d'articles sectoriels et propositions d'emails | Back-office & Validation humaine |
-| **Agent Données** | Synthèse des appels, statistiques d'attribution et KPI | Dashboard analytique |
-| **Agent SEO Local** | Optimisation des fiches d'établissement et visibilité locale | Rapports périodiques |
-| **Agent Personnalisé** | Workflows complexes sur mesure et intégrations métiers | API & Webhooks sur devis |
+| `fr` | aucun (`/`) | France |
+| `en-gb` | `/en-gb` | Royaume-Uni |
+| `en-au` | `/en-au` | Australie (variante de `en`, `src/i18n/content/en/au.ts`) |
+| `it` | `/it` | Italie |
+| `pl` | `/pl` | Pologne |
+| `nl` | `/nl` | Pays-Bas |
+| `he` | `/he` | Israël (RTL) |
+
+Les textes sont dans `src/i18n/content/<langue>/` (le français fait référence pour les types) ; les bases de connaissances des agents dans `src/data/kb/`.
 
 ---
 
-## 📂 Structure du Répertoire
+## Stack
+
+- **Next.js 14** (Pages Router) + TypeScript + Tailwind CSS, icônes Lucide.
+- **Hébergement : Firebase App Hosting** (`apphosting.yaml`, secrets dans Secret Manager). Un push sur `main` déclenche le déploiement (environ 6 minutes, un déploiement à la fois).
+- **Supabase** (PostgreSQL) : demandes de rappel, événements d'appel, contacts et relances (`supabase/schema.sql`, `supabase/migrations/`).
+- **Autocalls (marque blanche)** : agents vocaux, WhatsApp, widget, espace client, forfaits.
+- **Stripe** : abonnements et paiements des clients (via l'espace client).
+- **E-mails** : nodemailer (SMTP), pied de page avec préférences et désinscription.
+
+---
+
+## Routes API (`src/pages/api/`)
+
+| Route | Rôle |
+|---|---|
+| `callback/` | Demande de rappel du site (création, plafonds) |
+| `callback/check` | Contrôle d'une demande juste avant l'appel par l'automatisation Autocalls |
+| `contact` | Collecte légère avant l'inscription (langue, page d'origine, UTM, case marketing) |
+| `agent/now` | Outil des agents : date et heure actuelles |
+| `agent/optout` | Outil des agents : « ne plus appeler » (annule les rappels en attente) |
+| `agent/account` | Outil des agents : dossier client après vérification par code |
+| `webhooks/autocalls` | Fin d'appel et fin de conversation Autocalls |
+| `webhooks/signup` | Inscription d'un nouveau client dans l'espace white-label |
+| `webhooks/stripe` | Webhook Stripe signé (relances) |
+| `cron/relances` | Moteur des relances commerciales (coupé et en mode test par défaut) |
+| `email/preferences`, `email/unsubscribe` | Préférences e-mail et désinscription en un clic |
+| `fx` | Taux de change indicatifs USD → devise locale |
+
+---
+
+## Démarrage
+
+Prérequis : Node.js 18.17+ ou 20+.
+
+```bash
+npm install
+npm run dev          # http://localhost:3000
+npx tsc --noEmit -p .  # vérification des types, obligatoire avant un push
+npm run build && npm run start
+```
+
+---
+
+## Arborescence utile
 
 ```text
-Permanence-IA/
-├── design_handoff_permanence_ia_brand/  # Charte graphique complète, planche d'identité & symbol.svg
-├── permanenceia-md/                     # 42 spécifications techniques et stratégiques + rapports QA
-├── public/                              # Logos SVG (dark/light), favicon, portraits des agents IA
-├── src/                                 # Application Next.js (Pages Router) en TypeScript
-│   ├── components/                      # Navbar, Footer, Modal Callback universelle, DarkMode
-│   │   └── Home/                        # Hero, Catalogue Agents, Process, Packages, Mockup Portail
-│   ├── context/                         # Contextes React (Thème sombre, gestionnaire Callback)
-│   ├── data/                            # Données dynamiques (articles de blog, etc.)
-│   ├── pages/                           # Routes publiques, sectorielles (cliniques, plombiers...), tarifs, FAQ
-│   │   └── api/                         # Endpoints API (callback, authentification, webhooks AutoCalls/Stripe)
-│   └── styles/                          # Styles globaux Tailwind CSS
-├── supabase/                            # Schéma PostgreSQL (tables leads, callbacks, users)
-├── package.json                         # Dépendances et scripts de build Next.js 14
-├── tailwind.config.js                   # Configuration Tailwind avec les tokens de la marque
-└── tsconfig.json                        # Configuration TypeScript stricte
+src/
+├── components/   # Layout, Navbar, Footer, blocs de page, démo en direct, formulaires
+├── data/         # site.ts (constantes), kb/ (bases de connaissances des agents)
+├── i18n/         # locales, marchés (markets.ts), contenus par langue
+├── lib/          # serveur : Supabase, e-mails, opposition, relances
+├── pages/        # pages publiques, secteurs, fonctionnalités, tarifs, aide, pages légales, API
+└── middleware.ts # choix de la langue
+docs/             # documentation d'exploitation (Autocalls, relances, audits, présentations)
+supabase/         # schéma et migrations
+scripts/          # aperçus et tests (relances, horaires d'appel, e-mails)
 ```
 
----
-
-## 🛠️ Stack Technique
-
-- **Framework** : [Next.js 14](https://nextjs.org/) (Pages Router)
-- **Langage** : [TypeScript](https://www.typescriptlang.org/)
-- **Styles** : [Tailwind CSS](https://tailwindcss.com/)
-- **Icônes** : [Lucide React](https://lucide.dev/)
-- **Base de données** : [Supabase](https://supabase.com/) (PostgreSQL)
-- **Voix & Téléphonie** : Intégration AutoCalls White-label & webhooks
-- **Paiements** : Stripe Checkout & Portails d'abonnements
-
----
-
-## 🚀 Démarrage Rapide
-
-### Prérequis
-- Node.js 18.17+ ou 20+
-- npm ou pnpm
-
-### Installation
-
-```bash
-# Cloner le dépôt
-git clone https://github.com/KGSbzv/Permanence-IA.git
-cd Permanence-IA
-
-# Installer les dépendances
-npm install
-
-# Lancer le serveur de développement
-npm run dev
-```
-
-L'application est accessible sur [http://localhost:3000](http://localhost:3000).
-
-### Build de Production
-
-```bash
-npm run build
-npm run start
-```
-
----
-
-## 🎨 Identité Visuelle & Design Tokens
-
-La marque s'appuie sur une esthétique sobre, institutionnelle et rassurante :
-- **Bleu Pétrole** (`#0F3A48`) : Élégance, confiance et robustesse
-- **Turquoise Actif** (`#2E9E98`) : Disponibilité et technologie
-- **Encre Profonde** (`#0B1D24`) : Lisibilité maximale
-- **Surfaces Claires** (`#FFFFFF`, `#F3F5F6`) : Clarté et respiration
-- **Typographies** : *Manrope* (titres et UI) et *IBM Plex Mono* (données techniques, horaires et métriques).
-
----
-
-## 📜 Documentation Complète
-
-L'ensemble des spécifications d'ingénierie et des règles d'implémentation est consigné dans le dossier [`permanenceia-md/`](./permanenceia-md/) :
-- `00-INDEX-ET-REGLES.md` : Index maître et gouvernance
-- `08-zero-numero.md` : Protocole Zéro Numéro
-- `21-VENDasta-INSPIRED-STRATEGY.md` : Stratégie de plateforme
-- `25-PACKAGES-REVISES.md` : Grille des 6 forfaits
-- `RAPPORT-VALIDATION.md` : Bilan de validation et conformité
+Le dossier `permanenceia-md/` contient les spécifications de septembre 2026 ; ses rapports `RAPPORT-VALIDATION.md` et `RAPPORT-AUDIT.md` sont **obsolètes**.

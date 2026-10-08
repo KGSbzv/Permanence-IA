@@ -1,3 +1,5 @@
+> Bibliothèque de modèles pour les clients ; les modèles de Permanence IA sont dans `docs/autocalls-modeles-whatsapp.md`.
+
 # WhatsApp message templates (Meta format)
 
 Ready-to-submit templates for businesses that send WhatsApp messages from their sender: appointments, callbacks, quotes, support, payments, reviews and win-back offers. Five languages: French, English, Italian, Polish and Dutch.

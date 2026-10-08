@@ -1,3 +1,5 @@
+> **OBSOLÈTE (30 sept. 2026)** — ce rapport décrit l'état du projet au 30 septembre 2026 et ne correspond plus au site actuel (offre, langues, architecture). Ne pas s'y fier ; voir le README et `docs/`.
+
 # Rapport Final de Validation & Déploiement — Permanence IA
 
 ## Date : Mercredi 30 Septembre 2026

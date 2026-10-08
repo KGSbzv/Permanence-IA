@@ -1,3 +1,5 @@
+> **OBSOLÈTE (30 sept. 2026)** — ce rapport décrit l'état du projet au 30 septembre 2026 et ne correspond plus au site actuel (offre, langues, architecture). Ne pas s'y fier ; voir le README et `docs/`.
+
 # Rapport d'Audit de l'État Actuel (Permanence IA)
 
 ## 1. Structure Actuelle
