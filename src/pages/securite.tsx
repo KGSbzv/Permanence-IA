@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import { Heading, Section, Tick } from '@/components/ui';
 import { FinalCTA, SecurityBlock } from '@/components/blocks';
+import Mock from '@/components/Mock';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
 
@@ -11,8 +12,10 @@ export default function Securite() {
   return (
     <Layout title={t.meta.title(market.brand)} description={t.meta.description(market.brand)}>
       <section className="bg-paper">
-        <div className="wrap py-14 lg:py-20">
+        <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.6fr_1fr] lg:items-center lg:py-20">
           <Heading as="h1" title={t.h1} intro={t.intro} />
+          {/* Visuel : un appel enregistré, transcrit et résumé dans l’espace client (données que la page protège). */}
+          <div className="mx-auto w-full max-w-sm" aria-hidden><Mock kind="transcript" /></div>
         </div>
       </section>
       <Section><SecurityBlock bare /></Section>

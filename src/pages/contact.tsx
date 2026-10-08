@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '@/components/Layout';
-import { CallbackForm, Heading, Section, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
+import { CallbackForm, Heading, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
+import Mock from '@/components/Mock';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { Mail, MessageSquare, Phone, PhoneCall } from 'lucide-react';
@@ -24,7 +25,7 @@ export default function Contact() {
             </ul>
             <p className="mt-10 text-sm text-slate-light">{t.legal(market.brand, SITE.company)}</p>
           </div>
-          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
+          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8 lg:row-span-2 lg:self-start">
             <div role="tablist" aria-label={t.tabsLabel} className="mb-6 grid grid-cols-2 rounded-xl bg-paper p-1">
               {(['commercial', 'support'] as const).map((k) => (
                 <button key={k} role="tab" aria-selected={type === k} type="button" onClick={() => setType(k)} className={`rounded-lg py-2.5 text-sm font-semibold ${type === k ? 'bg-white text-ink shadow-card' : 'text-slate'}`}>
@@ -34,6 +35,8 @@ export default function Contact() {
             </div>
             <CallbackForm key={type} type={type} />
           </div>
+          {/* Visuel : l’agent du marché décroche (décoratif, le formulaire reste l’action principale). */}
+          <div className="max-w-md lg:col-start-1" aria-hidden><Mock kind="call" /></div>
         </div>
       </section>
     </Layout>

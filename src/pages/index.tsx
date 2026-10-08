@@ -38,7 +38,7 @@ export default function Home() {
       <section className="overflow-hidden bg-paper">
         <div className="wrap py-14 lg:py-20">
           <TalkNowPill href={`#${LIVE_DEMO_ID}`} className="mb-6" />
-          <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-12">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-12">
             <h1 className="text-hero font-extrabold"><Kw t={t.hero.title} /></h1>
             <div>
               <p className="max-w-prose text-lg">{t.hero.intro}</p>

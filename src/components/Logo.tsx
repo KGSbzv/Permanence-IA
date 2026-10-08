@@ -3,12 +3,10 @@ import Link from 'next/link';
 import { useI18n } from '@/i18n';
 
 export default function Logo({ height = 40, dark = false, href = '/' }: { height?: number; dark?: boolean; href?: string | null }) {
-  const { locale, market } = useI18n();
-  // Français : logo image d’origine. Autres langues : pictogramme + marque et slogan du marché en texte.
-  const content = locale === 'fr' ? (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={dark ? '/logo/logo-dark.png' : '/logo/logo-light.png'} alt={market.brand} style={{ height, width: 'auto' }} />
-  ) : (
+  const { market } = useI18n();
+  // Toutes les langues : pictogramme + marque et slogan du marché en texte (net à toute taille ;
+  // le slogan du logo image français devenait illisible à 40 px de haut).
+  const content = (
     <span className="inline-flex items-center gap-2">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={dark ? '/logo/mark-dark.png' : '/logo/mark-light.png'} alt={market.brand} style={{ height, width: 'auto' }} />

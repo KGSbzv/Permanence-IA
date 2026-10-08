@@ -29,7 +29,10 @@ export function useLiveDemoSector() {
     if (typeof q === 'string') setSector(q);
   }, [router.isReady, router.query.sector]);
   const trySector = useCallback((slug: string) => {
-    setSector(slug);
+    // Le secteur passe d’abord à vide puis revient au rendu suivant : la démo le réapplique même si c’est
+    // le même qu’avant et que le visiteur l’avait changé à la main dans la démo entre-temps.
+    setSector(undefined);
+    requestAnimationFrame(() => setSector(slug));
     const el = document.getElementById(LIVE_DEMO_ID);
     if (!el) return;
     el.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });

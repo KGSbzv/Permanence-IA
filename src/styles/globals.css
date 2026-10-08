@@ -51,10 +51,12 @@ iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*=
   z-index: 70 !important;
 }
 /* Sur téléphone, la bulle fermée (bouton + invitation) est réduite pour ne pas masquer les boutons de la page.
-   La fenêtre ouverte (400px de large ou plein écran) garde sa taille. */
+   Largeur plafonnée : l’iframe capte les touches sur toute sa surface, même transparente ; le widget resserre
+   son invitation (texte tronqué) au lieu de la couper. La fenêtre ouverte (400px de large ou plein écran) garde sa taille. */
 @media (max-width: 639.98px) {
   iframe[src*="/web-widget/"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]),
   iframe[title="Voice Assistant Widget"]:not([style*="width: 400px"]):not([style*="100vw"]):not([style*="100dvh"]) {
+    max-width: 280px !important;
     transform: scale(0.78) !important;
     transform-origin: right bottom;
   }

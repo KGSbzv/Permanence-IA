@@ -15,6 +15,15 @@ import { useI18n } from '@/i18n';
 import { isActiveSector } from '@/data/site';
 import { VOICES } from '@/data/personas';
 
+/** Onglets : flèches gauche/droite (inversées en RTL), Début/Fin → indice de l’onglet visé, ou undefined. */
+function tabKeyTarget(e: React.KeyboardEvent, i: number, n: number) {
+  const rtl = document.documentElement.dir === 'rtl';
+  const fwd = (i + 1) % n, back = (i - 1 + n) % n;
+  const next = ({ ArrowRight: rtl ? back : fwd, ArrowLeft: rtl ? fwd : back, Home: 0, End: n - 1 } as Record<string, number>)[e.key];
+  if (next !== undefined) e.preventDefault();
+  return next;
+}
+
 /* ---------- Bandeau défilant ---------- */
 
 export function Marquee({ items, className = '' }: { items: React.ReactNode[]; className?: string }) {
@@ -224,6 +233,15 @@ export function UseCaseTabs() {
   const { c } = useI18n();
   const tx = c.ui.components.useCaseTabs;
   const [tab, setTab] = useState<UseKey>('entrants');
+  const base = useId().replace(/:/g, '');
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const keys = Object.keys(USE_ICONS) as UseKey[];
+  const onKey = (e: React.KeyboardEvent, i: number) => {
+    const next = tabKeyTarget(e, i, keys.length);
+    if (next === undefined) return;
+    setTab(keys[next]);
+    tabs.current[next]?.focus();
+  };
   const USES = (Object.keys(USE_ICONS) as UseKey[]).reduce((acc, k) => {
     acc[k] = { label: tx.tabs[k].label, icon: USE_ICONS[k].icon, items: tx.tabs[k].items.map((it, n) => ({ icon: USE_ICONS[k].items[n] || Sparkles, t: it.title, d: it.text })) };
     return acc;
@@ -231,17 +249,18 @@ export function UseCaseTabs() {
   return (
     <div>
       <div role="tablist" aria-label={tx.ariaLabel} className="mx-auto flex w-fit max-w-full flex-wrap justify-center gap-1 rounded-3xl bg-paper p-1">
-        {(Object.keys(USES) as UseKey[]).map((k) => {
+        {keys.map((k, n) => {
           const T = USES[k]; const on = tab === k;
           return (
-            <button key={k} role="tab" aria-selected={on} type="button" onClick={() => setTab(k)}
+            <button key={k} ref={(el) => { tabs.current[n] = el; }} role="tab" id={`${base}-tab-${k}`} aria-selected={on} aria-controls={`${base}-panel`}
+              tabIndex={on ? 0 : -1} type="button" onClick={() => setTab(k)} onKeyDown={(e) => onKey(e, n)}
               className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold sm:px-5 ${on ? 'bg-ink text-white' : 'text-ink'}`}>
               <T.icon className="h-4 w-4" aria-hidden />{T.label}
             </button>
           );
         })}
       </div>
-      <div role="tabpanel" className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${tab}`} className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {USES[tab].items.map((i) => (
           <div key={i.t} className="rounded-2xl border border-line bg-white p-6">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-signal-soft"><i.icon className="h-5 w-5 text-signal-deep" aria-hidden /></span>
@@ -320,18 +339,27 @@ export function Lifecycle() {
   const STAGES = tx.stages.map((st, n) => ({ k: st.key, t: st.title, items: st.items, ...STAGE_STYLE[n] }));
   const [i, setI] = useState(0);
   const s = STAGES[i];
+  const base = useId().replace(/:/g, '');
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const onKey = (e: React.KeyboardEvent, n: number) => {
+    const next = tabKeyTarget(e, n, STAGES.length);
+    if (next === undefined) return;
+    setI(next);
+    tabs.current[next]?.focus();
+  };
   return (
     <div>
       <Heading center title={tx.title} intro={tx.intro} />
       <div role="tablist" aria-label={tx.ariaLabel} className="mx-auto mt-10 grid max-w-3xl grid-cols-4 gap-2">
         {STAGES.map((x, n) => (
-          <button key={x.k} role="tab" aria-selected={n === i} type="button" onClick={() => setI(n)}
+          <button key={x.k} ref={(el) => { tabs.current[n] = el; }} role="tab" id={`${base}-tab-${n}`} aria-selected={n === i} aria-controls={`${base}-panel`}
+            tabIndex={n === i ? 0 : -1} type="button" onClick={() => setI(n)} onKeyDown={(e) => onKey(e, n)}
             className={`flex flex-col items-center gap-2 rounded-2xl px-2 py-4 text-sm font-semibold transition-colors ${n === i ? 'bg-ink text-white' : 'bg-paper text-ink hover:bg-signal-soft'}`}>
             <x.icon className="h-5 w-5" aria-hidden />{x.k}
           </button>
         ))}
       </div>
-      <div role="tabpanel" className="mt-10 grid items-center gap-10 lg:grid-cols-2">
+      <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${i}`} className="mt-10 grid items-center gap-10 lg:grid-cols-2">
         <div>
           <h3 className="font-display text-[1.75rem] font-bold">{s.t}</h3>
           <ul className="mt-5 space-y-3">{s.items.map((it) => <li key={it} className="flex gap-3 text-ink"><Check className="mt-1 h-4 w-4 shrink-0 text-signal" aria-hidden />{it}</li>)}</ul>

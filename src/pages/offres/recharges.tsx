@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '@/components/Layout';
 import { Heading, Section, TrialBadges } from '@/components/ui';
 import { FinalCTA, GrowthBlock, RechargeTables, Steps } from '@/components/blocks';
+import Mock from '@/components/Mock';
 import { useI18n } from '@/i18n';
 
 export default function Recharges() {
@@ -14,9 +15,13 @@ export default function Recharges() {
   return (
     <Layout title={t.meta.title(market.brand)} description={t.meta.description(money(first), num(firstMinutes))}>
       <section className="bg-paper">
-        <div className="wrap py-14 lg:py-20">
-          <Heading as="h1" title={t.hero.title} intro={t.hero.intro} />
-          <TrialBadges className="mt-6" />
+        <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:py-20">
+          <div>
+            <Heading as="h1" title={t.hero.title} intro={t.hero.intro} />
+            <TrialBadges className="mt-6" />
+          </div>
+          {/* Visuel : le suivi des appels traités dans l’espace client. */}
+          <div className="mx-auto w-full max-w-md" aria-hidden><Mock kind="report" /></div>
         </div>
       </section>
       <Section><RechargeTables /><p className="mt-4 text-sm text-slate-light">{c.site.priceNote(money(market.phoneNumberFrom, 2))}</p></Section>
@@ -26,7 +31,7 @@ export default function Recharges() {
           <Steps steps={t.how.steps(money(first), money(last))} />
         </div>
       </Section>
-      <Section><GrowthBlock /></Section>
+      <Section><GrowthBlock visual={false} /></Section>
       <FinalCTA />
     </Layout>
   );

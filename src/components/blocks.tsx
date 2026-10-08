@@ -569,7 +569,7 @@ export function MessageCreditsBox() {
 }
 
 /** Règles d’évolution : recharge pour un dépassement ponctuel, forfait supérieur pour un usage régulier. */
-export function GrowthBlock() {
+export function GrowthBlock({ visual = true }: { visual?: boolean }) {
   const { c, offer, money, num } = useI18n();
   const t = c.ui.components.growthBlock;
   const rec = offer('receptionniste'), asst = offer('assistant'), centre = offer('centre-appels'), custom = offer('sur-mesure');
@@ -604,6 +604,8 @@ export function GrowthBlock() {
             </li>
           ))}
         </ol>
+        {/* Visuel : le suivi des appels traités, sauf si la page l’affiche déjà (recharges). */}
+        {visual && <div className="mt-8 max-w-sm" aria-hidden><Mock kind="report" /></div>}
       </div>
       <div className="space-y-4">
         {cases.map((x) => (
