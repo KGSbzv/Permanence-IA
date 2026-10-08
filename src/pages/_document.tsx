@@ -21,8 +21,6 @@ export default function Document({ __NEXT_DATA__ }: DocumentProps) {
         {/* Google Analytics 4 en mode consentement : rien n’est stocké avant l’accord du visiteur. */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </Head>
       <body>
         <Main />

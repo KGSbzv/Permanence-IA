@@ -487,22 +487,23 @@ export function RechargeTables() {
   const plans = offers.filter((o) => o.extraMinute);
   return (
     <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-      <div className="overflow-x-auto rounded-2xl border border-line bg-white p-5 sm:p-6">
+      <div className="min-w-0 overflow-x-auto rounded-2xl border border-line bg-white p-3 sm:p-6">
         <h3 className="text-h3 font-semibold">{t.title}</h3>
         <p className="mt-1 text-[15px]">{t.text}</p>
-        {/* Sans largeur minimale : sur téléphone, les 4 colonnes tiennent à l’écran (texte réduit, en-têtes sur 2 lignes). */}
-        <table className="mt-4 w-full text-sm sm:text-[15px]">
+        {/* Sans largeur minimale : sur téléphone (375 px), les 4 colonnes tiennent à l’écran (texte réduit, en-têtes et
+            « ≈ n min » pouvant passer sur 2 lignes, même en polonais et en néerlandais). */}
+        <table className="mt-4 w-full text-xs sm:text-[15px]">
           <thead>
             <tr className="border-b border-line text-start text-xs text-slate sm:text-sm">
-              <th className="py-2 pe-2 text-start align-bottom font-medium">{t.rechargeCol}</th>
-              {plans.map((o) => <th key={o.slug} className="py-2 ps-2 text-end align-bottom font-medium">{o.name}</th>)}
+              <th className="py-2 pe-1.5 text-start align-bottom font-medium sm:pe-2">{t.rechargeCol}</th>
+              {plans.map((o) => <th key={o.slug} className="py-2 ps-1.5 text-end align-bottom font-medium [overflow-wrap:anywhere] sm:ps-2">{o.name}</th>)}
             </tr>
           </thead>
           <tbody>
             {market.recharges.map((amount) => (
               <tr key={amount} className="border-b border-line last:border-0">
-                <td className="whitespace-nowrap py-2.5 pe-2 font-semibold text-ink">{money(amount)}</td>
-                {plans.map((o) => <td key={o.slug} className="whitespace-nowrap py-2.5 ps-2 text-end text-slate">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
+                <td className="whitespace-nowrap py-2.5 pe-1.5 font-semibold text-ink sm:pe-2">{money(amount)}</td>
+                {plans.map((o) => <td key={o.slug} className="py-2.5 ps-1.5 text-end text-slate sm:ps-2">{t.approxMinutes(num(Math.floor(amount / o.extraMinute!)))}</td>)}
               </tr>
             ))}
           </tbody>

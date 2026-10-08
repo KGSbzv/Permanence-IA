@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Heebo:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
+/* Polices Figtree, Poppins et Heebo hébergées par le site (next/font, src/pages/_app.tsx) : aucune requête vers
+   Google avant le consentement. Les familles sont exposées en variables CSS (--font-figtree, --font-poppins, --font-heebo). */
 
 @tailwind base;
 @tailwind components;
@@ -90,7 +91,7 @@ html[dir="rtl"] iframe[title="Voice Assistant Widget"]:not([style*="100vw"]):not
 
 /* ---------- Hébreu : police adaptée et sens de lecture de droite à gauche ---------- */
 /* Poppins et Figtree n’ont pas de glyphes hébreux : Heebo prend le relais pour tout le texte. */
-html[lang="he"] body, html[lang="he"] .font-sans, html[lang="he"] .font-display { font-family: 'Heebo', system-ui, sans-serif; }
+html[lang="he"] body, html[lang="he"] .font-sans, html[lang="he"] .font-display { font-family: var(--font-heebo, 'Heebo'), system-ui, sans-serif; }
 html[lang="he"] .font-display { letter-spacing: 0; }
 /* Heebo paraît petit à taille égale : on l'agrandit d'environ 10 % partout (y compris les tailles en px) et on aère les lignes. */
 html[lang="he"] body { font-size-adjust: ex-height 0.57; line-height: 1.65; }

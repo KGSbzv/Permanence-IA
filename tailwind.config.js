@@ -20,8 +20,9 @@ module.exports = {
         accent: { DEFAULT: '#E2F5FA', glow: '#5AD3EC' },
       },
       fontFamily: {
-        display: ['Poppins', 'system-ui', 'sans-serif'],
-        sans: ['Figtree', 'system-ui', 'sans-serif'],
+        // Polices hébergées par le site (next/font, src/pages/_app.tsx), exposées en variables CSS.
+        display: ['var(--font-poppins)', 'Poppins', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-figtree)', 'Figtree', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         // Échelle typographique (ratio ~1.25)
