@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
-import { NOTIFY_TO, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -125,10 +125,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .catch((e) => console.error('[callback] statut:', e.message));
   };
 
-  const [db, mail] = await Promise.allSettled([
-    dbInsert('callbacks', row, true),
-    sendMail(NOTIFY_TO, `Nouvelle demande de rappel (${row.type}) — ${row.name}`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n')),
-  ]);
+  const [db] = await Promise.allSettled([dbInsert('callbacks', row, true)]);
   // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
   // Message WhatsApp : mêmes garde-fous que l’appel automatique (demande enregistrée, zone couverte,
   // 3 demandes par numéro sur 7 jours), plus un plafond de 30 messages par 24 h.
@@ -149,15 +146,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
   const [call] = await Promise.allSettled([db.status === 'fulfilled' ? queueCall(db.value) : Promise.reject(new Error('demande non enregistrée'))]);
   const [wa] = await Promise.allSettled([call.status === 'fulfilled' ? sendWhatsApp() : Promise.resolve(null)]);
+  // Email à l’équipe après la tentative de mise en file : il dit si l’appel automatique part ou s’il faut rappeler à la main.
+  const callLine = call.status === 'fulfilled'
+    ? `Appel automatique : en file${scheduled ? ` pour ${callAt.toISOString()}` : ' (dès que possible)'}`
+    : `Appel automatique : NON (${call.reason?.message || 'motif inconnu'}) — À RAPPELER À LA MAIN`;
+  const [mail] = await Promise.allSettled([sendMail(
+    NOTIFY_TO,
+    `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}) — ${row.name}`,
+    [callLine, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
+  )]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   if (call.status === 'rejected') console.error('[callback] campagne:', call.reason?.message);
+  // Pannes (base, webhook de campagne absent ou en erreur) : alerte limitée à une par heure. Les refus voulus
+  // (numéro hors zone, plafonds) restent signalés par l’email « À rappeler à la main » seulement.
+  if (db.status === 'rejected') await alertTeam('callback-db', 'demande de rappel non enregistrée en base', String(db.reason?.message));
+  const callError = call.status === 'rejected' ? String(call.reason?.message || '') : '';
+  if (/^(webhook de campagne|campagne \d)/.test(callError)) await alertTeam(`callback-campaign-${campaignLang}-${kind}`, `campagne d’appels ${campaignLang}/${kind} injoignable`, callError);
   // Succès seulement si la demande est conservée quelque part.
   if (db.status === 'rejected' && mail.status === 'rejected') {
     return res.status(502).json({ error: 'Impossible d’enregistrer la demande pour le moment.' });
   }
   // Date relue par l’agent pour confirmer le rendez-vous (dans la langue et le fuseau de la personne).
   const scheduledFor = scheduled ? `${describeLocal(callAt, zone, campaignLang)} (${zone})` : 'as soon as possible, during calling hours';
-  return res.status(200).json({ success: true, scheduled_for: scheduledFor, stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued: call.status === 'fulfilled', whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined });
+  const queued = call.status === 'fulfilled';
+  return res.status(200).json({
+    success: true, scheduled_for: queued ? scheduledFor : 'not scheduled', stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued,
+    whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined,
+    // Rappel automatique non mis en file : l’agent ne promet ni appel ni horaire, l’équipe a reçu « À rappeler à la main ».
+    ...(queued ? {} : { message_for_agent: 'The request was passed on to the team, but no automatic callback could be scheduled. Do not promise a call at a given time: say that a team member will get back to the person as soon as possible.' }),
+  });
 }

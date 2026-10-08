@@ -14,6 +14,17 @@ import { GENDERS, VOICES, type Gender } from '@/data/personas';
 const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands', he: 'עברית' };
 /** Libellés internes de la note (lus par l'équipe et l'agent de la campagne, en français). */
 const ROLE_NOTE = ['Réceptionniste', 'Commercial / qualification', 'Support'];
+// Demande reçue mais rappel automatique non mis en file (zone, plafond, panne) : l’équipe recontacte à la main,
+// sans promesse d’appel dans les minutes. Textes à déplacer dans ui/components.ts (liveDemo.notQueuedText) par la chaîne contenu.
+const NOT_QUEUED: Record<Locale, string> = {
+  fr: 'Le rappel automatique n’a pas pu être programmé : un conseiller vous recontacte dès que possible.',
+  'en-gb': 'The automatic callback could not be scheduled: a member of our team will get back to you as soon as possible.',
+  'en-au': 'The automatic callback couldn’t be scheduled: someone from our team will get back to you as soon as possible.',
+  it: 'Non è stato possibile programmare la richiamata automatica: un consulente la ricontatterà il prima possibile.',
+  pl: 'Nie udało się zaplanować automatycznego połączenia: konsultant skontaktuje się z Tobą tak szybko, jak to możliwe.',
+  nl: 'De automatische terugbelafspraak kon niet worden ingepland: een adviseur neemt zo snel mogelijk contact met u op.',
+  he: 'לא ניתן היה לתזמן שיחה חוזרת אוטומטית: נציג יחזור אליך בהקדם האפשרי.',
+};
 /** Teintes des orbes, dans l'ordre des rôles : [reflet, cœur, bord]. */
 const HUES: [string, string, string][] = [
   ['#9BE7F7', '#0FA3C4', '#0B5F78'],
@@ -297,6 +308,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
   const [mode, setMode] = useState<'browser' | 'phone'>('browser');
   const [state, setState] = useState<'idle' | 'busy' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
+  const [queued, setQueued] = useState(true);
   const [dialog, setDialog] = useState<string | null>(null);
 
   useEffect(() => { setLang(locale); }, [locale]);
@@ -345,7 +357,10 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
-      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendFailed); }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendFailed);
+      // queued === false : demande enregistrée et équipe prévenue, mais aucun appel automatique en file.
+      setQueued(data.queued !== false);
       setState('sent');
       track('generate_lead', { lead_type: 'demo_call', demo_language: lang, sector, voice: gender });
     } catch (err: any) { setState('error'); setError(err.message || t.sendFailed); }
@@ -499,7 +514,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           ) : state === 'sent' ? (
             <div role="status" className="mt-4 rounded-2xl bg-white/[.07] p-5 ring-1 ring-white/10">
               <p className="font-display text-lg font-semibold">{t.sentTitle}</p>
-              <p className="mt-1 text-[14px] text-white/75">{t.sentText(voice)}</p>
+              <p className="mt-1 text-[14px] text-white/75">{queued ? t.sentText(voice) : NOT_QUEUED[locale]}</p>
               <button type="button" onClick={() => switchMode('phone')} className="mt-3 text-sm font-semibold text-signal-glow underline-offset-4 hover:underline">{t.again}</button>
             </div>
           ) : (

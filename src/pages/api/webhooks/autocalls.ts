@@ -1,7 +1,7 @@
 // Webhook Autocalls : fin d’appel (post_call) et fin de conversation (widget, WhatsApp…).
 // Enregistre chaque échange et alerte l’équipe quand un prospect demande une démo ou un rappel.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, dbInsert, dbSelect, esc, isAuthorized, langFromPhone, sendMail } from '@/lib/server';
+import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, esc, isAuthorized, langFromPhone, sendMail } from '@/lib/server';
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
 
@@ -66,7 +66,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!/22P02/.test(e.message) || row.assistant_id == null) throw e;
       return dbInsert('call_events', { ...row, assistant_id: null });
     });
-  } catch (e: any) { console.error('[autocalls-webhook] supabase:', e.message); }
+  } catch (e: any) {
+    console.error('[autocalls-webhook] supabase:', e.message);
+    // Réponse 200 gardée (un renvoi par Autocalls doublerait l’email « À traiter » et le SMS) : l’équipe est prévenue.
+    await alertTeam('autocalls-webhook-db', 'échange Autocalls non enregistré', `${e.message}\n\nÉchange ${row.kind} ${row.external_id} (${row.customer_phone || 'site web'}), outcome ${row.outcome ?? '—'}.\nRésumé : ${row.summary ?? '—'}`);
+  }
 
   if (row.outcome && HOT.includes(String(row.outcome))) {
     const lines = Object.entries(vars).map(([k, v]) => `<li><b>${esc(k)}</b> : ${esc(typeof v === 'object' ? JSON.stringify(v) : v)}</li>`).join('');

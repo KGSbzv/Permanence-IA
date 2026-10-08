@@ -66,6 +66,17 @@ export async function sendMail(to: string, subject: string, text: string, html?:
   await transporter.sendMail({ from: `${fromName} <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
 }
 
+// Alertes d’exploitation : au plus un email par sujet et par heure (par instance), pour ne pas inonder la boîte.
+const alerted = new Map<string, number>();
+/** Prévient l’équipe d’une panne (base, campagne…) sans jamais faire échouer la route qui l’appelle. */
+export async function alertTeam(key: string, subject: string, detail: string) {
+  const now = Date.now();
+  if (now - (alerted.get(key) || 0) < 3_600_000) return;
+  alerted.set(key, now);
+  try { await sendMail(NOTIFY_TO, `[Alerte site] ${subject}`, `${detail}\n\n(Une seule alerte par heure pour ce sujet ; voir les journaux App Hosting.)`); }
+  catch (e: any) { console.error('[alerte] email:', e.message); }
+}
+
 /** Adresse du client : avant-dernière valeur de X-Forwarded-For (la dernière est ajoutée par le répartiteur Google ;
  *  la première peut être falsifiée par le client). */
 export function clientIp(req: NextApiRequest) {
