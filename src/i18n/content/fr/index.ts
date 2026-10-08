@@ -12,6 +12,8 @@ import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
 import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
+import { UI_RELANCES } from './ui/relances';
+import { withFrenchTypography } from '../../typography';
 
 export const fr = {
   site: SITE_TEXT,
@@ -26,3 +28,10 @@ export const fr = {
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };
+
+// Relances commerciales et messages de cycle de vie : gardés hors de `fr` tant que toutes les langues n’ont pas
+// leur version (le typage `Content` l’exigerait partout). Chaque langue exporte un `RelancesContent` ; ici, la
+// typographie française (espaces insécables) est déjà appliquée.
+export type { RelancesContent, RelanceFacts, RelanceMessage, RelanceKey } from './ui/relances';
+export { buildRelanceFacts } from './ui/relances';
+export const RELANCES_FR = withFrenchTypography(UI_RELANCES);
