@@ -528,7 +528,7 @@ export const UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Privacy policy',
     intro: 'What we collect, why, who with, for how long, and how to exercise your rights.',
-    updated: 'Last updated: 6 October 2026',
+    updated: 'Last updated: 8 October 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -682,6 +682,15 @@ export const UI_PAGES = {
             { p: ['The website uses cookies that are essential to its operation and security and, only with your consent, analytics cookies (Google Analytics) and advertising measurement cookies (Meta Pixel). Details and your choices are on the ', { a: 'cookies', href: '/cookies' }, ' page. As there is no common standard, we do not respond differently to “Do Not Track” signals; we do not track your browsing on other websites ourselves. If you accept the Meta Pixel, however, Meta may link your visit to your Facebook or Instagram account to measure and deliver our ads.'] },
           ],
         },
+        // À RELIRE PAR UN JURISTE avant validation définitive : responsabilité conjointe avec Meta (art. 26 RGPD, CJUE C-40/17 Fashion ID)
+        {
+          title: 'Meta Pixel: joint controllership with Meta',
+          body: [
+            { p: [`Where the GDPR or UK GDPR applies and you accept the Meta Pixel, ${company} and Meta Platforms Ireland Ltd are joint controllers (Article 26 GDPR; Court of Justice of the EU, 29 July 2019, Fashion ID, C-40/17) for the collection of your data by the pixel on our website and its transmission to Meta. This joint controllership is governed by Meta’s Controller Addendum: `, { a: 'facebook.com/legal/controller_addendum', href: 'https://www.facebook.com/legal/controller_addendum' }, '.'] },
+            { p: 'We inform you about this processing and collect your consent; Meta provides information about its own processing and handles rights requests that concern it. Meta is the sole controller of any further processing once it has received the data (for example, delivering and personalising ads); its own privacy policy applies to that processing.' },
+            { p: ['You can exercise your rights with us (', mail, ') or with Meta; we pass on to Meta any request that concerns it.'] },
+          ],
+        },
         {
           title: 'Links to third-party websites',
           body: [
@@ -770,6 +779,8 @@ export const UI_PAGES = {
       `Your choice: the pia_consent cookie remembers whether you accepted or declined measurement cookies. It lasts 6 months and applies to ${siteHost} and the customer area.`,
       'Only with your consent: Google Analytics 4 (Google Ireland Ltd / Google LLC) sets the _ga and _ga_<ID> cookies, for no more than 13 months, to measure visits to the site and how well our campaigns perform (aggregated statistics). Data may be transferred to the United States under the EU–US Data Privacy Framework.',
       'Only with your consent: the Meta Pixel (Meta Platforms Ireland Ltd) measures how well our ads perform on Facebook and Instagram (visits, callback requests, clicks to WhatsApp or to call us). It sets cookies such as _fbp, for no more than 3 months. Nothing you enter in our forms (name, email, phone number) is sent to Meta. Meta may transfer data to the United States (Meta Platforms, Inc.) under the EU–US Data Privacy Framework.',
+      // À RELIRE PAR UN JURISTE : responsabilité conjointe avec Meta pour le pixel
+      'For the collection and transmission of data by the Meta Pixel, we are joint controllers with Meta Platforms Ireland Ltd (Article 26 GDPR; Meta’s Controller Addendum: https://www.facebook.com/legal/controller_addendum). Meta is the sole controller of any further processing. You can exercise your rights with us or with Meta.',
       'Without your consent, none of these cookies is set and the Meta Pixel is not loaded.',
       'You can change your mind and withdraw your consent at any time using the “Manage cookies” link at the bottom of every page. Declining won’t stop you using the site.',
       `The assistant widget, loaded from ${appHost}, may use technical storage needed for the conversation to work.`,

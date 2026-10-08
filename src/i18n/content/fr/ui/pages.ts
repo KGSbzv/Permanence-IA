@@ -544,7 +544,7 @@ export const UI_PAGES = {
     breadcrumb: 'Confidentialité',
     h1: 'Politique de confidentialité',
     intro: 'Ce que nous collectons, pourquoi, avec qui, combien de temps, et comment exercer vos droits.',
-    updated: 'Dernière mise à jour : 6 octobre 2026',
+    updated: 'Dernière mise à jour : 8 octobre 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -698,6 +698,15 @@ export const UI_PAGES = {
             { p: ['Le site utilise des cookies essentiels à son fonctionnement et à sa sécurité et, uniquement avec votre consentement, des cookies de mesure d’audience (Google Analytics) et de mesure publicitaire (pixel Meta). Les détails et le réglage de vos choix figurent sur la page ', { a: 'cookies', href: '/cookies' }, '. Faute de norme commune, nous ne répondons pas différemment aux signaux « Do Not Track » ; nous ne suivons pas nous-mêmes votre navigation sur d’autres sites. Si vous acceptez le pixel Meta, Meta peut en revanche relier votre visite à votre compte Facebook ou Instagram pour mesurer et diffuser nos publicités.'] },
           ],
         },
+        // À RELIRE PAR UN JURISTE avant validation définitive : responsabilité conjointe avec Meta (art. 26 RGPD, CJUE C-40/17 Fashion ID)
+        {
+          title: 'Pixel Meta : responsabilité conjointe avec Meta',
+          body: [
+            { p: [`Lorsque le RGPD s’applique et que vous acceptez le pixel Meta, ${company} et Meta Platforms Ireland Ltd sont responsables conjoints du traitement (article 26 du RGPD ; Cour de justice de l’UE, 29 juillet 2019, Fashion ID, C-40/17) pour la collecte de vos données par le pixel sur notre site et leur transmission à Meta. Cette responsabilité conjointe est régie par l’addendum de Meta relatif aux responsables conjoints du traitement : `, { a: 'facebook.com/legal/controller_addendum', href: 'https://www.facebook.com/legal/controller_addendum' }, '.'] },
+            { p: 'Nous vous informons de ce traitement et recueillons votre consentement ; Meta fournit les informations sur ses propres traitements et répond aux demandes d’exercice de droits qui les concernent. Meta est seule responsable des traitements ultérieurs, une fois les données reçues (par exemple la diffusion et la personnalisation de publicités) ; sa propre politique de confidentialité s’y applique.' },
+            { p: ['Vous pouvez exercer vos droits auprès de nous (', mail, ') comme auprès de Meta ; nous transmettons à Meta toute demande qui la concerne.'] },
+          ],
+        },
         {
           title: 'Liens vers des sites tiers',
           body: [
@@ -786,6 +795,8 @@ export const UI_PAGES = {
       `Cookie de consentement : le cookie pia_consent mémorise votre choix (accepter ou refuser) pendant 6 mois, sur le domaine permanenceia.com et sur l’espace client (${appHost}).`,
       'Mesure d’audience, avec votre accord seulement : Google Analytics 4 (Google Ireland Ltd / Google LLC) mesure l’audience du site et l’efficacité de nos campagnes, sous forme de statistiques agrégées. Cookies déposés : _ga et _ga_<ID>, conservés 13 mois au plus. Un transfert de données vers les États-Unis est possible ; il est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',
       'Mesure publicitaire, avec votre accord seulement : le pixel Meta (Meta Platforms Ireland Ltd) mesure l’efficacité de nos publicités sur Facebook et Instagram (visites, demandes de rappel, clics vers WhatsApp ou le téléphone). Il dépose notamment le cookie _fbp, conservé 3 mois au plus. Aucune donnée saisie dans nos formulaires (nom, email, téléphone) n’est transmise à Meta. Meta peut transférer des données vers les États-Unis (Meta Platforms, Inc.) ; ce transfert est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',
+      // À RELIRE PAR UN JURISTE : responsabilité conjointe avec Meta pour le pixel
+      'Pour la collecte et la transmission des données par le pixel Meta, nous sommes responsables conjoints avec Meta Platforms Ireland Ltd (article 26 du RGPD, addendum de Meta : https://www.facebook.com/legal/controller_addendum). Meta est seule responsable des traitements ultérieurs. Vous pouvez exercer vos droits auprès de nous comme auprès de Meta.',
       'Sans votre accord, aucun de ces cookies n’est déposé et le pixel Meta n’est pas chargé.',
       'Vous pouvez changer d’avis et retirer votre consentement à tout moment avec le lien « Gérer les cookies » en bas de chaque page. Refuser n’empêche pas d’utiliser le site.',
       `Le widget de notre assistante, chargé depuis ${appHost}, peut utiliser un stockage technique nécessaire à la conversation. L’espace client (${appHost}) utilise des cookies de session nécessaires à la connexion.`,

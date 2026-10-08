@@ -537,7 +537,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Prywatność',
     h1: 'Polityka prywatności',
     intro: 'Jakie dane zbieramy, w jakim celu, komu je przekazujemy, jak długo je przechowujemy i jak możesz skorzystać ze swoich praw.',
-    updated: 'Ostatnia aktualizacja: 6 października 2026 r.',
+    updated: 'Ostatnia aktualizacja: 8 października 2026 r.',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -691,6 +691,15 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             { p: ['Strona używa plików cookie niezbędnych do jej działania i bezpieczeństwa oraz, wyłącznie za Twoją zgodą, analitycznych plików cookie (Google Analytics) i plików cookie do pomiaru skuteczności reklam (piksel Meta). Szczegóły i ustawienia wyboru znajdziesz na stronie ', { a: 'pliki cookie', href: '/cookies' }, '. Wobec braku wspólnego standardu nie reagujemy inaczej na sygnały „Do Not Track”; sami nie śledzimy Twojej aktywności na innych stronach. Jeśli zaakceptujesz piksel Meta, Meta może jednak powiązać Twoją wizytę z Twoim kontem na Facebooku lub Instagramie, aby mierzyć skuteczność i wyświetlać nasze reklamy.'] },
           ],
         },
+        // À RELIRE PAR UN JURISTE avant validation définitive : responsabilité conjointe avec Meta (art. 26 RGPD, CJUE C-40/17 Fashion ID)
+        {
+          title: 'Piksel Meta: współadministrowanie z Meta',
+          body: [
+            { p: [`Gdy ma zastosowanie RODO i akceptujesz piksel Meta, ${company} i Meta Platforms Ireland Ltd są współadministratorami (art. 26 RODO; wyrok TSUE z 29 lipca 2019 r., Fashion ID, C-40/17) w zakresie zbierania Twoich danych przez piksel na naszej stronie i ich przekazywania do Meta. Współadministrowanie reguluje dodatek Meta dotyczący współadministratorów: `, { a: 'facebook.com/legal/controller_addendum', href: 'https://www.facebook.com/legal/controller_addendum' }, '.'] },
+            { p: 'Informujemy Cię o tym przetwarzaniu i zbieramy Twoją zgodę; Meta przekazuje informacje o własnym przetwarzaniu i odpowiada na żądania dotyczące praw w tym zakresie. Meta jest jedynym administratorem dalszego przetwarzania po otrzymaniu danych (np. wyświetlania i personalizacji reklam); ma do niego zastosowanie jej własna polityka prywatności.' },
+            { p: ['Swoje prawa możesz wykonywać u nas (', mail, ') lub u Meta; każde żądanie dotyczące Meta przekazujemy jej.'] },
+          ],
+        },
         {
           title: 'Linki do stron osób trzecich',
           body: [
@@ -778,6 +787,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       `Plik cookie zgody: plik pia_consent zapamiętuje Twój wybór (akceptacja lub odmowa) przez 6 miesięcy, w domenie permanenceia.com i w panelu klienta (${appHost}).`,
       'Pomiar ruchu, wyłącznie za Twoją zgodą: Google Analytics 4 (Google Ireland Ltd / Google LLC) mierzy ruch na stronie i skuteczność naszych kampanii w postaci zbiorczych statystyk. Zapisywane pliki cookie: _ga i _ga_<ID>, przechowywane maksymalnie 13 miesięcy. Dane mogą być przekazywane do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',
       'Pomiar skuteczności reklam, wyłącznie za Twoją zgodą: piksel Meta (Meta Platforms Ireland Ltd) mierzy skuteczność naszych reklam na Facebooku i Instagramie (odwiedziny, prośby o oddzwonienie, kliknięcia w WhatsApp lub numer telefonu). Zapisuje m.in. plik cookie _fbp, przechowywany maksymalnie 3 miesiące. Dane wpisane w naszych formularzach (imię i nazwisko, e-mail, telefon) nie są przekazywane do Meta. Meta może przekazywać dane do Stanów Zjednoczonych (Meta Platforms, Inc.) na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',
+      // À RELIRE PAR UN JURISTE : responsabilité conjointe avec Meta pour le pixel
+      'W zakresie zbierania i przekazywania danych przez piksel Meta jesteśmy współadministratorami z Meta Platforms Ireland Ltd (art. 26 RODO; dodatek Meta: https://www.facebook.com/legal/controller_addendum). Meta jest jedynym administratorem dalszego przetwarzania. Swoje prawa możesz wykonywać u nas lub u Meta.',
       'Bez Twojej zgody żaden z tych plików cookie nie jest zapisywany, a piksel Meta nie jest ładowany.',
       'Zdanie możesz zmienić, a zgodę wycofać, w każdej chwili za pomocą linku „Ustawienia cookie” na dole każdej strony. Odmowa nie ogranicza korzystania ze strony.',
       `Widżet naszej asystentki, ładowany z ${appHost}, może korzystać z technicznej pamięci przeglądarki niezbędnej do prowadzenia rozmowy. Panel klienta (${appHost}) używa sesyjnych plików cookie niezbędnych do logowania.`,

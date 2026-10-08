@@ -528,7 +528,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Informativa sulla privacy',
     intro: 'Cosa raccogliamo, perché, con chi lo condividiamo, per quanto tempo e come esercitare i Suoi diritti.',
-    updated: 'Ultimo aggiornamento: 6 ottobre 2026',
+    updated: 'Ultimo aggiornamento: 8 ottobre 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -682,6 +682,15 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             { p: ['Il sito utilizza cookie essenziali al suo funzionamento e alla sua sicurezza e, solo con il Suo consenso, cookie analitici (Google Analytics) e di misurazione pubblicitaria (pixel di Meta). I dettagli e la gestione delle Sue scelte si trovano nella pagina ', { a: 'Cookie policy', href: '/cookies' }, '. In assenza di uno standard comune, non rispondiamo in modo diverso ai segnali «Do Not Track»; non tracciamo noi stessi la Sua navigazione su altri siti. Se accetta il pixel di Meta, Meta può tuttavia collegare la Sua visita al Suo account Facebook o Instagram per misurare e mostrare i nostri annunci.'] },
           ],
         },
+        // À RELIRE PAR UN JURISTE avant validation définitive : responsabilité conjointe avec Meta (art. 26 RGPD, CJUE C-40/17 Fashion ID)
+        {
+          title: 'Pixel di Meta: contitolarità con Meta',
+          body: [
+            { p: [`Quando si applica il GDPR e Lei accetta il pixel di Meta, ${company} e Meta Platforms Ireland Ltd sono contitolari del trattamento (articolo 26 del GDPR; Corte di giustizia dell’UE, 29 luglio 2019, Fashion ID, C-40/17) per la raccolta dei Suoi dati tramite il pixel sul nostro sito e per la loro trasmissione a Meta. La contitolarità è disciplinata dall’addendum di Meta sui contitolari del trattamento: `, { a: 'facebook.com/legal/controller_addendum', href: 'https://www.facebook.com/legal/controller_addendum' }, '.'] },
+            { p: 'La informiamo di questo trattamento e raccogliamo il Suo consenso; Meta fornisce le informazioni sui propri trattamenti e risponde alle richieste di esercizio dei diritti che li riguardano. Meta è l’unica titolare dei trattamenti successivi, una volta ricevuti i dati (ad esempio la diffusione e la personalizzazione delle pubblicità); a questi si applica la sua informativa sulla privacy.' },
+            { p: ['Può esercitare i Suoi diritti presso di noi (', mail, ') o presso Meta; trasmettiamo a Meta ogni richiesta che la riguarda.'] },
+          ],
+        },
         {
           title: 'Link a siti di terzi',
           body: [
@@ -770,6 +779,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       `Cookie «pia_consent»: memorizza la Sua scelta (accettare o rifiutare) per 6 mesi, sul dominio permanenceia.com e nell’area clienti (${appHost}), dove sono utilizzati anche i cookie di sessione necessari per l’accesso.`,
       'Solo con il Suo consenso: Google Analytics 4 (Google Ireland Ltd / Google LLC), cookie «_ga» e «_ga_<ID>», durata massima di 13 mesi, per misurare l’audience del sito e l’efficacia delle nostre campagne (statistiche aggregate). I dati possono essere trasferiti negli Stati Uniti nell’ambito del Data Privacy Framework UE-USA.',
       'Solo con il Suo consenso: il pixel di Meta (Meta Platforms Ireland Ltd) misura l’efficacia delle nostre pubblicità su Facebook e Instagram (visite, richieste di richiamata, clic verso WhatsApp o il telefono). Installa cookie come «_fbp», con durata massima di 3 mesi. Nessun dato inserito nei nostri moduli (nome, email, telefono) viene trasmesso a Meta. Meta può trasferire dati negli Stati Uniti (Meta Platforms, Inc.) nell’ambito del Data Privacy Framework UE-USA.',
+      // À RELIRE PAR UN JURISTE : responsabilité conjointe avec Meta pour le pixel
+      'Per la raccolta e la trasmissione dei dati tramite il pixel di Meta siamo contitolari del trattamento con Meta Platforms Ireland Ltd (articolo 26 del GDPR; addendum di Meta: https://www.facebook.com/legal/controller_addendum). Meta è l’unica titolare dei trattamenti successivi. Può esercitare i Suoi diritti presso di noi o presso Meta.',
       'Senza il Suo consenso nessuno di questi cookie viene installato e il pixel di Meta non viene caricato.',
       'Può cambiare idea e revocare il consenso in qualsiasi momento con il link «Gestisci i cookie» in fondo a ogni pagina; il rifiuto non impedisce di utilizzare il sito.',
       `Il widget della nostra assistente (caricato da ${appHost}) può utilizzare una memorizzazione tecnica necessaria alla conversazione.`,

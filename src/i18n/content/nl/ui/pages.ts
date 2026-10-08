@@ -528,7 +528,7 @@ export const UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Privacybeleid',
     intro: 'Wat we verzamelen, waarom, met wie, hoe lang, en hoe u uw rechten uitoefent.',
-    updated: 'Laatst bijgewerkt: 6 oktober 2026',
+    updated: 'Laatst bijgewerkt: 8 oktober 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -682,6 +682,15 @@ export const UI_PAGES = {
             { p: ['De website gebruikt cookies die noodzakelijk zijn voor de werking en beveiliging en, alleen met uw toestemming, analytische cookies (Google Analytics) en cookies voor advertentiemeting (Meta-pixel). Details en uw keuzes vindt u op de pagina ', { a: 'cookies', href: '/cookies' }, '. Omdat er geen gemeenschappelijke standaard bestaat, reageren wij niet anders op „Do Not Track”-signalen; wij volgen zelf uw surfgedrag op andere websites niet. Als u de Meta-pixel accepteert, kan Meta uw bezoek wel koppelen aan uw Facebook- of Instagram-account om onze advertenties te meten en te tonen.'] },
           ],
         },
+        // À RELIRE PAR UN JURISTE avant validation définitive : responsabilité conjointe avec Meta (art. 26 RGPD, CJUE C-40/17 Fashion ID)
+        {
+          title: 'Meta-pixel: gezamenlijke verwerkingsverantwoordelijkheid met Meta',
+          body: [
+            { p: [`Als de AVG van toepassing is en u de Meta-pixel accepteert, zijn ${company} en Meta Platforms Ireland Ltd gezamenlijk verwerkingsverantwoordelijken (artikel 26 AVG; Hof van Justitie van de EU, 29 juli 2019, Fashion ID, C-40/17) voor het verzamelen van uw gegevens door de pixel op onze website en het doorgeven ervan aan Meta. Deze gezamenlijke verantwoordelijkheid is geregeld in het Controller Addendum van Meta: `, { a: 'facebook.com/legal/controller_addendum', href: 'https://www.facebook.com/legal/controller_addendum' }, '.'] },
+            { p: 'Wij informeren u over deze verwerking en vragen uw toestemming; Meta geeft informatie over haar eigen verwerkingen en behandelt verzoeken over uw rechten die daarop betrekking hebben. Meta is als enige verantwoordelijk voor de verdere verwerking nadat zij de gegevens heeft ontvangen (bijvoorbeeld het tonen en personaliseren van advertenties); daarop is haar eigen privacybeleid van toepassing.' },
+            { p: ['U kunt uw rechten uitoefenen bij ons (', mail, ') of bij Meta; verzoeken die Meta betreffen, sturen wij aan Meta door.'] },
+          ],
+        },
         {
           title: 'Links naar websites van derden',
           body: [
@@ -769,6 +778,8 @@ export const UI_PAGES = {
       `Toestemmingscookie: de cookie pia_consent onthoudt uw keuze (accepteren of weigeren) gedurende 6 maanden, op het domein permanenceia.com en in de klantomgeving (${appHost}).`,
       'Bezoekersstatistieken, alleen met uw toestemming: Google Analytics 4 (Google Ireland Ltd / Google LLC) meet het bezoek aan de website en de effectiviteit van onze campagnes, in de vorm van geaggregeerde statistieken. Geplaatste cookies: _ga en _ga_<ID>, maximaal 13 maanden bewaard. Gegevens kunnen naar de Verenigde Staten worden doorgegeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',
       'Advertentiemeting, alleen met uw toestemming: de Meta-pixel (Meta Platforms Ireland Ltd) meet de resultaten van onze advertenties op Facebook en Instagram (bezoeken, terugbelverzoeken, klikken naar WhatsApp of de telefoon). De pixel plaatst onder meer de cookie _fbp, maximaal 3 maanden bewaard. Gegevens die u in onze formulieren invult (naam, e-mail, telefoonnummer) worden niet aan Meta doorgegeven. Meta kan gegevens naar de Verenigde Staten (Meta Platforms, Inc.) doorgeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',
+      // À RELIRE PAR UN JURISTE : responsabilité conjointe avec Meta pour le pixel
+      'Voor het verzamelen en doorgeven van gegevens door de Meta-pixel zijn wij gezamenlijk verwerkingsverantwoordelijke met Meta Platforms Ireland Ltd (artikel 26 AVG; Controller Addendum van Meta: https://www.facebook.com/legal/controller_addendum). Meta is als enige verantwoordelijk voor de verdere verwerking. U kunt uw rechten uitoefenen bij ons of bij Meta.',
       'Zonder uw toestemming wordt geen van deze cookies geplaatst en wordt de Meta-pixel niet geladen.',
       'U kunt uw keuze op elk moment wijzigen of uw toestemming intrekken via de link “Cookies beheren” onderaan elke pagina. Weigeren heeft geen invloed op het gebruik van de website.',
       `De widget van onze assistent, geladen vanaf ${appHost}, kan technische opslag gebruiken die nodig is voor het gesprek. De klantomgeving (${appHost}) gebruikt sessiecookies die nodig zijn om in te loggen.`,
