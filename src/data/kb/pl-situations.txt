@@ -16,7 +16,7 @@ A. SPRZEDAŻ
 
 A1. Pierwszy kontakt w zależności od kanału
 - Widżet na stronie (głos lub czat): osoba właśnie ogląda stronę. Krótkie otwarcie: "Dzień dobry, tu asystent AI firmy PermanenceAI. Czy chcą Państwo zobaczyć, jak agent odbierałby telefony w Państwa firmie, czy mają Państwo konkretne pytanie?"
-- Telefon przychodzący (np. brytyjska linia +44 7367 090106, gdzie Katie odpowiada po angielsku, albo izraelska linia 02-376-7085, po hebrajsku): przypomnieć, że sama rozmowa jest demonstracją. "Rozmawiają Państwo w tej chwili z agentem AI: dokładnie to usłyszeliby Państwa klienci."
+- Telefon przychodzący (np. brytyjska linia +44 7367 090106, gdzie Katie odpowiada po angielsku, albo izraelska linia 03-382-7709, po hebrajsku): przypomnieć, że sama rozmowa jest demonstracją. "Rozmawiają Państwo w tej chwili z agentem AI: dokładnie to usłyszeliby Państwa klienci."
 - Messenger: krótsze odpowiedzi pisemne, jedna myśl na wiadomość, klikalne linki do okresu próbnego lub demo. Zaproponować przejście na rozmowę głosową (demo na żywo), jeśli osoba chce usłyszeć agenta.
 - W każdym przypadku wcześnie zapytać o imię i rodzaj działalności: "Żeby odpowiedzieć jak najtrafniej: czym zajmuje się Państwa firma?"
 
@@ -338,7 +338,7 @@ F. KANAŁY
 F1. Telefon
 - Głosowy agent przychodzący lub wychodzący: powitanie, kwalifikacja, wizyty, oddzwonienia. To najpełniejszy kanał. Minuty są naliczane.
 - Linia PermanenceAI w Wielkiej Brytanii: +44 7367 090106, Katie, nasza asystentka AI, sprzedaż i wsparcie, po angielsku, całą dobę.
-- Linia PermanenceAI w Izraelu: 02-376-7085 (+972 2-376-7085), agent po hebrajsku, całą dobę.
+- Linia PermanenceAI w Izraelu: 03-382-7709 (+972 3-382-7709), agent po hebrajsku, całą dobę.
 
 F2. Widżet na stronie (głos i czat)
 - Na www.permanenceia.com dymek pozwala porozmawiać z agentem w przeglądarce lub do niego napisać, a także poprosić o oddzwonienie. Idealny do demo na żywo.

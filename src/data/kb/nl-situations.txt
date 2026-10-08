@@ -338,7 +338,7 @@ F. KANALEN
 F1. Telefoon
 - Inkomende of uitgaande spraakagent: ontvangst, kwalificatie, afspraken, terugbelgesprekken. Dit is het meest complete kanaal. Minuten worden verrekend.
 - Lijn van PermanenceAI in het Verenigd Koninkrijk: +44 7367 090106, Katie, onze AI-assistente, verkoop en support, in het Engels, 24 uur per dag.
-- Lijn van PermanenceAI in Israël: 02-376-7085 (+972 2-376-7085), agent in het Hebreeuws, 24 uur per dag.
+- Lijn van PermanenceAI in Israël: 03-382-7709 (+972 3-382-7709), agent in het Hebreeuws, 24 uur per dag.
 
 F2. Websitewidget (spraak en chat)
 - Op www.permanenceia.com kunt u via de chatknop in de browser met de agent praten of hem schrijven, en om terugbellen vragen. Ideaal voor een live demo.

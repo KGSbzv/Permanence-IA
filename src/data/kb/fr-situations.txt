@@ -16,7 +16,7 @@ A. COMMERCIAL ET VENTE
 
 A1. Premier contact selon le canal
 - Widget du site (voix ou chat) : la personne est déjà en train de regarder le site. Ouvrir court : « Bonjour, je suis l'assistante IA de Permanence IA. Vous voulez voir comment l'agent répondrait chez vous, ou vous avez une question précise ? »
-- Téléphone entrant (par exemple la ligne britannique +44 7367 090106, où Katie répond en anglais, ou la ligne israélienne 02-376-7085, en hébreu ; pas de ligne téléphonique en France : le contact passe par le widget, la démo, le rappel, WhatsApp et l'email) : rappeler que l'appel lui-même est une démonstration. « Vous parlez en ce moment à un agent IA : c'est exactement ce que vos clients entendraient. »
+- Téléphone entrant (par exemple la ligne britannique +44 7367 090106, où Katie répond en anglais, ou la ligne israélienne 03-382-7709, en hébreu ; pas de ligne téléphonique en France : le contact passe par le widget, la démo, le rappel, WhatsApp et l'email) : rappeler que l'appel lui-même est une démonstration. « Vous parlez en ce moment à un agent IA : c'est exactement ce que vos clients entendraient. »
 - Messenger : réponses écrites plus courtes, une idée par message, liens cliquables vers l'essai ou la démo. Proposer le passage à la voix (démo en direct) si la personne veut entendre l'agent.
 - Dans tous les cas, demander tôt le prénom et l'activité : « Pour vous répondre au plus juste, quelle est votre activité ? »
 
@@ -338,7 +338,7 @@ F. CANAUX
 F1. Téléphone
 - Agent vocal entrant ou sortant : accueil, qualification, rendez-vous, rappels. C'est le canal le plus complet. Les minutes sont décomptées.
 - Ligne de Permanence IA au Royaume-Uni : +44 7367 090106, Katie, notre assistante IA, commercial et support, en anglais, 24 h/24.
-- Ligne de Permanence IA en Israël : 02-376-7085 (+972 2-376-7085), agent en hébreu, 24 h/24.
+- Ligne de Permanence IA en Israël : 03-382-7709 (+972 3-382-7709), agent en hébreu, 24 h/24.
 
 F2. Widget du site (voix et chat)
 - Sur www.permanenceia.com, la bulle permet de parler à l'agent dans le navigateur ou de lui écrire, et de demander un rappel. Idéal pour une démo en direct.

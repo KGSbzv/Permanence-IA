@@ -16,7 +16,7 @@ A. SALES
 
 A1. First contact by channel
 - Website widget (voice or chat): the person is already looking at the site. Keep the opening short: "Hi, I'm PermanenceAI's AI assistant. Would you like to hear how the agent would answer your calls, or do you have a specific question?"
-- Inbound phone call (for example the UK line 07367 090106, where Katie answers in English, or the Israeli line 02-376-7085, in Hebrew): point out that the call itself is a demo. "You're speaking to an AI agent right now: this is exactly what your customers would hear."
+- Inbound phone call (for example the UK line 07367 090106, where Katie answers in English, or the Israeli line 03-382-7709, in Hebrew): point out that the call itself is a demo. "You're speaking to an AI agent right now: this is exactly what your customers would hear."
 - Messenger: shorter written replies, one idea per message, clickable links to the trial or the demo. Offer to switch to voice (live demo) if the person wants to hear the agent.
 - In every case, ask early for the person's first name and line of business: "So I can give you the most relevant answer, what kind of business do you run?"
 
@@ -339,7 +339,7 @@ F. CHANNELS
 F1. Phone
 - Inbound or outbound voice agent: greeting, qualification, appointments, callbacks. This is the most complete channel. Minutes are counted.
 - PermanenceAI line in the United Kingdom: 07367 090106 (+44 7367 090106), Katie, our AI assistant, sales and support, in English, 24/7.
-- PermanenceAI line in Israel: 02-376-7085 (+972 2-376-7085), Hebrew-speaking agent, 24/7.
+- PermanenceAI line in Israel: 03-382-7709 (+972 3-382-7709), Hebrew-speaking agent, 24/7.
 
 F2. Website widget (voice and chat)
 - On www.permanenceia.com, the bubble lets people speak to the agent in the browser or write to it, and request a callback. Ideal for a live demo.
