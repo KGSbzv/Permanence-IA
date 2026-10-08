@@ -406,7 +406,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sendFailed: 'Non è stato possibile inviare la richiesta.',
     sending: 'Invio…',
     phoneCta: 'Mi chiami adesso',
-    phoneLegal: 'Gratuito e senza impegno. Il Suo numero serve solo per questa demo.',
+    phoneLegal: 'Gratuito e senza impegno. Il Suo numero serve per questa demo; La ricontattiamo solo se lo accetta qui sotto.',
     sentTitle: 'Richiesta ricevuta',
     sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00-19:00, ora italiana). Tenga il telefono a portata di mano.`,
     again: 'Riprovi',

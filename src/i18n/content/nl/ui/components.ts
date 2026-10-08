@@ -404,7 +404,7 @@ export const UI_COMPONENTS = {
     sendFailed: 'De aanvraag kon niet worden verzonden.',
     sending: 'Verzenden…',
     phoneCta: 'Bel mijn telefoon',
-    phoneLegal: 'Gratis en vrijblijvend. Uw nummer wordt alleen voor deze demo gebruikt.',
+    phoneLegal: 'Gratis en vrijblijvend. Uw nummer wordt voor deze demo gebruikt; we nemen alleen opnieuw contact op als u daarmee hieronder akkoord gaat.',
     sentTitle: 'Aanvraag ontvangen',
     sentText: (name: string) => `${name} belt u binnen enkele minuten tijdens de openingstijden (maandag tot en met zaterdag, 9.00–17.30 uur, Nederlandse tijd). Houd uw telefoon bij de hand.`,
     again: 'Opnieuw proberen',

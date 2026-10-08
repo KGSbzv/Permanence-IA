@@ -415,7 +415,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     sendFailed: 'Nie udało się wysłać zgłoszenia.',
     sending: 'Wysyłanie…',
     phoneCta: 'Zadzwońcie do mnie',
-    phoneLegal: 'Bezpłatnie i bez zobowiązań. Twój numer służy wyłącznie do tej demonstracji.',
+    phoneLegal: 'Bezpłatnie i bez zobowiązań. Twój numer służy do tej demonstracji; ponownie skontaktujemy się tylko, jeśli wyrazisz na to zgodę poniżej.',
     sentTitle: 'Zgłoszenie przyjęte',
     sentText: (name: string) => `${name} zadzwoni w ciągu kilku minut w godzinach pracy (od poniedziałku do soboty, 9:00–17:30, czasu polskiego). Miej telefon pod ręką.`,
     again: 'Spróbuj ponownie',

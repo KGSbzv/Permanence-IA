@@ -91,7 +91,7 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Your customers will know they’re talking to an AI, and that’s deliberate',
       preheader: 'You write its instructions, its no-go areas and when it passes the call to you.',
       body: [
-        'From the start of the call, the agent says that it is an AI. Rules such as the EU AI Act require it, and above all it’s a matter of trust. Its voice is natural, in the caller’s language.',
+        'From the start of the call, the agent says that it is an AI: it’s a matter of trust, and your callers appreciate the honesty. Its voice is natural, in the caller’s language.',
         'And you stay in control:',
         {
           ul: [

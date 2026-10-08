@@ -410,7 +410,7 @@ export const UI_COMPONENTS = {
     sendFailed: 'Your request could not be sent.',
     sending: 'Sending…',
     phoneCta: 'Ring my phone',
-    phoneLegal: 'Free, no commitment. Your number is only used for this demo.',
+    phoneLegal: 'Free, no commitment. Your number is used for this demo; we only contact you again if you agree below.',
     sentTitle: 'Request received',
     sentText: (name: string) => `${name} calls you within minutes during opening hours (Monday to Saturday, 9am to 7pm). Keep your phone close.`,
     again: 'Try again',

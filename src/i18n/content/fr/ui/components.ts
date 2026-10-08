@@ -406,7 +406,7 @@ export const UI_COMPONENTS = {
     sendFailed: 'La demande n’a pas pu être envoyée.',
     sending: 'Envoi…',
     phoneCta: 'Faire sonner mon téléphone',
-    phoneLegal: 'Appel gratuit, sans engagement. Votre numéro sert uniquement à cette démonstration.',
+    phoneLegal: 'Appel gratuit, sans engagement. Votre numéro sert à cette démonstration ; nous ne vous recontactons ensuite que si vous l’acceptez ci-dessous.',
     sentTitle: 'C’est noté',
     sentText: (name: string) => `${name} vous appelle dans les minutes qui suivent, aux heures d’ouverture (du lundi au samedi, de 9 h à 19 h, heure de Paris). Gardez votre téléphone à portée de main.`,
     again: 'Faire un autre essai',
