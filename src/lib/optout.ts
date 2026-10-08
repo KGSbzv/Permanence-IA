@@ -51,11 +51,11 @@ export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_ap
     isOptOut && 'À FAIRE : ajouter ce numéro à la liste de blocage Autocalls (blacklist), pour toutes les campagnes.',
     ...problems.map((p) => `ERREUR — ${p}`),
   ].filter(Boolean) as string[];
-  const [mail] = await Promise.allSettled([sendMail(
-    NOTIFY_TO,
-    `${isOptOut ? 'Opposition : ne plus appeler' : 'Mauvais contact : rappels annulés'} — ${phone}`,
-    lines.join('\n'), `<p>${lines.map(esc).join('<br>')}</p>`,
-  )]);
+  const [mail] = await Promise.allSettled([sendMail({
+    to: NOTIFY_TO, category: 'internal',
+    subject: `${isOptOut ? 'Opposition : ne plus appeler' : 'Mauvais contact : rappels annulés'} — ${phone}`,
+    text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>`,
+  })]);
   if (mail.status === 'rejected') problems.push(`email : ${mail.reason?.message}`);
   return { cancelled: cancel.status === 'fulfilled', recorded: recorded.status === 'fulfilled', notified: mail.status === 'fulfilled', problems };
 }

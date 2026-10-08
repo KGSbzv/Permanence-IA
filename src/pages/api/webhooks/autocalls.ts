@@ -91,12 +91,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (row.outcome && HOT.includes(String(row.outcome))) {
     const lines = Object.entries(vars).map(([k, v]) => `<li><b>${esc(k)}</b> : ${esc(typeof v === 'object' ? JSON.stringify(v) : v)}</li>`).join('');
     try {
-      await sendMail(
-        NOTIFY_TO,
-        `À traiter : ${row.outcome} — ${row.assistant_name || 'agent'} (${row.customer_phone || 'site web'})`,
-        `${row.summary || ''}\n\n${JSON.stringify(vars, null, 2)}`,
-        `<p>${esc(row.summary)}</p><ul>${lines}</ul>${row.recording_url ? `<p><a href="${esc(row.recording_url)}">Écouter l’enregistrement</a></p>` : ''}`,
-      );
+      await sendMail({
+        to: NOTIFY_TO, category: 'internal',
+        subject: `À traiter : ${row.outcome} — ${row.assistant_name || 'agent'} (${row.customer_phone || 'site web'})`,
+        text: `${row.summary || ''}\n\n${JSON.stringify(vars, null, 2)}`,
+        html: `<p>${esc(row.summary)}</p><ul>${lines}</ul>${row.recording_url ? `<p><a href="${esc(row.recording_url)}">Écouter l’enregistrement</a></p>` : ''}`,
+      });
     } catch (e: any) { console.error('[autocalls-webhook] email:', e.message); }
   }
   // Opposition : traitée avant le message « rappel manqué » (jamais de SMS à une personne qui a refusé).

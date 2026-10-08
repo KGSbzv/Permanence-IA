@@ -5,6 +5,8 @@ export const SITE = {
   appUrl: 'https://app.permanenceia.com',
   email: 'contact@permanenceia.com',
   company: 'SINAY STRATEGIC LLC',
+  /** Adresse postale de la société (pied des emails). */
+  address: '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001, USA',
   /** Numéro WhatsApp Business (expéditeur Autocalls 521), servi par l’agent IA multilingue. */
   whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' },
   /** Page Facebook de la marque (en anglais). */

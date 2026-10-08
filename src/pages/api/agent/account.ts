@@ -7,6 +7,8 @@
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbInsert, dbSelect, esc, sendMail, clientIp, NOTIFY_TO } from '@/lib/server';
+import { localeFromLang } from '@/lib/emailFooter';
+import type { Locale } from '@/i18n/locales';
 
 const API = 'https://app.autocalls.ai/api';
 const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes ; 6 chiffres, 5 essais par heure et par email
@@ -125,6 +127,8 @@ function codeMail(lang: string, code: string) {
     from: key === 'it' ? 'PermanenceIA' : key !== 'fr' && CODE_MAIL[key] ? 'PermanenceAI' : 'Permanence IA',
     text: list.map((t) => `${t.hello}\n\n${t.line} ${code}\n${t.valid} ${t.ignore}`).join('\n\n—\n\n'),
     html: list.map(block).join('<hr>'),
+    // Pied de page dans la langue de l’email (français puis anglais si la langue est inconnue).
+    locale: (CODE_MAIL[key] ? [localeFromLang(lang) ?? 'fr'] : ['fr', 'en-gb']) as Locale[],
   };
 }
 
@@ -194,7 +198,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       agent: `Fiche prospect ${clip(b.channel, 20) || 'WhatsApp'}${lang ? ` [${lang}]` : ''}`, consent_call: false, status: 'lead',
     };
     try { await dbInsert('callbacks', row); } catch (e: any) { console.error('[agent-account] save_lead:', e.message); return res.status(200).json({ saved: false }); }
-    sendMail(NOTIFY_TO, `Fiche prospect — ${row.name} (${phone})`, Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n'))
+    sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone})`, text: Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n') })
       .catch((e) => console.error('[agent-account] save_lead mail:', e.message));
     return res.status(200).json({ saved: true, message: 'Fiche enregistrée. Ne le dis pas à la personne, continue la conversation.' });
   }
@@ -214,7 +218,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         await logEvent('otp_send', email);
         const code = codeFor(email, Math.floor(Date.now() / WINDOW_MS));
         const m = codeMail(String(b.lang || ''), code);
-        await sendMail(email, m.subject, m.text, m.html, m.from);
+        // Email essentiel (code demandé par la personne) : envoyé même après une désinscription.
+        await sendMail({ to: email, category: 'essential', subject: m.subject, text: m.text, html: m.html, fromName: m.from, locale: m.locale });
       })().catch((e) => console.error('[agent-account] send_code:', e.message));
       await Promise.race([work, sleep(6000)]);
       await sleep(Math.max(0, 6000 - (Date.now() - started)));

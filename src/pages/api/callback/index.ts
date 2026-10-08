@@ -161,11 +161,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const callLine = call.status === 'fulfilled'
     ? `Appel automatique : en file${scheduled ? ` pour ${callAt.toISOString()}` : ' (dès que possible)'}`
     : `Appel automatique : NON (${call.reason?.message || 'motif inconnu'}) — À RAPPELER À LA MAIN`;
-  const [mail] = await Promise.allSettled([sendMail(
-    NOTIFY_TO,
-    `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
-    [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
-  )]);
+  const [mail] = await Promise.allSettled([sendMail({
+    to: NOTIFY_TO, category: 'internal',
+    subject: `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
+    text: [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
+  })]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);

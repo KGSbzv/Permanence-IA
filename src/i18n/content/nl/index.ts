@@ -10,6 +10,7 @@ import { SECTORS } from './sectors';
 import { SITE_TEXT } from './site';
 import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
+import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
 
 export const nl: typeof fr = {
@@ -23,5 +24,5 @@ export const nl: typeof fr = {
   help: { menu: HELP_MENU, tasks: HELP_TASKS, glossary: HELP_GLOSSARY },
   guides: { ui: GUIDES_UI, list: GUIDES },
   integrations: INTEGRATIONS,
-  ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES },
+  ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };

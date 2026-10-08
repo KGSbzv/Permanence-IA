@@ -26,6 +26,8 @@ export function middleware(req: NextRequest) {
   // Les lectures des bases de connaissances Autocalls (?kb=… dans l’URL) ne sont jamais redirigées : leur navigateur
   // sans interface envoie Sec-Fetch-Dest et un user-agent réécrit en « Google » par l’hébergeur, et indexait l’anglais.
   if (req.nextUrl.searchParams.has('kb')) return NextResponse.next();
+  // Liens des emails vers les préférences (?l=…) : la langue de l’email prime sur celle du navigateur.
+  if (req.nextUrl.pathname === '/preferences-email' && req.nextUrl.searchParams.has('l')) return NextResponse.next();
   const browserNavigation = req.headers.get('sec-fetch-dest') === 'document';
   if (req.nextUrl.locale !== DEFAULT_LOCALE || !browserNavigation || BOT.test(req.headers.get('user-agent') || '')) return NextResponse.next();
   const saved = req.cookies.get('NEXT_LOCALE')?.value;

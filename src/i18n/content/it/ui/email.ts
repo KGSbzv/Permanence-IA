@@ -1,0 +1,55 @@
+// Testi delle email inviate dal sito: piè di pagina comune, pagina delle preferenze email
+// (/preferences-email) ed email con il link personale. Nel piè di pagina {year}, {company}, {brand} ed
+// {email} vengono sostituiti all’invio (src/lib/emailFooter.ts).
+import type { UI_EMAIL as FR_UI_EMAIL } from '../../fr/ui/email';
+
+export const UI_EMAIL: typeof FR_UI_EMAIL = {
+  footer: {
+    copyright: 'Copyright © {year} {company}, tutti i diritti riservati.',
+    brandOf: '{brand} è un marchio di {company}.',
+    question: 'Desidera modificare il modo in cui riceve queste email?',
+    manage: ['Può gestire le preferenze email per {email} ', 'qui', ''],
+    manageNoEmail: ['Può gestire le preferenze email ', 'qui', ''],
+    unsubscribe: ['oppure annullare l’iscrizione a tutte le email ', 'qui', '.'],
+    terms: 'Termini di servizio',
+    privacy: 'Informativa sulla privacy',
+  },
+  prefs: {
+    meta: {
+      title: (brand: string) => `Preferenze email · ${brand}`,
+      description: 'Scelga quali email ricevere da noi, oppure annulli l’iscrizione alle email non essenziali.',
+    },
+    h1: 'Le Sue preferenze email',
+    intro: (brand: string) => `Scelga quali email ricevere da ${brand}.`,
+    address: 'Indirizzo email',
+    current: 'Scelta attuale',
+    essential: { title: 'Solo le email essenziali dell’account', text: 'Nessuna email non essenziale: niente novità, consigli né offerte.' },
+    all: { title: 'Tutte le email', text: 'Le email essenziali, più le nostre novità, consigli e offerte.' },
+    save: 'Salva la mia scelta',
+    saving: 'Salvataggio…',
+    unsubscribeTitle: 'Confermi l’annullamento dell’iscrizione',
+    unsubscribeText: 'Basta un clic: riceverà solo le email essenziali dell’account.',
+    unsubscribeButton: 'Annulla l’iscrizione alle email non essenziali',
+    saved: {
+      essential_only: 'Fatto: d’ora in poi riceverà solo le email essenziali dell’account.',
+      all: 'Fatto: riceverà tutte le nostre email.',
+    },
+    always: 'Qualunque sia la Sua scelta, inviamo sempre le email indispensabili: codici di sicurezza, ricevute e fatture, e risposte alle Sue richieste.',
+    error: (email: string) => `Non è stato possibile salvare la Sua scelta. Riprovi tra qualche minuto o ci scriva a ${email}.`,
+    invalid: 'Questo link non è valido o è stato copiato solo in parte. Richieda un nuovo link qui sotto.',
+    askTitle: 'Ricevere un link per gestire le preferenze',
+    askText: 'Per proteggere il Suo indirizzo, lo inserisca qui sotto: Le invieremo via email un link personale per scegliere quali email ricevere. Nessun altro può modificare le Sue preferenze.',
+    emailLabel: 'Il Suo indirizzo email',
+    send: 'Ricevi il link',
+    sending: 'Invio…',
+    sent: 'Se l’indirizzo è valido, Le abbiamo appena inviato un’email con il Suo link personale (controlli anche la cartella spam).',
+    tooMany: 'Troppe richieste: riprovi più tardi.',
+  },
+  linkMail: {
+    subject: (brand: string) => `Le Sue preferenze email ${brand}`,
+    hello: 'Buongiorno,',
+    line: (brand: string) => `Ecco il Suo link personale per scegliere quali email ricevere da ${brand}:`,
+    button: 'Gestisci le mie preferenze',
+    ignore: 'Se non lo ha richiesto, ignori questa email: non cambierà nulla.',
+  },
+};

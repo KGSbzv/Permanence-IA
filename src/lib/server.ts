@@ -1,8 +1,12 @@
-// Outils côté serveur partagés par les routes API : Supabase (REST), email (Zoho SMTP)
+// Outils côté serveur partagés par les routes API : Supabase (REST), email (Zoho SMTP, pied de page commun)
 // et vérification du jeton des webhooks.
 import { timingSafeEqual } from 'crypto';
 import type { NextApiRequest } from 'next';
 import nodemailer from 'nodemailer';
+import { SITE } from '@/data/site';
+import { DEFAULT_LOCALE, isRtl, type Locale } from '@/i18n/locales';
+import { appendHtmlFooter, buildEmailFooter, textToHtml } from './emailFooter';
+import { emailOptedOut, unsubscribeUrl, type MailCategory, type PrefDb } from './emailPrefs';
 
 export const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
 
@@ -55,15 +59,74 @@ export async function dbUpdate(table: string, query: string, patch: Record<strin
   if (!res.ok) throw new Error(`Supabase ${table} ${res.status}`);
 }
 
-export async function sendMail(to: string, subject: string, text: string, html?: string, fromName = 'Permanence IA') {
+/** Accès à la base pour les préférences email (src/lib/emailPrefs.ts). */
+export const PREF_DB: PrefDb = { select: dbSelect, insert: (table, row) => dbInsert(table, row) };
+
+/** L’adresse s’est-elle désinscrite des emails non essentiels ? */
+export const isEmailOptedOut = (email: string) => emailOptedOut(email, PREF_DB);
+
+export interface MailOptions {
+  to: string;
+  subject: string;
+  text: string;
+  html?: string;
+  fromName?: string;
+  /** essential : codes, confirmations, réponses à une demande de la personne ; marketing : non envoyé après
+   *  désinscription ; internal : notification à l’équipe (NOTIFY_TO). */
+  category: MailCategory;
+  /** Langue du pied de page (plusieurs pour un email bilingue) ; français par défaut et pour l’équipe. */
+  locale?: Locale | Locale[];
+}
+
+/**
+ * Message prêt à partir : pied de page (texte et HTML, version HTML créée si l’appelant n’envoie que du texte)
+ * et en-têtes List-Unsubscribe. { skipped } si l’email ne doit pas partir : marketing vers une adresse désinscrite,
+ * ou préférence illisible (base en panne) — dans le doute, un email non essentiel n’est pas envoyé.
+ */
+export async function prepareMail(m: MailOptions, db: PrefDb = PREF_DB) {
+  if (m.category === 'marketing') {
+    try {
+      if (await emailOptedOut(m.to, db)) return { skipped: 'opted_out' as const };
+    } catch (e: any) {
+      console.error('[mail] préférence illisible, email marketing non envoyé:', e.message);
+      return { skipped: 'pref_unavailable' as const };
+    }
+  }
+  const locales = m.category === 'internal' ? ['fr' as Locale] : [m.locale ?? DEFAULT_LOCALE].flat();
+  const footer = buildEmailFooter(m.to, locales);
+  const rtl = isRtl(locales[0]);
+  const unsub = unsubscribeUrl(m.to, locales[0]);
+  return {
+    message: {
+      to: m.to,
+      subject: m.subject,
+      text: `${m.text}\n\n${footer.text}`,
+      html: appendHtmlFooter(m.html ?? textToHtml(m.text, rtl), footer.html),
+      // Désinscription depuis la messagerie : mailto (traité à la main) et lien HTTPS en un clic (RFC 8058).
+      headers: {
+        'List-Unsubscribe': [`<mailto:${SITE.email}?subject=unsubscribe>`, unsub && `<${unsub}>`].filter(Boolean).join(', '),
+        ...(unsub ? { 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } : {}),
+      },
+    },
+  };
+}
+
+/** Envoie un email (Zoho SMTP) avec le pied de page commun ; renvoie false s’il a été volontairement sauté. */
+export async function sendMail(m: MailOptions) {
   if (!process.env.ZOHO_SMTP_USER || !process.env.ZOHO_SMTP_PASS) throw new Error('SMTP Zoho non configuré');
+  const prepared = await prepareMail(m);
+  if (!prepared.message) {
+    console.log(`[mail] non envoyé (${prepared.skipped}) : ${m.subject}`);
+    return false;
+  }
   const transporter = nodemailer.createTransport({
     host: process.env.ZOHO_SMTP_HOST || 'smtp.zoho.com',
     port: 465,
     secure: true,
     auth: { user: process.env.ZOHO_SMTP_USER, pass: process.env.ZOHO_SMTP_PASS },
   });
-  await transporter.sendMail({ from: `${fromName} <${process.env.ZOHO_SMTP_USER}>`, to, subject, text, html });
+  await transporter.sendMail({ from: `${m.fromName || 'Permanence IA'} <${process.env.ZOHO_SMTP_USER}>`, ...prepared.message });
+  return true;
 }
 
 // Alertes d’exploitation : au plus un email par sujet et par heure (par instance), pour ne pas inonder la boîte.
@@ -73,7 +136,7 @@ export async function alertTeam(key: string, subject: string, detail: string) {
   const now = Date.now();
   if (now - (alerted.get(key) || 0) < 3_600_000) return;
   alerted.set(key, now);
-  try { await sendMail(NOTIFY_TO, `[Alerte site] ${subject}`, `${detail}\n\n(Une seule alerte par heure pour ce sujet ; voir les journaux App Hosting.)`); }
+  try { await sendMail({ to: NOTIFY_TO, category: 'internal', subject: `[Alerte site] ${subject}`, text: `${detail}\n\n(Une seule alerte par heure pour ce sujet ; voir les journaux App Hosting.)` }); }
   catch (e: any) { console.error('[alerte] email:', e.message); }
 }
 

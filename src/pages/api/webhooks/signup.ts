@@ -29,8 +29,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     ? `\n\nDemande de rappel du ${previous.created_at.slice(0, 10)} avec cet email :\nTéléphone : ${previous.phone}\nEntreprise : ${previous.company || ''}\nSecteur : ${previous.sector || ''}\nNote : ${previous.note || ''}`
     : '';
   try {
-    await sendMail(NOTIFY_TO, `Nouvelle inscription — ${name || email}`,
-      `Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nProchaine étape : choix d’un forfait (essai 14 jours / 30 minutes).${context}`);
+    await sendMail({
+      to: NOTIFY_TO, category: 'internal', subject: `Nouvelle inscription — ${name || email}`,
+      text: `Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nProchaine étape : choix d’un forfait (essai 14 jours / 30 minutes).${context}`,
+    });
   } catch (e: any) { console.error('[signup] email:', e.message); }
 
   return res.status(200).json({ received: true });
