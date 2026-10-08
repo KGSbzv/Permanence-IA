@@ -1,98 +1,92 @@
-# Documents de connaissance Autocalls à supprimer (mis à jour le 8 octobre 2026)
+# Bases de connaissances Autocalls : nettoyage (mis à jour le 8 octobre 2026, 17 h UTC)
 
-Les documents **v10** sont importés et actifs dans les 6 bases (8 octobre, entre 09:15 et 09:55 UTC). Ils reprennent les pages en ligne du site après le dernier déploiement : /kb/<langue>, /kb/<langue>-situations, tarifs, FAQ, aide (guides), secteurs, sécurité, confidentialité, CGU et fonctionnalités.
+Autocalls l'a confirmé par écrit le 8 octobre : un agent lit **tous** les documents actifs de sa base. Les anciennes versions des mêmes pages (v7, v9, v10) sont encore actives à côté des nouvelles. Les agents mélangent donc anciens et nouveaux prix ou processus. Les documents en échec sont vides et sans effet sur les réponses, mais ils font afficher « failed » à la base.
 
-Tous les documents listés ci-dessous sont remplacés. Tant qu'ils restent dans une base, les agents peuvent encore citer d'anciens textes : la grille « 100 crédits = 1 $ » et les numéros « dès 5,99 $ » dans les v7, l'absence de la ligne britannique +44 7367 090106 et les recharges à montants fixes dans les v9.
+Claude ne supprime jamais de données définitivement. Deux façons d'en sortir :
 
-L'API Autocalls ne permet de modifier que le nom et la description d'un document, pas son contenu. Il n'est donc pas possible de « mettre à jour » un ancien document : seule la suppression le retire des réponses des agents.
+## Option A, recommandée : bases neuves (Claude, avec votre accord)
 
-**Où les supprimer :** app.autocalls.ai, menu **Knowledge base**, ouvrir la base, puis supprimer chaque document par son ID. Action irréversible, à faire par le propriétaire.
+1. Claude crée 7 bases neuves, une version par page du site, lue **après** les corrections du 8 octobre au soir (200 crédits dans Réceptionniste, 100 crédits pour 1 $, recharge dès 5 $, CGU et page sécurité).
+2. Il rattache chacun des 41 agents à la nouvelle base de sa langue, vérifie le résultat, puis renomme les anciennes bases « ANCIENNE, plus utilisée ».
+3. Vous supprimez ensuite les 7 anciennes bases entières, quand vous voulez : 7 suppressions au lieu de 195. Rien ne presse, puisque plus aucun agent ne les lit.
 
-## Documents à garder (v10 actifs)
+L'opération est réversible : il suffit de rattacher un agent à son ancienne base. Le contrôle de sécurité de Claude Code demande votre accord explicite, car l'opération écrit beaucoup dans Autocalls.
 
-| Base | IDs v10 |
-|---|---|
-| 6163 Français | 25161, 25164, 25166, 25167, 25168, 25169, 25170, 25171, 25172, 25173 |
-| 6166 English (UK et Australie) | 25174, 25175, 25176, 25177, 25178, 25179, 25180, 25182, 25183, 25184 |
-| 6167 Italiano | 25185, 25187, 25188, 25189, 25190, 25191, 25193, 25194, 25195, 25196 |
-| 6168 Polski | 25197, 25198, 25199, 25200, 25201, 25202, 25204, 25205, 25206, 25207 |
-| 6169 Nederlands | 25208, 25209, 25210, 25211, 25212, 25214, 25215, 25216, 25217, 25218 |
-| 6180 עברית | 25219, 25220, 25221, 25222, 25223, 25224, 25227, 25228, 25230, 25233 |
+## Option B : suppression à la main dans les bases actuelles
 
-Garder aussi les documents « détail des modules » (/kb/modules/...) s'il en existe en dehors des listes ci-dessous.
+Autocalls > Knowledge base > ouvrir la base > supprimer chaque document de la colonne « à supprimer ». Il y en a 195 au total (29 en échec). Attention : même après ce nettoyage, les documents gardés datent d'avant les corrections du 8 octobre au soir. Il faudra donc encore réimporter la plupart des pages, puis supprimer les versions remplacées.
 
-## 1. Anciens documents v7 (7 octobre, avant 11:35 UTC)
+Liste établie à partir de l'inventaire de l'API (8 octobre, 17 h UTC). Dans chaque base, la règle est la même : on garde la version active la plus récente de chaque page, et on supprime tout le reste.
 
-| Base | IDs |
-|---|---|
-| 6163 Français | 24899, 24921, 24954, 24955, 24961, 24967, 24968, 24972 |
-| 6166 English | 24900, 24914, 24915, 24920, 24950, 24951, 24952, 24953, 24973 |
-| 6167 Italiano | 24901, 24922, 24923, 24924, 24925, 24926, 24927, 24928, 24974 |
-| 6168 Polski | 24902, 24929, 24930, 24931, 24932, 24933, 24934, 24935, 24975 |
-| 6169 Nederlands | 24903, 24936, 24937, 24938, 24939, 24940, 24941, 24942, 24976 |
-| 6180 עברית | 24904, 24943, 24944, 24945, 24946, 24947, 24948, 24949, 24977 |
+### 6163 Français
+**À garder (10) :** 25168 Guides de l'espace client (v10) ; 25169 Secteurs (v10) ; 25170 Sécurité, confidentialité et conditions (v10) ; 25172 Conditions générales (v10) ; 25173 Fonctionnalités (v10) ; 25275 Parcours d'interaction et situations (v11) ; 25276 Tarifs et forfaits (v11) ; 25277 FAQ et essai gratuit (v11) ; 25278 Politique de confidentialité (v11) ; 25279 Processus (v11)
 
-Les « Fonctionnalités — détail des modules (v7) » (24972 à 24977) sont remplacés par les documents « Fonctionnalités (v10) », qui lisent la page Fonctionnalités et ses pages de modules.
+**À supprimer (26) :**
+- anciennes versions actives (22) : 24899, 24921, 24954, 24955, 24961, 24967, 24968, 24972, 25001, 25002, 25003, 25007, 25048, 25049, 25050, 25160, 25161, 25164, 25166, 25167, 25171, 25274
+- créations en échec, vides (4) : 25004, 25005, 25006, 25165
 
-## 2. Documents v9 actifs, remplacés par les v10
+### 6166 English (UK et Australie)
+**À garder (10) :** 25179 Sectors (v10) ; 25180 Security, privacy and terms (v10) ; 25182 Terms and conditions (v10) ; 25183 Features (v10) ; 25280 Processes (v11) ; 25281 Interaction journeys and situations (v11) ; 25282 Pricing and plans (v11) ; 25283 FAQ and free trial (v11) ; 25284 Customer area guides (v11) ; 25285 Privacy policy (v11)
 
-| Base | IDs |
-|---|---|
-| 6163 Français | 25001, 25002, 25003, 25007, 25048, 25049, 25050, 25160 |
-| 6166 English | 25008, 25010, 25011, 25012, 25015, 25051, 25066, 25071 |
-| 6167 Italiano | 25016, 25018, 25020, 25022, 25023, 25054, 25055, 25056 |
-| 6168 Polski | 25024, 25026, 25028, 25029, 25031, 25057, 25059, 25068 |
-| 6169 Nederlands | 25032, 25033, 25035, 25037, 25038, 25060, 25062, 25069 |
-| 6180 עברית | 25040, 25041, 25042, 25044, 25045, 25063, 25065, 25070 |
+**À supprimer (30) :**
+- anciennes versions actives (23) : 24900, 24914, 24915, 24920, 24950, 24951, 24952, 24953, 24973, 25008, 25010, 25011, 25012, 25015, 25051, 25066, 25071, 25174, 25175, 25176, 25177, 25178, 25184
+- créations en échec, vides (7) : 25009, 25013, 25014, 25052, 25053, 25067, 25181
 
-25160 « Fonctionnalités (v9) » (créé le 8 octobre à 09:06) a le même contenu que 25173 « Fonctionnalités (v10) » : l'un des deux suffit.
+### 6167 Italiano
+**À garder (10) :** 25191 Settori (v10) ; 25193 Sicurezza, privacy e condizioni (v10) ; 25195 Condizioni generali (v10) ; 25196 Funzionalità (v10) ; 25286 Processi (v11) ; 25287 Percorsi di interazione e situazioni (v11) ; 25288 Prezzi e piani (v11) ; 25289 FAQ e prova gratuita (v11) ; 25290 Informativa sulla privacy (v11) ; 25291 Guide dell'area clienti (v11)
 
-## 3. Créations en échec, vides (statut « failed »)
+**À supprimer (27) :**
+- anciennes versions actives (23) : 24901, 24922, 24923, 24924, 24925, 24926, 24927, 24928, 24974, 25016, 25018, 25020, 25022, 25023, 25054, 25055, 25056, 25185, 25187, 25188, 25189, 25190, 25194
+- créations en échec, vides (4) : 25017, 25019, 25021, 25186
 
-- v9 du 7 octobre : 25004, 25005, 25006, 25009, 25013, 25014, 25017, 25019, 25021, 25025, 25027, 25030, 25034, 25036, 25039, 25043, 25046, 25047, 25052, 25053, 25058, 25061, 25064, 25067
-- v10 du 8 octobre : 25165, 25181, 25186, 25203 (chaque document a été recréé aussitôt avec succès)
+### 6168 Polski
+**À garder (10) :** 25202 Branże (v10) ; 25204 Bezpieczeństwo, prywatność i warunki (v10) ; 25206 Regulamin (v10) ; 25207 Funkcje (v10) ; 25292 Procesy (v11) ; 25293 Ścieżki rozmów i sytuacje (v11) ; 25294 Cennik i pakiety (v11) ; 25295 FAQ i bezpłatny okres próbny (v11) ; 25296 Polityka prywatności (v11) ; 25297 Przewodniki po panelu klienta (v11)
 
-Une base apparaît « en échec » tant qu'elle contient un de ces documents. Ils ne contiennent rien : leur suppression ne retire aucune information.
+**À supprimer (28) :**
+- anciennes versions actives (23) : 24902, 24929, 24930, 24931, 24932, 24933, 24934, 24935, 24975, 25024, 25026, 25028, 25029, 25031, 25057, 25059, 25068, 25197, 25198, 25199, 25200, 25201, 25205
+- créations en échec, vides (5) : 25025, 25027, 25030, 25058, 25203
 
-## 4. Base multilingue 6209 (créée le 8 octobre, 10:30-10:57 UTC)
+### 6169 Nederlands
+**À garder (10) :** 25212 Handleidingen klantomgeving (v10) ; 25214 Sectoren (v10) ; 25215 Beveiliging, privacy en voorwaarden (v10) ; 25217 Algemene voorwaarden (v10) ; 25218 Functies (v10) ; 25298 Processen (v11) ; 25299 Gespreksverloop en situaties (v11) ; 25300 Prijzen en abonnementen (v11) ; 25301 FAQ en gratis proefperiode (v11) ; 25302 Privacybeleid (v11)
 
-Les 35 autres documents de cette base sont actifs et à garder. À supprimer :
-- 25239 « FR — Fonctionnalités (v10) » : création en échec, vide (recréée aussitôt en 25240).
-- 25234 « FR — Processus (v10) » : resté 17 minutes en traitement, puis actif. Il fait doublon avec 25245 (même page /kb/fr) : garder l'un des deux.
+**À supprimer (26) :**
+- anciennes versions actives (22) : 24903, 24936, 24937, 24938, 24939, 24940, 24941, 24942, 24976, 25032, 25033, 25035, 25037, 25038, 25060, 25062, 25069, 25208, 25209, 25210, 25211, 25216
+- créations en échec, vides (4) : 25034, 25036, 25039, 25061
 
-Réimport prévu ici aussi : quand les guides « assistante virtuelle » seront corrigés sur le site, recréer dans 6209 les 5 documents de guides concernés (25238 fr, 25250 en, 25255 it, 25260 pl, 25265 nl), puis supprimer les anciens.
+### 6180 עברית
+**À garder (10) :** 25224 תחומים (v10) ; 25227 אבטחה, פרטיות ותנאים (v10) ; 25230 תנאי שימוש (v10) ; 25233 תכונות (v10) ; 25303 תהליכים (v11) ; 25304 מסלולי שיחה ומצבים (v11) ; 25305 מחירים ומסלולים (v11) ; 25306 שאלות נפוצות והתנסות חינם (v11) ; 25307 מדיניות פרטיות (v11) ; 25308 מדריכים לאזור הלקוח (v11)
 
-## 5. Réimport v11 du 8 octobre (12:10-12:41 UTC), documents remplacés
+**À supprimer (27) :**
+- anciennes versions actives (23) : 24904, 24943, 24944, 24945, 24946, 24947, 24948, 24949, 24977, 25040, 25041, 25042, 25044, 25045, 25063, 25065, 25070, 25219, 25220, 25221, 25222, 25223, 25228
+- créations en échec, vides (4) : 25043, 25046, 25047, 25064
 
-Les commits de contenu 67b9c81 (src/data/kb : refus enregistré au lieu de « blacklist » ; FAQ ; texte des recharges sur /tarifs), 0b197f5 (politique de confidentialité : pixel Meta et responsabilité conjointe) et 6538d03 (résumés des guides en anglais, italien, polonais et hébreu) sont en ligne depuis 11:45 UTC environ. Seuls les documents dont la page source a changé ont été recréés (v11, tous « Active ») ; secteurs, sécurité, CGU et fonctionnalités n'ont pas changé et leurs v10 restent à garder, comme les guides français et néerlandais (25168, 25212, 25238, 25265).
+### 6209 multilingue (WhatsApp, Messenger, espace client)
+**À garder (35) :** 25238 FR — Guides de l'espace client (v10) ; 25240 FR — Fonctionnalités (v10) ; 25241 FR — Secteurs (v10) ; 25242 FR — Sécurité, confidentialité et conditions (v10) ; 25243 FR — Conditions générales (v10) ; 25265 NL — Handleidingen klantomgeving (v10) ; 25309 FR — Processus (v11) ; 25310 FR — Parcours d'interaction et situations (v11) ; 25311 FR — Tarifs et forfaits (v11) ; 25312 FR — FAQ et essai gratuit (v11) ; 25313 FR — Politique de confidentialité (v11) ; 25314 EN — Processes (v11) ; 25315 EN — Interaction journeys and situations (v11) ; 25316 EN — Pricing and plans (v11) ; 25317 EN — FAQ and free trial (v11) ; 25318 EN — Customer area guides (v11) ; 25319 IT — Processi (v11) ; 25320 IT — Percorsi di interazione e situazioni (v11) ; 25321 IT — Prezzi e piani (v11) ; 25322 IT — FAQ e prova gratuita (v11) ; 25323 IT — Guide dell'area clienti (v11) ; 25324 PL — Procesy (v11) ; 25325 PL — Ścieżki rozmów i sytuacje (v11) ; 25326 PL — Cennik i pakiety (v11) ; 25327 PL — FAQ i bezpłatny okres próbny (v11) ; 25328 PL — Przewodniki po panelu klienta (v11) ; 25329 NL — Processen (v11) ; 25330 NL — Gespreksverloop en situaties (v11) ; 25331 NL — Prijzen en abonnementen (v11) ; 25332 NL — FAQ en gratis proefperiode (v11) ; 25333 HE — תהליכים (v11) ; 25334 HE — מסלולי שיחה ומצבים (v11) ; 25335 HE — מחירים ומסלולים (v11) ; 25336 HE — שאלות נפוצות והתנסות חינם (v11) ; 25337 HE — מדריכים לאזור הלקוח (v11)
 
-| Base | v11 actifs (à garder) | v10 remplacés (à supprimer) |
-|---|---|---|
-| 6163 Français | 25279 processus, 25275 situations, 25276 tarifs, 25277 FAQ, 25278 confidentialité | 25161, 25164, 25166, 25167, 25171, et 25274 (premier essai v11 de /kb/fr, resté 17 minutes « en traitement » puis actif : doublon de 25279, garder l'un des deux) |
-| 6166 English | 25280 processus, 25281 situations, 25282 tarifs, 25283 FAQ, 25284 guides, 25285 confidentialité | 25174, 25175, 25176, 25177, 25178, 25184 |
-| 6167 Italiano | 25286 processus, 25287 situations, 25288 tarifs, 25289 FAQ, 25291 guides, 25290 confidentialité | 25185, 25187, 25188, 25189, 25190, 25194 |
-| 6168 Polski | 25292 processus, 25293 situations, 25294 tarifs, 25295 FAQ, 25297 guides, 25296 confidentialité | 25197, 25198, 25199, 25200, 25201, 25205 |
-| 6169 Nederlands | 25298 processus, 25299 situations, 25300 tarifs, 25301 FAQ, 25302 confidentialité | 25208, 25209, 25210, 25211, 25216 |
-| 6180 עברית | 25303 processus, 25304 situations, 25305 tarifs, 25306 FAQ, 25308 guides, 25307 confidentialité | 25219, 25220, 25221, 25222, 25223, 25228 |
-| 6209 multilingue | FR 25309, 25310, 25311, 25312, 25313 ; EN 25314, 25315, 25316, 25317, 25318 ; IT 25319, 25320, 25321, 25322, 25323 ; PL 25324, 25325, 25326, 25327, 25328 ; NL 25329, 25330, 25331, 25332 ; HE 25333, 25334, 25335, 25336, 25337 | FR 25234, 25245, 25235, 25236, 25237, 25244 ; EN 25246, 25247, 25248, 25249, 25250 ; IT 25251, 25252, 25253, 25254, 25255 ; PL 25256, 25257, 25258, 25259, 25260 ; NL 25261, 25262, 25263, 25264 ; HE 25266, 25267, 25268, 25269, 25270 |
-
-Dans le tableau « Documents à garder (v10 actifs) » plus haut, les IDs de la dernière colonne ci-dessus ne sont donc plus à garder. Les agents lisent la base entière : aucun rattachement à modifier (6163 à 6180 et 6209 restent rattachées aux mêmes agents).
-
-## Ordre conseillé
-
-1. Vérifier dans chaque base que les v10 du tableau « à garder » sont « Active ».
-2. Supprimer les créations en échec (point 3), puis les v7 (point 1), puis les v9 (point 2).
-3. Vérifier que chaque base repasse au statut « active » et que les agents y sont toujours rattachés (aucun changement de rattachement n'est nécessaire : les agents lisent la base, pas un document précis).
+**À supprimer (31) :**
+- anciennes versions actives (30) : 25234, 25235, 25236, 25237, 25244, 25245, 25246, 25247, 25248, 25249, 25250, 25251, 25252, 25253, 25254, 25255, 25256, 25257, 25258, 25259, 25260, 25261, 25262, 25263, 25264, 25266, 25267, 25268, 25269, 25270
+- créations en échec, vides (1) : 25239
 
 ## Réimporter après une mise à jour du site
 
-Les documents « site web » ne se mettent pas à jour seuls : Autocalls lit la page une seule fois, à la création. Après un déploiement qui modifie src/data/kb/*.txt ou les textes de src/i18n/content/<langue> (tarifs, FAQ, guides, secteurs, sécurité, CGU, confidentialité, fonctionnalités) :
+Les documents « site web » ne se mettent pas à jour seuls : Autocalls lit la page une seule fois, à la création.
 
-1. Attendre le déploiement (environ 6 minutes) et vérifier qu'une phrase nouvelle apparaît sur la page en ligne.
-2. Créer le nouveau document par l'outil create-document du MCP Autocalls (ou Knowledge base > Add document > Website), **un seul à la fois** : deux créations lancées à quelques secondes d'intervalle échouent souvent. Attendre le statut « Active » avant le suivant ; relancer une fois en cas d'échec.
-3. Liens à suivre (relative_links_limit) : 1 pour /kb/... , tarifs, FAQ, sécurité, CGU et confidentialité ; 50 pour /aide (pour inclure les guides) ; 30 pour /secteurs ; 20 pour /fonctionnalites.
-4. Ajouter ici les anciens IDs à supprimer.
+Après un déploiement qui modifie src/data/kb/*.txt ou les textes de src/i18n/content/<langue> :
+1. Vérifier qu'une phrase nouvelle apparaît sur la page en ligne.
+2. Créer le nouveau document par l'outil create-document du MCP Autocalls, **un seul à la fois**, et attendre le statut « Active » avant le suivant.
+3. Liens à suivre (relative_links_limit) :
+   - 1 pour /kb/..., tarifs, FAQ, sécurité, CGU et confidentialité ;
+   - 50 pour /aide ;
+   - 30 pour /secteurs ;
+   - 20 pour /fonctionnalites.
+4. Noter ici l'ancien document, à supprimer.
 
-Réimport déjà prévu : au 8 octobre à 12:40 UTC, les guides (/aide) contiennent encore l'exemple d'accueil « assistante virtuelle » (sans « IA ») en français, italien et néerlandais (src/i18n/content/fr, it et nl/guides.ts) ; l'anglais et le polonais sont corrigés et leurs guides ont été réimportés en v11 (point 5). Une fois ces trois textes corrigés et déployés, recréer les documents « Guides » 25168 (6163), 25291 (6167) et 25212 (6169), ainsi que 25238, 25323 et 25265 dans 6209, puis ajouter les anciens IDs à la liste des documents à supprimer.
+URL par base :
+- 6163 : sans préfixe ;
+- 6166 : /en-gb/ ;
+- 6167 : /it/ ;
+- 6168 : /pl/ ;
+- 6169 : /nl/ ;
+- 6180 : /he/.
 
-URL par base : 6163 sans préfixe ; 6166 /en-gb/ ; 6167 /it/ ; 6168 /pl/ ; 6169 /nl/ ; 6180 /he/. Les pages /kb/ n'ont pas de préfixe : /kb/fr, /kb/en, /kb/it, /kb/pl, /kb/nl, /kb/he et leurs versions « -situations ».
+Les pages /kb/ n'ont pas de préfixe (/kb/fr, /kb/en, /kb/it, /kb/pl, /kb/nl, /kb/he et leurs versions « -situations »).
