@@ -30,7 +30,7 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
    - Le premier va dans app.autocalls.ai/administrator/settings?tab=smtp (Save, puis Test).
    - Le second va dans Google Cloud > Secret Manager > ZOHO_SMTP_PASS > Nouvelle version.
    - Prévenir Claude, puis révoquer l'ancien. Garder celui des relances (RELANCES_IMAP_PASS).
-7. **Anciennes bases de connaissances.** Les 41 agents utilisent désormais 7 bases neuves et à jour (6213 à 6220, voir docs/autocalls-kb-a-supprimer.md). Il vous reste, sans urgence, à supprimer les 7 anciennes bases entières : 6163, 6166, 6167, 6168, 6169, 6180 et 6209. Plus aucun agent ne les lit.
+7. **Bases de connaissances.** Fait : vous avez supprimé les 7 anciennes bases, et Claude a vérifié le résultat (7 bases neuves actives, 95 documents actifs, 41 agents bien rattachés).
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
 9. **Copie inutile du site.** Le projet Google permanentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
 

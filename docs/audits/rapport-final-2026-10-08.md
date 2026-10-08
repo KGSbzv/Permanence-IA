@@ -59,7 +59,7 @@ Il y a eu 16 contrôles en échec :
 - **Bases de connaissances reconstruites le 8 octobre au soir** (avec votre accord) :
   - 7 bases neuves (6213 à 6220), une version par page, lues sur le site corrigé ;
   - 95 documents actifs, aucun échec, et les 41 agents rattachés à la base de leur langue (contrôle indépendant : aucun reste sur une ancienne base, aucun blocage de conformité) ;
-  - les 7 anciennes bases ne sont plus lues et restent à supprimer par vous.
+  - les 7 anciennes bases ont été supprimées par vous, et la vérification qui a suivi ne montre aucun écart.
 - Prix, méthode commerciale et droit de refuser sont à jour sur les 32 agents.
 - L'outil « ne plus appeler » (ne_plus_appeler, 6243) a été ajouté dans la section Outils de 19 agents vocaux ; 6 autres le citaient déjà. L'outil voisin ne_plus_appeler_numero (6244) a été ajouté dans les règles du conseiller 21205 et des 14 widgets. Le scan de conformité d'Autocalls ne bloque aucun des 9 agents contrôlés (échantillon, pas les 33).
 
@@ -227,5 +227,5 @@ Le tableau complet, question par question, est dans docs/autocalls-questions-wha
 - Un assistant mis en pause par le contrôle de conformité : le client reçoit un e-mail en anglais à votre nom. Vous n'êtes pas prévenu. Pour le débloquer, envoyez l'ID de l'assistant à Autocalls.
 - L'inscription ne recueille ni téléphone ni accord WhatsApp. Pour les obtenir, il faudrait gérer l'inscription sur le site puis créer le compte par l'API (POST /white-label/register). C'est un chantier à décider plus tard.
 
-**Bases de connaissances (fait le 8 octobre au soir, avec votre accord).** Claude a créé 7 bases neuves à partir du site corrigé : 95 documents, tous actifs. Il y a rattaché les 41 agents. Les 7 anciennes bases (6163, 6166, 6167, 6168, 6169, 6180, 6209) ne sont plus lues ; à vous de les supprimer, sans urgence. Détail : docs/autocalls-kb-a-supprimer.md.
+**Bases de connaissances (fait le 8 octobre au soir, avec votre accord).** Claude a créé 7 bases neuves à partir du site corrigé : 95 documents, tous actifs. Il y a rattaché les 41 agents. Vous avez supprimé les 7 anciennes bases (6163, 6166, 6167, 6168, 6169, 6180, 6209) ; la vérification qui a suivi ne montre aucun écart. Détail : docs/autocalls-kb-a-supprimer.md.
 

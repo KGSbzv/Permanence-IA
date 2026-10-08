@@ -1,4 +1,4 @@
-# Bases de connaissances Autocalls (mis à jour le 8 octobre 2026, 19 h UTC)
+# Bases de connaissances Autocalls (mis à jour le 8 octobre 2026, soir)
 
 ## Ce qui a été fait le 8 octobre au soir (accord du propriétaire)
 
@@ -30,13 +30,15 @@ Puis il a rattaché les 41 agents à la base de leur langue. Les 95 documents so
 | 6219 | 21306, 21307, 21308, 21309, 21310, 21314 |
 | 6220 | 21205, 21297, 21358 |
 
-## À faire par le propriétaire (sans urgence)
+## Anciennes bases : supprimées
 
-Supprimer les 7 anciennes bases entières : Autocalls > Knowledge base. Plus aucun agent ne les lit.
-- 6163, 6167, 6168, 6169, 6180 et 6209 sont renommées « ANCIENNE, plus utilisée — … ».
-- 6166 (English) garde son nom : son renommage a été refusé par le contrôle de sécurité de Claude Code. Elle n'a plus aucun agent.
+Le propriétaire a supprimé les 7 anciennes bases le 8 octobre au soir : 6163, 6166, 6167, 6168, 6169, 6180 et 6209.
 
-Claude ne supprime jamais de données définitivement. Pour revenir en arrière, il suffit de rattacher un agent à son ancienne base.
+Claude a vérifié juste après, en lecture seule :
+- il ne reste que les 7 bases neuves, toutes « active » ;
+- leurs 95 documents sont tous actifs ;
+- les 41 agents sont rattachés à la base attendue, aucun sans base ;
+- aucun agent n'est bloqué par le contrôle de conformité.
 
 ## Réimporter après une mise à jour du site
 
