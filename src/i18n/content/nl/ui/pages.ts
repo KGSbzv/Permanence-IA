@@ -106,6 +106,17 @@ export const UI_PAGES = {
       ' gelezen en wil worden teruggebeld voor het instellen van mijn account.',
     ] as Rich,
     termsRequired: 'Ga akkoord met de voorwaarden om teruggebeld te worden.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'Ik ga akkoord met de ',
+      { a: 'algemene voorwaarden', href: '/cgu' },
+      ' en heb het ',
+      { a: 'privacybeleid', href: '/confidentialite' },
+      ' gelezen.',
+    ] as Rich,
+    termsOnlyRequired: 'Ga akkoord met de algemene voorwaarden om verder te gaan.',
+    consentCall: 'Ik wil op het opgegeven nummer worden teruggebeld voor het instellen van mijn account, door een AI-spraakassistent of door een adviseur. Ik kan deze toestemming altijd intrekken.',
+    consentCallRequired: 'Vink het vakje voor terugbellen aan, zodat we u kunnen bellen.',
     sendError: 'De aanmelding kon niet worden verzonden. Probeer het opnieuw.',
     sending: 'Verzenden…',
     submit: 'Bel mij terug',

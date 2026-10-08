@@ -121,6 +121,17 @@ export const UI_PAGES = {
       '.',
     ] as Rich,
     termsRequired: 'Acceptez les conditions pour être rappelé.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'J’accepte les ',
+      { a: 'conditions générales', href: '/cgu' },
+      '. Mes données sont traitées selon la ',
+      { a: 'politique de confidentialité', href: '/confidentialite' },
+      '.',
+    ] as Rich,
+    termsOnlyRequired: 'Acceptez les conditions générales pour continuer.',
+    consentCall: 'J’accepte d’être rappelé(e) au numéro indiqué pour la mise en place de mon compte, par une assistante vocale IA ou par un conseiller. Je peux retirer cet accord à tout moment.',
+    consentCallRequired: 'Cochez l’accord de rappel pour que nous puissions vous appeler.',
     sendError: 'Votre demande n’a pas pu être envoyée.',
     sending: 'Envoi…',
     submit: 'Être rappelé',

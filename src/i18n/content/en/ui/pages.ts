@@ -106,6 +106,17 @@ export const UI_PAGES = {
       ', and agree to be called back to set up my account.',
     ] as Rich,
     termsRequired: 'Accept the terms to be called back.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'I accept the ',
+      { a: 'terms and conditions', href: '/cgu' },
+      ' and have read the ',
+      { a: 'privacy policy', href: '/confidentialite' },
+      '.',
+    ] as Rich,
+    termsOnlyRequired: 'Accept the terms and conditions to continue.',
+    consentCall: 'I agree to be called back on the number above to set up my account, by an AI voice assistant or by an adviser. I can withdraw this consent at any time.',
+    consentCallRequired: 'Tick the call-back box so we can call you.',
     sendError: 'Your sign-up could not be sent.',
     sending: 'Sending…',
     submit: 'Get a call back',

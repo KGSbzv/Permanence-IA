@@ -115,6 +115,17 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       ' oraz wyrażam zgodę na kontakt telefoniczny w celu konfiguracji mojego konta.',
     ] as Rich,
     termsRequired: 'Zaakceptuj warunki, abyśmy mogli oddzwonić.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'Akceptuję ',
+      { a: 'regulamin', href: '/cgu' },
+      ' i ',
+      { a: 'politykę prywatności', href: '/confidentialite' },
+      '.',
+    ] as Rich,
+    termsOnlyRequired: 'Zaakceptuj regulamin, aby kontynuować.',
+    consentCall: 'Wyrażam zgodę na kontakt telefoniczny pod podanym numerem w celu konfiguracji mojego konta, przez asystentkę głosową AI lub doradcę. Mogę wycofać tę zgodę w każdej chwili.',
+    consentCallRequired: 'Zaznacz zgodę na kontakt telefoniczny, abyśmy mogli oddzwonić.',
     sendError: 'Nie udało się wysłać zgłoszenia.',
     sending: 'Wysyłanie…',
     submit: 'Zamów rozmowę',

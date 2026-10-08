@@ -106,6 +106,17 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       ' e acconsento a essere richiamato per l’attivazione del mio account.',
     ] as Rich,
     termsRequired: 'Accetti le condizioni per essere richiamato.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'Accetto i ',
+      { a: 'termini e le condizioni', href: '/cgu' },
+      ' e dichiaro di aver letto l’',
+      { a: 'informativa sulla privacy', href: '/confidentialite' },
+      '.',
+    ] as Rich,
+    termsOnlyRequired: 'Accetti i termini e le condizioni per continuare.',
+    consentCall: 'Acconsento a essere richiamato al numero indicato per l’attivazione del mio account, da un’assistente vocale IA o da un consulente. Posso revocare questo consenso in qualsiasi momento.',
+    consentCallRequired: 'Spunti il consenso alla richiamata per essere contattato.',
     sendError: 'Non è stato possibile inviare la richiesta. Riprovi tra qualche istante.',
     sending: 'Invio…',
     submit: 'Richieda una richiamata',

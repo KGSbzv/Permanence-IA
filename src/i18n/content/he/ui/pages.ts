@@ -106,6 +106,17 @@ export const UI_PAGES = {
       ', ומסכים/ה לקבל שיחה חוזרת, גם מסוכנת AI, לצורך הגדרת החשבון.',
     ] as Rich,
     termsRequired: 'יש לאשר את התנאים כדי לקבל שיחה חוזרת.',
+    // Deux cases distinctes (RGPD art. 7(2)) : CGU et confidentialité d’un côté, accord de rappel de l’autre.
+    termsOnly: [
+      'קראתי ואני מסכים/ה ל',
+      { a: 'תנאי השימוש והמכירה', href: '/cgu' },
+      ' ול',
+      { a: 'מדיניות הפרטיות', href: '/confidentialite' },
+      '.',
+    ] as Rich,
+    termsOnlyRequired: 'יש לאשר את תנאי השימוש כדי להמשיך.',
+    consentCall: 'אני מסכים/ה לקבל שיחה חוזרת למספר שמסרתי לצורך הגדרת החשבון, מסוכנת AI קולית או מנציג/ה. אפשר לבטל את ההסכמה בכל עת.',
+    consentCallRequired: 'יש לסמן את ההסכמה לשיחה חוזרת כדי שנוכל להתקשר.',
     sendError: 'לא הצלחנו לשלוח את הבקשה. נסו שוב.',
     sending: 'שולח…',
     submit: 'בקשו שיחה חוזרת',
