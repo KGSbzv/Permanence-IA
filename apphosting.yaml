@@ -42,7 +42,7 @@ env:
   - variable: RELANCES_ENABLED
     value: "1"
   - variable: RELANCES_DRY_RUN
-    value: "1"
+    value: "0"
   - variable: RELANCES_LOCALES
     value: fr,en-gb,en-au
   - variable: RELANCES_OIDC_AUDIENCE
