@@ -127,7 +127,7 @@ export const UI_COMPONENTS = {
     emailHint: '(pour vous écrire si besoin)',
     need: 'Votre besoin',
     needPlaceholder: 'Ex. : je rate des appels le soir, je veux automatiser les rendez-vous…',
-    consent: (brand: string) => `J’accepte d’être rappelé au numéro indiqué, y compris par un agent vocal IA de ${brand}. Mes données servent uniquement à traiter ma demande.`,
+    consent: (brand: string) => `J’accepte d’être rappelé au numéro indiqué, y compris par un agent vocal IA de ${brand}. Mes données sont traitées selon la politique de confidentialité et ne sont jamais vendues.`,
     sending: 'Envoi…',
     company: 'Entreprise',
     optional: '(facultatif)',
@@ -509,7 +509,7 @@ export const UI_COMPONENTS = {
   portalPreview: {
     // Même ordre que les couleurs d’étiquette du composant.
     calls: [
-      { who: 'Nouveau patient', what: 'Rendez-vous mardi 9 h 30', tag: 'Réservé' },
+      { who: 'Nouveau client', what: 'Rendez-vous mardi 9 h 30', tag: 'Réservé' },
       { who: 'Fuite d’eau', what: 'Rappel prioritaire demandé', tag: 'Urgent' },
       { who: 'Acheteur T3', what: 'Visite samedi 11 h', tag: 'Qualifié' },
       { who: 'Question horaires', what: 'Réponse donnée', tag: 'Résolu' },
@@ -562,8 +562,8 @@ export const UI_COMPONENTS = {
     prompt: {
       title: 'Objectif de l’appel',
       hint: 'Décrivez ce que l’agent doit accomplir.',
-      text: 'Accueillir le patient, identifier s’il est nouveau, proposer deux créneaux et confirmer par SMS.',
-      tags: ['Ton : chaleureux', 'Vouvoiement', 'Pas de conseil médical'],
+      text: 'Accueillir le client, identifier s’il est nouveau, proposer deux créneaux et confirmer par SMS.',
+      tags: ['Ton : chaleureux', 'Vouvoiement', 'Pas de prix sans devis'],
     },
     flow: {
       title: 'Scénario : demande web',

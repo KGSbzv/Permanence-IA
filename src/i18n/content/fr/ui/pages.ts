@@ -1,6 +1,7 @@
 // Textes d'interface des pages non commerciales (démo, contact, FAQ, essai, aide, à propos, sécurité,
 // 404, pages légales, blog). Les variables (marque, société, email, durée d’essai…) sont passées
 // par fonctions : la marque vient du marché, la société et l’email de SITE.
+import { SITE } from '@/data/site';
 
 /** Morceau de texte enrichi : texte simple, gras (<b> ou <strong>) ou lien (interne si href commence par « / »). */
 export type Span = string | { b: string } | { strong: string } | { a: string; href: string };
@@ -714,7 +715,7 @@ export const UI_PAGES = {
       description: (brand: string) => `Mentions légales, informations sur l’éditeur, l’hébergement et les droits d’auteur de la plateforme ${brand}.`,
     },
     h1: 'Mentions légales',
-    updated: 'Dernière mise à jour : 29 septembre 2026',
+    updated: 'Dernière mise à jour : 8 octobre 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Éditeur du site',
@@ -738,7 +739,7 @@ export const UI_PAGES = {
           { p: 'Le site et les services sont hébergés par :' },
           {
             ul: [
-              [{ strong: 'Site vitrine :' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, États-Unis. Région d’hébergement : us-east4 (Virginie du Nord, États-Unis).'],
+              [{ strong: 'Site vitrine :' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, États-Unis, tél. +1 650-253-0000. Région d’hébergement : us-east4 (Virginie du Nord, États-Unis).'],
               [{ strong: 'Bases de données et stockage du site :' }, ' Supabase Inc., infrastructures situées aux États-Unis (région AWS us-east-1, Virginie).'],
               [{ strong: 'Espace client et agents vocaux :' }, ` l’espace client (${appHost}), les agents et leurs données sont hébergés par notre prestataire de plateforme technique, établi dans l’Union européenne (Roumanie), sur des serveurs situés dans l’Espace économique européen et/ou aux États-Unis.`],
             ],
@@ -769,6 +770,7 @@ export const UI_PAGES = {
     },
     h1: 'Politique cookies',
     paragraphs: (siteHost: string, appHost: string) => [
+      `Responsable : ${SITE.company}, ${ADDRESS}, États-Unis, éditeur du site ${siteHost}.`,
       `Cookies strictement nécessaires : le site ${siteHost} dépose les cookies indispensables à son fonctionnement (sécurité, équilibrage de charge). Ils ne demandent pas votre consentement.`,
       `Cookie de consentement : le cookie pia_consent mémorise votre choix (accepter ou refuser) pendant 6 mois, sur le domaine permanenceia.com et sur l’espace client (${appHost}).`,
       'Mesure d’audience, avec votre accord seulement : Google Analytics 4 (Google Ireland Ltd / Google LLC) mesure l’audience du site et l’efficacité de nos campagnes, sous forme de statistiques agrégées. Cookies déposés : _ga et _ga_<ID>, conservés 13 mois au plus. Un transfert de données vers les États-Unis est possible ; il est encadré par le Cadre de protection des données UE-États-Unis (Data Privacy Framework).',

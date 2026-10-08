@@ -129,7 +129,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     emailHint: '(facoltativa)',
     need: 'La Sua esigenza',
     needPlaceholder: 'Es.: perdo chiamate la sera, voglio automatizzare gli appuntamenti…',
-    consent: (brand: string) => `Accetto di essere richiamato al numero indicato, anche da un agente vocale AI di ${brand}. I miei dati sono utilizzati esclusivamente per gestire la mia richiesta.`,
+    consent: (brand: string) => `Accetto di essere richiamato al numero indicato, anche da un agente vocale AI di ${brand}. I miei dati sono trattati secondo l’informativa sulla privacy e non sono mai venduti.`,
     sending: 'Invio…',
     company: 'Azienda',
     optional: '(facoltativo)',
@@ -511,7 +511,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   portalPreview: {
     // Stesso ordine dei colori delle etichette del componente.
     calls: [
-      { who: 'Nuovo paziente', what: 'Appuntamento martedì 9:30', tag: 'Prenotato' },
+      { who: 'Nuovo cliente', what: 'Appuntamento martedì 9:30', tag: 'Prenotato' },
       { who: 'Perdita d’acqua', what: 'Richiamata prioritaria richiesta', tag: 'Urgente' },
       { who: 'Acquirente trilocale', what: 'Visita sabato 11:00', tag: 'Qualificato' },
       { who: 'Domanda sugli orari', what: 'Risposta fornita', tag: 'Risolto' },
@@ -564,8 +564,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     prompt: {
       title: 'Obiettivo della chiamata',
       hint: 'Descriva cosa deve fare l’agente.',
-      text: 'Accogliere il paziente, capire se è nuovo, proporre due orari e confermare via SMS.',
-      tags: ['Tono: cordiale', 'Dare del Lei', 'Nessun consiglio medico'],
+      text: 'Accogliere il cliente, capire se è nuovo, proporre due orari e confermare via SMS.',
+      tags: ['Tono: cordiale', 'Dare del Lei', 'Nessun prezzo senza preventivo'],
     },
     flow: {
       title: 'Scenario: lead dal web',

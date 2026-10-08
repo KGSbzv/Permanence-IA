@@ -127,7 +127,7 @@ export const UI_COMPONENTS = {
     emailHint: '(om u zo nodig te mailen)',
     need: 'Uw vraag',
     needPlaceholder: 'Bijv.: ik mis ’s avonds gesprekken, ik wil afspraken automatiseren…',
-    consent: (brand: string) => `Ik ga ermee akkoord dat ik op het opgegeven nummer word teruggebeld, ook door een AI-spraakagent van ${brand}. Mijn gegevens worden alleen gebruikt om mijn aanvraag af te handelen.`,
+    consent: (brand: string) => `Ik ga ermee akkoord dat ik op het opgegeven nummer word teruggebeld, ook door een AI-spraakagent van ${brand}. Mijn gegevens worden verwerkt volgens het privacybeleid en worden nooit verkocht.`,
     sending: 'Verzenden…',
     company: 'Bedrijf',
     optional: '(optioneel)',
@@ -509,7 +509,7 @@ export const UI_COMPONENTS = {
   portalPreview: {
     // Zelfde volgorde als de labelkleuren van de component.
     calls: [
-      { who: 'Nieuwe patiënt', what: 'Afspraak dinsdag 9.30 uur', tag: 'Geboekt' },
+      { who: 'Nieuwe klant', what: 'Afspraak dinsdag 9.30 uur', tag: 'Geboekt' },
       { who: 'Waterlekkage', what: 'Met voorrang terugbellen gevraagd', tag: 'Spoed' },
       { who: 'Koper driekamerappartement', what: 'Bezichtiging zaterdag 11.00 uur', tag: 'Gekwalificeerd' },
       { who: 'Vraag over openingstijden', what: 'Antwoord gegeven', tag: 'Opgelost' },
@@ -562,8 +562,8 @@ export const UI_COMPONENTS = {
     prompt: {
       title: 'Doel van het gesprek',
       hint: 'Beschrijf wat de agent moet bereiken.',
-      text: 'De patiënt ontvangen, nagaan of het een nieuwe patiënt is, twee tijdsloten voorstellen en per sms bevestigen.',
-      tags: ['Toon: hartelijk', 'U-vorm', 'Geen medisch advies'],
+      text: 'De klant ontvangen, nagaan of het een nieuwe klant is, twee tijdsloten voorstellen en per sms bevestigen.',
+      tags: ['Toon: hartelijk', 'U-vorm', 'Geen prijzen zonder offerte'],
     },
     flow: {
       title: 'Scenario: weblead',

@@ -2,6 +2,7 @@
 // beveiliging, 404, juridische pagina’s, blog). De variabelen (merk, bedrijf, e-mail, proefduur…)
 // worden via functies doorgegeven: het merk komt uit de markt, het bedrijf en de e-mail uit SITE.
 import type { Block, ChatLine, LegalSection, LegalVars, Rich, Span } from '../../fr/ui/pages';
+import { SITE } from '@/data/site';
 
 export type { Block, ChatLine, LegalSection, LegalVars, Rich, Span };
 
@@ -698,8 +699,8 @@ export const UI_PAGES = {
       description: (brand: string) => `Juridische informatie, gegevens over de beheerder, de hosting en het auteursrecht van het platform ${brand}.`,
     },
     h1: 'Juridische informatie',
-    updated: 'Laatst bijgewerkt: 29 september 2026',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    updated: 'Laatst bijgewerkt: 8 oktober 2026',
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Beheerder van de website',
         body: [
@@ -718,12 +719,12 @@ export const UI_PAGES = {
       {
         title: '2. Hosting van het platform',
         body: [
-          { p: 'De commerciële website en de applicatie worden gehost door:' },
+          { p: 'De website en de diensten worden gehost door:' },
           {
             ul: [
-              [{ strong: 'Front-endplatform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, Verenigde Staten. Hostingregio: us-east4 (Noord-Virginia, Verenigde Staten).'],
+              [{ strong: 'Front-endplatform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, Verenigde Staten, tel. +1 650-253-0000. Hostingregio: us-east4 (Noord-Virginia, Verenigde Staten).'],
               [{ strong: 'Databases en opslag:' }, ' Supabase Inc., infrastructuur in de Verenigde Staten (AWS-regio us-east-1, Virginia).'],
-              [{ strong: 'Telefoonnetwerk en spraaksynthese:' }, ' cloudinfrastructuur voor spraaktelefonie.'],
+              [{ strong: 'Klantomgeving en spraakagenten:' }, ` de klantomgeving (${appHost}), de agenten en hun gegevens worden gehost door onze leverancier van het technische platform, gevestigd in de Europese Unie (Roemenië), op servers in de Europese Economische Ruimte en/of de Verenigde Staten.`],
             ],
           },
         ],
@@ -752,6 +753,7 @@ export const UI_PAGES = {
     },
     h1: 'Cookiebeleid',
     paragraphs: (siteHost: string, appHost: string) => [
+      `Verwerkingsverantwoordelijke: ${SITE.company}, ${ADDRESS}, Verenigde Staten, beheerder van de website ${siteHost}.`,
       `Strikt noodzakelijke cookies: de website ${siteHost} plaatst de cookies die nodig zijn voor de werking ervan (beveiliging, load balancing). Daarvoor is geen toestemming nodig.`,
       `Toestemmingscookie: de cookie pia_consent onthoudt uw keuze (accepteren of weigeren) gedurende 6 maanden, op het domein permanenceia.com en in de klantomgeving (${appHost}).`,
       'Bezoekersstatistieken, alleen met uw toestemming: Google Analytics 4 (Google Ireland Ltd / Google LLC) meet het bezoek aan de website en de effectiviteit van onze campagnes, in de vorm van geaggregeerde statistieken. Geplaatste cookies: _ga en _ga_<ID>, maximaal 13 maanden bewaard. Gegevens kunnen naar de Verenigde Staten worden doorgegeven; die doorgifte valt onder het EU-VS-kader voor gegevensbescherming (Data Privacy Framework).',

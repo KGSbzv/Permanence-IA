@@ -2,6 +2,7 @@
 // 404, strony prawne, blog). Zmienne (marka, firma, e-mail, długość okresu próbnego…) są przekazywane
 // przez funkcje: marka pochodzi z rynku, firma i e-mail z SITE.
 import type { ChatLine, LegalSection, LegalVars, Rich, UI_PAGES as FR_UI_PAGES } from '../../fr/ui/pages';
+import { SITE } from '@/data/site';
 
 /** Odmiana liczebnika: 1 → one, 2–4 (bez 12–14) → few, pozostałe → many. */
 const plural = (n: number, one: string, few: string, many: string) => {
@@ -707,8 +708,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string) => `Nota prawna: informacje o właścicielu serwisu, hostingu i prawach autorskich platformy ${brand}.`,
     },
     h1: 'Nota prawna',
-    updated: 'Ostatnia aktualizacja: 29 września 2026 r.',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    updated: 'Ostatnia aktualizacja: 8 października 2026 r.',
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Właściciel serwisu',
         body: [
@@ -727,11 +728,12 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: '2. Hosting platformy',
         body: [
-          { p: 'Strona sprzedażowa i aplikacja są hostowane przez:' },
+          { p: 'Strona i usługi są hostowane przez:' },
           {
             ul: [
-              [{ strong: 'Platforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Region hostingu: us-east4 (Północna Wirginia, Stany Zjednoczone).'],
+              [{ strong: 'Platforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, tel. +1 650-253-0000. Region hostingu: us-east4 (Północna Wirginia, Stany Zjednoczone).'],
               [{ strong: 'Bazy danych i przechowywanie:' }, ' Supabase Inc., infrastruktura zlokalizowana w Stanach Zjednoczonych (region AWS us-east-1, Wirginia).'],
+              [{ strong: 'Panel klienta i agenci głosowi:' }, ` panel klienta (${appHost}), agenci i ich dane są hostowani przez naszego dostawcę platformy technicznej z siedzibą w Unii Europejskiej (Rumunia), na serwerach znajdujących się w Europejskim Obszarze Gospodarczym i/lub w Stanach Zjednoczonych.`],
             ],
           },
         ],
@@ -760,6 +762,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Polityka plików cookie',
     paragraphs: (siteHost: string, appHost: string) => [
+      `Administrator danych: ${SITE.company}, ${ADDRESS}, Stany Zjednoczone, właściciel serwisu ${siteHost}.`,
       `Pliki cookie niezbędne: strona ${siteHost} zapisuje pliki cookie konieczne do jej działania (bezpieczeństwo, równoważenie obciążenia). Nie wymagają one Twojej zgody.`,
       `Plik cookie zgody: plik pia_consent zapamiętuje Twój wybór (akceptacja lub odmowa) przez 6 miesięcy, w domenie permanenceia.com i w panelu klienta (${appHost}).`,
       'Pomiar ruchu, wyłącznie za Twoją zgodą: Google Analytics 4 (Google Ireland Ltd / Google LLC) mierzy ruch na stronie i skuteczność naszych kampanii w postaci zbiorczych statystyk. Zapisywane pliki cookie: _ga i _ga_<ID>, przechowywane maksymalnie 13 miesięcy. Dane mogą być przekazywane do Stanów Zjednoczonych na podstawie Ram ochrony danych UE–USA (Data Privacy Framework).',

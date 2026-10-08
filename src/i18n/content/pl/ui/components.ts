@@ -138,7 +138,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     emailHint: '(opcjonalnie)',
     need: 'Czego potrzebujesz',
     needPlaceholder: 'Np. tracę połączenia wieczorami, chcę zautomatyzować umawianie wizyt…',
-    consent: (brand: string) => `Wyrażam zgodę na kontakt telefoniczny pod podanym numerem, również przez agenta głosowego AI ${brand}. Moje dane posłużą wyłącznie do obsługi mojego zgłoszenia.`,
+    consent: (brand: string) => `Wyrażam zgodę na kontakt telefoniczny pod podanym numerem, również przez agenta głosowego AI ${brand}. Moje dane są przetwarzane zgodnie z polityką prywatności i nigdy nie są sprzedawane.`,
     sending: 'Wysyłanie…',
     company: 'Firma',
     optional: '(opcjonalnie)',
@@ -325,7 +325,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     human: 'Recepcja na pełny etat',
     ai: 'Agent AI',
     rows: [
-      { label: 'Koszt miesięczny', human: 'Co najmniej płaca minimalna (4806 zł brutto miesięcznie w 2026 r.), plus koszty pracodawcy (ZUS)', ai: 'Od {from} netto miesięcznie (350 min) lub {payg} za minutę bez abonamentu' },
+      { label: 'Koszt miesięczny', human: 'Co najmniej płaca minimalna, plus koszty pracodawcy (ZUS)', ai: 'Od {from} netto miesięcznie (350 min) lub {payg} za minutę bez abonamentu' },
       { label: 'Godziny pracy', human: '40 godz. tygodniowo', ai: '24/7 (168 godz. tygodniowo)' },
       { label: 'Połączenia jednocześnie', human: 'Jedno', ai: 'Kilka równolegle' },
       { label: 'Języki', human: 'Jeden, czasem dwa', ai: 'Ponad 80, z natywnymi głosami' },
@@ -520,7 +520,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   portalPreview: {
     // Ta sama kolejność co kolory etykiet komponentu.
     calls: [
-      { who: 'Nowy pacjent', what: 'Wizyta we wtorek 9:30', tag: 'Zarezerwowano' },
+      { who: 'Nowy klient', what: 'Wizyta we wtorek 9:30', tag: 'Zarezerwowano' },
       { who: 'Wyciek wody', what: 'Prośba o pilne oddzwonienie', tag: 'Pilne' },
       { who: 'Kupujący, 3 pokoje', what: 'Prezentacja w sobotę 11:00', tag: 'Zakwalifikowany' },
       { who: 'Pytanie o godziny', what: 'Udzielono odpowiedzi', tag: 'Rozwiązane' },
@@ -573,8 +573,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     prompt: {
       title: 'Cel rozmowy',
       hint: 'Opisz, co agent ma osiągnąć.',
-      text: 'Przywitać pacjenta, ustalić, czy jest nowy, zaproponować dwa terminy i potwierdzić SMS-em.',
-      tags: ['Ton: ciepły', 'Forma „Pan/Pani”', 'Bez porad medycznych'],
+      text: 'Przywitać klienta, ustalić, czy jest nowy, zaproponować dwa terminy i potwierdzić SMS-em.',
+      tags: ['Ton: ciepły', 'Forma „Pan/Pani”', 'Ceny tylko po wycenie'],
     },
     flow: {
       title: 'Scenariusz: lead ze strony',

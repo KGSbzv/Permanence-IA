@@ -131,7 +131,7 @@ export const UI_COMPONENTS = {
     emailHint: '(optional)',
     need: 'What you need',
     needPlaceholder: 'E.g. I miss calls in the evening, I want to automate bookings…',
-    consent: (brand: string) => `I agree to be called back on the number provided, including by a ${brand} AI voice agent. My data is used only to handle my request.`,
+    consent: (brand: string) => `I agree to be called back on the number provided, including by a ${brand} AI voice agent. My data is processed in line with the privacy policy and is never sold.`,
     sending: 'Sending…',
     company: 'Company',
     optional: '(optional)',
@@ -513,7 +513,7 @@ export const UI_COMPONENTS = {
   portalPreview: {
     // Same order as the component's tag colours.
     calls: [
-      { who: 'New patient', what: 'Appointment Tuesday 9:30 am', tag: 'Booked' },
+      { who: 'New customer', what: 'Appointment Tuesday 9:30 am', tag: 'Booked' },
       { who: 'Water leak', what: 'Priority callback requested', tag: 'Urgent' },
       { who: 'Two-bed flat buyer', what: 'Viewing Saturday 11 am', tag: 'Qualified' },
       { who: 'Opening hours question', what: 'Answer given', tag: 'Resolved' },
@@ -566,8 +566,8 @@ export const UI_COMPONENTS = {
     prompt: {
       title: 'Purpose of the call',
       hint: 'Describe what the agent needs to achieve.',
-      text: 'Greet the patient, find out whether they are new, offer two slots and confirm by SMS.',
-      tags: ['Tone: warm', 'Polite, formal address', 'No medical advice'],
+      text: 'Greet the customer, find out whether they are new, offer two slots and confirm by SMS.',
+      tags: ['Tone: warm', 'Polite, formal address', 'No prices without a quote'],
     },
     flow: {
       title: 'Scenario: web lead',

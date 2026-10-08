@@ -2,6 +2,7 @@
 // 404, legal pages, blog). Variables (brand, company, email, trial length…) are passed
 // through functions: the brand comes from the market, the company and email from SITE.
 import type { ChatLine, LegalSection, LegalVars, Rich } from '../../fr/ui/pages';
+import { SITE } from '@/data/site';
 
 export type { Block, ChatLine, LegalSection, LegalVars, Rich, Span } from '../../fr/ui/pages';
 
@@ -233,7 +234,7 @@ export const UI_PAGES = {
       description: (brand: string) => `The terms and conditions of use and sale that apply to ${brand} AI receptionist and phone answering plans and services.`,
     },
     h1: 'Terms and Conditions of Use and Sale',
-    updated: 'Applicable to professionals and businesses • Last updated: 7 October 2026',
+    updated: 'Applicable to professionals and businesses • Last updated: 8 October 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -355,7 +356,7 @@ export const UI_PAGES = {
         {
           title: 'Article 8 — Customer data and data protection',
           body: [
-            { p: ['For Recipients’ personal data processed through the Service, the Customer is the controller and we act as its processor (Article 28 GDPR and equivalent laws). This Article and the ', { a: 'privacy policy', href: '/confidentialite' }, ' form the data processing agreement; a signed agreement may be concluded under a Custom plan. We:'] },
+            { p: ['For Recipients’ personal data processed through the Service, the Customer is the controller and we act as its processor (Article 28 GDPR and equivalent laws). This Article and the ', { a: 'privacy policy', href: '/confidentialite' }, ' form the data processing agreement; a signed version is available on request. We:'] },
             {
               ul: [
                 'process the data only on the Customer’s documented instructions (these Terms and its settings), unless the law requires otherwise, and tell it if an instruction appears unlawful;',
@@ -698,8 +699,8 @@ export const UI_PAGES = {
       description: (brand: string) => `Legal notice for the ${brand} AI receptionist platform: publisher, hosting and copyright information.`,
     },
     h1: 'Legal Notice',
-    updated: 'Last updated: 29 September 2026',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    updated: 'Last updated: 8 October 2026',
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Website publisher',
         body: [
@@ -719,11 +720,12 @@ export const UI_PAGES = {
       {
         title: '2. Platform hosting',
         body: [
-          { p: 'The marketing website and the application are hosted by:' },
+          { p: 'The website and the services are hosted by:' },
           {
             ul: [
-              [{ strong: 'Front-end platform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Hosting region: us-east4 (Northern Virginia, United States).'],
+              [{ strong: 'Front-end platform:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, tel. +1 650-253-0000. Hosting region: us-east4 (Northern Virginia, United States).'],
               [{ strong: 'Databases and storage:' }, ' Supabase Inc., infrastructure located in the United States (AWS region us-east-1, Virginia).'],
+              [{ strong: 'Customer area and voice agents:' }, ` the customer area (${appHost}), the agents and their data are hosted by our technical platform provider, established in the European Union (Romania), on servers located in the European Economic Area and/or the United States.`],
             ],
           },
         ],
@@ -752,6 +754,7 @@ export const UI_PAGES = {
     },
     h1: 'Cookie policy',
     paragraphs: (siteHost: string, appHost: string) => [
+      `Controller: ${SITE.company}, ${ADDRESS}, United States, publisher of the ${siteHost} website.`,
       `Strictly necessary cookies: the ${siteHost} website and the customer area (${appHost}) use cookies that are essential for them to work (security, load balancing, logging in). They do not require your consent.`,
       `Your choice: the pia_consent cookie remembers whether you accepted or declined measurement cookies. It lasts 6 months and applies to ${siteHost} and the customer area.`,
       'Only with your consent: Google Analytics 4 (Google Ireland Ltd / Google LLC) sets the _ga and _ga_<ID> cookies, for no more than 13 months, to measure visits to the site and how well our campaigns perform (aggregated statistics). Data may be transferred to the United States under the EU–US Data Privacy Framework.',

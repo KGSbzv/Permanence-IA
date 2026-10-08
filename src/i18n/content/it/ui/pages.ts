@@ -2,6 +2,7 @@
 // 404, pagine legali, blog). Le variabili (marchio, società, email, durata della prova…) sono passate
 // tramite funzioni: il marchio arriva dal mercato, la società e l’email da SITE.
 import type { ChatLine, LegalSection, LegalVars, Rich, UI_PAGES as FR_UI_PAGES } from '../../fr/ui/pages';
+import { SITE } from '@/data/site';
 
 export type { Block, ChatLine, LegalSection, LegalVars, Rich, Span } from '../../fr/ui/pages';
 
@@ -698,8 +699,8 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: (brand: string) => `Note legali, informazioni sull’editore, sull’hosting e sui diritti d’autore della piattaforma ${brand}.`,
     },
     h1: 'Note legali',
-    updated: 'Ultimo aggiornamento: 29 settembre 2026',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    updated: 'Ultimo aggiornamento: 8 ottobre 2026',
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. Editore del sito',
         body: [
@@ -719,11 +720,12 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       {
         title: '2. Hosting della piattaforma',
         body: [
-          { p: 'Il sito commerciale e l’applicazione sono ospitati da:' },
+          { p: 'Il sito e i servizi sono ospitati da:' },
           {
             ul: [
-              [{ strong: 'Piattaforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Regione di hosting: us-east4 (Virginia del Nord, Stati Uniti).'],
+              [{ strong: 'Piattaforma front-end:' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA, tel. +1 650-253-0000. Regione di hosting: us-east4 (Virginia del Nord, Stati Uniti).'],
               [{ strong: 'Database e archiviazione:' }, ' Supabase Inc., infrastrutture situate negli Stati Uniti (regione AWS us-east-1, Virginia del Nord).'],
+              [{ strong: 'Area clienti e agenti vocali:' }, ` l’area clienti (${appHost}), gli agenti e i relativi dati sono ospitati dal nostro fornitore della piattaforma tecnica, con sede nell’Unione europea (Romania), su server situati nello Spazio economico europeo e/o negli Stati Uniti.`],
             ],
           },
         ],
@@ -752,6 +754,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     },
     h1: 'Cookie policy',
     paragraphs: (siteHost: string, appHost: string) => [
+      `Titolare del trattamento: ${SITE.company}, ${ADDRESS}, Stati Uniti, gestore del sito ${siteHost}.`,
       `Cookie strettamente necessari: il sito ${siteHost} utilizza i cookie indispensabili al suo funzionamento (sicurezza, bilanciamento del carico). Non richiedono il Suo consenso.`,
       `Cookie «pia_consent»: memorizza la Sua scelta (accettare o rifiutare) per 6 mesi, sul dominio permanenceia.com e nell’area clienti (${appHost}), dove sono utilizzati anche i cookie di sessione necessari per l’accesso.`,
       'Solo con il Suo consenso: Google Analytics 4 (Google Ireland Ltd / Google LLC), cookie «_ga» e «_ga_<ID>», durata massima di 13 mesi, per misurare l’audience del sito e l’efficacia delle nostre campagne (statistiche aggregate). I dati possono essere trasferiti negli Stati Uniti nell’ambito del Data Privacy Framework UE-USA.',

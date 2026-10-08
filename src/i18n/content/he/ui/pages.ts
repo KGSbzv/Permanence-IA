@@ -2,6 +2,7 @@
 // about, security, 404, legal pages, blog. Variables (brand, company, email, trial length…) are
 // passed through functions: the brand comes from the market, the company and email from SITE.
 import type { ChatLine, LegalSection, LegalVars, Rich } from '../../fr/ui/pages';
+import { SITE } from '@/data/site';
 
 export type { Block, ChatLine, LegalSection, LegalVars, Rich, Span } from '../../fr/ui/pages';
 
@@ -233,7 +234,7 @@ export const UI_PAGES = {
       description: (brand: string) => `תנאי השימוש והמכירה החלים על המסלולים והשירותים של ${brand} למענה טלפוני חכם.`,
     },
     h1: 'תנאי שימוש ומכירה',
-    updated: 'חלים על עסקים ובעלי מקצוע • עדכון אחרון: 7 באוקטובר 2026',
+    updated: 'חלים על עסקים ובעלי מקצוע • עדכון אחרון: 8 באוקטובר 2026',
     sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -355,7 +356,7 @@ export const UI_PAGES = {
         {
           title: 'סעיף 8 – נתוני הלקוח והגנת מידע',
           body: [
-            { p: ['לגבי מידע אישי של נמענים המעובד באמצעות השירות, הלקוח הוא בעל השליטה במאגר (controller) ואנו פועלים כמחזיק (processor) מטעמו, כמשמעותם בחוק הגנת הפרטיות, התשמ״א-1981 (לרבות תיקון 13), בתקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017, בסעיף 28 ל-GDPR ובדינים מקבילים. סעיף זה ו', { a: 'מדיניות הפרטיות', href: '/confidentialite' }, ' מהווים את הסכם עיבוד הנתונים; במסגרת מסלול בהתאמה אישית ניתן לחתום על הסכם נפרד. אנו:'] },
+            { p: ['לגבי מידע אישי של נמענים המעובד באמצעות השירות, הלקוח הוא בעל השליטה במאגר (controller) ואנו פועלים כמחזיק (processor) מטעמו, כמשמעותם בחוק הגנת הפרטיות, התשמ״א-1981 (לרבות תיקון 13), בתקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017, בסעיף 28 ל-GDPR ובדינים מקבילים. סעיף זה ו', { a: 'מדיניות הפרטיות', href: '/confidentialite' }, ' מהווים את הסכם עיבוד הנתונים; עותק חתום זמין לפי בקשה. אנו:'] },
             {
               ul: [
                 'מעבדים את המידע אך ורק לפי הנחיות מתועדות של הלקוח (תנאים אלה וההגדרות שלו), אלא אם הדין מחייב אחרת, ומודיעים לו אם הנחיה נראית בלתי חוקית;',
@@ -700,8 +701,8 @@ export const UI_PAGES = {
       description: (brand: string) => `מידע משפטי על ${brand}: מפעיל האתר, אחסון וזכויות יוצרים.`,
     },
     h1: 'מידע משפטי',
-    updated: 'עדכון אחרון: 29 בספטמבר 2026',
-    sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => [
+    updated: 'עדכון אחרון: 8 באוקטובר 2026',
+    sections: ({ brand, company, email, appHost, legal }: LegalVars): LegalSection[] => [
       {
         title: '1. מפעיל האתר',
         body: [
@@ -721,11 +722,12 @@ export const UI_PAGES = {
       {
         title: '2. אחסון הפלטפורמה',
         body: [
-          { p: 'אתר השיווק והאפליקציה מתארחים אצל:' },
+          { p: 'האתר והשירותים מתארחים אצל:' },
           {
             ul: [
-              [{ strong: 'פלטפורמת ממשק המשתמש (Front-end):' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, ארצות הברית. אזור אחסון: us-east4 (צפון וירג׳יניה, ארצות הברית).'],
+              [{ strong: 'פלטפורמת ממשק המשתמש (Front-end):' }, ' Google LLC (Firebase App Hosting / Google Cloud), 1600 Amphitheatre Parkway, Mountain View, CA 94043, ארצות הברית, טל׳ ‎+1 650-253-0000. אזור אחסון: us-east4 (צפון וירג׳יניה, ארצות הברית).'],
               [{ strong: 'מסדי נתונים ואחסון:' }, ' Supabase Inc., תשתית הממוקמת בארצות הברית (אזור AWS us-east-1, וירג׳יניה).'],
+              [{ strong: 'אזור הלקוח והסוכנים הקוליים:' }, ` אזור הלקוח (${appHost}), הסוכנים והנתונים שלהם מתארחים אצל ספק הפלטפורמה הטכנית שלנו, הפועל באיחוד האירופי (רומניה), בשרתים הממוקמים באזור הכלכלי האירופי ו/או בארצות הברית.`],
             ],
           },
         ],
@@ -754,6 +756,7 @@ export const UI_PAGES = {
     },
     h1: 'מדיניות עוגיות',
     paragraphs: (siteHost: string, appHost: string) => [
+      `האחראי על עיבוד הנתונים: ${SITE.company}, ${ADDRESS}, ארצות הברית, מפעיל האתר ${siteHost}.`,
       `עוגיות חיוניות בלבד (אבטחה, איזון עומסים): האתר ${siteHost} מציב אותן ללא צורך בהסכמה, כי בלעדיהן הוא אינו פועל.`,
       `העוגייה pia_consent שומרת את הבחירה שלכם (אישור או דחייה) למשך 6 חודשים, באתר ${siteHost} ובאזור הלקוח.`,
       'רק בהסכמתכם: Google Analytics 4 (‏Google Ireland Ltd / Google LLC), עם העוגיות _ga ו-_ga_<ID>, לתקופה של 13 חודשים לכל היותר, לצורך מדידת התנועה באתר והאפקטיביות של הקמפיינים שלנו (סטטיסטיקות מצטברות). המידע עשוי לעבור לארצות הברית, במסגרת ה-Data Privacy Framework.',
