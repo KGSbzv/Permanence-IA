@@ -110,9 +110,9 @@ Il y a eu 16 contrôles en échec :
 4. **Forfait Réceptionniste.** Admin Autocalls > Plans > New plan : Included Credits 200. Désactiver 1646, puis donner le nouveau numéro de forfait à Claude. *C'est une promesse du site.*
 5. **Campagnes.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240.
 6. **Mot de passe Zoho visible dans Autocalls.** Dans accounts.zoho.com > Sécurité > Mots de passe d'application, créer un nouveau mot de passe pour Autocalls (Settings > SMTP) et un pour ZOHO_SMTP_PASS. Ne pas toucher à RELANCES_IMAP_PASS.
-7. **Bases de connaissances.** Autocalls > Knowledge base : supprimer la liste de docs/autocalls-kb-a-supprimer.md, ou donner votre accord écrit à Claude.
+7. **Bases de connaissances.** Autocalls > Knowledge base : supprimer les documents listés dans docs/autocalls-kb-a-supprimer.md (Claude ne supprime jamais de données définitivement, même avec votre accord).
 8. **Avocat et comptable** : leur confier les décisions 1 et 2.
-9. **Ancienne copie du site** (permentia-prod) : dire « oui » à Claude pour la supprimer.
+9. **Ancienne copie du site** (permanentia-prod) : dire « oui » à Claude pour la retirer, ou la supprimer vous-même dans la console Firebase (projet permanentia-prod).
 
 Les autres réglages (Autocalls, Stripe, Zoho, Google Analytics, Meta) sont dans la checklist.
 

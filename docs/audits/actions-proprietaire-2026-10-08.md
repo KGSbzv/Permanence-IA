@@ -30,9 +30,9 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
    - Le premier va dans app.autocalls.ai/administrator/settings?tab=smtp (Save, puis Test).
    - Le second va dans Google Cloud > Secret Manager > ZOHO_SMTP_PASS > Nouvelle version.
    - Prévenir Claude, puis révoquer l'ancien. Garder celui des relances (RELANCES_IMAP_PASS).
-7. **Bases de connaissances « failed ».** Autocalls > Knowledge base : supprimer les documents de docs/autocalls-kb-a-supprimer.md, section 5 comprise. Vous pouvez aussi écrire votre accord à Claude, qui le fera.
+7. **Bases de connaissances « failed ».** Autocalls > Knowledge base : supprimer les documents de docs/autocalls-kb-a-supprimer.md, section 5 comprise. Claude ne supprime jamais de données définitivement : c'est à faire par vous.
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
-9. **Copie inutile du site.** Le projet Google permentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
+9. **Copie inutile du site.** Le projet Google permanentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
 
 ## 2. Décisions à prendre
 
