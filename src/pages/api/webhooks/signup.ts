@@ -5,6 +5,7 @@ import { NOTIFY_TO, dbInsertIfNew, isAuthorized, sendMail } from '@/lib/server';
 import { CONTACTS_DB, advanceStage, resolveLocale, selectWithFallback, updateQuietly, upsertContact, type ResolvedLocale } from '@/lib/contacts';
 import { isLocale } from '@/i18n/locales';
 import { emailKey, isValidEmail, normEmail } from '@/lib/emailPrefs';
+import { stripPersonaMarks } from '@/lib/callbackPersona';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -61,8 +62,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     upsertContact(CONTACTS_DB, { email, name, phone: phone || previous?.phone || null, resolved, origin: 'signup', keepOrigin: true, autocallsUserId: userId })
       .then(() => advanceStage(CONTACTS_DB, email, 'prospect', 'signed_up')),
   ]);
+  // Marqueurs internes [VOICE:], [ROLE:] et [ASKED:] retirés de la note (comme dans l’e-mail de /api/callback).
   const context = previous
-    ? `\n\nDemande de rappel du ${previous.created_at.slice(0, 10)} avec cet email :\nTéléphone : ${previous.phone}\nEntreprise : ${previous.company || ''}\nSecteur : ${previous.sector || ''}\nNote : ${previous.note || ''}`
+    ? `\n\nDemande de rappel du ${previous.created_at.slice(0, 10)} avec cet email :\nTéléphone : ${previous.phone}\nEntreprise : ${previous.company || ''}\nSecteur : ${previous.sector || ''}\nNote : ${stripPersonaMarks(previous.note) || ''}`
     : '';
   try {
     await sendMail({

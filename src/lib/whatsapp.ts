@@ -2,8 +2,7 @@
 // (case WhatsApp du formulaire de rappel). Expéditeur Autocalls 521 (+33 7 45 46 04 46) pour toutes les langues,
 // 529 (+972 3-382-7709) pour l’hébreu, avec repli sur le 521 tant que ses modèles ne sont pas approuvés.
 import { TZ, validTz } from './server';
-import { VOICES } from '@/data/personas';
-import type { Locale } from '@/i18n/locales';
+import { availableGender, callbackName } from './callbackPersona';
 
 const API = 'https://app.autocalls.ai/api/user/whatsapp';
 /** Expéditeur français : toutes les langues, et repli de l’hébreu. */
@@ -22,8 +21,6 @@ export const sendersFor = (market: string) => (market === 'he' ? [WHATSAPP_SENDE
 const TEMPLATE_LANG: Record<string, string> = { fr: 'fr', 'en-gb': 'en_GB', 'en-au': 'en_GB', it: 'it', pl: 'pl', nl: 'nl', he: 'he' };
 /** Code Intl pour écrire la date et l’heure dans la langue du message. */
 const INTL: Record<string, string> = { fr: 'fr-FR', 'en-gb': 'en-GB', 'en-au': 'en-AU', it: 'it-IT', pl: 'pl-PL', nl: 'nl-NL', he: 'he-IL' };
-/** Conseillère du rappel support dans chaque langue (mêmes prénoms que l’agent WhatsApp et l’espace client). */
-const SUPPORT_NAME: Record<string, string> = { fr: 'Lucie', 'en-gb': 'Katie', 'en-au': 'Charlotte', it: 'Manuela', pl: 'Lena', nl: 'Emma', he: 'נועה' };
 
 /** Formule neutre quand le prénom saisi n’est pas un simple prénom (« Bonjour {{1}}, … »). */
 const NEUTRAL: Record<string, string> = { fr: 'Madame, Monsieur', 'en-gb': 'there', 'en-au': 'there', it: 'gentile cliente', pl: 'Szanowni Państwo', nl: 'klant', he: 'לכם' };
@@ -111,15 +108,15 @@ export async function sendTemplate(name: string, lang: string, phone: string, va
 
 /**
  * Confirmation d’une demande de rappel faite sur le site : « {{2}}, de l’équipe, vous appellera le {{3}} à {{4}} ».
- * Date et heure écrites dans la langue du site et le fuseau du visiteur.
+ * Date et heure écrites dans la langue du site et le fuseau du visiteur. {{2}} = prénom de la persona qui rappelle
+ * (`advisor` calculé par la route, sinon d’après la langue, le type et la voix : src/lib/callbackPersona.ts).
  */
-export function sendCallbackConfirmation(opts: { lang: string; market?: string; phone: string; name: string; callAt: Date; tz?: unknown; kind: 'commercial' | 'support'; voice?: 'male' }) {
+export function sendCallbackConfirmation(opts: { lang: string; market?: string; phone: string; name: string; callAt: Date; tz?: unknown; kind: 'commercial' | 'support'; voice?: 'male'; advisor?: string }) {
   const { lang } = opts;
   const zone = typeof opts.tz === 'string' && validTz(opts.tz) ? opts.tz : TZ[lang] || TZ.fr;
   const intl = INTL[lang] || 'fr-FR';
   const first = safeFirstName(opts.name, lang);
-  const voices = VOICES[(lang in VOICES ? lang : 'fr') as Locale];
-  const advisor = opts.kind === 'support' ? SUPPORT_NAME[lang] || 'Lucie' : voices[opts.voice === 'male' ? 'male' : 'female'].name;
+  const advisor = opts.advisor || callbackName(lang, opts.kind, availableGender(lang, opts.kind, opts.voice === 'male' ? 'male' : 'female'));
   // En hébreu, le modèle dit déjà « ביום » : pas de jour de la semaine, pour éviter « ביום יום שלישי ».
   const date = new Intl.DateTimeFormat(intl, { timeZone: zone, ...(lang === 'he' ? {} : { weekday: 'long' }), day: 'numeric', month: 'long' }).format(opts.callAt);
   const time = new Intl.DateTimeFormat(intl, { timeZone: zone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(opts.callAt);

@@ -9,6 +9,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbInsert, dbSelect, esc, sendMail, clientIp, isAuthorized, tooManyMessage, NOTIFY_TO } from '@/lib/server';
 import { localeFromLang } from '@/lib/emailFooter';
 import { CONTACTS_DB, insertWithExtras, isYes, normalizeAgentLang, recordConsent, resolveLocale, selectWithFallback, upsertContact } from '@/lib/contacts';
+import { stripPersonaMarks } from '@/lib/callbackPersona';
 import type { Locale } from '@/i18n/locales';
 
 const API = 'https://app.autocalls.ai/api';
@@ -306,7 +307,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         agents: summary?.agents ?? 'indisponible',
         phone_numbers: summary?.phone_numbers ?? 'indisponible',
         last_calls: summary?.last_calls ?? 'indisponible',
-        previous_requests: requests,
+        // Marqueurs serveur [ROLE:], [VOICE:] et [ASKED:] retirés : l’agent ne doit pas les lire comme une consigne de rôle.
+        previous_requests: (Array.isArray(requests) ? requests : []).map((r: any) => (r && typeof r.note === 'string' ? { ...r, note: stripPersonaMarks(r.note) } : r)),
       });
     }
     return res.status(400).json({ message: 'Action inconnue.' });

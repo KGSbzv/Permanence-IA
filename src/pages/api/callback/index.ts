@@ -1,6 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
+import {
+  agentMessage, callbackAgentReply, campaignRoleLine, decideCallback, defuseRoleMarker, needsPrev, parsePrev, readCallbackAsk, storedMarks,
+  stripPersonaMarks, teamMailLines, type Kind, type Prev,
+} from '@/lib/callbackPersona';
 import { isOptedOut } from '@/lib/optout';
 import { CONTACTS_DB, captureMeta, insertWithExtras, isYes, recordConsent, recordFormConsents, resolveLocale, upsertContact, type ContactOrigin } from '@/lib/contacts';
 import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164, tooManyMessage } from '@/lib/server';
@@ -27,6 +31,9 @@ const marketMark = (market: string) => `[MKT:${market}]`;
 // Créneaux du formulaire (valeurs fixes en français) : en anglais pour les agents des autres pays, qui les résument dans leur langue.
 const SLOT_EN: Record<string, string> = { 'Aujourd’hui après-midi': 'this afternoon', 'Demain matin': 'tomorrow morning', 'Demain après-midi': 'tomorrow afternoon' };
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
+/** Texte libre recopié dans la note de campagne (créneau, fuseau, date du formulaire) : ni crochet ni saut de ligne,
+ *  pour qu’aucune ligne de rôle « [ROLE: » ne puisse être imitée. */
+const free = (v: unknown) => String(v).replace(/[\[\]\r\n]/g, ' ');
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -42,8 +49,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const b = req.body || {};
   const { consentCall, type, locale } = b;
   const name = clip(b.name, 120), phone = clip(b.phone, 32), email = clip(b.email, 160), company = clip(b.company, 160);
-  // Voix choisie dans la démo : seule la valeur exacte « male » est transmise (sinon voix féminine par défaut).
-  const voice = b.voice === 'male' ? 'male' as const : undefined;
   const sector = clip(b.sector, 80), slot = clip(b.slot, 120), note = clip(b.note, 1500), agent = clip(b.agent, 120);
   // Accepte true ou "true" (les outils des agents envoient des chaînes).
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
@@ -113,16 +118,39 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     marketing_email_consent: siteForm ? marketingEmail : agentAnswered ? isYes(b.marketing_email_consent) : null,
     marketing_whatsapp_consent: siteForm ? marketingWhatsApp : null,
   };
+
+  // Qui rappelle (src/lib/callbackPersona.ts) : même persona, responsable IA de l’autre voix, ou personne de l’équipe.
+  // Seulement pour un outil d’agent qui envoie callback_by ou aid (?aid={{assistant_id}}) ; sinon, comme avant :
+  // voix choisie dans la démo ou champ statique voice=male de l’outil, seule la valeur exacte « male » comptant.
+  const kind: Kind = type === 'support' ? 'support' : 'commercial';
+  const ask = readCallbackAsk({ fromAgent, aid: req.query?.aid, callbackBy: b.callback_by });
+  if (ask.active && !ask.requester) console.warn(`[callback] aid ${ask.aidGiven ? 'inconnu' : 'absent'} : agent non identifié, voix de repli`);
+  let prev: Prev | undefined;
+  let prevFailed = false;
+  if (needsPrev(ask)) {
+    // Dernière demande en file (même numéro, même type, 31 jours) : rôle gardé à la reprogrammation, voix reprise
+    // pour « again », même responsable IA (R12), boucle coupée quand le responsable IA se voit redemander un responsable.
+    // Lecture en échec : un responsable ou un humain demandé au responsable IA possible va à l’équipe (decideCallback).
+    const since = new Date(Date.now() - 31 * 86_400_000).toISOString();
+    const [p] = await dbSelect<{ note: string | null; slot: string | null }>('callbacks',
+      `select=note,slot&phone=eq.${encodeURIComponent(e164)}&type=eq.${kind}&status=eq.scheduled&created_at=gte.${since}&order=created_at.desc&limit=1`)
+      .catch((e) => { console.error('[callback] dernière demande:', e.message); prevFailed = true; return []; });
+    if (p) prev = parsePrev(p.note, p.slot);
+  }
+  const persona = decideCallback(ask, { staticVoice: b.voice, lang: campaignLang, kind, prev, prevFailed });
+  // Voix transmise à l’automatisation : 'male' bascule sur la campagne masculine, sinon voix féminine par défaut.
+  const voice = persona.voice;
+
   const row = {
     name, phone: e164, email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
-    // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
-    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang), marketMark(market)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
+    // Marqueurs [WA], [VOICE], [ROLE] et [ASKED] posés seulement par le serveur (crochets retirés du texte du visiteur
+    // ou de l’agent) : plafond quotidien WhatsApp, et voix et rôle de cette demande pour la suivante.
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang), marketMark(market), storedMarks(persona)].filter(Boolean).join(' — ') || null, type: kind,
     agent: agent ? `${agent}${isLocale(locale) && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
   // Rappel automatique : la demande rejoint la campagne d’appels de son pays et de son type (commercial ou support).
-  const kind = row.type === 'support' ? 'support' : 'commercial';
   let leadHook: string | undefined;
   if (campaignLang === 'fr') leadHook = kind === 'support' ? process.env.LEAD_WEBHOOK_SUPPORT : process.env.LEAD_WEBHOOK_COMMERCIAL;
   else {
@@ -133,6 +161,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Email transmis à la campagne seulement s’il a la forme d’une adresse (pas de texte libre ajouté à la note).
   const campaignEmail = /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i.test(String(email || '').trim()) ? String(email).trim() : '';
   const queueCall = async (requestId?: string) => {
+    // Responsable IA à qui l’on redemande un responsable ou un humain : aucun nouvel appel IA (pas de boucle entre
+    // deux voix), l’équipe reçoit « À rappeler à la main ».
+    // Opposition « ne plus appeler » signalée d’abord, pour que l’e-mail le dise.
+    if ((persona.role === 'human' || persona.personaMissing) && await isOptedOut(e164).catch(() => false)) throw new Error('opposition « ne plus appeler » enregistrée pour ce numéro');
+    if (persona.role === 'human') throw new Error('personne de l’équipe demandée au responsable IA (pas de nouvel appel IA)');
+    // Persona de rappel pas encore créée (support masculin) : jamais une autre voix sous un autre prénom.
+    if (persona.personaMissing) throw new Error(`persona de rappel ${kind} ${persona.target === 'male' ? 'masculine' : 'féminine'} pas encore en place (${persona.targetName})`);
     if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);
     // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus, et au plus
     // 3 rappels par numéro sur 7 jours (la demande, puis jusqu’à deux reprogrammations par un agent).
@@ -159,9 +194,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ...(voice ? { voice } : {}),
         // Email saisi sur le site (accompagnement à l’essai, rappel) : transmis à l’agent, qui n’a pas à le redemander.
         ...(campaignEmail ? { email: campaignEmail } : {}),
-        note: [note, ticket && `Ticket : ${ticket}`, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`,
+        // Avec callback_by ou aid : ligne de rôle en tête, seule à faire foi pour l’agent qui rappelle, et crochets
+        // retirés du texte reçu (aucune ligne de rôle imitable). Sans eux : note d’avant, seule une fausse ligne
+        // « [ROLE: » étant neutralisée. Créneau, fuseau et date du formulaire : crochets et sauts de ligne retirés.
+        note: [campaignRoleLine(persona), [note && (persona.active ? String(note).replace(/[\[\]]/g, '') : defuseRoleMarker(String(note))), ticket && `Ticket : ${ticket}`,
+          slot && slot !== 'asap' && `Créneau souhaité : ${free(slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot)}${b.tz ? ` (${free(b.tz)})` : ''}`,
           // Date précise reportée au prochain créneau d’appel du marché : l’agent annonce l’heure réelle de l’appel.
-          slot === 'precise' && scheduled && `Appel prévu : ${describeLocal(callAt, zone, campaignLang)} (${zone})`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
+          slot === 'precise' && scheduled && `Appel prévu : ${describeLocal(callAt, zone, campaignLang)} (${zone})`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — ')].filter(Boolean).join('\n'),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);
@@ -200,7 +239,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (day.length > 30) throw new Error('plafond quotidien de messages WhatsApp atteint');
     // Rappel programmé : date et heure confirmées ; « dès que possible » : message d’activation des notifications.
     return scheduled
-      ? sendCallbackConfirmation({ lang: campaignLang, market, phone: e164, name: String(name), callAt, tz: b.tz, kind, voice })
+      ? sendCallbackConfirmation({ lang: campaignLang, market, phone: e164, name: String(name), callAt, tz: b.tz, kind, voice, advisor: persona.targetName })
       : sendTemplate('pia_welcome_whatsapp', campaignLang, e164, { 1: safeFirstName(name, campaignLang) }, { market });
   };
   // L’appel est mis en file d’abord : la confirmation WhatsApp (« X vous appellera le … ») ne part que s’il l’est.
@@ -213,8 +252,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const [, mail] = await Promise.allSettled([capture, sendMail({
     to: NOTIFY_TO, category: 'internal',
     subject: `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
-    text: [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '',
-      ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
+    // Avec callback_by ou aid : qui rappelle (prénom, voix, rôle) et quel agent a pris la demande. Les marqueurs de
+    // persona de la note sont retirés de l’e-mail (lisibles dans la base).
+    text: [callLine, ...teamMailLines(persona, kind),
+      persona.role === 'human' && prev?.at && !prev.due && `Un rappel IA est encore prévu le ${prev.at} (UTC) pour ce numéro : si la personne est rappelée à la main, passer l’ancienne demande à cancelled dans la base.`, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '',
+      ...Object.entries({ ...row, note: stripPersonaMarks(row.note) }).map(([k, v]) => `${k}: ${v ?? ''}`),
       `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})${extra.demo_lang ? ` — langue de la démo : ${extra.demo_lang}` : ''}`,
       extra.marketing_email_consent != null && `accord email marketing : ${extra.marketing_email_consent ? 'oui' : 'non'}${extra.marketing_whatsapp_consent ? ' — WhatsApp marketing : oui' : ''}`,
       meta?.origin_page && `page : ${meta.origin_page}${meta.utm_source ? ` (utm ${[meta.utm_source, meta.utm_medium, meta.utm_campaign].filter(Boolean).join(' / ')})` : ''}`,
@@ -236,15 +278,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Date relue par l’agent pour confirmer le rendez-vous (dans la langue et le fuseau de la personne).
   const scheduledFor = scheduled ? `${describeLocal(callAt, zone, campaignLang)} (${zone})` : 'as soon as possible, during calling hours';
   const queued = call.status === 'fulfilled';
+  // Rappel automatique non mis en file : l’agent ne promet ni appel ni horaire, l’équipe a reçu « À rappeler à la main ».
+  // Ticket de support : l’agent le lit à la personne (une lettre ou un chiffre à la fois).
+  const ticketMessage = ticket && `Support ticket number: ${ticket}. Read it to the person one character at a time so they can quote it later.`;
+  const notQueuedMessage = 'The request was passed on to the team, but no automatic callback could be scheduled. Do not promise a call at a given time: say that a team member will get back to the person as soon as possible.';
+  // Avec callback_by ou aid : qui annoncer (prénom, IA, rôle) ; personne de l’équipe demandée au responsable IA : le
+  // seul message « équipe », sans le message générique.
+  const personaMessages = [ticketMessage, !queued && persona.role !== 'human' && notQueuedMessage, agentMessage(persona, { queued, scheduledFor })].filter(Boolean);
   return res.status(200).json({
     success: true, scheduled_for: queued ? scheduledFor : 'not scheduled', stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued,
     whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined,
     ...(ticket ? { ticket } : {}),
-    // Rappel automatique non mis en file : l’agent ne promet ni appel ni horaire, l’équipe a reçu « À rappeler à la main ».
-    // Ticket de support : l’agent le lit à la personne (une lettre ou un chiffre à la fois).
-    ...(queued && !ticket ? {} : { message_for_agent: [
-      ticket && `Support ticket number: ${ticket}. Read it to the person one character at a time so they can quote it later.`,
-      !queued && 'The request was passed on to the team, but no automatic callback could be scheduled. Do not promise a call at a given time: say that a team member will get back to the person as soon as possible.',
-    ].filter(Boolean).join(' ') }),
+    ...(persona.active
+      ? { ...(personaMessages.length ? { message_for_agent: personaMessages.join(' ') } : {}), callback_agent: callbackAgentReply(persona, queued) }
+      : queued && !ticket ? {} : { message_for_agent: [ticketMessage, !queued && notQueuedMessage].filter(Boolean).join(' ') }),
   });
 }

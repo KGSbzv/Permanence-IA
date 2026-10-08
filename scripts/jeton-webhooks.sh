@@ -49,7 +49,8 @@ d = json.load(sys.stdin); d = d.get("data", d)
 p = u.urlsplit(d["endpoint"])
 if p.netloc != "www.permanenceia.com": sys.exit("hôte inattendu")
 q = [(k, v) for k, v in u.parse_qsl(p.query, keep_blank_values=True) if k != "token"]
-ep = u.urlunsplit((p.scheme, p.netloc, p.path, u.urlencode(q), p.fragment))
+# {{assistant_id}} (?aid=) gardé tel quel : Autocalls le remplace par l’identifiant de l’agent ; encodé, il ne le serait plus.
+ep = u.urlunsplit((p.scheme, p.netloc, p.path, u.urlencode(q, safe="{}"), p.fragment))
 print(json.dumps({"endpoint": ep, "headers": [{"name": "Content-Type", "value": "application/json"}, {"name": "x-webhook-token", "value": os.environ["T"]}]}))
 ' 2>/dev/null) || { echo "Outil $id : lecture impossible (code $(status "$r")), laissé tel quel."; ko=$((ko+1)); continue; }
   res=$(status "$(api PUT "$API/tools/$id" "$body")")
