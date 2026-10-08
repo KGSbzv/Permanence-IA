@@ -3,7 +3,7 @@
 // Côté getStaticProps / API : `getI18n(locale)`.
 import React, { createContext, useContext, useMemo } from 'react';
 import { fr } from './content/fr';
-import { CONTENT } from './content';
+import { CONTENT, CONTENT_EN_AU } from './content';
 import { DEFAULT_LOCALE, LANG_OF, asLocale, type Locale } from './locales';
 import { MARKETS, type Market, type PlanSlug } from './markets';
 import type { OfferText } from './content/fr/offers';
@@ -50,13 +50,17 @@ const PLAN_ORDER: PlanSlug[] = ['decouverte', 'receptionniste', 'assistant', 'ce
 export function getI18n(rawLocale: unknown) {
   const locale = asLocale(rawLocale);
   const market = MARKETS[locale];
-  const c = (LANG_OF[locale] === 'fr' ? FR_TYPO : CONTENT[LANG_OF[locale]]) as Content;
+  // Australie : contenu anglais adapté (A$, lieux et vocabulaire locaux) au lieu de celui du Royaume-Uni.
+  const c = (LANG_OF[locale] === 'fr' ? FR_TYPO : locale === 'en-au' ? CONTENT_EN_AU : CONTENT[LANG_OF[locale]]) as Content;
 
   // useGrouping « always » : 1.000 en italien et en polonais, identique côté serveur et navigateur (sinon erreur d’hydratation).
   const num = (n: number, digits = 0) => n.toLocaleString(market.numberLocale, { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: GROUP });
   /** Montant dans la devise du marché, au format local (ex. « 99 $US » en français, « US$99 » en anglais) : le symbole précise le dollar américain. */
-  const money = (n: number, digits = 0) =>
-    new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'symbol', minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: GROUP }).format(n);
+  const money = (n: number, digits = 0) => {
+    const out = new Intl.NumberFormat(market.numberLocale, { style: 'currency', currency: market.currency, currencyDisplay: 'symbol', minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: GROUP }).format(n);
+    // en-AU : Intl écrit « USD 99 » ; les textes fixes du site écrivent « US$3.99 » → même forme partout.
+    return market.numberLocale === 'en-AU' ? out.replace(/^USD\s?/, 'US$') : out;
+  };
   const perMin = (price: number, minutes: number) => money(price / minutes, 2);
 
   const L = c.offerLabels;

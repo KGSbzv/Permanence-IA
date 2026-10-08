@@ -21,7 +21,8 @@ export const asLocale = (v: unknown): Locale => (isLocale(v) ? v : DEFAULT_LOCAL
  * Toute autre langue que celles proposées reçoit la version anglaise (Royaume-Uni).
  */
 export function detectLocale(acceptLanguage: string | null): Locale {
-  if (!acceptLanguage) return DEFAULT_LOCALE;
+  // Sans en-tête (robots, outils) : anglais (Royaume-Uni), comme pour toute langue non proposée.
+  if (!acceptLanguage) return 'en-gb';
   const tags = acceptLanguage
     .split(',')
     .map((part) => {
