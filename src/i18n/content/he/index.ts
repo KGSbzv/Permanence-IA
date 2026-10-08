@@ -13,6 +13,7 @@ import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
 import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
+import { UI_RELANCES } from './ui/relances';
 
 export const he: typeof fr = {
   site: SITE_TEXT,
@@ -27,3 +28,6 @@ export const he: typeof fr = {
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };
+
+// Relances commerciales : hors de `he` comme en français (voir src/i18n/content/fr/index.ts).
+export const RELANCES_HE = UI_RELANCES;
