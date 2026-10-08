@@ -23,6 +23,9 @@ export function middleware(req: NextRequest) {
   // Seule une vraie navigation de navigateur (en-tête Sec-Fetch-Dest: document) est redirigée selon la langue :
   // les robots (Google, Autocalls qui lit les pages pour les bases de connaissances, aperçus de liens) et les outils
   // reçoivent toujours la page demandée, dans la langue de l’URL.
+  // Les lectures des bases de connaissances Autocalls (?kb=… dans l’URL) ne sont jamais redirigées : leur navigateur
+  // sans interface envoie Sec-Fetch-Dest et un user-agent réécrit en « Google » par l’hébergeur, et indexait l’anglais.
+  if (req.nextUrl.searchParams.has('kb')) return NextResponse.next();
   const browserNavigation = req.headers.get('sec-fetch-dest') === 'document';
   if (req.nextUrl.locale !== DEFAULT_LOCALE || !browserNavigation || BOT.test(req.headers.get('user-agent') || '')) return NextResponse.next();
   const saved = req.cookies.get('NEXT_LOCALE')?.value;

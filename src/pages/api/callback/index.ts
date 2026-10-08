@@ -64,6 +64,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
   }
+  // Date précise choisie dans le formulaire (callAt) : même contrôle, refus explicite plutôt qu’un appel immédiat
+  // ou ramené à une autre date que celle choisie.
+  const formCallAt = typeof b.callAt === 'string' ? b.callAt.trim() : '';
+  if (!agentCallAt && (formCallAt || slot === 'precise')) {
+    const problem = formCallAt ? checkCallAt(formCallAt, zone).problem : 'unreadable';
+    if (problem) return res.status(400).json({ error: 'Date de rappel passée, trop lointaine ou invalide.', code: `call_at_${problem}` });
+  }
   // Moment du rappel : date précise (formulaire ou agent), créneau du formulaire, sinon dès que possible.
   const callAt = resolveCallAt({ callAt: b.callAt ?? b.call_at, slot, tz: b.tz, lang: campaignLang });
   const scheduled = callAt.getTime() > Date.now() + 60_000;

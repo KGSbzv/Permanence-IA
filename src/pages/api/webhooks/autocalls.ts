@@ -5,7 +5,7 @@ import { NOTIFY_TO, dbInsert, dbSelect, esc, isAuthorized, langFromPhone, sendMa
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
 
-const HOT = ['rappel', 'demo', 'demo_planifiee', 'essai_gratuit', 'ticket_cree'];
+const HOT = ['rappel', 'rappel_commercial', 'demo', 'demo_planifiee', 'essai_gratuit', 'ticket_cree', 'ticket_support'];
 // « failed » (numéro invalide, erreur opérateur) n’est pas un appel manqué : pas de message.
 const MISSED = ['no-answer', 'busy', 'voicemail'];
 const MISSED_OUTCOME = 'whatsapp_rappel_manque';
@@ -45,19 +45,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const row = {
     kind,
     external_id: String(p.id ?? p.conversation_id ?? ''),
-    assistant_id: p.assistant_id ?? null,
+    // Autocalls envoie un UUID ; la colonne d’origine est un entier (BIGINT) : voir l’insertion ci-dessous.
+    assistant_id: p.assistant_id == null ? null : String(p.assistant_id),
     assistant_name: p.assistant_name ?? null,
     customer_phone: p.customer_phone ?? null,
     duration_seconds: p.duration ?? null,
     status: p.status ?? null,
     outcome: vars.outcome ?? vars.request_type ?? null,
     summary: vars.summary ?? null,
-    variables: vars,
+    // UUID de l’agent aussi conservé dans les variables, lisible quel que soit le type de la colonne.
+    variables: p.assistant_id == null ? vars : { ...vars, assistant_uuid: String(p.assistant_id) },
     transcript: p.formatted_transcript ?? null,
     recording_url: p.recording_url ?? null,
   };
 
-  try { await dbInsert('call_events', row); } catch (e: any) { console.error('[autocalls-webhook] supabase:', e.message); }
+  // Tant que la migration supabase/migrations/20261008_call_events_assistant_id_text.sql n’est pas passée,
+  // la colonne BIGINT refuse l’UUID (22P02) : on réenregistre alors sans assistant_id plutôt que de perdre l’échange.
+  try {
+    await dbInsert('call_events', row).catch((e: Error) => {
+      if (!/22P02/.test(e.message) || row.assistant_id == null) throw e;
+      return dbInsert('call_events', { ...row, assistant_id: null });
+    });
+  } catch (e: any) { console.error('[autocalls-webhook] supabase:', e.message); }
 
   if (row.outcome && HOT.includes(String(row.outcome))) {
     const lines = Object.entries(vars).map(([k, v]) => `<li><b>${esc(k)}</b> : ${esc(typeof v === 'object' ? JSON.stringify(v) : v)}</li>`).join('');

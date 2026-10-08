@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS call_events (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   kind TEXT NOT NULL DEFAULT 'call',
   external_id TEXT,
-  assistant_id BIGINT,
+  assistant_id TEXT, -- UUID Autocalls (BIGINT avant la migration du 8 oct. 2026)
   assistant_name TEXT,
   customer_phone TEXT,
   duration_seconds INT,

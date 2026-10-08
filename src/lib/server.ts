@@ -82,7 +82,6 @@ export function isAuthorized(req: NextApiRequest) {
   return got.length === want.length && timingSafeEqual(got, want);
 }
 
-/** Numéro au format international (+33…) ; les numéros français à 10 chiffres sont convertis. Null si illisible. */
 /** Indicatif du pays visé par chaque langue du site, pour convertir un numéro saisi au format national. */
 const DIAL: Record<string, { cc: string; keepZero?: boolean }> = {
   fr: { cc: '33' }, 'en-gb': { cc: '44' }, 'en-au': { cc: '61' }, it: { cc: '39', keepZero: true }, pl: { cc: '48' }, nl: { cc: '31' }, he: { cc: '972' },
@@ -90,16 +89,21 @@ const DIAL: Record<string, { cc: string; keepZero?: boolean }> = {
 
 /** Numéro au format international (+33…). Un numéro national est converti selon la langue du site. Null si illisible. */
 export function toE164(raw: string, locale = 'fr', cc?: string) {
-  const s = raw.replace(/[\s.\-()/]/g, '');
-  if (/^\+\d{8,15}$/.test(s)) return s;
-  if (/^00\d{8,15}$/.test(s)) return `+${s.slice(2)}`;
+  // « +44 (0)20… » : le 0 entre parenthèses ne se compose pas depuis l’étranger.
+  let s = raw.replace(/\(0\)/g, '').replace(/[\s.\-()/]/g, '');
+  if (/^00\d{8,15}$/.test(s)) s = `+${s.slice(2)}`;
+  if (/^\+\d{8,15}$/.test(s)) {
+    // « +33 06… » : préfixe national 0 saisi après l’indicatif, retiré (sauf en Italie, où il fait partie du numéro).
+    return s.replace(/^\+(33|32|41|44|61|31|972|48)0(?=\d{7})/, '+$1');
+  }
   // Indicatif choisi dans le formulaire (prioritaire sur la langue du site) ; l’Italie garde le 0 initial.
   const d = cc && /^\d{1,3}$/.test(cc) ? { cc, keepZero: cc === '39' } : DIAL[locale] || DIAL.fr;
-  if (/^\d{6,12}$/.test(s)) {
-    if (d.keepZero || !s.startsWith('0')) return `+${d.cc}${s}`;
-    return `+${d.cc}${s.slice(1)}`;
-  }
-  return null;
+  let national: string | null = null;
+  if (/^\d{6,12}$/.test(s)) national = d.keepZero || !s.startsWith('0') ? `+${d.cc}${s}` : `+${d.cc}${s.slice(1)}`;
+  // Indicatif saisi sans « + » (33612345678, 447700900123) : retenu seulement si la lecture nationale n’est pas
+  // un numéro valide et que la lecture internationale en est un (pays desservis uniquement).
+  if (/^[1-9]\d{7,13}$/.test(s) && !(national && isValidCovered(national)) && isValidCovered(`+${s}`)) return `+${s}`;
+  return national;
 }
 
 /** Numéros que l’agent peut rappeler automatiquement : liste blanche des fixes et mobiles des pays desservis
@@ -118,15 +122,21 @@ const CALLABLE = [
   /^\+972(?:5[0-9]\d{7}|[234689]\d{7}|7[2-9]\d{7})$/, // Israël : mobiles 05x, fixes 02-04, 08-09 et 07x (hors 1-800, 1-700, *xxxx)
   /^\+1(?!(?:900|976|8(?:00|33|44|55|66|77|88)))[2-9]\d{2}[2-9]\d{6}$/, // États-Unis / Canada hors surtaxés et numéros verts
 ];
-// Indicatifs +1 qui ne sont ni aux États-Unis ni au Canada (Caraïbes, territoires) ou non géographiques (5xx, 6xx réservés, 700, 710).
-const NANP_EXCLUDED = /^\+1(?:242|246|264|268|284|340|345|441|473|649|658|664|670|671|684|721|758|767|784|787|809|829|849|868|869|876|939|5\d\d|600|622|633|644|655|677|688|700|710)/;
+// Indicatifs +1 qui ne sont ni aux États-Unis ni au Canada (Caraïbes, territoires) ou non géographiques
+// (5xx hors indicatifs géographiques, 6xx réservés, 456, 700, 710). Les 5xx géographiques restent appelables :
+// Canada 506, 514, 519, 548, 579, 581, 584, 587 et États-Unis 501-510, 512-518, 520, 530, 531, 534, 539-541,
+// 551, 557, 559, 561-564, 567, 570-575, 580, 582, 585, 586.
+const NANP_EXCLUDED = /^\+1(?:242|246|264|268|284|340|345|441|473|649|658|664|670|671|684|721|758|767|784|787|809|829|849|868|869|876|939|5(?!0[1-9]|1[02-9]|20|3[0149]|4[018]|5[179]|6[1-47]|7[0-59]|8[0-24-7])\d\d|600|622|633|644|655|677|688|456|700|710)/;
+/** Numéro valide d’un pays desservi (liste blanche, sans les indicatifs +1 hors États-Unis et Canada). */
+const isValidCovered = (e164: string) => !NANP_EXCLUDED.test(e164) && CALLABLE.some((r) => r.test(e164));
 // Ailleurs dans le monde, tout numéro international est accepté, sauf les destinations connues pour la fraude
-// aux appels surtaxés (satellites, réseaux internationaux, micro-États du Pacifique, Cuba, Somalie…).
+// aux appels surtaxés (satellites, réseaux internationaux, micro-États du Pacifique, Cuba, Somalie…) et les pays
+// les plus visés par la fraude aux rappels (Nigeria, Pakistan, Russie et Kazakhstan, Chine, Ukraine).
 // Les autorisations géographiques du compte Twilio restent le dernier filtre.
 const COVERED = /^\+(?:33|32|41|352|377|44|61|39|48|31|972|1)/;
-const HIGH_RISK = /^\+(?:53|252|232|224|245|220|231|235|239|269|222|291|246|247|290|500|67\d|68\d|69[0-2]|87\d|88[0-3]|979|808|800|99\d)/;
+const HIGH_RISK = /^\+(?:53|252|232|224|245|220|231|235|239|269|222|291|246|247|290|500|67\d|68\d|69[0-2]|87\d|88[0-3]|979|808|800|99\d|234|92|7|86|380)/;
 export const isAutoCallable = (e164: string) => (COVERED.test(e164)
-  ? !NANP_EXCLUDED.test(e164) && CALLABLE.some((r) => r.test(e164))
+  ? isValidCovered(e164)
   : /^\+[1-9]\d{7,14}$/.test(e164) && !HIGH_RISK.test(e164));
 
 /** Campagne à utiliser pour un numéro reçu sans langue du site (demande enregistrée par un agent pendant un appel). */
