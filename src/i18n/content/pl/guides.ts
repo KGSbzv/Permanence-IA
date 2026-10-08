@@ -787,6 +787,7 @@ export const GUIDES: Guide[] = [
           'Jedna kolumna na każdą zmienną agenta (np. customer_name, company), aby personalizować połączenie.',
           'Numery w formacie międzynarodowym bez spacji (+48612345678) lub w formacie krajowym, z osobnym plikiem dla każdego kraju.',
           'Pobierz przykładowy plik dostępny przy imporcie, aby od początku zachować właściwy format.',
+          'Podstawa prawna przed każdym importem: sprawdź, czy każdy kontakt zgodził się na połączenie lub jest już Twoim klientem (zgodnie z przepisami danego kraju), i zapisz źródło oraz datę zgody, np. w kolumnie zrodlo_zgody. Nigdy nie importuj kupionych ani wynajętych baz. Zob. przewodnik „Do kogo może dzwonić Twój agent?”.',
         ],
       },
       {
@@ -809,7 +810,7 @@ export const GUIDES: Guide[] = [
         tip: 'Najpierw zrób mały import testowy, aby sprawdzić format, a potem zaimportuj resztę.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Śledzenie i automatyzacje ----------

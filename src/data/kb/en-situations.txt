@@ -266,7 +266,7 @@ Sign-in with email and password, or via Google or LinkedIn. Forgotten password: 
 
 D16. Data deletion and data protection
 - A person asks for their call to be erased: a call, its recording and its transcript are deleted on request. Create a ticket with the email or number concerned, without asking for more than necessary.
-- A customer wants a DPA: provided on request, ticket or contact@permanenceia.com.
+- A customer wants a DPA: it is built into the Terms (Article 8); a signed version is provided on request, by ticket or at contact@permanenceia.com.
 - Rights requests are answered within 30 days. If the call was handled on behalf of one of our customers, the request is passed on to them.
 - Supervisory authorities, if the person asks: the ICO in the UK, the OAIC in Australia.
 

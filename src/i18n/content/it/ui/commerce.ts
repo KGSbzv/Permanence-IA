@@ -280,7 +280,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     other: {
       title: 'La Sua attività non è nell’elenco?',
-      intro: 'Autoscuole, palestre, formazione, selezione del personale, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
+      intro: 'Autoscuole, palestre, formazione, lavanderie, turismo: l’agente si configura per qualsiasi attività che riceve chiamate. Parliamo del Suo caso.',
       primary: 'Inizi gratis',
       demo: 'Provi dal vivo il nostro agente',
     },

@@ -753,7 +753,7 @@ export const GUIDES: Guide[] = [
         list: [
           'שיחות: סוכן מסוג "Make phone calls" עם מספר, ודקות זמינות.',
           'WhatsApp: שולח מחובר ותבנית מאושרת. SMS: מספר שתומך ב־SMS. שניהם משתמשים בקרדיטים להודעות.',
-          'אנשי קשר שהסכימו שיפנו אליהם.',
+          'אנשי קשר שהסכימו מראש לקבל שיחות (הסכמה מתועדת עם תאריך) או, לפי הדין במדינה, לקוחות קיימים; לעולם לא רשימה שנקנתה או נשכרה. ראו את המדריך „למי הסוכן שלכם יכול להתקשר?”.',
         ],
       },
       {
@@ -776,7 +776,7 @@ export const GUIDES: Guide[] = [
         tip: 'התחילו עם 2 או 3 ניסיונות בשעות העבודה במדינה של אנשי הקשר (בישראל: ראשון עד חמישי), ותמיד כבדו בקשות הסרה (תפריט "Blacklist").',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -791,6 +791,7 @@ export const GUIDES: Guide[] = [
           'עמודה לכל משתנה של הסוכן (למשל customer_name, company) כדי להתאים אישית את השיחה.',
           'מספרים בפורמט בינלאומי בלי רווחים (+972501234567), או בפורמט מקומי עם קובץ נפרד לכל מדינה.',
           'הורידו את קובץ הדוגמה שמוצע בשלב הייבוא כדי להתחיל בפורמט הנכון.',
+          'בסיס חוקי, לפני כל ייבוא: ודאו שכל איש קשר הסכים לקבל שיחות או שהוא כבר לקוח שלכם (לפי הדין במדינה), ותעדו את המקור ואת תאריך ההסכמה, למשל בעמודה consent_source. לעולם אל תייבאו רשימה שנקנתה או נשכרה. ראו את המדריך „למי הסוכן שלכם יכול להתקשר?”.',
         ],
       },
       {
@@ -813,7 +814,7 @@ export const GUIDES: Guide[] = [
         tip: 'בצעו קודם ייבוא ניסיון קטן כדי לבדוק את הפורמט, ואז ייבאו את השאר.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Call tracking and automations ----------

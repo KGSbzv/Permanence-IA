@@ -271,7 +271,7 @@ export const UI_COMMERCE = {
     },
     other: {
       title: 'Staat uw branche er niet tussen?',
-      intro: 'Rijscholen, sportscholen, opleidingen, werving, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
+      intro: 'Rijscholen, sportscholen, opleidingen, stomerijen, toerisme: de agent is in te stellen voor elk vak dat telefoontjes krijgt. Laten we uw situatie bespreken.',
       primary: 'Gratis starten',
       demo: 'Probeer onze agent live',
     },

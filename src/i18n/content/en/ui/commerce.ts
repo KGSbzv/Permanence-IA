@@ -220,7 +220,7 @@ export const UI_COMMERCE = {
     },
     other: {
       title: 'Your business isn’t on the list?',
-      intro: 'Driving schools, gyms, training providers, recruitment, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
+      intro: 'Driving schools, gyms, training providers, dry cleaners, tourism: the agent can be set up for any business that receives calls. Let’s talk about your case.',
       primary: 'Start for free',
       demo: 'Try our agent live',
     },

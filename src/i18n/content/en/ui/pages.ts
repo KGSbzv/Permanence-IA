@@ -615,7 +615,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Callback requests and conversations with our assistants: 24 months after the last contact.',
-                'Calls, recordings, transcripts, chats and SMS processed for our customers: 90 days by default from the date of the call (the period applied by our technical provider); each customer can shorten this period and delete its data.',
+                'Calls, recordings, transcripts, chats and SMS processed for our customers: 90 days by default from the date of the call (the period applied by our technical provider); each customer can change this period (up to 12 months) and delete its data.',
                 'Leads and contacts collected by our customers’ agents: 24 months by default, which the customer can shorten.',
                 'Account data: for the duration of the contract, then 3 years for marketing unless you object. Account content is deleted within 90 days of the end of the contract.',
                 'Invoices and accounting records: 10 years.',
@@ -628,7 +628,7 @@ export const UI_PAGES = {
         {
           title: 'Security',
           body: [
-            { p: 'Data is encrypted in transit (TLS) and at rest (AES-256). Access is role-based, protected by authentication and recorded in audit logs; two-factor authentication is available to customers; regular backups are made and technical keys are kept in secret vaults. Our technical platform provider is ISO 27001 certified. As no system is infallible, we notify personal data breaches to the authorities and to the people affected where the law requires.' },
+            { p: 'Our technical platform provider, which is ISO 27001 certified, encrypts data in transit (TLS) and at rest (AES-256), restricts access by role and records it in audit logs; our other hosting providers (Google Cloud, Supabase) also encrypt data at rest. The customer area offers two-factor authentication (authenticator app or email code), which each customer can turn on under Profile > Security. On our side, technical keys are kept in secret vaults and access is limited to the people who need it. As no system is infallible, we notify personal data breaches to the authorities and to the people affected where the law requires.' },
           ],
         },
         {

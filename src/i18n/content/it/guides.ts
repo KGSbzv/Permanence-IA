@@ -772,7 +772,7 @@ export const GUIDES: Guide[] = [
         tip: 'Inizi con 2 o 3 tentativi negli orari d’ufficio del Paese dei Suoi contatti e rispetti sempre le richieste di opposizione (menu «Blacklist»).',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -787,6 +787,7 @@ export const GUIDES: Guide[] = [
           'Una colonna per ogni variabile dell’agente (ad esempio customer_name, company) per personalizzare la chiamata.',
           'Numeri in formato internazionale senza spazi (+393471234567), oppure in formato nazionale con un file per Paese.',
           'Scarichi il file di esempio proposto durante l’importazione per partire dal formato corretto.',
+          'Base giuridica, prima di ogni importazione: verifichi che ogni contatto abbia acconsentito a essere chiamato o sia già Suo cliente (secondo le regole del Paese) e annoti la fonte e la data del consenso, ad esempio in una colonna fonte_consenso. Non importi mai liste acquistate o noleggiate. Veda la guida «Chi può chiamare con il Suo agente?».',
         ],
       },
       {
@@ -809,7 +810,7 @@ export const GUIDES: Guide[] = [
         tip: 'Effettui prima una piccola importazione di prova per verificare il formato, poi importi il resto.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Monitoraggio e automazioni ----------

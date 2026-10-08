@@ -337,7 +337,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 [{ strong: 'Zgoda:' }, ' przed każdym zautomatyzowanym, wychodzącym lub marketingowym połączeniem lub wiadomością (głos, SMS, WhatsApp) uzyskuje zgody wymagane przez prawo, przechowuje dowody ich udzielenia i niezwłocznie respektuje każdy sprzeciw (słowo STOP, prośba ustna lub pisemna).'],
-                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: w Polsce — wymóg uprzedniej zgody abonenta lub użytkownika końcowego na marketing bezpośredni z użyciem telefonu i automatycznych systemów wywołujących, także wobec firm (art. 398 ustawy – Prawo komunikacji elektronicznej); TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register).'],
+                [{ strong: 'Rejestry sprzeciwu:' }, ' sprawdza i respektuje obowiązujące rejestry i zasady: w Polsce — wymóg uprzedniej zgody abonenta lub użytkownika końcowego na marketing bezpośredni z użyciem telefonu i automatycznych systemów wywołujących, także wobec firm (art. 398 ustawy – Prawo komunikacji elektronicznej); TPS i CTPS (Wielka Brytania), Do Not Call Register (Australia), Registro pubblico delle opposizioni (Włochy) oraz zasady niderlandzkie (uprzednia zgoda lub istniejąca relacja z klientem, Bel-me-niet Register); we Francji — od 11 sierpnia 2026 r. uprzednia, wyraźna zgoda konsumenta na marketing telefoniczny (art. L223-1 francuskiego Code de la consommation).'],
                 [{ strong: 'Godziny i częstotliwość:' }, ' przestrzega dozwolonych dni, godzin i częstotliwości połączeń.'],
                 [{ strong: 'Identyfikacja:' }, ' prezentuje ważny, przydzielony mu numer, nie podszywa się pod cudze numery i jasno się przedstawia.'],
                 [{ strong: 'Przejrzystość:' }, ' od początku rozmowy wyraźnie informuje Odbiorców, że komunikują się z systemem sztucznej inteligencji (w szczególności zgodnie z art. 50 rozporządzenia (UE) 2024/1689 — aktu w sprawie sztucznej inteligencji), a jeżeli wymaga tego prawo — że rozmowa jest nagrywana lub transkrybowana, i uzyskuje ich zgodę, gdy jest wymagana.'],
@@ -624,7 +624,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Prośby o oddzwonienie i rozmowy z naszymi asystentkami: 24 miesiące od ostatniego kontaktu.',
-                'Połączenia, nagrania, transkrypcje, czaty i SMS-y przetwarzane dla naszych klientów: domyślnie 90 dni od daty połączenia (okres stosowany przez naszego dostawcę technicznego); każdy klient może zmienić ten okres i usunąć swoje dane.',
+                'Połączenia, nagrania, transkrypcje, czaty i SMS-y przetwarzane dla naszych klientów: domyślnie 90 dni od daty połączenia (okres stosowany przez naszego dostawcę technicznego); każdy klient może zmienić ten okres (maksymalnie do 12 miesięcy) i usunąć swoje dane.',
                 'Potencjalni klienci i kontakty zebrane przez agentów naszych klientów: domyślnie 24 miesiące, klient może ten okres skrócić.',
                 'Dane konta: przez czas trwania umowy, a następnie 3 lata w celach marketingowych, chyba że wniesiesz sprzeciw. Zawartość konta jest usuwana w ciągu 90 dni od zakończenia umowy.',
                 'Faktury i dokumenty księgowe: 10 lat.',
@@ -637,7 +637,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Bezpieczeństwo',
           body: [
-            { p: 'Dane są szyfrowane podczas przesyłania (TLS) i w spoczynku (AES-256). Dostęp jest przydzielany według ról, chroniony uwierzytelnianiem i rejestrowany w logach audytowych; klienci mogą włączyć uwierzytelnianie dwuskładnikowe; regularnie wykonujemy kopie zapasowe, a klucze techniczne przechowujemy w zabezpieczonych menedżerach sekretów. Nasz dostawca platformy technicznej posiada certyfikat ISO 27001. Ponieważ żaden system nie jest niezawodny, zgłaszamy naruszenia ochrony danych organom i osobom, których dotyczą, gdy wymaga tego prawo.' },
+            { p: 'Nasz dostawca platformy technicznej, posiadający certyfikat ISO 27001, szyfruje dane podczas przesyłania (TLS) i w spoczynku (AES-256), przydziela dostęp według ról i rejestruje go w logach audytowych; nasi pozostali dostawcy hostingu (Google Cloud, Supabase) również szyfrują dane w spoczynku. Panel klienta oferuje uwierzytelnianie dwuskładnikowe (aplikacja uwierzytelniająca lub kod e-mailem), które każdy klient może włączyć w zakładce Profil > Bezpieczeństwo. Po naszej stronie klucze techniczne przechowujemy w zabezpieczonych menedżerach sekretów, a dostęp mają tylko osoby, które go potrzebują. Ponieważ żaden system nie jest niezawodny, zgłaszamy naruszenia ochrony danych organom i osobom, których dotyczą, gdy wymaga tego prawo.' },
           ],
         },
         {

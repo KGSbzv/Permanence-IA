@@ -273,7 +273,7 @@ export const UI_COMMERCE = {
     },
     other: {
       title: 'Votre activité n’est pas dans la liste ?',
-      intro: 'Auto-écoles, salles de sport, recrutement, tourisme, formation : l’agent se configure pour tout métier qui reçoit des appels. Parlons de votre cas.',
+      intro: 'Auto-écoles, salles de sport, pressings, tourisme, formation : l’agent se configure pour tout métier qui reçoit des appels. Parlons de votre cas.',
       primary: 'Démarrer l’essai de 14 jours',
       demo: 'Essayer notre agent en direct',
     },

@@ -65,7 +65,7 @@ Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 
 8. Zasady dzwonienia i zgodność z przepisami
 - Polska: marketing bezpośredni przez telefon i z użyciem automatycznych systemów wywołujących wymaga uprzedniej zgody abonenta, także wobec firm i własnych klientów (art. 398 ustawy – Prawo komunikacji elektronicznej). Oddzwonienie, o które ktoś poprosił, potwierdzenie wizyty lub kontakt w sprawie trwającej usługi pozostają możliwe.
-- RODO: umowa powierzenia przetwarzania danych (DPA) jest częścią Regulaminu (art. 8), wersja podpisana na życzenie; prawo do usunięcia danych (rozmowa, nagranie i transkrypcja usuwane na żądanie), nagrania domyślnie przechowywane 90 dni od połączenia (okres naszego dostawcy technicznego), regulowany przez klienta. Szyfrowanie TLS i AES-256, dostawca z certyfikatem ISO 27001. W Polsce organem nadzorczym jest Prezes Urzędu Ochrony Danych Osobowych (UODO).
+- RODO: umowa powierzenia przetwarzania danych (DPA) jest częścią Regulaminu (art. 8), wersja podpisana na życzenie; prawo do usunięcia danych (rozmowa, nagranie i transkrypcja usuwane na żądanie), nagrania domyślnie przechowywane 90 dni od połączenia (okres naszego dostawcy technicznego), regulowany przez klienta do 12 miesięcy. Szyfrowanie TLS i AES-256, dostawca z certyfikatem ISO 27001. W Polsce organem nadzorczym jest Prezes Urzędu Ochrony Danych Osobowych (UODO).
 - Nagłe wypadki: agent nigdy nie zastępuje służb ratunkowych. Mówi, by zadzwonić pod lokalny numer alarmowy: Polska 112, Francja 112 lub 15, Wielka Brytania 999, Australia 000, Włochy i Holandia 112, Izrael 101 (pogotowie), 100 (policja), 102 (straż pożarna).
 
 Ochrona zdrowia (stomatologia, kliniki, fizjoterapia, medycyna estetyczna) — wstrzymane handlowo:

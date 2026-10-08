@@ -615,7 +615,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
             {
               ul: [
                 'Richieste di richiamata e conversazioni con le nostre assistenti: 24 mesi dall’ultimo contatto.',
-                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 90 giorni dalla data della chiamata (durata applicata dal nostro fornitore tecnico) per impostazione predefinita; ogni cliente può modificare tale periodo e cancellare i propri dati.',
+                'Chiamate, registrazioni, trascrizioni, conversazioni scritte e SMS trattati per i nostri clienti: 90 giorni dalla data della chiamata (durata applicata dal nostro fornitore tecnico) per impostazione predefinita; ogni cliente può modificare tale periodo (fino a 12 mesi) e cancellare i propri dati.',
                 'Potenziali clienti e contatti raccolti dagli agenti dei nostri clienti: 24 mesi per impostazione predefinita, riducibili dal cliente.',
                 'Dati dell’account: per la durata del rapporto contrattuale, poi 3 anni per finalità di marketing, salvo opposizione. Il contenuto dell’account è cancellato entro 90 giorni dalla fine del contratto.',
                 'Fatture e scritture contabili: 10 anni.',
@@ -628,7 +628,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
         {
           title: 'Sicurezza',
           body: [
-            { p: 'I dati sono cifrati in transito (TLS) e a riposo (AES-256). Gli accessi sono basati sui ruoli, protetti da autenticazione e tracciati in log di audit; l’autenticazione a due fattori è disponibile per i clienti; vengono effettuati backup regolari e le chiavi tecniche sono custodite in vault dedicati. Il nostro fornitore di piattaforma tecnica è certificato ISO 27001. Poiché nessun sistema è infallibile, notifichiamo le violazioni dei dati personali alle autorità e agli interessati quando la legge lo richiede.' },
+            { p: 'Il nostro fornitore di piattaforma tecnica, certificato ISO 27001, cifra i dati in transito (TLS) e a riposo (AES-256), limita gli accessi in base ai ruoli e li traccia in log di audit; anche gli altri nostri fornitori di hosting (Google Cloud, Supabase) cifrano i dati a riposo. L’area clienti offre l’autenticazione a due fattori (app di autenticazione o codice via e-mail), che ogni cliente può attivare in Profilo > Sicurezza. Da parte nostra, le chiavi tecniche sono custodite in vault dedicati e gli accessi sono riservati alle persone che ne hanno bisogno. Poiché nessun sistema è infallibile, notifichiamo le violazioni dei dati personali alle autorità e agli interessati quando la legge lo richiede.' },
           ],
         },
         {

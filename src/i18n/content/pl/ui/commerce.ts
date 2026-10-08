@@ -265,7 +265,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     other: {
       title: 'Twojej branży nie ma na liście?',
-      intro: 'Szkoły jazdy, siłownie i kluby fitness, szkolenia i edukacja, rekrutacja, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
+      intro: 'Szkoły jazdy, siłownie i kluby fitness, szkolenia i edukacja, pralnie, turystyka: agenta można skonfigurować dla każdej firmy, która odbiera telefony. Porozmawiajmy o Twoim przypadku.',
       primary: 'Zacznij za darmo',
       demo: 'Wypróbuj naszego agenta na żywo',
     },

@@ -631,7 +631,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Demandes de rappel et échanges avec nos assistantes : 24 mois après le dernier contact.',
-                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 90 jours par défaut à compter de l’appel (durée appliquée par notre prestataire technique) ; chaque client peut modifier cette durée et supprimer ses données.',
+                'Appels, enregistrements, transcriptions, conversations écrites et SMS traités pour nos clients : 90 jours par défaut à compter de l’appel (durée appliquée par notre prestataire technique) ; chaque client peut modifier cette durée (jusqu’à 12 mois) et supprimer ses données.',
                 'Prospects et contacts recueillis par les agents de nos clients : 24 mois par défaut, réductibles par le client.',
                 'Données du compte : pendant la relation contractuelle, puis 3 ans pour la prospection, sauf opposition. Le contenu du compte est supprimé dans les 90 jours suivant la fin du contrat.',
                 'Factures et pièces comptables : 10 ans.',
@@ -644,7 +644,7 @@ export const UI_PAGES = {
         {
           title: 'Sécurité',
           body: [
-            { p: 'Les données sont chiffrées en transit (TLS) et au repos (AES-256). Les accès sont limités selon les rôles, protégés par authentification et tracés dans des journaux d’audit ; la double authentification est disponible pour les clients ; des sauvegardes régulières sont réalisées et les clés techniques sont conservées dans des coffres-forts de secrets. Notre prestataire de plateforme technique est certifié ISO 27001. Aucun système n’étant infaillible, nous notifions les violations de données aux autorités et aux personnes concernées lorsque la loi l’exige.' },
+            { p: 'Notre prestataire de plateforme technique, certifié ISO 27001, chiffre les données en transit (TLS) et au repos (AES-256), limite les accès selon les rôles et les trace dans des journaux d’audit ; nos autres hébergeurs (Google Cloud, Supabase) chiffrent également les données au repos. L’espace client propose la double authentification (application d’authentification ou code par e-mail), que chaque client peut activer dans Profil > Sécurité. De notre côté, les clés techniques sont conservées dans des coffres-forts de secrets et les accès sont réservés aux personnes qui en ont besoin. Aucun système n’étant infaillible, nous notifions les violations de données aux autorités et aux personnes concernées lorsque la loi l’exige.' },
           ],
         },
         {

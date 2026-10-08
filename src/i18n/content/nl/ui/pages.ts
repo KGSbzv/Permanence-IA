@@ -615,7 +615,7 @@ export const UI_PAGES = {
             {
               ul: [
                 'Terugbelverzoeken en gesprekken met onze assistenten: 24 maanden na het laatste contact.',
-                'Gesprekken, opnames, transcripties, chats en sms die wij voor onze klanten verwerken: standaard 90 dagen vanaf de datum van het gesprek (de termijn van onze technische leverancier); elke klant kan deze termijn verkorten en zijn gegevens verwijderen.',
+                'Gesprekken, opnames, transcripties, chats en sms die wij voor onze klanten verwerken: standaard 90 dagen vanaf de datum van het gesprek (de termijn van onze technische leverancier); elke klant kan deze termijn wijzigen (tot 12 maanden) en zijn gegevens verwijderen.',
                 'Leads en contacten verzameld door de agents van onze klanten: standaard 24 maanden, door de klant in te korten.',
                 'Accountgegevens: zolang de overeenkomst loopt, daarna 3 jaar voor marketing, tenzij u bezwaar maakt. De inhoud van het account wordt binnen 90 dagen na het einde van de overeenkomst verwijderd.',
                 'Facturen en boekhoudkundige stukken: 10 jaar.',
@@ -628,7 +628,7 @@ export const UI_PAGES = {
         {
           title: 'Beveiliging',
           body: [
-            { p: 'Gegevens worden versleuteld tijdens overdracht (TLS) en in rust (AES-256). Toegang is rolgebaseerd, beveiligd met authenticatie en vastgelegd in auditlogs; tweestapsverificatie is beschikbaar voor klanten; er worden regelmatig back-ups gemaakt en technische sleutels worden bewaard in beveiligde sleutelkluizen (secret vaults). Onze technische platformleverancier is ISO 27001-gecertificeerd. Omdat geen enkel systeem onfeilbaar is, melden wij datalekken aan de autoriteiten en aan betrokkenen wanneer de wet dat vereist.' },
+            { p: 'Onze technische platformleverancier, ISO 27001-gecertificeerd, versleutelt gegevens tijdens overdracht (TLS) en in rust (AES-256), beperkt de toegang op basis van rollen en legt die vast in auditlogs; onze andere hostingleveranciers (Google Cloud, Supabase) versleutelen gegevens in rust eveneens. De klantomgeving biedt tweestapsverificatie (authenticator-app of code per e-mail), die elke klant kan inschakelen onder Profiel > Beveiliging. Aan onze kant worden technische sleutels bewaard in beveiligde sleutelkluizen (secret vaults) en is de toegang beperkt tot wie die nodig heeft. Omdat geen enkel systeem onfeilbaar is, melden wij datalekken aan de autoriteiten en aan betrokkenen wanneer de wet dat vereist.' },
           ],
         },
         {

@@ -777,7 +777,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Appels : un agent « Make phone calls » avec un numéro, et des minutes disponibles.',
           'WhatsApp : un expéditeur connecté et un modèle approuvé. SMS : un numéro compatible SMS. Les deux utilisent les crédits de messages.',
-          'Des contacts qui ont accepté d’être contactés.',
+          'Des contacts qui ont accepté d’être appelés (accord daté) ou, selon le pays, avec qui vous avez une relation client ; jamais de fichier acheté ou loué. Voir le guide « Qui pouvez-vous faire appeler par votre agent ? ».',
         ],
       },
       {
@@ -800,7 +800,7 @@ export const GUIDES: Guide[] = [
         tip: 'Commencez par 2 ou 3 tentatives aux heures autorisées dans le pays de vos contacts (en France : du lundi au vendredi, 10 h–13 h et 14 h–20 h), et respectez toujours les demandes d’opposition (menu « Blacklist »).',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -815,6 +815,7 @@ export const GUIDES: Guide[] = [
           'Une colonne par variable de l’agent (par exemple customer_name, company) pour personnaliser l’appel.',
           'Numéros au format international sans espaces (+33639981234), ou format national avec un fichier par pays.',
           'Téléchargez le fichier d’exemple proposé à l’import pour partir du bon format.',
+          'Base légale, avant chaque import : vérifiez que chaque contact a accepté d’être appelé ou est déjà client (selon les règles du pays), et notez la source et la date de cet accord, par exemple dans une colonne source_consentement. N’importez jamais de fichier acheté ou loué. Voir le guide « Qui pouvez-vous faire appeler par votre agent ? ».',
         ],
       },
       {
@@ -837,7 +838,7 @@ export const GUIDES: Guide[] = [
         tip: 'Faites d’abord un petit import de test pour vérifier le format, puis importez le reste.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Suivi et automatisations ----------

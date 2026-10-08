@@ -750,7 +750,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Calls: a "Make phone calls" agent with a number, and minutes available.',
           'WhatsApp: a connected sender and an approved template. SMS: an SMS-capable number. Both use message credits.',
-          'Contacts who have agreed to be contacted.',
+          'Contacts who have agreed to be called (dated consent) or, depending on the country, who are existing customers; never a bought or rented list. See the guide “Who can your agent call?”.',
         ],
       },
       {
@@ -773,7 +773,7 @@ export const GUIDES: Guide[] = [
         tip: 'Start with 2 or 3 attempts during office hours in your contacts’ country, and always honour opt-out requests (exclusion list, "Blacklist" menu).',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -788,6 +788,7 @@ export const GUIDES: Guide[] = [
           'One column per agent variable (for example customer_name, company) to personalise the call.',
           'Numbers in international format without spaces (+447700900123), or national format with one file per country.',
           'Download the sample file offered at import to start with the right format.',
+          'Lawful basis, before every import: check that each contact has agreed to be called or is already a customer (according to the country’s rules), and record the source and date of that consent, for example in a consent_source column. Never import a bought or rented list. See the guide “Who can your agent call?”.',
         ],
       },
       {
@@ -810,7 +811,7 @@ export const GUIDES: Guide[] = [
         tip: 'Do a small test import first to check the format, then import the rest.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Call tracking and automations ----------

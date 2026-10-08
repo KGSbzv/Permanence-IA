@@ -65,7 +65,7 @@ Processus : rappels, suivi et support (Permanence IA)
 
 8. Règles d'appel et conformité
 - France : depuis le 11 août 2026, la prospection téléphonique des consommateurs exige leur accord préalable (opt-in). Bloctel reste utile pour certains contrats conclus avant cette date (à faire vérifier par un juriste). Un rappel demandé, un rendez-vous à confirmer ou le suivi d'une prestation en cours restent possibles.
-- RGPD : accord de traitement des données (DPA) intégré aux conditions générales (article 8), version signée sur demande, droit à l'effacement (appel, enregistrement et transcription supprimés sur demande), enregistrements conservés 90 jours par défaut à compter de l’appel (durée de notre prestataire technique), réglable par le client. Chiffrement TLS et AES-256, prestataire certifié ISO 27001.
+- RGPD : accord de traitement des données (DPA) intégré aux conditions générales (article 8), version signée sur demande, droit à l'effacement (appel, enregistrement et transcription supprimés sur demande), enregistrements conservés 90 jours par défaut à compter de l’appel (durée de notre prestataire technique), réglable par le client jusqu’à 12 mois. Chiffrement TLS et AES-256, prestataire certifié ISO 27001.
 - Urgences : l'agent ne remplace jamais les secours. Il dit d'appeler le numéro d'urgence local : France : 15 (SAMU), 17 (police), 18 (pompiers) ou 112 ; Belgique 112 ; Suisse 144 (ambulance), 117 (police), 118 (pompiers) ou 112 ; Canada 911 ; Royaume-Uni 999, Australie 000, Italie, Pologne et Pays-Bas 112, Israël 101 (ambulance), 100 (police), 102 (pompiers).
 
 Secteurs de santé humaine (dentaire, cliniques, kinés, paramédical, médecine esthétique) — en pause commerciale :

@@ -749,7 +749,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Gesprekken: een agent “Make phone calls” met een nummer, en beschikbare minuten.',
           'WhatsApp: een gekoppelde afzender en een goedgekeurd sjabloon. Sms: een nummer dat sms ondersteunt. Beide gebruiken berichtcredits.',
-          'Contacten die ermee hebben ingestemd om benaderd te worden (zie de gids “Wie mag uw agent bellen?”).',
+          'Contacten die ermee hebben ingestemd om gebeld te worden (gedateerde toestemming) of, afhankelijk van het land, bestaande klanten; nooit een gekochte of gehuurde lijst (zie de gids “Wie mag uw agent bellen?”).',
         ],
       },
       {
@@ -772,7 +772,7 @@ export const GUIDES: Guide[] = [
         tip: 'Begin met 2 of 3 pogingen tijdens de kantooruren van het land van uw contacten, en respecteer altijd bezwaren (uitsluitingslijst, menu “Blacklist”).',
       },
     ],
-    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel'],
+    related: ['contacts-leads', 'numero-presente', 'donnees-apres-appel', 'qui-peut-on-appeler'],
   },
   {
     slug: 'contacts-leads',
@@ -787,6 +787,7 @@ export const GUIDES: Guide[] = [
           'Eén kolom per variabele van de agent (bijvoorbeeld customer_name, company) om het gesprek te personaliseren.',
           'Nummers in internationaal formaat zonder spaties (+31612345678), of nationaal formaat met één bestand per land.',
           'Download het voorbeeldbestand dat bij het importeren wordt aangeboden om met het juiste formaat te beginnen.',
+          'Rechtsgrond, vóór elke import: controleer of elk contact heeft ingestemd om gebeld te worden of al klant is (volgens de regels van het land), en noteer de bron en datum van die toestemming, bijvoorbeeld in een kolom bron_toestemming. Importeer nooit een gekochte of gehuurde lijst. Zie de gids “Wie mag uw agent bellen?”.',
         ],
       },
       {
@@ -809,7 +810,7 @@ export const GUIDES: Guide[] = [
         tip: 'Doe eerst een kleine testimport om het formaat te controleren en importeer daarna de rest.',
       },
     ],
-    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia'],
+    related: ['campagnes-d-appels', 'donnees-apres-appel', 'editeur-de-prompt-ia', 'qui-peut-on-appeler'],
   },
 
   // ---------- Gespreksopvolging en automatiseringen ----------
