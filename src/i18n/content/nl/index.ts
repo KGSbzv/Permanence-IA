@@ -12,6 +12,7 @@ import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
 import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
+import { UI_RELANCES } from './ui/relances';
 
 export const nl: typeof fr = {
   site: SITE_TEXT,
@@ -26,3 +27,6 @@ export const nl: typeof fr = {
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };
+
+// Opvolgmails: buiten `nl` gehouden zolang niet alle talen hun versie hebben (zie src/i18n/content/fr/index.ts).
+export const RELANCES_NL = UI_RELANCES;
