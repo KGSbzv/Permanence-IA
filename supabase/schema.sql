@@ -2,8 +2,8 @@
 -- Permanence IA — Supabase PostgreSQL Schema
 -- Tables: users, subscriptions, api_calls, trials, callbacks, signups, call_events
 --
--- État au 8 oct. 2026 : le code du site n'utilise que callbacks, signups (email, nom,
--- date d'inscription) et call_events. Les tables users, subscriptions, api_calls et trials,
+-- État au 8 oct. 2026 : le code du site utilise callbacks, signups et call_events, plus les
+-- tables des relances créées par les migrations du 8 oct. (section 8 en fin de fichier). Les tables users, subscriptions, api_calls et trials,
 -- ainsi que signups.trial_minutes, reminder_sent_at et ended_sent_at, sont RÉSERVÉES aux
 -- relances d'essai et de minutes (aucune tâche planifiée ne les remplit encore). Elles sont
 -- conservées en attendant la décision du propriétaire : ne pas les supprimer sans elle.
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS api_calls (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 4. Table Trials (Suivi des essais gratuits 7 jours)
+-- 4. Table Trials (Suivi des essais gratuits 14 jours (30 min))
 CREATE TABLE IF NOT EXISTS trials (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
@@ -133,3 +133,42 @@ CREATE INDEX IF NOT EXISTS idx_call_events_outcome ON call_events(outcome);
 ALTER TABLE signups ENABLE ROW LEVEL SECURITY;
 ALTER TABLE call_events ENABLE ROW LEVEL SECURITY;
 GRANT ALL ON signups, call_events TO service_role;
+
+-- ==============================================================================
+-- 8. Migrations du 8 oct. 2026 (supabase/migrations/, à exécuter dans le SQL Editor)
+-- Résumé de ce qu'elles créent ; la définition exacte (types, index, valeurs par
+-- défaut) reste dans les fichiers de migration, qui font foi.
+-- ==============================================================================
+--
+-- 20261008_call_events_assistant_id_text.sql
+--   call_events.assistant_id : BIGINT → TEXT (UUID des agents Autocalls).
+--
+-- 20261008_relances_capture.sql — collecte (langue, provenance, accords)
+--   callbacks, colonnes ajoutées :
+--     locale                     fr | en-gb | en-au | it | pl | nl | he
+--     locale_source              site_form | agent_call | phone_prefix | picker | manual | unknown
+--     locale_needs_review        BOOLEAN (indicatif ambigu : langue à choisir à la main)
+--     origin                     callback | demo | agent_lead | trial_request | contact
+--     demo_lang                  langue choisie pour l'appel de démo (locale = langue du site)
+--     origin_page, referrer      page du formulaire (sans paramètres), site d'origine (sans requête)
+--     utm_source, utm_medium, utm_campaign
+--     marketing_email_consent, marketing_whatsapp_consent   BOOLEAN (NULL : question non posée)
+--   signups, colonnes ajoutées :
+--     locale, locale_source, origin_page, autocalls_user_id, phone, matched_callback_id (UUID de la demande rapprochée)
+--   contacts  : une ligne par adresse (email_key = HMAC unique), langue et provenance, origine
+--               (… | signup | trial_signup), UTM, étape de vie (stage), liens Autocalls et Stripe, is_test, stop_reason.
+--   consents  : journal des accords marketing (ajout seul) : canal, finalité, accord, base légale, version du texte,
+--               source, identifiant d'appel, empreinte de l'adresse IP.
+--
+-- 20261008_relances_moteur.sql — moteur des relances et Stripe
+--   relance_settings         interrupteur en base (ligne unique id = 1, créée coupée)
+--   relance_state            série suivie par contact (P, I, C, F, U, M), mode test ou réel
+--   relance_log              journal des envois (une ligne par contact, série, étape et mode)
+--   relance_stops            arrêts au niveau du contact (réponse, rebond, manuel)
+--   relance_runs             passages du moteur (compteurs, décisions, erreurs)
+--   platform_user_snapshots  instantané quotidien des comptes white-label (minutes, crédits)
+--   stripe_customers         clients Stripe (email, langue préférée, a payé)
+--   stripe_subscriptions     abonnements (statut, essai, prix, période)
+--   stripe_events            événements Stripe déjà traités (idempotence du webhook)
+--
+-- Toutes ces tables : RLS activé, accès par la clé service uniquement.

@@ -57,8 +57,9 @@ function planOf(sub: StripeSubscriptionRow | undefined, locale: Locale): { slug:
 
 const latestTrial = (c: Contact) => c.subscriptions.filter((s) => s.trial_end).sort((a, b) => String(b.trial_end).localeCompare(String(a.trial_end)))[0];
 
-/** Variables du contact pour les textes ; ce qui vient de Stripe n’est jamais estimé (absent = étape sautée). */
-function varsFor(c: Contact, locale: Locale, content: RelancesContent, step: StepDef, now: Date): RenderVars {
+/** Variables du contact pour les textes ; ce qui vient de Stripe n’est jamais estimé (absent = étape sautée).
+ *  Exportée pour les aperçus (scripts/preview-relances.ts), qui passent par le même calcul. */
+export function varsFor(c: Contact, locale: Locale, content: RelancesContent, step: StepDef, now: Date): RenderVars {
   const i18n = getI18n(locale);
   const tz = MARKET_TZ[locale];
   const nl = i18n.market.numberLocale;
@@ -85,8 +86,9 @@ function varsFor(c: Contact, locale: Locale, content: RelancesContent, step: Ste
   };
 }
 
-/** Texte de l’étape (P3 sans secteur connu → P3_generic ; M → prospect ou espace client selon la série d’origine). */
-function templateOf(content: RelancesContent, step: StepDef, c: Contact, locale: Locale, origin: Seq) {
+/** Texte de l’étape (P3 sans secteur connu → P3_generic ; M → prospect ou espace client selon la série d’origine).
+ *  Exportée pour les aperçus (scripts/preview-relances.ts). */
+export function templateOf(content: RelancesContent, step: StepDef, c: Contact, locale: Locale, origin: Seq) {
   if (step.key === 'M') return { key: origin === 'P' ? 'M_prospect' : 'M_account', build: origin === 'P' ? content.monthly.prospect : content.monthly.account };
   let key: RelanceKey = step.key;
   if (key === 'P3' && !(c.sector && !c.pausedSector && getI18n(locale).c.sectors.some((s) => s.slug === c.sector))) key = 'P3_generic';

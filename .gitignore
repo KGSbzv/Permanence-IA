@@ -31,3 +31,15 @@ yarn-error.log*
 
 # TypeScript build cache
 *.tsbuildinfo
+
+# Lots marketing générés (zips et dossiers d’export : trop lourds pour GitHub, 165 Mo pour le plus gros)
+docs/marketing/*.zip
+docs/marketing/pack-creations/
+docs/marketing/pack-publicite/
+docs/marketing/par-langue/
+
+# Fichiers de travail locaux (captures, images générées, exports de FAQ, sessions Playwright)
+/.playwright-mcp/
+/faq_*.html
+/Gemini_Generated_*.png
+/Screenshot *.png

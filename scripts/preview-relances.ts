@@ -28,12 +28,14 @@ async function main() {
   const { LOCALES, isRtl } = await import('@/i18n/locales');
   const { MARKETS } = await import('@/i18n/markets');
   const { buildRelanceFacts } = await import('@/i18n/content/fr');
-  type RelanceKey = import('@/i18n/content/fr').RelanceKey;
-  type RelanceMessage = import('@/i18n/content/fr').RelanceMessage;
   type RelanceOrigin = import('@/i18n/content/fr/ui/relances').RelanceOrigin;
   const { relancesContent } = await import('@/lib/relances/content');
+  // Mêmes fonctions que le moteur pour les variables et le choix du texte (aucune copie du calcul ici).
+  const { varsFor, templateOf } = await import('@/lib/relances/engine');
+  type Contact = import('@/lib/relances/selection').Contact;
+  type Seq = import('@/lib/relances/types').Seq;
   const { renderMessage } = await import('@/lib/relances/render');
-  const { MARKET_TZ, MARKETING_HOURS, SERVICE_HOURS, dayMonth, longDate } = await import('@/lib/relances/calendar');
+  const { MARKETING_HOURS, SERVICE_HOURS } = await import('@/lib/relances/calendar');
   const { STEPS, MONTHLY_STEPS, C4_MINUTES_LEFT, C5_DAYS_BEFORE_END } = await import('@/lib/relances/sequences');
   type StepDef = import('@/lib/relances/sequences').StepDef;
   const { prepareMail } = await import('@/lib/server');
@@ -67,42 +69,38 @@ async function main() {
     const i18n = getI18n(locale);
     const facts = buildRelanceFacts(i18n);
     if (!facts) { console.error(`${locale} : chiffres du marché incomplets`); process.exitCode = 1; continue; }
-    const tz = MARKET_TZ[locale];
-    const nl = i18n.market.numberLocale;
     const sector = PAUSED_SECTORS.includes(SAMPLE.sector) ? undefined : i18n.c.sectors.find((s) => s.slug === SAMPLE.sector);
     if (!sector) throw new Error(`${locale} : secteur ${SAMPLE.sector} introuvable`);
     const plan = MARKETS[locale].plans.receptionniste;
     mkdirSync(join(out, locale), { recursive: true });
 
-    // Mêmes calculs que varsFor (src/lib/relances/engine.ts), avec les valeurs du contact fictif.
-    const varsOf = (step: StepDef, origin: RelanceOrigin) => {
-      const topic = step.seq === 'M' ? content.monthly.topics[Number(step.step.slice(1)) - 1] : undefined;
-      return {
-        first_name: SAMPLE.firstName,
-        company: SAMPLE.company,
-        source_line: content.shared.sourceLine[origin],
-        request_date: dayMonth(REQUEST_AT, nl, tz),
-        sector_name: sector.name,
-        sector_problem: sector.problems[0] ? content.shared.clause(sector.problems[0]) : null,
-        sector_handles: sector.handles.length ? content.shared.list(sector.handles.slice(0, 3)) : null,
-        trial_end_date: longDate(TRIAL_END, nl, tz),
-        minutes_left: i18n.num(step.step === 'C4' ? C4_MINUTES_LEFT - 1 : MINUTES_LEFT),
-        plan_name: i18n.c.offers.receptionniste.name,
-        plan_price: plan.price ? i18n.money(plan.price) : null,
-        topic_title: topic?.title ?? null,
-        topic_paragraph: topic?.paragraph ?? null,
-      };
-    };
+    // Contact fictif tel que le moteur le construit (src/lib/relances/selection.ts) : essai en cours (fin TRIAL_END),
+    // forfait Réceptionniste au mois, instantané du compte du jour (minutes restantes).
+    const now = new Date();
+    const contactOf = (step: StepDef, origin: RelanceOrigin, withSector = true): Contact => ({
+      email: SAMPLE.email, key: 'apercu', firstName: SAMPLE.firstName, company: SAMPLE.company, sector: withSector ? SAMPLE.sector : null,
+      phones: [], locale, localeSource: 'site_form', origin, requestAt: REQUEST_AT, prospectSince: REQUEST_AT, supportOpen: false, pausedSector: false,
+      signup: null,
+      platform: { userId: 'apercu', minutes: step.step === 'C4' ? C4_MINUTES_LEFT - 1 : MINUTES_LEFT, credits: 0, createdAt: null, usage30: null, snapDate: now.toISOString().slice(0, 10) },
+      subscriptions: [{
+        subscription_id: 'sub_apercu', customer_id: null, status: 'trialing', trial_start: null, trial_end: TRIAL_END.toISOString(), canceled_at: null, ended_at: null,
+        price_amount: plan.price ? Math.round(plan.price * 100) : null, currency: MARKETS[locale].currency, billing_interval: 'month', livemode: false,
+      }],
+      hasPaid: false, hasCreditPurchase: false, preferredLocale: null, isTest: true, consents: [], pref: null, phoneOptout: false, stops: [],
+    });
 
-    const one = async (o: { step: StepDef; key: string; message: RelanceMessage | null; origin: RelanceOrigin; file: string; label: string; seqOrigin?: string; note?: string }) => {
-      const base = { locale, seq: o.step.seq, label: o.label, delay: delayOf(o.step, o.seqOrigin), window: windowOf(o.step) };
-      if (!o.message) {
+    const one = async (o: { step: StepDef; origin: RelanceOrigin; file: string; label: string; seqOrigin?: Seq; seqLabel?: string; generic?: boolean; note?: string }) => {
+      const base = { locale, seq: o.step.seq, label: o.label, delay: delayOf(o.step, o.seqLabel), window: windowOf(o.step) };
+      const contact = contactOf(o.step, o.origin, !o.generic);
+      const tpl = templateOf(content, o.step, contact, locale, o.seqOrigin ?? o.step.seq);
+      const message = tpl.build(facts);
+      if (!message) {
         entries.push({ ...base, file: null, subject: '', category: '', note: 'étape sautée : chiffre du marché manquant' });
         return;
       }
-      const rendered = renderMessage({ content, message: o.message, locale, brand: MARKETS[locale].brand, vars: varsOf(o.step, o.origin), campaign: o.step.step });
+      const rendered = renderMessage({ content, message, locale, brand: MARKETS[locale].brand, vars: varsFor(contact, locale, content, o.step, now), campaign: o.step.step });
       if (!rendered.ok) {
-        entries.push({ ...base, file: null, subject: '', category: o.message.category, note: `étape sautée : ${rendered.reason}` });
+        entries.push({ ...base, file: null, subject: '', category: message.category, note: `étape sautée : ${rendered.reason}` });
         return;
       }
       const mail = rendered.mail;
@@ -120,7 +118,7 @@ async function main() {
         ['Catégorie', mail.category],
         ['Délai', base.delay],
         ['Fenêtre d’envoi', base.window],
-        ['Modèle', `${o.key} (${locale})`],
+        ['Modèle', `${tpl.key} (${locale})`],
         ...(notes ? [['Remarques', notes] as [string, string]] : []),
         ...Object.entries(m.headers).map(([k, v]) => [k, String(v)] as [string, string]),
       ];
@@ -152,23 +150,23 @@ ${m.html}
     for (const seq of ['P', 'I', 'C', 'F', 'U'] as const) {
       for (const step of STEPS[seq]) {
         const n = step.step.slice(1);
-        const key = step.key as RelanceKey;
-        await one({ step, key, message: content.messages[key](facts), origin: 'callback_done', file: `${seq}-${n}.html`, label: step.step });
-        if (key === 'P1') {
+        await one({ step, origin: 'callback_done', file: `${seq}-${n}.html`, label: step.step });
+        if (step.key === 'P1') {
           for (const origin of origins.filter((x) => x !== 'callback_done')) {
-            await one({ step, key, message: content.messages.P1(facts), origin, file: `${seq}-${n}-${origin}.html`, label: `P1 (${origin})`, note: `provenance ${origin}` });
+            await one({ step, origin, file: `${seq}-${n}-${origin}.html`, label: `P1 (${origin})`, note: `provenance ${origin}` });
           }
         }
-        if (key === 'P3') {
-          await one({ step, key: 'P3_generic', message: content.messages.P3_generic(facts), origin: 'callback_done', file: `${seq}-${n}-generique.html`, label: 'P3 (générique)', note: 'secteur inconnu ou en pause' });
+        if (step.key === 'P3') {
+          // Secteur inconnu : le moteur choisit lui-même P3_generic.
+          await one({ step, origin: 'callback_done', generic: true, file: `${seq}-${n}-generique.html`, label: 'P3 (générique)', note: 'secteur inconnu ou en pause' });
         }
       }
     }
     // Suivi mensuel : version prospect (après P) et version espace client (après I, F ou U).
     for (const step of MONTHLY_STEPS) {
       const n = step.step.slice(1);
-      await one({ step, key: 'M_prospect', message: content.monthly.prospect(facts), origin: 'callback_done', file: `M-${n}-prospect.html`, label: `${step.step} (prospect)`, seqOrigin: 'P' });
-      await one({ step, key: 'M_account', message: content.monthly.account(facts), origin: 'callback_done', file: `M-${n}-compte.html`, label: `${step.step} (espace client)`, seqOrigin: 'I, F ou U' });
+      await one({ step, origin: 'callback_done', file: `M-${n}-prospect.html`, label: `${step.step} (prospect)`, seqOrigin: 'P', seqLabel: 'P' });
+      await one({ step, origin: 'callback_done', file: `M-${n}-compte.html`, label: `${step.step} (espace client)`, seqOrigin: 'I', seqLabel: 'I, F ou U' });
     }
   }
 
