@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import { SITE } from '@/data/site';
 import { DEFAULT_LOCALE, isRtl, type Locale } from '@/i18n/locales';
 import { appendHtmlFooter, buildEmailFooter, textToHtml } from './emailFooter';
+import { CALL_TZ, localToUtc, nextCallTime, tzOffset } from './callHours';
 import { emailOptedOut, unsubscribeUrl, type MailCategory, type PrefDb } from './emailPrefs';
 
 export const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
@@ -171,9 +172,10 @@ export function toE164(raw: string, locale = 'fr', cc?: string) {
     return s.replace(/^\+(33|32|41|44|61|31|972|48)0(?=\d{7})/, '+$1');
   }
   // Indicatif choisi dans le formulaire (prioritaire sur la langue du site) ; l’Italie garde le 0 initial.
-  const d = cc && /^\d{1,3}$/.test(cc) ? { cc, keepZero: cc === '39' } : DIAL[locale] || DIAL.fr;
+  // « intl » (outil d’agent) sans indicatif : aucun pays supposé — un 050-123-4567 israélien ne devient pas +33….
+  const d = cc && /^\d{1,3}$/.test(cc) ? { cc, keepZero: cc === '39' } : locale === 'intl' ? null : DIAL[locale] || DIAL.fr;
   let national: string | null = null;
-  if (/^\d{6,12}$/.test(s)) national = d.keepZero || !s.startsWith('0') ? `+${d.cc}${s}` : `+${d.cc}${s.slice(1)}`;
+  if (d && /^\d{6,12}$/.test(s)) national = d.keepZero || !s.startsWith('0') ? `+${d.cc}${s}` : `+${d.cc}${s.slice(1)}`;
   // Indicatif saisi sans « + » (33612345678, 447700900123) : retenu seulement si la lecture nationale n’est pas
   // un numéro valide et que la lecture internationale en est un (pays desservis uniquement).
   if (/^[1-9]\d{7,13}$/.test(s) && !(national && isValidCovered(national)) && isValidCovered(`+${s}`)) return `+${s}`;
@@ -221,34 +223,21 @@ export function langFromPhone(e164: string) {
   if (/^\+48/.test(e164)) return 'pl';
   if (/^\+31/.test(e164)) return 'nl';
   if (/^\+972/.test(e164)) return 'he';
-  // France, Belgique, Suisse, Luxembourg, Monaco, Canada francophone par défaut et Afrique francophone (+2xx).
-  if (/^\+(?:33|32|41|352|377|2[0-6]\d)/.test(e164)) return 'fr';
+  // France, Belgique, Suisse, Luxembourg, Monaco, départements d’outre-mer (+262, +590, +594, +596) et Afrique
+  // francophone seulement (Maghreb, Afrique de l’Ouest et centrale, océan Indien). Le reste de l’Afrique (+20 Égypte,
+  // +234 Nigeria, +254 Kenya, +27 Afrique du Sud…) part vers la campagne anglaise.
+  if (/^\+(?:33|32|41|352|377|262|590|594|596|212|213|216|22[1-9]|23[5-7]|24[0-3]|250|253|257|261|269)/.test(e164)) return 'fr';
   return 'en-gb';
 }
 
 /* ---------- Rappels programmés ---------- */
 
 /** Fuseau par défaut de chaque langue du site, quand le navigateur n’en fournit pas. */
-export const TZ: Record<string, string> = {
-  fr: 'Europe/Paris', 'en-gb': 'Europe/London', 'en-au': 'Australia/Sydney', it: 'Europe/Rome', pl: 'Europe/Warsaw', nl: 'Europe/Amsterdam', he: 'Asia/Jerusalem',
-};
+export const TZ: Record<string, string> = CALL_TZ;
 export const validTz = (tz: string) => { try { new Intl.DateTimeFormat('en', { timeZone: tz }); return true; } catch { return false; } };
 
-/** Écart (ms) entre l’heure locale d’un fuseau et l’heure UTC, à un instant donné. */
-export function tzOffset(at: Date, tz: string) {
-  const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
-    timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit',
-  }).formatToParts(at).map((x) => [x.type, x.value]));
-  return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second) - at.getTime();
-}
-
-/** Heure locale « AAAA-MM-JJTHH:MM » d’un fuseau → instant UTC. */
-export function localToUtc(local: string, tz: string) {
-  const m = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/.exec(local);
-  if (!m) return null;
-  const guess = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]);
-  return new Date(guess - tzOffset(new Date(guess), tz));
-}
+// Conversions de fuseau : src/lib/callHours.ts (aussi utilisé dans le navigateur).
+export { localToUtc, tzOffset };
 
 /**
  * Les `count` prochaines dates du calendrier local (AAAA-MM-JJ), aujourd’hui compris. Calcul sur le calendrier,
@@ -280,11 +269,13 @@ function slotDay(tz: string, days: number, lang: string) {
 /**
  * Moment du rappel, en UTC. Priorité : date précise (ISO avec décalage, ou heure locale du fuseau `tz`),
  * puis créneau du formulaire, sinon tout de suite. Toujours entre maintenant et 30 jours.
- * La campagne n’appelle de toute façon que dans ses plages horaires.
+ * Une date précise un jour non ouvré ou hors des plages d’appel du marché (src/lib/callHours.ts) est reportée au
+ * début du créneau ouvré suivant : la date confirmée (scheduled_for, WhatsApp) est celle où l’appel partira.
+ * `now` : horloge simulée pour les tests.
  */
-export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unknown; lang: string }) {
+export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unknown; lang: string; now?: number }) {
   const zone = typeof opts.tz === 'string' && validTz(opts.tz) ? opts.tz : TZ[opts.lang] || TZ.fr;
-  const now = Date.now();
+  const now = opts.now ?? Date.now();
   let at: Date | null = null;
   const raw = typeof opts.callAt === 'string' ? opts.callAt.trim() : '';
   if (raw) at = /(?:[zZ]|[+-]\d{2}:?\d{2})$/.test(raw) ? new Date(raw) : localToUtc(raw, zone);
@@ -293,7 +284,8 @@ export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unk
     at = localToUtc(`${slotDay(zone, days, opts.lang)}T${time}`, zone);
   }
   if (!at || Number.isNaN(at.getTime()) || at.getTime() <= now) return new Date(now);
-  return new Date(Math.min(at.getTime(), now + 30 * 86_400_000));
+  const capped = new Date(Math.min(at.getTime(), now + 30 * 86_400_000));
+  return raw ? nextCallTime(capped, opts.lang) : capped;
 }
 
 /** Locale d’affichage des dates pour chaque langue du site. */
@@ -326,6 +318,21 @@ export function checkCallAt(raw: string, tz: string): { at?: Date; problem?: 'un
   if (at.getTime() < Date.now() - 10 * 60_000) return { problem: 'past' };
   if (at.getTime() > Date.now() + 30 * 86_400_000) return { problem: 'too_far' };
   return { at };
+}
+
+/** Message lisible pour l’agent (et la personne) quand une limite de fréquence est atteinte (réponse 429),
+ *  dans la langue de l’échange (fr, en, it, pl, nl, he ; anglais par défaut). */
+export function tooManyMessage(lang: unknown) {
+  const key = String(lang ?? '').toLowerCase().slice(0, 2);
+  const text: Record<string, string> = {
+    fr: 'Trop de demandes en peu de temps pour ce contact : rien n’a été enregistré. Dites à la personne que la demande n’a pas pu être prise maintenant et réessayez dans une dizaine de minutes, sans le promettre à une heure précise.',
+    en: 'Too many requests for this contact in a short time: nothing was saved. Tell the person the request could not be taken right now and try again in about ten minutes, without promising a specific time.',
+    it: 'Troppe richieste in poco tempo per questo contatto: non è stato salvato nulla. Dica alla persona che la richiesta non può essere registrata ora e riprovi tra una decina di minuti, senza promettere un orario preciso.',
+    pl: 'Zbyt wiele żądań w krótkim czasie dla tego kontaktu: nic nie zostało zapisane. Powiedz osobie, że zgłoszenia nie można teraz przyjąć, i spróbuj ponownie za około dziesięć minut, bez obiecywania konkretnej godziny.',
+    nl: 'Te veel verzoeken in korte tijd voor dit contact: er is niets opgeslagen. Zeg tegen de persoon dat het verzoek nu niet kan worden aangenomen en probeer het over ongeveer tien minuten opnieuw, zonder een precies tijdstip te beloven.',
+    he: 'יותר מדי בקשות בזמן קצר עבור איש קשר זה: שום דבר לא נשמר. יש לומר לאדם שלא ניתן לקבל את הבקשה כרגע ולנסות שוב בעוד כעשר דקות, בלי להבטיח שעה מסוימת.',
+  };
+  return text[key === 'iw' ? 'he' : key] || text.en;
 }
 
 export const esc = (s: unknown) => String(s ?? '').replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]!));

@@ -6,7 +6,7 @@
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbInsert, dbSelect, esc, sendMail, clientIp, NOTIFY_TO } from '@/lib/server';
+import { dbInsert, dbSelect, esc, sendMail, clientIp, isAuthorized, tooManyMessage, NOTIFY_TO } from '@/lib/server';
 import { localeFromLang } from '@/lib/emailFooter';
 import { CONTACTS_DB, insertWithExtras, isYes, normalizeAgentLang, recordConsent, resolveLocale, selectWithFallback, upsertContact } from '@/lib/contacts';
 import type { Locale } from '@/i18n/locales';
@@ -148,17 +148,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const ip = clientIp(req);
 
   const b = req.body || {};
+  // Outils d’agents (clé IDENTIFY_KEY ou jeton des webhooks) : tous partent des mêmes serveurs Autocalls, donc les
+  // limites portent sur le contact (téléphone, email ou conversation) et non sur l’adresse IP, sinon elles
+  // deviendraient un plafond commun à tous les agents.
+  const trusted = identifyAllowed(b.key) || isAuthorized(req);
+  const contactKey = String(b.phone || '').replace(/\D/g, '') || String(b.email || '').trim().toLowerCase().slice(0, 160)
+    || String(b.conversation_id || b.call_id || '').slice(0, 80);
+  const limitKey = (scope: string) => (trusted && contactKey ? `${scope}:who:${contactKey}` : `${scope}:ip:${ip}`);
+  /** Réponse 429 avec un message lisible par l’agent, dans la langue de l’échange. */
+  const busy = (body: Record<string, unknown>) => res.status(429).json({ ...body, message_for_agent: tooManyMessage(b.language ?? b.lang) });
+  // Messenger (agent 21297) : pas de numéro E.164 ; la fiche est rattachée à l’email ou, à défaut, à l’identifiant de
+  // la conversation (« messenger:<id> » dans la colonne phone, jamais composé : les appels exigent un +E.164).
+  const messenger = String(b.channel || '').trim().toLowerCase() === 'messenger';
+  const messengerId = messenger ? String(b.conversation_id || b.call_id || '').replace(/[^\w.:-]/g, '').slice(0, 80) : '';
+  const messengerEmail = messenger && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(b.email || '').trim()) ? String(b.email).trim().toLowerCase().slice(0, 160) : '';
 
   // Reconnaissance d’un contact par son numéro (premier message WhatsApp, appel entrant) : seulement pour nos
   // assistants non publics (pas les widgets du site), et réponse minimale : prénom, profil, langue, dernière demande.
   if (b.action === 'identify') {
     if (!identifyAllowed(b.key)) return res.status(403).json({ known: false });
-    // Plafonds : par adresse et global (toutes adresses confondues) sur chaque instance.
-    if (tooMany(`identify:${ip}`, 60) || tooMany('identify:all', 300)) return res.status(429).json({ known: false });
+    // Plafonds (par instance) : par contact, et global pour tous les agents réunis.
+    if (tooMany(limitKey('identify'), 60) || tooMany('identify:all', 1000)) return busy({ known: false });
     const phone = String(b.phone || '').replace(/[^\d+]/g, '');
-    if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro non reconnu : identifie le besoin à partir du message.' });
+    const byPhone = /^\+\d{8,15}$/.test(phone);
+    // Messenger sans numéro : recherche par email, sinon par identifiant de conversation.
+    if (!byPhone && !(messengerEmail || messengerId)) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro non reconnu : identifie le besoin à partir du message.' });
     // Colonne locale (migration des relances) lue si elle existe ; sinon même lecture qu’avant.
-    const filter = `phone=eq.${encodeURIComponent(phone)}&order=created_at.desc&limit=5`;
+    const where = byPhone ? `phone=eq.${encodeURIComponent(phone)}`
+      : messengerEmail ? `email=eq.${encodeURIComponent(messengerEmail)}` : `phone=eq.${encodeURIComponent(`messenger:${messengerId}`)}`;
+    const filter = `${where}&order=created_at.desc&limit=5`;
     const rows = await selectWithFallback<{ name: string; email: string | null; type: string; agent: string | null; created_at: string; note: string | null; locale?: string | null }>(
       CONTACTS_DB, 'callbacks', `select=name,email,type,agent,created_at,note,locale&${filter}`, `select=name,email,type,agent,created_at,note&${filter}`).catch(() => []);
     if (!rows.length) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro inconnu : nouvelle personne. Pars de son message pour comprendre ce qu’elle veut, sans lui demander si elle est cliente.' });
@@ -185,15 +203,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // rappel : activité, besoins, volume, site, langue. Même clé secrète que identify. L’équipe est prévenue par email.
   if (b.action === 'save_lead') {
     if (!identifyAllowed(b.key)) return res.status(403).json({ saved: false });
-    if (tooMany(`lead:${ip}`, 60) || tooMany('lead:all', 300)) return res.status(429).json({ saved: false });
+    if (tooMany(limitKey('lead'), 60) || tooMany('lead:all', 1000)) return busy({ saved: false });
     const clip = (v: unknown, n: number) => String(v ?? '').replace(/[\[\]<>]/g, '').trim().slice(0, n);
-    const phone = clip(b.phone, 20).replace(/[^\d+]/g, '');
-    if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ saved: false, message: 'Numéro inconnu : fiche non enregistrée.' });
-    const day = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(phone)}&status=eq.lead&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=4`).catch(() => []);
+    const typed = clip(b.phone, 20).replace(/[^\d+]/g, '');
+    const e164 = /^\+\d{8,15}$/.test(typed) ? typed : '';
+    // Messenger sans numéro : clé « messenger:<conversation> » (ou l’email seul) au lieu du téléphone.
+    const phone = e164 || (messengerId ? `messenger:${messengerId}` : '');
+    if (!e164 && !(messenger && (messengerId || messengerEmail))) return res.status(200).json({ saved: false, message: 'Numéro inconnu : fiche non enregistrée.' });
+    const dupe = phone ? `phone=eq.${encodeURIComponent(phone)}` : `email=eq.${encodeURIComponent(messengerEmail)}`;
+    const day = await dbSelect('callbacks', `select=id&${dupe}&status=eq.lead&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=4`).catch(() => []);
     if (day.length >= 3) return res.status(200).json({ saved: false, message: 'Fiche déjà enregistrée aujourd’hui.' });
     // Langue en liste fermée (fr, en-gb, en-au, it, pl, nl, he) : « en » tranché par l’indicatif ; valeur inconnue → indicatif.
-    const lang = normalizeAgentLang(clip(b.language, 16), phone);
-    const resolved = resolveLocale({ agentLang: lang, phone });
+    const lang = normalizeAgentLang(clip(b.language, 16), e164);
+    const resolved = resolveLocale({ agentLang: lang, phone: e164 || undefined });
     const note = [
       clip(b.channel, 20) && `Canal : ${clip(b.channel, 20)}`, clip(b.activity, 300) && `Activité : ${clip(b.activity, 300)}`,
       clip(b.needs, 600) && `Besoins : ${clip(b.needs, 600)}`, clip(b.volume, 80) && `Volume : ${clip(b.volume, 80)}`,
@@ -201,7 +223,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `Rappel souhaité : ${b.wants_call === true || b.wants_call === 'true' ? 'oui (voir demande de rappel)' : 'non pour l’instant'}`,
     ].filter(Boolean).join(' — ');
     const row = {
-      name: clip(b.name, 120) || 'Prospect WhatsApp', phone, email: clip(b.email, 160) || null, company: clip(b.company, 160) || null,
+      name: clip(b.name, 120) || `Prospect ${messenger ? 'Messenger' : 'WhatsApp'}`, phone, email: clip(b.email, 160) || null, company: clip(b.company, 160) || null,
       sector: clip(b.sector, 80) || null, slot: 'aucun', note, type: 'commercial',
       agent: `Fiche prospect ${clip(b.channel, 20) || 'WhatsApp'}${lang ? ` [${lang}]` : ''}`, consent_call: false, status: 'lead',
     };
@@ -215,19 +237,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Fiche contact et journal des accords (jamais bloquants ; sautés tant que la migration n’est pas faite).
     const callId = clip(b.call_id ?? b.conversation_id, 80) || null;
     await Promise.all([
-      upsertContact(CONTACTS_DB, { email: row.email, name: clip(b.name, 120), company: row.company, sector: row.sector, phone, resolved, origin: 'agent_lead' }),
+      upsertContact(CONTACTS_DB, { email: row.email, name: clip(b.name, 120), company: row.company, sector: row.sector, phone: e164 || null, resolved, origin: 'agent_lead' }),
       answered && recordConsent(CONTACTS_DB, {
         email: row.email, channel: 'email', purpose: 'marketing', granted: isYes(b.marketing_email_consent), legal_basis: isYes(b.marketing_email_consent) ? 'consent' : null,
         notice_shown: false, locale: resolved.locale, source: `agent:save_lead:${clip(b.channel, 20) || 'WhatsApp'}`, call_id: callId,
       }),
     ]);
-    sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone})`, text: [...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
+    sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone || row.email})`, text: [...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
       `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})`, answered && `accord email marketing : ${isYes(b.marketing_email_consent) ? 'oui' : 'non'}`].filter(Boolean).join('\n') })
       .catch((e) => console.error('[agent-account] save_lead mail:', e.message));
     return res.status(200).json({ saved: true, message: 'Fiche enregistrée. Ne le dis pas à la personne, continue la conversation.' });
   }
 
-  if (tooMany(`ip:${ip}`, 10)) return res.status(429).json({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
+  if (tooMany(limitKey('account'), 10)) return busy({ message: 'Trop de demandes : réessayez dans quelques minutes.' });
   const email = String(b.email || '').trim().toLowerCase().slice(0, 160);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ message: 'Adresse email invalide : demandez à la personne de la vérifier.' });
 

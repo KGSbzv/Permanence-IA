@@ -3,20 +3,25 @@ import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
 import { isOptedOut } from '@/lib/optout';
 import { CONTACTS_DB, captureMeta, insertWithExtras, isYes, recordConsent, recordFormConsents, resolveLocale, upsertContact, type ContactOrigin } from '@/lib/contacts';
-import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164, tooManyMessage } from '@/lib/server';
 
-// Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
+// Limite simple (par instance) : 20 demandes par tranche de 10 minutes, par adresse IP ; pour un outil d’agent
+// authentifié par le jeton (tous les outils Autocalls partent des mêmes serveurs), par numéro ou par email.
 const hits = new Map<string, number[]>();
-function tooMany(ip: string) {
+function tooMany(key: string) {
   const now = Date.now();
-  const recent = (hits.get(ip) || []).filter((t) => now - t < 600_000);
+  const recent = (hits.get(key) || []).filter((t) => now - t < 600_000);
   recent.push(now);
-  hits.set(ip, recent);
-  if (hits.size > 5000) hits.clear();
+  hits.delete(key);
+  hits.set(key, recent);
+  while (hits.size > 5000) hits.delete(hits.keys().next().value as string);
   return recent.length > 20;
 }
 /** Marqueur posé par le serveur : accord WhatsApp et langue du message (lu aussi après un appel manqué). */
 const waMark = (lang: string) => `[WA:${lang}] confirmation WhatsApp demandée`;
+/** Marqueur de la langue de la campagne (langue du site) : SMS de repli après un appel manqué dans cette langue,
+ *  même si l’indicatif du numéro est celui d’un autre pays. */
+const langMark = (lang: string) => `[LANG:${lang}]`;
 // Créneaux du formulaire (valeurs fixes en français) : en anglais pour les agents des autres pays, qui les résument dans leur langue.
 const SLOT_EN: Record<string, string> = { 'Aujourd’hui après-midi': 'this afternoon', 'Demain matin': 'tomorrow morning', 'Demain après-midi': 'tomorrow afternoon' };
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
@@ -24,7 +29,11 @@ const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, ma
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
   const ip = clientIp(req);
-  if (tooMany(ip)) return res.status(429).json({ error: 'Trop de demandes, réessayez dans quelques minutes.' });
+  const authed = isAuthorized(req);
+  const who = String(req.body?.phone || '').replace(/\D/g, '') || String(req.body?.email || '').trim().toLowerCase();
+  if (tooMany(authed && who ? `who:${who}` : `ip:${ip}`)) {
+    return res.status(429).json({ error: 'Trop de demandes, réessayez dans quelques minutes.', message_for_agent: tooManyMessage(req.body?.language ?? req.body?.locale) });
+  }
   // Champ piège invisible : rempli uniquement par les robots. On répond « succès » sans rien faire.
   if (req.body?.website) return res.status(200).json({ success: true });
 
@@ -51,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
-  const fromAgent = isAuthorized(req) && (lang === 'intl' || Boolean(agent));
+  const fromAgent = authed && (lang === 'intl' || Boolean(agent));
   const campaignLang = lang === 'intl' ? langFromPhone(e164) : lang;
   // Date fournie par un outil d’agent (champ call_at) : illisible, passée ou à plus de 30 jours → rien n’est
   // enregistré et l’agent reçoit la date du jour pour redemander, au lieu d’un appel immédiat non souhaité.
@@ -103,7 +112,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     name, phone: e164, email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueur [WA] posé seulement par le serveur (crochets retirés du texte du visiteur) : sert au plafond quotidien.
-    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang)].filter(Boolean).join(' — ') || null, type: type === 'support' ? 'support' : 'commercial',
     agent: agent ? `${agent}${isLocale(locale) && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
@@ -145,7 +154,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ...(voice ? { voice } : {}),
         // Email saisi sur le site (accompagnement à l’essai, rappel) : transmis à l’agent, qui n’a pas à le redemander.
         ...(campaignEmail ? { email: campaignEmail } : {}),
-        note: [note, ticket && `Ticket : ${ticket}`, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
+        note: [note, ticket && `Ticket : ${ticket}`, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`,
+          // Date précise reportée au prochain créneau d’appel du marché : l’agent annonce l’heure réelle de l’appel.
+          slot === 'precise' && scheduled && `Appel prévu : ${describeLocal(callAt, zone, campaignLang)} (${zone})`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);

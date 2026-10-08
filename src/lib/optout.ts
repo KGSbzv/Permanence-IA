@@ -18,32 +18,33 @@ export const cancelPendingCallbacks = (e164: string) =>
 
 /**
  * Enregistre l’opposition (une seule ligne par numéro), annule les rappels en attente et prévient l’équipe.
- * `outcome` : ne_plus_appeler (opposition, liste de blocage) ou mauvais_contact (rappels annulés seulement).
+ * `outcome` : ne_plus_appeler (opposition, liste de blocage), desinscription (demandée sur WhatsApp : traitée comme
+ * une opposition, plus aucun appel ni message automatique) ou mauvais_contact (rappels annulés seulement).
  * `apply: false` (demande non authentifiée) : rien n’est annulé ni bloqué, l’équipe est seulement prévenue —
  * sinon n’importe qui pourrait faire annuler le rappel d’un autre numéro. L’opposition est alors appliquée
  * par le webhook de fin d’appel (résultat ne_plus_appeler, authentifié) ou à la main.
  * Renvoie le détail des étapes, pour les journaux et la réponse à l’agent.
  */
-export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_appeler' | 'mauvais_contact'; source: string; reason?: string; apply?: boolean }) {
+export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_appeler' | 'desinscription' | 'mauvais_contact'; source: string; reason?: string; apply?: boolean }) {
   const { phone, outcome, source } = opts;
+  const isOptOut = outcome !== 'mauvais_contact';
   const apply = opts.apply !== false;
   const reason = String(opts.reason || '').slice(0, 500);
   const skipped: PromiseSettledResult<boolean> = { status: 'fulfilled', value: true };
   const [cancel, already] = apply
-    ? await Promise.allSettled([cancelPendingCallbacks(phone), outcome === 'ne_plus_appeler' ? isOptedOut(phone) : Promise.resolve(true)])
+    ? await Promise.allSettled([cancelPendingCallbacks(phone), isOptOut ? isOptedOut(phone) : Promise.resolve(true)])
     : [{ status: 'rejected', reason: new Error('non appliqué : demande sans jeton') } as PromiseSettledResult<unknown>, skipped];
   let recorded: PromiseSettledResult<unknown> = { status: 'fulfilled', value: null };
-  if (apply && outcome === 'ne_plus_appeler' && !(already.status === 'fulfilled' && already.value)) {
+  if (apply && isOptOut && !(already.status === 'fulfilled' && already.value)) {
     [recorded] = await Promise.allSettled([dbInsert('call_events', {
       kind: OPTOUT_KIND, external_id: `optout-${Date.now()}`, customer_phone: phone, outcome,
-      summary: `Opposition « ne plus appeler » (${source})${reason ? ` : ${reason}` : ''}`,
+      summary: `${outcome === 'desinscription' ? 'Désinscription WhatsApp' : 'Opposition « ne plus appeler »'} (${source})${reason ? ` : ${reason}` : ''}`,
     })]);
   }
   const problems = [
     apply && cancel.status === 'rejected' && `annulation des rappels en attente : ${cancel.reason?.message}`,
     recorded.status === 'rejected' && `opposition non enregistrée en base : ${recorded.reason?.message}`,
   ].filter(Boolean) as string[];
-  const isOptOut = outcome === 'ne_plus_appeler';
   const lines = [
     `Numéro : ${phone}`, `Source : ${source}`, reason && `Motif : ${reason}`,
     `Rappels en attente : ${cancel.status === 'fulfilled' ? 'annulés' : 'NON annulés'}`,
@@ -53,7 +54,7 @@ export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_ap
   ].filter(Boolean) as string[];
   const [mail] = await Promise.allSettled([sendMail({
     to: NOTIFY_TO, category: 'internal',
-    subject: `${isOptOut ? 'Opposition : ne plus appeler' : 'Mauvais contact : rappels annulés'} — ${phone}`,
+    subject: `${outcome === 'desinscription' ? 'Désinscription WhatsApp : ne plus contacter' : isOptOut ? 'Opposition : ne plus appeler' : 'Mauvais contact : rappels annulés'} — ${phone}`,
     text: lines.join('\n'), html: `<p>${lines.map(esc).join('<br>')}</p>`,
   })]);
   if (mail.status === 'rejected') problems.push(`email : ${mail.reason?.message}`);
