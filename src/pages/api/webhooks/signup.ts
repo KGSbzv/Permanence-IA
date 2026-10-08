@@ -4,6 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, dbInsertIfNew, isAuthorized, sendMail } from '@/lib/server';
 import { CONTACTS_DB, advanceStage, resolveLocale, selectWithFallback, updateQuietly, upsertContact, type ResolvedLocale } from '@/lib/contacts';
 import { isLocale } from '@/i18n/locales';
+import { emailKey, isValidEmail, normEmail } from '@/lib/emailPrefs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
@@ -35,14 +36,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     locale?: string | null; locale_source?: string | null; origin_page?: string | null;
   }>(CONTACTS_DB, 'callbacks', `select=id,created_at,phone,company,sector,note,locale,locale_source,origin_page&${filter}`, `select=id,created_at,phone,company,sector,note&${filter}`)
     .catch(() => []);
-  // Langue de l’inscrit : celle de sa dernière demande sur le site (rapprochée par email), sinon à valider
-  // (la page d’inscription de l’app ne transmet ni langue ni provenance).
+  // Fiche contact créée avant l’inscription (email laissé sur /essai-gratuit, /api/contact) : langue et page.
+  let card: { locale?: string | null; locale_source?: string | null; origin_page?: string | null } | undefined;
+  if (!(previous && isLocale(previous.locale))) {
+    const norm = normEmail(email);
+    let key: string | null = null;
+    try { key = isValidEmail(norm) ? emailKey(norm) : null; } catch { key = null; }
+    if (key) [card] = await CONTACTS_DB.select<NonNullable<typeof card>>('contacts', `select=locale,locale_source,origin_page&email_key=eq.${key}&limit=1`).catch(() => []);
+  }
+  // Langue de l’inscrit : celle de sa dernière demande sur le site (rapprochée par email), sinon celle de sa fiche
+  // contact (formulaire d’avant inscription), sinon à valider (la page d’inscription de l’app ne la transmet pas).
   const resolved: ResolvedLocale = previous && isLocale(previous.locale)
     ? { locale: previous.locale, locale_source: (previous.locale_source as ResolvedLocale['locale_source']) || 'site_form', locale_needs_review: false }
-    : resolveLocale({ phone: phone || undefined });
+    : card && isLocale(card.locale) && card.locale_source && card.locale_source !== 'unknown'
+      ? { locale: card.locale, locale_source: card.locale_source as ResolvedLocale['locale_source'], locale_needs_review: false }
+      : resolveLocale({ phone: phone || undefined });
   await Promise.all([
     updateQuietly(CONTACTS_DB, 'signups', `email=eq.${encodeURIComponent(String(email).toLowerCase())}`, {
-      locale: resolved.locale, locale_source: resolved.locale_source, origin_page: previous?.origin_page || null,
+      locale: resolved.locale, locale_source: resolved.locale_source, origin_page: previous?.origin_page || card?.origin_page || null,
       autocalls_user_id: userId, phone: phone || previous?.phone || null, matched_callback_id: previous?.id || null,
     }),
     upsertContact(CONTACTS_DB, { email, name, phone: phone || previous?.phone || null, resolved, origin: 'signup', keepOrigin: true, autocallsUserId: userId })

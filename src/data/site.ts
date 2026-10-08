@@ -19,6 +19,22 @@ export const whatsappUrl = (text: string) => `https://wa.me/${SITE.whatsapp.e164
 // Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';
 export const REGISTER_URL = `${SITE.appUrl}/register`;
+/** Paramètres UTM repris de la page vers la création de compte. */
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+/**
+ * Lien de création de compte avec la langue du site (?lang=) et les UTM de la page affichée (`search` =
+ * window.location.search, vide côté serveur) : la langue et la provenance suivent l’inscrit.
+ */
+export function registerUrl(locale: string, search = '') {
+  const u = new URL(REGISTER_URL);
+  u.searchParams.set('lang', locale);
+  const q = new URLSearchParams(search);
+  for (const k of UTM_KEYS) {
+    const v = q.get(k);
+    if (v) u.searchParams.set(k, v.slice(0, 100));
+  }
+  return u.toString();
+}
 export const LOGIN_URL = `${SITE.appUrl}/login`;
 export const DEMO_URL = '/demo';
 

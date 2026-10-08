@@ -1,42 +1,91 @@
 // Essai gratuit : création du compte sur l’app (essai natif 14 j / 30 min), ou demande d’accompagnement.
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Check } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { Heading, MarketingConsent, MarketingNotice, PhoneField, ProfileFields, TrialBadges, dialCode, marketingFields, profileNote } from '@/components/ui';
-import { LOGIN_URL, REGISTER_URL } from '@/data/site';
+import { NOT_QUEUED } from '@/components/formTexts';
+import { LOGIN_URL, isActiveSector, registerUrl } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
+import { track } from '@/lib/analytics';
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Fiche contact avant la création du compte (/api/contact) : langue du site, page, UTM, case marketing.
+ *  Jamais bloquant : au plus 2,5 s d’attente, la suite continue même en cas d’échec. */
+async function saveContact(body: Record<string, unknown>) {
+  await Promise.race([
+    fetch('/api/contact', { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => null),
+    sleep(2500),
+  ]);
+}
 
 export default function EssaiGratuit() {
   const { c, market, offers, money, locale } = useI18n();
   const t = c.ui.pages.trial;
   const { days, minutes } = market.trial;
   const { query } = useRouter();
-  const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  // sent : demande de rappel enregistrée ; noCall : sans accord de rappel, rien n’est demandé à /api/callback.
+  const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'noCall' | 'error'>('idle');
+  const [queued, setQueued] = useState(true);
   const [error, setError] = useState('');
+  const [going, setGoing] = useState(false);
   const planQuery = typeof query.plan === 'string' ? query.plan : 'decouverte';
+  // Facturation annuelle choisie sur la grille des tarifs (lien ?billing=annual de PricingCards).
+  const annual = query.billing === 'annual';
+  // Lien de création de compte : langue du site, puis UTM de la page une fois dans le navigateur (pas d’écart d’hydratation).
+  const [register, setRegister] = useState(() => registerUrl(locale));
+  useEffect(() => { setRegister(registerUrl(locale, window.location.search)); }, [locale]);
+
+  /** Création du compte : l’email (et l’accord marketing) est enregistré avec la langue du site, puis redirection. */
+  async function startSignup(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    setGoing(true);
+    track('begin_trial_click', { link_url: register, language: locale, form: 'trial_signup' });
+    if (!f.get('website')) await saveContact({ email: f.get('email'), locale, origin: 'trial_signup', ...marketingFields(f) });
+    window.location.href = register;
+  }
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    if (!f.get('terms')) { setError(t.termsRequired); return; }
-    setState('sending'); setError('');
+    if (!f.get('terms')) { setError(t.termsOnlyRequired); return; }
+    setError('');
+    // Accord de rappel facultatif (case distincte des conditions) : sans lui, aucune demande de rappel. L’email et
+    // la langue sont gardés pour l’inscription, puis le bouton de création du compte est affiché.
+    if (f.get('consentCall') !== 'on') {
+      setState('sending');
+      if (!f.get('website')) {
+        await saveContact({ email: f.get('email'), name: f.get('name'), company: f.get('company'), sector: f.get('sector'), locale, origin: 'trial_signup', ...marketingFields(f) });
+      }
+      setState('noCall');
+      return;
+    }
+    setState('sending');
     try {
       const res = await fetch('/api/callback', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         // Champs destinés à l’équipe (back-office) : restent en français quelle que soit la langue du site.
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), email: f.get('email'), company: f.get('company'),
-          sector: f.get('sector'), consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
-          note: [`Trial onboarding request — plan: ${f.get('plan')} — company: ${f.get('company') || ''}`, profileNote(f)].filter(Boolean).join(' — '),
+          sector: f.get('sector'), consentCall: f.get('consentCall') === 'on', website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
+          note: [`Trial onboarding request — plan: ${f.get('plan')}${annual ? ' (annual billing)' : ''} — company: ${f.get('company') || ''}`, profileNote(f)].filter(Boolean).join(' — '),
           // Case marketing (décochée par défaut, distincte des conditions) et provenance : fiche contact et relances.
           ...marketingFields(f),
         }),
       });
-      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendError); }
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendError);
+      // queued === false : demande enregistrée et équipe prévenue, mais aucun appel automatique en file.
+      setQueued(data.queued !== false);
       setState('sent');
-    } catch (err: any) { setState('error'); setError(err.message); }
+      track('generate_lead', { lead_type: 'trial_onboarding', language: locale, form: 'trial', plan: String(f.get('plan') || '') });
+    } catch (err: any) {
+      // Panne réseau : fetch lève un TypeError au message du navigateur (« Failed to fetch », en anglais) → texte traduit.
+      setState('error'); setError((!(err instanceof TypeError) && err?.message) || t.sendError);
+    }
   }
 
   return (
@@ -65,15 +114,33 @@ export default function EssaiGratuit() {
             <ol className="mt-4 space-y-2 text-ink">
               {t.createSteps.map((s) => <li key={s}>{s}</li>)}
             </ol>
-            <a href={REGISTER_URL} className="btn-primary mt-6 w-full">{t.createCta}</a>
+            {/* Email avant la redirection : fiche contact avec la langue du site (relances), case marketing décochée. */}
+            <form onSubmit={startSignup} className="mt-5 grid gap-3">
+              <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
+              <div>
+                <label htmlFor="su-start-email" className="mb-1.5 block text-sm font-semibold text-ink">{t.email}</label>
+                <input id="su-start-email" name="email" type="email" required autoComplete="email" className="field" aria-describedby="su-start-email-notice" />
+                <MarketingNotice id="su-start-email-notice" />
+              </div>
+              <MarketingConsent />
+              <button type="submit" disabled={going} className="btn-primary mt-1 w-full">{t.createCta}</button>
+            </form>
             <p className="mt-3 text-center text-sm">{t.already} <a href={LOGIN_URL} className="font-semibold text-signal-deep hover:underline">{t.login}</a></p>
           </div>
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
             {state === 'sent' ? (
               <div role="status">
                 <p className="font-display text-2xl font-bold">{t.sentTitle}</p>
-                <p className="mt-3">{t.sentText}</p>
-                <a href={REGISTER_URL} className="btn-primary mt-6">{t.sentCta}</a>
+                <p className="mt-3">{queued ? t.sentText : NOT_QUEUED[locale]}</p>
+                <a href={register} className="btn-primary mt-6">{t.sentCta}</a>
+              </div>
+            ) : state === 'noCall' ? (
+              <div role="status">
+                <p className="font-display text-2xl font-bold">{t.createTitle}</p>
+                <ol className="mt-4 space-y-2 text-ink">
+                  {t.createSteps.map((s) => <li key={s}>{s}</li>)}
+                </ol>
+                <a href={register} className="btn-primary mt-6">{t.sentCta}</a>
               </div>
             ) : (
               <form onSubmit={submit} className="grid gap-4">
@@ -90,7 +157,8 @@ export default function EssaiGratuit() {
                     <label htmlFor="su-sector" className="mb-1.5 block text-sm font-semibold text-ink">{t.sector}</label>
                     <select id="su-sector" name="sector" className="field" defaultValue="">
                       <option value="">{t.sectorPlaceholder}</option>
-                      {c.sectors.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+                      {/* Secteurs en pause (santé) exclus de la liste. */}
+                      {c.sectors.filter(isActiveSector).map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
                       <option value="autre">{t.sectorOther}</option>
                     </select>
                   </div>
@@ -102,9 +170,14 @@ export default function EssaiGratuit() {
                   </div>
                   <div className="sm:col-span-2 grid gap-4"><ProfileFields labelClassName="mb-1.5 block text-sm font-semibold text-ink" optional={c.ui.components.callbackForm.optional} /></div>
                 </div>
+                {/* Deux cases distinctes (RGPD art. 7(2)) : conditions obligatoires, accord de rappel facultatif. */}
                 <label className="flex items-start gap-2.5 text-sm">
-                  <input type="checkbox" name="terms" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
-                  <span><RichText value={t.terms} linkClassName="font-semibold text-signal-deep underline" /></span>
+                  <input type="checkbox" name="terms" className="mt-1 h-4 w-4 shrink-0 accent-[#0FA3C4]" />
+                  <span><RichText value={t.termsOnly} linkClassName="font-semibold text-signal-deep underline" /></span>
+                </label>
+                <label className="flex items-start gap-2.5 text-sm">
+                  <input type="checkbox" name="consentCall" className="mt-1 h-4 w-4 shrink-0 accent-[#0FA3C4]" />
+                  <span>{t.consentCall}</span>
                 </label>
                 <MarketingConsent />
                 {error && <p role="alert" className="text-sm font-medium text-red-700">{error}</p>}

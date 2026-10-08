@@ -7,6 +7,8 @@ import { DEMO_URL, SIGNUP_URL, SITE, isActiveSector, whatsappUrl } from '@/data/
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
+import { isCallTime } from '@/lib/callHours';
+import { DATE_INVALID, NOT_QUEUED } from './formTexts';
 
 /* ---------- Mise en page ---------- */
 
@@ -163,14 +165,15 @@ export function ProfileFields({ labelClassName, dark = false, optional }: { labe
   const { locale } = useI18n();
   const pt = profileText(locale);
   const label = labelClassName;
+  const site = `cb-site-${useId().replace(/:/g, '')}`;
   const t = { optional };
   return (
     <>
           <div>
-            <label htmlFor="cb-site" className={label}>{pt.website} <span className="font-normal text-slate-light">{t.optional}</span></label>
+            <label htmlFor={site} className={label}>{pt.website} <span className="font-normal text-slate-light">{t.optional}</span></label>
             {/* « site_url » et non « website » : ce dernier nom est réservé au champ piège anti-robots. */}
-            <input id="cb-site" name="site_url" type="text" inputMode="url" autoComplete="url" placeholder="www.…" className="field" dir="ltr" aria-describedby="cb-site-hint" />
-            <p id="cb-site-hint" className={`mt-1 text-xs ${dark ? 'text-white/60' : 'text-slate-light'}`}>{pt.websiteHint}</p>
+            <input id={site} name="site_url" type="text" inputMode="url" autoComplete="url" placeholder="www.…" className="field" dir="ltr" aria-describedby={`${site}-hint`} />
+            <p id={`${site}-hint`} className={`mt-1 text-xs ${dark ? 'text-white/60' : 'text-slate-light'}`}>{pt.websiteHint}</p>
           </div>
           <fieldset>
             <legend className={label}>{pt.goals} <span className="font-normal text-slate-light">{t.optional}</span></legend>
@@ -250,18 +253,33 @@ export const marketingFields = (f: FormData) => ({
 export function CallbackForm({
   type = 'commercial', sector = '', compact = false, dark = false, submitLabel, onDone,
 }: { type?: 'commercial' | 'support' | 'demo'; sector?: string; compact?: boolean; dark?: boolean; submitLabel?: string; onDone?: () => void }) {
-  const { c, market, locale } = useI18n();
+  const { c, market, locale, path } = useI18n();
   const t = c.ui.components.callbackForm;
+  // Clés dateInvalid et notQueuedText lues dans le contenu dès qu’elles y sont, sinon textes de ./formTexts.
+  const tx = t as typeof t & { dateInvalid?: string; notQueuedText?: string };
+  const dateInvalid = tx.dateInvalid ?? DATE_INVALID[locale];
+  // Identifiants propres à chaque formulaire : deux formulaires sur une page n’ont plus d’id en double.
+  const uid = useId().replace(/:/g, '');
+  const id = (name: string) => `cb-${uid}-${name}`;
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const [queued, setQueued] = useState(true);
   const [error, setError] = useState('');
   const [slot, setSlot] = useState('asap');
   const [wa, setWa] = useState(false);
   const marketing = type !== 'support';
+  // Bornes du champ date (heure locale du visiteur) : à partir de maintenant, jusqu’à 30 jours.
+  const localInput = (ms: number) => new Date(ms - new Date(ms).getTimezoneOffset() * 60_000).toISOString().slice(0, 16);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
     if (!f.get('consent')) { setError(t.consentRequired); return; }
+    // Date précise : dans les 30 jours et dans les plages d’appel du marché (jour et heure, src/lib/callHours.ts).
+    if (f.get('slot') === 'precise') {
+      const at = new Date(String(f.get('callAt') || ''));
+      const ms = at.getTime();
+      if (Number.isNaN(ms) || ms < Date.now() || ms > Date.now() + 30 * 86_400_000 || !isCallTime(at, locale)) { setError(dateInvalid); return; }
+    }
     setState('sending'); setError('');
     try {
       const res = await fetch('/api/callback', {
@@ -284,11 +302,16 @@ export function CallbackForm({
         }),
       });
       const data = await res.json().catch(() => ({}));
+      // Date refusée par le serveur (passée, trop lointaine, illisible) : même message que le contrôle local.
+      if (res.status === 400 && /^call_at_(past|too_far|unreadable)$/.test(String(data.code || ''))) { setState('error'); setError(dateInvalid); return; }
       if (!res.ok) throw new Error((locale === 'fr' && data.error) || t.sendFailed);
+      // queued === false : demande enregistrée et équipe prévenue, mais aucun appel automatique en file.
+      setQueued(data.queued !== false);
       setState('sent'); onDone?.();
       track('generate_lead', { lead_type: type, language: locale, form: 'callback' });
     } catch (err: any) {
-      setState('error'); setError(`${err.message} ${t.retry(SITE.email)}`);
+      // Panne réseau : fetch lève un TypeError au message du navigateur (« Failed to fetch », en anglais) → texte traduit.
+      setState('error'); setError(`${(!(err instanceof TypeError) && err?.message) || t.sendFailed} ${t.retry(SITE.email)}`);
     }
   }
 
@@ -297,7 +320,7 @@ export function CallbackForm({
     return (
       <div role="status" className={`rounded-xl p-6 ${dark ? 'bg-white/10 text-white' : 'bg-signal-soft text-ink'}`}>
         <p className="font-display text-lg font-semibold">{t.sentTitle}</p>
-        <p className="mt-1 text-[15px]">{t.sentText}</p>
+        <p className="mt-1 text-[15px]">{queued ? t.sentText : tx.notQueuedText ?? NOT_QUEUED[locale]}</p>
       </div>
     );
   }
@@ -306,12 +329,12 @@ export function CallbackForm({
         {/* Champ piège invisible pour les robots (ne pas remplir) */}
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>
-        <div><label htmlFor="cb-name" className={label}>{t.name}</label><input id="cb-name" name="name" required autoComplete="name" className="field" /></div>
-        <div><label htmlFor="cb-company" className={label}>{t.company} <span className="font-normal text-slate-light">{t.optional}</span></label><input id="cb-company" name="company" autoComplete="organization" className="field" /></div>
-        <PhoneField id="cb-phone" label={t.phone} labelClassName={label} />
+        <div><label htmlFor={id('name')} className={label}>{t.name}</label><input id={id('name')} name="name" required autoComplete="name" className="field" /></div>
+        <div><label htmlFor={id('company')} className={label}>{t.company} <span className="font-normal text-slate-light">{t.optional}</span></label><input id={id('company')} name="company" autoComplete="organization" className="field" /></div>
+        <PhoneField id={id('phone')} label={t.phone} labelClassName={label} />
         <div>
-          <label htmlFor="cb-sector" className={label}>{t.sector}</label>
-          <select id="cb-sector" name="sector" defaultValue={sector} className="field">
+          <label htmlFor={id('sector')} className={label}>{t.sector}</label>
+          <select id={id('sector')} name="sector" defaultValue={sector} className="field">
             <option value="">{t.choose}</option>
             {/* Secteurs en pause (santé) exclus de la liste. */}
             {c.sectors.filter(isActiveSector).map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
@@ -319,15 +342,15 @@ export function CallbackForm({
           </select>
         </div>
         <div>
-          <label htmlFor="cb-volume" className={label}>{t.volume} <span className="font-normal text-slate-light">{t.optional}</span></label>
-          <select id="cb-volume" name="volume" defaultValue="" className="field">
+          <label htmlFor={id('volume')} className={label}>{t.volume} <span className="font-normal text-slate-light">{t.optional}</span></label>
+          <select id={id('volume')} name="volume" defaultValue="" className="field">
             <option value="">{t.choose}</option>
             {t.volumeOptions.map((v) => <option key={v} value={v}>{v}</option>)}
           </select>
         </div>
         <div>
-          <label htmlFor="cb-slot" className={label}>{t.when}</label>
-          <select id="cb-slot" name="slot" className="field" value={slot} onChange={(e) => setSlot(e.target.value)}>
+          <label htmlFor={id('slot')} className={label}>{t.when}</label>
+          <select id={id('slot')} name="slot" className="field" value={slot} onChange={(e) => setSlot(e.target.value)}>
             {/* Les valeurs envoyées à l’API restent fixes ; seuls les libellés changent selon la langue. */}
             <option value="asap">{t.slots.asap}</option>
             <option value="Aujourd’hui après-midi">{t.slots.todayAfternoon}</option>
@@ -338,23 +361,23 @@ export function CallbackForm({
         </div>
         {slot === 'precise' && (
           <div className={compact ? '' : 'sm:col-span-2'}>
-            <label htmlFor="cb-callat" className={label}>{t.preciseLabel}</label>
-            <input id="cb-callat" name="callAt" type="datetime-local" required className="field" min={new Date(Date.now() - new Date().getTimezoneOffset() * 60_000).toISOString().slice(0, 16)} />
+            <label htmlFor={id('callat')} className={label}>{t.preciseLabel}</label>
+            <input id={id('callat')} name="callAt" type="datetime-local" required className="field" min={localInput(Date.now())} max={localInput(Date.now() + 30 * 86_400_000)} />
           </div>
         )}
       </div>
       {/* Email facultatif, aussi dans le bloc compact (sans lui, aucune relance par email) ; mention d’information
           visible même case marketing décochée. */}
       <div>
-        <label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{compact ? t.optional : t.emailHint}</span></label>
-        <input id="cb-email" name="email" type="email" autoComplete="email" className="field" aria-describedby={marketing ? 'cb-email-notice' : undefined} />
-        {marketing && <MarketingNotice id="cb-email-notice" dark={dark} />}
+        <label htmlFor={id('email')} className={label}>{t.email} <span className="font-normal opacity-70">{compact ? t.optional : t.emailHint}</span></label>
+        <input id={id('email')} name="email" type="email" autoComplete="email" className="field" aria-describedby={marketing ? id('email-notice') : undefined} />
+        {marketing && <MarketingNotice id={id('email-notice')} dark={dark} />}
       </div>
       {!compact && type !== 'support' && <ProfileFields labelClassName={label} dark={dark} optional={t.optional} />}
-      <div><label htmlFor="cb-note" className={label}>{t.need}</label><textarea id="cb-note" name="note" rows={compact ? 2 : 3} className="field" placeholder={t.needPlaceholder} /></div>
+      <div><label htmlFor={id('note')} className={label}>{t.need}</label><textarea id={id('note')} name="note" rows={compact ? 2 : 3} className="field" placeholder={t.needPlaceholder} /></div>
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
         <input type="checkbox" name="consent" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
-        <span>{t.consent(market.brand)}</span>
+        <span>{t.consent(market.brand)} <a href={path('/confidentialite')} target="_blank" rel="noopener" className="underline">{c.ui.components.security.privacy}</a></span>
       </label>
       {/* Accord séparé et facultatif (décoché) : confirmation du rappel envoyée par WhatsApp. */}
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
@@ -375,9 +398,9 @@ export function CallbackForm({
 
 /** Indicatifs proposés (marchés servis et voisins). La valeur envoyée est l’indicatif sans « + ». */
 const DIAL_CODES: { id: string; flag: string; cc: string; ex: string }[] = [
-  { id: 'FR', flag: '🇫🇷', cc: '33', ex: '06 12 34 56 78' }, { id: 'BE', flag: '🇧🇪', cc: '32', ex: '0470 12 34 56' }, { id: 'CH', flag: '🇨🇭', cc: '41', ex: '078 123 45 67' },
-  { id: 'LU', flag: '🇱🇺', cc: '352', ex: '621 123 456' }, { id: 'MC', flag: '🇲🇨', cc: '377', ex: '06 12 34 56 78' }, { id: 'CA', flag: '🇨🇦', cc: '1', ex: '514 555 0123' },
-  { id: 'GB', flag: '🇬🇧', cc: '44', ex: '07123 456789' }, { id: 'IE', flag: '🇮🇪', cc: '353', ex: '085 123 4567' }, { id: 'AU', flag: '🇦🇺', cc: '61', ex: '0412 345 678' },
+  { id: 'FR', flag: '🇫🇷', cc: '33', ex: '06 39 98 12 34' }, { id: 'BE', flag: '🇧🇪', cc: '32', ex: '0470 12 34 56' }, { id: 'CH', flag: '🇨🇭', cc: '41', ex: '078 123 45 67' },
+  { id: 'LU', flag: '🇱🇺', cc: '352', ex: '621 123 456' }, { id: 'MC', flag: '🇲🇨', cc: '377', ex: '06 39 98 12 34' }, { id: 'CA', flag: '🇨🇦', cc: '1', ex: '514 555 0123' },
+  { id: 'GB', flag: '🇬🇧', cc: '44', ex: '07700 900123' }, { id: 'IE', flag: '🇮🇪', cc: '353', ex: '085 123 4567' }, { id: 'AU', flag: '🇦🇺', cc: '61', ex: '0491 570 156' },
   { id: 'NZ', flag: '🇳🇿', cc: '64', ex: '021 123 4567' }, { id: 'IT', flag: '🇮🇹', cc: '39', ex: '312 345 6789' }, { id: 'PL', flag: '🇵🇱', cc: '48', ex: '512 345 678' },
   { id: 'NL', flag: '🇳🇱', cc: '31', ex: '06 12345678' }, { id: 'IL', flag: '🇮🇱', cc: '972', ex: '050-123-4567' }, { id: 'US', flag: '🇺🇸', cc: '1', ex: '212 555 0123' },
   { id: 'DE', flag: '🇩🇪', cc: '49', ex: '0151 23456789' }, { id: 'ES', flag: '🇪🇸', cc: '34', ex: '612 34 56 78' }, { id: 'PT', flag: '🇵🇹', cc: '351', ex: '912 345 678' },

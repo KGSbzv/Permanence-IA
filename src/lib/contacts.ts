@@ -15,7 +15,8 @@ import { dbInsert, dbInsertIfNew, dbSelect, dbUpdate } from './server';
 export const MARKETING_TEXT_VERSION = 'mkt-2026-10-08';
 
 export type LocaleSource = 'site_form' | 'agent_call' | 'phone_prefix' | 'picker' | 'manual' | 'unknown';
-export type ContactOrigin = 'callback' | 'demo' | 'agent_lead' | 'trial_request' | 'contact' | 'signup';
+// trial_signup : email laissé sur /essai-gratuit juste avant la création du compte (/api/contact).
+export type ContactOrigin = 'callback' | 'demo' | 'agent_lead' | 'trial_request' | 'contact' | 'signup' | 'trial_signup';
 export type LegalBasis = 'consent' | 'b2b_legit_interest' | 'soft_opt_in' | 'inferred_consent' | 'contract';
 
 export interface ContactsDb {

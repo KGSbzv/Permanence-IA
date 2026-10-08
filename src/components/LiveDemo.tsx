@@ -5,7 +5,8 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE, isActiveSector } from '@/data/site';
-import { MarketingConsent, MarketingNotice, PhoneField, dialCode, marketingFields } from './ui';
+import { MarketingConsent, MarketingNotice, PhoneField, WhatsAppIcon, dialCode, marketingFields } from './ui';
+import { NOT_QUEUED } from './formTexts';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
 import { GENDERS, VOICES, type Gender } from '@/data/personas';
@@ -14,17 +15,6 @@ import { GENDERS, VOICES, type Gender } from '@/data/personas';
 const NATIVE: Record<Locale, string> = { fr: 'Français', 'en-gb': 'English (UK)', 'en-au': 'English (AU)', it: 'Italiano', pl: 'Polski', nl: 'Nederlands', he: 'עברית' };
 /** Libellés internes de la note (lus par l'équipe et l'agent de la campagne, en français). */
 const ROLE_NOTE = ['Réceptionniste', 'Commercial / qualification', 'Support'];
-// Demande reçue mais rappel automatique non mis en file (zone, plafond, panne) : l’équipe recontacte à la main,
-// sans promesse d’appel dans les minutes. Textes à déplacer dans ui/components.ts (liveDemo.notQueuedText) par la chaîne contenu.
-const NOT_QUEUED: Record<Locale, string> = {
-  fr: 'Le rappel automatique n’a pas pu être programmé : un conseiller vous recontacte dès que possible.',
-  'en-gb': 'The automatic callback could not be scheduled: a member of our team will get back to you as soon as possible.',
-  'en-au': 'The automatic callback couldn’t be scheduled: someone from our team will get back to you as soon as possible.',
-  it: 'Non è stato possibile programmare la richiamata automatica: un consulente la ricontatterà il prima possibile.',
-  pl: 'Nie udało się zaplanować automatycznego połączenia: konsultant skontaktuje się z Tobą tak szybko, jak to możliwe.',
-  nl: 'De automatische terugbelafspraak kon niet worden ingepland: een adviseur neemt zo snel mogelijk contact met u op.',
-  he: 'לא ניתן היה לתזמן שיחה חוזרת אוטומטית: נציג יחזור אליך בהקדם האפשרי.',
-};
 /** Teintes des orbes, dans l'ordre des rôles : [reflet, cœur, bord]. */
 const HUES: [string, string, string][] = [
   ['#9BE7F7', '#0FA3C4', '#0B5F78'],
@@ -351,6 +341,8 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), sector, consentCall: true, website: f.get('website') || undefined,
+          // Case facultative (décochée) : confirmation du rappel par WhatsApp (modèles pia_* approuvés).
+          whatsapp: Boolean(f.get('whatsapp')),
           // locale = langue de la démo (campagne d’appel) ; siteLocale = langue du site, celle des relances éventuelles.
           type: 'commercial', agent: 'Démo live', locale: lang, siteLocale: locale, voice: gender,
           // Email facultatif et cases marketing (décochées par défaut), avec la provenance de la demande.
@@ -521,7 +513,7 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
           ) : state === 'sent' ? (
             <div role="status" className="mt-4 rounded-2xl bg-white/[.07] p-5 ring-1 ring-white/10">
               <p className="font-display text-lg font-semibold">{t.sentTitle}</p>
-              <p className="mt-1 text-[14px] text-white/75">{queued ? t.sentText(voice) : NOT_QUEUED[locale]}</p>
+              <p className="mt-1 text-[14px] text-white/75">{queued ? t.sentText(voice) : (t as typeof t & { notQueuedText?: string }).notQueuedText ?? NOT_QUEUED[locale]}</p>
               <button type="button" onClick={() => switchMode('phone')} className="mt-3 text-sm font-semibold text-signal-glow underline-offset-4 hover:underline">{t.again}</button>
             </div>
           ) : (
@@ -539,6 +531,11 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
                 </div>
               </div>
               <label className="flex items-start gap-2 text-[13px] text-white/70"><input type="checkbox" name="consent" className="mt-0.5 h-4 w-4 shrink-0 accent-[#5AD3EC]" />{t.consent}</label>
+              {/* Accord séparé et facultatif (décoché) : confirmation du rappel envoyée par WhatsApp. */}
+              <label className="flex items-start gap-2 text-[13px] text-white/70">
+                <input type="checkbox" name="whatsapp" className="mt-0.5 h-4 w-4 shrink-0 accent-[#25D366]" />
+                <span className="inline-flex items-start gap-1.5"><WhatsAppIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#25D366]" />{c.site.whatsapp.optIn}</span>
+              </label>
               {/* Accords marketing séparés et décochés : email et WhatsApp (seul canal de suivi d’une démo sans email). */}
               <MarketingConsent dark whatsapp className="text-[13px]" />
               {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
