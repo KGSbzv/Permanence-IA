@@ -682,6 +682,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Marketing, połączenia i rezygnacja',
           body: [
             { p: ['Dzwonimy do Ciebie wyłącznie na Twoją prośbę lub za Twoją zgodą, a nasz agent przedstawia się jako AI. W każdej chwili możesz powiedzieć, że nie chcesz więcej połączeń, odpowiedzieć STOP na SMS, skorzystać z linku rezygnacji w e-mailu lub napisać na adres ', mail, ': wpiszemy Cię na naszą wewnętrzną listę sprzeciwów. W naszym własnym marketingu przestrzegamy obowiązujących zasad i rejestrów sprzeciwu (w Polsce uprzednia zgoda na marketing telefoniczny, także wobec firm — art. 398 Prawa komunikacji elektronicznej; TPS/CTPS, Do Not Call Register, Registro pubblico delle opposizioni itp.).'] },
+            { p: ['Każdy wysyłany przez nas e-mail wyjaśnia na dole, jak zarządzać preferencjami lub wypisać się. Na stronie ', { a: 'Preferencje e-mail', href: '/preferences-email' }, ' wybierasz, czy chcesz otrzymywać tylko niezbędne e-maile dotyczące konta (kody bezpieczeństwa, potwierdzenia płatności i faktury, odpowiedzi na Twoje zapytania), czy także nasze nowości, porady i oferty. Aby chronić Twój adres, strona najpierw wysyła Ci osobisty link.'] },
             { p: 'Za połączenia i wiadomości wysyłane przez naszych klientów odpowiadają oni sami: skieruj do nich swój sprzeciw; jeżeli skontaktujesz się z nami, przekażemy go.' },
           ],
         },

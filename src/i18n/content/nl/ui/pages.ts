@@ -673,6 +673,7 @@ export const UI_PAGES = {
           title: 'Marketing, gesprekken en afmelden',
           body: [
             { p: ['Wij bellen u alleen op uw verzoek of met uw instemming, en onze agent stelt zich voor als AI. U kunt op elk moment zeggen dat u niet meer gebeld wilt worden, STOP antwoorden op een sms, de afmeldlink in een e-mail gebruiken of mailen naar ', mail, ': wij zetten u op onze interne afmeldlijst. Voor onze eigen marketing respecteren wij de toepasselijke regels en belregisters (Bel-me-niet Register, TPS/CTPS, Do Not Call Register, Registro delle opposizioni enz.).'] },
+            { p: ['Onderaan elke e-mail die wij sturen staat hoe u uw voorkeuren beheert of zich afmeldt. Op de pagina ', { a: 'E-mailvoorkeuren', href: '/preferences-email' }, ' kiest u of u alleen de essentiële e-mails over uw account ontvangt (beveiligingscodes, betaalbewijzen en facturen, antwoorden op uw eigen vragen) of ook ons nieuws, onze tips en aanbiedingen. Om uw adres te beschermen, stuurt de pagina u eerst een persoonlijke link.'] },
             { p: 'Gesprekken en berichten van onze klanten vallen onder hun verantwoordelijkheid: richt uw bezwaar aan hen; als u contact met ons opneemt, sturen wij het door.' },
           ],
         },

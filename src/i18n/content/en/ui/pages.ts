@@ -673,6 +673,7 @@ export const UI_PAGES = {
           title: 'Marketing, calls and opting out',
           body: [
             { p: ['We only call you at your request or with your agreement, and our agent introduces itself as an AI. At any time you can say you no longer wish to be called, reply STOP to an SMS, use the unsubscribe link in an email or write to ', mail, ': we will add you to our internal suppression list. For our own marketing, we respect the applicable do-not-call registers (TPS/CTPS in the UK, the Do Not Call Register in Australia and the equivalent rules in other countries).'] },
+            { p: ['Every email we send explains at the bottom how to manage your preferences or unsubscribe. On the ', { a: 'Email preferences', href: '/preferences-email' }, ' page, you choose to receive only essential account emails (security codes, receipts and invoices, replies to your own requests) or also our news, tips and offers. To protect your address, the page first sends you a personal link.'] },
             { p: 'Calls and messages sent by our customers are their responsibility: please send your objection to them; if you contact us, we will pass it on.' },
           ],
         },

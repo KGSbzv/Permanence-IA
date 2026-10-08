@@ -689,6 +689,7 @@ export const UI_PAGES = {
           title: 'Prospection, appels et désinscription',
           body: [
             { p: ['Nous ne vous appelons qu’à votre demande ou avec votre accord, et notre agent se présente comme une IA. Vous pouvez à tout moment dire que vous ne souhaitez plus être appelé, répondre STOP à un SMS, utiliser le lien de désinscription d’un email ou écrire à ', mail, ' : nous vous inscrivons sur notre liste d’opposition interne. Pour notre propre prospection, nous respectons les listes d’opposition au démarchage applicables (consentement préalable des consommateurs en France, TPS/CTPS, Do Not Call Register, Registro delle opposizioni…).'] },
+            { p: ['Chaque email que nous envoyons indique en bas comment gérer vos préférences ou vous désinscrire. Sur la page ', { a: 'Préférences email', href: '/preferences-email' }, ', vous choisissez de ne recevoir que les emails essentiels du compte (codes de sécurité, reçus et factures, réponses à vos demandes) ou aussi nos actualités, conseils et offres. Pour protéger votre adresse, la page vous envoie d’abord un lien personnel.'] },
             { p: 'Les appels et messages envoyés par nos clients relèvent de leur responsabilité : adressez-leur votre opposition ; nous la leur transmettrons si vous nous contactez.' },
           ],
         },

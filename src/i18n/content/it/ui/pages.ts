@@ -673,6 +673,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Marketing, chiamate e opposizione',
           body: [
             { p: ['La chiamiamo soltanto su Sua richiesta o con il Suo consenso, e il nostro agente si presenta come un’AI. In qualsiasi momento può dire che non desidera più essere chiamato, rispondere STOP a un SMS, usare il link di disiscrizione di un’email o scrivere a ', mail, ': La inseriremo nella nostra lista interna di opposizione. Per il nostro marketing rispettiamo i registri delle opposizioni applicabili (Registro pubblico delle opposizioni, TPS/CTPS, Do Not Call Register…).'] },
+            { p: ['Ogni email che inviamo indica in fondo come gestire le Sue preferenze o disiscriversi. Nella pagina ', { a: 'Preferenze email', href: '/preferences-email' }, ' sceglie se ricevere solo le email essenziali dell’account (codici di sicurezza, ricevute e fatture, risposte alle Sue richieste) o anche le nostre novità, consigli e offerte. Per proteggere il Suo indirizzo, la pagina Le invia prima un link personale.'] },
             { p: 'Le chiamate e i messaggi inviati dai nostri clienti sono di loro responsabilità: rivolga loro la Sua opposizione; se ci contatta, la trasmetteremo.' },
           ],
         },
