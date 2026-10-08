@@ -947,7 +947,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Where to manage what',
         list: [
-          '"Add credits": buy a top-up; credit never expires.',
+          '"Add credits": buy a top-up (any amount from US$5); credit never expires. You can also buy message credits there: 100 credits for US$1, from 100 credits.',
           '"Change plan": switch plans. If you often go over, the next plan up works out cheaper per minute.',
           '"Billing info": payment method, invoices and subscription.',
           '"Limits": what your plan allows (agents, concurrent calls, numbers…).',

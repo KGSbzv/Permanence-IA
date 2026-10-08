@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Een AI-receptionist die elk gesprek aanneemt, 24 uur per dag',
     pitch: 'Met het Receptionist-abonnement worden uw gesprekken aangenomen, veelgestelde vragen beantwoord, afspraken ingepland en ontvangt u van elke aanvraag een duidelijke samenvatting. Eenvoudig in te stellen, zonder gedoe.',
     cta: 'Kies Receptionist',
-    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 3,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger, berichtcredits door minuten om te zetten (1 min = 9 credits)'],
+    highlights: ['1 AI-spraakagent die 24/7 opneemt', '2 gelijktijdige gesprekken', '1 eigen nummer mogelijk (optie, vanaf $ 3,99 excl. btw/maand) en 1 kennisbank', 'Gekoppelde agenda en webwidget', 'Doorverbinden naar uw team', 'Sms, WhatsApp en Messenger, 200 berichtcredits per maand (≈ 65 schriftelijke antwoorden)'],
   },
   assistant: {
     name: 'Assistent',
@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Uitgaande campagnes', detail: 'Opvolging, bevestigingen en herinneringen die automatisch worden gebeld.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Onbeperkt', 'sur-mesure': 'Onbeperkt' } },
       { label: 'Sms en WhatsApp', detail: 'Schriftelijk contact op één plek, betaald met berichtcredits.', cells: all(true) },
       { label: 'Messenger en Instagram', detail: 'Berichten van sociale netwerken in dezelfde inbox.', cells: all(true) },
-      { label: 'Inbegrepen berichtcredits', detail: 'Credits die elke maand worden toegekend voor schriftelijk contact (websitechat, WhatsApp, Messenger, Instagram, sms). Een schriftelijk AI-antwoord kost 3 credits. Meer nodig? Zet minuten om in uw klantomgeving: 1 minuut = 9 credits.', cells: { decouverte: false, receptionniste: 'Niet inbegrepen (minuten omzetten)', assistant: '1.000 / maand (≈ 330 antwoorden)', 'centre-appels': '3.000 / maand (≈ 1.000 antwoorden)', 'sur-mesure': 'Op aanvraag' } },
+      { label: 'Inbegrepen berichtcredits', detail: 'Credits die elke maand worden toegekend voor schriftelijk contact (websitechat, WhatsApp, Messenger, Instagram, sms). Een schriftelijk AI-antwoord kost 3 credits. Meer nodig? Koop ze in uw klantomgeving (Add credits): 100 credits voor $ 1, vanaf 100 credits. U kunt ook minuten omzetten: 1 minuut = 9 credits.', cells: { decouverte: false, receptionniste: '200 / maand (≈ 65 antwoorden)', assistant: '1.000 / maand (≈ 330 antwoorden)', 'centre-appels': '3.000 / maand (≈ 1.000 antwoorden)', 'sur-mesure': 'Op aanvraag' } },
     ],
   },
   {

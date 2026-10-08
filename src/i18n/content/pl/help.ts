@@ -92,7 +92,7 @@ export const HELP_TASKS: HelpTask[] = [
   {
     title: 'Dokup minuty lub zmień pakiet',
     steps: [
-      'Doraźnie: Add credits (doładowanie kredytów) i wybierz kwotę. Kredyty nie wygasają.',
+      'Doraźnie: Add credits (doładowanie kredytów) i wpisz kwotę, od 5 $. Kredyty nie wygasają.',
       'Jeśli często przekraczasz limit: Change plan — wyższy pakiet wychodzi taniej za minutę.',
     ],
   },

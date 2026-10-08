@@ -172,7 +172,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'I 5 blocchi di buone istruzioni',
         list: [
-          'Ruolo e identità: «Sei l’assistente virtuale (AI) di accoglienza dello studio X, specializzato in… Ti presenti sempre come assistente virtuale.»',
+          'Ruolo e identità: «Sei l’assistente AI di accoglienza dello studio X, specializzato in… Fin dall’inizio della chiamata dici che sei un’AI.»',
           'Stile: tono, uso del Lei, frasi brevi, niente gergo tecnico.',
           'Informazioni chiave: servizi, orari, tariffe, indirizzo.',
           'Regole: cosa verificare, quando trasferire, cosa non promettere mai.',
@@ -259,7 +259,7 @@ export const GUIDES: Guide[] = [
       },
       {
         title: 'Il messaggio di benvenuto registrato',
-        text: 'Per un benvenuto con la Sua voce, può caricare un file audio riprodotto alla risposta; il messaggio deve comunque precisare che risponde un assistente virtuale (AI).',
+        text: 'Per un benvenuto con la Sua voce, può caricare un file audio riprodotto alla risposta; il messaggio deve comunque precisare che risponde un assistente AI.',
         steps: [
           'Registri il benvenuto in un ambiente silenzioso (meno di 10 secondi).',
           'Carichi il file nelle impostazioni dell’agente e ne attivi la riproduzione.',
@@ -947,7 +947,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Dove gestire cosa',
         list: [
-          '«Add credits»: acquistare una ricarica; il credito non scade.',
+          '«Add credits»: acquistare una ricarica (importo libero, a partire da 5 $); il credito non scade. Può anche acquistarvi crediti messaggi: 100 crediti per 1 $, a partire da 100 crediti.',
           '«Change plan»: cambiare piano. Se supera spesso i minuti, il piano superiore costa meno al minuto.',
           '«Billing info»: metodo di pagamento, fatture e abbonamento.',
           '«Limits»: cosa consente il Suo piano (agenti, chiamate simultanee, numeri…).',

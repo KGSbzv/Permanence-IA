@@ -9,7 +9,7 @@ export const SITE_TEXT = {
   payg: (rate: string) => `Not ready for a plan? Pay as you go: ${rate} excl. tax per minute, no subscription. Add credit whenever you like (Add credits); it never expires. A plan costs less as soon as your calls are regular.`,
   talkNow: 'Talk to our agent right now',
   talkNowSub: 'Live demo, free, no sign-up',
-  rechargeFreeAmount: 'You choose the amount: enter it in your customer area (Add credits). The amounts above are examples.',
+  rechargeFreeAmount: 'You choose the amount, from US$5: enter it in your customer area (Add credits). The amounts above are examples.',
   consent: { title: 'Measurement cookies', text: 'With your consent, we use cookies to measure visits to the site (Google Analytics) and how well our ads perform on Facebook and Instagram (Meta Pixel). Nothing is set without your consent, and declining won’t stop you using the site.', accept: 'Accept', reject: 'Decline', policy: 'Learn more', manage: 'Manage cookies' },
   keepNumber: { title: 'You keep your number', text: 'No change of provider or equipment: a simple call forward, permanent or only when you don’t answer, and the agent takes over.' },
   fxNote: (date: string) => `Local-currency amounts are indicative, at the ECB reference rate of ${date}. Plans are billed in US dollars: the amount charged depends on your bank’s exchange rate on the day of payment.`,

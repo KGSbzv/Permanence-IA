@@ -172,7 +172,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'De 5 bouwstenen van goede instructies',
         list: [
-          'Rol en identiteit: “Je bent de virtuele assistent (AI) van praktijk X, gespecialiseerd in…”',
+          'Rol en identiteit: “Je bent de AI-assistent van praktijk X, gespecialiseerd in… Je zegt aan het begin van het gesprek dat je een AI bent.”',
           'Stijl: toon, aanspreekvorm (u of je), korte zinnen, geen vakjargon.',
           'Belangrijke informatie: diensten, openingstijden, tarieven, adres.',
           'Regels: wat gecontroleerd moet worden, wanneer doorverbinden, wat nooit beloofd mag worden.',
@@ -947,7 +947,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Waar u wat beheert',
         list: [
-          '“Add credits”: een opwaardering kopen; het tegoed vervalt niet.',
+          '“Add credits”: een opwaardering kopen (vrij bedrag, vanaf $ 5); het tegoed vervalt niet. U kunt er ook berichtcredits kopen: 100 credits voor $ 1, vanaf 100 credits.',
           '“Change plan”: van abonnement wisselen. Zit u er vaak boven, dan is het grotere abonnement per minuut goedkoper.',
           '“Billing info”: betaalmethode, facturen en abonnement.',
           '“Limits”: wat uw abonnement toestaat (agents, gelijktijdige gesprekken, nummers…).',

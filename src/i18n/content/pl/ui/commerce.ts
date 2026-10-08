@@ -186,7 +186,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       included: 'Co miesiąc w cenie pakietu:',
       includedValue: (credits: string, replies: string) => `${credits} kredytów / mies. (≈ ${replies} odpowiedzi)`,
       notIncludedValue: 'Brak w cenie: zamień minuty',
-      convert: 'Możesz też zamienić minuty na kredyty w panelu klienta: 1 minuta = 9 kredytów.',
+      convert: 'Możesz też kupić je w panelu klienta (Add credits): 100 kredytów za 1 $, od 100 kredytów, albo zamienić minuty na kredyty: 1 minuta = 9 kredytów.',
       balance: 'Saldo sprawdzisz w panelu klienta. Przy 0 kredytów odpowiedzi pisemne oraz wysyłka SMS-ów i wiadomości WhatsApp zostają wstrzymane do czasu doładowania.',
     },
     faq: {

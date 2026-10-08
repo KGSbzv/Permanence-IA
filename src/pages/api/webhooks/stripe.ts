@@ -4,7 +4,9 @@
 // tables pas encore créées : 200 sans enregistrement et alerte à l’équipe (une par heure).
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { alertTeam, dbInsertIfNew, dbSelect, dbUpdate } from '@/lib/server';
-import { applyStripeEvent, stripeCustomerFetcher, verifyStripeSignature, type StripeDb } from '@/lib/relances/stripe';
+import { applyStripeEvent, stripeCustomerFetcher, stripeCustomerLocaleSetter, verifyStripeSignature, type StripeDb } from '@/lib/relances/stripe';
+import { emailKey } from '@/lib/emailPrefs';
+import { isLocale } from '@/i18n/locales';
 
 // Corps brut indispensable à la vérification de la signature.
 export const config = { api: { bodyParser: false } };
@@ -26,6 +28,12 @@ function readRaw(req: NextApiRequest) {
   });
 }
 
+// Langue des factures Stripe : celle de la fiche contact du site (clé STRIPE_CUSTOMERS_KEY absente : rien n’est écrit).
+async function contactLocale(email: string) {
+  const rows = await dbSelect<{ locale: string | null }>('contacts', `select=locale&email_key=eq.${emailKey(email)}&locale=not.is.null&limit=1`);
+  return isLocale(rows[0]?.locale) ? rows[0].locale : null;
+}
+
 const missingTable = (e: unknown) => /PGRST205|42P01|\b404\b/.test(String((e as Error)?.message ?? e));
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -40,7 +48,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   let event: any;
   try { event = JSON.parse(raw.toString('utf8')); } catch { return res.status(400).json({ error: 'JSON invalide.' }); }
   try {
-    const { handled } = await applyStripeEvent(event, DB, stripeCustomerFetcher());
+    const setLocale = stripeCustomerLocaleSetter();
+    const { handled } = await applyStripeEvent(event, DB, stripeCustomerFetcher(), setLocale && { lookup: contactLocale, set: setLocale });
     return res.status(200).json({ received: true, handled });
   } catch (e: any) {
     if (missingTable(e)) {

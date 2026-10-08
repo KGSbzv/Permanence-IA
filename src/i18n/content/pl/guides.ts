@@ -946,7 +946,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Gdzie czym zarządzać',
         list: [
-          '„Add credits”: zakup doładowania; kredyty nie wygasają.',
+          '„Add credits”: zakup doładowania (dowolna kwota, od 5 $); kredyty nie wygasają. Możesz tam też kupić kredyty na wiadomości: 100 kredytów za 1 $, od 100 kredytów.',
           '„Change plan”: zmiana pakietu. Jeśli często przekraczasz limit, wyższy pakiet wychodzi taniej za minutę.',
           '„Billing info”: metoda płatności, faktury i subskrypcja.',
           '„Limits”: co obejmuje Twój pakiet (agenci, jednoczesne połączenia, numery…).',

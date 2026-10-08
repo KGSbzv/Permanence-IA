@@ -246,7 +246,7 @@ D9. SMS qui ne partent pas
 Il faut un numéro compatible SMS et des crédits de messages. Vérifier le pays et le type de numéro, et le solde de crédits.
 
 D10. Minutes épuisées
-« Vos minutes du mois sont consommées. Vous pouvez ajouter du crédit tout de suite dans "Add credits" (du montant de votre choix), ou passer au forfait supérieur dans "Change plan" si cela arrive souvent. » Les minutes incluses se renouvellent à la date anniversaire de l'abonnement. La recharge automatique et l'alerte de solde bas existent.
+« Vos minutes du mois sont consommées. Vous pouvez ajouter du crédit tout de suite dans "Add credits" (du montant de votre choix, à partir de 5 $), ou passer au forfait supérieur dans "Change plan" si cela arrive souvent. » Les minutes incluses se renouvellent à la date anniversaire de l'abonnement. La recharge automatique et l'alerte de solde bas existent.
 
 D11. Paiement refusé ou carte expirée
 Mettre à jour la carte dans « Billing info ». Les paiements sont traités par Stripe : l'agent ne prend jamais de numéro de carte, ni à l'oral ni à l'écrit. Si le problème persiste, ticket « facturation ».
@@ -353,8 +353,8 @@ L'assistante d'aide (bulle en bas à droite de app.permanenceia.com) guide le cl
 F5. Crédits de messages
 - Ils paient les échanges écrits : réponses de l'IA sur WhatsApp, SMS, Messenger, Instagram et chat, et messages envoyés.
 - Coûts : réponse écrite de l'IA (chat du site, WhatsApp, Messenger, Instagram) = 3 crédits ; message WhatsApp reçu ou envoyé en session = 1,4 crédit ; SMS envoyé = 2 crédits (peut varier selon l'opérateur ou le pays) ; message modèle WhatsApp (template) = tarif de Meta selon le pays et la catégorie, majoré ; appels WhatsApp facturés en minutes.
-- Inclus chaque mois : Réceptionniste aucun (crédits obtenus en convertissant des minutes : 1 minute = 9 crédits), Assistant 1 000 (≈ 330), Centre d'appels 3 000 (≈ 1 000), Sur mesure sur devis. Aucun crédit n'est confirmé pour l'essai gratuit : ne pas en promettre.
-- En obtenir plus : convertir des minutes depuis l'espace client, 1 minute = 9 crédits. Ne jamais donner d'équivalence en dollars.
+- Inclus chaque mois : Réceptionniste 200 (≈ 65), Assistant 1 000 (≈ 330), Centre d'appels 3 000 (≈ 1 000), Sur mesure sur devis. Aucun crédit n'est confirmé pour l'essai gratuit : ne pas en promettre.
+- En obtenir plus : les acheter dans l'espace client, rubrique "Add credits" : 100 crédits pour 1 $, minimum 100 crédits. Autre possibilité, moins avantageuse : convertir des minutes, 1 minute = 9 crédits.
 - Solde visible dans l'espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s'arrêtent jusqu'à la recharge.
 
 F6. Ce que chaque canal peut faire

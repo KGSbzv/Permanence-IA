@@ -19,7 +19,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Your phone numbers', label: 'Uw nummers', text: 'Uw nummers, import via Twilio / Telnyx en de SIP-koppeling.' },
   { en: 'Automate platform', label: 'Automatiseringen', text: 'No-code automatiseringen gekoppeld aan meer dan 300 tools (Assistent-abonnement en hoger).' },
   { en: 'Change plan', label: 'Abonnement wijzigen', text: 'Overstappen op een groter of kleiner abonnement.' },
-  { en: 'Add credits', label: 'Tegoed toevoegen', text: 'Een opwaardering van minuten kopen; het tegoed vervalt niet.' },
+  { en: 'Add credits', label: 'Tegoed toevoegen', text: 'Tegoed kopen (minuten boven uw abonnement, berichten); het tegoed vervalt niet.' },
   { en: 'Billing info', label: 'Facturatie', text: 'Betaalmethode, facturen, abonnement en opzegging.' },
   { en: 'Limits', label: 'Limieten', text: 'Wat uw abonnement toestaat: agents, gelijktijdige gesprekken, functies.' },
   { en: 'API Keys', label: 'API-sleutels', text: 'Uw eigen software koppelen (alle abonnementen).' },
@@ -94,7 +94,7 @@ export const HELP_TASKS: HelpTask[] = [
   {
     title: 'Minuten toevoegen of van abonnement wisselen',
     steps: [
-      'Eenmalig: Add credits (tegoed toevoegen) en kies een opwaardering. Het tegoed vervalt niet.',
+      'Eenmalig: Add credits (tegoed toevoegen) en vul het bedrag van de opwaardering in, vanaf $ 5. Het tegoed vervalt niet.',
       'Gaat u er vaak overheen? Kies dan een groter abonnement via Change plan: dat is per minuut goedkoper.',
     ],
   },

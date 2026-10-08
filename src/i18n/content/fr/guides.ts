@@ -199,7 +199,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Les 5 blocs d’une bonne consigne',
         list: [
-          'Rôle et identité : « Tu es l’assistante virtuelle (IA) du cabinet X, spécialisé en… Tu dis dès le début de l’appel que tu es une IA. »',
+          'Rôle et identité : « Tu es l’assistante IA du cabinet X, spécialisé en… Tu dis dès le début de l’appel que tu es une IA. »',
           'Style : ton, vouvoiement, phrases courtes, pas de jargon.',
           'Informations clés : services, horaires, tarifs, adresse.',
           'Règles : ce qu’il faut vérifier, quand transférer, ce qu’il ne faut jamais promettre.',
@@ -974,7 +974,7 @@ export const GUIDES: Guide[] = [
       {
         title: 'Où gérer quoi',
         list: [
-          '« Add credits » : acheter une recharge ; le crédit ne périme pas.',
+          '« Add credits » : acheter une recharge (montant libre, dès 5 $) ; le crédit ne périme pas. Vous pouvez aussi y acheter des crédits de messages : 100 crédits pour 1 $, dès 100 crédits.',
           '« Change plan » : changer de forfait. Si vous dépassez souvent vos minutes incluses, le forfait supérieur revient moins cher à la minute.',
           '« Billing info » : moyen de paiement, factures et abonnement.',
           '« Limits » : ce que votre forfait autorise (agents, appels simultanés, numéros…).',

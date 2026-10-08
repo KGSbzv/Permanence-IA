@@ -7,8 +7,8 @@ Le site en 7 langues, les formulaires, les 32 agents commerciaux, les e-mails et
 Ce qui bloque encore les ventes :
 - **Aucun test réel** de paiement, d'appel ou d'inscription n'a été fait. Claude n'a pas le droit de les faire.
 - **Stripe** marque le représentant du compte (Joseph Haddad) « Invalid ». Aucun examen n'est en cours, paiements et virements sont actifs, seules les Cartes Bancaires sont en pause.
-- **Le forfait Réceptionniste** n'a pas les 200 crédits promis par le site.
-- **Autocalls** n'a pas encore répondu sur la taxe au paiement et sur l'essai.
+- **Les bases de connaissances** gardent d'anciennes versions actives : Autocalls confirme que les agents mélangent anciens et nouveaux prix. Leur suppression est à faire par vous (liste prête).
+- **Autocalls a répondu** à 22 questions sur 24 le 8 octobre au soir (section 10). Le forfait Réceptionniste reçoit ses 200 crédits, et la taxe automatique est coupée.
 - **L'avocat et le comptable** ne sont pas encore choisis.
 
 Les relances tournent en mode test toutes les heures depuis le 8 octobre (13 h UTC) : elles n'envoient rien aux contacts.
@@ -107,7 +107,7 @@ Il y a eu 16 contrôles en échec :
    - demander un rappel et ne pas décrocher : il faut un répondeur, puis un SMS ou un WhatsApp ;
    - faire écouter les voix par des natifs.
 3. **Tester l'inscription** avec une adresse Gmail : le message de bienvenue doit arriver hors spam.
-4. **Forfait Réceptionniste.** Admin Autocalls > Plans > New plan : Included Credits 200. Désactiver 1646, puis donner le nouveau numéro de forfait à Claude. *C'est une promesse du site.*
+4. **Forfait Réceptionniste.** Plus rien à faire : Autocalls met 200 crédits sur 1646 (dès le prochain renouvellement), et Claude a lancé « Resync Billing Portal ».
 5. **Campagnes.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240.
 6. **Mot de passe Zoho visible dans Autocalls.** Dans accounts.zoho.com > Sécurité > Mots de passe d'application, créer un nouveau mot de passe pour Autocalls (Settings > SMTP) et un pour ZOHO_SMTP_PASS. Ne pas toucher à RELANCES_IMAP_PASS.
 7. **Bases de connaissances.** Autocalls > Knowledge base : supprimer les documents listés dans docs/autocalls-kb-a-supprimer.md (Claude ne supprime jamais de données définitivement, même avec votre accord).
@@ -151,11 +151,11 @@ La flèche → donne la recommandation de Claude.
 10. **Bouton « Connect AI ».** → Le garder masqué et retirer la ligne du comparatif.
 11. **Bulle sur téléphone.** → La masquer quand elle est fermée, sous 640 px.
 12. **Google Analytics.** → Ne rien charger avant « Accepter ».
-13. **Jeton dans les adresses des webhooks.** → Le remplacer, et le passer dans un en-tête.
+13. **Jeton dans les adresses des webhooks.** Autocalls ne propose pas d'en-tête : seulement le jeton dans l'adresse, ou une automatisation « appel terminé » suivie d'une requête HTTP avec une connexion. → Remplacer le jeton, puis passer les webhooks de fin d'appel par une automatisation.
 14. **Case de la démo par téléphone.** → Élargir le texte, après avis de l'avocat.
 15. **Conservation des données.** → 90 jours, comme annoncé.
 16. **Langues.** → Vouvoiement en polonais. Anglais par défaut.
-17. **Moyens de paiement.** → Garder iDEAL. Couper Affirm, Klarna et Cash App Pay.
+17. **Moyens de paiement.** Selon Autocalls, le paiement des forfaits affiche les moyens activés dans Stripe, mais SEPA n'apparaît que sur des prix en euros, et la plateforme facture en dollars. Recharges et numéros débitent la carte enregistrée. → Couper Affirm, Klarna et Cash App Pay. Pour iDEAL, regarder s'il apparaît lors du test de paiement.
 18. **Qui rappelle pendant l'essai.** → L'agent IA de support, et un humain sur demande.
 
 ## 7. Relances commerciales
@@ -198,3 +198,30 @@ L'arrêt est possible à tout moment.
 - Autocalls : docs/autocalls-questions-2026-10-08.md, docs/autocalls-questions-whatsapp.md, docs/autocalls-kb-a-supprimer.md et docs/autocalls-agents-a-faire-proprietaire.md
 - WhatsApp : docs/autocalls-modeles-whatsapp.md
 - Domaine e-mail Stripe : docs/stripe-domaine-email.md
+
+## 10. Réponses d'Autocalls (8 octobre au soir)
+
+Le tableau complet, question par question, est dans docs/autocalls-questions-whatsapp.md. Restent sans réponse : la commission de 2,70 $ sur l'achat d'un numéro et le mot de passe SMTP visible (message 5, prêt à envoyer).
+
+**Fait par Claude dans la foulée :**
+- « Resync Billing Portal » lancé et confirmé (Autocalls et journal Stripe, 13 h 52 UTC). Le portail affiche les trois forfaits, au mois et à l'année.
+- Vérifié dans Stripe, rien à changer :
+  - après le dernier essai de paiement, l'abonnement est annulé, comme Autocalls le recommande ;
+  - rappel 7 jours avant la fin de l'essai, e-mails d'échec de paiement, mention « fin d'essai » sur le relevé.
+- Vérifié dans Autocalls : la conversion minutes → crédits est active, le site disait donc vrai.
+- Site et bases de connaissances alignés, en 7 langues :
+  - 200 crédits inclus dans Réceptionniste ;
+  - achat direct de crédits : 100 crédits pour 1 $, dès 100 crédits ;
+  - recharge de minutes dès 5 $ ;
+  - codes promo sur les forfaits seulement ;
+  - pas de SEPA.
+- Guides fr, it et nl : l'exemple d'accueil dit « assistante IA ».
+- Langue des factures et reçus Stripe : le webhook la pose d'après la langue enregistrée sur le site. Il n'agit qu'une fois la clé restreinte créée (actions, section 3). Pas d'hébreu chez Stripe : anglais.
+- Le message « nous avons essayé de vous rappeler » (WhatsApp ou SMS) n'est plus envoyé à un numéro qui a refusé d'être contacté. La liste de blocage d'Autocalls ne filtre pas les envois faits par l'API.
+
+**Ce que cela change pour vous :**
+- Les e-mails système (fin d'essai, solde bas, paiement, mot de passe, pause de conformité) partent en anglais pour tous les clients. Seul l'e-mail de bienvenue se modifie. La traduction coûte 1 900 $ par langue (décision 21).
+- Les données sont stockées chez AWS à Francfort. Pendant les appels, des fournisseurs d'IA situés aux États-Unis interviennent aussi, sauf si vous demandez le routage UE (décision 19). Autocalls n'est pas certifié HDS : les secteurs santé restent en pause. Gardez le DPA reçu hors du dépôt, qui est public.
+- Un assistant mis en pause par le contrôle de conformité : le client reçoit un e-mail en anglais à votre nom. Vous n'êtes pas prévenu. Pour le débloquer, envoyez l'ID de l'assistant à Autocalls.
+- L'inscription ne recueille ni téléphone ni accord WhatsApp. Pour les obtenir, il faudrait gérer l'inscription sur le site puis créer le compte par l'API (POST /white-label/register). C'est un chantier à décider plus tard.
+

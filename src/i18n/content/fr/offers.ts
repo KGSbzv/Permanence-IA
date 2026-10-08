@@ -26,7 +26,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Une réceptionniste IA qui répond à chaque appel, 24 h/24',
     pitch: 'Le forfait Réceptionniste capte vos appels, répond aux questions fréquentes, prend les rendez-vous et vous transmet un résumé clair de chaque demande. Simple à mettre en place.',
     cta: 'Choisir Réceptionniste',
-    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 3,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger, crédits de messages obtenus en convertissant des minutes (1 min = 9 crédits)'],
+    highlights: ['1 agent vocal IA qui répond 24 h/24', '2 appels simultanés', '1 base de connaissances', '1 numéro dédié possible, en option dès 3,99 $ HT/mois', 'Agenda connecté et widget web', 'Transfert d’appel vers votre équipe', 'SMS, WhatsApp et Messenger, 200 crédits de messages par mois (≈ 65 réponses écrites)'],
   },
   assistant: {
     name: 'Assistant',
@@ -114,7 +114,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Rappels et confirmations', detail: 'Relances, confirmations et rappels passés automatiquement par téléphone.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Illimitées', 'sur-mesure': 'Illimitées' } },
       { label: 'SMS et WhatsApp', detail: 'Échanges écrits centralisés, payés avec les crédits de messages.', cells: all(true) },
       { label: 'Messenger et Instagram', detail: 'Messages des réseaux sociaux dans la même boîte.', cells: all(true) },
-      { label: 'Crédits de messages inclus', detail: 'Crédits attribués chaque mois pour les échanges écrits (chat du site, WhatsApp, Messenger, Instagram, SMS). Une réponse écrite de l’IA coûte 3 crédits. Pour en avoir plus, convertissez des minutes depuis votre espace : 1 minute = 9 crédits.', cells: { decouverte: false, receptionniste: 'Non inclus (conversion de minutes)', assistant: '1 000 / mois (≈ 330 réponses)', 'centre-appels': '3 000 / mois (≈ 1 000 réponses)', 'sur-mesure': 'Sur devis' } },
+      { label: 'Crédits de messages inclus', detail: 'Crédits attribués chaque mois pour les échanges écrits (chat du site, WhatsApp, Messenger, Instagram, SMS). Une réponse écrite de l’IA coûte 3 crédits. Pour en avoir plus, achetez-en depuis votre espace (Add credits) : 100 crédits pour 1 $, dès 100 crédits. Vous pouvez aussi convertir des minutes : 1 minute = 9 crédits.', cells: { decouverte: false, receptionniste: '200 / mois (≈ 65 réponses)', assistant: '1 000 / mois (≈ 330 réponses)', 'centre-appels': '3 000 / mois (≈ 1 000 réponses)', 'sur-mesure': 'Sur devis' } },
     ],
   },
   {

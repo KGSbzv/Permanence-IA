@@ -27,7 +27,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'Recepcjonistka AI, która odbiera każde połączenie, całą dobę',
     pitch: 'Pakiet Recepcjonistka przejmuje połączenia, odpowiada na częste pytania, umawia wizyty i przekazuje Ci czytelne podsumowanie każdego zgłoszenia. Proste wdrożenie, bez komplikacji.',
     cta: 'Wybierz Recepcjonistkę',
-    highlights: ['1 agent głosowy AI odbierający 24/7', '2 jednoczesne połączenia', '1 baza wiedzy; możliwy 1 dedykowany numer (opcja od 3,99 $ netto / mies.)', 'Podłączony kalendarz i widżet na stronę', 'Przekazanie rozmowy do zespołu', 'SMS, WhatsApp i Messenger, kredyty na wiadomości z zamiany minut (1 min = 9 kredytów)'],
+    highlights: ['1 agent głosowy AI odbierający 24/7', '2 jednoczesne połączenia', '1 baza wiedzy; możliwy 1 dedykowany numer (opcja od 3,99 $ netto / mies.)', 'Podłączony kalendarz i widżet na stronę', 'Przekazanie rozmowy do zespołu', 'SMS, WhatsApp i Messenger, 200 kredytów na wiadomości miesięcznie (≈ 65 odpowiedzi pisemnych)'],
   },
   assistant: {
     name: 'Asystent',
@@ -111,7 +111,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Kampanie wychodzące', detail: 'Ponowne kontakty, potwierdzenia i przypomnienia realizowane automatycznie przez telefon.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Bez limitu', 'sur-mesure': 'Bez limitu' } },
       { label: 'SMS i WhatsApp', detail: 'Korespondencja pisemna w jednym miejscu, opłacana kredytami na wiadomości.', cells: all(true) },
       { label: 'Messenger i Instagram', detail: 'Wiadomości z mediów społecznościowych w tej samej skrzynce.', cells: all(true) },
-      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na komunikację pisemną (czat na stronie, WhatsApp, Messenger, Instagram, SMS). Pisemna odpowiedź AI kosztuje 3 kredyty. Aby mieć ich więcej, zamień minuty na kredyty w panelu klienta: 1 minuta = 9 kredytów.', cells: { decouverte: false, receptionniste: 'Brak w cenie (zamiana minut)', assistant: '1000 / mies. (≈ 330 odpowiedzi)', 'centre-appels': '3000 / mies. (≈ 1000 odpowiedzi)', 'sur-mesure': 'Wycena indywidualna' } },
+      { label: 'Kredyty na wiadomości w cenie', detail: 'Kredyty przyznawane co miesiąc na komunikację pisemną (czat na stronie, WhatsApp, Messenger, Instagram, SMS). Pisemna odpowiedź AI kosztuje 3 kredyty. Aby mieć ich więcej, kup je w panelu klienta (Add credits): 100 kredytów za 1 $, od 100 kredytów, albo zamień minuty na kredyty: 1 minuta = 9 kredytów.', cells: { decouverte: false, receptionniste: '200 / mies. (≈ 65 odpowiedzi)', assistant: '1000 / mies. (≈ 330 odpowiedzi)', 'centre-appels': '3000 / mies. (≈ 1000 odpowiedzi)', 'sur-mesure': 'Wycena indywidualna' } },
     ],
   },
   {

@@ -246,7 +246,7 @@ D9. SMS not sending
 You need an SMS-capable number and message credits. Check the country and type of number, and the credit balance. In Australia, marketing SMS must follow the Spam Act (consent, sender identified, unsubscribe); in the UK, PECR rules apply.
 
 D10. Minutes used up
-"Your minutes for this month have been used. You can add credit straight away in 'Add credits' (any amount you choose), or move to the next plan up in 'Change plan' if it happens often." Included minutes renew on the subscription date. Automatic top-up and low-balance alerts are available.
+"Your minutes for this month have been used. You can add credit straight away in 'Add credits' (any amount you choose, from $5), or move to the next plan up in 'Change plan' if it happens often." Included minutes renew on the subscription date. Automatic top-up and low-balance alerts are available.
 
 D11. Payment declined or card expired
 Update the card in "Billing info". Payments are processed by Stripe: the agent never takes a card number, whether spoken or written. If the problem persists, "billing" ticket.
@@ -354,8 +354,8 @@ The help assistant (bubble at the bottom right of app.permanenceia.com) guides c
 F5. Message credits
 - They pay for written exchanges: AI replies on WhatsApp, SMS, Messenger, Instagram and chat, and messages sent.
 - Costs: written AI reply (website chat, WhatsApp, Messenger, Instagram) = 3 credits; WhatsApp message received or sent within a session = 1.4 credits; SMS sent = 2 credits (may vary by carrier or country); WhatsApp template message = Meta's rate by country and category, plus a margin; WhatsApp calls billed in minutes.
-- Included each month: Receptionist none (credits obtained by converting minutes: 1 minute = 9 credits), Assistant 1,000 (≈ 330), Call Centre 3,000 (≈ 1,000), Custom on quotation. No credits are confirmed for the free trial: do not promise any.
-- Getting more: convert minutes in the customer area, 1 minute = 9 credits. Never give a dollar equivalent.
+- Included each month: Receptionist 200 (≈ 65), Assistant 1,000 (≈ 330), Call Centre 3,000 (≈ 1,000), Custom on quotation. No credits are confirmed for the free trial: do not promise any.
+- Getting more: buy them in the customer area under "Add credits": 100 credits for $1, minimum 100 credits. Another option, less good value: convert minutes, 1 minute = 9 credits.
 - Balance shown in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until the balance is topped up.
 
 F6. What each channel can do

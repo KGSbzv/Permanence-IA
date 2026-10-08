@@ -9,7 +9,7 @@ export const SITE_TEXT = {
   payg: (rate: string) => `Nog niet klaar voor een abonnement? Betaal per gebruik: ${rate} excl. btw per minuut, zonder abonnement. U waardeert uw tegoed op wanneer u wilt (Add credits); het vervalt niet. Een abonnement is goedkoper zodra u regelmatig gebeld wordt.`,
   talkNow: 'Praat nu direct met onze agent',
   talkNowSub: 'Live demo, gratis, zonder aanmelden',
-  rechargeFreeAmount: 'U kiest zelf het bedrag: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
+  rechargeFreeAmount: 'U kiest zelf het bedrag, vanaf $ 5: vul het in uw klantomgeving in (Add credits). De bedragen hierboven zijn voorbeelden.',
   consent: { title: 'Meetcookies', text: 'Met uw toestemming gebruiken wij cookies om het bezoek aan de site te meten (Google Analytics) en de resultaten van onze advertenties op Facebook en Instagram (Meta-pixel). Zonder uw toestemming wordt niets geplaatst; weigeren heeft geen invloed op het gebruik van de site.', accept: 'Accepteren', reject: 'Weigeren', policy: 'Meer informatie', manage: 'Cookies beheren' },
   keepNumber: { title: 'U houdt uw nummer', text: 'Geen andere provider of apparatuur nodig: een eenvoudige doorschakeling, altijd of alleen als u niet opneemt, en de agent neemt het over.' },
   fxNote: (date: string) => `Bedragen in lokale valuta zijn indicatief, tegen de ECB-referentiekoers van ${date}. Abonnementen worden in Amerikaanse dollars gefactureerd: het afgeschreven bedrag hangt af van de wisselkoers van uw bank op de dag van betaling.`,

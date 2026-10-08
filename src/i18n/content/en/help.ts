@@ -19,7 +19,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Your phone numbers', label: 'Your numbers', text: 'Your numbers, Twilio / Telnyx import and SIP connection.' },
   { en: 'Automate platform', label: 'Automations', text: 'No-code automated workflows connected to over 300 tools (Assistant plan and above).' },
   { en: 'Change plan', label: 'Change plan', text: 'Move up or down a plan.' },
-  { en: 'Add credits', label: 'Add credit', text: 'Buy a minute top-up; credit never expires.' },
+  { en: 'Add credits', label: 'Add credit', text: 'Buy credit (minutes beyond your plan, messages); credit never expires.' },
   { en: 'Billing info', label: 'Billing', text: 'Payment method, invoices, subscription and cancellation.' },
   { en: 'Limits', label: 'Limits', text: 'What your plan allows: agents, simultaneous calls, features.' },
   { en: 'API Keys', label: 'API keys', text: 'Connect your own software (all plans).' },
@@ -94,7 +94,7 @@ export const HELP_TASKS: HelpTask[] = [
   {
     title: 'Add minutes or change plan',
     steps: [
-      'For a one-off need: Add credits and choose a top-up. Credit never expires.',
+      'For a one-off need: Add credits and enter the top-up amount, from US$5. Credit never expires.',
       'If you often go over: Change plan; the next plan up is cheaper per minute.',
     ],
   },

@@ -19,7 +19,7 @@ export const HELP_MENU: MenuEntry[] = [
   { en: 'Your phone numbers', label: 'I Suoi numeri', text: 'I Suoi numeri, l’importazione da Twilio / Telnyx e la connessione SIP.' },
   { en: 'Automate platform', label: 'Automazioni', text: 'Scenari automatizzati senza codice, collegati a oltre 300 strumenti (piano Assistant e superiori).' },
   { en: 'Change plan', label: 'Cambiare piano', text: 'Passare al piano superiore o inferiore.' },
-  { en: 'Add credits', label: 'Aggiungere credito', text: 'Acquistare una ricarica di credito; il credito non scade.' },
+  { en: 'Add credits', label: 'Aggiungere credito', text: 'Acquistare credito (minuti oltre il piano, messaggi); il credito non scade.' },
   { en: 'Billing info', label: 'Fatturazione', text: 'Metodo di pagamento, fatture, abbonamento e disdetta.' },
   { en: 'Limits', label: 'Limiti', text: 'Cosa consente il Suo piano: agenti, chiamate simultanee, funzioni.' },
   { en: 'API Keys', label: 'Chiavi API', text: 'Collegare i Suoi software (tutti i piani).' },
@@ -94,7 +94,7 @@ export const HELP_TASKS: HelpTask[] = [
   {
     title: 'Aggiungere minuti o cambiare piano',
     steps: [
-      'Occasionalmente: Add credits (aggiungi credito) e scelga una ricarica. Il credito non scade.',
+      'Occasionalmente: Add credits (aggiungi credito) e inserisca l’importo della ricarica, a partire da 5 $. Il credito non scade.',
       'Se supera spesso i minuti: Change plan, il piano superiore costa meno al minuto.',
     ],
   },

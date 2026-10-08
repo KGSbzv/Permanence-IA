@@ -1,12 +1,62 @@
 # Questions à envoyer à Autocalls par WhatsApp (8 octobre 2026)
 
-4 messages, à envoyer dans l'ordre.
+Messages 1 à 4 : envoyés le 8 octobre. Message 5 : suite à leurs réponses, à envoyer.
 
-**Réponses déjà reçues d'Autocalls (8 octobre) :**
-- **1. Notre solde à zéro :** si le client est créditeur, il continue à utiliser le système.
-- **2. Numéros dédiés :** un numéro acheté par un client se renouvelle automatiquement chaque mois, avec le même numéro (documenté par Autocalls). Seul l'achat de test du 7 octobre (numéro 11806) a vu son abonnement annulé : il ne sera pas reconduit.
-- **8. Transferts :** la durée du transfert est décomptée des minutes (déjà indiqué ainsi dans la FAQ du site, 6 langues).
-- Autres questions : réponse attendue. Chaque question cite nos identifiants et ce qu'on a observé : la réponse dépend de notre compte, pas de la documentation générale.
+**Réponses d'Autocalls (8 octobre, deux envois).** Le détail de ce qui a été fait est dans docs/audits/rapport-final-2026-10-08.md, section 10.
+
+| Question | Réponse d'Autocalls | Suite |
+|---|---|---|
+| 1. Notre solde à zéro | Un client créditeur continue d'utiliser le service. | Rien à faire. |
+| 2. Numéros dédiés | Renouvelés chaque mois avec le même numéro. Seul l'achat de test du 7 octobre (11806) a été annulé. | **Sans réponse** : la commission de 2,70 $ et le prix des numéros (message 5). |
+| 3. Taxe au paiement | Taxe automatique active, paiements passés avec 0 de taxe. Autocalls la coupe pour notre plateforme ; à réactiver sur demande. | Décision du comptable. |
+| 4. Champs du paiement, langue | Adresse de facturation déjà exigée sur les forfaits. Pas de téléphone. Le paiement suit la langue du navigateur ; factures et reçus : langue du client Stripe. | Langue posée automatiquement par notre webhook dès qu'une clé Stripe restreinte est fournie. |
+| 5. Codes promo | Oui sur les forfaits (champ déjà présent), non sur les recharges. | Site aligné. |
+| 6. Impayés | Pendant les relances Stripe, le client garde ses minutes restantes sans les fonctions du forfait. Choisir « Cancel the subscription » après le dernier essai : il passe aux limites du compte gratuit et garde les minutes achetées. Ne jamais créer d'abonnement ni de prix dans Stripe. | Réglage Stripe déjà sur « cancel the subscription » (vérifié). |
+| 7. Moyens de paiement | Ceux activés dans Stripe sur les forfaits ; SEPA seulement sur des prix en EUR (la plateforme est en USD). Recharges et numéros : moyen enregistré. | SEPA inutile ; site aligné. |
+| 8. Transferts | La durée du transfert est décomptée des minutes. | Déjà dans la FAQ. |
+| 9. Coût par appel | Appels des clients au tarif du client. L'appel 9234492 : 0,102 $ à 0,09 $/min, plus 0,02 $ de ligne opérateur appliquée à tort à un appel web ; Autocalls recalcule. | Rien à faire. |
+| 10. Essai | Abonnement Stripe avec date de fin d'essai, carte prise à l'inscription, débit automatique à la fin ; en cas d'échec, compte gratuit. Passer à un forfait pendant l'essai le démarre aussitôt et garde les minutes d'essai. 28790 n'a pas d'essai : 51,28 min = recharge de 20 $ à 0,39 $/min. | Le site le disait déjà ; rappel Stripe 7 jours avant la fin activé (vérifié). |
+| 11. Forfait 1646 | Autocalls met 200 crédits inclus, reçus dès le prochain renouvellement, sans double débit. « Resync Billing Portal » reconstruit l'écran de changement de forfait. | Resync lancé et confirmé le 8 octobre, 13 h 52 UTC. |
+| 12. Crédits de messages | L'essai ne donne que des minutes. Achat dans « Add credits » : 100 crédits pour 1 $, minimum 100 crédits ; recharge de minutes dès 5 $. Marge réglée par action. | Conversion minutes → crédits déjà active (vérifié). Site et bases alignés. |
+| 13. E-mails « via autocalls.ai » | Tout passe par notre SMTP Zoho sauf l'e-mail de bienvenue, qu'Autocalls bascule. | À revérifier sur la prochaine inscription test. |
+| 14. E-mails système, traduction | Seul l'e-mail de bienvenue est modifiable. Les autres partent dans la langue de la plateforme (une seule). Traduction : 1 900 $ par langue, 1 à 2 semaines, remise si plusieurs ; couvre espace client, inscription, connexion, e-mails, sélecteur de langue, hébreu de droite à gauche. | Décision (argent). |
+| 15. Mot de passe SMTP visible | — | **Sans réponse** (message 5). |
+| 16. Widget en hébreu | De gauche à droite, dans son propre cadre ; inclus si l'hébreu est commandé. | Rien à faire. |
+| 17. Données | AWS Francfort pour comptes, transcriptions, conversations, enregistrements et fichiers. Pendant les appels, fournisseurs d'IA dans l'UE et aux États-Unis. Routage 100 % UE réglé par Autocalls sur demande. Pas HDS ; ISO/IEC 27001:2022 et ISO 9001:2015. DPA et sous-traitants joints. | Décision : demander le routage UE. Garder le DPA hors du dépôt public. |
+| 18. Pause de conformité | E-mail au client, par notre SMTP, à notre nom, en anglais. Nous ne sommes pas prévenus et ne pouvons pas débloquer : le client corrige son prompt, ou nous envoyons l'ID de l'assistant à Autocalls. | Noté. |
+| 19. Données clients, webhooks | L'API donne id, nom, e-mail, soldes, date de création. Forfait, statut et fin d'essai : webhooks Stripe, rapprochés par e-mail. Pas de webhook « solde épuisé ». | Déjà fait : notre webhook Stripe reçoit ces événements. |
+| 20. Inscription | Ni téléphone ni case de consentement. Pour les avoir : inscription sur notre site puis POST /white-label/register. | Option pour plus tard. |
+| 21. Liste d'exclusion | Pas d'API pour l'instant (« très bientôt »). Bloque appels et WhatsApp/SMS de campagne, pas les envois par l'API. | Nos envois par l'API vérifient déjà notre propre liste de refus. |
+| 22. Sécurité des webhooks | Jeton dans l'adresse seulement. Pour un en-tête : automatisation « appel terminé » puis requête HTTP avec une connexion. | Décision 13 révisée. |
+| 23. Campagnes | Pas d'API de modification (« très bientôt ») : tableau de bord, ou supprimer et recréer. | Les 7 campagnes restent à faire à la main. |
+| 24. Bases de connaissances | L'agent utilise tous les documents actifs. Le vrai problème : v7, v9 et v10 des mêmes pages sont actives ensemble, et l'agent mélange anciens et nouveaux prix. Supprimer les échecs et les anciennes versions. Pas d'IP publiée : derrière Cloudflare, importer un fichier TXT. | Liste prête dans docs/autocalls-kb-a-supprimer.md. Urgent. |
+
+## Message 5 — Suite à leurs réponses (à envoyer)
+
+```
+Hi Autocalls team, thank you for the detailed answers. We applied them on our side: "Resync Billing Portal" is done (8 Oct, 13:52 UTC), Stripe is set to "cancel the subscription" after the final retry, and our site now shows the $5 top-up minimum and chat credits at 100 per $1. Please keep automatic tax off until we confirm our tax registrations.
+
+A few follow-ups:
+
+*1. Plan 1646* — Please confirm once "Included Chat Credits" = 200 is saved on plan 1646, so we can check it in the admin.
+
+*2. Welcome email* — Please tell us when it goes through our Zoho SMTP. We will run a signup test to confirm "via autocalls.ai" is gone.
+
+*3. Dedicated number fee (still open)* — On 7 Oct our test client (user nyh770) bought number 11806 for $3.09 on our Stripe account. Your platform took a $2.70 application fee on that payment, so we received $0, and you also bill us $3.99/month for the same number. What is this fee, and where do we set the price our clients pay for a number so that we keep a margin?
+
+*4. SMTP password (still open)* — Admin > Settings > SMTP shows the password in clear text on the page. Can it become a write-only field that is never sent back to the browser, and is it encrypted at rest?
+
+*5. EU-only routing* — Before we ask you to turn it on: what changes for our assistants (LLM models, voices and transcription available, latency, price)? Does it also cover WhatsApp and web-widget chats?
+
+*6. Translation* — Please quote French, Hebrew, Italian, Polish and Dutch ordered together. Once translated, are system emails sent in each user's own language, or still in one language for the whole platform?
+
+*7. Compliance pause* — Can the pause email be sent in the user's language, and can we (the agency) get a copy or a webhook, so we can help the client the same day?
+
+*8. Release notices* — Please let us know when the blacklist REST endpoint and the campaign update endpoint are live.
+
+Thank you!
+Joseph — PermanenceAI
+```
 
 ## Message 1 — Facturation
 

@@ -9,7 +9,7 @@ import { createHmac, generateKeyPairSync, randomBytes, sign } from 'crypto';
 
 // Secret de test aléatoire (jamais celui de production) ; SMTP et base retirés : rien ne peut partir pour de vrai.
 process.env.ACCOUNT_CODE_SECRET = randomBytes(32).toString('hex');
-for (const k of ['ZOHO_SMTP_USER', 'ZOHO_SMTP_PASS', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'AUTOCALLS_API_KEY', 'STRIPE_READ_KEY', 'RELANCES_IMAP_USER', 'RELANCES_IMAP_PASS', 'CRON_SECRET', 'RELANCES_OIDC_AUDIENCE', 'RELANCES_OIDC_EMAIL']) delete process.env[k];
+for (const k of ['ZOHO_SMTP_USER', 'ZOHO_SMTP_PASS', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'AUTOCALLS_API_KEY', 'STRIPE_READ_KEY', 'STRIPE_CUSTOMERS_KEY', 'RELANCES_IMAP_USER', 'RELANCES_IMAP_PASS', 'CRON_SECRET', 'RELANCES_OIDC_AUDIENCE', 'RELANCES_OIDC_EMAIL']) delete process.env[k];
 
 type Any = Record<string, any>;
 
@@ -537,6 +537,17 @@ async function main() {
     await applyStripeEvent({ id: 'evt_e', type: 'invoice.paid', created: 500, livemode: true, data: { object: { customer: 'cus_9', amount_paid: 9900 } } }, db);
     assert.equal(tables.stripe_customers[0].has_paid, true);
     assert.equal(tables.stripe_events.length, 5);
+
+    // Langue des factures : posée d’après la fiche contact, seulement si le client Stripe n’en a pas.
+    const set: [string, string][] = [];
+    const locale = { lookup: async (email: string) => (email === 'luca@esempio.it' ? 'it' as const : email === 'dana@example.co.il' ? 'he' as const : null), set: async (id: string, l: string) => { set.push([id, l]); return true; } };
+    await applyStripeEvent({ id: 'evt_f', type: 'customer.created', created: 600, livemode: true, data: { object: { id: 'cus_it', email: 'Luca@Esempio.it' } } }, db, undefined, locale);
+    await applyStripeEvent({ id: 'evt_g', type: 'customer.created', created: 601, livemode: true, data: { object: { id: 'cus_he', email: 'dana@example.co.il' } } }, db, undefined, locale);
+    await applyStripeEvent({ id: 'evt_h', type: 'customer.updated', created: 602, livemode: true, data: { object: { id: 'cus_it', email: 'luca@esempio.it', preferred_locales: ['it'] } } }, db, undefined, locale);
+    await applyStripeEvent({ id: 'evt_i', type: 'customer.created', created: 603, livemode: true, data: { object: { id: 'cus_x', email: 'inconnu@exemple.fr' } } }, db, undefined, locale);
+    await applyStripeEvent({ id: 'evt_j', type: 'customer.created', created: 604, livemode: true, data: { object: { id: 'cus_de', email: 'luca@esempio.it', preferred_locales: ['de'] } } }, db, undefined, locale);
+    assert.deepEqual(set, [['cus_it', 'it'], ['cus_he', 'en']], 'langue posée une fois, jamais devinée ni remplacée');
+    assert.equal(tables.stripe_customers.find((c) => c.customer_id === 'cus_it')?.preferred_locale, 'it');
   });
 
   /* ---------- Accès à la route planifiée ---------- */

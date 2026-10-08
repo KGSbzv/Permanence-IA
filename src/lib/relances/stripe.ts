@@ -3,6 +3,7 @@
 // client (essai, fin d’essai, annulation, paiement), rapproché par email. Aucun événement non signé n’est lu.
 // Les accès à la base sont passés en paramètre (helpers de src/lib/server.ts en production, faux en test).
 import { createHmac, timingSafeEqual } from 'crypto';
+import type { Locale } from '@/i18n/locales';
 
 export const SIGNATURE_TOLERANCE_S = 300;
 
@@ -42,6 +43,35 @@ export function stripeCustomerFetcher(key = process.env.STRIPE_READ_KEY): Custom
   };
 }
 
+/** Langue des factures, reçus et e-mails Stripe pour chaque langue du site (pas d’hébreu chez Stripe : anglais). */
+export const STRIPE_INVOICE_LOCALE: Record<Locale, string> = { fr: 'fr', 'en-gb': 'en-GB', 'en-au': 'en-GB', it: 'it', pl: 'pl', nl: 'nl', he: 'en' };
+
+/** Langue du client enregistrée par le site (formulaire, agent, indicatif), retrouvée par son email. */
+export type ContactLocaleLookup = (email: string) => Promise<Locale | null>;
+/** Pose la langue d’un client Stripe ; vrai si Stripe a accepté. */
+export type CustomerLocaleSetter = (id: string, stripeLocale: string) => Promise<boolean>;
+
+/**
+ * Écriture de la langue avec la clé restreinte STRIPE_CUSTOMERS_KEY (droit « Customers : écriture » seulement), si
+ * elle existe. Le paiement Autocalls suit la langue du navigateur et ne la transmet pas au client Stripe : sans cela,
+ * factures et reçus partent en anglais.
+ */
+export function stripeCustomerLocaleSetter(key = process.env.STRIPE_CUSTOMERS_KEY): CustomerLocaleSetter | undefined {
+  if (!key) return undefined;
+  return async (id, stripeLocale) => {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4_000);
+    try {
+      const res = await fetch(`https://api.stripe.com/v1/customers/${encodeURIComponent(id)}`, {
+        method: 'POST', signal: ctrl.signal,
+        headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ 'preferred_locales[0]': stripeLocale }).toString(),
+      });
+      return res.ok;
+    } catch { return false; } finally { clearTimeout(timer); }
+  };
+}
+
 const iso = (s: unknown) => (typeof s === 'number' && s > 0 ? new Date(s * 1000).toISOString() : null);
 const str = (v: unknown) => (typeof v === 'string' && v ? v : null);
 const idOf = (v: any) => (typeof v === 'string' ? v : str(v?.id));
@@ -58,7 +88,7 @@ async function upsertCustomer(db: StripeDb, id: string, patch: Record<string, un
  * Applique un événement Stripe déjà vérifié. Idempotent : les écritures sont des remplacements, et un abonnement
  * n’est mis à jour que par un événement plus récent que le dernier appliqué.
  */
-export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?: CustomerFetcher) {
+export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?: CustomerFetcher, locale?: { lookup: ContactLocaleLookup; set: CustomerLocaleSetter }) {
   const type = String(event?.type || '');
   const obj = event?.data?.object ?? {};
   const livemode = Boolean(event?.livemode);
@@ -66,7 +96,14 @@ export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?:
   let handled = true;
 
   if (type === 'customer.created' || type === 'customer.updated') {
-    if (obj.id) await upsertCustomer(db, obj.id, { email: str(obj.email)?.toLowerCase(), preferred_locale: str(obj.preferred_locales?.[0]) }, livemode);
+    const email = str(obj.email)?.toLowerCase();
+    if (obj.id) await upsertCustomer(db, obj.id, { email, preferred_locale: str(obj.preferred_locales?.[0]) }, livemode);
+    // Client sans langue : celle que le site a enregistrée pour cet email. Stripe renvoie ensuite customer.updated
+    // avec la langue posée, qui s’enregistre ci-dessus ; une langue déjà choisie n’est jamais remplacée.
+    if (obj.id && email && locale && !obj.preferred_locales?.length) {
+      const lang = await locale.lookup(email).catch(() => null);
+      if (lang) await locale.set(obj.id, STRIPE_INVOICE_LOCALE[lang]).catch(() => false);
+    }
   } else if (type.startsWith('customer.subscription.')) {
     const customer = idOf(obj.customer);
     const item = obj.items?.data?.[0];

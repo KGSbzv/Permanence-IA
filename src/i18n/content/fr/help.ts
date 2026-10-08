@@ -95,7 +95,7 @@ export const HELP_TASKS: HelpTask[] = [
   {
     title: 'Ajouter des minutes ou changer de forfait',
     steps: [
-      'Ponctuellement : Add credits (ajouter du crédit) et choisissez une recharge. Le crédit ne périme pas.',
+      'Ponctuellement : Add credits (ajouter du crédit) et saisissez le montant de la recharge, dès 5 $. Le crédit ne périme pas.',
       'Si vous dépassez souvent vos minutes incluses : Change plan, le forfait supérieur revient moins cher à la minute.',
     ],
   },

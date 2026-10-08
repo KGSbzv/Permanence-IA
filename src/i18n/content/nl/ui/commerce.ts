@@ -192,7 +192,7 @@ export const UI_COMMERCE = {
       included: 'Elke maand inbegrepen in uw abonnement:',
       includedValue: (credits: string, replies: string) => `${credits} credits / maand (≈ ${replies} antwoorden)`,
       notIncludedValue: 'Niet inbegrepen: zet minuten om',
-      convert: 'Of zet minuten om in uw klantomgeving: 1 minuut = 9 credits.',
+      convert: 'Of koop ze in uw klantomgeving (Add credits): 100 credits voor $ 1, vanaf 100 credits. U kunt ook minuten omzetten: 1 minuut = 9 credits.',
       balance: 'Uw saldo ziet u in de klantomgeving. Bij 0 credits stoppen schriftelijke antwoorden en het verzenden van sms- en WhatsApp-berichten tot u opwaardeert.',
     },
     faq: {

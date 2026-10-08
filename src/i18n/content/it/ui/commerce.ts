@@ -201,7 +201,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       included: 'Inclusi ogni mese nel Suo piano:',
       includedValue: (credits: string, replies: string) => `${credits} crediti / mese (≈ ${replies} risposte)`,
       notIncludedValue: 'Non inclusi: converta minuti',
-      convert: 'Oppure converta minuti dalla Sua area clienti: 1 minuto = 9 crediti.',
+      convert: 'Oppure li acquisti dalla Sua area clienti (Add credits): 100 crediti per 1 $, a partire da 100 crediti. Può anche convertire minuti: 1 minuto = 9 crediti.',
       balance: 'Il saldo è consultabile nell’area clienti. A 0 crediti, le risposte scritte e gli invii di SMS o WhatsApp si interrompono fino alla ricarica.',
     },
     faq: {

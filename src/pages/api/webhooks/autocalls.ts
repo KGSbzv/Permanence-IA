@@ -2,7 +2,7 @@
 // Enregistre chaque échange et alerte l’équipe quand un prospect demande une démo ou un rappel.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, dbUpdate, esc, isAuthorized, langFromPhone, sendMail, toE164 } from '@/lib/server';
-import { registerOptOut } from '@/lib/optout';
+import { isOptedOut, registerOptOut } from '@/lib/optout';
 import { CONTACTS_DB, recordConsent } from '@/lib/contacts';
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
@@ -29,6 +29,8 @@ async function messageAfterMissedCall(phone: string) {
   if (!req) return 'aucune demande de rappel récente';
   const sent = await dbSelect('call_events', `select=id&customer_phone=eq.${enc}&outcome=in.(${MISSED_OUTCOME},${MISSED_SMS})&created_at=gte.${since}&limit=1`);
   if (sent.length) return 'déjà prévenu';
+  // La liste de blocage Autocalls ne filtre pas les WhatsApp et SMS envoyés par l’API : notre registre d’opposition, si.
+  if (await isOptedOut(phone)) return 'opposition enregistrée, aucun message';
   const waLang = /\[WA:([a-z-]+)\]/.exec(req.note || '')?.[1];
   // Langue de la campagne posée par /api/callback ([LANG:xx], langue du site) avant l’indicatif : un visiteur du site
   // français avec un numéro +44 reçoit le message en français.

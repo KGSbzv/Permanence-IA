@@ -19,7 +19,7 @@ export const SITE_TEXT = {
   payg: (rate: string) => `Nie potrzebujesz jeszcze pakietu? Płać za użycie: ${rate} netto za minutę, bez abonamentu. Doładowujesz kredyty, kiedy chcesz (Add credits); nie wygasają. Pakiet wychodzi taniej, gdy połączenia są regularne.`,
   talkNow: 'Porozmawiaj z naszym agentem teraz',
   talkNowSub: 'Demo na żywo, bezpłatnie, bez rejestracji',
-  rechargeFreeAmount: 'Kwotę wybierasz sam: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
+  rechargeFreeAmount: 'Kwotę wybierasz sam, od 5 $: wpisz ją w panelu klienta (Add credits). Powyższe kwoty to przykłady.',
   consent: { title: 'Pliki cookie do pomiaru', text: 'Za Twoją zgodą używamy plików cookie do pomiaru ruchu na stronie (Google Analytics) i skuteczności naszych reklam na Facebooku i Instagramie (piksel Meta). Bez Twojej zgody nic nie jest zapisywane, a odmowa nie ogranicza korzystania ze strony.', accept: 'Akceptuję', reject: 'Odrzucam', policy: 'Więcej informacji', manage: 'Ustawienia cookie' },
   keepNumber: { title: 'Zachowujesz swój numer', text: 'Bez zmiany operatora i sprzętu: wystarczy przekierowanie połączeń, stałe lub tylko wtedy, gdy nie odbierasz telefonu, a agent przejmuje rozmowę.' },
   fxNote: (date: string) => `Kwoty w walucie lokalnej mają charakter orientacyjny, według kursu referencyjnego EBC z dnia ${date}. Pakiety są rozliczane w dolarach amerykańskich: pobrana kwota zależy od kursu Twojego banku w dniu płatności.`,

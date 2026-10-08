@@ -141,7 +141,7 @@ export const UI_COMMERCE = {
       included: 'Included every month in your plan:',
       includedValue: (credits: string, replies: string) => `${credits} credits / month (≈ ${replies} replies)`,
       notIncludedValue: 'Not included: convert minutes',
-      convert: 'Or convert minutes from your customer area: 1 minute = 9 credits.',
+      convert: 'Or buy them in your customer area (Add credits): 100 credits for US$1, from 100 credits. You can also convert minutes: 1 minute = 9 credits.',
       balance: 'You can check your balance in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until you top up.',
     },
     faq: {

@@ -1,4 +1,4 @@
-# Actions du propriétaire (mise à jour du 8 octobre 2026, soir)
+# Actions du propriétaire (mise à jour du 8 octobre 2026, après les réponses d'Autocalls)
 
 Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le compte Permanence IA. Ce qui a été fait aujourd'hui en a été retiré :
 - DNS Stripe et doublon DKIM ;
@@ -23,14 +23,14 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
    - Ouvrir le widget de l'espace client en fr, it et he.
    - Faire écouter les voix étrangères par des natifs.
 3. **Test d'inscription** avec une adresse Gmail. Le message de bienvenue doit arriver hors spam, et contact@ doit recevoir « Nouvelle inscription ». Le compte test yossef ne doit pouvoir ni appeler ni acheter.
-4. **Forfait Réceptionniste à 200 crédits.** Admin Autocalls > Plans > New plan : recréer Receptionist à l'identique, avec Included Credits 200. Désactiver 1646, lancer Resync Billing Portal, puis donner le nouveau numéro à Claude.
-5. **7 campagnes de rappel.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240, Save.
+4. **Message 5 à Autocalls.** Envoyer le message 5 de docs/autocalls-questions-whatsapp.md : commission de 2,70 $ sur l'achat d'un numéro, et mot de passe SMTP visible. Le forfait Réceptionniste n'est plus à recréer : Autocalls lui donne 200 crédits, et Claude a lancé « Resync Billing Portal » (confirmé).
+5. **7 campagnes de rappel.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240, Save. Autocalls confirme qu'aucune API ne permet de le faire autrement.
 6. **Mot de passe Zoho visible dans Autocalls.**
    - accounts.zoho.com > Sécurité > Mots de passe d'application : en créer deux.
    - Le premier va dans app.autocalls.ai/administrator/settings?tab=smtp (Save, puis Test).
    - Le second va dans Google Cloud > Secret Manager > ZOHO_SMTP_PASS > Nouvelle version.
    - Prévenir Claude, puis révoquer l'ancien. Garder celui des relances (RELANCES_IMAP_PASS).
-7. **Bases de connaissances « failed ».** Autocalls > Knowledge base : supprimer les documents de docs/autocalls-kb-a-supprimer.md, section 5 comprise. Claude ne supprime jamais de données définitivement : c'est à faire par vous.
+7. **Bases de connaissances : urgent.** Autocalls le confirme : les anciennes versions (v7, v9, v10) restent actives à côté des nouvelles, et les agents mélangent anciens et nouveaux prix. Autocalls > Knowledge base : supprimer les documents de docs/autocalls-kb-a-supprimer.md, section 5 comprise. Claude ne supprime jamais de données définitivement : c'est à faire par vous.
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
 9. **Copie inutile du site.** Le projet Google permanentia-prod en publie une, avec une ancienne clé Autocalls. Dites « oui » à Claude pour la supprimer.
 
@@ -55,12 +55,17 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 16. Langues.
 17. Moyens de paiement Stripe.
 18. Qui rappelle pendant l'essai.
+19. Routage 100 % UE des appels : Autocalls le règle sur demande (aujourd'hui, des fournisseurs d'IA aux États-Unis traitent aussi les appels). → Le demander, après un appel test pour vérifier la qualité.
+20. Taxe automatique au paiement : Autocalls l'a coupée pour notre plateforme. → La faire réactiver quand le comptable aura choisi les immatriculations.
+21. Traduction de la plateforme (espace client, inscription, connexion, e-mails système) : 1 900 $ par langue, remise si plusieurs. Sans elle, ces écrans et e-mails restent en anglais. → À décider avant la publicité hors pays anglophones.
+22. Langue des factures Stripe : Claude a ajouté au webhook la pose automatique de la langue du client. → Créer une clé restreinte (voir section 3).
 
 ## 3. Comptes et tiers
 
 1. **Stripe.**
    - Représentant du compte marqué « Invalid » : Settings > Business details > Management and ownership, ouvrir la fiche de Joseph Haddad et fournir ce que Stripe demande. Aucun examen n'est en cours ; Cartes Bancaires est en pause.
-   - SEPA : Payment methods > Billing Payments > SEPA > Provide info.
+   - SEPA : inutile. Selon Autocalls, il n'apparaît que sur des prix en euros, et la plateforme facture en dollars.
+   - Clé pour la langue des factures : Developers > API keys > Create restricted key, nom « langue-factures », droit « Customers : Write » et rien d'autre. Claude vous donnera ensuite la commande pour l'enregistrer en saisie masquée (ne pas la coller dans la conversation).
    - Vérifier vers le 10 octobre, le 11 au plus tard : Settings > Customer emails, domaine « Verified ».
    - Le 31 octobre et le 1er novembre : contrôler la facturation du numéro de nyh770.
 2. **Admin Autocalls.**
@@ -94,10 +99,10 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 
 ## 5. À reprendre par Claude
 
-- Avec votre « go » : passer les relances en envoi réel.
+- Relances en envoi réel : votre « go » est reçu, mais le contrôle de sécurité de Claude Code a bloqué le changement (envoi d'e-mails à de vrais contacts). Soit vous lancez la commande donnée par Claude, soit vous autorisez Claude à le faire.
 - Avec votre accord : page /admin, alerte d'erreurs, remplacement du jeton des webhooks, Google Analytics après accord aux cookies, libération des numéros, suppression des anciens documents.
 - Sans attendre :
-  - exemples d'accueil des guides fr, it et nl, puis réimport dans Autocalls ;
+  - réimport dans Autocalls des pages modifiées le 8 octobre au soir (tarifs, FAQ, guides fr, it et nl, bases) ;
   - mention des préférences e-mail dans /confidentialite ;
   - modèles hébreux ;
   - polices gardées dans le dépôt.

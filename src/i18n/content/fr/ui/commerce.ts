@@ -193,7 +193,7 @@ export const UI_COMMERCE = {
       includedValue: (credits: string, replies: string) => `${credits} crédits / mois (≈ ${replies} réponses)`,
       // Forfait sans crédits inclus (Réceptionniste tant que le plan Autocalls n’en attribue pas).
       notIncludedValue: 'Non inclus : convertissez des minutes',
-      convert: 'Ou convertissez des minutes depuis votre espace client : 1 minute = 9 crédits.',
+      convert: 'Ou achetez-en depuis votre espace client (Add credits) : 100 crédits pour 1 $, dès 100 crédits. Vous pouvez aussi convertir des minutes : 1 minute = 9 crédits.',
       balance: 'Votre solde se consulte dans l’espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s’arrêtent jusqu’à la recharge.',
     },
     faq: {
