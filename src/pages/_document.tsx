@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript, type DocumentProps } from 'next/document';
 import { MARKETS } from '@/i18n/markets';
 import { asLocale, isRtl } from '@/i18n/locales';
-import { CONSENT_DEFAULT_SCRIPT, GA_ID } from '@/lib/analytics';
+import { CONSENT_DEFAULT_SCRIPT } from '@/lib/analytics';
 
 // Fichiers latins de Figtree (texte) et de Poppins (titres), utiles dès le premier affichage de chaque page.
 const FONT_PRELOADS = [
@@ -30,9 +30,9 @@ export default function Document({ __NEXT_DATA__ }: DocumentProps) {
         {FONT_PRELOADS.map((href) => (
           <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
         ))}
-        {/* Google Analytics 4 en mode consentement : rien n’est stocké avant l’accord du visiteur. */}
+        {/* Google Analytics 4 : consentement refusé par défaut. gtag.js n’est chargé qu’après l’accord du visiteur
+            (loadGoogleAnalytics, src/lib/analytics.ts) : aucune requête vers Google avant le clic sur « Accepter ». */}
         <script dangerouslySetInnerHTML={{ __html: CONSENT_DEFAULT_SCRIPT }} />
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
       </Head>
       <body>
         <Main />

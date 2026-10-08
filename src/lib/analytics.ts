@@ -1,6 +1,6 @@
 // Mesure d’audience (Google Analytics 4, sans Tag Manager), mesure publicitaire (pixel Meta) et consentement (Consent Mode v2).
-// Rien n’est stocké chez le visiteur avant son accord : le mode consentement envoie seulement des signaux anonymes,
-// et le pixel Meta n’est même pas chargé tant que le visiteur n’a pas accepté.
+// Rien ne part chez Google ni chez Meta avant l’accord du visiteur : gtag.js et le pixel Meta ne sont chargés
+// qu’au clic sur « Accepter » (ou dès l’arrivée sur le site si ce choix est déjà mémorisé). Sur « Refuser », rien ne se charge.
 
 export const GA_ID = 'G-4W1B1W52PZ';
 /** Pixel Meta (Facebook / Instagram) : mesure des campagnes publicitaires, uniquement après consentement. */
@@ -23,11 +23,51 @@ export function saveConsent(value: 'granted' | 'denied') {
     const domain = location.hostname.endsWith('permanenceia.com') ? '; domain=.permanenceia.com' : '';
     document.cookie = `${CONSENT_COOKIE}=${value}${domain}; path=/; max-age=${60 * 60 * 24 * 180}; samesite=lax; secure`;
   } catch { /* cookies bloqués : le choix vaut pour cette page seulement */ }
-  // Côté Google, seule la mesure d’audience suit le choix : les signaux publicitaires Google (ad_*) restent refusés,
-  // aucune balise Google Ads n’étant utilisée. La mesure publicitaire passe uniquement par le pixel Meta.
-  gtag()?.('consent', 'update', { analytics_storage: value });
-  if (value === 'granted') loadMetaPixel();
-  else { metaAllowed = false; fbq()?.('consent', 'revoke'); clearTrackingCookies(); }
+  if (value === 'granted') { loadGoogleAnalytics(); loadMetaPixel(); }
+  else { stopGoogleAnalytics(); metaAllowed = false; fbq()?.('consent', 'revoke'); clearTrackingCookies(); }
+}
+
+// ── Google Analytics 4 ─────────────────────────────────────────────────────
+// Côté Google, seule la mesure d’audience suit le choix : les signaux publicitaires Google (ad_*) restent refusés,
+// aucune balise Google Ads n’étant utilisée. La mesure publicitaire passe uniquement par le pixel Meta.
+let gaAllowed = false;
+let gaLoaded = false;
+/** Interrupteur officiel de gtag.js : à true, plus aucune donnée n’est envoyée pour cet identifiant. */
+const GA_DISABLE_KEY = `ga-disable-${GA_ID}`;
+
+/** Charge gtag.js (une seule fois) et compte la page en cours (page_view envoyée par « config »).
+ *  À n’appeler qu’après consentement : avant, aucune requête ne part vers googletagmanager.com ni google-analytics.com. */
+export function loadGoogleAnalytics() {
+  if (typeof window === 'undefined' || gaAllowed) return;
+  gaAllowed = true;
+  const w = window as unknown as Record<string, unknown> & { dataLayer?: unknown[]; gtag?: Gtag };
+  w[GA_DISABLE_KEY] = false;
+  if (!w.gtag) {
+    // File d’attente normalement déjà posée dans le <head> (CONSENT_DEFAULT_SCRIPT) ; gtag.js attend l’objet « arguments ».
+    const dl: unknown[] = (w.dataLayer = w.dataLayer || []);
+    // eslint-disable-next-line prefer-rest-params
+    w.gtag = function () { dl.push(arguments); };
+    w.gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  }
+  const g = w.gtag;
+  g('consent', 'update', { analytics_storage: 'granted' });
+  // Accord retiré puis redonné sur la même page : la balise est déjà là et cette page vue déjà comptée.
+  if (gaLoaded) return;
+  gaLoaded = true;
+  g('js', new Date());
+  g('config', GA_ID, { linker: { domains: ['permanenceia.com', 'app.permanenceia.com'] } });
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+}
+
+/** Refus ou retrait du consentement : plus aucun envoi vers Google, même des signaux sans cookie. */
+function stopGoogleAnalytics() {
+  gaAllowed = false;
+  try { (window as unknown as Record<string, unknown>)[GA_DISABLE_KEY] = true; } catch { /* hors navigateur */ }
+  // Si la balise n’a jamais été chargée, la commande reste dans la file en mémoire : rien ne part.
+  gtag()?.('consent', 'update', { analytics_storage: 'denied' });
 }
 
 /** Retrait du consentement : efface les identifiants déjà déposés (_ga, _ga_*, _gid, _fbp, _fbc),
@@ -82,20 +122,18 @@ const META_EVENTS: Record<string, [method: 'track' | 'trackCustom', name: string
   begin_trial_click: ['trackCustom', 'TrialClick'],
 };
 
-/** Événement GA4 (ignoré tant que la balise n’est pas chargée), relayé au pixel Meta si le visiteur a accepté. */
+/** Événement GA4 et pixel Meta, envoyés seulement si le visiteur a accepté (sinon ignorés, sans erreur).
+ *  Une fois l’accord donné, gtag.js envoie aussi les événements émis pendant son téléchargement. */
 export function track(event: string, params: Record<string, unknown> = {}) {
-  gtag()?.('event', event, params);
+  if (gaAllowed) gtag()?.('event', event, params);
   const meta = META_EVENTS[event];
   if (meta && metaAllowed) fbq()?.(meta[0], meta[1]);
 }
 
-/** Script placé dans le <head>, avant gtag.js : consentement refusé par défaut, puis choix mémorisé. */
+/** Script placé dans le <head> : file d’attente gtag et consentement refusé par défaut. Il ne charge rien :
+ *  gtag.js, la configuration et la page vue viennent de loadGoogleAnalytics(), seulement après l’accord du visiteur. */
 export const CONSENT_DEFAULT_SCRIPT = `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
-var m = /(?:^|;\\s*)pia_consent=(granted|denied)/.exec(document.cookie);
-if (m) gtag('consent', 'update', { analytics_storage: m[1] });
-gtag('js', new Date());
-gtag('config', '${GA_ID}', { linker: { domains: ['permanenceia.com', 'app.permanenceia.com'] } });
+gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
 `;

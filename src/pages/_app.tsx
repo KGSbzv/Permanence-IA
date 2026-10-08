@@ -7,7 +7,7 @@ import CallbackModal from '@/components/CallbackModal';
 import TrialNudge from '@/components/TrialNudge';
 import ConsentBanner from '@/components/ConsentBanner';
 import { useEffect } from 'react';
-import { loadMetaPixel, readConsent, track } from '@/lib/analytics';
+import { loadGoogleAnalytics, loadMetaPixel, readConsent, track } from '@/lib/analytics';
 // Polices gardées dans le dépôt (public/fonts, déclarées dans fonts.css) : aucun téléchargement chez Google,
 // ni au build ni côté visiteur (donc rien avant le consentement), mêmes graisses qu’avant.
 import '@/styles/fonts.css';
@@ -16,8 +16,8 @@ import '@/styles/globals.css';
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { locale } = router;
-  // Pixel Meta chargé d’emblée seulement si le visiteur a déjà accepté (sinon, au clic sur « Accepter »).
-  useEffect(() => { if (readConsent() === 'granted') loadMetaPixel(); }, []);
+  // Google Analytics et pixel Meta chargés d’emblée seulement si le visiteur a déjà accepté (sinon, au clic sur « Accepter »).
+  useEffect(() => { if (readConsent() === 'granted') { loadGoogleAnalytics(); loadMetaPixel(); } }, []);
   // Pages vues lors des changements de page côté client, et clics utiles (essai, inscription, appel).
   useEffect(() => {
     const onRoute = (url: string) => track('page_view', { page_location: window.location.origin + url, page_title: document.title });

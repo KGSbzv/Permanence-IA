@@ -148,22 +148,39 @@ export function clientIp(req: NextApiRequest) {
   return parts.length >= 2 ? parts[parts.length - 2] : parts[0] || req.socket.remoteAddress || '';
 }
 
+/** Comparaison à temps constant ; un secret absent ou vide ne valide jamais rien. */
+function tokenMatches(got: Buffer, expected: string | undefined) {
+  if (!expected) return false;
+  const want = Buffer.from(expected);
+  return got.length === want.length && timingSafeEqual(got, want);
+}
+
+export type AuthOptions = {
+  /** Secret dédié au jeton dans l’adresse (?token=…) de cette route : seul accepté dans l’adresse quand
+   *  WEBHOOK_ALLOW_QUERY_TOKEN=0, accepté en plus des jetons communs sinon. Réservé au webhook d’inscription. */
+  querySecret?: 'SIGNUP_WEBHOOK_TOKEN';
+};
+
 /**
  * Jeton secret des webhooks et des outils Autocalls : en-tête x-webhook-token (outils en appel, relais d’automatisation)
  * ou ?token=… (webhooks d’agents, qui n’envoient pas d’en-têtes). Pendant le changement de jeton, WEBHOOK_TOKEN_NEXT est
  * accepté aussi. Le mode utilisé (en-tête, adresse, aucun) est journalisé par route, jamais la valeur : il dira quand
  * plus aucun appel n’utilise ?token=… et que l’ancien jeton peut être retiré.
+ * WEBHOOK_ALLOW_QUERY_TOKEN=0 coupe le jeton dans l’adresse sur toutes les routes (« query=off » dans le journal), sauf
+ * celles qui passent `querySecret` : elles ne l’acceptent alors que contre ce secret dédié (refus s’il n’est pas défini).
+ * Variable absente ou autre valeur : comportement d’origine.
  */
-export function isAuthorized(req: NextApiRequest) {
+export function isAuthorized(req: NextApiRequest, opts: AuthOptions = {}) {
   const header = req.headers['x-webhook-token'];
   const mode = header ? 'header' : req.query.token ? 'query' : 'none';
   const got = Buffer.from(String(header || req.query.token || ''));
-  const ok = [process.env.WEBHOOK_TOKEN, process.env.WEBHOOK_TOKEN_NEXT].some((expected) => {
-    if (!expected) return false;
-    const want = Buffer.from(expected);
-    return got.length === want.length && timingSafeEqual(got, want);
-  });
-  console.info(`[auth] ${String(req.url || '').split('?')[0]} mode=${mode} ok=${ok}`);
+  const common = [process.env.WEBHOOK_TOKEN, process.env.WEBHOOK_TOKEN_NEXT];
+  const dedicated = opts.querySecret ? process.env[opts.querySecret] : undefined;
+  const queryOff = String(process.env.WEBHOOK_ALLOW_QUERY_TOKEN ?? '').trim() === '0';
+  const accepted = mode !== 'query' ? common : queryOff ? (opts.querySecret ? [dedicated] : []) : [...common, dedicated];
+  const ok = accepted.some((expected) => tokenMatches(got, expected));
+  const note = mode === 'query' && queryOff && !opts.querySecret ? ' query=off' : '';
+  console.info(`[auth] ${String(req.url || '').split('?')[0]} mode=${mode} ok=${ok}${note}`);
   return ok;
 }
 

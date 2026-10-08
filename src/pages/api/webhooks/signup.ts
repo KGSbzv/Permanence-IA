@@ -8,7 +8,9 @@ import { emailKey, isValidEmail, normEmail } from '@/lib/emailPrefs';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Méthode non autorisée.' });
-  if (!isAuthorized(req)) return res.status(401).json({ error: 'Jeton invalide.' });
+  // Seul appelant qui garde le jeton dans l’adresse (administration white-label, sans en-tête ni relais possible) :
+  // secret dédié SIGNUP_WEBHOOK_TOKEN, seul accepté dans l’adresse quand WEBHOOK_ALLOW_QUERY_TOKEN=0.
+  if (!isAuthorized(req, { querySecret: 'SIGNUP_WEBHOOK_TOKEN' })) return res.status(401).json({ error: 'Jeton invalide.' });
 
   const { name, email, created_at } = req.body || {};
   // Champs éventuels du webhook (non garantis par Autocalls) : identifiant du compte et téléphone.

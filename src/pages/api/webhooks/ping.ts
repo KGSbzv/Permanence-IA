@@ -1,4 +1,5 @@
-// Contrôle du jeton des webhooks, sans aucun effet : 200 si l’en-tête x-webhook-token (ou ?token) est accepté, 401 sinon.
+// Contrôle du jeton des webhooks, sans aucun effet : 200 si l’en-tête x-webhook-token (ou ?token, sauf avec
+// WEBHOOK_ALLOW_QUERY_TOKEN=0) est accepté, 401 sinon.
 // Sert à vérifier un nouveau jeton (WEBHOOK_TOKEN_NEXT) avant de le coller dans les outils et le relais Autocalls.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { isAuthorized } from '@/lib/server';

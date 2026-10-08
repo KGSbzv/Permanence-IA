@@ -44,10 +44,7 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
    - enfin WhatsApp et Messenger.
 
    Pour revenir en arrière, il suffit de remettre l'ancienne adresse.
-5. **Après 7 jours sans aucun « mode=query » dans les journaux** (inscription exceptée) :
-   - Vous mettez la valeur du nouveau jeton dans WEBHOOK_TOKEN et retirez l'ancienne.
-   - Claude coupe le jeton dans l'adresse sur toutes les routes, sauf l'inscription.
-   - L'inscription reçoit son propre secret, à coller dans l'administration white-label.
+5. **Retrait de l'ancien jeton** : voir la section du même nom, plus bas. Rien à modifier dans l'administration white-label.
 
 ## Points d'attention
 
@@ -61,9 +58,42 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
 - Jeton : le nouveau (WEBHOOK_TOKEN_NEXT) est en place. Il est vérifié par /api/webhooks/ping.
 - Les 11 outils pendant l'appel envoient le jeton dans l'en-tête.
 - Le relais porte le vrai jeton. Un événement de test neutre est passé par le relais jusqu'au site : exécution « SUCCEEDED », journal du site « mode=header ok=true », sans email ni SMS.
-- Webhooks des agents : **31 sur 56 passent par le relais.** Le contrôle de sécurité de Claude Code a refusé de basculer les 25 autres (motif : redirection de trafic).
-  - Ces 25 webhooks appellent toujours le site directement, avec l'ancien jeton dans l'adresse. Les deux chemins fonctionnent, le site acceptant les deux jetons.
-  - Restent sur le site, en fin d'appel : 21183, 21207, 21208, 21209, 21210, 21235, 21236, 21269, 21273, 21275, 21279, 21280, 21306, 21307, 21309, 21314, 21376.
-  - Restent sur le site, en fin de conversation : 21206, 21207, 21208, 21275, 21277, 21279, 21297, 21306.
-- Pour finir : soit le propriétaire autorise l'outil configure-assistant-webhook dans Claude Code, et Claude relance la bascule des 25 ; soit il colle lui-même l'adresse du relais dans ces agents (Autocalls > Assistants > agent > Webhooks).
-- L'étape 5 (retrait de l'ancien jeton) attend que plus aucun webhook n'appelle le site avec « ?token= ».
+- Webhooks des agents : **56 sur 56 passent par le relais** (bascule des 25 derniers faite le 8 octobre au soir, avec l'autorisation du propriétaire).
+  - Contrôle des 41 agents le 8 octobre : 56 adresses sur le relais, aucune sur le site, aucun agent bloqué.
+  - Appel réel du 8 octobre (ligne israélienne, 21314) : exécution du relais réussie, journal du site « /api/webhooks/autocalls mode=header ok=true ».
+- L'étape 5 (retrait de l'ancien jeton) : plus aucun webhook d'agent n'appelle le site avec « ?token= » ; reste le webhook d'inscription (voir la section suivante).
+
+## Retrait de l'ancien jeton
+
+But : que l'ancien jeton (valeur actuelle de WEBHOOK_TOKEN) ne serve plus que pour le webhook « User Signup » de l'administration white-label, seul appelant qui garde « ?token= » dans l'adresse. Son adresse ne change pas : rien à recoller dans l'administration.
+
+Le site est prêt (sans effet tant que les réglages ci-dessous ne sont pas posés) :
+- `WEBHOOK_ALLOW_QUERY_TOKEN=0` refuse le jeton dans l'adresse sur toutes les routes. Le journal indique alors « mode=query ok=false query=off ».
+- Seule exception, /api/webhooks/signup : elle accepte encore « ?token= », mais uniquement avec le secret dédié `SIGNUP_WEBHOOK_TOKEN`.
+- L'en-tête `x-webhook-token` (relais, outils) reste accepté partout, avec WEBHOOK_TOKEN ou WEBHOOK_TOKEN_NEXT.
+- Variable absente : comportement actuel. Tests : `npx tsx scripts/test-webhook-auth.ts`.
+
+Les valeurs ne s'affichent jamais : chaque commande lit un secret et l'écrit dans un autre par un tube. Un clic sur Run par commande, **dans cet ordre**.
+
+1. **Vous : copier l'ancien jeton dans un secret dédié à l'inscription**, et donner l'accès au site. À faire avant l'étape 2, tant que WEBHOOK_TOKEN contient encore l'ancienne valeur.
+   ```bash
+   gcloud secrets versions access latest --secret WEBHOOK_TOKEN --project snarecore-cacrs | tr -d '\n' | gcloud secrets create SIGNUP_WEBHOOK_TOKEN --project snarecore-cacrs --data-file=- && firebase apphosting:secrets:grantaccess SIGNUP_WEBHOOK_TOKEN --backend voiceia --project snarecore-cacrs
+   ```
+   Prévenez Claude. Il vérifie d'abord que les journaux des dernières 24 heures ne montrent aucun « mode=query » ailleurs que sur /api/webhooks/signup. Filtre (journaux du site, projet snarecore-cacrs) : `textPayload:"[auth]" AND textPayload:"mode=query"`. Si une autre route apparaît, un appelant utilise encore l'ancien jeton dans l'adresse : Claude le bascule d'abord sur le relais ou l'en-tête.
+
+   Il ajoute ensuite `SIGNUP_WEBHOOK_TOKEN` et `WEBHOOK_ALLOW_QUERY_TOKEN: "0"` à apphosting.yaml, redéploie, puis vérifie :
+   - les inscriptions arrivent (« /api/webhooks/signup mode=query ok=true ») ;
+   - aucun refus « query=off ».
+
+   Pour revenir en arrière, il suffit de retirer `WEBHOOK_ALLOW_QUERY_TOKEN` et de redéployer.
+2. **Vous : remplacer l'ancien jeton par le nouveau**, seulement quand Claude a confirmé 24 heures de journaux sans aucun « mode=query » hors /api/webhooks/signup. La valeur de WEBHOOK_TOKEN_NEXT devient une nouvelle version de WEBHOOK_TOKEN.
+   ```bash
+   gcloud secrets versions access latest --secret WEBHOOK_TOKEN_NEXT --project snarecore-cacrs | tr -d '\n' | gcloud secrets versions add WEBHOOK_TOKEN --project snarecore-cacrs --data-file=-
+   ```
+   Prévenez Claude. Il redéploie (le site ne lit un secret qu'au déploiement) et vérifie :
+   - le relais et les outils (« mode=header ok=true ») ;
+   - l'inscription (« /api/webhooks/signup mode=query ok=true »).
+
+   Ensuite, l'ancienne valeur n'ouvre plus que /api/webhooks/signup. La version précédente de WEBHOOK_TOKEN peut être désactivée dans Secret Manager (opération réversible).
+
+L'ancienne valeur reste donc le secret de l'inscription. Pour s'en défaire complètement plus tard : créer une nouvelle valeur de SIGNUP_WEBHOOK_TOKEN et la coller dans l'adresse du webhook « User Signup » de l'administration white-label.
