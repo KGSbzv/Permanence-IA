@@ -136,7 +136,7 @@ export const MARKETS: Record<Locale, Market> = {
     brand: 'PermanenceAI', tagline: 'מענה טלפוני חכם 24/7', numberLocale: 'he-IL',
     legal: { governingLaw: 'דיני מדינת ויומינג, ארצות הברית', court: 'בתי המשפט המוסמכים במחוז לרמי, ויומינג, ארצות הברית', dataAuthority: 'הרשות להגנת הפרטיות', privacyLaw: 'חוק הגנת הפרטיות, התשמ״א-1981 (לרבות תיקון מס׳ 13) ותקנות הגנת הפרטיות (אבטחת מידע), התשע״ז-2017', copyrightLaw: 'חוק זכות יוצרים, התשס״ח-2007', mandatoryNote: '' },
     plans: basePlans(), recharges: baseRecharges(), widgetAssistantId: 'd8bde5e6-bb6d-435c-8934-3c1131c964e9',
-    // Ligne israélienne (Autocalls 11784), agent entrant 21314 (נועה).
+    // Ligne israélienne (Autocalls 11826, depuis le 8 oct. 2026 ; avant : 11784), agent entrant 21314 (נועה).
     phone: { e164: '+97233827709', display: '03-382-7709', label: 'התקשרו אלינו, 24/7', note: 'נועה, סוכנת ה-AI שלנו, עונה בעברית – וזו גם ההדגמה הכי טובה.' },
   },
 };
