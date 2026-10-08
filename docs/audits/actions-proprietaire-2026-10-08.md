@@ -26,7 +26,7 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
 4. **Message 5 à Autocalls.** Envoyer le message 5 de docs/autocalls-questions-whatsapp.md : commission de 2,70 $ sur l'achat d'un numéro, et mot de passe SMTP visible. Le forfait Réceptionniste n'est plus à recréer : Autocalls lui donne 200 crédits, et Claude a lancé « Resync Billing Portal » (confirmé).
 5. **Campagnes de rappel.** Fait le 8 octobre au soir par Claude : les 20 campagnes sont à 2 tentatives toutes les 240 minutes (vérifié par l'API).
 6. **Mot de passe Zoho.** Fait : vous l'avez changé le 8 octobre.
-7. **Bases de connaissances.** Fait : vous avez supprimé les 7 anciennes bases, et Claude a vérifié le résultat (7 bases neuves actives, 95 documents actifs, 41 agents bien rattachés).
+7. **Bases de connaissances.** Supprimer les 8 anciennes bases nommées « ANCIENNE » : 6213, 6214, 6215, 6216, 6218, 6219, 6220 et 6228 (liens dans docs/autocalls-kb-a-supprimer.md). Les 41 agents utilisent les nouvelles (6223 à 6230).
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
 9. **Ancienne copie du site.** Fait le 8 octobre : Claude a supprimé le service App Hosting du projet permanentia-prod et désactivé ses 3 secrets (ancienne clé Autocalls comprise). Les deux adresses de la copie renvoient 404. Le projet Google lui-même reste ; vous pouvez le fermer dans la console si vous voulez.
 
