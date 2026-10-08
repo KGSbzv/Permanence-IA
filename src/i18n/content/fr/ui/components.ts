@@ -186,6 +186,18 @@ export const UI_COMPONENTS = {
     step: (n: number) => `Étape ${n}`,
   },
 
+  // Parcours d’un appel en 4 étapes (src/components/CallFlow.tsx, même ordre que les icônes)
+  callFlow: {
+    title: 'Un appel, du premier « allô » au résumé',
+    intro: 'Ce qui se passe quand un client appelle alors que vous êtes occupé.',
+    steps: [
+      { title: 'Le client appelle', text: 'L’agent décroche dès la première sonnerie, de jour comme de nuit, et précise qu’il est une IA.' },
+      { title: 'L’agent comprend la demande', text: 'Il répond avec vos informations et pose les questions utiles : nom, besoin, urgence.' },
+      { title: 'Le rendez-vous est pris', text: 'Il propose un créneau libre et l’inscrit dans votre agenda, via Cal.com ou Calendly.' },
+      { title: 'Vous recevez le résumé', text: 'Le résumé de l’appel arrive par e-mail et dans votre tableau de bord, ou sur WhatsApp si vous l’avez configuré.' },
+    ],
+  },
+
   demoBlock: {
     title: 'Essayez notre agent en direct, dès maintenant',
     intro: 'Parlez à l’agent depuis votre navigateur, ou faites-le sonner sur votre propre téléphone : 30 secondes suffisent pour juger la voix et la façon dont il traite une demande de votre secteur.',
@@ -317,6 +329,10 @@ export const UI_COMPONENTS = {
     netBenefit: 'Bénéfice mensuel estimé',
     roi: (x: string) => `Retour : ${x} fois le prix du forfait`,
     perMonth: ' / mois',
+    missedYesterday: 'Combien d’appels avez-vous manqués hier ?',
+    workingDaysNote: (days: number) => `Multiplié par ${days} jours ouvrés, ce nombre règle le curseur des appels manqués.`,
+    perWeek: ' / semaine',
+    perYear: ' / an',
     assumptions: (wrapUp: number, conversion: number) =>
       `Hypothèses : ${wrapUp} min de traitement après chaque appel pour un employé, ${conversion} % des appels manqués deviennent clients. Prix HT en dollars US ; numéro de téléphone en sus. Estimation indicative, à comparer avec vos chiffres.`,
     cta: 'Essayer gratuitement',
@@ -408,7 +424,7 @@ export const UI_COMPONENTS = {
     phoneCta: 'Faire sonner mon téléphone',
     phoneLegal: 'Appel gratuit, sans engagement. Votre numéro sert à cette démonstration ; nous ne vous recontactons ensuite que si vous l’acceptez ci-dessous.',
     sentTitle: 'C’est noté',
-    sentText: (name: string) => `${name} vous appelle dans les minutes qui suivent, aux heures d’ouverture (du lundi au samedi, de 9 h à 19 h, heure de Paris). Gardez votre téléphone à portée de main.`,
+    sentText: (name: string) => `${name} vous appelle dans les minutes qui suivent, aux heures d’ouverture (du lundi au samedi, de 9 h à 12 h 30 et de 14 h à 19 h, heure de Paris). Gardez votre téléphone à portée de main.`,
     again: 'Faire un autre essai',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'agent vocal' : 'agente vocale'} IA (${accent})`,
     voiceLabel: 'Voix',

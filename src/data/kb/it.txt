@@ -25,7 +25,7 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 - I risultati vengono inviati al team PermanenceIA via email e aggiunti al CRM.
 - Esiti possibili di una richiamata commerciale: demo o prova concordata, da richiamare, non interessato, non richiamare più, contatto errato. Per l'assistenza: risolto, ticket creato, da richiamare, contatto errato, non richiamare più.
 - Se non c'è risposta (o la linea cade, o risponde la segreteria), la campagna riprova fino a 3 volte. In segreteria l'agente lascia al massimo un breve messaggio, senza dati personali, oppure non ne lascia.
-- Chi rifiuta o chiede di non essere più chiamato viene inserito nella lista di esclusione (blacklist) e non viene più richiamato.
+- Quando una persona rifiuta o chiede di non essere più chiamata, il suo rifiuto viene registrato: i richiami in attesa vengono annullati e non viene più richiamata.
 - Numero o persona sbagliati: l'agente si scusa, non presenta l'offerta e chiude la chiamata.
 
 4. Assistenza ed escalation

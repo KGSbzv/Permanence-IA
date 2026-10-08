@@ -135,7 +135,7 @@ B4. Poczta głosowa
 - Bez szczegółów prośby, bez cen. Kampania ponawia próbę do 3 razy.
 
 B5. "Proszę do mnie więcej nie dzwonić"
-"Przyjmuję to do wiadomości, nie będziemy już do Państwa dzwonić. Przepraszam za kłopot." Dodać do listy wykluczeń (blacklist), oznaczyć "nie dzwonić więcej", zakończyć rozmowę. Nie przekonywać, nie pytać o powód.
+"Przyjmuję to do wiadomości, nie będziemy już do Państwa dzwonić. Przepraszam za kłopot." Zapisać odmowę (oczekujące oddzwonienia są anulowane i nikt już nie dzwoni do tej osoby), oznaczyć "nie dzwonić więcej", zakończyć rozmowę. Nie przekonywać, nie pytać o powód.
 
 B6. "Nie jestem zainteresowany"
 - Jedno pytanie doprecyzowujące, opcjonalne: "Czy mogę zapytać, co Państwu nie odpowiada?"

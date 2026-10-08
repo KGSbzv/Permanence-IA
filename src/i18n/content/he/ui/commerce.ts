@@ -245,7 +245,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'מוסיפים דקות בכל רגע',
-      intro: 'טעינת קרדיט עוזרת בחודש עמוס יותר. אם אתם טוענים לעיתים קרובות, המסלול הבא ישתלם יותר: נעדכן אתכם.',
+      intro: 'טעינת קרדיט עוזרת בחודש עמוס יותר. אם אתם טוענים לעיתים קרובות, המסלול הבא ישתלם יותר: היועץ שלכם יכול לאשר לכם זאת.',
     },
     how: {
       title: 'איך זה עובד',
@@ -328,7 +328,8 @@ export const UI_COMMERCE = {
 
   feature: {
     meta: {
-      title: (name: string, brand: string) => `${name} – מענה טלפוני AI · ${brand}`,
+      // Évite « מענה טלפוני AI – מענה טלפוני AI » quand le nom du module contient déjà l'expression
+      title: (name: string, brand: string) => (name.includes('מענה טלפוני') ? `${name} 24/7 · ${brand}` : `${name} – מענה טלפוני AI · ${brand}`),
       /** `short` is the module's benefit sentence, without a final full stop. */
       description: (short: string, offerName: string, days: number) => `${short}. כלול החל ממסלול ${offerName}. ${days} יום ניסיון חינם.`,
     },

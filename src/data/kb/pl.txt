@@ -25,7 +25,7 @@ Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 - Wyniki trafiają do zespołu PermanenceAI e-mailem i są dodawane do CRM.
 - Możliwe wyniki oddzwonienia sprzedażowego: ustalona demonstracja lub okres próbny, oddzwonić, niezainteresowany, nie dzwonić więcej, błędny kontakt. Wsparcie: rozwiązane, utworzono zgłoszenie, oddzwonić, błędny kontakt, nie dzwonić więcej.
 - Jeśli nikt nie odbiera (albo połączenie zostanie przerwane lub odbierze poczta głosowa), kampania ponawia próbę do 3 razy. Na poczcie głosowej agent zostawia najwyżej jedną krótką wiadomość, bez danych osobowych, albo nie zostawia żadnej.
-- Osoba, która odmawia lub prosi, by więcej do niej nie dzwonić, trafia na listę wykluczeń (blacklist) i nie otrzymuje już połączeń.
+- Gdy osoba odmawia lub prosi, by więcej do niej nie dzwonić, jej odmowa zostaje zapisana: oczekujące oddzwonienia są anulowane i nikt już do niej nie dzwoni.
 - Błędny numer lub niewłaściwa osoba: agent przeprasza, nie przedstawia oferty i kończy rozmowę.
 
 4. Wsparcie i eskalacja

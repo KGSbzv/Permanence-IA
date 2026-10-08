@@ -248,7 +248,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Voeg op elk moment extra belminuten toe',
-      intro: 'Een opwaardering helpt u door een drukkere maand. Waardeert u vaak op, dan wordt het grotere abonnement voordeliger: wij laten u dat weten.',
+      intro: 'Een opwaardering helpt u door een drukkere maand. Waardeert u vaak op, dan wordt het grotere abonnement voordeliger: uw adviseur kan het u bevestigen.',
     },
     how: {
       title: 'Hoe het werkt',

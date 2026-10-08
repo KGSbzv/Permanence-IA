@@ -190,6 +190,18 @@ export const UI_COMPONENTS = {
     step: (n: number) => `Step ${n}`,
   },
 
+  // Parcours d’un appel en 4 étapes (src/components/CallFlow.tsx, même ordre que les icônes)
+  callFlow: {
+    title: 'One call, from “hello” to summary',
+    intro: 'What happens when a customer calls while you are busy.',
+    steps: [
+      { title: 'The customer calls', text: 'The agent picks up on the first ring, day or night, and says that it is an AI.' },
+      { title: 'The agent understands the request', text: 'It answers with your information and asks what matters: name, need, urgency.' },
+      { title: 'The appointment is booked', text: 'It offers a free slot and books it straight into your calendar, through Cal.com or Calendly.' },
+      { title: 'You get the summary', text: 'The call summary arrives by email and in your dashboard, or on WhatsApp if you have set it up.' },
+    ],
+  },
+
   demoBlock: {
     title: 'Try our agent live now',
     intro: 'Talk to the agent from your browser, or have it ring your own phone: 30 seconds is enough to judge the voice and how it handles an enquiry from your sector.',
@@ -321,6 +333,10 @@ export const UI_COMPONENTS = {
     netBenefit: 'Estimated monthly benefit',
     roi: (x: string) => `Return: ${x} times the plan price`,
     perMonth: ' / month',
+    missedYesterday: 'How many calls did you miss yesterday?',
+    workingDaysNote: (days: number) => `Multiplied by ${days} working days, this number sets the missed-calls slider.`,
+    perWeek: ' / week',
+    perYear: ' / year',
     assumptions: (wrapUp: number, conversion: number) =>
       `Assumptions: ${wrapUp} min of wrap-up work after each call for an employee, ${conversion}% of missed calls become customers. Prices excl. tax in US dollars; phone number extra. Indicative estimate, to compare with your own figures.`,
     cta: 'Try it free',
@@ -412,7 +428,7 @@ export const UI_COMPONENTS = {
     phoneCta: 'Ring my phone',
     phoneLegal: 'Free, no commitment. Your number is used for this demo; we only contact you again if you agree below.',
     sentTitle: 'Request received',
-    sentText: (name: string) => `${name} calls you within minutes during opening hours (Monday to Saturday, 9am to 7pm). Keep your phone close.`,
+    sentText: (name: string) => `${name} calls you within minutes during opening hours (Monday to Saturday, 9am–12:30pm and 2pm–7pm UK time). Keep your phone close.`,
     again: 'Try again',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, ${male ? 'male' : 'female'} AI voice agent (${accent})`,
     voiceLabel: 'Voice',

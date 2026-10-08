@@ -242,7 +242,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Dokupuj minuty w dowolnym momencie',
-      intro: 'Doładowanie pomaga w intensywniejszym miesiącu. Jeśli doładowujesz często, wyższy pakiet staje się korzystniejszy: poinformujemy Cię o tym.',
+      intro: 'Doładowanie pomaga w intensywniejszym miesiącu. Jeśli doładowujesz często, wyższy pakiet staje się korzystniejszy: Twój doradca może Ci to potwierdzić.',
     },
     how: {
       title: 'Jak to działa',

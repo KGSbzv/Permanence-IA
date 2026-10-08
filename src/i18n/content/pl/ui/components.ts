@@ -195,6 +195,18 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     step: (n: number) => `Krok ${n}`,
   },
 
+  // Parcours d’un appel en 4 étapes (src/components/CallFlow.tsx, même ordre que les icônes)
+  callFlow: {
+    title: 'Jedno połączenie: od „halo” do podsumowania',
+    intro: 'Co się dzieje, gdy klient dzwoni, a Ty jesteś zajęty.',
+    steps: [
+      { title: 'Klient dzwoni', text: 'Agent odbiera po pierwszym sygnale, w dzień i w nocy, i informuje, że jest AI.' },
+      { title: 'Agent rozumie sprawę', text: 'Odpowiada na podstawie Twoich informacji i zadaje potrzebne pytania: imię, potrzeba, pilność.' },
+      { title: 'Wizyta jest umówiona', text: 'Proponuje wolny termin i wpisuje go do Twojego kalendarza przez Cal.com lub Calendly.' },
+      { title: 'Dostajesz podsumowanie', text: 'Podsumowanie rozmowy trafia na e-mail i do panelu, albo na WhatsApp, jeśli to skonfigurujesz.' },
+    ],
+  },
+
   demoBlock: {
     title: 'Wypróbuj naszego agenta na żywo już teraz',
     intro: 'Porozmawiaj z agentem w przeglądarce albo niech zadzwoni na Twój własny telefon: 30 sekund wystarczy, by ocenić głos i to, jak obsługuje zgłoszenie z Twojej branży.',
@@ -326,6 +338,10 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     netBenefit: 'Szacowany miesięczny zysk',
     roi: (x: string) => `Zwrot: ${x} × cena pakietu`,
     perMonth: ' / mies.',
+    missedYesterday: 'Ile połączeń nie odebrano wczoraj?',
+    workingDaysNote: (days: number) => `Pomnożona przez ${days} dni robocze, ta liczba ustawia suwak nieodebranych połączeń.`,
+    perWeek: ' / tydz.',
+    perYear: ' / rok',
     assumptions: (wrapUp: number, conversion: number) =>
       `Założenia: ${wrapUp} min obsługi po każdym połączeniu w przypadku pracownika, ${conversion}% nieodebranych połączeń zamienia się w klientów. Ceny netto w dolarach amerykańskich; numer telefonu płatny dodatkowo. Szacunek orientacyjny, do porównania z Twoimi danymi.`,
     cta: 'Wypróbuj za darmo',

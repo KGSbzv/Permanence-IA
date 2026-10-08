@@ -25,7 +25,7 @@ Processus : rappels, suivi et support (Permanence IA)
 - Les résultats sont envoyés à l'équipe Permanence IA par email et ajoutés au CRM.
 - Résultats possibles d'un rappel commercial : démonstration ou essai convenu, à rappeler, pas intéressé, ne plus appeler, mauvais contact. Pour le support : résolu, ticket créé, à rappeler, mauvais contact, ne plus appeler.
 - Sans réponse (ou ligne coupée, répondeur), la campagne réessaie jusqu'à 3 fois. Sur un répondeur, l'agent laisse au plus un message court, sans détail personnel, ou n'en laisse pas.
-- Une personne qui refuse ou demande à ne plus être appelée est ajoutée à la liste d'opposition (blacklist) et n'est plus rappelée.
+- Quand une personne refuse ou demande à ne plus être appelée, son refus est enregistré : ses rappels en attente sont annulés et elle n'est plus rappelée.
 - Mauvais numéro ou mauvaise personne : l'agent s'excuse, ne présente pas l'offre et termine l'appel.
 
 4. Support et escalade

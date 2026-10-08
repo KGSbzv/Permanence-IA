@@ -250,7 +250,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Ajoutez des minutes à tout moment',
-      intro: 'La recharge dépanne un mois plus chargé. Si vous rechargez souvent, le forfait supérieur devient plus économique : nous vous le signalons.',
+      intro: 'La recharge dépanne un mois plus chargé. Si vous rechargez souvent, le forfait supérieur devient plus économique : votre conseiller peut vous le confirmer.',
     },
     how: {
       title: 'Comment ça fonctionne',

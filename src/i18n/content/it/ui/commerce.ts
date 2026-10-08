@@ -257,7 +257,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     },
     hero: {
       title: 'Aggiunga minuti in qualsiasi momento',
-      intro: 'La ricarica copre un mese più intenso. Se ricarica spesso, il piano superiore diventa più conveniente: glielo segnaliamo.',
+      intro: 'La ricarica copre un mese più intenso. Se ricarica spesso, il piano superiore diventa più conveniente: il Suo consulente può confermarglielo.',
     },
     how: {
       title: 'Come funziona',

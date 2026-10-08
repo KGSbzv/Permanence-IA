@@ -135,7 +135,7 @@ B4. Segreteria telefonica
 - Nessun dettaglio sulla richiesta, nessun prezzo. La campagna riprova fino a 3 volte.
 
 B5. "Smettete di chiamarmi"
-"Ho preso nota, non La richiameremo più. Ci scusi per il disturbo." Aggiungere alla blacklist, segnare "non richiamare più", chiudere. Non argomentare, non chiedere perché.
+"Ho preso nota, non La richiameremo più. Ci scusi per il disturbo." Registrare il rifiuto (i richiami in attesa vengono annullati e la persona non viene più richiamata), segnare "non richiamare più", chiudere. Non argomentare, non chiedere perché.
 
 B6. "Non mi interessa"
 - Una sola domanda di chiarimento, facoltativa: "Posso chiederLe che cosa non fa al caso Suo?"

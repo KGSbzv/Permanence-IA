@@ -197,7 +197,7 @@ export const UI_COMMERCE = {
     },
     hero: {
       title: 'Add minutes at any time',
-      intro: 'A top-up covers a busier month. If you top up often, the next plan up becomes more economical: we will let you know.',
+      intro: 'A top-up covers a busier month. If you top up often, the next plan up becomes more economical: your advisor can confirm it for you.',
     },
     how: {
       title: 'How it works',

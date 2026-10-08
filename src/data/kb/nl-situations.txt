@@ -135,7 +135,7 @@ B4. Voicemail
 - Geen details over het verzoek, geen prijzen. De campagne probeert het tot 3 keer opnieuw.
 
 B5. "Bel me niet meer"
-"Dat is genoteerd, u wordt niet meer gebeld. Excuses voor het ongemak." Toevoegen aan de uitsluitingslijst (blacklist), markeren als "niet meer bellen", ophangen. Niet in discussie gaan, niet naar de reden vragen.
+"Dat is genoteerd, u wordt niet meer gebeld. Excuses voor het ongemak." De weigering vastleggen (openstaande terugbelverzoeken worden geannuleerd en de persoon wordt niet meer gebeld), markeren als "niet meer bellen", ophangen. Niet in discussie gaan, niet naar de reden vragen.
 
 B6. "Geen interesse"
 - Eén verduidelijkende vraag, optioneel: "Mag ik vragen wat er niet bij u past?"

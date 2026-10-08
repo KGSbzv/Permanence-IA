@@ -25,7 +25,7 @@ Process: callbacks, follow-up and support (PermanenceAI)
 - Results are sent to the PermanenceAI team by email and added to the CRM.
 - Possible results of a sales callback: demo or trial agreed, call back, not interested, do not call again, wrong contact. For support: resolved, ticket created, call back, wrong contact, do not call again.
 - If there is no answer (or the line drops, or it goes to voicemail), the campaign retries up to 3 times. On voicemail, the agent leaves at most one short message with no personal details, or none at all.
-- A person who declines or asks not to be called again is added to the exclusion list (the "Blacklist" menu) and is not called again.
+- When a person declines or asks not to be called again, their refusal is recorded: their pending callbacks are cancelled and they are not called again.
 - Wrong number or wrong person: the agent apologises, does not pitch the offer and ends the call.
 
 4. Support and escalation

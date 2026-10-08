@@ -135,7 +135,7 @@ B4. Voicemail
 - No details about the request, no prices. The campaign retries up to 3 times.
 
 B5. "Stop calling me"
-"Understood, you won't be called again. I'm sorry for the inconvenience." Add to the exclusion list, mark "do not call again", hang up. Do not argue, do not ask why.
+"Understood, you won't be called again. I'm sorry for the inconvenience." Record the refusal (their pending callbacks are cancelled and they are not called again), mark "do not call again", hang up. Do not argue, do not ask why.
 
 B6. "Not interested"
 - One optional clarifying question only: "May I ask what doesn't fit for you?"

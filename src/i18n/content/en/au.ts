@@ -77,7 +77,17 @@ export const enAu: Content = {
   modules,
   ui: {
     ...en.ui,
-    components: { ...en.ui.components, industryMarquee, portalPreview, mock },
+    components: {
+      ...en.ui.components,
+      industryMarquee,
+      portalPreview,
+      mock,
+      // Démo en direct : les horaires de rappel sont donnés à l’heure de Sydney pour l’Australie
+      liveDemo: {
+        ...en.ui.components.liveDemo,
+        sentText: (name: string) => en.ui.components.liveDemo.sentText(name).replace('UK time', 'Sydney time'),
+      },
+    },
     commerce: {
       ...en.ui.commerce,
       sectorsIndex: {

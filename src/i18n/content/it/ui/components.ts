@@ -186,6 +186,18 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     step: (n: number) => `Passo ${n}`,
   },
 
+  // Parcours d’un appel en 4 étapes (src/components/CallFlow.tsx, même ordre que les icônes)
+  callFlow: {
+    title: 'Una chiamata, dal primo «pronto» al riepilogo',
+    intro: 'Cosa succede quando un cliente chiama mentre Lei è occupato.',
+    steps: [
+      { title: 'Il cliente chiama', text: 'L’agente risponde al primo squillo, di giorno come di notte, e dice di essere un’AI.' },
+      { title: 'L’agente capisce la richiesta', text: 'Risponde con le Sue informazioni e fa le domande utili: nome, esigenza, urgenza.' },
+      { title: 'L’appuntamento è fissato', text: 'Propone una fascia libera e la registra nel Suo calendario, tramite Cal.com o Calendly.' },
+      { title: 'Lei riceve il riepilogo', text: 'Il riepilogo della chiamata arriva via email e nella Sua dashboard, oppure su WhatsApp se lo ha configurato.' },
+    ],
+  },
+
   demoBlock: {
     title: 'Provi subito dal vivo il nostro agente',
     intro: 'Parli con l’agente dal Suo browser, oppure lo faccia squillare sul Suo telefono: bastano 30 secondi per giudicare la voce e il modo in cui gestisce una richiesta del Suo settore.',
@@ -317,6 +329,10 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     netBenefit: 'Beneficio mensile stimato',
     roi: (x: string) => `Ritorno: ${x} volte il prezzo del piano`,
     perMonth: ' / mese',
+    missedYesterday: 'Quante chiamate ha perso ieri?',
+    workingDaysNote: (days: number) => `Moltiplicato per ${days} giorni lavorativi, questo numero regola il cursore delle chiamate perse.`,
+    perWeek: ' / settimana',
+    perYear: ' / anno',
     assumptions: (wrapUp: number, conversion: number) =>
       `Ipotesi: ${wrapUp} min di lavorazione dopo ogni chiamata per un dipendente, il ${conversion}% delle chiamate perse diventa cliente. Prezzi IVA esclusa in dollari USA; numero di telefono escluso. Stima indicativa, da confrontare con i Suoi dati.`,
     cta: 'Provi gratis',
@@ -408,7 +424,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     phoneCta: 'Mi chiami adesso',
     phoneLegal: 'Gratuito e senza impegno. Il Suo numero serve per questa demo; La ricontattiamo solo se lo accetta qui sotto.',
     sentTitle: 'Richiesta ricevuta',
-    sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00-19:00, ora italiana). Tenga il telefono a portata di mano.`,
+    sentText: (name: string) => `${name} La chiama entro pochi minuti durante l’orario di apertura (dal lunedì al sabato, 9:00-13:00 e 14:30-19:00, ora italiana). Tenga il telefono a portata di mano.`,
     again: 'Riprovi',
     portraitAlt: (name: string, accent: string, male = false) => `${name}, agente vocale AI, voce ${male ? 'maschile' : 'femminile'} (${accent})`,
     voiceLabel: 'Voce',

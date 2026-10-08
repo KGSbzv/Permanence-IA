@@ -135,7 +135,7 @@ B4. Répondeur
 - Pas de détail sur la demande, pas de prix. La campagne réessaie jusqu'à 3 fois.
 
 B5. « Arrêtez de m'appeler »
-« C'est noté, vous ne serez plus appelé. Je vous prie de nous excuser. » Ajouter à la blacklist, marquer « ne plus appeler », raccrocher. Ne pas argumenter, ne pas demander pourquoi.
+« C'est noté, vous ne serez plus appelé. Je vous prie de nous excuser. » Enregistrer le refus (ses rappels en attente sont annulés et la personne n'est plus rappelée), marquer « ne plus appeler », raccrocher. Ne pas argumenter, ne pas demander pourquoi.
 
 B6. « Pas intéressé »
 - Une seule question de clarification, facultative : « Puis-je vous demander ce qui ne correspond pas ? »

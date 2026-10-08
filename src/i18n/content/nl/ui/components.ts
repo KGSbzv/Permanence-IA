@@ -184,6 +184,18 @@ export const UI_COMPONENTS = {
     step: (n: number) => `Stap ${n}`,
   },
 
+  // Parcours d’un appel en 4 étapes (src/components/CallFlow.tsx, même ordre que les icônes)
+  callFlow: {
+    title: 'Eén gesprek, van „hallo” tot samenvatting',
+    intro: 'Wat er gebeurt als een klant belt terwijl u bezig bent.',
+    steps: [
+      { title: 'De klant belt', text: 'De agent neemt op bij de eerste keer overgaan, dag en nacht, en meldt dat het een AI is.' },
+      { title: 'De agent begrijpt de vraag', text: 'Hij antwoordt met uw informatie en stelt de nodige vragen: naam, behoefte, urgentie.' },
+      { title: 'De afspraak staat', text: 'Hij stelt een vrij tijdslot voor en zet het in uw agenda, via Cal.com of Calendly.' },
+      { title: 'U krijgt de samenvatting', text: 'De samenvatting van het gesprek komt per e-mail en in uw dashboard, of via WhatsApp als u dat hebt ingesteld.' },
+    ],
+  },
+
   demoBlock: {
     title: 'Probeer onze agent nu live',
     intro: 'Praat vanuit uw browser met de agent, of laat hem uw eigen telefoon bellen: in 30 seconden hoort u hoe de stem klinkt en hoe hij een aanvraag uit uw sector afhandelt.',
@@ -315,6 +327,10 @@ export const UI_COMPONENTS = {
     netBenefit: 'Geschat maandelijks voordeel',
     roi: (x: string) => `Rendement: ${x} keer de prijs van het abonnement`,
     perMonth: ' / maand',
+    missedYesterday: 'Hoeveel gesprekken hebt u gisteren gemist?',
+    workingDaysNote: (days: number) => `Vermenigvuldigd met ${days} werkdagen bepaalt dit getal de schuifregelaar voor gemiste gesprekken.`,
+    perWeek: ' / week',
+    perYear: ' / jaar',
     assumptions: (wrapUp: number, conversion: number) =>
       `Aannames: ${wrapUp} min nawerk per gesprek voor een medewerker, ${conversion}% van de gemiste gesprekken wordt klant. Prijzen excl. btw in Amerikaanse dollars; telefoonnummer niet inbegrepen. Indicatieve schatting, vergelijk met uw eigen cijfers.`,
     cta: 'Gratis proberen',

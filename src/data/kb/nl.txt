@@ -25,7 +25,7 @@ Proces: terugbellen, opvolging en support (PermanenceAI)
 - De resultaten gaan per e-mail naar het PermanenceAI-team en worden toegevoegd aan het CRM.
 - Mogelijke resultaten van een verkoopterugbelgesprek: demo of proefperiode afgesproken, terugbellen, niet geïnteresseerd, niet meer bellen, verkeerd contact. Support: opgelost, ticket aangemaakt, terugbellen, verkeerd contact, niet meer bellen.
 - Bij geen antwoord (of een verbroken verbinding of voicemail) probeert de campagne het tot 3 keer opnieuw. Op een voicemail spreekt de agent hooguit één kort bericht in, zonder persoonlijke details, of helemaal geen.
-- Wie weigert of vraagt niet meer gebeld te worden, komt op de uitsluitingslijst (blacklist) en wordt niet meer gebeld.
+- Als iemand weigert of vraagt niet meer gebeld te worden, wordt die weigering vastgelegd: openstaande terugbelverzoeken worden geannuleerd en de persoon wordt niet meer gebeld.
 - Verkeerd nummer of verkeerde persoon: de agent verontschuldigt zich, presenteert het aanbod niet en beëindigt het gesprek.
 
 4. Support en escalatie
