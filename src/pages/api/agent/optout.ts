@@ -3,8 +3,9 @@
 // et prévient l’équipe (qui l’ajoute à la liste de blocage Autocalls).
 //
 // POST { phone, reason?, agent? } — phone = {{customer_phone}} de l’appel (ou numéro dicté, avec indicatif).
-// Jeton secret (en-tête x-webhook-token) recommandé ; sans jeton, accepté aussi (une opposition ne fait
-// qu’empêcher des appels) mais limité à 10 demandes par adresse IP et par 10 minutes.
+// Jeton secret (en-tête x-webhook-token) : opposition appliquée tout de suite. Sans jeton, rien n’est annulé
+// (sinon n’importe qui pourrait bloquer le rappel d’un autre numéro) : l’équipe est prévenue et le webhook de
+// fin d’appel applique l’opposition (résultat ne_plus_appeler). Limité à 10 demandes par IP et par 10 minutes.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { clientIp, isAuthorized, toE164 } from '@/lib/server';
 import { registerOptOut } from '@/lib/optout';
@@ -40,11 +41,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     phone, outcome: 'ne_plus_appeler',
     source: `outil agent${agent ? ` ${agent}` : ''}${authorized ? '' : ' (sans jeton)'}`,
     reason: typeof b.reason === 'string' ? b.reason : undefined,
+    apply: authorized,
   });
   if (result.problems.length) console.error('[agent-optout]', result.problems.join(' ; '));
   return res.status(200).json({
     success: result.cancelled || result.recorded || result.notified,
     cancelled_callbacks: result.cancelled,
-    message_for_agent: 'Recorded: this number will not be called again. Confirm it briefly to the person, apologise for the disturbance and end the call politely. Do not offer another callback.',
+    message_for_agent: 'Recorded: this number will not be called again. Confirm it briefly to the person, apologise for the disturbance and end the call politely. Do not offer another callback. The call outcome must be ne_plus_appeler.',
   });
 }

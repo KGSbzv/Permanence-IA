@@ -19,27 +19,35 @@ export const cancelPendingCallbacks = (e164: string) =>
 /**
  * Enregistre l’opposition (une seule ligne par numéro), annule les rappels en attente et prévient l’équipe.
  * `outcome` : ne_plus_appeler (opposition, liste de blocage) ou mauvais_contact (rappels annulés seulement).
+ * `apply: false` (demande non authentifiée) : rien n’est annulé ni bloqué, l’équipe est seulement prévenue —
+ * sinon n’importe qui pourrait faire annuler le rappel d’un autre numéro. L’opposition est alors appliquée
+ * par le webhook de fin d’appel (résultat ne_plus_appeler, authentifié) ou à la main.
  * Renvoie le détail des étapes, pour les journaux et la réponse à l’agent.
  */
-export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_appeler' | 'mauvais_contact'; source: string; reason?: string }) {
+export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_appeler' | 'mauvais_contact'; source: string; reason?: string; apply?: boolean }) {
   const { phone, outcome, source } = opts;
+  const apply = opts.apply !== false;
   const reason = String(opts.reason || '').slice(0, 500);
-  const [cancel, already] = await Promise.allSettled([cancelPendingCallbacks(phone), outcome === 'ne_plus_appeler' ? isOptedOut(phone) : Promise.resolve(true)]);
+  const skipped: PromiseSettledResult<boolean> = { status: 'fulfilled', value: true };
+  const [cancel, already] = apply
+    ? await Promise.allSettled([cancelPendingCallbacks(phone), outcome === 'ne_plus_appeler' ? isOptedOut(phone) : Promise.resolve(true)])
+    : [{ status: 'rejected', reason: new Error('non appliqué : demande sans jeton') } as PromiseSettledResult<unknown>, skipped];
   let recorded: PromiseSettledResult<unknown> = { status: 'fulfilled', value: null };
-  if (outcome === 'ne_plus_appeler' && !(already.status === 'fulfilled' && already.value)) {
+  if (apply && outcome === 'ne_plus_appeler' && !(already.status === 'fulfilled' && already.value)) {
     [recorded] = await Promise.allSettled([dbInsert('call_events', {
       kind: OPTOUT_KIND, external_id: `optout-${Date.now()}`, customer_phone: phone, outcome,
       summary: `Opposition « ne plus appeler » (${source})${reason ? ` : ${reason}` : ''}`,
     })]);
   }
   const problems = [
-    cancel.status === 'rejected' && `annulation des rappels en attente : ${cancel.reason?.message}`,
+    apply && cancel.status === 'rejected' && `annulation des rappels en attente : ${cancel.reason?.message}`,
     recorded.status === 'rejected' && `opposition non enregistrée en base : ${recorded.reason?.message}`,
   ].filter(Boolean) as string[];
   const isOptOut = outcome === 'ne_plus_appeler';
   const lines = [
     `Numéro : ${phone}`, `Source : ${source}`, reason && `Motif : ${reason}`,
     `Rappels en attente : ${cancel.status === 'fulfilled' ? 'annulés' : 'NON annulés'}`,
+    !apply && 'À VÉRIFIER : demande reçue sans jeton, rien n’a été appliqué automatiquement. Elle le sera à la fin de l’appel si son résultat est « ne_plus_appeler » ; sinon, annuler les rappels de ce numéro à la main.',
     isOptOut && 'À FAIRE : ajouter ce numéro à la liste de blocage Autocalls (blacklist), pour toutes les campagnes.',
     ...problems.map((p) => `ERREUR — ${p}`),
   ].filter(Boolean) as string[];
