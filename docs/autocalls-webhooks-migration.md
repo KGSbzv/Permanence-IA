@@ -33,7 +33,15 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
    - garder `Content-Type: application/json`.
 
    6243 a déjà l'en-tête : il suffit de remplacer sa valeur. Commencer par 6241 seul, puis faire un appel de test.
-3. **Vous : le relais.** Autocalls > Automate, ouvrir l'automatisation « Relais fin d'échange → site (PermanenceAI) » préparée par Claude.
+3. **Vous : le relais.** Autocalls > Automate (https://app.autocalls.ai/automate), ouvrir l'automatisation « Relais fin d'échange → site (PermanenceAI) » préparée par Claude.
+
+   Ce qu'elle contient (créée et vérifiée le 8 octobre, identifiant xml56HWLiG2rnf4TKvZjf) :
+   - un déclencheur « Catch Webhook » ;
+   - une étape qui n'accepte que les 41 agents du compte ;
+   - une branche qui écarte l'événement de test fictif ;
+   - l'étape HTTP « Envoyer l'événement au site », réglée sur « Retry on all errors » : un refus du site apparaît comme un échec dans l'historique des exécutions, au lieu d'être perdu.
+
+   Elle est active mais reliée à aucun agent. Tant que le jeton provisoire est en place, le site refuse tout ce qu'elle envoie.
    - Dans l'étape HTTP, remplacer la valeur provisoire de l'en-tête `x-webhook-token` par le nouveau jeton.
    - Publier et activer.
 4. **Claude : rebascule des agents.** Il fait pointer, par lots, les webhooks des 41 agents vers le relais, et vérifie à chaque lot que les événements arrivent :
