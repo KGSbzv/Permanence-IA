@@ -138,6 +138,19 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     phoneInvalid: 'Indichi un numero di telefono valido, ad esempio 312 345 6789.',
   },
 
+  // Consenso marketing (ricontatti): casella NON selezionata, separata dal consenso alla richiamata. Consenso
+  // espresso obbligatorio in Italia. Ogni modifica richiede una nuova MARKETING_TEXT_VERSION (src/lib/contacts.ts).
+  marketingConsent: {
+    email: (brand: string, company: string) => `Acconsento a ricevere via e-mail consigli e offerte di ${brand}: alcune e-mail nelle prime settimane, poi al massimo una al mese. Disiscrizione con un clic in ogni e-mail.`,
+    whatsapp: (brand: string) => `Acconsento a ricevere questi consigli e offerte di ${brand} anche su WhatsApp (facoltativo; risponda STOP in qualsiasi momento per interrompere).`,
+    notice: (brand: string, company: string, email: string) => [
+      'Il consenso è facoltativo: senza di esso Le scriveremo solo in merito alla Sua richiesta. Può revocarlo in qualsiasi momento, gratuitamente, con il link presente in ogni e-mail o scrivendo a ', email,
+      '. Titolare del trattamento: ', company, '. Vedi l’',
+      { a: 'informativa sulla privacy', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'La Sua e-mail (facoltativa)',
+  },
+
   benefits: {
     items: [
       { title: 'Risponda anche fuori orario', text: 'Sera, fine settimana, durante i Suoi appuntamenti: ogni chiamata riceve una risposta.' },

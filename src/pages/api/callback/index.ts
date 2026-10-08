@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { isLocale } from '@/i18n/locales';
 import { safeFirstName, sendCallbackConfirmation, sendTemplate } from '@/lib/whatsapp';
 import { isOptedOut } from '@/lib/optout';
-import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbInsert, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
+import { CONTACTS_DB, captureMeta, insertWithExtras, isYes, recordConsent, recordFormConsents, resolveLocale, upsertContact, type ContactOrigin } from '@/lib/contacts';
+import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164 } from '@/lib/server';
 
 // Limite simple par adresse IP (par instance) : 20 demandes par tranche de 10 minutes.
 const hits = new Map<string, number[]>();
@@ -77,6 +78,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const scheduled = callAt.getTime() > Date.now() + 60_000;
   // Case WhatsApp du formulaire (accord séparé, décoché par défaut) : confirmation envoyée sur WhatsApp.
   const wantsWhatsApp = (b.whatsapp === true || b.whatsapp === 'true') && !fromAgent;
+  // Langue des relances, toujours enregistrée avec sa provenance (src/lib/contacts.ts) : langue du site du
+  // formulaire (pour la démo, celle du site, la langue de la démo est gardée à part), sinon langue déclarée par
+  // l’agent (« en » tranché par l’indicatif), sinon indicatif non ambigu ; à défaut, à valider à la main.
+  const siteLocale = fromAgent ? undefined : isLocale(b.siteLocale) ? b.siteLocale : locale;
+  const resolved = resolveLocale({ siteLocale, agentLang: fromAgent ? b.language ?? locale : undefined, phone: e164 });
+  // Cases marketing : seulement depuis un formulaire du site qui les affiche (booléen présent dans le corps).
+  const siteForm = !fromAgent && typeof b.marketingEmail === 'boolean';
+  const marketingEmail = siteForm && b.marketingEmail === true;
+  const marketingWhatsApp = siteForm && b.marketingWhatsApp === true;
+  // Agent : paramètre marketing_email_consent rempli seulement après une question explicite (oui ou non).
+  const agentAnswered = fromAgent && b.marketing_email_consent != null && String(b.marketing_email_consent).trim() !== '';
+  const meta = fromAgent ? null : captureMeta(b);
+  // Colonnes ajoutées par la migration 20261008_relances_capture.sql : la demande est enregistrée sans elles tant
+  // qu’elle n’est pas exécutée.
+  const origin: ContactOrigin = type === 'support' ? 'contact' : agent === 'Démo live' ? 'demo' : agent === 'Accompagnement essai' ? 'trial_request' : 'callback';
+  const extra = {
+    origin, locale: resolved.locale, locale_source: resolved.locale_source, locale_needs_review: resolved.locale_needs_review,
+    demo_lang: agent === 'Démo live' && isLocale(locale) ? locale : null, ...(meta || {}),
+    marketing_email_consent: siteForm ? marketingEmail : agentAnswered ? isYes(b.marketing_email_consent) : null,
+    marketing_whatsapp_consent: siteForm ? marketingWhatsApp : null,
+  };
   const row = {
     name, phone: e164, email: email || null, company: company || null, sector: sector || null,
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
@@ -133,7 +155,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .catch((e) => console.error('[callback] statut:', e.message));
   };
 
-  const [db] = await Promise.allSettled([dbInsert('callbacks', row, true)]);
+  const [db] = await Promise.allSettled([insertWithExtras(CONTACTS_DB, 'callbacks', row, extra, true)]);
+  // Fiche contact et journal des accords (relances) : jamais bloquants, sautés tant que la migration n’est pas faite.
+  const consentSource = fromAgent ? `agent:callback${agent ? `:${agent}` : ''}` : `site:${origin}:${meta?.origin_page || ''}`;
+  const capture = Promise.all([
+    upsertContact(CONTACTS_DB, { email, name, company, sector, phone: e164, resolved, origin, meta: meta || undefined }),
+    siteForm && recordFormConsents(CONTACTS_DB, { email, phone: e164, locale: resolved.locale, marketingEmail, marketingWhatsApp, source: consentSource, ip }),
+    // Accord (ou refus) donné oralement à un agent, après sa question explicite : enregistré avec l’identifiant de l’appel.
+    agentAnswered && recordConsent(CONTACTS_DB, {
+      email, channel: 'email', purpose: 'marketing', granted: isYes(b.marketing_email_consent), legal_basis: isYes(b.marketing_email_consent) ? 'consent' : null,
+      notice_shown: false, locale: resolved.locale, source: consentSource, call_id: clip(b.call_id ?? b.conversation_id, 80) as string | undefined,
+    }),
+  ]).catch((e) => console.error('[callback] contacts:', e.message));
   // Numéro de ticket (demandes de support) : 8 premiers caractères de l’identifiant de la ligne, lu à la personne
   // par l’agent et repris dans l’email à l’équipe pour retrouver la demande dans la table callbacks.
   const ticket = kind === 'support' && db.status === 'fulfilled' && db.value ? `T-${db.value.replace(/-/g, '').slice(0, 8).toUpperCase()}` : undefined;
@@ -161,10 +194,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const callLine = call.status === 'fulfilled'
     ? `Appel automatique : en file${scheduled ? ` pour ${callAt.toISOString()}` : ' (dès que possible)'}`
     : `Appel automatique : NON (${call.reason?.message || 'motif inconnu'}) — À RAPPELER À LA MAIN`;
-  const [mail] = await Promise.allSettled([sendMail({
+  const [, mail] = await Promise.allSettled([capture, sendMail({
     to: NOTIFY_TO, category: 'internal',
     subject: `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
-    text: [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
+    text: [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '',
+      ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
+      `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})${extra.demo_lang ? ` — langue de la démo : ${extra.demo_lang}` : ''}`,
+      extra.marketing_email_consent != null && `accord email marketing : ${extra.marketing_email_consent ? 'oui' : 'non'}${extra.marketing_whatsapp_consent ? ' — WhatsApp marketing : oui' : ''}`,
+      meta?.origin_page && `page : ${meta.origin_page}${meta.utm_source ? ` (utm ${[meta.utm_source, meta.utm_medium, meta.utm_campaign].filter(Boolean).join(' / ')})` : ''}`,
+    ].filter((x) => x !== false && x != null).join('\n'),
   })]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);

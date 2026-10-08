@@ -6,6 +6,7 @@ import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from
 import { DEMO_URL, SIGNUP_URL, SITE, isActiveSector, whatsappUrl } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
+import { RichText } from '@/i18n/rich';
 
 /* ---------- Mise en page ---------- */
 
@@ -189,6 +190,63 @@ export function ProfileFields({ labelClassName, dark = false, optional }: { labe
 export const profileNote = (f: FormData) => [cleanWebsite(f.get('site_url')) && `Website: ${cleanWebsite(f.get('site_url'))}`,
   f.getAll('goals').length && `Priorities: ${f.getAll('goals').join(', ')}`].filter(Boolean).join(' — ');
 
+/* ---------- Accords marketing et provenance (relances, src/lib/contacts.ts) ---------- */
+
+/**
+ * Provenance envoyée avec chaque formulaire : page affichée, site d’où vient la personne (domaine et chemin, sans
+ * requête) et UTM de l’adresse actuelle. Rien n’est stocké dans le navigateur (aucun cookie ni stockage local).
+ */
+export function landingContext() {
+  if (typeof window === 'undefined') return {};
+  const q = new URLSearchParams(window.location.search);
+  let referrer: string | undefined;
+  try {
+    const r = new URL(document.referrer);
+    if (r.host !== window.location.host) referrer = `${r.origin}${r.pathname}`;
+  } catch { /* pas de référent */ }
+  const utm = { source: q.get('utm_source') || undefined, medium: q.get('utm_medium') || undefined, campaign: q.get('utm_campaign') || undefined };
+  return { originPage: window.location.pathname, referrer, ...(utm.source || utm.medium || utm.campaign ? { utm } : {}) };
+}
+
+/** Mention d’information sous le champ email (visible même case décochée) : finalité, droit de refus, responsable. */
+export function MarketingNotice({ id, dark = false, className = '' }: { id: string; dark?: boolean; className?: string }) {
+  const { c, market } = useI18n();
+  return (
+    <p id={id} className={`mt-1 text-xs ${dark ? 'text-white/60' : 'text-slate-light'} ${className}`}>
+      <RichText value={c.ui.components.marketingConsent.notice(market.brand, SITE.company, SITE.email)} linkClassName="underline" />
+    </p>
+  );
+}
+
+/**
+ * Cases marketing, NON cochées et séparées de l’accord de rappel : email (marketingEmail) et, si demandé,
+ * WhatsApp (marketingWhatsApp). Champs lus par marketingFields.
+ */
+export function MarketingConsent({ dark = false, whatsapp = false, className = '' }: { dark?: boolean; whatsapp?: boolean; className?: string }) {
+  const { c, market } = useI18n();
+  const t = c.ui.components.marketingConsent;
+  const text = `flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`;
+  return (
+    <div className={`grid gap-3 ${className}`}>
+      <label className={text}>
+        <input type="checkbox" name="marketingEmail" defaultChecked={false} className="mt-1 h-4 w-4 shrink-0 accent-[#0FA3C4]" />
+        <span>{t.email(market.brand, SITE.company)}</span>
+      </label>
+      {whatsapp && (
+        <label className={text}>
+          <input type="checkbox" name="marketingWhatsApp" defaultChecked={false} className="mt-1 h-4 w-4 shrink-0 accent-[#25D366]" />
+          <span>{t.whatsapp(market.brand)}</span>
+        </label>
+      )}
+    </div>
+  );
+}
+
+/** Valeurs des cases marketing (false si absentes ou décochées) et provenance, à joindre au corps de la requête. */
+export const marketingFields = (f: FormData) => ({
+  marketingEmail: Boolean(f.get('marketingEmail')), marketingWhatsApp: Boolean(f.get('marketingWhatsApp')), ...landingContext(),
+});
+
 export function CallbackForm({
   type = 'commercial', sector = '', compact = false, dark = false, submitLabel, onDone,
 }: { type?: 'commercial' | 'support' | 'demo'; sector?: string; compact?: boolean; dark?: boolean; submitLabel?: string; onDone?: () => void }) {
@@ -197,6 +255,8 @@ export function CallbackForm({
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState('');
   const [slot, setSlot] = useState('asap');
+  const [wa, setWa] = useState(false);
+  const marketing = type !== 'support';
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -209,9 +269,9 @@ export function CallbackForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), email: f.get('email'),
-          sector: f.get('sector'),
-          // Entreprise et volume (facultatifs) : ajoutés à la note lue par l’agent avant le rappel.
-          // Contexte lu par l’agent de rappel avant l’appel (et conservé dans le dossier du client).
+          sector: f.get('sector'), company: f.get('company') || undefined,
+          // Entreprise (aussi dans son champ, pour la fiche contact) et volume : ajoutés à la note lue par l’agent
+          // avant le rappel (et conservée dans le dossier du client).
           note: [f.get('note'), f.get('company') && `Company: ${f.get('company')}`, profileNote(f), f.get('volume') && `Calls/month: ${f.get('volume')}`].filter(Boolean).join(' — ') || undefined,
           slot: f.get('slot') || 'asap',
           // Créneau précis : date et heure locales du visiteur, avec son fuseau horaire (rappel programmé).
@@ -219,6 +279,8 @@ export function CallbackForm({
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
           consentCall: true, whatsapp: Boolean(f.get('whatsapp')), website: f.get('website') || undefined, type: type === 'support' ? 'support' : 'commercial',
           agent: type === 'demo' ? 'Démo live' : undefined, locale,
+          // Cases marketing (absentes du formulaire de support : rien n’est enregistré) et provenance.
+          ...(type === 'support' ? landingContext() : marketingFields(f)),
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -281,9 +343,13 @@ export function CallbackForm({
           </div>
         )}
       </div>
-      {!compact && (
-        <div><label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{t.emailHint}</span></label><input id="cb-email" name="email" type="email" autoComplete="email" className="field" /></div>
-      )}
+      {/* Email facultatif, aussi dans le bloc compact (sans lui, aucune relance par email) ; mention d’information
+          visible même case marketing décochée. */}
+      <div>
+        <label htmlFor="cb-email" className={label}>{t.email} <span className="font-normal opacity-70">{compact ? t.optional : t.emailHint}</span></label>
+        <input id="cb-email" name="email" type="email" autoComplete="email" className="field" aria-describedby={marketing ? 'cb-email-notice' : undefined} />
+        {marketing && <MarketingNotice id="cb-email-notice" dark={dark} />}
+      </div>
       {!compact && type !== 'support' && <ProfileFields labelClassName={label} dark={dark} optional={t.optional} />}
       <div><label htmlFor="cb-note" className={label}>{t.need}</label><textarea id="cb-note" name="note" rows={compact ? 2 : 3} className="field" placeholder={t.needPlaceholder} /></div>
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
@@ -292,9 +358,11 @@ export function CallbackForm({
       </label>
       {/* Accord séparé et facultatif (décoché) : confirmation du rappel envoyée par WhatsApp. */}
       <label className={`flex items-start gap-2.5 text-sm ${dark ? 'text-white/80' : ''}`}>
-        <input type="checkbox" name="whatsapp" className="mt-1 h-4 w-4 accent-[#25D366]" />
+        <input type="checkbox" name="whatsapp" checked={wa} onChange={(e) => setWa(e.target.checked)} className="mt-1 h-4 w-4 accent-[#25D366]" />
         <span className="inline-flex items-start gap-1.5"><WhatsAppIcon className="mt-0.5 h-4 w-4 shrink-0 text-[#25D366]" />{c.site.whatsapp.optIn}</span>
       </label>
+      {/* Accord marketing séparé (décoché) : email, et WhatsApp seulement si la confirmation WhatsApp est demandée. */}
+      {marketing && <MarketingConsent dark={dark} whatsapp={wa} />}
       {error && <p role="alert" className={`text-sm font-medium ${dark ? 'text-red-300' : 'text-red-700'}`}>{error}</p>}
       <button type="submit" disabled={state === 'sending'} className={dark ? 'btn-signal' : 'btn-primary'}>
         <PhoneCall className="h-4 w-4" aria-hidden /> {state === 'sending' ? t.sending : submitLabel ?? t.submit}

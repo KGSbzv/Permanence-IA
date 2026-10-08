@@ -138,6 +138,19 @@ export const UI_COMPONENTS = {
     phoneInvalid: 'הזינו מספר טלפון תקין, למשל 050-123-4567.',
   },
 
+  // Marketing consent (Communications Law, section 30A: explicit consent to « דברי פרסומת »): UNTICKED box, separate
+  // from the callback consent. Any change requires a new MARKETING_TEXT_VERSION (src/lib/contacts.ts). Lawyer review needed.
+  marketingConsent: {
+    email: (brand: string, company: string) => `אני מסכים/ה לקבל מ-${brand} דברי פרסומת בדוא״ל: טיפים והצעות, כמה הודעות בשבועות הראשונים ולאחר מכן הודעה אחת בחודש לכל היותר. אפשר לבטל בכל עת בלחיצה אחת בכל הודעה.`,
+    whatsapp: (brand: string) => `אני מסכים/ה לקבל דברי פרסומת אלה מ-${brand} גם ב-WhatsApp (רשות; אפשר להפסיק בכל עת בתשובה STOP או „הסר”).`,
+    notice: (brand: string, company: string, email: string) => [
+      'ההסכמה אינה חובה: בלעדיה נכתוב לכם רק בנוגע לפנייה שלכם. אפשר לבטל אותה בכל עת וללא עלות, בקישור שבכל הודעה או בכתיבה אל ', email,
+      '. כל הודעת פרסומת מסומנת במילה „פרסומת” וכוללת את פרטי השולח. האחראי על המידע: ', company, '. ראו את ',
+      { a: 'מדיניות הפרטיות', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'הדוא״ל שלכם (רשות)',
+  },
+
   benefits: {
     items: [
       { title: 'עונים גם מחוץ לשעות הפעילות', text: 'בערב, בשישי־שבת ובחגים, באמצע פגישה או כשאתם במילואים: כל שיחה מקבלת מענה.' },

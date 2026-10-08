@@ -136,6 +136,19 @@ export const UI_COMPONENTS = {
     phoneInvalid: 'Vul een geldig telefoonnummer in, bijvoorbeeld 06 12345678.',
   },
 
+  // Marketingtoestemming (opvolging): vakje NIET aangevinkt, los van de toestemming om teruggebeld te worden.
+  // Elke wijziging vereist een nieuwe MARKETING_TEXT_VERSION (src/lib/contacts.ts). Te laten nakijken door een jurist.
+  marketingConsent: {
+    email: (brand: string, company: string) => `Ik ga ermee akkoord per e-mail tips en aanbiedingen van ${brand} te ontvangen: enkele e-mails in de eerste weken, daarna hoogstens één per maand. Afmelden met één klik in elke e-mail.`,
+    whatsapp: (brand: string) => `Deze tips en aanbiedingen van ${brand} ook via WhatsApp ontvangen (optioneel; antwoord op elk moment STOP om te stoppen).`,
+    notice: (brand: string, company: string, email: string) => [
+      'Deze toestemming is optioneel: zonder toestemming mailen wij u alleen over uw aanvraag. U kunt ze op elk moment kosteloos intrekken via de link in elke e-mail of door te schrijven naar ', email,
+      '. Verwerkingsverantwoordelijke: ', company, '. Zie ons ',
+      { a: 'privacybeleid', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'Uw e-mailadres (optioneel)',
+  },
+
   benefits: {
     items: [
       { title: 'Neem ook buiten openingstijden op', text: '’s Avonds, in het weekend, tijdens uw afspraken: elk gesprek krijgt antwoord.' },

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Check } from 'lucide-react';
 import Layout from '@/components/Layout';
-import { Heading, PhoneField, ProfileFields, TrialBadges, dialCode, profileNote } from '@/components/ui';
+import { Heading, MarketingConsent, MarketingNotice, PhoneField, ProfileFields, TrialBadges, dialCode, marketingFields, profileNote } from '@/components/ui';
 import { LOGIN_URL, REGISTER_URL } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
@@ -30,6 +30,8 @@ export default function EssaiGratuit() {
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), email: f.get('email'), company: f.get('company'),
           sector: f.get('sector'), consentCall: true, website: f.get('website') || undefined, type: 'commercial', agent: 'Accompagnement essai', locale,
           note: [`Trial onboarding request — plan: ${f.get('plan')} — company: ${f.get('company') || ''}`, profileNote(f)].filter(Boolean).join(' — '),
+          // Case marketing (décochée par défaut, distincte des conditions) et provenance : fiche contact et relances.
+          ...marketingFields(f),
         }),
       });
       if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error((locale === 'fr' && data.error) || t.sendError); }
@@ -82,7 +84,7 @@ export default function EssaiGratuit() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div><label htmlFor="su-name" className="mb-1.5 block text-sm font-semibold text-ink">{t.name}</label><input id="su-name" name="name" required autoComplete="name" className="field" /></div>
                   <div><label htmlFor="su-company" className="mb-1.5 block text-sm font-semibold text-ink">{t.company}</label><input id="su-company" name="company" required autoComplete="organization" className="field" /></div>
-                  <div><label htmlFor="su-email" className="mb-1.5 block text-sm font-semibold text-ink">{t.email}</label><input id="su-email" name="email" type="email" required autoComplete="email" className="field" /></div>
+                  <div><label htmlFor="su-email" className="mb-1.5 block text-sm font-semibold text-ink">{t.email}</label><input id="su-email" name="email" type="email" required autoComplete="email" className="field" aria-describedby="su-email-notice" /><MarketingNotice id="su-email-notice" /></div>
                   <PhoneField id="su-phone" label={t.phone} labelClassName="mb-1.5 block text-sm font-semibold text-ink" />
                   <div>
                     <label htmlFor="su-sector" className="mb-1.5 block text-sm font-semibold text-ink">{t.sector}</label>
@@ -104,6 +106,7 @@ export default function EssaiGratuit() {
                   <input type="checkbox" name="terms" className="mt-1 h-4 w-4 accent-[#0FA3C4]" />
                   <span><RichText value={t.terms} linkClassName="font-semibold text-signal-deep underline" /></span>
                 </label>
+                <MarketingConsent />
                 {error && <p role="alert" className="text-sm font-medium text-red-700">{error}</p>}
                 <button type="submit" disabled={state === 'sending'} className="btn-primary">{state === 'sending' ? t.sending : t.submit}</button>
               </form>

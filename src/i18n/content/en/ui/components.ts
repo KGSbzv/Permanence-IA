@@ -140,6 +140,21 @@ export const UI_COMPONENTS = {
     phoneInvalid: 'Please enter a valid phone number, e.g. 07700 900123 (UK) or 0491 570 156 (Australia).',
   },
 
+  // Marketing consent (follow-ups): UNTICKED box, separate from the callback consent; information notice under the
+  // email field. Any change to these texts requires a new MARKETING_TEXT_VERSION (src/lib/contacts.ts).
+  // Texts to be reviewed by a lawyer.
+  marketingConsent: {
+    email: (brand: string, company: string) => `I agree to receive tips and offers from ${brand} by email: a few emails in the first weeks, then no more than one a month. Unsubscribe in one click from any email.`,
+    whatsapp: (brand: string) => `Also send me these tips and offers from ${brand} on WhatsApp (optional; reply STOP at any time to stop).`,
+    notice: (brand: string, company: string, email: string) => [
+      'We use your email first to handle your request. As a business, you may also receive a few emails from ', brand,
+      ' about similar services even if you leave the box unticked: you can object now or at any time, free of charge, by writing to ', email,
+      ' or via the unsubscribe link in every email. Data controller: ', company, '. See our ',
+      { a: 'privacy policy', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'Your email (optional)',
+  },
+
   benefits: {
     items: [
       { title: 'Answer even out of hours', text: 'Evenings, weekends, during your appointments: every call gets an answer.' },

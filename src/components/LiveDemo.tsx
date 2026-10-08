@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
 import { SITE, isActiveSector } from '@/data/site';
-import { PhoneField, dialCode } from './ui';
+import { MarketingConsent, MarketingNotice, PhoneField, dialCode, marketingFields } from './ui';
 import { useI18n } from '@/i18n';
 import { LOCALES, type Locale } from '@/i18n/locales';
 import { GENDERS, VOICES, type Gender } from '@/data/personas';
@@ -351,7 +351,10 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), sector, consentCall: true, website: f.get('website') || undefined,
-          type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
+          // locale = langue de la démo (campagne d’appel) ; siteLocale = langue du site, celle des relances éventuelles.
+          type: 'commercial', agent: 'Démo live', locale: lang, siteLocale: locale, voice: gender,
+          // Email facultatif et cases marketing (décochées par défaut), avec la provenance de la demande.
+          email: f.get('email') || undefined, ...marketingFields(f),
           // Note lue par l’agent avant de rappeler : format exact « Démo live — rôle : … » que les prompts des agents
           // commerciaux de rappel (toutes langues) reconnaissent pour passer en jeu de rôle. Ne pas le traduire.
           note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — voix : ${voice} — secteur : ${sectorName}`,
@@ -528,8 +531,16 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
               <div className="grid gap-2">
                 <input name="name" required placeholder={t.firstName} autoComplete="given-name" aria-label={t.firstName} className={field} />
                 <PhoneField id="demo-phone" label={t.phone} placeholder={t.phone} hideLabel className={field} />
+                {/* Email facultatif : sans lui, aucune relance par email après la démo. */}
+                <div>
+                  <input name="email" type="email" autoComplete="email" placeholder={c.ui.components.marketingConsent.emailPlaceholder}
+                    aria-label={c.ui.components.marketingConsent.emailPlaceholder} aria-describedby="demo-email-notice" className={field} />
+                  <MarketingNotice id="demo-email-notice" dark className="text-[12px]" />
+                </div>
               </div>
               <label className="flex items-start gap-2 text-[13px] text-white/70"><input type="checkbox" name="consent" className="mt-0.5 h-4 w-4 shrink-0 accent-[#5AD3EC]" />{t.consent}</label>
+              {/* Accords marketing séparés et décochés : email et WhatsApp (seul canal de suivi d’une démo sans email). */}
+              <MarketingConsent dark whatsapp className="text-[13px]" />
               {error && <p role="alert" className="text-sm text-red-300">{error}</p>}
               <button type="submit" disabled={state === 'busy'} className="btn w-full whitespace-normal bg-signal-glow py-3.5 text-[16px] text-night hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-glow">
                 {state === 'busy' ? <Loader2 className="h-5 w-5 animate-spin" aria-hidden /> : <PhoneCall className="h-5 w-5" aria-hidden />}

@@ -136,6 +136,21 @@ export const UI_COMPONENTS = {
     phoneInvalid: 'Indiquez un numéro de téléphone valide, par exemple 06 39 98 12 34.',
   },
 
+  // Accords marketing (relances) : case NON cochée, séparée de l’accord de rappel ; mention d’information sous le
+  // champ email. Toute modification de ces textes impose de changer MARKETING_TEXT_VERSION (src/lib/contacts.ts).
+  // Textes à faire valider par un avocat.
+  marketingConsent: {
+    email: (brand: string, company: string) => `J’accepte de recevoir par e-mail des conseils et offres de ${brand} : quelques e-mails les premières semaines, puis un par mois au plus. Désinscription en un clic dans chaque e-mail.`,
+    whatsapp: (brand: string) => `Recevoir aussi ces conseils et offres de ${brand} sur WhatsApp (facultatif ; répondez STOP à tout moment pour arrêter).`,
+    notice: (brand: string, company: string, email: string) => [
+      'Votre e-mail sert d’abord à traiter votre demande. En tant que professionnel, vous pourrez aussi recevoir de ', brand,
+      ' quelques e-mails sur des services similaires, même sans cocher la case : vous pouvez vous y opposer dès maintenant ou à tout moment, gratuitement, en écrivant à ', email,
+      ' ou par le lien de désinscription présent dans chaque e-mail. Responsable du traitement : ', company, '. Voir la ',
+      { a: 'politique de confidentialité', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'Votre email (facultatif)',
+  },
+
   benefits: {
     items: [
       { title: 'Répondez même hors horaires', text: 'Soirs, week-ends, pendant vos rendez-vous : chaque appel reçoit une réponse.' },

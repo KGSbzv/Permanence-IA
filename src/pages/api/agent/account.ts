@@ -8,6 +8,7 @@ import { createHmac, timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbInsert, dbSelect, esc, sendMail, clientIp, NOTIFY_TO } from '@/lib/server';
 import { localeFromLang } from '@/lib/emailFooter';
+import { CONTACTS_DB, insertWithExtras, isYes, normalizeAgentLang, recordConsent, resolveLocale, selectWithFallback, upsertContact } from '@/lib/contacts';
 import type { Locale } from '@/i18n/locales';
 
 const API = 'https://app.autocalls.ai/api';
@@ -156,15 +157,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (tooMany(`identify:${ip}`, 60) || tooMany('identify:all', 300)) return res.status(429).json({ known: false });
     const phone = String(b.phone || '').replace(/[^\d+]/g, '');
     if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro non reconnu : identifie le besoin à partir du message.' });
-    const rows = await dbSelect<{ name: string; email: string | null; type: string; agent: string | null; created_at: string; note: string | null }>(
-      'callbacks', `select=name,email,type,agent,created_at,note&phone=eq.${encodeURIComponent(phone)}&order=created_at.desc&limit=5`).catch(() => []);
+    // Colonne locale (migration des relances) lue si elle existe ; sinon même lecture qu’avant.
+    const filter = `phone=eq.${encodeURIComponent(phone)}&order=created_at.desc&limit=5`;
+    const rows = await selectWithFallback<{ name: string; email: string | null; type: string; agent: string | null; created_at: string; note: string | null; locale?: string | null }>(
+      CONTACTS_DB, 'callbacks', `select=name,email,type,agent,created_at,note,locale&${filter}`, `select=name,email,type,agent,created_at,note&${filter}`).catch(() => []);
     if (!rows.length) return res.status(200).json({ known: false, profile: 'inconnu', message: 'Numéro inconnu : nouvelle personne. Pars de son message pour comprendre ce qu’elle veut, sans lui demander si elle est cliente.' });
     const emails = Array.from(new Set(rows.map((r) => r.email).filter(Boolean))) as string[];
     const signedUp = emails.length
       ? (await dbSelect('signups', `select=email&email=in.(${emails.map((e) => encodeURIComponent(e.toLowerCase())).join(',')})&limit=1`).catch(() => [])).length > 0
       : false;
     const last = rows[0];
-    const lang = /\[(fr|en-gb|en-au|it|pl|nl|he)\]/.exec(rows.map((r) => r.agent || '').join(' '))?.[1] || /\[WA:([a-z-]+)\]/.exec(rows.map((r) => r.note || '').join(' '))?.[1] || null;
+    // Langue : colonne locale, sinon suffixe [xx] du champ agent (« [en] » des fiches d’agents compris, tranché par
+    // l’indicatif), sinon marqueur WhatsApp [WA:xx] de la note.
+    const tagged = /\[(fr|en-gb|en-au|en|it|pl|nl|he)\]/.exec(rows.map((r) => r.agent || '').join(' '))?.[1];
+    const lang = rows.find((r) => r.locale)?.locale || normalizeAgentLang(tagged, phone) || /\[WA:([a-z-]+)\]/.exec(rows.map((r) => r.note || '').join(' '))?.[1] || null;
     return res.status(200).json({
       known: true,
       first_name: String(last.name || '').trim().split(/\s+/)[0] || null,
@@ -185,7 +191,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!/^\+\d{8,15}$/.test(phone)) return res.status(200).json({ saved: false, message: 'Numéro inconnu : fiche non enregistrée.' });
     const day = await dbSelect('callbacks', `select=id&phone=eq.${encodeURIComponent(phone)}&status=eq.lead&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=4`).catch(() => []);
     if (day.length >= 3) return res.status(200).json({ saved: false, message: 'Fiche déjà enregistrée aujourd’hui.' });
-    const lang = clip(b.language, 8);
+    // Langue en liste fermée (fr, en-gb, en-au, it, pl, nl, he) : « en » tranché par l’indicatif ; valeur inconnue → indicatif.
+    const lang = normalizeAgentLang(clip(b.language, 16), phone);
+    const resolved = resolveLocale({ agentLang: lang, phone });
     const note = [
       clip(b.channel, 20) && `Canal : ${clip(b.channel, 20)}`, clip(b.activity, 300) && `Activité : ${clip(b.activity, 300)}`,
       clip(b.needs, 600) && `Besoins : ${clip(b.needs, 600)}`, clip(b.volume, 80) && `Volume : ${clip(b.volume, 80)}`,
@@ -197,8 +205,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       sector: clip(b.sector, 80) || null, slot: 'aucun', note, type: 'commercial',
       agent: `Fiche prospect ${clip(b.channel, 20) || 'WhatsApp'}${lang ? ` [${lang}]` : ''}`, consent_call: false, status: 'lead',
     };
-    try { await dbInsert('callbacks', row); } catch (e: any) { console.error('[agent-account] save_lead:', e.message); return res.status(200).json({ saved: false }); }
-    sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone})`, text: Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`).join('\n') })
+    // Accord email marketing demandé explicitement par l’agent (oui / non) ; vide = question non posée.
+    const answered = b.marketing_email_consent != null && String(b.marketing_email_consent).trim() !== '';
+    const extra = {
+      origin: 'agent_lead', locale: resolved.locale, locale_source: resolved.locale_source, locale_needs_review: resolved.locale_needs_review,
+      marketing_email_consent: answered ? isYes(b.marketing_email_consent) : null,
+    };
+    try { await insertWithExtras(CONTACTS_DB, 'callbacks', row, extra); } catch (e: any) { console.error('[agent-account] save_lead:', e.message); return res.status(200).json({ saved: false }); }
+    // Fiche contact et journal des accords (jamais bloquants ; sautés tant que la migration n’est pas faite).
+    const callId = clip(b.call_id ?? b.conversation_id, 80) || null;
+    await Promise.all([
+      upsertContact(CONTACTS_DB, { email: row.email, name: clip(b.name, 120), company: row.company, sector: row.sector, phone, resolved, origin: 'agent_lead' }),
+      answered && recordConsent(CONTACTS_DB, {
+        email: row.email, channel: 'email', purpose: 'marketing', granted: isYes(b.marketing_email_consent), legal_basis: isYes(b.marketing_email_consent) ? 'consent' : null,
+        notice_shown: false, locale: resolved.locale, source: `agent:save_lead:${clip(b.channel, 20) || 'WhatsApp'}`, call_id: callId,
+      }),
+    ]);
+    sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone})`, text: [...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
+      `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})`, answered && `accord email marketing : ${isYes(b.marketing_email_consent) ? 'oui' : 'non'}`].filter(Boolean).join('\n') })
       .catch((e) => console.error('[agent-account] save_lead mail:', e.message));
     return res.status(200).json({ saved: true, message: 'Fiche enregistrée. Ne le dis pas à la personne, continue la conversation.' });
   }

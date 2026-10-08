@@ -147,6 +147,19 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     phoneInvalid: 'Podaj prawidłowy numer telefonu, np. 512 345 678.',
   },
 
+  // Zgoda marketingowa (Prawo komunikacji elektronicznej): pole NIEZAZNACZONE, odrębne od zgody na kontakt
+  // telefoniczny. Każda zmiana tekstu wymaga nowej MARKETING_TEXT_VERSION (src/lib/contacts.ts). Do weryfikacji przez prawnika.
+  marketingConsent: {
+    email: (brand: string, company: string) => `Wyrażam zgodę na otrzymywanie od ${brand} (${company}) informacji handlowych drogą elektroniczną na podany adres e-mail: porady i oferty, kilka wiadomości w pierwszych tygodniach, potem najwyżej jedna w miesiącu. Mogę ją wycofać w każdej chwili jednym kliknięciem w każdej wiadomości.`,
+    whatsapp: (brand: string) => `Wyrażam też zgodę na otrzymywanie tych informacji handlowych od ${brand} przez WhatsApp na podany numer (dobrowolnie; mogę ją wycofać w każdej chwili, odpowiadając STOP).`,
+    notice: (brand: string, company: string, email: string) => [
+      'Zgoda jest dobrowolna: bez niej napiszemy do Ciebie tylko w sprawie Twojego zgłoszenia. Możesz ją wycofać w każdej chwili, bezpłatnie, linkiem w każdej wiadomości lub pisząc na ', email,
+      '; wycofanie zgody nie wpływa na zgodność z prawem wcześniejszych wysyłek. Administrator danych: ', company, '. Szczegóły: ',
+      { a: 'polityka prywatności', href: '/confidentialite' }, '.',
+    ],
+    emailPlaceholder: 'Twój e-mail (opcjonalnie)',
+  },
+
   benefits: {
     items: [
       { title: 'Odbieraj także poza godzinami pracy', text: 'Wieczory, weekendy, chwile, gdy obsługujesz klienta: każde połączenie zostaje odebrane.' },
