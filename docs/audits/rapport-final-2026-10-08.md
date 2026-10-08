@@ -10,7 +10,17 @@ Ce qui bloque encore les ventes :
 - **Autocalls a répondu** à 22 questions sur 24 le 8 octobre au soir (section 10). Le forfait Réceptionniste reçoit ses 200 crédits, et la taxe automatique est coupée.
 - **L'avocat et le comptable** ne sont pas encore choisis.
 
-Les relances tournent en mode test toutes les heures depuis le 8 octobre (13 h UTC) : elles n'envoient rien aux contacts.
+Les relances tournent toutes les heures, en envoi réel depuis le 8 octobre à 15 h UTC (aucun envoi tant qu'aucun contact n'a donné son accord).
+
+**Verdict au 8 octobre, 18 h 20 (heure de Paris).** La partie technique est en ligne et saine. Le contrôle de ce soir :
+- 42 pages sur 42 répondent dans les 7 langues ;
+- outil date et heure, webhook Stripe et route des relances protégés (401 sans signature ou sans jeton) ;
+- aucune erreur serveur depuis 12 h 15 UTC ;
+- 7 bases de connaissances actives, 41 agents rattachés.
+
+Les relances sont en envoi réel depuis 15 h UTC (commit 47a8f08) : 0 envoi à ce stade, car aucun contact n'a encore donné son accord.
+
+Ce n'est pas encore prêt à 100 % pour vendre : aucun parcours n'a été testé en réel (paiement, appel, inscription), et le webhook Stripe n'a encore reçu aucun vrai événement.
 
 ## 2. Chiffres de l'audit
 

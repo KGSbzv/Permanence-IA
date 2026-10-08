@@ -37,8 +37,8 @@ env:
   - variable: STRIPE_WEBHOOK_SECRET
     secret: STRIPE_WEBHOOK_SECRET
   # Relances commerciales (src/lib/relances) : planificateur Cloud Scheduler authentifié par jeton OIDC du compte
-  # relances-cron (aucun rôle). Mode test tant que RELANCES_DRY_RUN vaut 1 : rien n'est envoyé aux contacts,
-  # un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.
+  # relances-cron (aucun rôle). Envoi réel depuis le 8 oct. 2026 (RELANCES_DRY_RUN à 0, accord du propriétaire) ; le remettre à 1 pour revenir
+  # en mode test. Un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.
   - variable: RELANCES_ENABLED
     value: "1"
   - variable: RELANCES_DRY_RUN
