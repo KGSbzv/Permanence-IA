@@ -52,3 +52,10 @@ env:
   # Adresses jamais relancées (comptes de test du propriétaire) : liste gardée hors du dépôt public.
   - variable: RELANCES_EXCLUDE_EMAILS
     secret: RELANCES_EXCLUDE_EMAILS
+  # Lecture des réponses aux relances (IMAP Zoho, mot de passe d'application) : sans elle, aucun envoi marketing réel.
+  - variable: RELANCES_IMAP_USER
+    value: contact@permanenceia.com
+  - variable: RELANCES_IMAP_HOST
+    value: imappro.zoho.com
+  - variable: RELANCES_IMAP_PASS
+    secret: RELANCES_IMAP_PASS
