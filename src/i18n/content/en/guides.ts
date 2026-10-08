@@ -200,7 +200,7 @@ export const GUIDES: Guide[] = [
     slug: 'editeur-de-prompt-ia',
     category: 'assistant',
     title: 'Use the writing assistant (AI Prompt Editor)',
-    summary: 'Change your agent’s instructions simply by asking for what you want.',
+    summary: 'Change your agent’s instructions simply by asking for what you want, then review and approve each edit, variables and post-call data included.',
     plan: 'All plans.',
     sections: [
       {
@@ -244,7 +244,7 @@ export const GUIDES: Guide[] = [
     slug: 'message-d-accueil',
     category: 'assistant',
     title: 'Get the greeting right',
-    summary: 'Write a short, natural opening line, or use an audio recording.',
+    summary: 'Write a short, natural opening line or use an audio recording, then check how your greeting sounds on a real phone call before going live.',
     sections: [
       {
         title: 'Written greeting',
@@ -277,7 +277,7 @@ export const GUIDES: Guide[] = [
     slug: 'choisir-la-voix',
     category: 'assistant',
     title: 'Choose or clone a voice',
-    summary: 'Pick a voice from the library, import one, or clone your own.',
+    summary: 'Pick a voice from the library, import one from the provider’s library or clone your own, and hear how it sounds before your agent takes calls.',
     plan: 'Library voices: all plans. Cloned voices: Assistant plan and above.',
     sections: [
       {
@@ -561,7 +561,7 @@ export const GUIDES: Guide[] = [
     slug: 'importer-twilio-telnyx',
     category: 'phone',
     title: 'Import your Twilio or Telnyx numbers',
-    summary: 'Use your Twilio or Telnyx numbers with your agent via a SIP trunk.',
+    summary: 'Use your Twilio or Telnyx numbers with your agent via a SIP trunk: what to set up in Twilio or Telnyx, then how to import the number into your account.',
     plan: 'All plans.',
     sections: [
       {
@@ -779,7 +779,7 @@ export const GUIDES: Guide[] = [
     slug: 'contacts-leads',
     category: 'outbound',
     title: 'Import and manage your contacts (leads)',
-    summary: 'Import a contact file, personalise each call and track statuses.',
+    summary: 'Import a contact file, personalise each call with the contact’s details and track every contact’s status, from the first call to the outcome.',
     sections: [
       {
         title: 'Prepare the file',

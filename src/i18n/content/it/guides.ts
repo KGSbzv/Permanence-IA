@@ -277,7 +277,7 @@ export const GUIDES: Guide[] = [
     slug: 'choisir-la-voix',
     category: 'assistant',
     title: 'Scegliere o clonare una voce',
-    summary: 'Selezionare una voce della libreria, importarne una o clonare la Sua.',
+    summary: 'Selezionare una voce della libreria, importarne una dalla libreria del fornitore o clonare la Sua, e ascoltarla prima che l’agente risponda alle chiamate.',
     plan: 'Voci della libreria: tutti i piani. Voci clonate: a partire dal piano Assistant.',
     sections: [
       {

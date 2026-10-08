@@ -200,7 +200,7 @@ export const GUIDES: Guide[] = [
     slug: 'editeur-de-prompt-ia',
     category: 'assistant',
     title: 'Korzystanie z asystenta pisania (AI Prompt Editor)',
-    summary: 'Zmieniaj instrukcje agenta, po prostu opisując, co chcesz zmienić.',
+    summary: 'Zmieniaj instrukcje agenta, po prostu opisując, co chcesz zmienić, a potem przejrzyj i zatwierdź każdą poprawkę, łącznie ze zmiennymi i danymi po rozmowie.',
     plan: 'Wszystkie pakiety.',
     sections: [
       {
@@ -244,7 +244,7 @@ export const GUIDES: Guide[] = [
     slug: 'message-d-accueil',
     category: 'assistant',
     title: 'Dopracowanie powitania',
-    summary: 'Napisz krótkie i naturalne pierwsze zdanie albo użyj nagrania audio.',
+    summary: 'Napisz krótkie i naturalne pierwsze zdanie albo użyj nagrania audio, a potem sprawdź, jak powitanie brzmi w prawdziwej rozmowie telefonicznej.',
     sections: [
       {
         title: 'Powitanie tekstowe',
@@ -276,7 +276,7 @@ export const GUIDES: Guide[] = [
     slug: 'choisir-la-voix',
     category: 'assistant',
     title: 'Wybór lub klonowanie głosu',
-    summary: 'Wybierz głos z biblioteki, zaimportuj go lub sklonuj własny.',
+    summary: 'Wybierz głos z biblioteki, zaimportuj go z biblioteki dostawcy lub sklonuj własny i posłuchaj, jak brzmi, zanim agent zacznie odbierać połączenia.',
     plan: 'Głosy z biblioteki: wszystkie pakiety. Głosy sklonowane: od pakietu Asystent wzwyż.',
     sections: [
       {
@@ -818,7 +818,7 @@ export const GUIDES: Guide[] = [
     slug: 'historique-des-appels',
     category: 'results',
     title: 'Przeglądanie połączeń i rozmów',
-    summary: 'Odsłuchuj nagrania, czytaj transkrypcje i śledź rozmowy pisemne.',
+    summary: 'Odsłuchuj nagrania, czytaj transkrypcje i śledź rozmowy pisemne, a potem wykorzystaj je, aby poprawić instrukcje i odpowiedzi swojego agenta.',
     plan: 'Wszystkie pakiety.',
     sections: [
       {

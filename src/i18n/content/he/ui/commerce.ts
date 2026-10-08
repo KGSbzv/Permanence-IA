@@ -153,7 +153,7 @@ export const UI_COMMERCE = {
       annualOffer: (name: string) => `${name} (חיוב שנתי)`,
       plan: (name: string, price: string, minutes: string) => `${name}: ${price} ל-${minutes} דק׳`,
       description: (plans: string[], days: number, minutes: number) =>
-        `מסלולי מענה טלפוני AI, לא כולל מע״מ: ${plans.join(', ')}. ${days} יום ניסיון חינם, ${minutes} דקות כלולות.`,
+        `מסלולי מענה טלפוני AI, לא כולל מע״מ: ${plans.join(', ')}. ${days} יום ניסיון חינם, ${minutes} דקות.`,
     },
     hero: {
       title: 'מחירי המענה הטלפוני AI: בחרו מסלול לפי נפח השיחות',
@@ -353,7 +353,7 @@ export const UI_COMMERCE = {
     tools: { title: 'יותר מ-300 כלים דרך האוטומציות', intro: 'עם פלטפורמת האוטומציות (החל ממסלול עוזר AI), כל שיחה יכולה להזין את הכלים שלכם: אימייל, צ׳אט צוותי, CRM, חנות אונליין, תשלומים, גיליונות. הנה כמה מהם.' },
     meta: {
       title: (brand: string) => `אינטגרציות למענה טלפוני AI: CRM ויומן · ${brand}`,
-      description: 'חברו את המענה הטלפוני AI ליומן שלכם (Google Calendar, ‏Outlook דרך Cal.com או Calendly), ל-HubSpot, Zoho, וואטסאפ, SIP ויותר מ-300 כלים בלי קוד. לכל האינטגרציות.',
+      description: 'חברו את המענה הטלפוני AI ליומן שלכם (Google Calendar, ‏Outlook דרך Cal.com או Calendly), ל-HubSpot, Zoho, וואטסאפ, SIP ויותר מ-300 כלים, בלי קוד.',
     },
     hero: {
       title: 'מחובר לכלים שאתם כבר משתמשים בהם',

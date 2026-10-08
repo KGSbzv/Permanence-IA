@@ -355,7 +355,7 @@ export const UI_COMMERCE = {
     tools: { title: 'Meer dan 300 tools via automatiseringen', intro: 'Met het automatiseringsplatform (vanaf het Assistent-abonnement) stuurt elk gesprek gegevens door naar uw tools: e-mail, teamchat, CRM, webshop, betalingen, spreadsheets. Een paar voorbeelden.' },
     meta: {
       title: (brand: string) => `Integraties — agenda, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Koppel uw AI-telefoonassistent aan uw agenda (Google Agenda of Outlook via Cal.com of Calendly), HubSpot, Zoho, WhatsApp, SIP en meer dan 300 tools, zonder code.',
+      description: 'Koppel uw AI-telefoonassistent aan uw agenda (Google Agenda of Outlook via Cal.com of Calendly), HubSpot, Zoho, WhatsApp, SIP en 300+ tools, zonder code.',
     },
     hero: {
       title: 'Uw AI-telefoonassistent, gekoppeld aan de tools die u al gebruikt',

@@ -190,7 +190,7 @@ export const UI_PAGES = {
   security: {
     meta: {
       title: (brand: string) => `Sécurité et RGPD de l’agent vocal IA · ${brand}`,
-      description: (brand: string) => `Consentement, droit d’opposition, chiffrement en transit, durée de conservation configurable : comment ${brand} protège les données de vos appels, dans le respect du RGPD.`,
+      description: (brand: string) => `Consentement, droit d’opposition, chiffrement en transit, conservation configurable : comment ${brand} protège les données de vos appels (RGPD).`,
     },
     h1: 'Sécurité et conformité de vos appels IA',
     intro: 'Vos appels contiennent des données personnelles. Voici les protections en place et les réglages dont vous disposez pour respecter le RGPD.',

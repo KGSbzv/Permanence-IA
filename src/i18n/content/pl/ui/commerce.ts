@@ -349,7 +349,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     tools: { title: 'Ponad 300 narzędzi dzięki automatyzacjom', intro: 'Dzięki platformie automatyzacji (od pakietu Asystent wzwyż) każda rozmowa może zasilać Twoje narzędzia: e-mail, komunikator zespołu, CRM, sklep internetowy, płatności, arkusze. Oto kilka z nich.' },
     meta: {
       title: (brand: string) => `Integracje — kalendarz, CRM, WhatsApp, SIP · ${brand}`,
-      description: 'Połącz asystenta głosowego AI z Cal.com i Calendly (a przez nie z Kalendarzem Google i Outlookiem), HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',
+      description: 'Połącz asystenta głosowego AI z Cal.com i Calendly (Kalendarz Google, Outlook), HubSpotem, Zoho, WhatsApp, SIP i ponad 300 narzędziami bez kodu.',
     },
     hero: {
       title: 'Połączony z narzędziami, których już używasz',
