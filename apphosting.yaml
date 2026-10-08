@@ -33,6 +33,9 @@ env:
     secret: AUTOCALLS_API_KEY
   - variable: IDENTIFY_KEY
     secret: IDENTIFY_KEY
+  # Webhook Stripe du compte Permanence IA (destination « permanenceia-site-relances ») : signature vérifiée.
+  - variable: STRIPE_WEBHOOK_SECRET
+    secret: STRIPE_WEBHOOK_SECRET
   # Relances commerciales (src/lib/relances) : planificateur Cloud Scheduler authentifié par jeton OIDC du compte
   # relances-cron (aucun rôle). Mode test tant que RELANCES_DRY_RUN vaut 1 : rien n'est envoyé aux contacts,
   # un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.
