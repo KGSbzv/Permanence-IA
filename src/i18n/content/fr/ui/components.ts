@@ -36,7 +36,7 @@ export const UI_COMPONENTS = {
 
   footer: {
     tagline: 'Agents vocaux IA qui répondent, qualifient, réservent et rappellent pour votre entreprise, 24 h/24.',
-    startFree: 'Démarrer l’essai de 14 jours',
+    startFree: 'Essai gratuit 14 jours',
     login: 'Connexion',
     gdpr: 'Outils RGPD intégrés',
     encryption: 'Chiffrement en transit',
@@ -71,7 +71,7 @@ export const UI_COMPONENTS = {
   callbackModal: {
     titleSupport: 'Demander un rappel du support',
     titleCommercial: 'Laissez votre numéro, nous vous rappelons',
-    intro: 'Choisissez votre créneau. Nous ne publions aucun numéro : c’est nous qui vous rappelons.',
+    intro: 'Choisissez votre créneau : c’est nous qui vous rappelons.',
     close: 'Fermer',
   },
 
@@ -133,7 +133,7 @@ export const UI_COMPONENTS = {
     optional: '(facultatif)',
     volume: 'Appels reçus par mois',
     volumeOptions: ['Moins de 200', '200 à 1 000', 'Plus de 1 000'],
-    phoneInvalid: 'Indiquez un numéro de téléphone valide, par exemple 06 12 34 56 78.',
+    phoneInvalid: 'Indiquez un numéro de téléphone valide, par exemple 06 39 98 12 34.',
   },
 
   benefits: {
@@ -213,7 +213,7 @@ export const UI_COMPONENTS = {
     extraMinute: 'Minute supplémentaire',
     phoneNumber: 'Numéro dédié (en option)',
     phoneNumberFrom: (price: string) => `dès ${price} / mois`,
-    showAll: (n: number) => `Voir tous les modules (${n})`,
+    showAll: (n: number) => `Voir le comparatif complet (${n} lignes)`,
     showLess: 'Réduire le comparatif',
     legendIncluded: 'Inclus',
     legendNotIncluded: 'Non inclus',
@@ -249,8 +249,8 @@ export const UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Dépassement léger, une fois', text: 'Une recharge suffit pour finir le mois.' },
-      { title: 'Dépassements répétés', text: 'Nous vous proposons le forfait supérieur.' },
-      { title: 'Recharges fréquentes', text: 'Votre tableau de bord vous indique que vous payez trop cher pour votre usage.' },
+      { title: 'Dépassements répétés', text: 'Notre équipe vous conseille le forfait supérieur.' },
+      { title: 'Recharges fréquentes', text: 'Une alerte de solde bas vous prévient ; comparez les forfaits dans Change plan.' },
     ],
     ruleCustom: (minutes: string) => `Au-delà de ${minutes} min par mois, de façon régulière`,
     ruleCustomText: 'Nous construisons une offre sur mesure.',

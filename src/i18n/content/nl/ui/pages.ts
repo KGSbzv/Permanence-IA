@@ -36,7 +36,7 @@ export const UI_PAGES = {
       description: 'Vragen over een AI-telefoonassistent voor uw bedrijf? Laat uw nummer achter, wij bellen u terug voor verkoop, demo of support. Kies uw tijdslot.',
     },
     h1: 'Laat uw nummer achter, wij bellen u terug',
-    intro: 'Wij publiceren geen telefoonnummer: wij bellen u terug, op het tijdslot dat u kiest. U kunt ons ook mailen.',
+    intro: 'Geen telefoonlijn in Nederland: wij bellen u terug, op het tijdslot dat u kiest. U kunt ons ook schrijven via WhatsApp of e-mail.',
     commercialTitle: 'Terugbelverzoek: verkoop',
     commercialText: 'Vragen over de abonnementen, demonstratie, offerte op maat.',
     supportTitle: 'Terugbelverzoek: support',
@@ -180,6 +180,9 @@ export const UI_PAGES = {
     infraTitle: 'Een oplossing op gecertificeerde infrastructuur',
     infraIntro: 'Onze oplossing (agents, geplande terugbelgesprekken, routering, website en klantomgeving) draait op de infrastructuur van een gecertificeerde technische leverancier. Die certificeringen zijn van de leverancier; we kozen hem zodat u hetzelfde niveau krijgt.',
     infraItems: ['Leverancier gecertificeerd volgens ISO/IEC 27001:2022 (informatiebeveiliging) en ISO 9001:2015 (kwaliteit)', 'AES-256-versleuteling van opgeslagen gegevens en TLS tijdens transport', 'Toegang op basis van rollen, tweestapsverificatie en auditlogs', 'Automatische back-ups en herstel over meerdere zones', 'Ingericht op AVG-naleving, met instelbare bewaartermijnen en automatische verwijdering', 'Betalingen via Stripe, gecertificeerd volgens PCI DSS Level 1'],
+    // Badges neutres (icône + libellé, sans logo ISO ni d’organisme certificateur) ; l’id choisit l’icône.
+    badges: [{ id: 'iso27001', label: 'ISO/IEC 27001:2022 (leverancier)' }, { id: 'iso9001', label: 'ISO 9001:2015 (leverancier)' }, { id: 'encryption', label: 'TLS + AES-256' }, { id: 'gdpr', label: 'AVG-tools' }, { id: 'pci', label: 'Stripe PCI DSS Level 1' }] as { id: 'iso27001' | 'iso9001' | 'encryption' | 'gdpr' | 'pci'; label: string }[],
+    badgesNote: 'De ISO-certificeringen zijn van onze technische leverancier; de PCI DSS-certificering is van Stripe.',
     commitmentsTitle: 'Onze toezeggingen',
     commitments: [
       'De agent stelt zich voor als AI en doet zich niet voor als mens',

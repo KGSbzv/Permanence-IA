@@ -137,7 +137,7 @@ export const UI_COMPONENTS = {
     optional: '(optional)',
     volume: 'Calls received per month',
     volumeOptions: ['Fewer than 200', '200 to 1,000', 'More than 1,000'],
-    phoneInvalid: 'Please enter a valid phone number, e.g. 07700 900123 (UK) or 0412 345 678 (Australia).',
+    phoneInvalid: 'Please enter a valid phone number, e.g. 07700 900123 (UK) or 0491 570 156 (Australia).',
   },
 
   benefits: {
@@ -180,7 +180,7 @@ export const UI_COMPONENTS = {
     intro: 'Talk to the agent from your browser, or have it ring your own phone: 30 seconds is enough to judge the voice and how it handles an enquiry from your sector.',
     launchTitle: 'Start the live demo',
     launchText: 'A real conversation, nothing to install.',
-    callbackTitle: 'Call me back',
+    callbackTitle: 'Get a call back',
     callbackText: 'The agent calls you at the time you choose.',
     formTitle: 'Get a demo call',
     formText: 'Free, no commitment. You hear the voice and how the agent qualifies a request.',
@@ -217,7 +217,7 @@ export const UI_COMPONENTS = {
     extraMinute: 'Extra minute',
     phoneNumber: 'Dedicated phone number',
     phoneNumberFrom: (price: string) => `from ${price} / month`,
-    showAll: (n: number) => `Show all features (${n})`,
+    showAll: (n: number) => `Show the full comparison (${n} rows)`,
     showLess: 'Collapse the comparison',
     legendIncluded: 'Included',
     legendNotIncluded: 'Not included',
@@ -253,8 +253,8 @@ export const UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Slightly over, once', text: 'A top-up is enough to finish the month.' },
-      { title: 'Over again and again', text: 'We suggest the next plan up.' },
-      { title: 'Frequent top-ups', text: 'Your dashboard shows you that you are paying too much for your usage.' },
+      { title: 'Over again and again', text: 'Our team advises you on the next plan up.' },
+      { title: 'Frequent top-ups', text: 'A low-balance alert lets you know; compare plans in Change plan.' },
     ],
     ruleCustom: (minutes: string) => `Over ${minutes} min regularly`,
     ruleCustomText: 'We build a custom plan.',

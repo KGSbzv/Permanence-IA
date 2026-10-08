@@ -52,13 +52,13 @@ Process: callbacks, follow-up and support (PermanenceAI)
 - Outbound campaigns, automations and cloned voice from the Assistant plan upwards.
 
 7. Plans (US dollars, excluding tax)
-- Receptionist: $99 a month, 350 minutes. Extra minute $0.39. 1 agent, 2 simultaneous calls, 1 dedicated number possible (optional, from $3.99 excl. tax a month), 1 knowledge base, 200 message credits a month (≈ 65 written replies).
+- Receptionist: $99 a month, 350 minutes. Extra minute $0.39. 1 agent, 2 simultaneous calls, 1 dedicated number possible (optional, from $3.99 excl. tax a month), 1 knowledge base, no message credits included: they are obtained by converting minutes in the customer area (1 minute = 9 credits).
 - Assistant: $249 a month, 1,000 minutes. Extra minute $0.36. 3 agents, 5 simultaneous calls, up to 3 dedicated numbers (optional, from $3.99 excl. tax a month each), 3 campaigns, automations (5,000 runs a month), 1 cloned voice, 1,000 message credits a month (≈ 330 written replies).
 - Call Centre: $499 a month, 2,300 minutes. Extra minute $0.32. Unlimited agents, campaigns and knowledge bases, 20 simultaneous calls, up to 10 dedicated numbers (optional, from $3.99 excl. tax a month each), 3 cloned voices, 50,000 automation runs a month, custom dashboards, priority support, 3,000 message credits a month (≈ 1,000 written replies).
 - Custom: beyond 2,500 regular minutes, on quotation (negotiated per-minute price, multi-site, SLA).
 - Annual billing: $990, $2,490 or $4,990 a year, i.e. 2 months free, paid upfront; minutes are allocated each month, and the extra-minute price is unchanged.
 - Pay as you go, with no subscription: $0.39 a minute, credit that never expires, same features as Receptionist.
-- Credit top-ups: $39, $89, $159, $299 or $725.
+- Credit top-ups: any amount the customer chooses in "Add credits" (for example $39, $89, $159 or $299).
 - No setup fee, no commitment.
 - 14-day free trial with 30 minutes: a card is requested, nothing is charged during the trial; cancel free of charge before it ends. One trial per business or payment method.
 - Cancel at any time from the customer area: Billing info, "Cancel subscription" button; cancellation takes effect at the end of the period already paid. During the trial, cancelling before the 14 days are up means nothing is charged; a reminder email is sent 7 days before the trial ends. Paid periods and credits are not refunded.

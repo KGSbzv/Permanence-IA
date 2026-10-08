@@ -245,7 +245,7 @@ D9. SMS not sending
 You need an SMS-capable number and message credits. Check the country and type of number, and the credit balance. In Australia, marketing SMS must follow the Spam Act (consent, sender identified, unsubscribe); in the UK, PECR rules apply.
 
 D10. Minutes used up
-"Your minutes for this month have been used. You can add credit straight away in 'Add credits' (from $39 to $725), or move to the next plan up in 'Change plan' if it happens often." Included minutes renew on the subscription date. Automatic top-up and low-balance alerts are available.
+"Your minutes for this month have been used. You can add credit straight away in 'Add credits' (any amount you choose), or move to the next plan up in 'Change plan' if it happens often." Included minutes renew on the subscription date. Automatic top-up and low-balance alerts are available.
 
 D11. Payment declined or card expired
 Update the card in "Billing info". Payments are processed by Stripe: the agent never takes a card number, whether spoken or written. If the problem persists, "billing" ticket.
@@ -338,7 +338,7 @@ F. CHANNELS
 F1. Phone
 - Inbound or outbound voice agent: greeting, qualification, appointments, callbacks. This is the most complete channel. Minutes are counted.
 - PermanenceAI line in the United Kingdom: 07367 090106 (+44 7367 090106), Katie, our AI assistant, sales and support, in English, 24/7.
-- PermanenceAI line in Israel: 02-376-7085, Hebrew-speaking agent, 24/7.
+- PermanenceAI line in Israel: 02-376-7085 (+972 2-376-7085), Hebrew-speaking agent, 24/7.
 
 F2. Website widget (voice and chat)
 - On www.permanenceia.com, the bubble lets people speak to the agent in the browser or write to it, and request a callback. Ideal for a live demo.
@@ -353,7 +353,7 @@ The help assistant (bubble at the bottom right of app.permanenceia.com) guides c
 F5. Message credits
 - They pay for written exchanges: AI replies on WhatsApp, SMS, Messenger, Instagram and chat, and messages sent.
 - Costs: written AI reply (website chat, WhatsApp, Messenger, Instagram) = 3 credits; WhatsApp message received or sent within a session = 1.4 credits; SMS sent = 2 credits (may vary by carrier or country); WhatsApp template message = Meta's rate by country and category, plus a margin; WhatsApp calls billed in minutes.
-- Included each month: Receptionist 200 credits (≈ 65 replies), Assistant 1,000 (≈ 330), Call Centre 3,000 (≈ 1,000), Custom on quotation. No credits are confirmed for the free trial: do not promise any.
+- Included each month: Receptionist none (credits obtained by converting minutes: 1 minute = 9 credits), Assistant 1,000 (≈ 330), Call Centre 3,000 (≈ 1,000), Custom on quotation. No credits are confirmed for the free trial: do not promise any.
 - Getting more: convert minutes in the customer area, 1 minute = 9 credits. Never give a dollar equivalent.
 - Balance shown in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until the balance is topped up.
 

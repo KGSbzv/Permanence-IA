@@ -185,6 +185,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       getTitle: 'Jak uzyskać kredyty',
       included: 'Co miesiąc w cenie pakietu:',
       includedValue: (credits: string, replies: string) => `${credits} kredytów / mies. (≈ ${replies} odpowiedzi)`,
+      notIncludedValue: 'Brak w cenie: zamień minuty',
       convert: 'Możesz też zamienić minuty na kredyty w panelu klienta: 1 minuta = 9 kredytów.',
       balance: 'Saldo sprawdzisz w panelu klienta. Przy 0 kredytów odpowiedzi pisemne oraz wysyłka SMS-ów i wiadomości WhatsApp zostają wstrzymane do czasu doładowania.',
     },
@@ -237,7 +238,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Doładowania minut dla asystenta głosowego AI — ${brand}`,
       description: (price: string, mins: string) =>
-        `Doładowania kredytów od ${price} netto za ${mins} ${plural(toInt(mins), 'dodatkową minutę', 'dodatkowe minuty', 'dodatkowych minut')}. Dokupuj minuty w dowolnym momencie; przejdź na wyższy pakiet, gdy rośnie liczba połączeń.`,
+        `Doładowania kredytów o dowolnej kwocie, na przykład ${price} netto za ${mins} ${plural(toInt(mins), 'dodatkową minutę', 'dodatkowe minuty', 'dodatkowych minut')}. Dokupuj minuty w dowolnym momencie; przejdź na wyższy pakiet, gdy rośnie liczba połączeń.`,
     },
     hero: {
       title: 'Dokupuj minuty w dowolnym momencie',
@@ -247,7 +248,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       title: 'Jak to działa',
       steps: (min: string, max: string) => [
         { title: 'Śledź wykorzystanie', text: 'Pulpit pokazuje zużyte i pozostałe minuty.' },
-        { title: 'Doładuj kredyty', text: `Doładowanie od ${min} do ${max}, jednym kliknięciem w panelu klienta.` },
+        { title: 'Doładuj kredyty', text: `Dowolna kwota (na przykład ${min}), jednym kliknięciem w panelu klienta (Add credits).` },
         { title: 'Działaj bez przerw', text: 'Kredyty pokrywają minuty ponad limit pakietu i nie wygasają.' },
       ],
     },

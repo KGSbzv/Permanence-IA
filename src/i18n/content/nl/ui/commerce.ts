@@ -191,6 +191,7 @@ export const UI_COMMERCE = {
       getTitle: 'Credits krijgen',
       included: 'Elke maand inbegrepen in uw abonnement:',
       includedValue: (credits: string, replies: string) => `${credits} credits / maand (≈ ${replies} antwoorden)`,
+      notIncludedValue: 'Niet inbegrepen: zet minuten om',
       convert: 'Of zet minuten om in uw klantomgeving: 1 minuut = 9 credits.',
       balance: 'Uw saldo ziet u in de klantomgeving. Bij 0 credits stoppen schriftelijke antwoorden en het verzenden van sms- en WhatsApp-berichten tot u opwaardeert.',
     },
@@ -243,7 +244,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Extra belminuten opwaarderen · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Extra belminuten voor uw AI-telefoonassistent: waardeer op vanaf ${price} excl. btw voor ${minutes} minuten, of stap over op een groter abonnement.`,
+        `Extra belminuten voor uw AI-telefoonassistent: waardeer het bedrag van uw keuze op, bijvoorbeeld ${price} excl. btw voor ${minutes} minuten, of stap over op een groter abonnement.`,
     },
     hero: {
       title: 'Voeg op elk moment extra belminuten toe',
@@ -253,7 +254,7 @@ export const UI_COMMERCE = {
       title: 'Hoe het werkt',
       steps: (min: string, max: string) => [
         { title: 'Volg uw verbruik', text: 'Uw dashboard toont de verbruikte en resterende minuten.' },
-        { title: 'Voeg tegoed toe', text: `Een opwaardering van ${min} tot ${max}, met één klik in uw klantomgeving.` },
+        { title: 'Voeg tegoed toe', text: `Het bedrag van uw keuze (bijvoorbeeld ${min}), met één klik in uw klantomgeving (Add credits).` },
         { title: 'Ga zonder onderbreking door', text: 'Met het tegoed betaalt u de minuten boven het abonnement; het vervalt niet.' },
       ],
     },

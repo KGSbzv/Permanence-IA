@@ -45,7 +45,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: 'Zostaw numer, oddzwonimy: pytania o asystenta głosowego AI, demonstracja, wycena lub wsparcie. Wybierz dogodny termin rozmowy.',
     },
     h1: 'Zostaw numer, oddzwonimy',
-    intro: 'Nie publikujemy numeru telefonu: to my oddzwaniamy, w wybranym przez Ciebie terminie. Możesz też do nas napisać.',
+    intro: 'Nie mamy linii telefonicznej w Polsce: to my oddzwaniamy, w wybranym przez Ciebie terminie. Możesz też napisać do nas na WhatsAppie lub e-mailem.',
     commercialTitle: 'Rozmowa handlowa',
     commercialText: 'Pytania o pakiety, demonstracja, wycena oferty na miarę.',
     supportTitle: 'Wsparcie techniczne',
@@ -189,6 +189,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     infraTitle: 'Rozwiązanie zbudowane na certyfikowanej infrastrukturze',
     infraIntro: 'Nasze rozwiązanie (agenci, zaplanowane oddzwonienia, przekierowania, strona i panel klienta) działa na infrastrukturze certyfikowanego dostawcy technicznego. Certyfikaty należą do dostawcy; wybraliśmy go, aby zapewnić Ci ten sam poziom bezpieczeństwa.',
     infraItems: ['Dostawca z certyfikatami ISO/IEC 27001:2022 (bezpieczeństwo informacji) i ISO 9001:2015 (jakość)', 'Szyfrowanie AES-256 danych w spoczynku i TLS w transmisji', 'Dostęp według ról, uwierzytelnianie dwuskładnikowe i dzienniki audytu', 'Automatyczne kopie zapasowe i odtwarzanie w kilku strefach', 'Zgodność z RODO, konfigurowalny okres przechowywania i automatyczne usuwanie', 'Płatności obsługiwane przez Stripe z certyfikatem PCI DSS poziomu 1'],
+    // Badges neutres (icône + libellé, sans logo ISO ni d’organisme certificateur) ; l’id choisit l’icône.
+    badges: [{ id: 'iso27001', label: 'ISO/IEC 27001:2022 (dostawca)' }, { id: 'iso9001', label: 'ISO 9001:2015 (dostawca)' }, { id: 'encryption', label: 'TLS + AES-256' }, { id: 'gdpr', label: 'Narzędzia RODO' }, { id: 'pci', label: 'Stripe PCI DSS poziom 1' }] as { id: 'iso27001' | 'iso9001' | 'encryption' | 'gdpr' | 'pci'; label: string }[],
+    badgesNote: 'Certyfikaty ISO należą do naszego dostawcy technicznego, a certyfikat PCI DSS do Stripe.',
     commitmentsTitle: 'Nasze zobowiązania',
     commitments: [
       'Agent przedstawia się jako AI i nie podszywa się pod człowieka',

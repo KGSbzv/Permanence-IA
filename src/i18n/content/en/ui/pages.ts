@@ -180,6 +180,9 @@ export const UI_PAGES = {
     infraTitle: 'A solution built on certified infrastructure',
     infraIntro: 'Our solution (agents, scheduled callbacks, routing, website and customer area) runs on the infrastructure of a certified technical provider. These certifications are the provider’s; we chose it so you get the same standard.',
     infraItems: ['Provider certified ISO/IEC 27001:2022 (information security) and ISO 9001:2015 (quality)', 'AES-256 encryption at rest and TLS in transit', 'Role-based access control, two-factor authentication and audit logs', 'Automated backups and disaster recovery across several zones', 'GDPR compliance, configurable retention and automatic deletion', 'Payments processed by Stripe, PCI-DSS Level 1 certified'],
+    // Badges neutres (icône + libellé, sans logo ISO ni d’organisme certificateur) ; l’id choisit l’icône.
+    badges: [{ id: 'iso27001', label: 'ISO/IEC 27001:2022 (provider)' }, { id: 'iso9001', label: 'ISO 9001:2015 (provider)' }, { id: 'encryption', label: 'TLS + AES-256' }, { id: 'gdpr', label: 'GDPR tools' }, { id: 'pci', label: 'Stripe PCI-DSS Level 1' }] as { id: 'iso27001' | 'iso9001' | 'encryption' | 'gdpr' | 'pci'; label: string }[],
+    badgesNote: 'The ISO certifications belong to our technical provider; the PCI-DSS certification belongs to Stripe.',
     commitmentsTitle: 'Our commitments',
     commitments: [
       'The agent introduces itself as an AI and does not pretend to be a person',

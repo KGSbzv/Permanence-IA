@@ -82,7 +82,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   callbackModal: {
     titleSupport: 'Poproś o oddzwonienie z działu wsparcia',
     titleCommercial: 'Zostaw numer, oddzwonimy',
-    intro: 'Wybierz dogodny termin. Nie publikujemy numeru telefonu: to my dzwonimy do Ciebie.',
+    intro: 'Wybierz dogodny termin: to my dzwonimy do Ciebie.',
     close: 'Zamknij',
   },
 
@@ -187,7 +187,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     intro: 'Porozmawiaj z agentem w przeglądarce albo niech zadzwoni na Twój własny telefon: 30 sekund wystarczy, by ocenić głos i to, jak obsługuje zgłoszenie z Twojej branży.',
     launchTitle: 'Uruchom demo na żywo',
     launchText: 'Prawdziwa rozmowa, bez instalacji.',
-    callbackTitle: 'Zamów oddzwonienie',
+    callbackTitle: 'Zamów rozmowę',
     callbackText: 'Agent zadzwoni do Ciebie w wybranym terminie.',
     formTitle: 'Zamów połączenie demonstracyjne',
     formText: 'Bezpłatnie, bez zobowiązań. Usłyszysz głos agenta i sposób, w jaki kwalifikuje zgłoszenie.',
@@ -224,7 +224,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     extraMinute: 'Dodatkowa minuta',
     phoneNumber: 'Dedykowany numer (opcja)',
     phoneNumberFrom: (price: string) => `od ${price} / mies.`,
-    showAll: (n: number) => `Pokaż wszystkie moduły (${n})`,
+    showAll: (n: number) => `Pokaż pełne porównanie (${n} ${plural(n, 'wiersz', 'wiersze', 'wierszy')})`,
     showLess: 'Zwiń porównanie',
     legendIncluded: 'W cenie',
     legendNotIncluded: 'Niedostępne',
@@ -260,8 +260,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Niewielkie, jednorazowe przekroczenie', text: 'Jedno doładowanie wystarczy do końca miesiąca.' },
-      { title: 'Powtarzające się przekroczenia', text: 'Zaproponujemy Ci wyższy pakiet.' },
-      { title: 'Częste doładowania', text: 'Pulpit pokaże Ci, że płacisz za dużo w stosunku do swojego wykorzystania.' },
+      { title: 'Powtarzające się przekroczenia', text: 'Nasz zespół doradzi Ci wyższy pakiet.' },
+      { title: 'Częste doładowania', text: 'Alert niskiego salda Cię uprzedzi; porównaj pakiety w Change plan.' },
     ],
     ruleCustom: (minutes: string) => `Powyżej ${minutes} min regularnie`,
     ruleCustomText: 'Przygotujemy ofertę na miarę.',

@@ -191,6 +191,8 @@ export const UI_COMMERCE = {
       getTitle: 'Obtenir des crédits',
       included: 'Inclus chaque mois dans votre forfait :',
       includedValue: (credits: string, replies: string) => `${credits} crédits / mois (≈ ${replies} réponses)`,
+      // Forfait sans crédits inclus (Réceptionniste tant que le plan Autocalls n’en attribue pas).
+      notIncludedValue: 'Non inclus : convertissez des minutes',
       convert: 'Ou convertissez des minutes depuis votre espace client : 1 minute = 9 crédits.',
       balance: 'Votre solde se consulte dans l’espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s’arrêtent jusqu’à la recharge.',
     },
@@ -244,7 +246,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Recharges de minutes agent vocal IA · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Recharges dès ${price} HT pour ${minutes} minutes de plus sur votre agent vocal IA, sans changer de forfait. Ajoutez du crédit en un clic.`,
+        `Rechargez le montant de votre choix, par exemple ${price} HT pour ${minutes} minutes de plus sur votre agent vocal IA, sans changer de forfait. Ajoutez du crédit en un clic.`,
     },
     hero: {
       title: 'Ajoutez des minutes à tout moment',
@@ -254,7 +256,7 @@ export const UI_COMMERCE = {
       title: 'Comment ça fonctionne',
       steps: (min: string, max: string) => [
         { title: 'Suivez votre usage', text: 'Votre tableau de bord affiche les minutes consommées et restantes.' },
-        { title: 'Ajoutez du crédit', text: `Une recharge de ${min} à ${max}, en un clic depuis votre espace.` },
+        { title: 'Ajoutez du crédit', text: `Le montant de votre choix (par exemple ${min}), en un clic depuis votre espace (Add credits).` },
         { title: 'Continuez sans coupure', text: 'Le crédit paie les minutes au-delà du forfait et ne périme pas.' },
       ],
     },

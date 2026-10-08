@@ -178,7 +178,7 @@ export const UI_COMPONENTS = {
     intro: 'דברו עם הסוכן מהדפדפן, או בקשו שיתקשר לטלפון שלכם: 30 שניות מספיקות כדי לשמוע את הקול ולראות איך הוא מטפל בפנייה מהתחום שלכם.',
     launchTitle: 'להפעלת ההדגמה החיה',
     launchText: 'שיחה אמיתית, בלי להתקין כלום.',
-    callbackTitle: 'חזרו אליי',
+    callbackTitle: 'בקשת שיחה חוזרת',
     callbackText: 'הסוכן מתקשר אליכם במועד שתבחרו.',
     formTitle: 'קבלו שיחת הדגמה',
     formText: 'בחינם וללא התחייבות. תשמעו את הקול ואת הדרך שבה הסוכן מסנן פנייה.',
@@ -215,7 +215,7 @@ export const UI_COMPONENTS = {
     extraMinute: 'דקה נוספת',
     phoneNumber: 'מספר טלפון ייעודי',
     phoneNumberFrom: (price: string) => `החל מ-${price} לחודש`,
-    showAll: (n: number) => `הצגת כל המודולים (${n})`,
+    showAll: (n: number) => `הצגת ההשוואה המלאה (${n} שורות)`,
     showLess: 'צמצום ההשוואה',
     legendIncluded: 'כלול',
     legendNotIncluded: 'לא כלול',
@@ -251,8 +251,8 @@ export const UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'חריגה קטנה, פעם אחת', text: 'טעינת קרדיט מספיקה כדי לסיים את החודש.' },
-      { title: 'חריגות חוזרות', text: 'נציע לכם את המסלול הבא.' },
-      { title: 'טעינות תכופות', text: 'לוח הבקרה יראה לכם שאתם משלמים יותר מדי ביחס לשימוש.' },
+      { title: 'חריגות חוזרות', text: 'הצוות שלנו ימליץ לכם על המסלול הבא.' },
+      { title: 'טעינות תכופות', text: 'התראת יתרה נמוכה מעדכנת אתכם; השוו את המסלולים ב-Change plan.' },
     ],
     ruleCustom: (minutes: string) => `מעל ${minutes} דק׳ באופן קבוע`,
     ruleCustomText: 'נבנה לכם מסלול בהתאמה אישית.',

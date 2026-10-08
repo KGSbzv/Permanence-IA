@@ -52,13 +52,13 @@ Proces: oddzwonienia, dalsze kroki i wsparcie (PermanenceAI)
 - Kampanie wychodzące, scenariusze automatyzacji i sklonowany głos od pakietu Asystent wzwyż.
 
 7. Pakiety (dolary amerykańskie, bez podatku)
-- Recepcjonistka: 99 $ miesięcznie, 350 minut. Dodatkowa minuta 0,39 $. 1 agent, 2 jednoczesne połączenia, możliwy 1 dedykowany numer (płatny osobno), 1 baza wiedzy, 200 kredytów na wiadomości miesięcznie (≈ 65 odpowiedzi pisemnych).
+- Recepcjonistka: 99 $ miesięcznie, 350 minut. Dodatkowa minuta 0,39 $. 1 agent, 2 jednoczesne połączenia, możliwy 1 dedykowany numer (płatny osobno), 1 baza wiedzy, brak kredytów na wiadomości w cenie: uzyskuje się je, zamieniając minuty w panelu klienta (1 minuta = 9 kredytów).
 - Asystent: 249 $ miesięcznie, 1000 minut. Dodatkowa minuta 0,36 $. 3 agentów, 5 jednoczesnych połączeń, możliwe 3 dedykowane numery (płatne osobno), 3 kampanie, automatyzacje (5000 uruchomień miesięcznie), 1 sklonowany głos, 1000 kredytów na wiadomości miesięcznie (≈ 330 odpowiedzi pisemnych).
 - Call center: 499 $ miesięcznie, 2300 minut. Dodatkowa minuta 0,32 $. Agenci, kampanie i bazy wiedzy bez limitu, 20 jednoczesnych połączeń, możliwe 10 dedykowanych numerów (płatnych osobno), 3 sklonowane głosy, 50 000 automatyzacji miesięcznie, własne pulpity, priorytetowe wsparcie, 3000 kredytów na wiadomości miesięcznie (≈ 1000 odpowiedzi pisemnych).
 - Na miarę: powyżej 2500 minut regularnie, wycena indywidualna (negocjowana cena za minutę, wiele lokalizacji, SLA).
 - Rozliczenie roczne: 990 $, 2490 $ lub 4990 $ rocznie, czyli 2 miesiące gratis, płatne z góry; minuty przydzielane co miesiąc, cena dodatkowej minuty bez zmian.
 - Płatność za zużycie, bez abonamentu: 0,39 $ za minutę, kredyty bez daty ważności, te same funkcje co Recepcjonistka.
-- Doładowania kredytów: 39, 89, 159, 299 lub 725 $.
+- Doładowania kredytów: dowolna kwota wybrana przez klienta w "Add credits" (na przykład 39, 89, 159 lub 299 $).
 - Brak opłaty za uruchomienie, brak zobowiązania.
 - Bezpłatny okres próbny 14 dni z 30 minutami: wymagana jest karta, w trakcie okresu próbnego nic nie jest pobierane; rezygnacja bez kosztów przed jego końcem. Jeden okres próbny na firmę lub metodę płatności.
 - Rezygnacja w dowolnym momencie w panelu klienta: sekcja Billing info (rozliczenia), przycisk "Cancel subscription"; skuteczna z końcem już opłaconego okresu. Rezygnacja w okresie próbnym, przed upływem 14 dni, nie powoduje żadnego obciążenia; 7 dni przed końcem okresu próbnego wysyłamy e-mail z przypomnieniem. Opłacone okresy i kredyty nie podlegają zwrotowi.

@@ -73,7 +73,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   callbackModal: {
     titleSupport: 'Richieda una richiamata dall’assistenza',
     titleCommercial: 'Lasci il Suo numero, La richiamiamo noi',
-    intro: 'Scelga la fascia oraria. Non pubblichiamo alcun numero: siamo noi a richiamarLa.',
+    intro: 'Scelga la fascia oraria: siamo noi a richiamarLa.',
     close: 'Chiudi',
   },
 
@@ -178,7 +178,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     intro: 'Parli con l’agente dal Suo browser, oppure lo faccia squillare sul Suo telefono: bastano 30 secondi per giudicare la voce e il modo in cui gestisce una richiesta del Suo settore.',
     launchTitle: 'Avvii la demo dal vivo',
     launchText: 'Una conversazione reale, senza installare nulla.',
-    callbackTitle: 'Mi faccia richiamare',
+    callbackTitle: 'Richieda una richiamata',
     callbackText: 'L’agente La chiama nella fascia oraria scelta.',
     formTitle: 'Riceva una chiamata dimostrativa',
     formText: 'Gratuita e senza impegno. Sente la voce e il modo in cui l’agente qualifica una richiesta.',
@@ -215,7 +215,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     extraMinute: 'Minuto aggiuntivo',
     phoneNumber: 'Acquisto di un numero',
     phoneNumberFrom: (price: string) => `da ${price} / mese`,
-    showAll: (n: number) => `Mostra tutti i moduli (${n})`,
+    showAll: (n: number) => `Mostra il confronto completo (${n} righe)`,
     showLess: 'Mostra meno',
     legendIncluded: 'Incluso',
     legendNotIncluded: 'Non incluso',
@@ -251,8 +251,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Superamento lieve, una tantum', text: 'Una ricarica basta per finire il mese.' },
-      { title: 'Superamenti ripetuti', text: 'Le proponiamo il piano superiore.' },
-      { title: 'Ricariche frequenti', text: 'La Sua dashboard Le segnala che sta pagando troppo per il Suo utilizzo.' },
+      { title: 'Superamenti ripetuti', text: 'Il nostro team Le consiglia il piano superiore.' },
+      { title: 'Ricariche frequenti', text: 'Un avviso di saldo basso La informa; confronti i piani in Change plan.' },
     ],
     ruleCustom: (minutes: string) => `Oltre ${minutes} min al mese`,
     ruleCustomText: 'Costruiamo un’offerta su misura.',

@@ -52,13 +52,13 @@ Proces: terugbellen, opvolging en support (PermanenceAI)
 - Uitgaande campagnes, flow builder, automatiseringen en gekloonde stem vanaf het abonnement Assistent.
 
 7. Abonnementen (Amerikaanse dollars, exclusief btw)
-- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39. 1 agent, 2 gelijktijdige gesprekken, 1 eigen nummer mogelijk (optie, vanaf $3,99 per maand), 1 kennisbank, 200 berichtcredits per maand (≈ 65 schriftelijke antwoorden).
+- Receptionist: $99 per maand, 350 minuten. Extra minuut $0,39. 1 agent, 2 gelijktijdige gesprekken, 1 eigen nummer mogelijk (optie, vanaf $3,99 per maand), 1 kennisbank, geen berichtcredits inbegrepen: die krijgt u door minuten om te zetten in de klantomgeving (1 minuut = 9 credits).
 - Assistent: $249 per maand, 1.000 minuten. Extra minuut $0,36. 3 agents, 5 gelijktijdige gesprekken, tot 3 eigen nummers (optie), 3 campagnes, automatiseringen (5.000 automatiseringsruns per maand), 1 gekloonde stem, 1.000 berichtcredits per maand (≈ 330 schriftelijke antwoorden).
 - Callcenter: $499 per maand, 2.300 minuten. Extra minuut $0,32. Onbeperkt aantal agents, campagnes en kennisbanken, 20 gelijktijdige gesprekken, tot 10 eigen nummers (optie), 3 gekloonde stemmen, 50.000 automatiseringsruns per maand, eigen dashboards, prioriteitssupport, 3.000 berichtcredits per maand (≈ 1.000 schriftelijke antwoorden).
 - Maatwerk: boven 2.500 minuten structureel, op aanvraag (minuutprijs in overleg, meerdere vestigingen, SLA).
 - Jaarlijkse facturatie: $990, $2.490 of $4.990 per jaar, dus 2 maanden gratis, vooraf betaald; minuten worden elke maand toegekend, de prijs van een extra minuut blijft gelijk.
 - Betalen naar gebruik, zonder abonnement: $0,39 per minuut, tegoed zonder vervaldatum, dezelfde functies als Receptionist.
-- Tegoed opwaarderen: $39, $89, $159, $299 of $725.
+- Tegoed opwaarderen: vrij bedrag, door de klant gekozen in "Add credits" (bijvoorbeeld $39, $89, $159 of $299).
 - Geen opstartkosten, geen verplichting.
 - Gratis proefperiode van 14 dagen met 30 minuten: er wordt een creditcard gevraagd, tijdens de proefperiode wordt niets afgeschreven; kosteloos opzeggen vóór het einde. Eén proefperiode per bedrijf of betaalmiddel.
 - Op elk moment opzegbaar in de klantomgeving: onderdeel Billing info (facturatie), knop "Cancel subscription"; de opzegging gaat in aan het einde van de al betaalde periode. Tijdens de proefperiode leidt opzeggen vóór het einde van de 14 dagen niet tot een afschrijving; 7 dagen vóór het einde van de proefperiode wordt een herinneringsmail gestuurd. Betaalde periodes en tegoeden worden niet terugbetaald.

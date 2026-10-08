@@ -20,7 +20,7 @@ export const OFFER_TEXT: Record<PlanSlug, OfferText> = {
     title: 'An AI receptionist that answers every call, 24/7',
     pitch: 'The Receptionist plan picks up your calls, answers common questions, books appointments and sends you a clear summary of every request. Simple to set up, no complexity.',
     cta: 'Choose Receptionist',
-    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 knowledge base; 1 dedicated number possible (optional, from US$3.99 excl. tax / month)', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger, 200 message credits a month (≈ 65 written replies)'],
+    highlights: ['1 AI voice agent answering 24/7', '2 concurrent calls', '1 knowledge base; 1 dedicated number possible (optional, from US$3.99 excl. tax / month)', 'Connected calendar and web widget', 'Call transfer to your team', 'SMS, WhatsApp and Messenger, message credits by converting minutes (1 min = 9 credits)'],
   },
   assistant: {
     name: 'Assistant',
@@ -104,7 +104,7 @@ export const MATRIX: MatrixGroup[] = [
       { label: 'Outbound campaigns', detail: 'Follow-ups, confirmations and reminders called automatically.', cells: { decouverte: false, receptionniste: false, assistant: '3', 'centre-appels': 'Unlimited', 'sur-mesure': 'Unlimited' } },
       { label: 'SMS and WhatsApp', detail: 'Written conversations in one place, paid for with message credits.', cells: all(true) },
       { label: 'Messenger and Instagram', detail: 'Social media messages in the same inbox.', cells: all(true) },
-      { label: 'Message credits included', detail: 'Credits allocated every month for written exchanges (website chat, WhatsApp, Messenger, Instagram, SMS). A written AI reply costs 3 credits. For more, convert minutes from your customer area: 1 minute = 9 credits.', cells: { decouverte: false, receptionniste: '200 / month (≈ 65 replies)', assistant: '1,000 / month (≈ 330 replies)', 'centre-appels': '3,000 / month (≈ 1,000 replies)', 'sur-mesure': 'On quote' } },
+      { label: 'Message credits included', detail: 'Credits allocated every month for written exchanges (website chat, WhatsApp, Messenger, Instagram, SMS). A written AI reply costs 3 credits. For more, convert minutes from your customer area: 1 minute = 9 credits.', cells: { decouverte: false, receptionniste: 'Not included (convert minutes)', assistant: '1,000 / month (≈ 330 replies)', 'centre-appels': '3,000 / month (≈ 1,000 replies)', 'sur-mesure': 'On quote' } },
     ],
   },
   {

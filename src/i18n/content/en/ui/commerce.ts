@@ -140,6 +140,7 @@ export const UI_COMMERCE = {
       getTitle: 'Getting credits',
       included: 'Included every month in your plan:',
       includedValue: (credits: string, replies: string) => `${credits} credits / month (≈ ${replies} replies)`,
+      notIncludedValue: 'Not included: convert minutes',
       convert: 'Or convert minutes from your customer area: 1 minute = 9 credits.',
       balance: 'You can check your balance in the customer area. At 0 credits, written replies and SMS or WhatsApp sending stop until you top up.',
     },
@@ -192,7 +193,7 @@ export const UI_COMMERCE = {
     meta: {
       title: (brand: string) => `AI receptionist minute top-ups · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Extra minutes for your AI receptionist: top-ups from ${price} excl. tax for ${minutes} minutes. Add credit at any time from your customer area.`,
+        `Extra minutes for your AI receptionist: top up the amount of your choice, for example ${price} excl. tax for ${minutes} minutes. Add credit at any time from your customer area.`,
     },
     hero: {
       title: 'Add minutes at any time',
@@ -202,7 +203,7 @@ export const UI_COMMERCE = {
       title: 'How it works',
       steps: (min: string, max: string) => [
         { title: 'Track your usage', text: 'Your dashboard shows the minutes used and remaining.' },
-        { title: 'Add credit', text: `A top-up from ${min} to ${max}, in one click from your customer area.` },
+        { title: 'Add credit', text: `The amount of your choice (for example ${min}), in one click from your customer area (Add credits).` },
         { title: 'Carry on without interruption', text: 'Credit pays for minutes beyond your plan and never expires.' },
       ],
     },

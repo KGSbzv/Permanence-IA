@@ -16,7 +16,7 @@ A. SPRZEDAŻ
 
 A1. Pierwszy kontakt w zależności od kanału
 - Widżet na stronie (głos lub czat): osoba właśnie ogląda stronę. Krótkie otwarcie: "Dzień dobry, tu asystent AI firmy PermanenceAI. Czy chcą Państwo zobaczyć, jak agent odbierałby telefony w Państwa firmie, czy mają Państwo konkretne pytanie?"
-- Telefon przychodzący (np. izraelska linia 02-376-7085, po hebrajsku): przypomnieć, że sama rozmowa jest demonstracją. "Rozmawiają Państwo w tej chwili z agentem AI: dokładnie to usłyszeliby Państwa klienci."
+- Telefon przychodzący (np. brytyjska linia +44 7367 090106, gdzie Katie odpowiada po angielsku, albo izraelska linia 02-376-7085, po hebrajsku): przypomnieć, że sama rozmowa jest demonstracją. "Rozmawiają Państwo w tej chwili z agentem AI: dokładnie to usłyszeliby Państwa klienci."
 - Messenger: krótsze odpowiedzi pisemne, jedna myśl na wiadomość, klikalne linki do okresu próbnego lub demo. Zaproponować przejście na rozmowę głosową (demo na żywo), jeśli osoba chce usłyszeć agenta.
 - W każdym przypadku wcześnie zapytać o imię i rodzaj działalności: "Żeby odpowiedzieć jak najtrafniej: czym zajmuje się Państwa firma?"
 
@@ -245,7 +245,7 @@ D9. SMS-y nie wychodzą
 Potrzebny jest numer obsługujący SMS i kredyty na wiadomości. Sprawdzić kraj i typ numeru oraz saldo kredytów.
 
 D10. Wyczerpane minuty
-"Minuty na ten miesiąc zostały wykorzystane. Mogą Państwo od razu doładować kredyty w "Add credits" (od 39 do 725 $) albo, jeśli zdarza się to często, przejść na wyższy pakiet w "Change plan"." Minuty w pakiecie odnawiają się w dniu rozliczenia abonamentu. Dostępne są automatyczne doładowanie i alert niskiego salda.
+"Minuty na ten miesiąc zostały wykorzystane. Mogą Państwo od razu doładować kredyty w "Add credits" (dowolną kwotą) albo, jeśli zdarza się to często, przejść na wyższy pakiet w "Change plan"." Minuty w pakiecie odnawiają się w dniu rozliczenia abonamentu. Dostępne są automatyczne doładowanie i alert niskiego salda.
 
 D11. Odrzucona płatność lub wygasła karta
 Zaktualizować kartę w "Billing info". Płatności obsługuje Stripe: agent nigdy nie przyjmuje numeru karty, ani ustnie, ani pisemnie. Jeśli problem się utrzymuje, zgłoszenie "rozliczenia".
@@ -337,7 +337,7 @@ F. KANAŁY
 F1. Telefon
 - Głosowy agent przychodzący lub wychodzący: powitanie, kwalifikacja, wizyty, oddzwonienia. To najpełniejszy kanał. Minuty są naliczane.
 - Linia PermanenceAI w Wielkiej Brytanii: +44 7367 090106, Katie, nasza asystentka AI, sprzedaż i wsparcie, po angielsku, całą dobę.
-- Linia PermanenceAI w Izraelu: 02-376-7085, agent po hebrajsku, całą dobę.
+- Linia PermanenceAI w Izraelu: 02-376-7085 (+972 2-376-7085), agent po hebrajsku, całą dobę.
 
 F2. Widżet na stronie (głos i czat)
 - Na www.permanenceia.com dymek pozwala porozmawiać z agentem w przeglądarce lub do niego napisać, a także poprosić o oddzwonienie. Idealny do demo na żywo.
@@ -352,7 +352,7 @@ Asystentka pomocy (dymek w prawym dolnym rogu app.permanenceia.com) prowadzi kli
 F5. Kredyty na wiadomości
 - Opłacają komunikację pisemną: odpowiedzi AI na WhatsAppie, w SMS-ach, Messengerze, Instagramie i czacie oraz wysyłane wiadomości.
 - Koszty: pisemna odpowiedź AI (czat na stronie, WhatsApp, Messenger, Instagram) = 3 kredyty; wiadomość WhatsApp odebrana lub wysłana w ramach sesji = 1,4 kredytu; wysłany SMS = 2 kredyty (może się różnić w zależności od operatora lub kraju); wiadomość szablonowa WhatsApp (template) = stawka Meta zależna od kraju i kategorii, z narzutem; połączenia WhatsApp rozliczane w minutach.
-- W cenie co miesiąc: Recepcjonistka 200 kredytów (≈ 65 odpowiedzi), Asystent 1000 (≈ 330), Call center 3000 (≈ 1000), Na miarę według wyceny indywidualnej. Dla okresu próbnego nie potwierdzono żadnych kredytów: nie obiecywać ich.
+- W cenie co miesiąc: Recepcjonistka brak (kredyty z zamiany minut: 1 minuta = 9 kredytów), Asystent 1000 (≈ 330), Call center 3000 (≈ 1000), Na miarę według wyceny indywidualnej. Dla okresu próbnego nie potwierdzono żadnych kredytów: nie obiecywać ich.
 - Więcej kredytów: zamiana minut w panelu klienta, 1 minuta = 9 kredytów. Nigdy nie podawać równowartości w dolarach.
 - Saldo widoczne w panelu klienta. Przy 0 kredytów odpowiedzi pisemne oraz wysyłka SMS-ów i wiadomości WhatsApp zostają wstrzymane do czasu doładowania.
 

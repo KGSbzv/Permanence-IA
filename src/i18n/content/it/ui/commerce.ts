@@ -200,6 +200,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       getTitle: 'Come ottenere crediti',
       included: 'Inclusi ogni mese nel Suo piano:',
       includedValue: (credits: string, replies: string) => `${credits} crediti / mese (≈ ${replies} risposte)`,
+      notIncludedValue: 'Non inclusi: converta minuti',
       convert: 'Oppure converta minuti dalla Sua area clienti: 1 minuto = 9 crediti.',
       balance: 'Il saldo è consultabile nell’area clienti. A 0 crediti, le risposte scritte e gli invii di SMS o WhatsApp si interrompono fino alla ricarica.',
     },
@@ -252,7 +253,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
     meta: {
       title: (brand: string) => `Ricariche di credito per l’assistente AI · ${brand}`,
       description: (price: string, minutes: string) =>
-        `Ricariche da ${price} IVA esclusa per ${minutes} minuti extra del Suo assistente telefonico AI. Aggiunga minuti quando vuole o passi al piano superiore.`,
+        `Ricariche dell’importo che preferisce, ad esempio ${price} IVA esclusa per ${minutes} minuti extra del Suo assistente telefonico AI. Aggiunga minuti quando vuole o passi al piano superiore.`,
     },
     hero: {
       title: 'Aggiunga minuti in qualsiasi momento',
@@ -262,7 +263,7 @@ export const UI_COMMERCE: typeof FR_UI_COMMERCE = {
       title: 'Come funziona',
       steps: (min: string, max: string) => [
         { title: 'Monitori il Suo utilizzo', text: 'La Sua dashboard mostra i minuti utilizzati e quelli rimanenti.' },
-        { title: 'Aggiunga credito', text: `Una ricarica da ${min} a ${max}, con un clic dalla Sua area clienti.` },
+        { title: 'Aggiunga credito', text: `L’importo che preferisce (ad esempio ${min}), con un clic dalla Sua area clienti (Add credits).` },
         { title: 'Continui senza interruzioni', text: 'Il credito paga i minuti oltre il piano e non scade.' },
       ],
     },

@@ -60,7 +60,7 @@ export interface Market {
   numberLocale: string;
   currency: 'USD';
   plans: Record<PlanSlug, PlanPricing>;
-  /** Montants des recharges de crédit proposées. */
+  /** Exemples de montants de recharge affichés sur le site : dans l’espace client (Add credits), le client choisit librement le montant. */
   recharges: number[];
   /** Prix minimum d’un numéro dédié (par mois, HT), affiché « à partir de » : les numéros sont facturés au prix de la plateforme (espace client), dès 3,99 $ selon le pays ; jamais inclus dans le forfait. */
   phoneNumberFrom: number;

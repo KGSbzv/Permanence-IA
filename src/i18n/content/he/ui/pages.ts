@@ -180,6 +180,9 @@ export const UI_PAGES = {
     infraTitle: 'פתרון הבנוי על תשתית מוסמכת',
     infraIntro: 'הפתרון שלנו (סוכנים, שיחות חוזרות מתוזמנות, ניתוב, אתר ואזור לקוח) פועל על התשתית של ספק טכנולוגי מוסמך. ההסמכות שייכות לספק; בחרנו בו כדי שתקבלו את אותה רמת סטנדרט.',
     infraItems: ['ספק בעל הסמכת ISO/IEC 27001:2022 (אבטחת מידע) ו-ISO 9001:2015 (איכות)', 'הצפנת AES-256 במנוחה ו-TLS בתעבורה', 'בקרת גישה לפי תפקידים, אימות דו־שלבי ויומני ביקורת', 'גיבויים אוטומטיים והתאוששות מאסון בכמה אזורים', 'עמידה בחוק הגנת הפרטיות וב-GDPR, תקופת שמירה ניתנת להגדרה ומחיקה אוטומטית', 'תשלומים מעובדים על ידי Stripe, בעלת הסמכת PCI-DSS Level 1'],
+    // Badges neutres (icône + libellé, sans logo ISO ni d’organisme certificateur) ; l’id choisit l’icône.
+    badges: [{ id: 'iso27001', label: 'ISO/IEC 27001:2022 (ספק)' }, { id: 'iso9001', label: 'ISO 9001:2015 (ספק)' }, { id: 'encryption', label: 'TLS + AES-256' }, { id: 'gdpr', label: 'כלי GDPR ופרטיות' }, { id: 'pci', label: 'Stripe PCI-DSS Level 1' }] as { id: 'iso27001' | 'iso9001' | 'encryption' | 'gdpr' | 'pci'; label: string }[],
+    badgesNote: 'הסמכות ה-ISO שייכות לספק הטכנולוגי שלנו, והסמכת PCI-DSS שייכת ל-Stripe.',
     commitmentsTitle: 'המחויבויות שלנו',
     commitments: [
       'הסוכן מציג את עצמו כבינה מלאכותית ואינו מתחזה לאדם',

@@ -36,7 +36,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       description: 'Ha domande sull’assistente telefonico AI? Lasci il Suo numero, La richiamiamo noi: richiamata commerciale, demo o assistenza, nella fascia oraria scelta.',
     },
     h1: 'Lasci il Suo numero, La richiamiamo noi',
-    intro: 'Non pubblichiamo un numero di telefono: siamo noi a richiamarLa, nella fascia oraria che sceglie. Può anche scriverci.',
+    intro: 'Nessuna linea telefonica in Italia: siamo noi a richiamarLa, nella fascia oraria che sceglie. Può anche scriverci su WhatsApp o via email.',
     commercialTitle: 'Richiamata commerciale',
     commercialText: 'Domande sui piani, dimostrazione, preventivo su misura.',
     supportTitle: 'Richiamata assistenza',
@@ -180,6 +180,9 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     infraTitle: 'Una soluzione costruita su un’infrastruttura certificata',
     infraIntro: 'La nostra soluzione (agenti, richiamate programmate, instradamento, sito e area clienti) funziona sull’infrastruttura di un fornitore tecnico certificato. Le certificazioni sono del fornitore; lo abbiamo scelto per offrirLe lo stesso livello di rigore.',
     infraItems: ['Fornitore certificato ISO/IEC 27001:2022 (sicurezza delle informazioni) e ISO 9001:2015 (qualità)', 'Crittografia AES-256 dei dati a riposo e TLS in transito', 'Accessi per ruolo, autenticazione a due fattori e registri di audit', 'Backup automatici e disaster recovery su più zone', 'Conformità al GDPR, conservazione configurabile e cancellazione automatica', 'Pagamenti gestiti da Stripe, certificato PCI DSS livello 1'],
+    // Badges neutres (icône + libellé, sans logo ISO ni d’organisme certificateur) ; l’id choisit l’icône.
+    badges: [{ id: 'iso27001', label: 'ISO/IEC 27001:2022 (fornitore)' }, { id: 'iso9001', label: 'ISO 9001:2015 (fornitore)' }, { id: 'encryption', label: 'TLS + AES-256' }, { id: 'gdpr', label: 'Strumenti GDPR' }, { id: 'pci', label: 'Stripe PCI DSS livello 1' }] as { id: 'iso27001' | 'iso9001' | 'encryption' | 'gdpr' | 'pci'; label: string }[],
+    badgesNote: 'Le certificazioni ISO sono del nostro fornitore tecnico; la certificazione PCI DSS è di Stripe.',
     commitmentsTitle: 'I nostri impegni',
     commitments: [
       'L’agente si presenta come un’AI e non si fa passare per una persona',

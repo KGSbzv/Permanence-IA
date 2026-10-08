@@ -16,7 +16,7 @@ A. COMMERCIAL ET VENTE
 
 A1. Premier contact selon le canal
 - Widget du site (voix ou chat) : la personne est déjà en train de regarder le site. Ouvrir court : « Bonjour, je suis l'assistante IA de Permanence IA. Vous voulez voir comment l'agent répondrait chez vous, ou vous avez une question précise ? »
-- Téléphone entrant (par exemple la ligne israélienne 02-376-7085, en hébreu ; il n'existe pas de ligne publique en France, le contact passe par le widget, la démo et le rappel) : rappeler que l'appel lui-même est une démonstration. « Vous parlez en ce moment à un agent IA : c'est exactement ce que vos clients entendraient. »
+- Téléphone entrant (par exemple la ligne britannique +44 7367 090106, où Katie répond en anglais, ou la ligne israélienne 02-376-7085, en hébreu ; pas de ligne téléphonique en France : le contact passe par le widget, la démo, le rappel, WhatsApp et l'email) : rappeler que l'appel lui-même est une démonstration. « Vous parlez en ce moment à un agent IA : c'est exactement ce que vos clients entendraient. »
 - Messenger : réponses écrites plus courtes, une idée par message, liens cliquables vers l'essai ou la démo. Proposer le passage à la voix (démo en direct) si la personne veut entendre l'agent.
 - Dans tous les cas, demander tôt le prénom et l'activité : « Pour vous répondre au plus juste, quelle est votre activité ? »
 
@@ -245,7 +245,7 @@ D9. SMS qui ne partent pas
 Il faut un numéro compatible SMS et des crédits de messages. Vérifier le pays et le type de numéro, et le solde de crédits.
 
 D10. Minutes épuisées
-« Vos minutes du mois sont consommées. Vous pouvez ajouter du crédit tout de suite dans "Add credits" (de 39 à 725 $), ou passer au forfait supérieur dans "Change plan" si cela arrive souvent. » Les minutes incluses se renouvellent à la date anniversaire de l'abonnement. La recharge automatique et l'alerte de solde bas existent.
+« Vos minutes du mois sont consommées. Vous pouvez ajouter du crédit tout de suite dans "Add credits" (du montant de votre choix), ou passer au forfait supérieur dans "Change plan" si cela arrive souvent. » Les minutes incluses se renouvellent à la date anniversaire de l'abonnement. La recharge automatique et l'alerte de solde bas existent.
 
 D11. Paiement refusé ou carte expirée
 Mettre à jour la carte dans « Billing info ». Les paiements sont traités par Stripe : l'agent ne prend jamais de numéro de carte, ni à l'oral ni à l'écrit. Si le problème persiste, ticket « facturation ».
@@ -337,7 +337,7 @@ F. CANAUX
 F1. Téléphone
 - Agent vocal entrant ou sortant : accueil, qualification, rendez-vous, rappels. C'est le canal le plus complet. Les minutes sont décomptées.
 - Ligne de Permanence IA au Royaume-Uni : +44 7367 090106, Katie, notre assistante IA, commercial et support, en anglais, 24 h/24.
-- Ligne de Permanence IA en Israël : 02-376-7085, agent en hébreu, 24 h/24.
+- Ligne de Permanence IA en Israël : 02-376-7085 (+972 2-376-7085), agent en hébreu, 24 h/24.
 
 F2. Widget du site (voix et chat)
 - Sur www.permanenceia.com, la bulle permet de parler à l'agent dans le navigateur ou de lui écrire, et de demander un rappel. Idéal pour une démo en direct.
@@ -352,7 +352,7 @@ L'assistante d'aide (bulle en bas à droite de app.permanenceia.com) guide le cl
 F5. Crédits de messages
 - Ils paient les échanges écrits : réponses de l'IA sur WhatsApp, SMS, Messenger, Instagram et chat, et messages envoyés.
 - Coûts : réponse écrite de l'IA (chat du site, WhatsApp, Messenger, Instagram) = 3 crédits ; message WhatsApp reçu ou envoyé en session = 1,4 crédit ; SMS envoyé = 2 crédits (peut varier selon l'opérateur ou le pays) ; message modèle WhatsApp (template) = tarif de Meta selon le pays et la catégorie, majoré ; appels WhatsApp facturés en minutes.
-- Inclus chaque mois : Réceptionniste 200 crédits (≈ 65 réponses), Assistant 1 000 (≈ 330), Centre d'appels 3 000 (≈ 1 000), Sur mesure sur devis. Aucun crédit n'est confirmé pour l'essai gratuit : ne pas en promettre.
+- Inclus chaque mois : Réceptionniste aucun (crédits obtenus en convertissant des minutes : 1 minute = 9 crédits), Assistant 1 000 (≈ 330), Centre d'appels 3 000 (≈ 1 000), Sur mesure sur devis. Aucun crédit n'est confirmé pour l'essai gratuit : ne pas en promettre.
 - En obtenir plus : convertir des minutes depuis l'espace client, 1 minute = 9 crédits. Ne jamais donner d'équivalence en dollars.
 - Solde visible dans l'espace client. À 0 crédit, les réponses écrites et les envois de SMS ou WhatsApp s'arrêtent jusqu'à la recharge.
 

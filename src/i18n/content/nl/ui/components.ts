@@ -71,7 +71,7 @@ export const UI_COMPONENTS = {
   callbackModal: {
     titleSupport: 'Terugbelverzoek voor support',
     titleCommercial: 'Laat uw nummer achter, wij bellen u terug',
-    intro: 'Kies uw tijdslot. Wij publiceren geen telefoonnummer: wij bellen u terug.',
+    intro: 'Kies uw tijdslot: wij bellen u terug.',
     close: 'Sluiten',
   },
 
@@ -213,7 +213,7 @@ export const UI_COMPONENTS = {
     extraMinute: 'Extra minuut',
     phoneNumber: 'Eigen nummer',
     phoneNumberFrom: (price: string) => `vanaf ${price} / maand`,
-    showAll: (n: number) => `Alle modules bekijken (${n})`,
+    showAll: (n: number) => `Volledige vergelijking bekijken (${n} rijen)`,
     showLess: 'Vergelijking inklappen',
     legendIncluded: 'Inbegrepen',
     legendNotIncluded: 'Niet inbegrepen',
@@ -249,8 +249,8 @@ export const UI_COMPONENTS = {
   growthBlock: {
     rules: [
       { title: 'Eenmalig iets meer verbruikt', text: 'Een opwaardering is genoeg om de maand af te maken.' },
-      { title: 'Regelmatig meer verbruikt', text: 'Wij raden u het hogere abonnement aan.' },
-      { title: 'Vaak opwaarderen', text: 'Uw dashboard laat zien dat u te veel betaalt voor uw gebruik.' },
+      { title: 'Regelmatig meer verbruikt', text: 'Ons team adviseert u over het hogere abonnement.' },
+      { title: 'Vaak opwaarderen', text: 'Een melding bij laag saldo waarschuwt u; vergelijk de abonnementen via Change plan.' },
     ],
     ruleCustom: (minutes: string) => `Vanaf ${minutes} min per maand`,
     ruleCustomText: 'Wij stellen een abonnement op maat samen.',

@@ -813,7 +813,7 @@ export const GUIDES: Guide[] = [
         list: [
           'Format CSV ou Excel, avec une colonne phone_number (obligatoire).',
           'Une colonne par variable de l’agent (par exemple customer_name, company) pour personnaliser l’appel.',
-          'Numéros au format international sans espaces (+33612345678), ou format national avec un fichier par pays.',
+          'Numéros au format international sans espaces (+33639981234), ou format national avec un fichier par pays.',
           'Téléchargez le fichier d’exemple proposé à l’import pour partir du bon format.',
         ],
       },

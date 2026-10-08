@@ -52,13 +52,13 @@ Processus : rappels, suivi et support (Permanence IA)
 - Campagnes sortantes, scénarios automatisés (plateforme d'automatisation) et voix clonée à partir du forfait Assistant.
 
 7. Forfaits (dollars US, hors taxes)
-- Réceptionniste : 99 $ par mois, 350 minutes. Minute supplémentaire 0,39 $. 1 agent, 2 appels simultanés, 1 base de connaissances, 1 numéro dédié possible (en option, non inclus), 200 crédits de messages par mois (≈ 65 réponses écrites).
+- Réceptionniste : 99 $ par mois, 350 minutes. Minute supplémentaire 0,39 $. 1 agent, 2 appels simultanés, 1 base de connaissances, 1 numéro dédié possible (en option, non inclus), pas de crédits de messages inclus : ils s'obtiennent en convertissant des minutes depuis l'espace client (1 minute = 9 crédits).
 - Assistant : 249 $ par mois, 1 000 minutes. Minute supplémentaire 0,36 $. 3 agents, 5 appels simultanés, jusqu'à 3 numéros dédiés (en option, non inclus), 3 campagnes, automatisations (5 000 exécutions par mois), 1 voix clonée, 1 000 crédits de messages par mois (≈ 330 réponses écrites).
 - Centre d'appels : 499 $ par mois, 2 300 minutes. Minute supplémentaire 0,32 $. Agents, campagnes et bases de connaissances illimités, 20 appels simultanés, jusqu'à 10 numéros dédiés (en option, non inclus), 3 voix clonées, 50 000 automatisations par mois, tableaux de bord personnalisés, support prioritaire, 3 000 crédits de messages par mois (≈ 1 000 réponses écrites).
 - Sur mesure : au-delà de 2 500 minutes par mois de façon régulière, sur devis (prix à la minute négocié, multi-sites, SLA).
 - Facturation annuelle : 990 $, 2 490 $ ou 4 990 $ par an, soit 2 mois offerts, payée d'avance ; minutes attribuées chaque mois, prix de la minute supplémentaire inchangé.
 - Paiement à la consommation, sans abonnement : 0,39 $ la minute, crédit sans date d'expiration, mêmes fonctions que Réceptionniste.
-- Recharges de crédit : 39, 89, 159, 299 ou 725 $.
+- Recharges de crédit : montant libre, au choix du client dans "Add credits" (par exemple 39, 89, 159 ou 299 $).
 - Aucun frais de mise en service, aucun engagement.
 - Essai gratuit de 14 jours avec 30 minutes : une carte est demandée, rien n'est débité pendant l'essai ; annulation sans frais avant la fin. Un seul essai par entreprise ou moyen de paiement.
 - Résiliation à tout moment depuis l'espace client, rubrique Billing info (facturation), bouton « Cancel subscription » ; elle prend effet à la fin de la période déjà payée. Pendant l'essai, une résiliation avant la fin des 14 jours n'entraîne aucun débit ; un email de rappel est envoyé 7 jours avant la fin de l'essai. Les périodes payées et les crédits ne sont pas remboursés.

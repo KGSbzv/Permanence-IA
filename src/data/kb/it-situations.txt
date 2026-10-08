@@ -245,7 +245,7 @@ D9. SMS che non partono
 Servono un numero abilitato agli SMS e crediti messaggi. Verificare il paese e il tipo di numero, e il saldo dei crediti.
 
 D10. Minuti esauriti
-"I minuti del mese sono stati consumati. Può aggiungere credito subito in 'Add credits' (da 39 a 725 $), oppure passare al piano superiore in 'Change plan' se succede spesso." I minuti inclusi si rinnovano alla data dell'abbonamento. Esistono la ricarica automatica e l'avviso di saldo basso.
+"I minuti del mese sono stati consumati. Può aggiungere credito subito in 'Add credits' (dell'importo che preferisce), oppure passare al piano superiore in 'Change plan' se succede spesso." I minuti inclusi si rinnovano alla data dell'abbonamento. Esistono la ricarica automatica e l'avviso di saldo basso.
 
 D11. Pagamento rifiutato o carta scaduta
 Aggiornare la carta in "Billing info". I pagamenti sono gestiti da Stripe: l'agente non prende mai un numero di carta, né a voce né per iscritto. Se il problema persiste, ticket "fatturazione".
@@ -338,7 +338,7 @@ F. CANALI
 F1. Telefono
 - Agente vocale in entrata o in uscita: accoglienza, qualificazione, appuntamenti, richiamate. È il canale più completo. I minuti vengono conteggiati.
 - Linea di PermanenceIA nel Regno Unito: +44 7367 090106, Katie, la nostra assistente AI, vendite e assistenza, in inglese, 24 ore su 24.
-- Linea di PermanenceIA in Israele: 02-376-7085, agente in ebraico, 24 ore su 24.
+- Linea di PermanenceIA in Israele: 02-376-7085 (+972 2-376-7085), agente in ebraico, 24 ore su 24.
 
 F2. Widget del sito (voce e chat)
 - Su www.permanenceia.com la bolla permette di parlare con l'agente dal browser o di scrivergli, e di richiedere una richiamata. Ideale per una demo live.
@@ -353,7 +353,7 @@ L'assistente di aiuto (bolla in basso a destra di app.permanenceia.com) guida il
 F5. Crediti messaggi
 - Pagano gli scambi scritti: risposte dell'AI su WhatsApp, SMS, Messenger, Instagram e chat, e messaggi inviati.
 - Costi: risposta scritta dell'AI (chat del sito, WhatsApp, Messenger, Instagram) = 3 crediti; messaggio WhatsApp ricevuto o inviato in sessione = 1,4 crediti; SMS inviato = 2 crediti (può variare in base all'operatore o al paese); messaggio modello WhatsApp (template) = tariffa di Meta in base al paese e alla categoria, maggiorata; chiamate WhatsApp fatturate in minuti.
-- Inclusi ogni mese: Receptionist 200 crediti (≈ 65 risposte), Assistant 1.000 (≈ 330), Call Center 3.000 (≈ 1.000), Su misura su preventivo. Nessun credito è confermato per la prova gratuita: non prometterne.
+- Inclusi ogni mese: Receptionist nessuno (crediti ottenuti convertendo minuti: 1 minuto = 9 crediti), Assistant 1.000 (≈ 330), Call Center 3.000 (≈ 1.000), Su misura su preventivo. Nessun credito è confermato per la prova gratuita: non prometterne.
 - Per averne di più: convertire minuti dall'area clienti, 1 minuto = 9 crediti. Non dare mai un'equivalenza in dollari.
 - Saldo visibile nell'area clienti. A 0 crediti, le risposte scritte e gli invii di SMS o WhatsApp si interrompono fino alla ricarica.
 
