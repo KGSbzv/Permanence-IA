@@ -33,3 +33,16 @@ env:
     secret: AUTOCALLS_API_KEY
   - variable: IDENTIFY_KEY
     secret: IDENTIFY_KEY
+  # Relances commerciales (src/lib/relances) : planificateur Cloud Scheduler authentifié par jeton OIDC du compte
+  # relances-cron (aucun rôle). Mode test tant que RELANCES_DRY_RUN vaut 1 : rien n'est envoyé aux contacts,
+  # un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.
+  - variable: RELANCES_ENABLED
+    value: "1"
+  - variable: RELANCES_DRY_RUN
+    value: "1"
+  - variable: RELANCES_LOCALES
+    value: fr,en-gb,en-au
+  - variable: RELANCES_OIDC_AUDIENCE
+    value: https://www.permanenceia.com/api/cron/relances
+  - variable: RELANCES_OIDC_EMAIL
+    value: relances-cron@snarecore-cacrs.iam.gserviceaccount.com
