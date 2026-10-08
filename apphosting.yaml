@@ -15,6 +15,12 @@ env:
     secret: ZOHO_SMTP_PASS
   - variable: WEBHOOK_TOKEN
     secret: WEBHOOK_TOKEN
+  # Jeton suivant, accepté aussi pendant le passage des webhooks à l'en-tête x-webhook-token (docs/autocalls-webhooks-migration.md).
+  - variable: WEBHOOK_TOKEN_NEXT
+    secret: WEBHOOK_TOKEN_NEXT
+  # Clé Stripe restreinte (Customers : écriture) : langue des factures posée par le webhook Stripe.
+  - variable: STRIPE_CUSTOMERS_KEY
+    secret: STRIPE_CUSTOMERS_KEY
   - variable: ACCOUNT_CODE_SECRET
     secret: ACCOUNT_CODE_SECRET
   - variable: LEAD_WEBHOOK_COMMERCIAL
