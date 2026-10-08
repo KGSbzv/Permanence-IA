@@ -13,7 +13,7 @@ const MISSED_SMS = 'sms_rappel_manque';
 
 /**
  * Rappel sortant sans réponse : un seul message « nous avons essayé de vous joindre » par demande (7 jours) :
- * WhatsApp si la personne a coché la case sur le site (marqueur [WA:langue]), sinon SMS depuis le numéro britannique.
+ * WhatsApp si la personne a coché la case sur le site (marqueur [WA:langue]), sinon (ou si WhatsApp échoue) SMS depuis le numéro britannique.
  * La campagne refait ensuite ses tentatives d’appel ; la personne peut aussi répondre « Rappelez-moi » à l’agent WhatsApp.
  */
 async function messageAfterMissedCall(phone: string) {
@@ -27,12 +27,25 @@ async function messageAfterMissedCall(phone: string) {
   const waLang = /\[WA:([a-z-]+)\]/.exec(req.note || '')?.[1];
   const lang = waLang || langFromPhone(phone);
   const first = safeFirstName(req.name, lang);
-  // Accord WhatsApp donné sur le site → modèle WhatsApp ; sinon SMS de service (hors États-Unis et Canada, qui exigent un enregistrement A2P).
-  if (waLang) await sendTemplate('pia_callback_missed', waLang, phone, { 1: first });
-  else if (!phone.startsWith('+1')) await sendMissedCallSms(lang, phone, first);
-  else return 'pas de SMS vers +1';
-  await dbInsert('call_events', { kind: waLang ? 'whatsapp' : 'sms', external_id: `missed-${Date.now()}`, customer_phone: phone, outcome: waLang ? MISSED_OUTCOME : MISSED_SMS, summary: `Message ${waLang ? 'WhatsApp' : 'SMS'} envoyé après un rappel sans réponse.` });
-  return waLang ? 'WhatsApp envoyé' : 'SMS envoyé';
+  // Accord WhatsApp donné sur le site → modèle WhatsApp ; s’il échoue (modèle pas encore approuvé par Meta…),
+  // SMS de service comme pour les autres (hors États-Unis et Canada, qui exigent un enregistrement A2P).
+  let channel: 'whatsapp' | 'sms' | null = null;
+  let waError = '';
+  if (waLang) {
+    try { await sendTemplate('pia_callback_missed', waLang, phone, { 1: first }); channel = 'whatsapp'; }
+    catch (e: any) { waError = e.message; console.error('[autocalls-webhook] WhatsApp rappel manqué, repli SMS :', waError); }
+  }
+  if (!channel) {
+    if (phone.startsWith('+1')) return waError ? `WhatsApp en échec (${waError}), pas de SMS vers +1` : 'pas de SMS vers +1';
+    await sendMissedCallSms(lang, phone, first);
+    channel = 'sms';
+  }
+  const label = channel === 'whatsapp' ? 'WhatsApp' : 'SMS';
+  await dbInsert('call_events', {
+    kind: channel, external_id: `missed-${Date.now()}`, customer_phone: phone, outcome: channel === 'whatsapp' ? MISSED_OUTCOME : MISSED_SMS,
+    summary: `Message ${label} envoyé après un rappel sans réponse.${waError ? ` WhatsApp en échec (${waError}).` : ''}`,
+  });
+  return waError ? `SMS envoyé (WhatsApp en échec)` : `${label} envoyé`;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

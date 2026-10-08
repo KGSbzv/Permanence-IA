@@ -93,6 +93,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   // requestId : identifiant de la ligne enregistrée, renvoyé par l’automatisation à /api/callback/check
   // juste avant l’appel (une demande remplacée par une plus récente du même numéro n’est plus appelée).
+  // Email transmis à la campagne seulement s’il a la forme d’une adresse (pas de texte libre ajouté à la note).
+  const campaignEmail = /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i.test(String(email || '').trim()) ? String(email).trim() : '';
   const queueCall = async (requestId?: string) => {
     if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);
     // Garde-fous contre les appels abusifs : numéros surtaxés et destinations à risque exclus, et au plus
@@ -115,7 +117,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ...(requestId ? { request_id: requestId } : {}),
         // Les automatisations Autocalls basculent sur la campagne de la voix masculine quand body.voice === 'male'.
         ...(voice ? { voice } : {}),
-        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`].filter(Boolean).join(' — '),
+        // Email saisi sur le site (accompagnement à l’essai, rappel) : transmis à l’agent, qui n’a pas à le redemander.
+        ...(campaignEmail ? { email: campaignEmail } : {}),
+        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);

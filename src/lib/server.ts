@@ -187,11 +187,6 @@ export function localToUtc(local: string, tz: string) {
   return new Date(guess - tzOffset(new Date(guess), tz));
 }
 
-/** Date du jour (AAAA-MM-JJ) dans un fuseau, décalée de `days` jours. */
-function dayIn(tz: string, days: number) {
-  return calendarDays(tz, days + 1)[days];
-}
-
 /**
  * Les `count` prochaines dates du calendrier local (AAAA-MM-JJ), aujourd’hui compris. Calcul sur le calendrier,
  * pas par pas de 24 h : aucune date sautée ni répétée autour d’un changement d’heure.
@@ -206,6 +201,19 @@ const SLOT_TIME: Record<string, [number, string]> = {
   'Aujourd’hui après-midi': [0, '14:00'], 'Demain matin': [1, '09:30'], 'Demain après-midi': [1, '14:30'],
 };
 
+/** Jour ouvré des campagnes d’appel : du dimanche au jeudi en Israël, du lundi au samedi ailleurs. */
+export function isBusinessDay(date: string, lang: string) {
+  const wd = new Date(`${date}T12:00:00Z`).getUTCDay(); // 0 = dimanche
+  return lang === 'he' ? wd <= 4 : wd !== 0;
+}
+
+/** Date (AAAA-MM-JJ) d’un créneau : `days` jours après aujourd’hui, reportée au prochain jour ouvré du marché
+ *  (« Demain matin » un samedi soir en France → lundi 9:30 ; un jeudi en Israël → dimanche). */
+function slotDay(tz: string, days: number, lang: string) {
+  const list = calendarDays(tz, days + 8);
+  return list.slice(days).find((d) => isBusinessDay(d, lang)) ?? list[days];
+}
+
 /**
  * Moment du rappel, en UTC. Priorité : date précise (ISO avec décalage, ou heure locale du fuseau `tz`),
  * puis créneau du formulaire, sinon tout de suite. Toujours entre maintenant et 30 jours.
@@ -219,7 +227,7 @@ export function resolveCallAt(opts: { callAt?: unknown; slot?: unknown; tz?: unk
   if (raw) at = /(?:[zZ]|[+-]\d{2}:?\d{2})$/.test(raw) ? new Date(raw) : localToUtc(raw, zone);
   else if (typeof opts.slot === 'string' && SLOT_TIME[opts.slot]) {
     const [days, time] = SLOT_TIME[opts.slot];
-    at = localToUtc(`${dayIn(zone, days)}T${time}`, zone);
+    at = localToUtc(`${slotDay(zone, days, opts.lang)}T${time}`, zone);
   }
   if (!at || Number.isNaN(at.getTime()) || at.getTime() <= now) return new Date(now);
   return new Date(Math.min(at.getTime(), now + 30 * 86_400_000));

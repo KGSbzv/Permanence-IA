@@ -352,8 +352,9 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
         body: JSON.stringify({
           name: f.get('name'), phone: f.get('phone'), cc: dialCode(f.get('cc')), sector, consentCall: true, website: f.get('website') || undefined,
           type: 'commercial', agent: 'Démo live', locale: lang, voice: gender,
-          // Note lue par l’agent avant de rappeler : en anglais neutre (les agents de chaque langue la comprennent).
-          note: `Live demo — role: ${['receptionist', 'sales / qualification', 'support'][role]} — language: ${NATIVE[lang]} — voice: ${voice} — sector: ${sectorName}`,
+          // Note lue par l’agent avant de rappeler : format exact « Démo live — rôle : … » que les prompts des agents
+          // commerciaux de rappel (toutes langues) reconnaissent pour passer en jeu de rôle. Ne pas le traduire.
+          note: `Démo live — rôle : ${ROLE_NOTE[role]} — langue : ${NATIVE[lang]} — voix : ${voice} — secteur : ${sectorName}`,
           tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });

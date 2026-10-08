@@ -12,10 +12,15 @@ const KEY = 'pia-trial-nudge';
 const WEEK = 7 * 86_400_000;
 const IDLE_MS = 45_000;
 // Pages où le visiteur est déjà en train d’agir, ou où une interruption serait déplacée.
-const SKIP = ['/essai-gratuit', '/contact', '/aide', '/cgu', '/confidentialite', '/mentions-legales', '/cookies'];
+const SKIP = ['/essai-gratuit', '/contact', '/demo', '/aide', '/cgu', '/confidentialite', '/mentions-legales', '/cookies'];
 
 function seenRecently() {
   try { return Date.now() - Number(localStorage.getItem(KEY) || 0) < WEEK; } catch { return false; }
+}
+/** Le visiteur est occupé ailleurs : autre fenêtre modale ouverte (rappel, démo dans le navigateur) ou focus dans
+ *  une iframe (conversation avec l’agent, démo ou bulle du widget). Ses clics et touches n’arrivent alors pas à la page. */
+function busyElsewhere() {
+  return !!document.querySelector('[role="dialog"][aria-modal="true"]') || document.activeElement?.tagName === 'IFRAME';
 }
 function markSeen() {
   try { localStorage.setItem(KEY, String(Date.now())); } catch { /* stockage indisponible : on n’affichera qu’une fois par visite */ }
@@ -32,7 +37,7 @@ export default function TrialNudge() {
   const signupHref = path(SIGNUP_URL);
 
   const show = useCallback(() => {
-    if (done.current || callbackOpen || seenRecently()) return;
+    if (done.current || callbackOpen || seenRecently() || busyElsewhere()) return;
     done.current = true;
     markSeen();
     setOpen(true);
@@ -40,8 +45,10 @@ export default function TrialNudge() {
 
   useEffect(() => {
     if (SKIP.includes(pathname)) return;
-    let idle = window.setTimeout(show, IDLE_MS);
-    const reset = () => { window.clearTimeout(idle); idle = window.setTimeout(show, IDLE_MS); };
+    // Inactivité apparente pendant une conversation avec l’agent : on attend simplement un nouveau délai.
+    const tick = () => { if (busyElsewhere()) idle = window.setTimeout(tick, IDLE_MS); else show(); };
+    let idle = window.setTimeout(tick, IDLE_MS);
+    const reset = () => { window.clearTimeout(idle); idle = window.setTimeout(tick, IDLE_MS); };
     // Toute action réelle (lien vers l’essai, saisie d’un formulaire) annule la relance pour cette visite ;
     // les autres clics relancent simplement le délai d’inactivité.
     const acted = (e: Event) => {
@@ -49,16 +56,23 @@ export default function TrialNudge() {
       if (t?.closest(`a[href^="${signupHref}"], form, input, textarea, select`)) { done.current = true; window.clearTimeout(idle); } else reset();
     };
     const exit = (e: MouseEvent) => { if (e.clientY <= 0 && !e.relatedTarget) show(); };
+    // Le focus passe dans une iframe (démarrage d’une conversation avec l’agent) : c’est une action réelle,
+    // la relance est annulée pour cette visite.
+    const blur = () => window.setTimeout(() => {
+      if (document.activeElement?.tagName === 'IFRAME') { done.current = true; window.clearTimeout(idle); }
+    }, 0);
     document.addEventListener('click', acted, true);
     document.addEventListener('focusin', acted, true);
     document.documentElement.addEventListener('mouseout', exit);
     window.addEventListener('scroll', reset, { passive: true });
+    window.addEventListener('blur', blur);
     return () => {
       window.clearTimeout(idle);
       document.removeEventListener('click', acted, true);
       document.removeEventListener('focusin', acted, true);
       document.documentElement.removeEventListener('mouseout', exit);
       window.removeEventListener('scroll', reset);
+      window.removeEventListener('blur', blur);
     };
   }, [pathname, show, signupHref]);
 
