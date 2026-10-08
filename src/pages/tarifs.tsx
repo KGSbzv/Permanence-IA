@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
-import { CTAs, FaqDark, Heading, Section, TrialBadges } from '@/components/ui';
+import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
 import { BillingProvider, EconomyBlock, FinalCTA, HumanVsAi, GrowthBlock, IncludedStack, MatrixTable, MessageCreditsBox, PricingCards, RechargeTables } from '@/components/blocks';
-import { SITE } from '@/data/site';
+import { DEMO_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 
 export default function Tarifs() {
@@ -45,6 +45,8 @@ export default function Tarifs() {
       <BillingProvider>
       <section className="bg-paper">
         <div className="wrap py-14 text-center lg:py-20">
+          {/* Pas de démo live sur cette page : la pastille mène à la page de démo. */}
+          <TalkNowPill href={DEMO_URL} className="mb-5" />
           <Heading as="h1" center title={t.hero.title} intro={t.hero.intro(days, minutes)} />
           <TrialBadges className="mt-6 justify-center" />
           <div className="mt-12 text-start"><PricingCards /></div>

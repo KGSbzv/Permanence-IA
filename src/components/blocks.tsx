@@ -172,8 +172,11 @@ export function SectorVisual({ s, className = '' }: { s: Sector; className?: str
 export function SectorCards({ exclude }: { exclude?: string }) {
   const { c } = useI18n();
   const list = c.sectors.filter((s) => s.slug !== exclude && isActiveSector(s));
-  // Grille sans carte isolée : 10 secteurs → 2 rangées de 5 ; 9 (page d’un secteur) → 3 rangées de 3.
-  const cols = list.length % 5 === 0 ? 'lg:grid-cols-5' : 'lg:grid-cols-3';
+  // Grille sans carte isolée : sur la page des secteurs, un nombre impair ajoute une carte « Votre activité
+  // n’est pas dans la liste ? » (11 + 1 = 12 → 2, 3 ou 4 colonnes pleines) ; 10 (page d’un secteur) → 2 rangées de 5.
+  const other = !exclude && list.length % 2 === 1 ? c.ui.commerce.sectorsIndex.other : null;
+  const count = list.length + (other ? 1 : 0);
+  const cols = count % 5 === 0 ? 'lg:grid-cols-5' : count % 4 === 0 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
   return (
     <div className={`grid gap-5 sm:grid-cols-2 ${cols}`}>
       {list.map((s) => {
@@ -189,6 +192,18 @@ export function SectorCards({ exclude }: { exclude?: string }) {
           </Link>
         );
       })}
+      {other && (
+        <Link href="/contact" className="group flex flex-col overflow-hidden rounded-2xl border border-dashed border-signal/40 bg-signal-soft/40 hover:border-ink">
+          <div className="flex aspect-[3/2] items-center justify-center bg-gradient-to-br from-signal-soft via-white to-paper">
+            <MessageSquare className="h-14 w-14 text-signal/60" aria-hidden />
+          </div>
+          <div className="p-5">
+            <h3 className="flex items-center gap-2 text-h3 font-semibold"><Sparkles className="h-5 w-5 text-signal" aria-hidden />{other.title}</h3>
+            <p className="mt-1.5 text-[15px]">{other.intro}</p>
+            <span className="mt-3 inline-block text-sm font-semibold text-signal-deep group-hover:underline">{c.ui.components.navbar.resources.contact}</span>
+          </div>
+        </Link>
+      )}
     </div>
   );
 }
@@ -644,6 +659,16 @@ export function planFor(minutes: number, i18n: Pick<ReturnType<typeof getI18n>, 
 // Hypothèses du calculateur, affichées sous les résultats.
 const WRAP_UP = 1; // minutes de traitement après chaque appel pour un employé (notes, saisie)
 const CONVERSION = 20; // % des appels manqués rattrapés qui deviennent clients
+const WORKING_DAYS = 22; // jours ouvrés par mois : « manqués hier » × 22 = appels manqués par mois
+// Valeur de départ d’un nouveau client par secteur : panier ou honoraire moyen volontairement prudent
+// (le visiteur l’ajuste ; une valeur haute gonflerait le chiffre d’affaires « récupéré »).
+const SECTOR_VALUE: Record<string, number> = {
+  'services-a-domicile': 200, 'cliniques-veterinaires': 100, immobilier: 500, automobile: 250,
+  'salons-de-coiffure': 50, 'beaute-bien-etre': 70, 'restaurants-hotellerie': 50, 'avocats-experts-comptables': 400,
+  'e-commerce': 60, 'courtiers-assurance-credit': 300, 'gestion-locative': 300,
+};
+/** Textes facultatifs du calculateur : affichés dès que les fichiers de contenu les définissent. */
+type EconomyExtra = { missedYesterday?: string; workingDaysNote?: (days: number) => string; perWeek?: string; perYear?: string };
 
 /** Forfait le moins cher pour un volume donné : prix du forfait + minutes au-delà, au tarif de la minute supplémentaire. */
 export function cheapestPlan(minutes: number, offers: Offer[]) {
@@ -657,14 +682,21 @@ export function cheapestPlan(minutes: number, offers: Offer[]) {
 }
 
 /** Calculateur de retour sur investissement : volume d’appels → forfait, prix réel à la minute, économie et bénéfice. */
-export function EconomyBlock() {
+export function EconomyBlock({ sector }: { sector?: string } = {}) {
   const { c, market, offers, offer, money, num, locale } = useI18n();
   const t = c.ui.components.economy;
+  const ex = t as typeof t & EconomyExtra;
   const [calls, setCalls] = useState(300);
   const [duration, setDuration] = useState(3);
   const [hourly, setHourly] = useState(market.hourlyCost);
   const [missed, setMissed] = useState(20);
-  const [value, setValue] = useState(150);
+  const [value, setValue] = useState((sector && SECTOR_VALUE[sector]) || 150);
+  const yId = useId();
+  // « Combien d’appels avez-vous manqués hier ? » : fixe le taux de manqués (× 22 jours ouvrés, borné au curseur).
+  const setYesterday = (n: number) => {
+    if (!Number.isFinite(n) || n < 0) return;
+    setMissed(Math.min(50, Math.round((n * WORKING_DAYS * 100) / Math.max(calls, 1))));
+  };
 
   const minutes = Math.round(calls * duration);
   const best = useMemo(() => cheapestPlan(minutes, offers), [minutes, offers]);
@@ -684,7 +716,7 @@ export function EconomyBlock() {
     ] },
     { group: t.yourCosts, items: [
       { id: 'roi-hourly', label: t.hourlyCost, v: hourly, set: setHourly, min: 10, max: 60, step: 1, show: (n: number) => `${money(n)}${t.perHour}` },
-      { id: 'roi-missed', label: t.missedRate, v: missed, set: setMissed, min: 0, max: 50, step: 5, show: (n: number) => (locale === 'fr' ? `${n}\u00a0%` : `${n}%`) },
+      { id: 'roi-missed', label: t.missedRate, v: missed, set: setMissed, min: 0, max: 50, step: 1, show: (n: number) => (locale === 'fr' ? `${n}\u00a0%` : `${n}%`) },
       { id: 'roi-value', label: t.customerValue, v: value, set: setValue, min: 0, max: 2000, step: 10, show: (n: number) => money(n) },
     ] },
   ];
@@ -699,6 +731,16 @@ export function EconomyBlock() {
               <legend className="font-display font-semibold text-ink">{g.group}</legend>
               {g.items.map((f) => (
                 <div key={f.id} className="mt-4">
+                  {f.id === 'roi-missed' && ex.missedYesterday && (
+                    <div className="mb-4">
+                      <label htmlFor={yId} className="flex items-center justify-between gap-4 text-sm text-slate">
+                        <span>{ex.missedYesterday}</span>
+                        <input id={yId} type="number" inputMode="numeric" min={0} max={500} placeholder="0" onChange={(e) => setYesterday(Number(e.target.value))}
+                          className="w-20 rounded-lg border border-line px-2 py-1 text-end font-semibold text-ink focus:border-signal focus:outline-none" />
+                      </label>
+                      {ex.workingDaysNote && <p className="mt-1 text-xs text-slate-light">{ex.workingDaysNote(WORKING_DAYS)}</p>}
+                    </div>
+                  )}
                   <label htmlFor={f.id} className="flex justify-between gap-4 text-sm text-slate"><span>{f.label}</span><output htmlFor={f.id} className="font-semibold text-ink">{f.show(f.v)}</output></label>
                   <input id={f.id} type="range" min={f.min} max={f.max} step={f.step} value={f.v} onChange={(e) => f.set(Number(e.target.value))} className="mt-2 w-full accent-[#0A7690]" />
                 </div>
@@ -729,6 +771,12 @@ export function EconomyBlock() {
             <p className="text-sm">{t.netBenefit}</p>
             <p className="font-display text-[2.5rem] font-bold leading-tight text-white">{money(benefit)}<span className="text-lg font-semibold text-white/60">{t.perMonth}</span></p>
             {ratio > 1 && <p className="mt-1 text-sm text-signal-glow">{t.roi(num(ratio, 1))}</p>}
+            {ex.perWeek && ex.perYear && (
+              <p className="mt-3 flex flex-wrap gap-x-5 gap-y-1 border-t border-white/10 pt-3 text-sm">
+                <span><span className="font-semibold text-white">{money((benefit * 12) / 52)}</span>{ex.perWeek}</span>
+                <span><span className="font-semibold text-white">{money(benefit * 12)}</span>{ex.perYear}</span>
+              </p>
+            )}
           </div>
           <Link href={SIGNUP_URL} className="btn-signal mt-6 w-full justify-center">{t.cta}</Link>
         </div>

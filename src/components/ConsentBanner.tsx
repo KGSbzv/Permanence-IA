@@ -27,7 +27,7 @@ export default function ConsentBanner() {
     <div role="dialog" aria-live="polite" aria-label={t.title} className="fixed inset-x-3 bottom-[5.5rem] z-[75] mx-auto max-w-xl rounded-2xl border border-line bg-white p-5 shadow-float lg:bottom-6 lg:start-6 lg:end-auto lg:mx-0">
       <p className="font-display font-semibold text-ink">{t.title}</p>
       <p className="mt-1.5 text-[14px] leading-relaxed">
-        {t.text} <Link href="/cookies" className="font-semibold text-signal-deep hover:underline">{t.policy}</Link>
+        {t.text} <Link href="/cookies" aria-label={`${t.policy} — ${t.title}`} className="font-semibold text-signal-deep hover:underline">{t.policy}</Link>
       </p>
       <div className="mt-4 grid grid-cols-2 gap-2">
         <button type="button" onClick={() => choose('denied')} className="btn-ghost justify-center py-2.5 text-sm">{t.reject}</button>

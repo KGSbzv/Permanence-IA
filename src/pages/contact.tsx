@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useId, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import { CallbackForm, Heading, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
 import Mock from '@/components/Mock';
+import { tabKeyTarget } from '@/components/tabs';
 import { SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { Mail, MessageSquare, Phone, PhoneCall } from 'lucide-react';
@@ -10,6 +11,16 @@ export default function Contact() {
   const { c, market } = useI18n();
   const t = c.ui.pages.contact;
   const [type, setType] = useState<'commercial' | 'support'>('commercial');
+  // Onglets accessibles au clavier : ←/→ (inversées en RTL), Début/Fin, un seul onglet dans l’ordre de tabulation.
+  const base = useId().replace(/:/g, '');
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const kinds = ['commercial', 'support'] as const;
+  const onKey = (e: React.KeyboardEvent, i: number) => {
+    const next = tabKeyTarget(e, i, kinds.length);
+    if (next === undefined) return;
+    setType(kinds[next]);
+    tabs.current[next]?.focus();
+  };
   return (
     <Layout title={t.meta.title(market.brand)} description={t.meta.description}>
       <section className="bg-paper">
@@ -27,13 +38,14 @@ export default function Contact() {
           </div>
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8 lg:row-span-2 lg:self-start">
             <div role="tablist" aria-label={t.tabsLabel} className="mb-6 grid grid-cols-2 rounded-xl bg-paper p-1">
-              {(['commercial', 'support'] as const).map((k) => (
-                <button key={k} role="tab" aria-selected={type === k} type="button" onClick={() => setType(k)} className={`rounded-lg py-2.5 text-sm font-semibold ${type === k ? 'bg-white text-ink shadow-card' : 'text-slate'}`}>
+              {kinds.map((k, i) => (
+                <button key={k} ref={(el) => { tabs.current[i] = el; }} role="tab" id={`${base}-tab-${k}`} aria-selected={type === k} aria-controls={`${base}-panel`}
+                  tabIndex={type === k ? 0 : -1} type="button" onClick={() => setType(k)} onKeyDown={(e) => onKey(e, i)} className={`rounded-lg py-2.5 text-sm font-semibold ${type === k ? 'bg-white text-ink shadow-card' : 'text-slate'}`}>
                   {k === 'commercial' ? t.tabCommercial : t.tabSupport}
                 </button>
               ))}
             </div>
-            <CallbackForm key={type} type={type} />
+            <div role="tabpanel" id={`${base}-panel`} aria-labelledby={`${base}-tab-${type}`}><CallbackForm key={type} type={type} /></div>
           </div>
           {/* Visuel : l’agent du marché décroche (décoratif, le formulaire reste l’action principale). */}
           <div className="max-w-md lg:col-start-1" aria-hidden><Mock kind="call" /></div>

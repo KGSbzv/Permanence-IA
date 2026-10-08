@@ -1,8 +1,9 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import { Heading, Section, TrialBadges } from '@/components/ui';
+import { Heading, Section, TalkNowPill, TrialBadges } from '@/components/ui';
 import { FinalCTA, GrowthBlock, RechargeTables, Steps } from '@/components/blocks';
 import Mock from '@/components/Mock';
+import { DEMO_URL } from '@/data/site';
 import { useI18n } from '@/i18n';
 
 export default function Recharges() {
@@ -17,6 +18,8 @@ export default function Recharges() {
       <section className="bg-paper">
         <div className="wrap grid gap-10 py-14 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:py-20">
           <div>
+            {/* Pas de démo live sur cette page : la pastille mène à la page de démo. */}
+            <TalkNowPill href={DEMO_URL} className="mb-5" />
             <Heading as="h1" title={t.hero.title} intro={t.hero.intro} />
             <TrialBadges className="mt-6" />
           </div>

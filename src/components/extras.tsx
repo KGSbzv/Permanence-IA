@@ -14,15 +14,7 @@ import { SECTOR_ICON } from './blocks';
 import { useI18n } from '@/i18n';
 import { isActiveSector } from '@/data/site';
 import { VOICES } from '@/data/personas';
-
-/** Onglets : flèches gauche/droite (inversées en RTL), Début/Fin → indice de l’onglet visé, ou undefined. */
-function tabKeyTarget(e: React.KeyboardEvent, i: number, n: number) {
-  const rtl = document.documentElement.dir === 'rtl';
-  const fwd = (i + 1) % n, back = (i - 1 + n) % n;
-  const next = ({ ArrowRight: rtl ? back : fwd, ArrowLeft: rtl ? fwd : back, Home: 0, End: n - 1 } as Record<string, number>)[e.key];
-  if (next !== undefined) e.preventDefault();
-  return next;
-}
+import { tabKeyTarget } from './tabs';
 
 /* ---------- Bandeau défilant ---------- */
 
@@ -372,7 +364,7 @@ export function Lifecycle() {
 
 /* ---------- Aperçu de l’espace client (inspiré de la « Business App ») ---------- */
 
-const TAG_COLORS = ['bg-ok/10 text-ok', 'bg-red-50 text-red-700', 'bg-signal-soft text-signal-deep', 'bg-paper text-slate'];
+const TAG_COLORS = ['bg-ok/10 text-ok-deep', 'bg-red-50 text-red-700', 'bg-signal-soft text-signal-deep', 'bg-paper text-slate'];
 
 export function PortalPreview() {
   const { c } = useI18n();

@@ -2,6 +2,7 @@ import { Phone, PhoneForwarded } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import Layout from '@/components/Layout';
+import CallFlow from '@/components/CallFlow';
 import LiveDemo from '@/components/LiveDemo';
 import Mock from '@/components/Mock';
 import { CTAs, FaqDark, Heading, Section, TalkNowPill, TrialBadges, WhatsAppLink } from '@/components/ui';
@@ -121,6 +122,9 @@ export default function Home() {
       <Section tone="paper"><Lifecycle /></Section>
 
       <Section><PortalPreview /></Section>
+
+      {/* Parcours d’un appel : appel → conversation → rendez-vous → résumé WhatsApp */}
+      <CallFlow />
 
       {/* Comment ça marche */}
       <Section tone="paper">

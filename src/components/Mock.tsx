@@ -186,7 +186,7 @@ function ReportMock() {
     <Card>
       <div className="flex items-end justify-between">
         <div><p className="text-xs text-slate-light">{t.handled}</p><p className="font-display text-2xl font-bold text-ink">412</p></div>
-        <span className="rounded-full bg-ok/10 px-2.5 py-1 text-xs font-semibold text-ok">{t.demo}</span>
+        <span className="rounded-full bg-ok/10 px-2.5 py-1 text-xs font-semibold text-ok-deep">{t.demo}</span>
       </div>
       <div className="mt-4 flex h-24 items-end gap-2" aria-hidden>
         {bars.map((b, i) => <span key={i} className={`flex-1 rounded-t-md ${i === 5 ? 'bg-signal' : 'bg-ink/15'}`} style={{ height: `${b}%` }} />)}
@@ -211,7 +211,7 @@ function WidgetMock() {
       <div className="absolute -bottom-4 end-4 w-60 rounded-2xl bg-night p-4 text-white shadow-float">
         <p className="text-sm font-semibold">{t.question}</p>
         <div className="mt-3 grid gap-2">
-          <span className="flex items-center justify-center gap-2 rounded-lg bg-signal py-2 text-sm font-semibold"><Mic className="h-4 w-4" aria-hidden />{t.talk}</span>
+          <span className="flex items-center justify-center gap-2 rounded-lg bg-signal-deep py-2 text-sm font-semibold"><Mic className="h-4 w-4" aria-hidden />{t.talk}</span>
           <span className="flex items-center justify-center gap-2 rounded-lg border border-white/20 py-2 text-sm"><Phone className="h-4 w-4" aria-hidden />{t.callback}</span>
         </div>
       </div>

@@ -130,7 +130,7 @@ export default function SectorPage({ slug }: { slug: string }) {
         </div>
       </Section>
 
-      <Section tone="paper"><EconomyBlock /></Section>
+      <Section tone="paper"><EconomyBlock key={s.slug} sector={s.slug} /></Section>
 
       {/* Prix HT */}
       {/* Le choix mensuel / annuel des cartes se répercute sur le comparatif. */}

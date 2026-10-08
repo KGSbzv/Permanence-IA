@@ -11,7 +11,8 @@ module.exports = {
         slate: { DEFAULT: '#4A5875', light: '#626E86' },
         line: '#DDE5EE',
         night: { DEFAULT: '#0A1233', raised: '#141E47' },
-        ok: '#178256',
+        // ok.deep : texte vert sur fond ok/10 (contraste ≥ 4,5:1)
+        ok: { DEFAULT: '#178256', deep: '#0F6B45' },
         no: '#C8463D',
         // Alias pour les pages héritées (légal, blog)
         navy: { DEFAULT: '#0E1B4D', dark: '#0A1233', light: '#22306A' },
