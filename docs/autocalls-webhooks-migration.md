@@ -35,7 +35,7 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
    6243 a déjà l'en-tête : il suffit de remplacer sa valeur. Commencer par 6241 seul, puis faire un appel de test.
 3. **Vous : le relais.** Autocalls > Automate (https://app.autocalls.ai/automate), ouvrir l'automatisation « Relais fin d'échange → site (PermanenceAI) » préparée par Claude.
 
-   Ce qu'elle contient (créée et vérifiée le 8 octobre, identifiant xml56HWLiG2rnf4TKvZjf) :
+   Ce qu'elle contient (créée et vérifiée le 8 octobre) :
    - un déclencheur « Catch Webhook » ;
    - une étape qui n'accepte que les 41 agents du compte ;
    - une branche qui écarte l'événement de test fictif ;
@@ -61,5 +61,5 @@ Claude ne manipule jamais la valeur d'un jeton : c'est vous qui la créez et la 
 
 - **Quota d'exécutions d'automatisations** du compte agence : le relais compte une exécution par appel et par message WhatsApp ou Messenger. Il faut le vérifier avant l'étape 4.
 - **Valeur stockée en clair dans le flux :** le module HTTP d'Autocalls n'a pas de « connexion » pour stocker un secret. La valeur est masquée dans l'API, mais visible dans l'éditeur Automate.
-- **L'adresse du relais devient elle-même secrète** : elle ne doit pas être publiée, ni dans ce dépôt public, ni ailleurs. Une fuite n'ouvrirait que les événements des 41 agents, plus le jeton des routes du site.
+- **L'adresse du relais devient elle-même secrète** : elle ne doit pas être publiée, ni dans ce dépôt public, ni ailleurs. Son identifiant (le dernier segment de l'adresse) non plus. Une première version du relais a été désactivée le 8 octobre, parce que son identifiant avait été écrit ici par erreur ; elle n'avait jamais été reliée à un agent. Une fuite n'ouvrirait que les événements des 41 agents, plus le jeton des routes du site.
 - **Pas d'erreur visible si l'en-tête manque :** sur /api/callback, /api/agent/optout et /api/agent/account, une requête sans jeton est traitée comme venant du site, avec moins de droits. D'où les étapes pilotes et la vérification des journaux à chaque lot.

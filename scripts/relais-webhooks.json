@@ -1,0 +1,114 @@
+{
+ "name": "Relais fin d'échange → site (PermanenceAI)",
+ "flow": {
+  "trigger": {
+   "name": "trigger",
+   "displayName": "Catch Webhook",
+   "type": "PIECE_TRIGGER",
+   "settings": {
+    "pieceName": "@activepieces/piece-webhook",
+    "pieceVersion": "0.1.12",
+    "pieceType": "OFFICIAL",
+    "packageType": "REGISTRY",
+    "triggerName": "catch_webhook",
+    "input": {
+     "authType": "none",
+     "authFields": []
+    },
+    "inputUiInfo": {}
+   },
+   "nextAction": {
+    "name": "step_1",
+    "type": "CODE",
+    "displayName": "Vérifier l'agent et préparer le corps",
+    "settings": {
+     "input": {
+      "body": "{{trigger['body']}}"
+     },
+     "sourceCode": {
+      "code": "export const code = async (inputs) => {\n  // Relais fin d'échange (PermanenceAI) : n'accepte que les agents du compte, transmet le corps tel quel.\n  // L'événement de test fictif (id test-relais) n'est jamais envoyé au site.\n  const ALLOWED = new Set([\"6b50ad79-6c28-4950-afc2-e1fafd152def\",\"798c2ab1-b454-40fb-b16c-711fc68eff50\",\"78f36e5d-1c24-45c5-ac69-fb20b641b02e\",\"c5a410a7-33be-4894-95bf-cd604655a7a9\",\"8dd784c4-f9f5-4d57-96a9-ff4c41d6d0e3\",\"fa2eea58-e492-4cf5-a01c-2d2165e41655\",\"16cef988-872b-4b6b-820a-9ba7647930f6\",\"d8bde5e6-bb6d-435c-8934-3c1131c964e9\",\"82ac010f-29e0-4953-b409-74466042391b\",\"c5a0eaab-dc06-4161-beb2-bc74c9500da4\",\"edbb8a6e-1fe0-4083-ad5f-5790eead8eef\",\"b97bf77e-ec93-4eeb-91c6-9f22eec8a9ff\",\"9dd87407-08f2-4669-ad32-bdf358543b8c\",\"4e757a3d-767d-476e-9e10-0d1fe6075285\",\"d96c1ace-1564-4fdf-9360-c8753103d774\",\"2a7ecf7b-cf1e-4255-85b3-186e1e54b7e4\",\"d8cfdb1b-a4e5-4769-94b5-cf61c34d74f6\",\"43aad653-2679-4e95-8ca0-ca2203c08c23\",\"488b70e7-6d6f-456e-b1fe-bf6bdfcebbb0\",\"19caa63b-cc05-4f40-a6b0-9cc9de9102b1\",\"b73b6d6a-da0e-46ee-951d-0e070f252280\",\"be701e1d-3197-4121-8ed3-e891830da51f\",\"64fc408d-d01a-4047-8d0b-33e588660ce9\",\"794050e7-4da1-44fe-a0a0-d91133f97a5d\",\"ebc02f87-82f5-490a-a0f8-c410f91b39cc\",\"705dbd3d-a256-4185-9fe1-d966325a4531\",\"7f35c689-cc6e-4054-a100-4d968bdc007c\",\"9a26c610-9db5-4aff-9962-5a21e189ac6f\",\"b0a20817-2561-4248-9b1c-86f708c7958f\",\"4d473a14-d2c6-4e41-8288-9822e8631938\",\"9c3c93cf-8fb6-4c1d-8c65-7f5ae13f4c8a\",\"8fec85f2-1c9e-4af7-b48e-1925a1f34764\",\"83d46ff1-caac-4132-afa3-e03e3f1d4b0b\",\"eb44bd48-491c-47c1-9c21-016f45678728\",\"59664acf-7aa5-4e6d-a2c8-d7f8fb558637\",\"57ba145e-b9d7-47cb-8bd3-6053a861951b\",\"c08ae64a-d170-4b9c-ab7a-a7c2221fb389\",\"2841fa2d-1fed-4fbc-b832-28b954d049a6\",\"a6f04fed-79d8-41d4-9f8a-870e6e14454c\",\"2935e8d4-cdb4-4dc6-9c01-eff2f1f7718c\",\"3bee385e-ae76-48da-a635-5d30ccbd7fc8\"]);\n  let body = inputs.body;\n  const raw = typeof body === 'string' ? body : null;\n  if (raw !== null) {\n    try { body = JSON.parse(raw); } catch (e) { throw new Error('Relais refusé : corps non JSON.'); }\n  }\n  if (!body || typeof body !== 'object' || Array.isArray(body)) {\n    throw new Error('Relais refusé : corps absent ou invalide.');\n  }\n  const id = String(body.assistant_id == null ? '' : body.assistant_id).trim().toLowerCase();\n  if (!ALLOWED.has(id)) {\n    throw new Error('Relais refusé : assistant_id inconnu.');\n  }\n  return { payload: raw !== null ? raw : JSON.stringify(body), send: body.id === 'test-relais' ? 'no' : 'yes' };\n};",
+      "packageJson": "{}"
+     },
+     "inputUiInfo": [],
+     "errorHandlingOptions": {
+      "retryOnFailure": {
+       "value": false
+      },
+      "continueOnFailure": {
+       "value": false
+      }
+     }
+    },
+    "nextAction": {
+     "name": "step_3",
+     "type": "BRANCH",
+     "displayName": "Événement réel ?",
+     "settings": {
+      "conditions": [
+       [
+        {
+         "operator": "TEXT_EXACTLY_MATCHES",
+         "firstValue": "{{step_1['send']}}",
+         "secondValue": "yes"
+        }
+       ]
+      ],
+      "inputUiInfo": []
+     },
+     "onSuccessAction": {
+      "name": "step_2",
+      "type": "PIECE",
+      "displayName": "Envoyer l'événement au site",
+      "settings": {
+       "pieceName": "@activepieces/piece-http",
+       "pieceVersion": "0.9.5",
+       "pieceType": "OFFICIAL",
+       "packageType": "REGISTRY",
+       "actionName": "send_request",
+       "input": {
+        "url": "https://www.permanenceia.com/api/webhooks/autocalls",
+        "method": "POST",
+        "headers": {
+         "Content-Type": "application/json",
+         "x-webhook-token": "__JETON__"
+        },
+        "authType": "NONE",
+        "stopFlow": false,
+        "body_type": "raw",
+        "body": {
+         "data": "{{step_1['payload']}}"
+        },
+        "use_proxy": false,
+        "failureMode": "retry_all",
+        "queryParams": {},
+        "response_is_binary": false
+       },
+       "inputUiInfo": [],
+       "errorHandlingOptions": {
+        "retryOnFailure": {
+         "value": false
+        },
+        "continueOnFailure": {
+         "value": false
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "sample": {
+  "id": "test-relais",
+  "type": "web",
+  "status": "completed",
+  "duration": 0,
+  "assistant_id": "3bee385e-ae76-48da-a635-5d30ccbd7fc8",
+  "assistant_name": "test",
+  "customer_phone": null,
+  "extracted_variables": {
+   "outcome": "test_migration"
+  },
+  "formatted_transcript": ""
+ }
+}
