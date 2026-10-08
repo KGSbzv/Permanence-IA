@@ -123,7 +123,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ...(voice ? { voice } : {}),
         // Email saisi sur le site (accompagnement à l’essai, rappel) : transmis à l’agent, qui n’a pas à le redemander.
         ...(campaignEmail ? { email: campaignEmail } : {}),
-        note: [note, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
+        note: [note, ticket && `Ticket : ${ticket}`, slot && slot !== 'asap' && `Créneau souhaité : ${slot === 'precise' ? clip(b.callAt, 40) : campaignLang === 'fr' ? slot : SLOT_EN[slot] || slot}${b.tz ? ` (${b.tz})` : ''}`, campaignEmail && !fromAgent && `Email : ${campaignEmail}`].filter(Boolean).join(' — '),
       }),
     });
     if (!r.ok) throw new Error(`campagne ${r.status}`);
@@ -134,6 +134,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   };
 
   const [db] = await Promise.allSettled([dbInsert('callbacks', row, true)]);
+  // Numéro de ticket (demandes de support) : 8 premiers caractères de l’identifiant de la ligne, lu à la personne
+  // par l’agent et repris dans l’email à l’équipe pour retrouver la demande dans la table callbacks.
+  const ticket = kind === 'support' && db.status === 'fulfilled' && db.value ? `T-${db.value.replace(/-/g, '').slice(0, 8).toUpperCase()}` : undefined;
   // Appel automatique seulement une fois la demande enregistrée (le contrôle des doublons s’appuie sur la base).
   // Message WhatsApp : mêmes garde-fous que l’appel automatique (demande enregistrée, zone couverte,
   // 3 demandes par numéro sur 7 jours), plus un plafond de 30 messages par 24 h.
@@ -160,8 +163,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     : `Appel automatique : NON (${call.reason?.message || 'motif inconnu'}) — À RAPPELER À LA MAIN`;
   const [mail] = await Promise.allSettled([sendMail(
     NOTIFY_TO,
-    `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}) — ${row.name}`,
-    [callLine, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
+    `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
+    [callLine, ticket ? `Ticket : ${ticket}` : false, db.status === 'rejected' && 'Demande NON enregistrée en base (voir journaux).', '', ...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`)].filter((x) => x !== false).join('\n'),
   )]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
@@ -182,7 +185,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   return res.status(200).json({
     success: true, scheduled_for: queued ? scheduledFor : 'not scheduled', stored: db.status === 'fulfilled', notified: mail.status === 'fulfilled', queued,
     whatsapp: wantsWhatsApp ? wa.status === 'fulfilled' : undefined,
+    ...(ticket ? { ticket } : {}),
     // Rappel automatique non mis en file : l’agent ne promet ni appel ni horaire, l’équipe a reçu « À rappeler à la main ».
-    ...(queued ? {} : { message_for_agent: 'The request was passed on to the team, but no automatic callback could be scheduled. Do not promise a call at a given time: say that a team member will get back to the person as soon as possible.' }),
+    // Ticket de support : l’agent le lit à la personne (une lettre ou un chiffre à la fois).
+    ...(queued && !ticket ? {} : { message_for_agent: [
+      ticket && `Support ticket number: ${ticket}. Read it to the person one character at a time so they can quote it later.`,
+      !queued && 'The request was passed on to the team, but no automatic callback could be scheduled. Do not promise a call at a given time: say that a team member will get back to the person as soon as possible.',
+    ].filter(Boolean).join(' ') }),
   });
 }

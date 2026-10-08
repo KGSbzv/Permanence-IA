@@ -1,6 +1,12 @@
 -- ==============================================================================
 -- Permanence IA — Supabase PostgreSQL Schema
--- Tables: users, subscriptions, api_calls, trials
+-- Tables: users, subscriptions, api_calls, trials, callbacks, signups, call_events
+--
+-- État au 8 oct. 2026 : le code du site n'utilise que callbacks, signups (email, nom,
+-- date d'inscription) et call_events. Les tables users, subscriptions, api_calls et trials,
+-- ainsi que signups.trial_minutes, reminder_sent_at et ended_sent_at, sont RÉSERVÉES aux
+-- relances d'essai et de minutes (aucune tâche planifiée ne les remplit encore). Elles sont
+-- conservées en attendant la décision du propriétaire : ne pas les supprimer sans elle.
 -- ==============================================================================
 
 -- 1. Table Users (Comptes d'essai et abonnés)
@@ -97,6 +103,7 @@ CREATE TABLE IF NOT EXISTS signups (
   email TEXT NOT NULL,
   name TEXT,
   signed_up_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  -- Colonnes réservées aux relances d'essai (non remplies à ce jour, voir l'en-tête).
   trial_minutes INT DEFAULT 0,
   reminder_sent_at TIMESTAMP WITH TIME ZONE,
   ended_sent_at TIMESTAMP WITH TIME ZONE,
