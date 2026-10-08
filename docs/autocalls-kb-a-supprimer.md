@@ -37,3 +37,10 @@ Ordre conseillé :
 1. Réimporter dans chaque base (6163, 6166, 6167, 6168, 6169, 6180) les pages en ligne /kb/<langue> et /kb/<langue>-situations, une fois le site redéployé (v10).
 2. Vérifier que les nouveaux documents passent en « active » et que les agents sont toujours rattachés à leur base.
 3. Supprimer ensuite (action manuelle, irréversible, à faire par le propriétaire) : les v7 du tableau 1, les créations en échec du point 2, puis les v9 remplacés par les v10.
+
+## Mise à jour du 8 octobre 2026 (suite) : Fonctionnalités en français
+
+La base 6163 n'avait aucun document « Fonctionnalités » général (les autres langues en ont un en v9). Le document **25160 « Fonctionnalités (v9) »** a été créé à partir de https://www.permanenceia.com/fonctionnalites.
+
+- Tant que 25160 n'est pas « active », garder **24972 « Fonctionnalités — détail des modules (v7) »**.
+- Une fois 25160 actif, 24972 peut être supprimé par le propriétaire s'il ne contient rien de plus que la page Fonctionnalités. En cas de doute, le garder : il ne contient pas l'ancienne grille de prix.
