@@ -12,6 +12,7 @@ import { UI_COMMERCE } from './ui/commerce';
 import { UI_COMPONENTS } from './ui/components';
 import { UI_EMAIL } from './ui/email';
 import { UI_PAGES } from './ui/pages';
+import { UI_RELANCES } from './ui/relances';
 
 export const pl: typeof fr = {
   site: SITE_TEXT,
@@ -26,3 +27,6 @@ export const pl: typeof fr = {
   integrations: INTEGRATIONS,
   ui: { components: UI_COMPONENTS, commerce: UI_COMMERCE, pages: UI_PAGES, email: UI_EMAIL },
 };
+
+// Przypomnienia handlowe: poza `pl`, tak jak w wersji francuskiej (zob. src/i18n/content/fr/index.ts).
+export const RELANCES_PL = UI_RELANCES;
