@@ -203,7 +203,7 @@ async function main() {
     assert.equal(P.callbackName('intl', 'support', 'female'), 'Lucie');
   });
 
-  test('tables : support masculin à null partout (étape 3 non faite), agents de rappel cohérents avec REQUESTERS', () => {
+  test('tables : pas de persona masculine de support (choix du propriétaire : responsable au support = personne de l’équipe), agents de rappel cohérents avec REQUESTERS', () => {
     for (const l of LANGS) {
       assert.equal(P.CALLBACK_AGENTS[l].support.male, null, l);
       for (const kind of ['commercial', 'support'] as const) for (const g of ['female', 'male'] as const) {
@@ -306,7 +306,7 @@ async function main() {
     assert.deepEqual([site.active, site.voice, site.targetName], [false, undefined, 'Jade']);
   });
 
-  test('e-mail à l’équipe : rappel par, agent Autocalls, personne de l’équipe, persona manquante', () => {
+  test('e-mail à l’équipe : rappel par, agent Autocalls, personne de l’équipe, responsable au support', () => {
     const ask = (aid: unknown, by: string) => P.readCallbackAsk({ fromAgent: true, aid, callbackBy: by });
     const mgr = P.decideCallback(ask(21314, 'manager'), { staticVoice: undefined, lang: 'he', kind: 'commercial' });
     assert.deepEqual(P.teamMailLines(mgr, 'commercial'), ['Rappel par : Daniel (voix masculine) — responsable IA demandé à Noa', 'Agent Autocalls : 21314 (Noa, inbound) — callback_by=manager']);
@@ -318,8 +318,9 @@ async function main() {
     assert.match(P.teamMailLines(failed, 'commercial')[0], /PERSONNE DE L’ÉQUIPE — dernière demande illisible en base/);
     const inbound = P.decideCallback(ask(21314, 'manager'), { staticVoice: undefined, lang: 'he', kind: 'commercial', prevFailed: true });
     assert.deepEqual([inbound.role, inbound.target, inbound.prevFailed], ['manager', 'male', false]);
-    const missing = P.decideCallback(ask(21376, 'manager'), { staticVoice: undefined, lang: 'en-gb', kind: 'support' });
-    assert.match(P.teamMailLines(missing, 'support')[0], /James \(voix masculine, support\) — persona pas encore créée dans Autocalls : à rappeler à la main/);
+    const support = P.decideCallback(ask(21376, 'manager'), { staticVoice: undefined, lang: 'en-gb', kind: 'support' });
+    assert.deepEqual([support.role, support.supportTeam, support.personaMissing], ['human', true, false]);
+    assert.equal(P.teamMailLines(support, 'support')[0], 'Rappel par : une PERSONNE DE L’ÉQUIPE — responsable demandé au support — aucun appel automatique');
     const unknown = P.decideCallback(ask('{{assistant_id}}', 'same'), { staticVoice: 'male', lang: 'fr', kind: 'commercial' });
     assert.equal(P.teamMailLines(unknown, 'commercial')[1], 'Agent Autocalls : inconnu (aid absent ou non reconnu) — callback_by=same');
     const legacy = P.decideCallback(ask(undefined, ''), { staticVoice: 'male', lang: 'fr', kind: 'commercial' });
@@ -529,26 +530,33 @@ async function main() {
     assert.equal(r.out.message_for_agent, 'Support ticket number: T-11111111. Read it to the person one character at a time so they can quote it later.');
   });
 
-  await atest('R9 / R15 : ticket support ligne UK 21376 + « un responsable » → James support pas encore créé : pas en file', async () => {
+  await atest('R9 : ticket support ligne UK 21376 + « un responsable » → une personne de l’équipe (choix du propriétaire)', async () => {
     const r = await call(handler, tool({ phone: PHONE['en-gb'], type: 'support', callback_by: 'manager' }), { aid: '21376' });
-    assert.equal(r.hooks.length, 0, 'jamais Katie sous le prénom James');
+    assert.equal(r.hooks.length, 0, 'aucun appel IA');
     assert.equal(r.out.queued, false);
     assert.equal(r.out.ticket, 'T-11111111');
     assert.deepEqual(r.out.callback_agent, { name: null, name_latin: null, gender: null, role: 'human', same_persona: false });
-    assert.match(r.out.message_for_agent, /^Support ticket number: T-11111111\..*no automatic callback could be scheduled/);
-    assert.ok(r.inserted.note.endsWith('[VOICE:male] [ROLE:manager] [ASKED:Katie]'));
-    assert.ok(r.logs.some((x) => x.includes('persona de rappel support masculine pas encore en place (James)')));
+    assert.match(r.out.message_for_agent, /^Support ticket number: T-11111111\..*The request was passed to the team/);
+    assert.doesNotMatch(r.out.message_for_agent, /no automatic callback could be scheduled/);
+    assert.ok(r.inserted.note.endsWith('[VOICE:female] [ROLE:human]'));
+    assert.ok(r.logs.some((x) => x.includes('responsable demandé au support : rappel par une personne de l’équipe')));
+    // « Un humain » au support : même chose.
+    const h = await call(handler, tool({ phone: PHONE['en-gb'], type: 'support', callback_by: 'human' }), { aid: '21376' });
+    assert.equal(h.hooks.length, 0);
+    assert.equal(h.out.callback_agent.role, 'human');
   });
 
-  await atest('R9 : support masculin créé (étape 3 simulée) → voice male vers l’automatisation support, James', async () => {
+  await atest('R9 : même si une persona masculine de support existait, un responsable au support reste une personne de l’équipe', async () => {
     const saved = P.CALLBACK_AGENTS['en-gb'].support.male;
     P.CALLBACK_AGENTS['en-gb'].support.male = { id: 99999, uuid: '00000000-0000-4000-8000-000000000000', voice: 2781, name: 'James', latin: 'James' };
     try {
       const r = await call(handler, tool({ phone: PHONE['en-gb'], type: 'support', callback_by: 'manager' }), { aid: '21376' });
-      assert.equal(r.hook.url, 'https://hooks.test/en-gb/support');
-      assert.equal(r.hook.body.voice, 'male');
-      assert.equal(firstLine(r.hook.body.note), '[ROLE: manager — request taken by: Katie — you call back as: James, AI assistant in charge of follow-up]');
-      assert.equal(r.out.callback_agent.name, 'James');
+      assert.equal(r.hooks.length, 0);
+      assert.equal(r.out.callback_agent.role, 'human');
+      // « Rappelez-moi » au support : toujours la même persona (Katie), mise en file.
+      const same = await call(handler, tool({ phone: PHONE['en-gb'], type: 'support', callback_by: 'same' }), { aid: '21376' });
+      assert.equal(same.hook.url, 'https://hooks.test/en-gb/support');
+      assert.equal('voice' in same.hook.body, false);
     } finally {
       P.CALLBACK_AGENTS['en-gb'].support.male = saved;
     }

@@ -165,7 +165,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // deux voix), l’équipe reçoit « À rappeler à la main ».
     // Opposition « ne plus appeler » signalée d’abord, pour que l’e-mail le dise.
     if ((persona.role === 'human' || persona.personaMissing) && await isOptedOut(e164).catch(() => false)) throw new Error('opposition « ne plus appeler » enregistrée pour ce numéro');
-    if (persona.role === 'human') throw new Error('personne de l’équipe demandée au responsable IA (pas de nouvel appel IA)');
+    if (persona.role === 'human') throw new Error(persona.supportTeam ? 'responsable demandé au support : rappel par une personne de l’équipe' : 'personne de l’équipe demandée au responsable IA (pas de nouvel appel IA)');
     // Persona de rappel pas encore créée (support masculin) : jamais une autre voix sous un autre prénom.
     if (persona.personaMissing) throw new Error(`persona de rappel ${kind} ${persona.target === 'male' ? 'masculine' : 'féminine'} pas encore en place (${persona.targetName})`);
     if (!leadHook) throw new Error(`webhook de campagne non configuré pour ${campaignLang}/${kind}`);

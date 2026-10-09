@@ -244,6 +244,8 @@ export interface CallbackDecision {
   personaMissing: boolean;
   /** Dernière demande illisible en base : responsable ou humain demandé à un agent qui l’est peut-être → équipe. */
   prevFailed: boolean;
+  /** Responsable demandé au support : une personne de l’équipe rappelle (choix du propriétaire, 9 oct. 2026). */
+  supportTeam: boolean;
 }
 
 export function decideCallback(ask: CallbackAsk, o: { staticVoice: unknown; lang: string; kind: Kind; prev?: Prev; prevFailed?: boolean }): CallbackDecision {
@@ -254,7 +256,7 @@ export function decideCallback(ask: CallbackAsk, o: { staticVoice: unknown; lang
     return {
       active: false, target: requesterGender, voice: requesterGender === 'male' ? 'male' : undefined, inherited: false, actingAsManager: false,
       // Prénom de la confirmation : celui de la voix qui appellera vraiment (sans persona masculine, la voix féminine).
-      requesterGender, targetName: callbackName(l, o.kind, availableGender(l, o.kind, requesterGender)), askedName: '', samePersona: false, personaMissing: false, prevFailed: false,
+      requesterGender, targetName: callbackName(l, o.kind, availableGender(l, o.kind, requesterGender)), askedName: '', samePersona: false, personaMissing: false, prevFailed: false, supportTeam: false,
     };
   }
   const { requester, by } = ask;
@@ -269,6 +271,15 @@ export function decideCallback(ask: CallbackAsk, o: { staticVoice: unknown; lang
     && (requester?.channel === 'callback' || (!requester && prev.due)));
   const resolved = resolveCallback({ requester: requesterGender, by, actingAsManager, prev });
   const { role, inherited } = resolved;
+  // Support : un responsable (ou un humain) demandé est rappelé par une personne de l’équipe, jamais par une autre voix IA
+  // (choix du propriétaire, 9 oct. 2026 : ces demandes portent sur la facturation ou le compte).
+  if (o.kind === 'support' && role === 'manager') {
+    const name = callbackName(l, o.kind, requesterGender);
+    return {
+      active: true, role: 'human', target: requesterGender, voice: undefined, inherited: false, actingAsManager, requester, requesterGender, by,
+      targetName: name, askedName: '', samePersona: false, personaMissing: false, prevFailed, supportTeam: true,
+    };
+  }
   // R12 : un responsable IA est déjà en file pour ce numéro → le même (même voix), jamais la voix d’origine.
   const target: Gender = role === 'manager' && !inherited && prev?.role === 'manager' && prev.voice ? prev.voice : resolved.target;
   const tgt = CALLBACK_AGENTS[l][o.kind][target];
@@ -283,12 +294,12 @@ export function decideCallback(ask: CallbackAsk, o: { staticVoice: unknown; lang
   if (role === 'manager' && !inherited && samePersona && prev?.role === 'manager') {
     return {
       active: true, role: 'human', target, voice: undefined, inherited: false, actingAsManager: true, requester, requesterGender, by,
-      targetName, askedName, samePersona: false, personaMissing: false, prevFailed,
+      targetName, askedName, samePersona: false, personaMissing: false, prevFailed, supportTeam: false,
     };
   }
   return {
     active: true, role, target, voice: target === 'male' ? 'male' : undefined, inherited, actingAsManager, requester, requesterGender, by,
-    targetName, askedName, samePersona, personaMissing: role !== 'human' && tgt == null, prevFailed,
+    targetName, askedName, samePersona, personaMissing: role !== 'human' && tgt == null, prevFailed, supportTeam: false,
   };
 }
 
@@ -351,6 +362,8 @@ export function teamMailLines(d: CallbackDecision, kind: Kind): string[] {
   const by = d.by ? `callback_by=${d.by}` : 'callback_by vide';
   const line = d.role === 'human' && d.prevFailed
     ? 'Rappel par : une PERSONNE DE L’ÉQUIPE — dernière demande illisible en base, responsable IA en cours impossible à vérifier — aucun appel automatique'
+    : d.role === 'human' && d.supportTeam
+    ? 'Rappel par : une PERSONNE DE L’ÉQUIPE — responsable demandé au support — aucun appel automatique'
     : d.role === 'human'
     ? `Rappel par : une PERSONNE DE L’ÉQUIPE, demandée au responsable IA ${latinName(d.targetName)} — aucun appel automatique`
     : d.personaMissing

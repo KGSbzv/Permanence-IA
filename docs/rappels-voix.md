@@ -14,7 +14,7 @@ Ce document décrit la règle et ce qu'il reste à faire dans Autocalls. Le code
 | R6 | La personne ne décroche pas | La campagne refait ses 2 tentatives avec le même agent. Aucun message n'est laissé sur le répondeur. Le SMS ou le WhatsApp « rappel manqué » ne contient aucun prénom. |
 | R7 | La demande est prise par écrit (WhatsApp, Messenger) ou dans l'espace client | « Rappelez-moi » : la persona de rappel de la langue appelle et elle est annoncée par son prénom (en français, c'est Jade et non Lucie pour une demande commerciale). « Un responsable » : la persona masculine. |
 | R8 | La demande vient du formulaire du site ou de la démo | Rien ne change : la voix choisie dans la démo, féminine par défaut. |
-| R9 | Demande au support | Mêmes règles. La persona masculine du support n'existe pas encore (étape 3). |
+| R9 | Demande au support | « Rappelez-moi » : la même persona. « Un responsable » ou « un humain » : une personne de l'équipe rappelle (e-mail « À rappeler à la main »), jamais une autre voix IA. Choix du propriétaire du 9 octobre : ces demandes portent sur la facturation ou le compte. |
 | R10 | Confirmation | À l'oral, l'agent annonce le prénom renvoyé par le site. Sur WhatsApp, la confirmation (formulaire du site) donne le prénom de la persona qui appellera. |
 | R11 | Le numéro est d'un autre pays que l'agent (par exemple Noa avec un numéro français) | La campagne du pays du numéro appelle (Jade). L'agent annonce ce prénom et ne dit jamais « je vous rappellerai moi-même ». |
 | R12 | Nouvelle demande de responsable (ou d'humain), sur n'importe quel canal, alors qu'un rappel de responsable est déjà prévu | Un nouveau rappel par le même responsable IA (même prénom, même voix) remplace l'ancien. La voix que la personne avait quittée ne revient jamais comme responsable. Si la personne parle justement à ce responsable (par exemple Noa, responsable, jointe ensuite sur la ligne entrante ou par WhatsApp), c'est R4 : l'équipe. |
@@ -24,15 +24,15 @@ Ce document décrit la règle et ce qu'il reste à faire dans Autocalls. Le code
 
 ## Les prénoms, langue par langue
 
-| Langue | Agente | Agent | Support, « rappelez-moi » | Support, « un responsable » |
+| Langue | Agente | Agent | Support, « rappelez-moi » | Support, « un responsable » ou « un humain » |
 |---|---|---|---|---|
-| Français | Jade | Hugo | Lucie | Hugo (à créer) |
-| Anglais (Royaume-Uni) | Katie | James | Katie | James (à créer) |
-| Anglais (Australie) | Charlotte | Jack | Charlotte | Jack (à créer) |
-| Italien | Manuela | Marco | Manuela | Marco (à créer) |
-| Polonais | Lena | Tomasz | Lena | Tomasz (à créer) |
-| Néerlandais | Emma | Daan | Emma | Daan (à créer) |
-| Hébreu | נועה (Noa) | דניאל (Daniel) | נועה (Noa) | דניאל (Daniel, à créer) |
+| Français | Jade | Hugo | Lucie | une personne de l'équipe |
+| Anglais (Royaume-Uni) | Katie | James | Katie | une personne de l'équipe |
+| Anglais (Australie) | Charlotte | Jack | Charlotte | une personne de l'équipe |
+| Italien | Manuela | Marco | Manuela | une personne de l'équipe |
+| Polonais | Lena | Tomasz | Lena | une personne de l'équipe |
+| Néerlandais | Emma | Daan | Emma | une personne de l'équipe |
+| Hébreu | נועה (Noa) | דניאל (Daniel) | נועה (Noa) | une personne de l'équipe |
 
 Pour lire ce tableau :
 - « Rappelez-moi » à Jade : Jade rappelle. « Un responsable » à Jade : Hugo rappelle. « Un responsable » à Hugo : Jade rappelle. C'est pareil dans chaque langue.
@@ -79,16 +79,16 @@ Pour lire ce tableau :
 
 Aucun agent n'a été bloqué par le contrôle de conformité. Rien d'autre n'a changé : voix, numéros, bases de connaissances, webhooks.
 
-**Reste à faire :**
-- **Étape 3, le support masculin**, dans les 7 langues (Hugo, James, Jack, Marco, Tomasz, Daan, Daniel) :
-  - créer 7 agents, copies des agentes du support avec leur voix masculine, et configurer leur webhook de fin d'appel ;
-  - ajouter leurs UUID à la liste autorisée du relais (`scripts/relais-webhooks.json`, puis `TOOLS=" " bash scripts/jeton-webhooks.sh`) ;
-  - créer 7 campagnes (`mark_complete_when_no_leads` à faux, `retry_on_voicemail` à vrai), puis ajouter la branche « voice = male » dans les 7 automatisations support ;
-  - remplir `CALLBACK_AGENTS` et `REQUESTERS` dans `src/lib/callbackPersona.ts`, relancer les tests, puis déployer.
+**Décision du 9 octobre : pas de voix masculine au support.** Au support, une demande de responsable ou d'humain est traitée par une personne de l'équipe :
+- e-mail « À rappeler à la main », ligne « responsable demandé au support » ;
+- l'agent annonce qu'une personne de l'équipe rappellera dès que possible, sans heure ;
+- c'est le site qui l'impose (`decideCallback`, `supportTeam`), quelle que soit la réponse de l'IA.
 
-  D'ici là, une demande de responsable au support ne part pas en appel automatique : l'équipe reçoit « À rappeler à la main ».
-- **Base de connaissances** : la section « un conseiller vous rappelle » des documents de situations est à aligner. Les prompts priment déjà sur la base. Il faudra publier de nouveaux documents ; la suppression des anciens revient au propriétaire.
-- **Étape 6, les essais de bout en bout**, avec l'accord du propriétaire, sur son numéro. Le premier est le rappel de Daniel du 11 octobre.
+Un agent créé avant cette décision, « PermanenceAI support callback — UK — James » (21498), n'a ni numéro ni campagne : il n'appelle personne. Le propriétaire peut le supprimer dans Autocalls.
+
+**Reste à faire :**
+- **Base de connaissances** : aligner la section « un conseiller vous rappelle » des documents de situations. Les prompts priment déjà sur la base. Il faudra publier de nouveaux documents ; la suppression des anciens revient au propriétaire.
+- **Essais de bout en bout**, avec l'accord du propriétaire et sur son numéro. Le premier est le rappel de Daniel du 11 octobre.
 
 ## Retour arrière
 
