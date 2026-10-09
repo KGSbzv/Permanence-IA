@@ -1,9 +1,11 @@
 // Webhook Stripe du compte Permanence IA : vérification de la signature (en-tête Stripe-Signature, HMAC-SHA256 du
 // corps brut avec STRIPE_WEBHOOK_SECRET, tolérance de 5 minutes) et enregistrement de l’état des abonnements par
 // client (essai, fin d’essai, annulation, paiement), rapproché par email. Aucun événement non signé n’est lu.
+// Paiements reçus et échoués : journal et alertes à l’équipe (src/lib/relances/payments.ts).
 // Les accès à la base sont passés en paramètre (helpers de src/lib/server.ts en production, faux en test).
 import { createHmac, timingSafeEqual } from 'crypto';
 import type { Locale } from '@/i18n/locales';
+import { onPaymentFailed, onSubscriptionChange, recordPayment, type PaymentDb, type TeamNotify } from './payments';
 
 export const SIGNATURE_TOLERANCE_S = 300;
 
@@ -22,10 +24,8 @@ export function verifyStripeSignature(rawBody: string | Buffer, header: unknown,
   });
 }
 
-export interface StripeDb {
-  insertIfNew: (table: string, row: Record<string, unknown>, onConflict: string) => Promise<boolean>;
+export interface StripeDb extends PaymentDb {
   update: (table: string, query: string, patch: Record<string, unknown>) => Promise<void>;
-  select: <T>(table: string, query: string) => Promise<T[]>;
 }
 
 /** Client Stripe (email, langue) lu avec la clé restreinte en lecture STRIPE_READ_KEY, si elle existe. */
@@ -86,13 +86,15 @@ async function upsertCustomer(db: StripeDb, id: string, patch: Record<string, un
 
 /**
  * Applique un événement Stripe déjà vérifié. Idempotent : les écritures sont des remplacements, et un abonnement
- * n’est mis à jour que par un événement plus récent que le dernier appliqué.
+ * n’est mis à jour que par un événement plus récent que le dernier appliqué. `notify` : alertes de paiement à l’équipe
+ * (une seule par facture et par tentative ; un envoi en échec est journalisé, jamais remonté).
  */
-export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?: CustomerFetcher, locale?: { lookup: ContactLocaleLookup; set: CustomerLocaleSetter }) {
+export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?: CustomerFetcher, locale?: { lookup: ContactLocaleLookup; set: CustomerLocaleSetter }, notify?: TeamNotify) {
   const type = String(event?.type || '');
   const obj = event?.data?.object ?? {};
   const livemode = Boolean(event?.livemode);
   const at = iso(event?.created) ?? new Date().toISOString();
+  const ctx = { db, notify, livemode, account: str(event?.account) ?? undefined };
   let handled = true;
 
   if (type === 'customer.created' || type === 'customer.updated') {
@@ -117,6 +119,10 @@ export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?:
       product_id: idOf(price.product), livemode, last_event_at: at,
     };
     if (!row.subscription_id) return { handled: false };
+    // Statut enregistré avant une résiliation : « résilié après impayé » (alerte) si l’abonnement était impayé.
+    const before = type === 'customer.subscription.deleted'
+      ? (await db.select<{ status: string | null }>('stripe_subscriptions', `select=status&subscription_id=eq.${enc(row.subscription_id)}`).catch(() => []))[0]?.status ?? null
+      : null;
     const created = await db.insertIfNew('stripe_subscriptions', row, 'subscription_id');
     if (!created) {
       // Événements reçus dans le désordre : seul un événement plus récent remplace l’état enregistré.
@@ -129,9 +135,15 @@ export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?:
         await upsertCustomer(db, customer, { email: str(c?.email)?.toLowerCase(), preferred_locale: str(c?.preferred_locales?.[0]) }, livemode);
       } else if (!known.length) await upsertCustomer(db, customer, {}, livemode);
     }
+    await onSubscriptionChange(obj, type, before, { ...ctx, amount: row.price_amount, currency: row.currency });
   } else if (type === 'invoice.paid' || type === 'invoice.payment_succeeded') {
     const customer = idOf(obj.customer);
     if (customer) await upsertCustomer(db, customer, { email: str(obj.customer_email)?.toLowerCase(), has_paid: Number(obj.amount_paid) > 0 ? true : undefined }, livemode);
+    await recordPayment(db, { id: str(obj.id), source: type, amount: Number(obj.amount_paid), currency: str(obj.currency), customer, livemode });
+  } else if (type === 'invoice.payment_failed') {
+    const customer = idOf(obj.customer);
+    if (customer) await upsertCustomer(db, customer, { email: str(obj.customer_email)?.toLowerCase() }, livemode);
+    await onPaymentFailed(obj, ctx);
   } else if (type === 'checkout.session.completed') {
     const customer = idOf(obj.customer);
     const paidPurchase = obj.mode === 'payment' && obj.payment_status === 'paid';
@@ -141,10 +153,13 @@ export async function applyStripeEvent(event: any, db: StripeDb, fetchCustomer?:
         has_paid: paidPurchase ? true : undefined, has_credit_purchase: paidPurchase ? true : undefined,
       }, livemode);
     }
+    // Même paiement que payment_intent.succeeded : même identifiant pi_… dans le journal (compté une fois).
+    if (paidPurchase) await recordPayment(db, { id: idOf(obj.payment_intent) ?? str(obj.id), source: type, amount: Number(obj.amount_total), currency: str(obj.currency), customer, livemode });
   } else if (type === 'payment_intent.succeeded') {
     // Achat de crédit (paiement sans facture d’abonnement).
     const customer = idOf(obj.customer);
     if (customer && !obj.invoice && Number(obj.amount_received) > 0) await upsertCustomer(db, customer, { has_paid: true, has_credit_purchase: true }, livemode);
+    if (!obj.invoice) await recordPayment(db, { id: str(obj.id), source: type, amount: Number(obj.amount_received), currency: str(obj.currency), customer, livemode });
   } else {
     handled = false;
   }

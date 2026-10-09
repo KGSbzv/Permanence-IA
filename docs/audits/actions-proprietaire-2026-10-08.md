@@ -61,6 +61,7 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 1. **Stripe.**
    - Représentant du compte marqué « Invalid » : Settings > Business details > Management and ownership, ouvrir la fiche de Joseph Haddad et fournir ce que Stripe demande. Aucun examen n'est en cours ; Cartes Bancaires est en pause.
    - SEPA : inutile. Selon Autocalls, il n'apparaît que sur des prix en euros, et la plateforme facture en dollars.
+   - Alertes « paiement échoué » (ajout du 9 octobre) : Developers > Webhooks > « permanenceia-site-relances » > Modifier les événements, ajouter `invoice.payment_failed`, puis enregistrer. Sans cet événement, l'équipe n'est pas prévenue des paiements refusés.
    - Clé pour la langue des factures : Developers > API keys > Create restricted key, nom « langue-factures », droit « Customers : Write » et rien d'autre. Claude vous donnera ensuite la commande pour l'enregistrer en saisie masquée (ne pas la coller dans la conversation).
    - Vérifier vers le 10 octobre, le 11 au plus tard : Settings > Customer emails, domaine « Verified ».
    - Le 31 octobre et le 1er novembre : contrôler la facturation du numéro de nyh770.

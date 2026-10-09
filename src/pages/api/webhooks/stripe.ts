@@ -2,8 +2,10 @@
 // sur le corps brut avec STRIPE_WEBHOOK_SECRET, sinon 401 ; état enregistré par client (src/lib/relances/stripe.ts).
 // Réponse rapide : quelques écritures en base, puis 200. Base indisponible : 503 (Stripe renverra l’événement) ;
 // tables pas encore créées : 200 sans enregistrement et alerte à l’équipe (une par heure).
+// Paiement échoué ou abonnement impayé : alerte à l’équipe (src/lib/relances/payments.ts) ; un email qui ne part pas
+// est journalisé et ne change jamais la réponse 200.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { alertTeam, dbInsertIfNew, dbSelect, dbUpdate } from '@/lib/server';
+import { NOTIFY_TO, alertTeam, dbInsert, dbInsertIfNew, dbSelect, dbUpdate, sendMail } from '@/lib/server';
 import { applyStripeEvent, stripeCustomerFetcher, stripeCustomerLocaleSetter, verifyStripeSignature, type StripeDb } from '@/lib/relances/stripe';
 import { emailKey } from '@/lib/emailPrefs';
 import { isLocale } from '@/i18n/locales';
@@ -12,7 +14,8 @@ import { isLocale } from '@/i18n/locales';
 export const config = { api: { bodyParser: false } };
 
 const MAX_BODY = 1_000_000;
-const DB: StripeDb = { insertIfNew: dbInsertIfNew, update: dbUpdate, select: dbSelect };
+const DB: StripeDb = { insertIfNew: dbInsertIfNew, update: dbUpdate, select: dbSelect, insert: (table, row) => dbInsert(table, row) };
+const notifyTeam = async (subject: string, text: string, html: string) => { await sendMail({ to: NOTIFY_TO, category: 'internal', subject, text, html }); };
 
 function readRaw(req: NextApiRequest) {
   return new Promise<Buffer>((resolve, reject) => {
@@ -49,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try { event = JSON.parse(raw.toString('utf8')); } catch { return res.status(400).json({ error: 'JSON invalide.' }); }
   try {
     const setLocale = stripeCustomerLocaleSetter();
-    const { handled } = await applyStripeEvent(event, DB, stripeCustomerFetcher(), setLocale && { lookup: contactLocale, set: setLocale });
+    const { handled } = await applyStripeEvent(event, DB, stripeCustomerFetcher(), setLocale && { lookup: contactLocale, set: setLocale }, notifyTeam);
     return res.status(200).json({ received: true, handled });
   } catch (e: any) {
     if (missingTable(e)) {

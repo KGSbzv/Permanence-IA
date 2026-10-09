@@ -29,6 +29,8 @@ Un échec d'envoi (Zoho) ne change jamais la réponse 200 du webhook. L'équipe 
 
 Ceux qui reçoivent la variable `copy_email` dans Autocalls (à ajouter aux variables post-appel des agents conversationnels) :
 
+État au 9 oct. 2026 : variable et consigne actives sur 16 agents — widgets du site (21203, 21269, 21206, 21271, 21207, 21273, 21208, 21275, 21209, 21277, 21210, 21279, 21306, 21307), espace client (21205) et Messenger (21297). **Pas sur WhatsApp (21358)** : le contrôle de conformité d'Autocalls a bloqué l'agent dès l'ajout de la consigne (« aggressive commercial onboarding… data gathering »), version précédente rétablie en moins d'une minute ; la personne garde de toute façon la conversation dans WhatsApp. Ne pas la remettre sans tester le contrôle.
+
 | Agents | Langue de l'e-mail | Prénom affiché |
 |---|---|---|
 | Widgets du site, écrits ou vocaux, d'une seule langue (Jade, Hugo, Katie, James, Charlotte, Jack, Manuela, Marco, Lena, Tomasz, Emma, Daan, Noa, Daniel) | celle de l'agent | celui de l'agent (נועה et דניאל en hébreu) |

@@ -63,8 +63,8 @@ Les textes sont dans `src/i18n/content/<langue>/` (le français fait référence
 | `agent/account` | Outil des agents : dossier client après vérification par code |
 | `webhooks/autocalls` | Fin d'appel et fin de conversation Autocalls |
 | `webhooks/signup` | Inscription d'un nouveau client dans l'espace white-label |
-| `webhooks/stripe` | Webhook Stripe signé (relances) |
-| `cron/relances` | Moteur des relances commerciales (coupé et en mode test par défaut) |
+| `webhooks/stripe` | Webhook Stripe signé (relances, alertes « paiement échoué » et « impayé » à l'équipe) |
+| `cron/relances` | Moteur des relances commerciales (coupé et en mode test par défaut), puis résumé hebdomadaire à l'équipe le lundi à 8 h (Paris) |
 | `email/preferences`, `email/unsubscribe` | Préférences e-mail et désinscription en un clic |
 | `fx` | Taux de change indicatifs USD → devise locale |
 
