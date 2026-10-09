@@ -75,12 +75,14 @@ export const UI_PAGES = {
       'Begeleiding bij de eerste configuratie',
     ],
     createTitle: 'Mijn account aanmaken',
-    createSteps: [
-      '1. Maak uw account aan met uw zakelijke e-mailadres.',
-      '2. Kies in uw klantomgeving het abonnement dat u wilt testen.',
-      '3. Stel uw agent in en voer uw eerste gesprekken.',
+    // Echte stappen in de app: stap 2 (een abonnement kiezen, "Start 14-Day Free Trial") start de proefperiode en zet de minuten klaar.
+    createSteps: (days: number, minutes: number): Rich[] => [
+      ['1. ', { b: 'Maak uw account aan' }, ' met uw zakelijke e-mailadres.'],
+      ['2. ', { b: 'Kies een abonnement' }, ' (Choose a plan) en klik daarna op ', { b: 'Start 14-Day Free Trial' }, `: er is een creditcard nodig, ${days} dagen lang wordt er niets afgeschreven, ${minutes} minuten inbegrepen. Pas na deze stap staan uw ${minutes} minuten op uw account.`],
+      ['3. ', { b: 'Stel uw agent in' }, ' en voer uw eerste gesprekken.'],
     ],
-    createCta: 'Mijn gratis account aanmaken',
+    createNote: (minutes: number) => `Slaat u stap 2 over, dan blijft uw account op 0 minuten staan: de proefperiode en de ${minutes} minuten starten pas zodra u een abonnement kiest.`,
+    createCta: 'Stap 1: maak mijn account aan',
     already: 'Al klant?',
     login: 'Inloggen',
     sentTitle: 'Uw aanvraag is ontvangen',
@@ -132,6 +134,7 @@ export const UI_PAGES = {
     h1: 'Help bij uw klantomgeving: uw AI-telefoonassistent instellen',
     intro: 'Uw klantomgeving is in het Engels. Deze gids vertaalt elk menu en begeleidt u stap voor stap. In de klantomgeving helpt ook de hulpassistent (chatknop rechtsonder) u verder in uw eigen taal, dus ook in het Nederlands, schriftelijk of gesproken.',
     openSpace: 'Open mijn klantomgeving',
+    accountCta: 'Mijn abonnement en facturen bekijken',
     chatLabel: 'Voorbeeld van een gesprek met de hulpassistent',
     chatTitle: (brand: string) => `Help ${brand}`,
     chatMode: 'Schriftelijk of gesproken',

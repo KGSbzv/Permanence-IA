@@ -1,9 +1,10 @@
 // Aide de l’espace client : l’interface est en anglais, cette page la traduit et guide pas à pas.
 import React from 'react';
+import Link from 'next/link';
 import Layout from '@/components/Layout';
 import { Heading, Section } from '@/components/ui';
 import { GuideIndex, isolateLtr } from '@/components/Guides';
-import { LOGIN_URL, SITE } from '@/data/site';
+import { ACCOUNT_URL, LOGIN_URL, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
 
@@ -44,7 +45,11 @@ export default function Aide() {
             title={t.h1}
             intro={t.intro}
           />
-          <a href={LOGIN_URL} className="btn-primary mt-8">{t.openSpace}</a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={LOGIN_URL} className="btn-primary">{t.openSpace}</a>
+            {/* Forfait, solde et factures dans la langue du site (page Mon compte). */}
+            <Link href={ACCOUNT_URL} className="btn-ghost">{t.accountCta}</Link>
+          </div>
           </div>
           <HelpChatPreview />
         </div>

@@ -75,12 +75,14 @@ export const UI_PAGES = {
       'Help with your first setup',
     ],
     createTitle: 'Create my account',
-    createSteps: [
-      '1. Create your account with your work email.',
-      '2. Choose the plan to try in your customer area.',
-      '3. Set up your agent and make your first calls.',
+    // Real steps in the app: step 2 (choosing a plan, "Start 14-Day Free Trial") starts the trial and adds the minutes.
+    createSteps: (days: number, minutes: number): Rich[] => [
+      ['1. ', { b: 'Create your account' }, ' with your work email.'],
+      ['2. ', { b: 'Choose a plan' }, ', then click ', { b: 'Start 14-Day Free Trial' }, `: card details are needed, nothing is charged for ${days} days, ${minutes} minutes included. This is the step that adds your ${minutes} minutes.`],
+      ['3. ', { b: 'Set up your agent' }, ' and make your first calls.'],
     ],
-    createCta: 'Create my free account',
+    createNote: (minutes: number) => `Skip step 2 and your account stays at 0 minutes: the trial and its ${minutes} minutes only start once you choose a plan.`,
+    createCta: 'Step 1: create my account',
     already: 'Already a customer?',
     login: 'Log in',
     sentTitle: 'Your request has been received',
@@ -132,6 +134,7 @@ export const UI_PAGES = {
     h1: 'Help with your customer area',
     intro: 'Your customer area is in English. This guide explains each menu and walks you through it step by step. Inside the customer area, the help assistant (bubble at the bottom right) also answers your questions in your language, in writing or out loud.',
     openSpace: 'Open my customer area',
+    accountCta: 'See my plan and invoices',
     chatLabel: 'Example conversation with the help assistant',
     chatTitle: (brand: string) => `${brand} help`,
     chatMode: 'In your language · text or voice',

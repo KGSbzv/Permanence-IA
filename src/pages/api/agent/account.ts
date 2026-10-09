@@ -4,81 +4,22 @@
 //
 // POST { action: 'send_code', email }        → envoie le code (réponse identique que le compte existe ou non)
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
-import { createHmac, timingSafeEqual } from 'crypto';
+import { timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { dbInsert, dbSelect, esc, sendMail, clientIp, isAuthorized, tooManyMessage, NOTIFY_TO } from '@/lib/server';
+import { dbSelect, esc, sendMail, clientIp, isAuthorized, tooManyMessage, NOTIFY_TO, PREF_DB } from '@/lib/server';
 import { localeFromLang } from '@/lib/emailFooter';
 import { CONTACTS_DB, insertWithExtras, isYes, normalizeAgentLang, recordConsent, resolveLocale, selectWithFallback, upsertContact } from '@/lib/contacts';
 import { stripPersonaMarks } from '@/lib/callbackPersona';
+import { makeLimiter, sendCodeFlow, verifyCodeFlow } from '@/lib/accountCode';
+import { autocallsApi as api, findPlatformUser, type PlatformUser } from '@/lib/autocallsAccount';
 import type { Locale } from '@/i18n/locales';
 
-const API = 'https://app.autocalls.ai/api';
-const WINDOW_MS = 10 * 60_000; // un code reste valable 10 à 20 minutes ; 6 chiffres, 5 essais par heure et par email
+// Code à 6 chiffres (valable 10 à 20 minutes, 3 envois et 5 essais par heure, 15 essais par jour et par email, usage
+// unique, accepté seulement si un code a réellement été envoyé à l’adresse) : mécanisme partagé avec la page Mon
+// compte, dans src/lib/accountCode.ts.
 
-// Limites en mémoire (par instance), en complément des compteurs persistants plus bas.
-const hits = new Map<string, number[]>();
-function tooMany(key: string, max: number) {
-  const now = Date.now();
-  const recent = (hits.get(key) || []).filter((t) => now - t < 15 * 60_000);
-  recent.push(now);
-  hits.delete(key);
-  hits.set(key, recent);
-  // Éviction des plus anciennes entrées seulement (jamais de remise à zéro globale).
-  while (hits.size > 5000) hits.delete(hits.keys().next().value as string);
-  return recent.length > max;
-}
-
-/** Compteurs persistants partagés par toutes les instances (table call_events), sur la dernière heure. */
-const emailKey = (email: string) => createHmac('sha256', codeSecret()).update(`id|${email}`).digest('hex').slice(0, 32);
-async function countEvents(kind: string, email: string, windowMs = 3600_000) {
-  const since = new Date(Date.now() - windowMs).toISOString();
-  const rows = await dbSelect<{ id: string }>('call_events', `select=id&kind=eq.${kind}&external_id=eq.${emailKey(email)}&created_at=gte.${since}&limit=20`);
-  return rows.length;
-}
-const logEvent = (kind: string, email: string) => dbInsert('call_events', { kind, external_id: emailKey(email) }).catch(() => undefined);
-/** Enregistre l’essai AVANT de vérifier le code ; si l’écriture échoue, l’erreur remonte et l’accès est refusé. */
-const recordAttempt = (email: string) => dbInsert('call_events', { kind: 'otp_try', external_id: emailKey(email) });
-
-/** Secret dédié aux codes, distinct du jeton des webhooks ; sans lui, la route refuse de fonctionner. */
-function codeSecret() {
-  const s = process.env.ACCOUNT_CODE_SECRET;
-  if (!s || s.length < 32) throw new Error('ACCOUNT_CODE_SECRET absente ou trop courte');
-  return s;
-}
-
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
-function codeFor(email: string, slot: number) {
-  const n = createHmac('sha256', codeSecret()).update(`lucie|${email}|${slot}`).digest().readUInt32BE(0) % 1_000_000;
-  return String(n).padStart(6, '0');
-}
-function codeIsValid(email: string, code: string) {
-  const slot = Math.floor(Date.now() / WINDOW_MS);
-  const got = Buffer.from(code.replace(/\D/g, ''));
-  return [slot, slot - 1].some((s) => {
-    const want = Buffer.from(codeFor(email, s));
-    return got.length === want.length && timingSafeEqual(got, want);
-  });
-}
-
-async function api<T>(path: string, token: string, init: RequestInit = {}): Promise<T> {
-  const res = await fetch(`${API}${path}`, {
-    ...init,
-    headers: { Authorization: `Bearer ${token}`, Accept: 'application/json', 'Content-Type': 'application/json', ...(init.headers || {}) },
-  });
-  if (!res.ok) throw new Error(`Autocalls ${path} ${res.status}`);
-  return res.json();
-}
-
-interface PlatformUser { id: number; name: string; email: string; minutes_balance: number; credits_balance: number; created_at: string }
-
-async function findUser(email: string): Promise<PlatformUser | undefined> {
-  const key = process.env.AUTOCALLS_API_KEY;
-  if (!key) throw new Error('AUTOCALLS_API_KEY non configurée');
-  const body = await api<{ data?: PlatformUser[] } | PlatformUser[]>('/white-label/users', key);
-  const list = Array.isArray(body) ? body : body.data || [];
-  return list.find((u) => u.email.toLowerCase() === email);
-}
+// Limites en mémoire (par instance), en complément des compteurs persistants de src/lib/accountCode.ts.
+const tooMany = makeLimiter();
 
 const items = (b: any): any[] => (Array.isArray(b) ? b : Array.isArray(b?.data) ? b.data : []);
 
@@ -257,37 +198,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     if (b.action === 'send_code') {
       // Réponse identique et en temps constant, que l’adresse ait un compte ou non (pas d’énumération).
-      const started = Date.now();
-      const work = (async () => {
-        if (tooMany(`mail:${email}`, 3) || (await countEvents('otp_send', email)) >= 3) return;
-        const user = await findUser(email);
-        if (!user) return;
-        await logEvent('otp_send', email);
-        const code = codeFor(email, Math.floor(Date.now() / WINDOW_MS));
-        const m = codeMail(String(b.lang || ''), code);
-        // Email essentiel (code demandé par la personne) : envoyé même après une désinscription.
-        await sendMail({ to: email, category: 'essential', subject: m.subject, text: m.text, html: m.html, fromName: m.from, locale: m.locale });
-      })().catch((e) => console.error('[agent-account] send_code:', e.message));
-      await Promise.race([work, sleep(6000)]);
-      await sleep(Math.max(0, 6000 - (Date.now() - started)));
+      await sendCodeFlow(email, 'lucie', {
+        db: PREF_DB, limiter: tooMany,
+        findUser: (e) => findPlatformUser(e),
+        mail: (code) => {
+          const m = codeMail(String(b.lang || ''), code);
+          // Email essentiel (code demandé par la personne) : envoyé même après une désinscription.
+          return sendMail({ to: email, category: 'essential', subject: m.subject, text: m.text, html: m.html, fromName: m.from, locale: m.locale });
+        },
+      });
       return res.status(200).json({ message: 'Si cette adresse correspond à un compte, un code à 6 chiffres vient d’y être envoyé (vérifier aussi les spams). Demandez-le à la personne.' });
     }
 
     if (b.action === 'lookup') {
       // Verrou persistant, toutes instances confondues : l’essai est compté avant la vérification (au plus 5 par heure),
       // et un code déjà utilisé avec succès ne resservira pas.
-      if (tooMany(`try:${email}`, 5)) return res.status(429).json({ verified: false, message: 'Trop d’essais : réessayez dans une heure, ou créez un ticket.' });
-      await recordAttempt(email);
-      if ((await countEvents('otp_try', email)) > 5) {
+      const verdict = await verifyCodeFlow(email, b.code, 'lucie', { db: PREF_DB, limiter: tooMany });
+      if (verdict === 'busy') return res.status(429).json({ verified: false, message: 'Trop d’essais : réessayez dans une heure, ou créez un ticket.' });
+      if (verdict === 'locked') {
         return res.status(429).json({ verified: false, message: 'Trop d’essais : le dossier est verrouillé pendant une heure. Continuez sans dossier ou créez un ticket.' });
       }
-      // Marqueur propre à ce code : un même code ne sert qu’une fois, un nouveau code reste utilisable.
-      const usedKey = `${email}|code:${String(b.code || '').replace(/\D/g, '')}`;
-      if (!codeIsValid(email, String(b.code || '')) || (await countEvents('otp_ok', usedKey, 2 * WINDOW_MS)) > 0) {
+      if (verdict === 'invalid') {
         return res.status(200).json({ verified: false, message: 'Code incorrect, expiré ou déjà utilisé : proposez d’envoyer un nouveau code.' });
       }
-      await dbInsert('call_events', { kind: 'otp_ok', external_id: emailKey(usedKey) });
-      const user = await findUser(email);
+      const user = await findPlatformUser(email);
       if (!user) return res.status(200).json({ verified: false, message: 'Aucun compte avec cette adresse : demandez l’email utilisé à l’inscription.' });
 
       const [summary, requests] = await Promise.all([

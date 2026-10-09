@@ -70,4 +70,12 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     linkRemoved: '[link usunięty]',
     notYou: 'Otrzymują Państwo tę wiadomość, ponieważ ten adres został podany podczas rozmowy. Jeśli to nie Państwo o nią prosili, prosimy ją zignorować.',
   },
+  // Kod logowania do strony Moje konto (src/lib/accountCode.ts), wiadomość niezbędna; forma „Państwo”.
+  accountCode: {
+    subject: (brand: string, code: string) => `Kod logowania ${brand}: ${code}`,
+    hello: 'Dzień dobry,',
+    line: (brand: string) => `Oto kod dostępu do Państwa konta na stronie ${brand}:`,
+    valid: 'Kod jest ważny 10 minut i można go użyć tylko raz.',
+    ignore: 'Jeśli to nie Państwo o niego prosili, prosimy zignorować tę wiadomość: bez tego kodu nikt nie uzyska dostępu do konta.',
+  },
 };

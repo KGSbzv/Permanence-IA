@@ -4,7 +4,7 @@ import { Lock, Mail, Phone, ShieldCheck } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { OPEN_CONSENT_EVENT } from './ConsentBanner';
-import { SITE, LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
+import { SITE, ACCOUNT_URL, LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { BRAND_MARKS } from '@/data/brandMarks';
 import { useI18n } from '@/i18n';
 import { WhatsAppLink } from './ui';
@@ -20,7 +20,7 @@ export default function Footer() {
     {
       title: t.cols.resources,
       links: [
-        { href: '/demo', label: r.demo }, { href: '/integrations', label: r.integrations }, { href: '/faq', label: r.faq }, { href: '/aide', label: r.help },
+        { href: '/demo', label: r.demo }, { href: '/integrations', label: r.integrations }, { href: '/faq', label: r.faq }, { href: '/aide', label: r.help }, { href: ACCOUNT_URL, label: r.account },
         { href: '/about', label: r.about }, { href: '/securite', label: r.security }, { href: '/contact', label: r.contact },
       ],
     },

@@ -63,4 +63,12 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     linkRemoved: '[link removed]',
     notYou: 'You are receiving this email because this address was given during the conversation. If you did not ask for it, please ignore it.',
   },
+  // Sign-in code for the My account page (src/lib/accountCode.ts), essential email.
+  accountCode: {
+    subject: (brand: string, code: string) => `Your ${brand} sign-in code: ${code}`,
+    hello: 'Hello,',
+    line: (brand: string) => `Here is your code to access your account on the ${brand} website:`,
+    valid: 'It is valid for 10 minutes and can only be used once.',
+    ignore: 'If you didn’t ask for it, just ignore this email: nobody can access your account without this code.',
+  },
 };

@@ -65,4 +65,12 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     linkRemoved: '[הקישור הוסר]',
     notYou: 'קיבלתם הודעה זו כי כתובת זו נמסרה במהלך השיחה. אם לא ביקשתם אותה, אפשר להתעלם ממנה.',
   },
+  // Sign-in code for the My account page (src/lib/accountCode.ts), essential email (plural אתם).
+  accountCode: {
+    subject: (brand: string, code: string) => `קוד הכניסה שלכם ל-${brand}: ${code}`,
+    hello: 'שלום,',
+    line: (brand: string) => `זה הקוד שלכם לכניסה לחשבון באתר ${brand}:`,
+    valid: 'הקוד בתוקף ל-10 דקות ולשימוש חד־פעמי.',
+    ignore: 'אם לא ביקשתם קוד, אפשר להתעלם מהודעה זו: אי אפשר להיכנס לחשבון בלי הקוד הזה.',
+  },
 };

@@ -12,7 +12,7 @@ const KEY = 'pia-trial-nudge';
 const WEEK = 7 * 86_400_000;
 const IDLE_MS = 45_000;
 // Pages où le visiteur est déjà en train d’agir, ou où une interruption serait déplacée.
-const SKIP = ['/essai-gratuit', '/contact', '/demo', '/aide', '/cgu', '/confidentialite', '/mentions-legales', '/cookies'];
+const SKIP = ['/essai-gratuit', '/contact', '/demo', '/aide', '/mon-compte', '/cgu', '/confidentialite', '/mentions-legales', '/cookies'];
 
 function seenRecently() {
   try { return Date.now() - Number(localStorage.getItem(KEY) || 0) < WEEK; } catch { return false; }

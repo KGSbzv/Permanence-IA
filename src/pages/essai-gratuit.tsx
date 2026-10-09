@@ -111,9 +111,11 @@ export default function EssaiGratuit() {
           <div className="order-2 grid content-start gap-6 lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1">
           <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
             <p className="font-display text-xl font-bold">{t.createTitle}</p>
+            {/* Étapes réelles de l’app : l’étape 2 (choix d’un forfait) démarre l’essai et crédite les minutes. */}
             <ol className="mt-4 space-y-2 text-ink">
-              {t.createSteps.map((s) => <li key={s}>{s}</li>)}
+              {t.createSteps(days, minutes).map((s, i) => <li key={i}><RichText value={s} /></li>)}
             </ol>
+            <p className="mt-3 rounded-xl bg-signal-soft px-4 py-3 text-sm text-ink">{t.createNote(minutes)}</p>
             {/* Email avant la redirection : fiche contact avec la langue du site (relances), case marketing décochée. */}
             <form onSubmit={startSignup} className="mt-5 grid gap-3">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
@@ -138,8 +140,9 @@ export default function EssaiGratuit() {
               <div role="status">
                 <p className="font-display text-2xl font-bold">{t.createTitle}</p>
                 <ol className="mt-4 space-y-2 text-ink">
-                  {t.createSteps.map((s) => <li key={s}>{s}</li>)}
+                  {t.createSteps(days, minutes).map((s, i) => <li key={i}><RichText value={s} /></li>)}
                 </ol>
+                <p className="mt-3 rounded-xl bg-signal-soft px-4 py-3 text-sm text-ink">{t.createNote(minutes)}</p>
                 <a href={register} className="btn-primary mt-6">{t.sentCta}</a>
               </div>
             ) : (

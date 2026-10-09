@@ -20,8 +20,9 @@ export interface PrefDb {
   insert: (table: string, row: Record<string, unknown>) => Promise<unknown>;
 }
 
-/** Clé dérivée du secret des codes de compte (jamais affichée) ; null si le secret manque. */
-function derive(label: string) {
+/** Clé dérivée du secret des codes de compte avec un libellé propre à chaque usage (jamais affichée) ; null si le
+ *  secret manque. Utilisée aussi par la session de la page Mon compte (src/lib/accountSession.ts). */
+export function deriveKey(label: string) {
   const s = process.env.ACCOUNT_CODE_SECRET;
   if (!s || s.length < 32) return null;
   return createHmac('sha256', s).update(`permanenceia|${label}`).digest();
@@ -32,7 +33,7 @@ export const isValidEmail = (e: string) => e.length <= 160 && /^[^@\s<>()",;]+@[
 
 /** Jeton du lien de préférences de cette adresse (null sans secret configuré). */
 export function emailToken(email: string) {
-  const key = derive('email-pref-link');
+  const key = deriveKey('email-pref-link');
   return key ? createHmac('sha256', key).update(normEmail(email)).digest('base64url').slice(0, 32) : null;
 }
 
@@ -44,7 +45,7 @@ export function verifyEmailToken(email: string, token: unknown) {
 
 /** Identifiant de l’adresse en base (HMAC, irréversible sans le secret). */
 export function emailKey(email: string) {
-  const key = derive('email-pref-id');
+  const key = deriveKey('email-pref-id');
   if (!key) throw new Error('ACCOUNT_CODE_SECRET absente ou trop courte');
   return createHmac('sha256', key).update(normEmail(email)).digest('hex').slice(0, 32);
 }

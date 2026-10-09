@@ -72,4 +72,12 @@ export const UI_EMAIL = {
     /** Après la transcription : l’adresse a pu être donnée par quelqu’un d’autre que son titulaire. */
     notYou: 'Vous recevez cet email parce que cette adresse a été donnée pendant l’échange. Si vous n’êtes pas à l’origine de cette demande, ignorez-le.',
   },
+  // Code de connexion à la page Mon compte (src/lib/accountCode.ts), email essentiel.
+  accountCode: {
+    subject: (brand: string, code: string) => `Votre code de connexion ${brand} : ${code}`,
+    hello: 'Bonjour,',
+    line: (brand: string) => `Votre code pour accéder à votre compte sur le site ${brand} :`,
+    valid: 'Il est valable 10 minutes et ne sert qu’une fois.',
+    ignore: 'Si vous n’avez rien demandé, ignorez cet email : personne ne peut accéder à votre compte sans ce code.',
+  },
 };

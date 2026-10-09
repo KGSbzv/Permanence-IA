@@ -29,6 +29,8 @@ export const UI_COMPONENTS = {
     login: 'Connexion',
     alreadyClient: 'Déjà client ?',
     clientArea: 'Accédez à votre espace client',
+    /** Lien du menu mobile vers la page Mon compte (/mon-compte). */
+    account: 'Mon compte : forfait et factures',
     startFree: 'Essai gratuit 14 jours',
     mainNav: 'Navigation principale',
     mobileNav: 'Navigation mobile',
@@ -56,6 +58,7 @@ export const UI_COMPONENTS = {
       integrations: 'Intégrations',
       faq: 'Questions fréquentes',
       help: 'Aide de l’espace client',
+      account: 'Mon compte',
       about: 'À propos',
       security: 'Sécurité et conformité',
       contact: 'Contact',

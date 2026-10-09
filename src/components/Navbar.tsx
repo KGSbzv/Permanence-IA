@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { ChevronDown, Menu, UserRound, X } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
-import { LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
+import { ACCOUNT_URL, LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { WhatsAppLink } from './ui';
 
@@ -112,6 +112,8 @@ export default function Navbar() {
           <div className="mt-4 grid gap-2">
             <Link href={SIGNUP_URL} className="btn-primary">{t.startFree}</Link>
             <a href={LOGIN_URL} className="btn-ghost">{t.login}</a>
+            {/* Page Mon compte du site : forfait, solde et factures dans la langue du site. */}
+            <Link href={ACCOUNT_URL} className="py-2 text-center text-sm font-semibold text-signal-deep underline-offset-2 hover:underline">{t.account}</Link>
           </div>
           <LanguageSwitcher id="lang-mobile" className="mt-4 block" />
         </nav>

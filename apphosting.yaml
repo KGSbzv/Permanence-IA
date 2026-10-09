@@ -42,6 +42,12 @@ env:
   # Webhook Stripe du compte Permanence IA (destination « permanenceia-site-relances ») : signature vérifiée.
   - variable: STRIPE_WEBHOOK_SECRET
     secret: STRIPE_WEBHOOK_SECRET
+  # Page « Mon compte » (/mon-compte) : clé Stripe RESTREINTE en lecture du compte Permanence IA (docs/mon-compte.md).
+  # Ne décommenter qu’APRÈS avoir créé le secret et l’avoir accordé au backend voiceia, sinon chaque déploiement échoue.
+  # Sans elle, la page affiche minutes et crédits, le forfait enregistré par le webhook Stripe ci-dessus s’il est en
+  # base, et renvoie vers l’espace client (Billing info) pour la carte et les factures.
+  # - variable: STRIPE_ACCOUNT_KEY
+  #   secret: STRIPE_ACCOUNT_KEY
   # Relances commerciales (src/lib/relances) : planificateur Cloud Scheduler authentifié par jeton OIDC du compte
   # relances-cron (aucun rôle). Envoi réel depuis le 8 oct. 2026 (RELANCES_DRY_RUN à 0, accord du propriétaire) ; le remettre à 1 pour revenir
   # en mode test. Un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.

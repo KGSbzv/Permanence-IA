@@ -47,6 +47,13 @@ export function registerUrl(locale: string, search = '') {
 }
 export const LOGIN_URL = `${SITE.appUrl}/login`;
 export const DEMO_URL = '/demo';
+/** Page Mon compte du site (forfait, solde, carte et factures en lecture seule, connexion par code email). */
+export const ACCOUNT_URL = '/mon-compte';
+// Pages de l’espace client : Billing info (carte dans l’onglet Wallet, factures, résiliation), choix ou changement
+// de forfait (démarre l’essai), achat de minutes et de crédits de messages (Add credits).
+export const APP_BILLING_URL = `${SITE.appUrl}/billing`;
+export const APP_PLANS_URL = `${SITE.appUrl}/plans`;
+export const APP_CREDITS_URL = `${SITE.appUrl}/credits`;
 
 // Widget Autocalls (assistante commerciale voix + chat) ; l’assistant dépend du marché.
 export const WIDGET_SRC = `${SITE.appUrl}/embed.js`;

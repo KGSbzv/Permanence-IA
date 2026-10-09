@@ -64,4 +64,12 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     linkRemoved: '[link rimosso]',
     notYou: 'Riceve questa email perché questo indirizzo è stato indicato durante la conversazione. Se non l’ha richiesta, la ignori.',
   },
+  // Codice di accesso alla pagina Il mio account (src/lib/accountCode.ts), email essenziale.
+  accountCode: {
+    subject: (brand: string, code: string) => `Il Suo codice di accesso ${brand}: ${code}`,
+    hello: 'Buongiorno,',
+    line: (brand: string) => `Ecco il Suo codice per accedere al Suo account sul sito ${brand}:`,
+    valid: 'È valido 10 minuti e si può usare una sola volta.',
+    ignore: 'Se non lo ha richiesto, ignori questa email: nessuno può accedere al Suo account senza questo codice.',
+  },
 };

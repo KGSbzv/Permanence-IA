@@ -90,12 +90,16 @@ export const UI_PAGES = {
       'Accompagnement pour la première configuration',
     ],
     createTitle: 'Créer mon compte',
-    createSteps: [
-      '1. Créez votre compte avec votre email professionnel.',
-      '2. Choisissez le forfait à tester dans votre espace.',
-      '3. Configurez votre agent et passez vos premiers appels.',
+    // Étapes réelles de l’app : l’étape 2 (choix d’un forfait, « Start 14-Day Free Trial ») démarre l’essai et crédite
+    // les minutes ; un inscrit qui la saute reste à 0 minute. Libellés des boutons de l’app en anglais. Le bouton du
+    // formulaire est l’étape 1 (et non un « compte gratuit », qui se confondrait avec ce compte à 0 minute).
+    createSteps: (days: number, minutes: number): Rich[] => [
+      ['1. ', { b: 'Créez votre compte' }, ' avec votre email professionnel.'],
+      ['2. ', { b: 'Choisissez un forfait' }, ' (Choose a plan), puis cliquez sur ', { b: 'Start 14-Day Free Trial' }, ` : carte demandée, rien n’est débité pendant ${days} jours, ${minutes} minutes incluses. C’est cette étape qui crédite vos ${minutes} minutes.`],
+      ['3. ', { b: 'Configurez votre agent' }, ' et passez vos premiers appels.'],
     ],
-    createCta: 'Créer mon compte gratuit',
+    createNote: (minutes: number) => `Sans l’étape 2, votre compte reste à 0 minute : l’essai et ses ${minutes} minutes ne démarrent qu’au choix d’un forfait.`,
+    createCta: 'Étape 1 : créer mon compte',
     already: 'Déjà client ?',
     login: 'Connexion',
     sentTitle: 'Votre demande est enregistrée',
@@ -147,6 +151,7 @@ export const UI_PAGES = {
     h1: 'Aide de votre espace client',
     intro: 'Votre espace client s’affiche en anglais. Ce guide traduit chaque menu et vous accompagne pas à pas. Dans l’espace, l’assistante d’aide (bulle en bas à droite) répond dans votre langue, par écrit ou à voix haute.',
     openSpace: 'Ouvrir mon espace',
+    accountCta: 'Voir mon forfait et mes factures',
     chatLabel: 'Exemple d’échange avec l’assistante d’aide',
     chatTitle: (brand: string) => `Aide ${brand}`,
     chatMode: 'En français · écrit ou voix',

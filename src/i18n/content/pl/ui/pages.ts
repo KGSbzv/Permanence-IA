@@ -84,12 +84,14 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Pomoc przy pierwszej konfiguracji',
     ],
     createTitle: 'Załóż konto',
-    createSteps: [
-      '1. Załóż konto, podając służbowy adres e-mail.',
-      '2. Wybierz pakiet do przetestowania w panelu klienta.',
-      '3. Skonfiguruj agenta i przeprowadź pierwsze rozmowy.',
+    // Rzeczywiste kroki w aplikacji: krok 2 (wybór pakietu, „Start 14-Day Free Trial”) uruchamia okres próbny i dodaje minuty.
+    createSteps: (days: number, minutes: number): Rich[] => [
+      ['1. ', { b: 'Załóż konto' }, ', podając służbowy adres e-mail.'],
+      ['2. ', { b: 'Wybierz pakiet' }, ' (Choose a plan), a potem kliknij ', { b: 'Start 14-Day Free Trial' }, `: potrzebna jest karta, przez ${days} dni nic nie jest pobierane, ${minutes} minut w cenie. Dopiero ten krok dodaje Twoje ${minutes} minut.`],
+      ['3. ', { b: 'Skonfiguruj agenta' }, ' i przeprowadź pierwsze rozmowy.'],
     ],
-    createCta: 'Załóż bezpłatne konto',
+    createNote: (minutes: number) => `Bez kroku 2 na Twoim koncie zostaje 0 minut: okres próbny i ${minutes} minut startują dopiero po wybraniu pakietu.`,
+    createCta: 'Krok 1: załóż konto',
     already: 'Masz już konto?',
     login: 'Logowanie',
     sentTitle: 'Twoje zgłoszenie zostało zapisane',
@@ -141,6 +143,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     h1: 'Przewodnik po Twoim panelu klienta',
     intro: 'Twój panel klienta jest wyświetlany po angielsku. Ten przewodnik tłumaczy każde menu i prowadzi Cię krok po kroku. W panelu asystentka pomocy (dymek w prawym dolnym rogu) również odpowiada na pytania w Twoim języku, na piśmie lub głosowo.',
     openSpace: 'Otwórz panel klienta',
+    accountCta: 'Zobacz swój pakiet i faktury',
     chatLabel: 'Przykładowa rozmowa z asystentką pomocy',
     chatTitle: (brand: string) => `Pomoc ${brand}`,
     chatMode: 'Na piśmie lub głosowo',

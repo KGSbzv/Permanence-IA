@@ -63,4 +63,12 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     linkRemoved: '[link verwijderd]',
     notYou: 'U ontvangt deze e-mail omdat dit adres tijdens het gesprek is opgegeven. Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren.',
   },
+  // Inlogcode voor de pagina Mijn account (src/lib/accountCode.ts), essentiële e-mail.
+  accountCode: {
+    subject: (brand: string, code: string) => `Uw inlogcode voor ${brand}: ${code}`,
+    hello: 'Hallo,',
+    line: (brand: string) => `Hier is uw code om uw account op de website van ${brand} te openen:`,
+    valid: 'De code is 10 minuten geldig en kan maar één keer worden gebruikt.',
+    ignore: 'Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren: zonder deze code kan niemand uw account openen.',
+  },
 };

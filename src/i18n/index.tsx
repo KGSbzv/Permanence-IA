@@ -15,7 +15,7 @@ import { withFrenchTypography } from './typography';
 const FR_TYPO = withFrenchTypography(CONTENT.fr) as typeof CONTENT.fr;
 
 /** Séparateur de milliers toujours affiché (le type TypeScript ne connaît pas encore la valeur « always »). */
-const GROUP = 'always' as unknown as boolean;
+export const GROUP = 'always' as unknown as boolean;
 export type Content = typeof fr;
 export type { Locale, Market, PlanSlug };
 
