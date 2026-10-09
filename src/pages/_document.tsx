@@ -26,6 +26,8 @@ export default function Document({ __NEXT_DATA__ }: DocumentProps) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#0E1B4D" />
+        {/* Vérification du domaine permanenceia.com dans le portefeuille Meta « SINAY Strategic LLC » (pixel, publicités). */}
+        <meta name="facebook-domain-verification" content="y391fpjod91dumruk22wu17s0sxm5b" />
         {/* Préchargement des polices latines du site (src/styles/fonts.css) ; Heebo (hébreu) se charge à la demande. */}
         {FONT_PRELOADS.map((href) => (
           <link key={href} rel="preload" href={href} as="font" type="font/woff2" crossOrigin="anonymous" />
