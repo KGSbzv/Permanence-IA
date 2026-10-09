@@ -2,7 +2,16 @@
 
 **Pour qui :** le propriétaire, ou Claude dans une session qui a accès au compte Autocalls.
 
-**Pourquoi ce fichier :** les corrections du dépôt (site, e-mails, alertes) ne modifient jamais les agents Autocalls. Quand une correction dépend d’un agent, le texte exact à appliquer est écrit ici. Rien n’a encore été modifié dans Autocalls.
+**Pourquoi ce fichier :** les corrections du dépôt (site, e-mails, alertes) ne modifient jamais les agents Autocalls. Quand une correction dépend d’un agent, le texte exact à appliquer est écrit ici.
+
+## État au 9 octobre 2026, 18 h 40 UTC (appliqué par Claude, autorisation du propriétaire)
+
+- **Lots B et C, points 1 à 6 : appliqués sur les 39 agents prévus** (126 opérations : consignes, post_call_schema dont copy_email et optout_phone), agent par agent, avec relecture du contrôle de conformité après chaque enregistrement. Aucun agent bloqué ; contre-vérification de tous les agents du compte ensuite : aucun bloqué. WhatsApp 21358 non touché.
+- **Outil 6242** (tickets, Israël) : description du champ email mise à jour.
+- **Outil 6177** (tickets, espace client) : **non fait** — la modification (description du champ email + nouveau paramètre language) a été refusée par le contrôle de sécurité de la session. À faire dans Autocalls → Mid-call tools → 6177 : champ email « Adresse e-mail donnée et confirmée par la personne, vide sinon. » ; ajouter le paramètre facultatif `language` (string) « Langue de la conversation avec la personne : fr, en-gb, en-au, it, pl, nl ou he. ».
+- **Point 7** (en-tête x-webhook-token des 14 automatisations de rappel) : à faire par le propriétaire (valeur du secret).
+- **Point 8, base de connaissances** : textes corrigés dans src/data/kb (7 langues, en ligne) ; nouveaux documents /kb « v3 » créés dans les bases 6223, 6224, 6225, 6226, 6227, 6229, 6230 ; les anciens sont renommés « ANCIENNE — à supprimer — … » (suppression définitive par le propriétaire, dans l'app).
+- **Lot D** : script Google Analytics de l'espace client remplacé dans « Custom scripts » et « Custom scripts (auth) », vérifié en ligne.
 
 **Dépôt public :** ce fichier ne contient ni numéro personnel, ni secret.
 
