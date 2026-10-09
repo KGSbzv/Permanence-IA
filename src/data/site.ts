@@ -12,6 +12,8 @@ export const SITE = {
   address: '1603 Capitol Ave Suite 413G-2408, Cheyenne, WY 82001, USA',
   /** Page Facebook de la marque (en anglais). */
   facebook: 'https://www.facebook.com/permanenceia',
+  /** Messenger de la Page (assistante IA Autocalls 21297, toutes les langues). */
+  messenger: 'https://m.me/permanenceia',
 };
 
 /**

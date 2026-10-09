@@ -52,4 +52,16 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     button: 'Gestisci le mie preferenze',
     ignore: 'Se non lo ha richiesto, ignori questa email: non cambierà nulla.',
   },
+  copyMail: {
+    subject: (agent, brand) => (agent ? `Copia della Sua conversazione con ${agent} · ${brand}` : `Copia della Sua conversazione con ${brand}`),
+    intro: (agent, _gender, brand, day, time) =>
+      `Ecco la copia della Sua conversazione con ${agent ? `${agent}, l’assistente AI di ${brand},` : `l’assistente AI di ${brand},`} di ${day} alle ${time}. Può conservarla o copiarla come preferisce.`,
+    // « Tu » come nelle trascrizioni delle chat (« Lei » a inizio riga si leggerebbe « lei », l’assistente).
+    you: 'Tu',
+    assistant: 'Assistente AI',
+    cut: '(messaggio abbreviato)',
+    truncated: (shown, total) => `Conversazione molto lunga: questa copia riporta solo i primi ${shown} messaggi (su ${total}).`,
+    linkRemoved: '[link rimosso]',
+    notYou: 'Riceve questa email perché questo indirizzo è stato indicato durante la conversazione. Se non l’ha richiesta, la ignori.',
+  },
 };

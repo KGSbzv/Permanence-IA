@@ -43,6 +43,7 @@ export const UI_PAGES = {
     supportTitle: 'Terugbelverzoek: support',
     supportText: 'Klanten: configuratie, nummers, integraties.',
     emailTitle: 'E-mail',
+    messengerNote: 'Stuur ons een bericht via Messenger: onze AI-assistent antwoordt 24/7.',
     legal: (brand: string, company: string) => `${brand} is een merk van ${company}, ${ADDRESS}, Verenigde Staten.`,
     tabsLabel: 'Soort aanvraag',
     tabCommercial: 'Verkoop en demo',
@@ -528,7 +529,7 @@ export const UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Privacybeleid',
     intro: 'Wat we verzamelen, waarom, met wie, hoe lang, en hoe u uw rechten uitoefent.',
-    updated: 'Laatst bijgewerkt: 8 oktober 2026',
+    updated: 'Laatst bijgewerkt: 9 oktober 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -580,6 +581,7 @@ export const UI_PAGES = {
           title: 'Kunstmatige intelligentie, opnames en transcripties',
           body: [
             { p: 'Onze assistenten zijn AI-systemen en maken dat ook bekend. Spraakgesprekken worden opgenomen en uitgeschreven; AI-aanbieders maken er samenvattingen van en halen de informatie eruit die nodig is om uw verzoek op te volgen. Er wordt geen besluit met rechtsgevolgen of dat u anderszins in aanmerkelijke mate treft uitsluitend op basis van geautomatiseerde verwerking genomen.' },
+            { p: 'Als u daarom vraagt of ermee instemt tijdens een gesprek met een van onze AI-assistenten, sturen wij u per e-mail een kopie van dat gesprek.' },
             { p: 'Wij verkopen uw gegevens niet en delen ze niet voor gerichte advertenties. Wij gebruiken de inhoud van gesprekken en berichten van onze klanten niet om onze eigen modellen te trainen. Onze AI-aanbieders verwerken gegevens op basis van een overeenkomst, namens ons.' },
             { p: 'Klanten die het platform gebruiken, moeten hun eigen bellers en contacten laten weten dat zij met een AI-systeem communiceren en, waar de wet dat vereist, dat het gesprek wordt opgenomen. Zij stellen het opnemen en de bewaartermijn daarvan in.' },
           ],

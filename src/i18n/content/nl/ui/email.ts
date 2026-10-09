@@ -52,4 +52,15 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     button: 'Mijn voorkeuren beheren',
     ignore: 'Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren: er verandert niets.',
   },
+  copyMail: {
+    subject: (agent, brand) => (agent ? `Kopie van uw gesprek met ${agent} · ${brand}` : `Kopie van uw gesprek met ${brand}`),
+    intro: (agent, _gender, brand, day, time) =>
+      `Hier is een kopie van uw gesprek met ${agent ? `${agent}, de AI-assistent van ${brand},` : `de AI-assistent van ${brand}`} op ${day} om ${time}. U kunt deze bewaren of kopiëren zoals u wilt.`,
+    you: 'U',
+    assistant: 'AI-assistent',
+    cut: '(bericht ingekort)',
+    truncated: (shown, total) => `Zeer lang gesprek: deze kopie bevat alleen de eerste ${shown} berichten (van de ${total}).`,
+    linkRemoved: '[link verwijderd]',
+    notYou: 'U ontvangt deze e-mail omdat dit adres tijdens het gesprek is opgegeven. Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren.',
+  },
 };

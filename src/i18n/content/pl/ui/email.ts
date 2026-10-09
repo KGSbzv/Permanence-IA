@@ -3,6 +3,9 @@
 // są uzupełniane przy wysyłce (src/lib/emailFooter.ts).
 import type { UI_EMAIL as FR_UI_EMAIL } from '../../fr/ui/email';
 
+// Narzędnik imion person („rozmowa z Leną”); inne imię: w nawiasie, bez odmiany.
+const WITH: Record<string, string> = { Lena: 'Leną', Tomasz: 'Tomaszem' };
+
 export const UI_EMAIL: typeof FR_UI_EMAIL = {
   footer: {
     copyright: 'Copyright © {year} {company}. Wszelkie prawa zastrzeżone.',
@@ -51,5 +54,20 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     line: (brand: string) => `Oto Państwa osobisty link do wyboru wiadomości e-mail otrzymywanych od ${brand}:`,
     button: 'Zarządzaj preferencjami',
     ignore: 'Jeśli to nie Państwo o niego prosili, prosimy zignorować tę wiadomość: nic się nie zmieni.',
+  },
+  copyMail: {
+    subject: (agent, brand) => (agent && WITH[agent] ? `Kopia Państwa rozmowy z ${WITH[agent]} · ${brand}` : `Kopia Państwa rozmowy · ${brand}`),
+    intro: (agent, gender, brand, day, time) => {
+      const role = gender === 'male' ? 'asystentem AI' : 'asystentką AI';
+      const who = !agent ? `asystentem AI ${brand},` : WITH[agent] ? `${WITH[agent]}, ${role} ${brand},` : `${role} ${brand} (${agent}),`;
+      return `Oto kopia Państwa rozmowy z ${who} z dnia ${day} r., godz. ${time}. Mogą ją Państwo zachować lub skopiować według uznania.`;
+    },
+    // „Ty”, jak w zapisach rozmów z komunikatorów (wstęp i stopka zwracają się „Państwo”).
+    you: 'Ty',
+    assistant: 'Asystent AI',
+    cut: '(wiadomość skrócona)',
+    truncated: (shown, total) => `Bardzo długa rozmowa: ta kopia zawiera tylko pierwsze ${shown} wiadomości (z ${total}).`,
+    linkRemoved: '[link usunięty]',
+    notYou: 'Otrzymują Państwo tę wiadomość, ponieważ ten adres został podany podczas rozmowy. Jeśli to nie Państwo o nią prosili, prosimy ją zignorować.',
   },
 };

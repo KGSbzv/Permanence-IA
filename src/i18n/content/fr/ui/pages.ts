@@ -58,6 +58,7 @@ export const UI_PAGES = {
     supportTitle: 'Rappel support',
     supportText: 'Clients : configuration, numéros, intégrations.',
     emailTitle: 'Email',
+    messengerNote: 'Écrivez-nous sur Messenger : notre assistante IA vous répond 24 h/24.',
     legal: (brand: string, company: string) => `${brand} est une marque de ${company}, ${ADDRESS}, États-Unis.`,
     tabsLabel: 'Type de demande',
     tabCommercial: 'Commercial et démo',
@@ -544,7 +545,7 @@ export const UI_PAGES = {
     breadcrumb: 'Confidentialité',
     h1: 'Politique de confidentialité',
     intro: 'Ce que nous collectons, pourquoi, avec qui, combien de temps, et comment exercer vos droits.',
-    updated: 'Dernière mise à jour : 8 octobre 2026',
+    updated: 'Dernière mise à jour : 9 octobre 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -596,6 +597,7 @@ export const UI_PAGES = {
           title: 'Intelligence artificielle, enregistrements et transcriptions',
           body: [
             { p: 'Nos assistantes sont des intelligences artificielles et se présentent comme telles. Les conversations vocales sont enregistrées et transcrites ; des fournisseurs d’IA en produisent des résumés et en extraient les informations utiles au suivi de votre demande. Aucune décision produisant des effets juridiques ou vous affectant de manière significative n’est prise sur le seul fondement d’un traitement automatisé.' },
+            { p: 'Si vous le demandez ou l’acceptez pendant un échange avec l’une de nos assistantes IA, nous vous envoyons par email une copie de cet échange.' },
             { p: 'Nous ne vendons pas vos données et ne les partageons pas à des fins de publicité ciblée. Nous n’utilisons pas le contenu des appels et messages de nos clients pour entraîner nos propres modèles. Nos fournisseurs d’IA traitent les données sous contrat, pour notre compte.' },
             { p: 'Les clients qui utilisent la plateforme doivent informer leurs propres interlocuteurs qu’ils échangent avec un système d’IA et, lorsque la loi l’exige, que l’appel est enregistré. Ils paramètrent l’enregistrement et sa durée de conservation.' },
           ],

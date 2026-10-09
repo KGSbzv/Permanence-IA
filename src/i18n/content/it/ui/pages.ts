@@ -43,6 +43,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     supportTitle: 'Richiamata assistenza',
     supportText: 'Clienti: configurazione, numeri, integrazioni.',
     emailTitle: 'Email',
+    messengerNote: 'Ci scriva su Messenger: la nostra assistente AI Le risponde 24 ore su 24.',
     legal: (brand: string, company: string) => `${brand} è un marchio di ${company}, ${ADDRESS}, Stati Uniti.`,
     tabsLabel: 'Tipo di richiesta',
     tabCommercial: 'Commerciale e demo',
@@ -528,7 +529,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Informativa sulla privacy',
     intro: 'Cosa raccogliamo, perché, con chi lo condividiamo, per quanto tempo e come esercitare i Suoi diritti.',
-    updated: 'Ultimo aggiornamento: 8 ottobre 2026',
+    updated: 'Ultimo aggiornamento: 9 ottobre 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -580,6 +581,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Intelligenza artificiale, registrazioni e trascrizioni',
           body: [
             { p: 'Le nostre assistenti sono sistemi di intelligenza artificiale e si presentano come tali. Le conversazioni vocali sono registrate e trascritte; fornitori di AI ne producono riassunti ed estraggono le informazioni utili a seguire la Sua richiesta. Nessuna decisione che produca effetti giuridici nei Suoi confronti o che incida in modo analogo significativamente sulla Sua persona è basata unicamente su un trattamento automatizzato.' },
+            { p: 'Se lo richiede o lo accetta durante una conversazione con una delle nostre assistenti AI, Le inviamo per email una copia di tale conversazione.' },
             { p: 'Non vendiamo i Suoi dati né li condividiamo per pubblicità mirata. Non utilizziamo il contenuto delle chiamate e dei messaggi dei nostri clienti per addestrare i nostri modelli. I nostri fornitori di AI trattano i dati in base a contratto, per nostro conto.' },
             { p: 'I clienti che utilizzano la piattaforma devono informare i propri interlocutori che stanno interagendo con un sistema di AI e, ove la legge lo richieda, che la chiamata è registrata. Sono loro a configurare la registrazione e il relativo periodo di conservazione.' },
           ],

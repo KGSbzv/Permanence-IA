@@ -53,4 +53,23 @@ export const UI_EMAIL = {
     button: 'Gérer mes préférences',
     ignore: 'Si vous n’avez rien demandé, ignorez cet email : rien ne changera.',
   },
+  // Copie d’un échange avec un assistant IA, envoyée à la personne qui l’a demandée (src/lib/conversationCopy.ts).
+  // agent : prénom de la persona (null si l’agent n’est pas identifié) ; gender : genre de la persona, pour l’accord ;
+  // day et time : date et heure de l’échange dans le fuseau du marché.
+  copyMail: {
+    subject: (agent: string | null, brand: string) => (agent ? `Copie de votre échange avec ${agent} · ${brand}` : `Copie de votre échange avec ${brand}`),
+    intro: (agent: string | null, gender: 'female' | 'male', brand: string, day: string, time: string) =>
+      `Voici la copie de votre échange avec ${agent ? `${agent}, ${gender === 'male' ? 'l’assistant' : 'l’assistante'} IA de ${brand},` : `l’assistant IA de ${brand},`} le ${day} à ${time}. Vous pouvez la conserver ou la copier comme vous le souhaitez.`,
+    /** Étiquette des messages de la personne. */
+    you: 'Vous',
+    /** Étiquette des messages de l’agent quand son prénom n’est pas connu. */
+    assistant: 'Assistant IA',
+    /** Ajouté à un message anormalement long, raccourci. */
+    cut: '(message raccourci)',
+    truncated: (shown: number, total: number) => `Échange très long : cette copie ne reprend que les ${shown} premiers messages (sur ${total}).`,
+    /** Remplace, dans un message de l’agent, un lien vers un autre site que permanenceia.com. */
+    linkRemoved: '[lien retiré]',
+    /** Après la transcription : l’adresse a pu être donnée par quelqu’un d’autre que son titulaire. */
+    notYou: 'Vous recevez cet email parce que cette adresse a été donnée pendant l’échange. Si vous n’êtes pas à l’origine de cette demande, ignorez-le.',
+  },
 };

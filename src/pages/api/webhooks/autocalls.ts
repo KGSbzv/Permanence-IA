@@ -1,8 +1,10 @@
 // Webhook Autocalls : fin d’appel (post_call) et fin de conversation (widget, WhatsApp…).
-// Enregistre chaque échange et alerte l’équipe quand un prospect demande une démo ou un rappel.
+// Enregistre chaque échange, alerte l’équipe quand un prospect demande une démo ou un rappel, et envoie à la
+// personne la copie de l’échange quand elle l’a demandée (variable copy_email, src/lib/conversationCopy.ts).
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, dbUpdate, esc, isAuthorized, langFromPhone, sendMail, toE164 } from '@/lib/server';
-import { isOptedOut, registerOptOut } from '@/lib/optout';
+import { STOP_OUTCOMES, isOptedOut, registerOptOut } from '@/lib/optout';
+import { MAX_COPIES_PER_DAY, maskEmails, sendConversationCopy } from '@/lib/conversationCopy';
 import { CONTACTS_DB, recordConsent } from '@/lib/contacts';
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
@@ -13,8 +15,8 @@ const MISSED = ['no-answer', 'busy', 'voicemail'];
 const MISSED_OUTCOME = 'whatsapp_rappel_manque';
 const MISSED_SMS = 'sms_rappel_manque';
 // Refus d’être rappelé (opposition), désinscription demandée sur WhatsApp (fin de conversation de l’agent 21358)
-// ou mauvais numéro : rappels en attente annulés, équipe prévenue.
-const STOP = ['ne_plus_appeler', 'desinscription', 'mauvais_contact'] as const;
+// ou mauvais numéro : rappels en attente annulés, équipe prévenue, aucune copie de l’échange envoyée.
+const STOP = STOP_OUTCOMES;
 
 /**
  * Rappel sortant sans réponse : un seul message « nous avons essayé de vous joindre » par demande (7 jours) :
@@ -146,6 +148,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (missed) {
     try { console.log('[autocalls-webhook] rappel manqué :', await messageAfterMissedCall(String(p.customer_phone))); }
     catch (e: any) { console.error('[autocalls-webhook] message rappel manqué:', e.message); }
+  }
+  // Copie de l’échange demandée par la personne (copy_email) : une seule fois par échange, jamais après un refus
+  // d’être contacté. Un échec ne change pas la réponse 200 (un renvoi doublerait les emails) : l’équipe est prévenue.
+  const where = `Échange ${row.kind} ${row.external_id || '—'} (${row.assistant_name || 'agent'}).`;
+  const copyAlert = (detail: string) => alertTeam('autocalls-webhook-copie', 'copie d’échange non envoyée',
+    `${detail}\n\n${where} L’adresse demandée figure dans les variables de l’échange (call_events, copy_email).`);
+  // Plafond de tout le site : alerte à part (jamais masquée par une autre alerte de copie dans l’heure).
+  const globalAlert = (detail: string) => alertTeam('autocalls-webhook-copie-plafond', `plafond quotidien des copies d’échange atteint (${MAX_COPIES_PER_DAY} en 24 h)`,
+    `${detail}\n\n${where} Plus aucune copie ne part tant que les dernières 24 h comptent ${MAX_COPIES_PER_DAY} copies (call_events : kind email, outcome copie_conversation). Abus du widget ou boucle d’un agent ? Pour tout couper : CONVERSATION_COPY à "0" (docs/copie-conversation.md).`);
+  try {
+    const copy = await sendConversationCopy(p, { kind, externalId: row.external_id });
+    if (copy) {
+      console.log('[autocalls-webhook] copie de l’échange :', copy.reason);
+      if (copy.alert) await (copy.limit === 'global' ? globalAlert : copyAlert)(copy.reason);
+    }
+  } catch (e: any) {
+    // Une réponse SMTP peut citer l’adresse : masquée dans les journaux et l’alerte.
+    const detail = maskEmails(String(e?.message ?? e));
+    console.error('[autocalls-webhook] copie de l’échange:', detail);
+    await copyAlert(detail);
   }
   return res.status(200).json({ received: true });
 }

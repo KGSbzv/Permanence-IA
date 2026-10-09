@@ -52,4 +52,15 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     button: 'Manage my preferences',
     ignore: 'If you didn’t ask for this, just ignore this email: nothing will change.',
   },
+  copyMail: {
+    subject: (agent, brand) => (agent ? `Copy of your conversation with ${agent} · ${brand}` : `Copy of your conversation with ${brand}`),
+    intro: (agent, _gender, brand, day, time) =>
+      `Here is a copy of your conversation with ${agent ? `${agent}, ${brand}’s AI assistant,` : `${brand}’s AI assistant`} on ${day} at ${time}. You can keep or copy it as you like.`,
+    you: 'You',
+    assistant: 'AI assistant',
+    cut: '(message shortened)',
+    truncated: (shown, total) => `Very long conversation: this copy only includes the first ${shown} messages (out of ${total}).`,
+    linkRemoved: '[link removed]',
+    notYou: 'You are receiving this email because this address was given during the conversation. If you did not ask for it, please ignore it.',
+  },
 };

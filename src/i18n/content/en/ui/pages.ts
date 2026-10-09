@@ -43,6 +43,7 @@ export const UI_PAGES = {
     supportTitle: 'Support callback',
     supportText: 'Customers: setup, numbers, integrations.',
     emailTitle: 'Email',
+    messengerNote: 'Message us on Messenger: our AI assistant replies 24/7.',
     legal: (brand: string, company: string) => `${brand} is a brand of ${company}, ${ADDRESS}, United States.`,
     tabsLabel: 'Type of request',
     tabCommercial: 'Sales and demo',
@@ -528,7 +529,7 @@ export const UI_PAGES = {
     breadcrumb: 'Privacy',
     h1: 'Privacy policy',
     intro: 'What we collect, why, who with, for how long, and how to exercise your rights.',
-    updated: 'Last updated: 8 October 2026',
+    updated: 'Last updated: 9 October 2026',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -580,6 +581,7 @@ export const UI_PAGES = {
           title: 'Artificial intelligence, recordings and transcripts',
           body: [
             { p: 'Our assistants are artificial intelligence systems and say so. Voice conversations are recorded and transcribed; AI providers produce summaries and extract the information needed to follow up your request. No decision producing legal effects or similarly significantly affecting you is taken solely by automated means.' },
+            { p: 'If you ask for it or agree to it during a conversation with one of our AI assistants, we email you a copy of that conversation.' },
             { p: 'We do not sell your data or share it for targeted advertising. We do not use the content of our customers’ calls and messages to train our own models. Our AI providers process data under contract, on our behalf.' },
             { p: 'Customers using the platform must tell their own callers and contacts that they are interacting with an AI system and, where the law requires, that the call is recorded. They configure recording and its retention period.' },
           ],

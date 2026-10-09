@@ -52,6 +52,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     supportTitle: 'Wsparcie techniczne',
     supportText: 'Dla klientów: konfiguracja, numery, integracje.',
     emailTitle: 'E-mail',
+    messengerNote: 'Napisz do nas na Messengerze: nasza asystentka AI odpowiada 24/7.',
     legal: (brand: string, company: string) => `${brand} jest marką firmy ${company}, ${ADDRESS}, Stany Zjednoczone.`,
     tabsLabel: 'Rodzaj zgłoszenia',
     tabCommercial: 'Sprzedaż i demo',
@@ -537,7 +538,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     breadcrumb: 'Prywatność',
     h1: 'Polityka prywatności',
     intro: 'Jakie dane zbieramy, w jakim celu, komu je przekazujemy, jak długo je przechowujemy i jak możesz skorzystać ze swoich praw.',
-    updated: 'Ostatnia aktualizacja: 8 października 2026 r.',
+    updated: 'Ostatnia aktualizacja: 9 października 2026 r.',
     sections: ({ brand, company, email, legal }: LegalVars): LegalSection[] => {
       const mail = { a: email, href: `mailto:${email}` };
       return [
@@ -589,6 +590,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
           title: 'Sztuczna inteligencja, nagrania i transkrypcje',
           body: [
             { p: 'Nasze asystentki są systemami sztucznej inteligencji i tak się przedstawiają. Rozmowy głosowe są nagrywane i transkrybowane; dostawcy AI przygotowują ich podsumowania i wyodrębniają informacje potrzebne do obsługi Twojej prośby. Żadna decyzja wywołująca skutki prawne lub w podobny sposób istotnie na Ciebie wpływająca nie jest podejmowana wyłącznie w sposób zautomatyzowany.' },
+            { p: 'Jeśli poprosisz o to lub wyrazisz na to zgodę podczas rozmowy z jedną z naszych asystentek AI, wyślemy Ci e-mailem kopię tej rozmowy.' },
             { p: 'Nie sprzedajemy Twoich danych ani nie udostępniamy ich w celach reklamy ukierunkowanej. Nie wykorzystujemy treści połączeń i wiadomości naszych klientów do trenowania naszych własnych modeli. Nasi dostawcy AI przetwarzają dane na podstawie umowy, w naszym imieniu.' },
             { p: 'Klienci korzystający z platformy muszą informować swoich rozmówców, że komunikują się z systemem AI, a jeżeli wymaga tego prawo — że rozmowa jest nagrywana. To oni konfigurują nagrywanie i okres przechowywania nagrań.' },
           ],

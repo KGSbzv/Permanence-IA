@@ -52,4 +52,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     button: 'ניהול ההעדפות שלי',
     ignore: 'אם לא ביקשתם זאת, אפשר להתעלם מהודעה זו: שום דבר לא ישתנה.',
   },
+  // Copy of an exchange with an AI assistant, sent to the person who asked for it (src/lib/conversationCopy.ts).
+  // `day` starts with "יום …" (Intl, he-IL), hence the "ב" prefix.
+  copyMail: {
+    subject: (agent, brand) => (agent ? `עותק של השיחה שלכם עם ${agent} · ${brand}` : `עותק של השיחה שלכם עם ${brand}`),
+    intro: (agent, gender, brand, day, time) =>
+      `זהו העותק של השיחה שלכם עם ${agent ? `${agent}, ${gender === 'male' ? 'עוזר' : 'עוזרת'} ה-AI של ${brand},` : `עוזר ה-AI של ${brand},`} ב${day}, בשעה ${time}. אפשר לשמור אותו או להעתיק אותו כרצונכם.`,
+    you: 'אתם',
+    assistant: 'עוזר ה-AI',
+    cut: '(ההודעה קוצרה)',
+    truncated: (shown, total) => `שיחה ארוכה מאוד: העותק כולל רק את ${shown} ההודעות הראשונות (מתוך ${total}).`,
+    linkRemoved: '[הקישור הוסר]',
+    notYou: 'קיבלתם הודעה זו כי כתובת זו נמסרה במהלך השיחה. אם לא ביקשתם אותה, אפשר להתעלם ממנה.',
+  },
 };

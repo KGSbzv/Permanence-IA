@@ -101,7 +101,7 @@ Ces deux pistes demandent des essais réels et un arbitrage du propriétaire. Ri
 ### À faire par le propriétaire
 
 1. **Opposition par canal ou pour tous les canaux** : aujourd'hui, un STOP sur WhatsApp annule aussi les rappels prévus du numéro (choix le plus prudent). À confirmer. Le site ne traite pas encore l'issue WhatsApp `desinscription` à la fin de la conversation (seuls `ne_plus_appeler` et `mauvais_contact` le sont) : signalé à la chaîne site.
-2. **Liste de blocage Autocalls** : à chaque email « Opposition : ne plus appeler », ajouter le numéro dans Autocalls > Blacklist.
+2. **Liste de blocage Autocalls** : depuis le 9 oct. 2026, le site y ajoute lui-même chaque opposition appliquée (automatisation Autocalls « Liste noire ← refus reçus par le site », src/lib/autocallsBlacklist.ts). À faire à la main seulement si l'email « Opposition : ne plus appeler » contient une ligne « À FAIRE » (ajout automatique impossible).
 3. **Script du widget de l'espace client** (admin white-label, hors dépôt) : vérifier qu'il transmet `agent_name` selon la langue, avec un `greeting` qui utilise ce prénom. Je n'ai pas pu l'ouvrir (extension Chrome non connectée pendant ce passage).
 4. **Messenger 21297** : `identifier_contact` (6223) et `enregistrer_fiche_prospect` (6224) ne sont pas ajoutés, car `/api/agent/account` exige un numéro de téléphone et Messenger n'en fournit pas. La fin de conversation (issue + résumé) arrive déjà au site. Une évolution du site est nécessaire pour enregistrer une fiche sans numéro.
 5. **Texte santé pour les secteurs en pause** (21297, 21358, 21182) : le texte actuel propose encore un rappel par un conseiller. À valider : le garder, ou passer à un refus poli avec liste d'attente.
