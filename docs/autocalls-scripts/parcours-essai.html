@@ -1,0 +1,76 @@
+<!-- Parcours d'essai et aides dans la langue du client (ajouté le 9 oct. 2026) :
+     1) un inscrit sans forfait et sans minutes est envoyé sur /plans, avec l'explication de l'essai (14 jours, 30 minutes,
+        carte demandée, rien débité) et un lien pour payer à la minute sans forfait (le paiement à l'usage reste possible) ;
+     2) lien « Factures et carte bancaire » (/billing) sous l'encadré du forfait ;
+     3) sur /credits : où changer de carte, et actualiser la page après un achat pour voir le nouveau solde.
+     Langue : cookie pia_lang posé par permanenceia.com, sinon le navigateur. Ne fait rien hors de app.permanenceia.com. -->
+<script>
+(function () {
+  if (location.hostname !== 'app.permanenceia.com') return;
+  var T = {
+    fr: { title: "Dernière étape : choisissez votre forfait pour démarrer l'essai gratuit", text: "Cliquez sur « Start 14-Day Free Trial » sous le forfait de votre choix : 14 jours et 30 minutes d'appels offerts. Une carte est demandée, mais rien n'est débité pendant l'essai. Sans engagement, annulable à tout moment.", payg: "Continuer sans forfait : paiement à la minute (0,39 $ HT)", billing: "Factures et carte bancaire", credits: "Le paiement utilise votre carte enregistrée. Pour la changer : « Factures et carte bancaire » sous votre forfait, puis l'onglet « Wallet ». Après un achat, actualisez la page pour voir votre nouveau solde." },
+    en: { title: "Last step: choose a plan to start your free trial", text: "Click “Start 14-Day Free Trial” under the plan you want: 14 days and 30 minutes of calls on us. A card is required, but nothing is charged during the trial. No commitment, cancel anytime.", payg: "Continue without a plan: pay per minute (US$0.39 excl. tax)", billing: "Invoices and payment card", credits: "Payments use your saved card. To change it: “Invoices and payment card” under your plan, then the “Wallet” tab. After a purchase, refresh the page to see your new balance." },
+    it: { title: "Ultimo passo: scelga un piano per iniziare la prova gratuita", text: "Clicchi su «Start 14-Day Free Trial» sotto il piano che preferisce: 14 giorni e 30 minuti di chiamate in omaggio. È richiesta una carta, ma durante la prova non viene addebitato nulla. Senza vincoli, disdetta in qualsiasi momento.", payg: "Continuare senza piano: pagamento a minuto (0,39 USD IVA esclusa)", billing: "Fatture e carta di pagamento", credits: "Il pagamento usa la carta registrata. Per cambiarla: «Fatture e carta di pagamento» sotto il Suo piano, poi la scheda «Wallet». Dopo un acquisto, aggiorni la pagina per vedere il nuovo saldo." },
+    pl: { title: "Ostatni krok: wybierz plan, aby rozpocząć darmowy okres próbny", text: "Kliknij „Start 14-Day Free Trial” pod wybranym planem: 14 dni i 30 minut rozmów gratis. Wymagana jest karta, ale w okresie próbnym nic nie zostanie pobrane. Bez zobowiązań, możesz zrezygnować w każdej chwili.", payg: "Kontynuuj bez planu: płatność za minutę (0,39 USD netto)", billing: "Faktury i karta płatnicza", credits: "Płatność obciąża zapisaną kartę. Aby ją zmienić: „Faktury i karta płatnicza” pod Twoim planem, a potem zakładka „Wallet”. Po zakupie odśwież stronę, aby zobaczyć nowe saldo." },
+    nl: { title: "Laatste stap: kies een abonnement om uw gratis proefperiode te starten", text: "Klik op ‘Start 14-Day Free Trial’ onder het abonnement van uw keuze: 14 dagen en 30 belminuten cadeau. Er is een betaalkaart nodig, maar tijdens de proefperiode wordt niets afgeschreven. Geen verplichtingen, altijd opzegbaar.", payg: "Doorgaan zonder abonnement: betalen per minuut (US$ 0,39 excl. btw)", billing: "Facturen en betaalkaart", credits: "Betalingen gaan via uw opgeslagen kaart. Wijzigen: ‘Facturen en betaalkaart’ onder uw abonnement, daarna het tabblad ‘Wallet’. Vernieuw na een aankoop de pagina om uw nieuwe saldo te zien." },
+    he: { title: "שלב אחרון: בחרו מסלול כדי להתחיל את תקופת הניסיון בחינם", text: "לחצו על ״Start 14-Day Free Trial״ מתחת למסלול שבחרתם: 14 יום ו-30 דקות שיחה במתנה. נדרש כרטיס אשראי, אבל שום סכום לא יחויב בתקופת הניסיון. בלי התחייבות, אפשר לבטל בכל עת.", payg: "המשך בלי מסלול: תשלום לפי דקה ($0.39 לא כולל מע״מ)", billing: "חשבוניות וכרטיס אשראי", credits: "התשלום מתבצע בכרטיס השמור. כדי להחליף אותו: ״חשבוניות וכרטיס אשראי״ מתחת למסלול, ואז הלשונית ״Wallet״. אחרי רכישה, רעננו את הדף כדי לראות את היתרה החדשה." }
+  };
+  var m = document.cookie.match(/(?:^|; )pia_lang=([^;]+)/);
+  var lang = ((m ? decodeURIComponent(m[1]) : navigator.language) || 'fr').toLowerCase().slice(0, 2);
+  if (lang === 'iw') lang = 'he';
+  var t = T[lang] || T.en, rtl = lang === 'he';
+  var SKIP = 'pia_skip_plans';
+
+  /** Encadré du forfait dans la barre latérale : forfait actif ou non, minutes restantes. */
+  function planBox() {
+    var badge = [].slice.call(document.querySelectorAll('.fi-section-content .fi-badge')).filter(function (b) { return b.closest('.fi-section-content') && b.closest('.fi-section-content').querySelector('a[href*="/credits"]'); })[0];
+    if (!badge) return null;
+    var box = badge.closest('.fi-section-content');
+    var num = box.querySelector('p.font-mono');
+    var minutes = num ? parseFloat((num.firstChild && num.firstChild.textContent || '').replace(',', '.')) : NaN;
+    return { box: box, noPlan: /No active plan/i.test(badge.textContent), minutes: minutes };
+  }
+
+  function el(tag, css, text) { var e = document.createElement(tag); if (css) e.style.cssText = css; if (text) e.textContent = text; return e; }
+
+  function run() {
+    var st = planBox();
+    if (!st) return;
+    var p = location.pathname.replace(/\/+$/, '') || '/';
+    // 1) Sans forfait ni minutes : direction la page des forfaits (sauf pages de paiement, compte et déconnexion).
+    var exempt = /^\/(plans|credits|billing|profile|logout|login|register|email|password|two-factor|security)/.test(p);
+    var skipped = false; try { skipped = sessionStorage.getItem(SKIP) === '1'; } catch (e) {}
+    if (st.noPlan && st.minutes === 0 && !exempt && !skipped) { location.replace('/plans'); return; }
+    // 2) Lien vers les factures et la carte (portail Stripe) sous l'encadré du forfait.
+    if (!document.getElementById('pia-billing-link')) {
+      var a = el('a', 'display:block;margin-top:10px;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:2px;', t.billing);
+      a.id = 'pia-billing-link'; a.href = '/billing'; if (rtl) a.dir = 'rtl';
+      st.box.appendChild(a);
+    }
+    // 3) Explication de l'essai en haut de la page des forfaits, pour un compte sans forfait.
+    if (p === '/plans' && st.noPlan && !document.getElementById('pia-trial-help')) {
+      var host = document.querySelector('main') || document.body;
+      var card = el('div', 'margin:0 0 24px;padding:16px 20px;border-radius:12px;background:#E2F5FA;border:1px solid #0FA3C4;color:#0E1B4D;line-height:1.5;');
+      card.id = 'pia-trial-help'; if (rtl) card.dir = 'rtl';
+      card.appendChild(el('p', 'margin:0 0 6px;font-weight:700;font-size:16px;', t.title));
+      card.appendChild(el('p', 'margin:0 0 8px;font-size:14px;', t.text));
+      var payg = el('a', 'font-size:13px;color:#0A7690;text-decoration:underline;', t.payg);
+      payg.href = '/credits';
+      payg.addEventListener('click', function () { try { sessionStorage.setItem(SKIP, '1'); } catch (e) {} });
+      card.appendChild(payg);
+      host.insertBefore(card, host.firstChild);
+    }
+    // 4) Page d'achat : où changer de carte, et actualiser après un achat.
+    if (p === '/credits' && !document.getElementById('pia-credits-help')) {
+      var main = document.querySelector('main') || document.body;
+      var note = el('p', 'margin:0 0 16px;padding:12px 16px;border-radius:10px;background:#F5F8FB;border:1px solid #DDE5EE;color:#0E1B4D;font-size:13px;line-height:1.5;', t.credits);
+      note.id = 'pia-credits-help'; if (rtl) note.dir = 'rtl';
+      main.insertBefore(note, main.firstChild);
+    }
+  }
+
+  function later() { setTimeout(run, 300); setTimeout(run, 1500); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', later); else later();
+  document.addEventListener('livewire:navigated', later);
+})();
+</script>
