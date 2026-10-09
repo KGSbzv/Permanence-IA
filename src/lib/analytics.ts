@@ -12,6 +12,10 @@ export const CONSENT_COOKIE = 'pia_consent';
 type Gtag = (...args: unknown[]) => void;
 const gtag = (): Gtag | undefined => (typeof window !== 'undefined' ? (window as unknown as { gtag?: Gtag }).gtag : undefined);
 
+/** Mesure seulement sur le site en ligne (permanenceia.com et ses sous-domaines) : le serveur de développement
+ *  (localhost) et les aperçus n’envoient rien à Google ni à Meta, pour ne pas fausser les statistiques et les audiences. */
+const onLiveSite = () => typeof location !== 'undefined' && /(^|\.)permanenceia\.com$/.test(location.hostname);
+
 export function readConsent(): 'granted' | 'denied' | null {
   if (typeof document === 'undefined') return null;
   const m = /(?:^|;\s*)pia_consent=(granted|denied)/.exec(document.cookie);
@@ -38,7 +42,7 @@ const GA_DISABLE_KEY = `ga-disable-${GA_ID}`;
 /** Charge gtag.js (une seule fois) et compte la page en cours (page_view envoyée par « config »).
  *  À n’appeler qu’après consentement : avant, aucune requête ne part vers googletagmanager.com ni google-analytics.com. */
 export function loadGoogleAnalytics() {
-  if (typeof window === 'undefined' || gaAllowed) return;
+  if (typeof window === 'undefined' || gaAllowed || !onLiveSite()) return;
   gaAllowed = true;
   const w = window as unknown as Record<string, unknown> & { dataLayer?: unknown[]; gtag?: Gtag };
   w[GA_DISABLE_KEY] = false;
@@ -92,7 +96,7 @@ let metaAllowed = false;
 
 /** Charge le pixel Meta (une seule fois) et compte la page vue. À n’appeler qu’après consentement. */
 export function loadMetaPixel() {
-  if (typeof window === 'undefined' || metaAllowed) return;
+  if (typeof window === 'undefined' || metaAllowed || !onLiveSite()) return;
   metaAllowed = true;
   const w = window as unknown as { fbq?: Fbq; _fbq?: Fbq };
   if (w.fbq) { w.fbq('consent', 'grant'); w.fbq('track', 'PageView'); return; }
