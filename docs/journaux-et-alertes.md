@@ -37,6 +37,8 @@ L'alerte existante filtre `severity>=ERROR` sur le service voiceia. Dès le dép
 
 La métrique compte les erreurs du code par partie du site (`component`). Elle donne un graphique, et l'alerte dit tout de suite quelle partie est en panne. Les commandes ci-dessous sont à lancer dans un terminal où `gcloud` est connecté avec votre compte (propriétaire du projet snarecore-cacrs). Elles ne lisent ni ne modifient aucun secret, et ne touchent pas au site.
 
+**Fait le 9 octobre 2026 :** métrique `site-erreurs-applicatives` et alerte « Site PermanenceAI : erreurs applicatives » (projects/snarecore-cacrs/alertPolicies/1128652134991375070), même destinataire que l'alerte existante. La durée est de 60 s : Google Cloud refuse 0 s avec `EVALUATION_MISSING_DATA_INACTIVE`.
+
 ### 1. Créer la métrique
 
 Créer d'abord le fichier `metrique-erreurs-site.yaml`, où vous voulez, hors du dépôt :
@@ -91,7 +93,7 @@ Créer le fichier `alerte-erreurs-site.json`, lui aussi hors du dépôt :
         ],
         "comparison": "COMPARISON_GT",
         "thresholdValue": 0,
-        "duration": "0s",
+        "duration": "60s",
         "trigger": { "count": 1 },
         "evaluationMissingData": "EVALUATION_MISSING_DATA_INACTIVE"
       }
