@@ -75,12 +75,19 @@ export const UI_COMPONENTS = {
     close: 'Sluiten',
   },
 
+  // Pop-up de relance : titre court, minutes offertes juste dessous, vraies conditions de l’essai dans la ligne de texte (vouvoiement u).
   trialNudge: {
-    title: (minutes: string) => `Uw eerste ${minutes} minuten zijn gratis`,
+    title: 'Uw gratis AI-agent',
+    subtitle: (minutes: string) => `${minutes} minuten cadeau`,
     close: 'Sluiten',
-    text: (days: number) => `Test uw spraakagent ${days} dagen lang op uw echte gesprekken, voordat u beslist.`,
-    points: ['Creditcard gevraagd bij activering; tijdens de proefperiode wordt niets afgeschreven', 'Opzeggen kan direct in uw klantomgeving', 'Eerste agent binnen enkele minuten klaar'],
-    claim: (minutes: string) => 'Gratis starten',
+    text: (days: number) => `${days} dagen gratis proberen, zonder verplichtingen. Creditcard gevraagd bij activering; tijdens de proefperiode wordt niets afgeschreven. Kosteloos opzeggen vóór het einde.`,
+    points: [
+      'Neemt 24/7 de telefoon op, in meer dan 80 talen',
+      'Plant afspraken in en kwalificeert uw leads',
+      'Stuurt u na elk gesprek een samenvatting',
+      'Binnen enkele minuten live, en u houdt uw eigen nummer',
+    ],
+    claim: 'Uw agent gratis aanmaken',
     callMeBack: 'Bel mij terug',
   },
 

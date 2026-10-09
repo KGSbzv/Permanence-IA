@@ -77,12 +77,19 @@ export const UI_COMPONENTS = {
     close: 'סגירה',
   },
 
+  // Pop-up de relance : titre court, minutes offertes juste dessous, vraies conditions de l’essai dans la ligne de texte (pluriel neutre).
   trialNudge: {
-    title: (minutes: string) => `${minutes} הדקות הראשונות עלינו`,
+    title: 'סוכן AI משלכם, בחינם',
+    subtitle: (minutes: string) => `${minutes} דקות מתנה`,
     close: 'סגירה',
-    text: (days: number) => `נסו את הסוכן הקולי על השיחות האמיתיות שלכם במשך ${days} יום, לפני שאתם מחליטים.`,
-    points: ['נדרש כרטיס אשראי, ללא חיוב בתקופת הניסיון', 'ביטול בכל עת, מאזור הלקוח', 'הסוכן הראשון מוכן תוך דקות'],
-    claim: (_minutes: string) => 'התחילו בחינם',
+    text: (days: number) => `${days} ימי ניסיון חינם, ללא התחייבות. נדרש כרטיס אשראי בהפעלה, אבל אין שום חיוב בתקופת הניסיון. ביטול ללא עלות לפני סוף התקופה.`,
+    points: [
+      'עונה ללקוחות שלכם 24/7, ביותר מ-80 שפות',
+      'קובע תורים ומסנן לידים',
+      'שולח לכם סיכום של כל שיחה',
+      'מוכן תוך דקות, והמספר נשאר שלכם',
+    ],
+    claim: 'צרו את הסוכן שלכם בחינם',
     callMeBack: 'בקשת שיחה חוזרת',
   },
 

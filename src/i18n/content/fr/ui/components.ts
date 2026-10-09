@@ -75,12 +75,20 @@ export const UI_COMPONENTS = {
     close: 'Fermer',
   },
 
+  // Pop-up de relance (TrialNudge) : titre court et vendeur, minutes offertes juste dessous ; la ligne de texte
+  // rappelle aussitôt les vraies conditions (essai gratuit, sans engagement, carte demandée, rien n’est débité).
   trialNudge: {
-    title: (minutes: string) => `Vos ${minutes} premières minutes sont offertes`,
+    title: 'Votre agent IA gratuit',
+    subtitle: (minutes: string) => `${minutes} minutes offertes`,
     close: 'Fermer',
-    text: (days: number) => `Testez votre agent vocal sur vos vrais appels pendant ${days} jours, avant de décider.`,
-    points: ['Carte demandée à l’activation, rien n’est débité pendant l’essai', 'Annulation depuis votre espace client', 'Premier agent prêt en quelques minutes'],
-    claim: (minutes: string) => 'Démarrer l’essai de 14 jours',
+    text: (days: number) => `Essai gratuit de ${days} jours, sans engagement : carte demandée à l’activation, rien n’est débité pendant l’essai. Annulation sans frais avant la fin.`,
+    points: [
+      'Répond à vos clients 24 h/24, 7 j/7, dans plus de 80 langues',
+      'Prend vos rendez-vous et qualifie vos prospects',
+      'Vous envoie le résumé de chaque appel',
+      'Prêt en quelques minutes, et vous gardez votre numéro',
+    ],
+    claim: 'Créer mon agent gratuitement',
     callMeBack: 'Être rappelé',
   },
 

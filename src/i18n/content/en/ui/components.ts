@@ -79,12 +79,19 @@ export const UI_COMPONENTS = {
     close: 'Close',
   },
 
+  // Pop-up de relance : anglais britannique (l’Australie remplace la ligne de texte dans en/au.ts).
   trialNudge: {
-    title: (minutes: string) => `Your first ${minutes} minutes are free`,
+    title: 'Your free AI agent',
+    subtitle: (minutes: string) => `${minutes} minutes on us`,
     close: 'Close',
-    text: (days: number) => `Test your voice agent on your real calls for ${days} days before you decide.`,
-    points: ['Card requested at activation, nothing charged during the trial', 'Cancel from your customer area', 'First agent ready in a few minutes'],
-    claim: (_minutes: string) => 'Start for free',
+    text: (days: number) => `Free ${days}-day trial, no commitment. Card details are needed to activate, but nothing is charged during the trial. Cancel before the end at no cost.`,
+    points: [
+      'Answers your customers 24/7, in more than 80 languages',
+      'Books appointments and qualifies your leads',
+      'Sends you a summary of every call',
+      'Up and running in minutes, and you keep your number',
+    ],
+    claim: 'Create your agent for free',
     callMeBack: 'Get a call back',
   },
 

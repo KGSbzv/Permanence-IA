@@ -77,12 +77,19 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     close: 'Chiudi',
   },
 
+  // Pop-up de relance : titre court, minutes offertes juste dessous, vraies conditions de l’essai dans la ligne de texte (vouvoiement Lei).
   trialNudge: {
-    title: (minutes: string) => `I Suoi primi ${minutes} minuti sono gratuiti`,
+    title: 'Il Suo agente AI gratuito',
+    subtitle: (minutes: string) => `${minutes} minuti in omaggio`,
     close: 'Chiudi',
-    text: (days: number) => `Provi il Suo agente vocale sulle Sue chiamate reali per ${days} giorni, prima di decidere.`,
-    points: ['Carta richiesta all’attivazione, nessun addebito durante la prova', 'Annullabile dalla Sua area clienti', 'Primo agente pronto in pochi minuti'],
-    claim: (minutes: string) => 'Inizi gratis',
+    text: (days: number) => `Prova gratuita di ${days} giorni, senza vincoli: carta richiesta all’attivazione, nessun addebito durante la prova. Disdica prima della fine senza costi.`,
+    points: [
+      'Risponde ai Suoi clienti 24 ore su 24, in oltre 80 lingue',
+      'Fissa gli appuntamenti e qualifica i contatti',
+      'Le invia il riepilogo di ogni chiamata',
+      'Pronto in pochi minuti, con il Suo numero di sempre',
+    ],
+    claim: 'Crei gratis il Suo agente',
     callMeBack: 'Richieda una richiamata',
   },
 

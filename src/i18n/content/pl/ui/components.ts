@@ -86,12 +86,19 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     close: 'Zamknij',
   },
 
+  // Pop-up de relance : titre court, minutes offertes juste dessous, vraies conditions de l’essai dans la ligne de texte (tutoiement, comme le site).
   trialNudge: {
-    title: (minutes: string) => `Pierwsze ${minutes} ${plural(toInt(minutes), 'minuta', 'minuty', 'minut')} za darmo`,
+    title: 'Twój darmowy agent\u00a0AI', // espace insécable : « AI » ne reste jamais seul à la ligne
+    subtitle: (minutes: string) => `${minutes} ${plural(toInt(minutes), 'minuta', 'minuty', 'minut')} gratis`,
     close: 'Zamknij',
-    text: (days: number) => `Przetestuj agenta głosowego na prawdziwych połączeniach przez ${days} ${days === 1 ? 'dzień' : 'dni'}, zanim podejmiesz decyzję.`,
-    points: ['Karta wymagana przy aktywacji, w okresie próbnym nic nie jest pobierane', 'Anulujesz w panelu klienta', 'Pierwszy agent gotowy w kilka minut'],
-    claim: (_minutes: string) => 'Zacznij za darmo',
+    text: (days: number) => `Bezpłatny okres próbny: ${days} ${days === 1 ? 'dzień' : 'dni'}, bez zobowiązań. Karta wymagana przy aktywacji, ale w okresie próbnym nie pobieramy żadnych opłat. Anuluj przed końcem okresu próbnego bez kosztów.`,
+    points: [
+      'Odbiera telefony 24/7, w ponad 80 językach',
+      'Umawia wizyty i kwalifikuje zgłoszenia',
+      'Wysyła Ci podsumowanie każdej rozmowy',
+      'Gotowy w kilka minut, a Twój numer zostaje bez zmian',
+    ],
+    claim: 'Stwórz agenta za darmo',
     callMeBack: 'Zamów rozmowę',
   },
 

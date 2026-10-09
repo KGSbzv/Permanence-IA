@@ -102,21 +102,27 @@ export default function TrialNudge() {
   return (
     <div className="fixed inset-0 z-[90] flex items-end justify-center bg-night/50 sm:items-center sm:p-4" onClick={() => setOpen(false)}>
       <div
-        ref={dialog} role="dialog" aria-modal="true" aria-labelledby="nudge-title"
+        ref={dialog} role="dialog" aria-modal="true" aria-labelledby="nudge-title nudge-subtitle" aria-describedby="nudge-text"
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-t-3xl bg-white p-6 shadow-float sm:rounded-3xl sm:p-8"
+        className="max-h-full w-full max-w-md overflow-y-auto overscroll-contain rounded-t-3xl bg-white p-6 shadow-float sm:rounded-3xl sm:p-8"
       >
         <div className="flex items-start justify-between gap-4">
-          <h2 id="nudge-title" className="font-display text-2xl font-bold">{t.title(num(market.trial.minutes))}</h2>
+          <div>
+            <h2 id="nudge-title" className="font-display text-2xl font-bold">{t.title}</h2>
+            {/* Accroche juste sous le titre : les minutes offertes, nombre tiré du marché (jamais écrit en dur). */}
+            <p id="nudge-subtitle" className="mt-2 inline-flex rounded-full bg-signal-soft px-3 py-1 text-sm font-semibold text-signal-deep">
+              {t.subtitle(num(market.trial.minutes))}
+            </p>
+          </div>
           <button type="button" onClick={() => setOpen(false)} aria-label={t.close} className="rounded-md p-1.5 text-slate hover:bg-paper"><X className="h-5 w-5" /></button>
         </div>
-        <p className="mt-2 text-[15px]">{t.text(market.trial.days)}</p>
+        <p id="nudge-text" className="mt-3 text-[15px]">{t.text(market.trial.days)}</p>
         <ul className="mt-5 space-y-2 text-ink">
           {t.points.map((t) => (
             <li key={t} className="flex gap-3"><Check className="mt-1 h-4 w-4 shrink-0 text-signal" aria-hidden />{t}</li>
           ))}
         </ul>
-        <Link href={SIGNUP_URL} onClick={() => setOpen(false)} className="btn-primary mt-6 w-full">{t.claim(num(market.trial.minutes))}</Link>
+        <Link href={SIGNUP_URL} onClick={() => setOpen(false)} className="btn-primary mt-6 w-full">{t.claim}</Link>
         <button type="button" onClick={() => { setOpen(false); openCallbackModal({ type: 'commercial' }); }} className="btn-ghost mt-3 w-full">{t.callMeBack}</button>
       </div>
     </div>

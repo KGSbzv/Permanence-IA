@@ -82,6 +82,11 @@ export const enAu: Content = {
       industryMarquee,
       portalPreview,
       mock,
+      // Pop-up de relance : « no lock-in contract », la formule australienne habituelle pour « sans engagement ».
+      trialNudge: {
+        ...en.ui.components.trialNudge,
+        text: (days: number) => `Free ${days}-day trial, no lock-in contract. Card details are needed to activate, but nothing is charged during the trial. Cancel before the end at no cost.`,
+      },
       // Démo en direct : les horaires de rappel sont donnés à l’heure de Sydney pour l’Australie
       liveDemo: {
         ...en.ui.components.liveDemo,
