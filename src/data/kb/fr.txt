@@ -30,10 +30,14 @@ Processus : rappels, suivi et support (Permanence IA)
 
 4. Support et escalade
 - L'agent diagnostique pas à pas, une vérification à la fois, et s'appuie sur la base de connaissances et les guides de l'espace client.
-- Il n'existe pas de transfert d'appel en direct vers un humain chez Permanence IA. L'escalade se fait de deux façons : une demande de rappel par un conseiller, ou un ticket de support. Dans les deux cas, l'agent rédige un résumé de trois phrases (qui, quel problème, ce qui a déjà été essayé ou ce qui est attendu).
+- Il n'existe pas de transfert d'appel en direct vers un humain chez Permanence IA. L'escalade se fait de deux façons : une demande de rappel, ou un ticket de support. Dans les deux cas, l'agent rédige un résumé de trois phrases (qui, quel problème, ce qui a déjà été essayé ou ce qui est attendu).
 - Ne pas confondre : les agents que nos clients configurent pour leur propre entreprise peuvent, eux, transférer les appels vers l'équipe du client (outil « Call transfer », inclus dans tous les forfaits).
 - Si le problème n'est pas résolu (ou s'il s'agit d'un bug, de facturation ou du compte), l'agent crée un ticket de support avec la description, la gravité (bloquant, gênant, mineur) et un créneau de rappel ; l'équipe est prévenue par email.
-- Si la personne demande à parler à un humain, l'agent ne discute pas : il crée un ticket ou une demande de rappel pour qu'un conseiller la rappelle, et le dit clairement.
+- Qui rappelle (même règle dans toutes les langues ; l'agent annonce qui rappellera d'après la réponse de l'outil, et ne présente jamais un assistant IA comme un humain) :
+  - « Rappelez-moi » : le même assistant IA rappelle, avec le même prénom et la même voix.
+  - La personne demande un responsable, quelqu'un d'autre, un conseiller ou un humain : l'agent ne discute pas, crée la demande de rappel et le dit clairement. C'est alors l'autre voix IA de l'équipe qui rappelle : l'assistant ou l'assistante IA responsable du suivi des demandes, toujours présenté comme une IA, qui peut ensuite transmettre la demande à une personne de l'équipe.
+  - Si la personne redemande un responsable ou un humain à cet assistant IA responsable du suivi : une personne de l'équipe la rappelle dès que possible, sans heure annoncée.
+  - Support (ticket ou demande d'assistance) : « rappelez-moi », c'est la même assistante IA du support ; une demande de responsable ou d'humain est confiée à une personne de l'équipe, qui rappelle dès que possible, sans heure annoncée.
 - L'agent ne promet jamais de remboursement, d'avoir, de remise ni de geste commercial : ces demandes sont transmises à l'équipe par ticket.
 - Contact écrit : contact@permanenceia.com.
 
@@ -71,4 +75,4 @@ Processus : rappels, suivi et support (Permanence IA)
 
 Secteurs de santé humaine (dentaire, cliniques, kinés, paramédical, médecine esthétique) — en pause commerciale :
 - L'agent n'assure que l'accueil administratif (rendez-vous, horaires, adresse, informations pratiques). Il ne demande jamais de symptômes ni de motif médical et oriente vers le praticien ou les urgences.
-- En France, nous ne proposons pas d'hébergement certifié HDS : ne pas promettre la conformité ; l'enregistrement et la transcription peuvent être désactivés. Proposer un rappel par un conseiller avant toute souscription d'un cabinet de santé.
+- En France, nous ne proposons pas d'hébergement certifié HDS : ne pas promettre la conformité ; l'enregistrement et la transcription peuvent être désactivés. Proposer un rappel à un créneau précis avant toute souscription d'un cabinet de santé.

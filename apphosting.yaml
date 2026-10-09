@@ -59,10 +59,6 @@ env:
     value: "0"
   - variable: RELANCES_LOCALES
     value: fr,en-gb,en-au
-  # Messages de service : fr et en seulement le temps de la relecture native des textes it, pl, nl, he (9 oct. 2026) ;
-  # retirer cette variable pour les ouvrir dans les 7 langues.
-  - variable: RELANCES_SERVICE_LOCALES
-    value: fr,en-gb,en-au
   - variable: RELANCES_OIDC_AUDIENCE
     value: https://www.permanenceia.com/api/cron/relances
   - variable: RELANCES_OIDC_EMAIL

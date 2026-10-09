@@ -70,20 +70,22 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     subject: (brand: string, code: string) => `קוד הכניסה שלכם ל-${brand}: ${code}`,
     hello: 'שלום,',
     line: (brand: string) => `זה הקוד שלכם לכניסה לחשבון באתר ${brand}:`,
-    valid: 'הקוד בתוקף ל-10 דקות ולשימוש חד־פעמי.',
-    ignore: 'אם לא ביקשתם קוד, אפשר להתעלם מהודעה זו: אי אפשר להיכנס לחשבון בלי הקוד הזה.',
+    valid: 'הקוד בתוקף ל-10 דקות, ואפשר להשתמש בו פעם אחת בלבד.',
+    ignore: 'אם לא ביקשתם קוד, אפשר להתעלם מהודעה זו: אף אחד לא יכול להיכנס לחשבון שלכם בלי הקוד הזה.',
   },
-  // Confirmation of a support request (ticket T-XXXXXXXX), essential email (src/lib/tickets.ts): information only, no
-  // prices or offers; plural אתם, as in the other emails.
+  // Confirmation d’une demande d’assistance (ticket T-XXXXXXXX), e-mail essentiel (src/lib/tickets.ts) : purement
+  // informatif, sans prix ni offre ; pluriel אתם, comme les autres e-mails. L’objet doit commencer par
+  // « פניית התמיכה שלכם T- » (scripts/test-dossier-tickets.ts). when (describeLocal, he-IL) commence par « יום … » :
+  // d’où le préfixe « ב » collé (« ביום שישי, 16 באוקטובר 2026 בשעה 14:30 »), comme copyMail.
   ticketMail: {
     subject: (ticket: string, brand: string) => `פניית התמיכה שלכם ${ticket} התקבלה · ${brand}`,
     hello: (first: string | null) => (first ? `שלום ${first},` : 'שלום,'),
-    recorded: (ticket: string) => `פניית התמיכה שלכם נרשמה במספר ${ticket}. כדאי לשמור את המספר: בעזרתו נאתר את הפנייה במהירות אם תפנו אלינו שוב.`,
-    callAt: (when: string) => `מועד השיחה החוזרת: ${when}.`,
-    asap: 'נחזור אליכם בהקדם האפשרי, בשעות שבהן אנחנו מתקשרים.',
+    recorded: (ticket: string) => `פניית התמיכה שלכם נרשמה. מספר הפנייה: ${ticket}. כדאי לשמור אותו: בעזרתו נאתר את הפנייה במהירות אם תפנו אלינו שוב.`,
+    callAt: (when: string) => `נתקשר אליכם ב${when}.`,
+    asap: 'נתקשר אליכם בהקדם האפשרי, בשעות הפעילות שלנו.',
     team: 'מישהו מהצוות שלנו יחזור אליכם בהקדם האפשרי.',
     reply: 'כדי להוסיף פרטים, אפשר פשוט להשיב למייל הזה ולציין את מספר הפנייה.',
-    notYou: 'אם לא אתם פניתם אלינו, אפשר להתעלם מההודעה.',
-    sign: (brand: string) => `הצוות של ${brand}`,
+    notYou: 'אם לא פניתם אלינו, אפשר להתעלם מההודעה הזו.',
+    sign: (brand: string) => `צוות ${brand}`,
   },
 };

@@ -78,11 +78,12 @@ export const UI_PAGES = {
     // Real steps in the app: step 2 (choosing a plan, "Start 14-Day Free Trial") starts the trial and adds the minutes.
     createSteps: (days: number, minutes: number): Rich[] => [
       ['1. ', { b: 'פתחו חשבון' }, ' עם כתובת האימייל העסקית שלכם.'],
-      ['2. ', { b: 'בחרו מסלול' }, ' (Choose a plan) ולחצו על ', { b: 'Start 14-Day Free Trial' }, `: נדרש כרטיס אשראי, לא מתבצע חיוב במשך ${days} יום, ${minutes} דקות כלולות. רק השלב הזה מוסיף לחשבון את ${minutes} הדקות.`],
+      ['2. ', { b: 'בחרו מסלול' }, ' (Choose a plan) ולחצו על ', { b: 'Start 14-Day Free Trial' }, `: נדרש כרטיס אשראי, אין שום חיוב במשך ${days} יום, ו-${minutes} דקות כלולות. רק השלב הזה מוסיף לחשבון את ${minutes} הדקות.`],
       ['3. ', { b: 'הגדירו את הסוכן' }, ' ובצעו את השיחות הראשונות.'],
     ],
-    createNote: (minutes: number) => `בלי שלב 2 החשבון נשאר עם 0 דקות: תקופת הניסיון ו-${minutes} הדקות מתחילות רק אחרי שבוחרים מסלול.`,
-    creditsNote: (credits: string, price: string) => `תקופת הניסיון כוללת דקות שיחה, אבל לא קרדיטים להודעות: כדי לנסות את התשובות הכתובות של ה-AI (צ׳אט באתר, וואטסאפ, מסנג׳ר), הוסיפו קרדיטים באזור הלקוח (Add credits), ${credits} קרדיטים ב-${price}.`,
+    createNote: (minutes: number) => `בלי שלב 2, החשבון נשאר עם 0 דקות: תקופת הניסיון ו-${minutes} הדקות שלה מתחילות רק אחרי שבוחרים מסלול.`,
+    // L’essai ne crédite que des minutes (audit du 9 oct.) ; price arrive déjà formaté par money() (100 crédits = 1 $).
+    creditsNote: (credits: string, price: string) => `תקופת הניסיון כוללת דקות שיחה, אבל לא קרדיטים להודעות: כדי לנסות את התשובות הכתובות של ה-AI (צ׳אט באתר, וואטסאפ, מסנג׳ר), הוסיפו קרדיטים באזור הלקוח (Add credits). ${credits} קרדיטים עולים ${price}.`,
     createCta: 'שלב 1: פתיחת חשבון',
     already: 'כבר לקוחות?',
     login: 'התחברות',

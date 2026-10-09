@@ -74,21 +74,21 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
   accountCode: {
     subject: (brand: string, code: string) => `Kod logowania ${brand}: ${code}`,
     hello: 'Dzień dobry,',
-    line: (brand: string) => `Oto kod dostępu do Państwa konta na stronie ${brand}:`,
+    line: (brand: string) => `Oto kod logowania do Państwa konta na stronie ${brand}:`,
     valid: 'Kod jest ważny 10 minut i można go użyć tylko raz.',
-    ignore: 'Jeśli to nie Państwo o niego prosili, prosimy zignorować tę wiadomość: bez tego kodu nikt nie uzyska dostępu do konta.',
+    ignore: 'Jeśli nie prosili Państwo o ten kod, wystarczy zignorować tę wiadomość: bez niego nikt nie uzyska dostępu do Państwa konta.',
   },
   // Potwierdzenie zgłoszenia do pomocy technicznej (T-XXXXXXXX), wiadomość niezbędna (src/lib/tickets.ts): tylko
   // informacja, bez cen i ofert; forma „Państwo”, jak w pozostałych wiadomościach.
   ticketMail: {
     subject: (ticket: string, brand: string) => `Zgłoszenie ${ticket} zostało przyjęte · ${brand}`,
     hello: (_first: string | null) => 'Dzień dobry,',
-    recorded: (ticket: string) => `Przyjęliśmy Państwa zgłoszenie do pomocy technicznej pod numerem ${ticket}. Prosimy zachować ten numer: dzięki niemu szybko odnajdziemy zgłoszenie, jeśli skontaktują się Państwo z nami ponownie.`,
-    callAt: (when: string) => `Termin oddzwonienia: ${when}.`,
-    asap: 'Oddzwonimy najszybciej, jak to możliwe, w godzinach, w których wykonujemy połączenia.',
+    recorded: (ticket: string) => `Państwa zgłoszenie do wsparcia technicznego zostało zarejestrowane pod numerem ${ticket}. Prosimy zachować ten numer: dzięki niemu szybko odnajdziemy zgłoszenie, jeśli skontaktują się Państwo z nami ponownie.`,
+    callAt: (when: string) => `Zaplanowany termin oddzwonienia: ${when}.`,
+    asap: 'Oddzwonimy najszybciej, jak to możliwe, w naszych godzinach pracy.',
     team: 'Ktoś z naszego zespołu skontaktuje się z Państwem najszybciej, jak to możliwe.',
-    reply: 'Aby coś dodać, wystarczy odpowiedzieć na tę wiadomość, podając numer zgłoszenia.',
-    notYou: 'Jeśli to nie Państwo wysłali to zgłoszenie, prosimy zignorować tę wiadomość.',
+    reply: 'Aby coś uzupełnić, wystarczy odpowiedzieć na tę wiadomość, podając numer zgłoszenia.',
+    notYou: 'Jeśli nie wysyłali Państwo tego zgłoszenia, prosimy zignorować tę wiadomość.',
     sign: (brand: string) => `Zespół ${brand}`,
   },
 };

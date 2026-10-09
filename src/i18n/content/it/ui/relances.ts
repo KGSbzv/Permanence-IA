@@ -7,6 +7,7 @@
 // - {company} può valere «la Sua attività»: le frasi usano «per {company}» o {company} come soggetto, mai «di/a {company}»;
 // - le date seguono «il giorno …» per restare corrette con qualunque giorno («il giorno 8 ottobre»);
 // - i messaggi «essential» (I1, C1–C5, F1, U1) non contengono argomenti di vendita;
+//   (relecture du 9 oct.) même règle pour les variantes de C4, C5 et F1, la série A et la série S : ni prix ni promotion ;
 // - piè di pagina legale e annullamento dell’iscrizione sono aggiunti da sendMail (src/lib/emailFooter.ts).
 import type { RelancesContent } from '../../fr/ui/relances';
 
@@ -60,15 +61,15 @@ export const UI_RELANCES: RelancesContent = {
       category: 'marketing',
       subject: '{first_name}, il Suo account non è ancora stato creato',
       subjectNoName: 'Il Suo account non è ancora stato creato',
-      preheader: 'La Sua iscrizione non è ancora completata: possiamo completarla insieme.',
+      preheader: 'La Sua iscrizione non è terminata: possiamo completarla insieme a Lei.',
       body: [
         `Ha iniziato a creare il Suo account ${f.brand} dalla nostra pagina della prova gratuita, ma l’iscrizione non risulta completata.`,
-        'Per avviare la prova restano due passaggi: completare l’iscrizione sulla pagina della Sua area clienti (in inglese, bastano pochi minuti), poi scegliere il piano da provare.',
+        'Per avviare la prova restano due passaggi: completare l’iscrizione nella Sua area clienti (la pagina è in inglese, bastano pochi minuti), poi scegliere il piano da provare.',
         `È la scelta del piano ad avviare la prova di ${f.trialDays} giorni, con ${f.trialMinutes} minuti di chiamate. È richiesta una carta, ma durante la prova non viene addebitato nulla.`,
-        'Se ha creato l’account con un altro indirizzo email, non tenga conto di questo messaggio.',
+        'Se ha già creato l’account con un altro indirizzo email, non tenga conto di questo messaggio.',
       ],
       cta: { label: 'Completi la Sua iscrizione', target: 'register' },
-      after: ['Preferisce farlo insieme a noi? Lasci il Suo numero sulla nostra pagina della prova: La richiamiamo nel momento che preferisce per creare l’account e configurare l’agente insieme. Può anche rispondere semplicemente a questa email.'],
+      after: ['Preferisce farlo insieme a noi? Lasci il Suo numero sulla nostra pagina della prova: La richiamiamo quando Le è più comodo per creare l’account e configurare l’agente insieme a Lei. Può anche rispondere semplicemente a questa email.'],
       secondary: { label: 'Richieda una richiamata', target: 'trial_assist' },
     }),
     P2: (f) => {
@@ -174,7 +175,7 @@ export const UI_RELANCES: RelancesContent = {
     // ---------- I: iscritti senza prova (I1 essential, poi marketing) ----------
     I1: (f) => ({
       category: 'essential',
-      subject: 'Il Suo account è stato creato: un passaggio per avviare la prova',
+      subject: 'Il Suo account è stato creato: manca solo la scelta del piano',
       preheader: 'La prova parte quando sceglie un piano nella Sua area clienti.',
       body: [
         `La Sua area clienti ${f.brand} è pronta.`,
@@ -274,7 +275,7 @@ export const UI_RELANCES: RelancesContent = {
           ],
         },
         'Durante la prova non viene addebitato nulla. Può annullare prima del giorno {trial_end_date} da Billing info.',
-        'Da sapere: la prova comprende minuti di chiamata, ma nessun credito messaggi. Le risposte scritte dell’AI (chat del sito, WhatsApp, Messenger) usano questi crediti, che può aggiungere in Add credits.',
+        'Da sapere: la prova comprende minuti di chiamata, ma nessun credito messaggi. Le risposte scritte dell’AI (chat del sito, WhatsApp, Messenger) utilizzano questi crediti, che può aggiungere da Add credits.',
       ],
       cta: { label: 'Apra la Sua area clienti', target: 'app' },
     }),
@@ -316,10 +317,10 @@ export const UI_RELANCES: RelancesContent = {
     C4: (f) => ({
       category: 'essential',
       subject: `Minuti di prova rimasti: {minutes_left} su ${f.trialMinutes}`,
-      preheader: `Cosa succede una volta raggiunti i ${f.trialMinutes} minuti.`,
+      preheader: `Cosa succede una volta esauriti i ${f.trialMinutes} minuti.`,
       body: [
-        `Minuti rimasti nella Sua prova: {minutes_left} su ${f.trialMinutes}.`,
-        `Per Sua informazione, una volta raggiunti i ${f.trialMinutes} minuti, le chiamate si interrompono fino alla fine della prova, il giorno {trial_end_date}, o fino all’avvio del Suo abbonamento {plan_name} da Billing info. Se non fa nulla, l’abbonamento parte da sé alla fine della prova, a meno che non lo annulli prima.`,
+        `I minuti della Sua prova stanno per finire (rimasti: {minutes_left} su ${f.trialMinutes}).`,
+        `Per Sua informazione, una volta esauriti i ${f.trialMinutes} minuti, il Suo agente non risponde più alle chiamate fino alla fine della prova, il giorno {trial_end_date}, o finché non avvia il Suo abbonamento {plan_name} da Billing info. Se non fa nulla, l’abbonamento parte automaticamente alla fine della prova, a meno che non lo annulli prima.`,
         'La scelta è Sua.',
       ],
       cta: { label: 'Veda il Suo abbonamento', target: 'billing' },
@@ -329,8 +330,8 @@ export const UI_RELANCES: RelancesContent = {
       subject: `I ${f.trialMinutes} minuti della Sua prova sono esauriti`,
       preheader: 'Cosa succede ora, fino alla fine della prova.',
       body: [
-        `I ${f.trialMinutes} minuti della Sua prova sono esauriti: le chiamate sono sospese fino alla fine della prova, il giorno {trial_end_date}, o fino all’avvio del Suo abbonamento {plan_name} da Billing info.`,
-        'Se non fa nulla, l’abbonamento parte da sé alla fine della prova, a meno che non lo annulli prima.',
+        `I ${f.trialMinutes} minuti della Sua prova sono esauriti: il Suo agente non risponde più alle chiamate fino alla fine della prova, il giorno {trial_end_date}, o finché non avvia il Suo abbonamento {plan_name} da Billing info.`,
+        'Se non fa nulla, l’abbonamento parte automaticamente alla fine della prova, a meno che non lo annulli prima.',
         'La scelta è Sua.',
       ],
       cta: { label: 'Veda il Suo abbonamento', target: 'billing' },
@@ -343,8 +344,8 @@ export const UI_RELANCES: RelancesContent = {
         'La Sua prova termina il giorno {trial_end_date}.',
         {
           ul: [
-            'Desidera continuare: non deve fare nulla. Il Suo piano {plan_name} parte quel giorno e il primo mese ({plan_price} IVA esclusa, imposte secondo il Suo paese) viene addebitato sulla Sua carta.',
-            'Non desidera continuare: annulli prima di quella data da Billing info, pulsante «Cancel subscription». Non verrà addebitato nulla.',
+            'Se desidera continuare, non deve fare nulla: il Suo piano {plan_name} parte quel giorno e il primo mese ({plan_price} IVA esclusa, imposte in base al Suo paese) viene addebitato sulla Sua carta.',
+            'Se non desidera continuare, annulli prima di quella data da Billing info, con il pulsante «Cancel subscription»: non verrà addebitato nulla.',
           ],
         },
         'Ha una domanda sul Suo piano o sui Suoi minuti? Risponda a questa email.',
@@ -359,8 +360,8 @@ export const UI_RELANCES: RelancesContent = {
         'La Sua prova termina il giorno {trial_end_date}.',
         {
           ul: [
-            'Desidera continuare: non deve fare nulla. Il Suo piano {plan_name} parte quel giorno con fatturazione annuale: il primo anno ({plan_price} IVA esclusa, imposte secondo il Suo paese) viene addebitato sulla Sua carta in un’unica soluzione.',
-            'Non desidera continuare: annulli prima di quella data da Billing info, pulsante «Cancel subscription». Non verrà addebitato nulla.',
+            'Se desidera continuare, non deve fare nulla: il Suo piano {plan_name} parte quel giorno con fatturazione annuale e il primo anno ({plan_price} IVA esclusa, imposte in base al Suo paese) viene addebitato sulla Sua carta in un’unica soluzione.',
+            'Se non desidera continuare, annulli prima di quella data da Billing info, con il pulsante «Cancel subscription»: non verrà addebitato nulla.',
           ],
         },
         'Ha una domanda sul Suo piano o sui Suoi minuti? Risponda a questa email.',
@@ -369,11 +370,11 @@ export const UI_RELANCES: RelancesContent = {
     }),
     C5_cancelled: () => ({
       category: 'essential',
-      subject: 'La Sua prova termina il giorno {trial_end_date}: non verrà addebitato nulla',
-      preheader: 'Il Suo annullamento è stato registrato.',
+      subject: 'La Sua prova termina il giorno {trial_end_date}, senza addebiti',
+      preheader: 'Abbiamo registrato il Suo annullamento.',
       body: [
-        'Ha annullato il Suo abbonamento durante la prova: l’annullamento è stato registrato.',
-        'La Sua prova resta attiva fino al giorno {trial_end_date}. Il Suo piano non partirà in quella data e sulla Sua carta non verrà addebitato nulla.',
+        'Ha annullato il Suo abbonamento durante la prova: la Sua richiesta è stata registrata.',
+        'La Sua prova resta attiva fino al giorno {trial_end_date}. In quella data il Suo piano non partirà e sulla Sua carta non verrà addebitato nulla.',
         'Se si tratta di un errore, o se ha una domanda, risponda semplicemente a questa email.',
       ],
       cta: { label: 'Veda il Suo abbonamento', target: 'billing' },
@@ -386,7 +387,7 @@ export const UI_RELANCES: RelancesContent = {
       preheader: 'Una domanda: basta una riga di risposta.',
       body: [
         'La Sua prova si è conclusa senza abbonamento: non è stato addebitato nulla, ed è un Suo pieno diritto.',
-        'Può dirci in una riga cosa è mancato? La voce, le risposte, la configurazione, il prezzo, il momento… Risponda semplicemente a questa email: il nostro team legge ogni risposta e, se un’impostazione può cambiare le cose, glielo diremo.',
+        'Può dirci in una riga cosa è mancato? La voce, le risposte, la configurazione, il prezzo, il momento… Risponda semplicemente a questa email: il nostro team legge ogni risposta e, se un’impostazione può cambiare le cose, Glielo diremo.',
         `Grazie per aver provato ${f.brand}.`,
       ],
       cta: null,
@@ -396,7 +397,7 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'La Sua prova è terminata: il pagamento non è andato a buon fine',
       preheader: 'Il Suo abbonamento non è partito e non è stato addebitato nulla.',
       body: [
-        'La Sua prova è giunta al termine, ma il pagamento del Suo piano non è andato a buon fine. Il Suo abbonamento quindi non è partito e non è stato addebitato nulla.',
+        'La Sua prova è giunta al termine, ma il pagamento del Suo piano non è andato a buon fine. Per questo il Suo abbonamento non è partito e non Le è stato addebitato nulla.',
         'Se desidera continuare, registri una carta valida in Billing info (scheda Wallet), poi scelga di nuovo il Suo piano.',
         'Ha una domanda o ha bisogno di aiuto? Risponda semplicemente a questa email.',
       ],
@@ -487,8 +488,8 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Il Suo agente riceve correttamente le chiamate?',
       preheader: 'Una verifica di un minuto.',
       body: [
-        'Negli ultimi 30 giorni il Suo agente ha ricevuto poche chiamate. Forse è voluto, ma a volte è una deviazione di chiamata disattivata o impostata male.',
-        'Verifica in un minuto:',
+        'Negli ultimi 30 giorni il Suo agente ha ricevuto poche chiamate. Forse è voluto, ma a volte dipende da una deviazione di chiamata disattivata o impostata male.',
+        'Può verificarlo in un minuto:',
         {
           ol: [
             'Chiami il Suo numero abituale nel momento in cui la deviazione dovrebbe attivarsi.',
@@ -553,11 +554,11 @@ export const UI_RELANCES: RelancesContent = {
         subject: 'Rispondere anche per iscritto, con la Sua voce',
         preheader: `Cosa aggiunge il piano ${a.name}, senza vincoli.`,
         body: [
-          `A consumo ha le funzioni del piano ${f.plans.receptionniste.name}, senza crediti di messaggi inclusi. Il piano ${a.name} (${a.price} IVA esclusa al mese) aggiunge:`,
+          `A consumo ha le funzioni del piano ${f.plans.receptionniste.name}, senza crediti messaggi inclusi. Il piano ${a.name} (${a.price} IVA esclusa al mese) aggiunge:`,
           {
             ul: [
               `${a.minutes} minuti di chiamate e ${x.agents} agenti;`,
-              `${x.messageCredits} crediti di messaggi al mese, cioè circa ${x.writtenReplies} risposte scritte dell’AI (chat del sito, WhatsApp);`,
+              `${x.messageCredits} crediti messaggi al mese, cioè circa ${x.writtenReplies} risposte scritte dell’AI (chat del sito, WhatsApp);`,
               `${x.clonedVoices} voce clonata: la Sua, o quella di una persona che Le ha dato il consenso scritto. L’agente dice sempre di essere un’AI.`,
             ],
           },
@@ -589,42 +590,42 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Il Suo agente non è ancora stato creato: bastano una decina di minuti',
       preheader: 'Tre passaggi perché risponda alle Sue chiamate.',
       body: [
-        `La Sua area clienti ${f.brand} è pronta, ma non vi è ancora stato creato nessun agente. È l’agente a rispondere alle Sue chiamate, e per crearlo bastano una decina di minuti:`,
+        `La Sua area clienti ${f.brand} è pronta, ma non contiene ancora nessun agente. È l’agente a rispondere alle Sue chiamate, e per crearlo bastano una decina di minuti:`,
         {
           ol: [
             'Nella Sua area clienti apra «Assistants», poi «Create», e parta da un modello.',
-            'Adatti le istruzioni per {company}: orari, servizi, cosa deve annotare per Lei.',
-            'Lo provi, poi gli colleghi un numero: «Get new phone number» se non ne ha ancora uno (opzione mensile), poi sezione «General», campo «Phone number».',
+            'Adatti le istruzioni per {company}: orari, servizi, informazioni da annotare per Lei.',
+            'Lo provi, poi gli assegni un numero: se non ne ha ancora uno, lo ottenga da «Get new phone number» (opzione mensile), poi lo inserisca nella sezione «General» dell’agente, campo «Phone number».',
           ],
         },
         'Le serve aiuto? L’assistente di supporto (bolla in basso a destra nella Sua area clienti) La guida passo passo, in italiano, per iscritto o a voce.',
       ],
       cta: { label: 'Crei il Suo agente', target: 'app' },
-      secondary: { label: 'La guida passo passo: creare un agente', target: 'guide_create' },
+      secondary: { label: 'Guida passo passo: creare un agente', target: 'guide_create' },
     }),
     A2: () => ({
       category: 'essential',
-      subject: 'Configuriamo il Suo agente insieme a Lei?',
+      subject: 'Vuole configurare il Suo agente insieme a noi?',
       preheader: 'Lasci il Suo numero: La richiamiamo per crearlo insieme.',
       body: [
-        'Il Suo agente non è ancora stato creato. Se il tempo Le manca, o se non sa da dove cominciare, possiamo configurarlo insieme a Lei, al telefono.',
+        'Il Suo agente non è ancora stato creato. Se Le manca il tempo, o se non sa da dove cominciare, possiamo configurarlo insieme a Lei, al telefono.',
         'Lasci il Suo numero e il momento che preferisce: La richiamiamo per creare insieme l’agente per {company} (istruzioni, numero, deviazione di chiamata). Può anche rispondere a questa email indicando una fascia oraria.',
       ],
-      cta: { label: 'Chieda una richiamata per configurarlo insieme', target: 'setup_assist' },
+      cta: { label: 'Richieda una richiamata per configurarlo insieme', target: 'setup_assist' },
       after: ['Preferisce fare da sé? La guida «Creare e modificare un agente» descrive ogni passaggio, e l’assistente di supporto della Sua area clienti risponde alle Sue domande.'],
       secondary: { label: 'Legga la guida', target: 'guide_create' },
     }),
     A3: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
-      subject: 'La Sua prova dura fino al giorno {trial_end_date}: il Suo agente non è ancora stato creato',
+      subject: 'Prova fino al giorno {trial_end_date}: il Suo agente non è ancora stato creato',
       preheader: 'C’è ancora tempo per provarlo: possiamo configurarlo insieme a Lei.',
       body: [
         'La Sua prova dura fino al giorno {trial_end_date}, ma il Suo agente non è ancora stato creato. È il nostro ultimo messaggio su questo argomento.',
         'C’è ancora tempo per provarlo su chiamate reali: possiamo configurarlo insieme a Lei, al telefono. Lasci il Suo numero, oppure risponda a questa email indicando una fascia oraria.',
         'Se ha cambiato idea, può annullare prima del giorno {trial_end_date} da Billing info: non verrà addebitato nulla.',
       ],
-      cta: { label: 'Chieda una richiamata per configurarlo insieme', target: 'setup_assist' },
+      cta: { label: 'Richieda una richiamata per configurarlo insieme', target: 'setup_assist' },
     }),
     A3_active: (f) => ({
       category: 'essential',
@@ -635,18 +636,18 @@ export const UI_RELANCES: RelancesContent = {
         `Il Suo account ${f.brand} è attivo, ma il Suo agente non è ancora stato creato: per ora nessuna chiamata viene gestita. È il nostro ultimo messaggio su questo argomento.`,
         'Possiamo configurarlo insieme a Lei, al telefono: lasci il Suo numero, oppure risponda a questa email indicando una fascia oraria.',
       ],
-      cta: { label: 'Chieda una richiamata per configurarlo insieme', target: 'setup_assist' },
+      cta: { label: 'Richieda una richiamata per configurarlo insieme', target: 'setup_assist' },
     }),
     A4: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
-      subject: 'Il Suo agente è pronto: lo provi e attivi la deviazione di chiamata',
+      subject: 'Il Suo agente è stato creato: lo provi e attivi la deviazione',
       preheader: 'Tre verifiche prima delle sue prime chiamate.',
       body: [
         'Il Suo agente è stato creato, ma non ha ancora ricevuto una vera chiamata. Di solito bastano tre verifiche:',
         {
           ol: [
-            'Gli assegni un numero: se non ne ha ancora uno, lo ottenga da «Get new phone number» (opzione mensile, prezzo indicato prima dell’acquisto), poi in «Assistants» apra l’agente, sezione «General», campo «Phone number».',
+            'Gli assegni un numero: se non ne ha ancora uno, lo ottenga da «Get new phone number» (opzione mensile, il prezzo è indicato prima dell’acquisto), poi in «Assistants» apra l’agente e inserisca il numero nella sezione «General», campo «Phone number».',
             'Chiami quel numero dal Suo cellulare e faccia una domanda che farebbe un cliente.',
             'Se la risposta La convince, attivi presso il Suo operatore la deviazione verso quel numero, ad esempio solo quando non risponde. Mantiene il Suo numero.',
           ],
@@ -663,7 +664,7 @@ export const UI_RELANCES: RelancesContent = {
       preheader: 'Una verifica di un minuto, anche insieme a noi.',
       body: [
         'Negli ultimi 30 giorni il Suo agente non ha ricevuto nessuna chiamata. Forse è voluto, ma spesso si tratta di un numero non più collegato all’agente o di una deviazione di chiamata disattivata.',
-        'Verifica in un minuto:',
+        'Può verificarlo in un minuto:',
         {
           ol: [
             'Chiami il Suo numero abituale nel momento in cui la deviazione dovrebbe attivarsi.',
@@ -672,7 +673,7 @@ export const UI_RELANCES: RelancesContent = {
         },
         'Preferisce verificarlo con noi? Lasci il Suo numero: La richiamiamo per controllare insieme.',
       ],
-      cta: { label: 'Chieda una richiamata per verificare insieme', target: 'setup_assist' },
+      cta: { label: 'Richieda una richiamata per verificare insieme', target: 'setup_assist' },
       secondary: { label: 'Guida: mantenere il Suo numero con la deviazione di chiamata', target: 'guide_forwarding' },
     }),
 
@@ -690,11 +691,11 @@ export const UI_RELANCES: RelancesContent = {
     }),
     S2: (f) => ({
       category: 'essential',
-      subject: 'Il Suo saldo minuti è esaurito: il Suo agente non risponde più alle chiamate',
-      preheader: 'Riprende appena vengono aggiunti minuti.',
+      subject: 'Minuti esauriti: il Suo agente non risponde più alle chiamate',
+      preheader: 'Riprenderà a rispondere appena verranno aggiunti minuti.',
       body: [
         `Il saldo minuti del Suo account ${f.brand} è a 0: per ora il Suo agente non risponde alle chiamate.`,
-        'Riprende appena vengono aggiunti minuti: al rinnovo del Suo piano, se ne ha uno, oppure subito da Add credits.',
+        'Riprenderà a rispondere appena verranno aggiunti minuti: al rinnovo del Suo piano, se ne ha uno, oppure subito da Add credits.',
         'Ha domande? Risponda semplicemente a questa email.',
       ],
       cta: { label: 'Aggiunga minuti', target: 'credits' },

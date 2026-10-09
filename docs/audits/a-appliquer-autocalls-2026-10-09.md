@@ -42,21 +42,21 @@ Anglais (21231, 21272, 21236 ; 21232, 21274, 21237) :
 
 Italien (21233, 21276, 21238) :
 
-> Se la persona dice di avere già un account, di essere già in prova o di avere già un abbonamento, non proporle né di avviare la prova né di cambiare piano. Aiutala a mettere in funzione il suo agente, passo dopo passo: in “Assistants”, “Create” partendo da un modello, poi le istruzioni (orari, servizi, cosa deve annotare), poi un numero collegato (“General”, “Phone number”); nessun numero è incluso nel piano: se non ne ha ancora uno, lo ottiene da “Get new phone number” (opzione a pagamento mensile, prezzo indicato prima dell’acquisto). Poi una chiamata di prova dal cellulare e la deviazione di chiamata presso il suo operatore. Se il problema è tecnico o riguarda la fattura, crea un ticket di assistenza.
+> Se la persona dice di avere già un account, una prova gratuita in corso o un abbonamento, non proporle di avviare la prova né di cambiare piano. Aiutala a mettere in funzione il suo agente, passo dopo passo: in «Assistants», «Create» partendo da un modello; poi le istruzioni (orari, servizi, cosa deve annotare l’agente); poi il collegamento di un numero («General», «Phone number»). Nessun numero è incluso nel piano: se non ne ha ancora uno, lo ottiene da «Get new phone number» (opzione a pagamento mensile, prezzo indicato prima dell’acquisto). Infine una chiamata di prova dal cellulare e la deviazione di chiamata presso il suo operatore. Se il problema è tecnico o riguarda la fattura, crea un ticket di assistenza.
 
 Polonais (21234, 21278, 21239) :
 
-> Jeśli rozmówca mówi, że ma już konto, jest już w okresie próbnym albo ma już subskrypcję, nie proponuj mu rozpoczęcia okresu próbnego ani zmiany pakietu. Pomóż mu krok po kroku uruchomić agenta: w „Assistants” opcja „Create” z szablonu, potem instrukcje (godziny, usługi, co agent ma notować), potem przypisany numer („General”, „Phone number”); numer nie jest wliczony w pakiet: jeśli rozmówca go jeszcze nie ma, uzyska go w „Get new phone number” (opcja płatna co miesiąc, cena widoczna przed zakupem). Następnie połączenie testowe z komórki i przekierowanie połączeń u operatora. Jeśli problem jest techniczny albo dotyczy faktury, utwórz zgłoszenie do pomocy technicznej.
+> Jeśli rozmówca mówi, że ma już konto, korzysta już z okresu próbnego albo ma już subskrypcję, nie proponuj mu ani rozpoczęcia okresu próbnego, ani zmiany pakietu. Pomóż mu krok po kroku uruchomić agenta: w „Assistants” kliknąć „Create” i wybrać szablon, potem dopasować instrukcje (godziny, usługi, co agent ma notować), a następnie przypisać numer („General”, pole „Phone number”). Numer nie jest wliczony w pakiet: jeśli rozmówca go jeszcze nie ma, może go kupić w „Get new phone number” (opcja płatna co miesiąc, cena wyświetla się przed zakupem). Na koniec połączenie testowe z komórki i włączenie przekierowania połączeń u operatora. Jeśli problem jest techniczny albo dotyczy faktury, utwórz zgłoszenie do wsparcia technicznego.
 
 Néerlandais (21235, 21280, 21240) :
 
-> Zegt de persoon dat hij of zij al een account heeft, al in de proefperiode zit of al een abonnement heeft, stel dan niet voor om de proefperiode te starten of van abonnement te wisselen. Help de persoon de agent stap voor stap in gebruik te nemen: in „Assistants” via „Create” vanuit een sjabloon, dan de instructies (openingstijden, diensten, wat de agent moet noteren), dan een gekoppeld nummer („General”, „Phone number”); er zit geen nummer in het abonnement: heeft de persoon er nog geen, dan vraagt hij of zij er een aan via „Get new phone number” (maandelijks betaalde optie, prijs zichtbaar vóór aankoop). Daarna een testgesprek vanaf de mobiel en doorschakelen bij de provider. Gaat het om een technisch probleem of om de factuur, maak dan een supportticket aan.
+> Zegt de persoon dat hij of zij al een account heeft, al in de proefperiode zit of al een abonnement heeft, stel dan niet voor om een proefperiode te starten of van abonnement te wisselen. Help de persoon om de agent stap voor stap in gebruik te nemen: in „Assistants” via „Create” een agent maken op basis van een sjabloon, dan de instructies invullen (openingstijden, diensten, wat de agent moet noteren) en een nummer koppelen („General”, „Phone number”). Bij het abonnement is geen telefoonnummer inbegrepen: heeft de persoon er nog geen, dan vraagt hij of zij er een aan via „Get new phone number” (optie, per maand betaald, prijs zichtbaar vóór de aankoop). Daarna volgen een testgesprek vanaf de eigen mobiel en het instellen van doorschakelen bij de eigen provider. Gaat het om een technisch probleem of om de factuur, maak dan een supportticket aan.
 
 Hébreu (21308, 21309, 21310 ; forme impersonnelle, comme le reste des consignes) :
 
-> אם האדם אומר שכבר יש לו חשבון, שהוא כבר בתקופת ניסיון או שכבר יש לו מנוי, אין להציע לו להתחיל תקופת ניסיון או להחליף מסלול. יש לעזור לו להפעיל את הסוכן צעד אחר צעד: ב-"Assistants", "Create" מתוך תבנית, אחר כך ההנחיות (שעות פעילות, שירותים, מה הסוכן צריך לרשום), אחר כך מספר טלפון מחובר ("General", "Phone number"); מספר טלפון אינו כלול במסלול: אם עדיין אין לו מספר, אפשר להשיג אחד דרך "Get new phone number" (אפשרות בתשלום חודשי, המחיר מוצג לפני הרכישה). לאחר מכן שיחת בדיקה מהנייד והפניית שיחות אצל חברת הטלפון. אם הבעיה טכנית או קשורה לחשבונית, יש לפתוח פנייה לתמיכה.
+> אם הפונה אומר שכבר יש לו חשבון, שהוא כבר בתקופת ניסיון או שכבר יש לו מנוי, אין להציע לו להתחיל תקופת ניסיון או להחליף מסלול. יש לעזור לו להפעיל את הסוכן צעד אחר צעד: ב-"Assistants", ללחוץ על "Create" ולהתחיל מתבנית; אחר כך לכתוב את ההנחיות (שעות פעילות, שירותים, מה הסוכן צריך לרשום); ואז לחבר מספר טלפון (בקטע "General", בשדה "Phone number"). מספר טלפון אינו כלול במסלול: אם עדיין אין לו מספר, אפשר להשיג אחד דרך "Get new phone number" (אפשרות בתשלום חודשי, המחיר מוצג לפני הרכישה). לבסוף, שיחת בדיקה מהנייד והפעלת הפניית שיחות אצל חברת הטלפון. אם הבעיה טכנית או קשורה לחשבונית, יש לפתוח פנייה לתמיכה.
 
-**Relecture :** les versions italienne, polonaise, néerlandaise et hébraïque sont à faire relire par un natif avant l’enregistrement, comme les e-mails de la série A.
+**Relecture :** versions italienne, polonaise, néerlandaise et hébraïque relues par des natifs le 9 octobre ; leurs corrections sont intégrées ci-dessus.
 
 **Vérification après l’enregistrement :** chaque enregistrement relance le contrôle de conformité. Vérifier que `compliance_blocked_at` reste vide sur chaque agent modifié (docs/autocalls-pieges-interface.md).
 
@@ -99,17 +99,19 @@ Les points ci-dessous complètent ces corrections dans les agents. Chaque enregi
 - Anglais (21236, 21237) :
   > Choose the outcome “resolu” only if the ticket’s problem is solved during the call: the website then closes the ticket. Otherwise, choose “a_rappeler” or create a new ticket.
 - Italien (21238) :
-  > Scegli l’esito “resolu” solo se il problema del ticket viene risolto durante la chiamata: il sito chiude allora il ticket. Altrimenti scegli “a_rappeler” o crea un nuovo ticket.
+  > Scegli l’esito «resolu» solo se il problema del ticket viene risolto durante la chiamata: in quel caso il sito chiude il ticket. Altrimenti scegli «a_rappeler» oppure crea un nuovo ticket.
 - Polonais (21239) :
-  > Wybierz wynik „resolu” tylko wtedy, gdy problem ze zgłoszenia zostanie rozwiązany w trakcie rozmowy: strona zamyka wtedy zgłoszenie. W przeciwnym razie wybierz „a_rappeler” albo utwórz nowe zgłoszenie.
+  > Wybierz wynik „resolu” tylko wtedy, gdy problem opisany w zgłoszeniu zostanie rozwiązany w trakcie rozmowy: zgłoszenie zostanie wtedy automatycznie zamknięte. W przeciwnym razie wybierz „a_rappeler” albo utwórz nowe zgłoszenie.
 - Néerlandais (21240) :
-  > Kies de uitkomst „resolu” alleen als het probleem van het ticket tijdens het gesprek is opgelost: de website sluit het ticket dan. Kies anders „a_rappeler” of maak een nieuw ticket aan.
+  > Kies de uitkomst „resolu” alleen als het probleem uit het ticket tijdens het gesprek is opgelost: de website sluit het ticket dan af. Kies anders „a_rappeler” of maak een nieuw ticket aan.
 - Hébreu (21310) :
-  > יש לבחור בתוצאה "resolu" רק אם הבעיה שבפנייה נפתרה במהלך השיחה: במקרה כזה האתר סוגר את הפנייה. אחרת, יש לבחור "a_rappeler" או לפתוח פנייה חדשה.
+  > יש לבחור את התוצאה "resolu" רק אם הבעיה שתוארה בפנייה נפתרה במהלך השיחה: במקרה כזה האתר סוגר את הפנייה. אחרת, יש לבחור "a_rappeler" או לפתוח פנייה חדשה.
 
 **Ce que fait le site avec `a_rappeler` :** alerte « À traiter » à l’équipe (ajouté le 9 octobre après relecture : avant, cette issue n’était suivie de rien et le ticket restait ouvert sans que personne soit prévenu). Le ticket reste ouvert ; l’équipe décide de la suite.
 
 **Avant de l’enregistrer :** vérifier que `resolu` et `a_rappeler` figurent bien dans les options de l’issue (post_call_schema → outcome) de ces 7 agents (`resolu` y est sur 21183). Ajouter `a_rappeler` s’il manque.
+
+**Constat du 9 octobre (lecture des agents) :** `resolu` et `a_rappeler` figurent déjà dans les 7 agents ; rien à ajouter.
 
 **Agents qui créent des tickets** (21205, 21297, 21376, 21314, et les outils 6177 et 6242 `creer_ticket_support`) : la confirmation écrite part seulement si l’outil reçoit une adresse e-mail. Ajouter aux consignes la phrase de la langue du prompt :
 
@@ -118,11 +120,13 @@ Les points ci-dessous complètent ces corrections dans les agents. Chaque enregi
 - Anglais (21376) :
   > If the person wants a written confirmation of their ticket, ask for their email address, read it back, and pass it in the tool’s email field: they will receive an email with their ticket number. Don’t insist.
 - Hébreu (21314) :
-  > אם הפונה רוצה אישור בכתב על הפנייה, יש לבקש את כתובת הדוא"ל, להקריא אותה לאישור ולהעביר אותה בשדה email של הכלי: יישלח לכתובת הזו מייל עם מספר הפנייה. אין להתעקש.
+  > אם הפונה רוצה אישור בכתב על הפנייה, יש לבקש את כתובת הדוא״ל שלו, להקריא אותה לאישור ולהעביר אותה בשדה email של הכלי: הוא יקבל מייל עם מספר הפנייה. אין להתעקש אם הוא לא רוצה למסור כתובת.
 
 **21358 (WhatsApp) : ne pas modifier.** Il a été bloqué le 9 octobre par le contrôle de conformité pour une consigne du même type (demander une adresse e-mail, voir point 5). La confirmation part quand même si la personne donne d’elle-même son adresse et que l’agent la passe à l’outil.
 
 Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242 (« Adresse e-mail donnée et confirmée par la personne, vide sinon »). Après chaque enregistrement, relire `compliance_blocked_at` (une consigne de collecte d’adresse peut déclencher le contrôle « data gathering ») et revenir à la version précédente si l’agent est bloqué.
+
+**Constat du 9 octobre :** le champ `email` existe dans 6177 et 6242, avec la description « Email du compte client, si donné. » : la remplacer par celle ci-dessus. `non_resolu` figure toujours dans le post_call_schema de 21205.
 
 **Lucie (21205)** : aucune modification nécessaire pour `non_resolu` (l’équipe est prévenue). Vérifier seulement que cette issue figure toujours dans son post_call_schema.
 
@@ -145,17 +149,19 @@ Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242
 - Anglais (21206, 21271, 21207, 21273) :
   > If the person no longer wants to be contacted: call ne_plus_appeler_numero with the number they gave (international format) and confirm it has been noted, without insisting. End with the outcome “ne_plus_appeler”; if they also refuse emails, the outcome is “desinscription”.
 - Italien (21208, 21275) :
-  > Se la persona non vuole più essere contattata: chiama ne_plus_appeler_numero con il numero che ha indicato (formato internazionale) e confermale che la richiesta è stata registrata, senza insistere. Chiudi con l’esito “ne_plus_appeler”; se rifiuta anche le email, l’esito è “desinscription”.
+  > Se la persona non vuole più essere contattata, chiama ne_plus_appeler_numero con il numero che ha indicato (in formato internazionale) e confermale, senza insistere, che la richiesta è stata registrata. Chiudi con l’esito «ne_plus_appeler»; se rifiuta anche le email, l’esito è «desinscription».
 - Polonais (21209, 21277) :
-  > Jeśli rozmówca nie chce, żeby się z nim dalej kontaktować: wywołaj ne_plus_appeler_numero z numerem, który podał (w formacie międzynarodowym), i potwierdź bez nalegania, że prośba została zapisana. Zakończ z wynikiem „ne_plus_appeler”; jeśli nie chce też otrzymywać e-maili, wynikiem jest „desinscription”.
+  > Jeśli rozmówca nie chce, żebyśmy się z nim więcej kontaktowali: wywołaj ne_plus_appeler_numero z numerem, który podał (w formacie międzynarodowym), potwierdź, że prośba została zapisana, i nie próbuj go przekonywać. Zakończ rozmowę z wynikiem „ne_plus_appeler”; jeśli nie chce też otrzymywać e-maili, wybierz wynik „desinscription”.
 - Néerlandais (21210, 21279) :
-  > Wil de persoon niet meer benaderd worden: roep ne_plus_appeler_numero aan met het opgegeven nummer (internationaal formaat) en bevestig dat het is genoteerd, zonder aan te dringen. Sluit af met de uitkomst „ne_plus_appeler”; weigert de persoon ook e-mails, dan is de uitkomst „desinscription”.
+  > Wil de persoon niet meer benaderd worden, roep dan ne_plus_appeler_numero aan met het nummer dat hij of zij heeft opgegeven (in internationaal formaat) en bevestig zonder aan te dringen dat het is genoteerd. Sluit af met de uitkomst „ne_plus_appeler”; wil de persoon ook geen e-mails meer ontvangen, dan is de uitkomst „desinscription”.
 - Hébreu (21306, 21307 ; forme impersonnelle) :
-  > אם הפונה מבקש שלא ייצרו איתו קשר יותר: יש להפעיל את ne_plus_appeler_numero עם המספר שמסר (בפורמט בינלאומי) ולאשר שהבקשה נרשמה, בלי להתעקש. יש לסיים עם התוצאה "ne_plus_appeler"; אם הוא מסרב גם למיילים, התוצאה היא "desinscription".
+  > אם הפונה מבקש שלא ניצור איתו קשר יותר: יש להפעיל את הכלי ne_plus_appeler_numero עם המספר שמסר (בפורמט בינלאומי) ולאשר לו שהבקשה נרשמה, בלי להתעקש. יש לסיים את השיחה עם התוצאה "ne_plus_appeler"; אם הוא לא רוצה לקבל גם מיילים, התוצאה היא "desinscription".
 
-**Relecture :** versions italienne, polonaise, néerlandaise et hébraïque à faire relire par un natif avant l’enregistrement.
+**Relecture :** versions italienne, polonaise, néerlandaise et hébraïque relues par des natifs le 9 octobre ; leurs corrections sont intégrées ci-dessus.
 
 **Champ 4 (à vérifier d’abord) : identifiant de l’échange dans les outils de rappel** de ces agents (6176, 6178, 6240, 6246, 6247, 6248 et l’outil de rappel de l’espace client ; liste exacte avec list-mid-call-tools). Le site accepte un champ `conversation_id` (ou `call_id`) dans le corps de la demande : il le note sur la demande (`[CONV:<identifiant>]`), ce qui permet de reconnaître à la fin du même échange un numéro écrit sans indicatif, ou un appel d’outil absent de la transcription. Ce champ n’est utile que si Autocalls peut le remplir lui-même avec l’identifiant que renvoie le webhook de fin d’échange (`conversation_id` d’une conversation, `id` d’un appel), comme `{{customer_phone}}` dans l’outil 6243. Vérifier dans la documentation ou auprès du support qu’une telle variable existe ; si oui, ajouter un champ fixe `conversation_id` avec cette variable. Sinon, ne rien changer : le site s’appuie sur l’appel d’outil visible dans la transcription (une valeur laissée en gabarit, `{{…}}`, est ignorée).
+
+**Constat du 9 octobre :** la documentation Autocalls des outils (version du 8 octobre) ne cite que `{{customer_phone}}`, `{{assistant_phone}}`, `{{assistant_id}}`, `{{assistant_name}}`, `{{current_date}}` et `{{current_time}}` : aucune variable d’identifiant d’échange. Rien à changer tant que le support d’Autocalls n’en confirme pas une.
 
 **Ce que fait le site ensuite :** rappels de ce numéro annulés, opposition enregistrée, numéro ajouté à la liste de blocage Autocalls, e-mail à l’équipe ; avec `desinscription` et une adresse dans la variable `email`, plus aucun e-mail commercial. Numéro jamais enregistré pendant ce même échange : rien n’est appliqué, l’équipe reçoit « À vérifier : ne plus me contacter par écrit » (une fois par échange et par numéro). Les widgets vocaux sont couverts aussi (fin d’appel sans numéro d’appelant).
 
@@ -171,11 +177,11 @@ Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242
 
 **Après :**
 
-> ספק, שותפות, עיתונות, הצעה מסחרית או טלמרקטינג → להודות על הפנייה, להסביר שפניות מהסוג הזה מטופלות בכתב, ולאיית לאט את כתובת הדוא"ל contact@permanenceia.com. לא להציע שיחה חוזרת, לא להפעיל אף כלי ולא לרשום פרטים, ולסיים את השיחה בנימוס.
+> ספק, שותפות, עיתונות, הצעה מסחרית או טלמרקטינג → להודות על הפנייה, להסביר שפניות מהסוג הזה מטופלות בכתב בלבד, ולאיית לאט את כתובת הדוא״ל contact@permanenceia.com. לא להציע שיחה חוזרת, לא להפעיל אף כלי ולא לרשום פרטים, ולסיים את השיחה בנימוס.
 
 **Issue de l’appel :** `information` (ou une valeur `non_client` si elle est ajoutée au post_call_schema ; le site n’en fait rien de particulier).
 
-**Relecture :** texte hébreu à faire relire par un natif. Contrôle de conformité à relancer après l’enregistrement.
+**Relecture :** texte hébreu relu par un natif le 9 octobre (correction intégrée ci-dessus). Contrôle de conformité à relancer après l’enregistrement.
 
 ### 5. Copie de l’échange sur les lignes téléphoniques (action 34)
 
@@ -187,20 +193,22 @@ Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242
 
 > Adresse e-mail que la personne a donnée ET confirmée pendant l’échange pour recevoir une copie de la conversation. Laisser vide si elle n’a pas demandé de copie, l’a refusée, ou si l’adresse n’a pas été confirmée.
 
+**Choix du 9 octobre :** on reprend plutôt la description anglaise déjà en service sur les 16 agents qui ont cette variable (21205, 21297, widgets) : même sens, plus stricte (jeu de rôle de démonstration, refus d’être recontacté, opposition à l’enregistrement).
+
 **Champ 2 : consignes**, une phrase, seulement en réponse à une demande de la personne (ne jamais la proposer d’office, pour ne pas déclencher le contrôle « data gathering ») :
 
 - Anglais (21376, 21231, 21232, 21236, 21237, 21272, 21274) :
   > If the person asks for a written copy of this call, ask for their email address, read it back to confirm it, and fill in copy_email. Never offer it to someone who asked not to be contacted.
 - Hébreu (21314, 21308, 21309, 21310) :
-  > אם האדם מבקש עותק כתוב של השיחה, יש לבקש את כתובת הדוא"ל, להקריא אותה לאישור, ולמלא אותה ב-copy_email. אין להציע זאת למי שביקש שלא ייצרו איתו קשר.
+  > אם הפונה מבקש עותק כתוב של השיחה, יש לבקש את כתובת הדוא״ל שלו, להקריא אותה לאישור ולמלא אותה בשדה copy_email. לעולם אין להציע זאת למי שביקש שלא ניצור איתו קשר.
 - Français (21182, 21270, 21183) :
   > Si la personne demande une copie écrite de l’appel, demande son adresse e-mail, relis-la pour la confirmer, et remplis copy_email. Ne la propose jamais à quelqu’un qui a demandé à ne plus être contacté.
 - Italien (21233, 21276, 21238) :
-  > Se la persona chiede una copia scritta della chiamata, chiedile l’indirizzo email, rileggilo per conferma e compila copy_email. Non proporla mai a chi ha chiesto di non essere più contattato.
+  > Se la persona chiede una copia scritta della chiamata, domandale l’indirizzo email, ripetiglielo per conferma e compila copy_email. Non proporla mai a chi ha chiesto di non essere più contattato.
 - Polonais (21234, 21278, 21239) :
-  > Jeśli rozmówca poprosi o pisemną kopię rozmowy, poproś o adres e-mail, przeczytaj go na głos do potwierdzenia i wpisz w copy_email. Nigdy nie proponuj tego komuś, kto poprosił o zaprzestanie kontaktu.
+  > Jeśli rozmówca poprosi o pisemną kopię rozmowy, poproś o jego adres e-mail, odczytaj mu go, aby potwierdzić, że jest poprawny, i wpisz go w copy_email. Nigdy nie proponuj kopii osobie, która poprosiła o zaprzestanie kontaktu.
 - Néerlandais (21235, 21280, 21240) :
-  > Vraagt de persoon om een schriftelijke kopie van het gesprek, vraag dan het e-mailadres, lees het ter bevestiging voor en vul copy_email in. Bied dit nooit aan iemand die heeft gevraagd niet meer benaderd te worden.
+  > Vraagt de persoon om een schriftelijke kopie van het gesprek, vraag dan naar het e-mailadres, lees het ter bevestiging voor en vul het in bij copy_email. Bied dit nooit aan iemand die heeft gevraagd om niet meer benaderd te worden.
 
 **Ordre conseillé :** 21376 d’abord, contrôle de conformité, appel de test avec demande de copie ; puis 21314 ; puis les agents de rappel, un par un.
 
@@ -211,6 +219,8 @@ Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242
 **À vérifier dans Autocalls :** le paramètre `language` de ces outils est bien rempli par l’agent avec la langue de l’échange. Description proposée si elle manque :
 
 > Langue de la conversation avec la personne : fr, en-gb, en-au, it, pl, nl ou he.
+
+**Constat du 9 octobre :** 6176 a déjà ce paramètre, avec une description correcte. 6177 (tickets et rappels de l’espace client, de Messenger et de la ligne UK) ne l’a pas : l’ajouter, facultatif, avec la description ci-dessus.
 
 ### 7. Jeton du contrôle juste avant l’appel (action 34)
 
@@ -234,7 +244,7 @@ Vérifier aussi que le champ `email` existe dans les paramètres de 6177 et 6242
 
 > Ne pas insister. « Bien sûr. Je ne peux pas vous transférer en direct, mais je crée votre demande : l’assistant IA responsable du suivi des demandes vous rappelle, et il peut transmettre votre demande à une personne de l’équipe si vous le souhaitez. Quel moment vous convient ? » Pour une demande de support (facture, compte) : « une personne de l’équipe vous rappelle ». Recueillir le créneau, résumer en trois phrases, créer le ticket ou la demande de rappel.
 
-Le responsable qui rappelle se présente toujours comme une IA (docs/rappels-voix.md, R2 et R3) : la base ne doit jamais laisser entendre qu’un humain rappellera, sauf pour le support. Même précision dans les autres langues, par exemple « the AI assistant in charge of following up requests » (anglais), « l’assistente IA responsabile del seguito delle richieste » (italien), « asystent AI odpowiedzialny za obsługę zgłoszeń » (polonais), « de AI-assistent die de opvolging van aanvragen verzorgt » (néerlandais), « עוזר ה-AI שאחראי על המעקב אחר הפניות » (hébreu), à valider avec chaque texte.
+Le responsable qui rappelle se présente toujours comme une IA (docs/rappels-voix.md, R2 et R3) : la base ne doit jamais laisser entendre qu’un humain rappellera, sauf pour le support. Même précision dans les autres langues, par exemple « the AI assistant in charge of following up requests » (anglais), « l’assistente AI responsabile del seguito delle richieste » (italien), « asystent AI odpowiedzialny za obsługę zgłoszeń » (polonais), « de AI-assistent die verantwoordelijk is voor het opvolgen van verzoeken » (néerlandais), « עוזר ה-AI שאחראי על המעקב אחר הפניות » (hébreu, persona masculine דניאל) ou « עוזרת ה-AI שאחראית על המעקב אחר הפניות » (hébreu, persona féminine נועה), à valider avec chaque texte.
 
 **Étapes :** modifier les fichiers du dépôt (toutes les langues), déployer, recréer les documents de la base un par un dans Autocalls à partir des adresses /kb/…, puis supprimer les anciens (docs/autocalls-kb-a-supprimer.md). Non fait dans ce lot : le texte de chaque langue est à valider avec la règle « Qui rappelle ».
 

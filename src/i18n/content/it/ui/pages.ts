@@ -78,11 +78,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     // Passaggi reali dell’app: il passaggio 2 (scelta del piano, « Start 14-Day Free Trial ») avvia la prova e accredita i minuti.
     createSteps: (days: number, minutes: number): Rich[] => [
       ['1. ', { b: 'Crei il Suo account' }, ' con la Sua email aziendale.'],
-      ['2. ', { b: 'Scelga un piano' }, ' (Choose a plan), poi clicchi su ', { b: 'Start 14-Day Free Trial' }, `: è richiesta una carta, nessun addebito per ${days} giorni, ${minutes} minuti inclusi. È questo passaggio ad accreditare i Suoi ${minutes} minuti.`],
+      ['2. ', { b: 'Scelga un piano' }, ' (Choose a plan), poi clicchi su ', { b: 'Start 14-Day Free Trial' }, `: è richiesta una carta, ma per ${days} giorni non viene addebitato nulla; ${minutes} minuti inclusi. È questo passaggio ad accreditare i Suoi ${minutes} minuti.`],
       ['3. ', { b: 'Configuri il Suo agente' }, ' ed effettui le prime chiamate.'],
     ],
     createNote: (minutes: number) => `Senza il passaggio 2, il Suo account resta a 0 minuti: la prova e i suoi ${minutes} minuti partono solo quando sceglie un piano.`,
-    creditsNote: (credits: string, price: string) => `La prova comprende minuti di chiamata, ma nessun credito messaggi: per provare le risposte scritte dell’AI (chat del sito, WhatsApp, Messenger), aggiunga crediti nella Sua area clienti (Add credits), ${credits} crediti per ${price}.`,
+    creditsNote: (credits: string, price: string) => `La prova comprende minuti di chiamata, ma nessun credito messaggi: per provare le risposte scritte dell’AI (chat del sito, WhatsApp, Messenger), aggiunga crediti dalla Sua area clienti (Add credits), al prezzo di ${price} ogni ${credits} crediti.`,
     createCta: 'Passo 1: crei il Suo account',
     already: 'È già cliente?',
     login: 'Accedi',
@@ -790,7 +790,7 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
       'Per la raccolta e la trasmissione dei dati tramite il pixel di Meta siamo contitolari del trattamento con Meta Platforms Ireland Ltd (articolo 26 del GDPR; addendum di Meta: https://www.facebook.com/legal/controller_addendum). Meta è l’unica titolare dei trattamenti successivi. Può esercitare i Suoi diritti presso di noi o presso Meta.',
       'Senza il Suo consenso nessuno di questi cookie viene installato e il pixel di Meta non viene caricato.',
       'Può cambiare idea e revocare il consenso in qualsiasi momento con il link «Gestisci i cookie» in fondo a ogni pagina; il rifiuto non impedisce di utilizzare il sito.',
-      'Nell’area clienti vale la scelta fatta sul sito: per modificarla, usi il link «Gestisci i cookie» in fondo a una pagina del sito.',
+      'Nell’area clienti vale la scelta fatta sul sito: per modificarla, usi il link «Gestisci i cookie» in fondo a qualsiasi pagina del sito.',
       `Il widget della nostra assistente (caricato da ${appHost}) può utilizzare una memorizzazione tecnica necessaria alla conversazione.`,
     ],
     questions: 'Domande: ',

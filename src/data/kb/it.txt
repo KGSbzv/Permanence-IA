@@ -30,10 +30,14 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 
 4. Assistenza ed escalation
 - L'agente fa una diagnosi passo dopo passo, una verifica alla volta, basandosi sulla base di conoscenza e sulle guide dell'area clienti.
-- In PermanenceIA non esiste il trasferimento di chiamata in diretta verso un operatore umano. L'escalation avviene in due modi: una richiesta di richiamata da parte di un consulente, oppure un ticket di assistenza. In entrambi i casi l'agente scrive un riepilogo di tre frasi (chi, quale problema, cosa è già stato provato o cosa ci si aspetta).
+- In PermanenceIA non esiste il trasferimento di chiamata in diretta verso un operatore umano. L'escalation avviene in due modi: una richiesta di richiamata, oppure un ticket di assistenza. In entrambi i casi l'agente scrive un riepilogo di tre frasi (chi, quale problema, cosa è già stato provato o cosa ci si aspetta).
 - Da non confondere: gli agenti che i nostri clienti configurano per la propria azienda possono invece trasferire le chiamate al team del cliente (strumento "Call transfer", incluso in tutti i piani).
 - Se il problema non è risolto (o si tratta di un bug, di fatturazione o dell'account), l'agente crea un ticket di assistenza con descrizione, gravità (bloccante, importante, minore) e un orario di richiamata; il team viene avvisato via email.
-- Se la persona chiede di parlare con un operatore umano, l'agente non discute: crea un ticket o una richiesta di richiamata affinché un consulente la richiami, e lo dice chiaramente.
+- Chi richiama (stessa regola in tutte le lingue; l'agente annuncia chi richiamerà in base alla risposta dello strumento e non presenta mai un assistente AI come un essere umano):
+  - "Mi richiami": richiama lo stesso assistente AI, con lo stesso nome e la stessa voce.
+  - La persona chiede un responsabile, qualcun altro, un consulente o un operatore umano: l'agente non discute, crea la richiesta di richiamata e lo dice chiaramente. Richiama allora l'altra voce AI del team: l'assistente AI responsabile del seguito delle richieste, presentato sempre come un'AI, che può poi passare la richiesta a una persona del team.
+  - Se la persona chiede di nuovo un responsabile o un operatore umano a questo assistente AI responsabile del seguito: una persona del team la richiama al più presto, senza indicare un orario.
+  - Assistenza (ticket o richiesta di assistenza): "mi richiami" = la stessa assistente AI dell'assistenza; una richiesta di un responsabile o di un operatore umano passa a una persona del team, che richiama al più presto, senza indicare un orario.
 - L'agente non promette mai rimborsi, note di credito, sconti né omaggi o condizioni di favore: queste richieste vengono inoltrate al team tramite ticket.
 - Contatto scritto: contact@permanenceia.com.
 
@@ -72,4 +76,4 @@ Processo: richiamate, follow-up e assistenza (PermanenceIA)
 
 Sanità (studi dentistici, cliniche, fisioterapia, paramedici, medicina estetica) — in pausa commerciale:
 - L'agente si occupa solo dell'accoglienza amministrativa (appuntamenti, orari, indirizzo, informazioni pratiche). Non chiede mai sintomi né motivi medici e indirizza al professionista o al 112.
-- Non promettere conformità per i dati sanitari; registrazione e trascrizione si possono disattivare. Proporre un richiamo da un consulente prima che una struttura sanitaria si abboni.
+- Non promettere conformità per i dati sanitari; registrazione e trascrizione si possono disattivare. Proporre una richiamata a un orario preciso prima che una struttura sanitaria si abboni.

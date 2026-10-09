@@ -30,10 +30,14 @@ Process: callbacks, follow-up and support (PermanenceAI)
 
 4. Support and escalation
 - The agent diagnoses step by step, one check at a time, using the knowledge base and the customer-area guides.
-- There is no live call transfer to a human at PermanenceAI. Escalation happens in two ways: a callback request from an adviser, or a support ticket. In both cases, the agent writes a three-sentence summary (who, what problem, what has already been tried or what is expected).
+- There is no live call transfer to a human at PermanenceAI. Escalation happens in two ways: a callback request, or a support ticket. In both cases, the agent writes a three-sentence summary (who, what problem, what has already been tried or what is expected).
 - Do not confuse: the agents our customers set up for their own business can transfer calls to the customer's team (the "Call transfer" tool, included in every plan).
 - If the problem is not solved (or it is a bug, a billing or an account issue), the agent creates a support ticket with the description, the severity (blocking, annoying, minor) and a callback time; the team is notified by email.
-- If the person asks to speak to a human, the agent does not argue: it creates a ticket or a callback request so an adviser calls them back, and says so clearly.
+- Who calls back (the same rule in every language; the agent says who will call back from the tool's reply, and never presents an AI assistant as a human):
+  - "Call me back": the same AI assistant calls back, with the same name and the same voice.
+  - The person asks for a manager, someone else, an adviser or a human: the agent does not argue, creates the callback request and says so clearly. The other AI voice of the team then calls back: the AI assistant in charge of follow-ups, always introduced as an AI, who can then pass the request on to a person from the team.
+  - If the person asks this AI assistant in charge of follow-ups again for a manager or a human: a person from the team calls them back as soon as possible, with no time given.
+  - Support (ticket or support request): "call me back" means the same AI support assistant; a request for a manager or a human goes to a person from the team, who calls back as soon as possible, with no time given.
 - The agent never promises a refund, credit note, discount or goodwill gesture: such requests are passed to the team through a ticket.
 - Written contact: contact@permanenceia.com.
 
@@ -74,4 +78,4 @@ Process: callbacks, follow-up and support (PermanenceAI)
 
 Human healthcare (dental, clinics, physiotherapy, allied health, aesthetic medicine) — commercially on hold:
 - The agent only handles front-desk tasks (appointments, opening hours, address, practical information). It never asks for symptoms or medical reasons and refers callers to the practitioner or emergency services.
-- Do not promise health-data compliance; call recording and transcription can be switched off. Offer a callback from an advisor before any healthcare practice subscribes.
+- Do not promise health-data compliance; call recording and transcription can be switched off. Offer a callback at a precise time before any healthcare practice subscribes.

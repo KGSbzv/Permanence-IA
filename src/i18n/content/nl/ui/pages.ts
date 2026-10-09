@@ -78,12 +78,12 @@ export const UI_PAGES = {
     // Echte stappen in de app: stap 2 (een abonnement kiezen, "Start 14-Day Free Trial") start de proefperiode en zet de minuten klaar.
     createSteps: (days: number, minutes: number): Rich[] => [
       ['1. ', { b: 'Maak uw account aan' }, ' met uw zakelijke e-mailadres.'],
-      ['2. ', { b: 'Kies een abonnement' }, ' (Choose a plan) en klik daarna op ', { b: 'Start 14-Day Free Trial' }, `: er is een creditcard nodig, ${days} dagen lang wordt er niets afgeschreven, ${minutes} minuten inbegrepen. Pas na deze stap staan uw ${minutes} minuten op uw account.`],
+      ['2. ', { b: 'Kies een abonnement' }, ' (Choose a plan) en klik daarna op ', { b: 'Start 14-Day Free Trial' }, `: er is een creditcard nodig, maar ${days} dagen lang wordt er niets afgeschreven, en ${minutes} minuten zijn inbegrepen. Pas na deze stap staan uw ${minutes} minuten op uw account.`],
       ['3. ', { b: 'Stel uw agent in' }, ' en voer uw eerste gesprekken.'],
     ],
     createNote: (minutes: number) => `Slaat u stap 2 over, dan blijft uw account op 0 minuten staan: de proefperiode en de ${minutes} minuten starten pas zodra u een abonnement kiest.`,
-    creditsNote: (credits: string, price: string) => `De proefperiode bevat belminuten, maar geen berichtcredits: wilt u de schriftelijke AI-antwoorden testen (websitechat, WhatsApp, Messenger), voeg dan credits toe in uw klantomgeving (Add credits), ${credits} credits voor ${price}.`,
-    createCta: 'Stap 1: maak mijn account aan',
+    creditsNote: (credits: string, price: string) => `De proefperiode bevat belminuten, maar geen berichtcredits. Wilt u de schriftelijke AI-antwoorden testen (websitechat, WhatsApp, Messenger)? Voeg dan credits toe in uw klantomgeving (Add credits): ${credits} credits voor ${price}.`,
+    createCta: 'Stap 1: mijn account aanmaken',
     already: 'Al klant?',
     login: 'Inloggen',
     sentTitle: 'Uw aanvraag is ontvangen',

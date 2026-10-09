@@ -87,11 +87,11 @@ export const UI_PAGES: typeof FR_UI_PAGES = {
     // Rzeczywiste kroki w aplikacji: krok 2 (wybór pakietu, „Start 14-Day Free Trial”) uruchamia okres próbny i dodaje minuty.
     createSteps: (days: number, minutes: number): Rich[] => [
       ['1. ', { b: 'Załóż konto' }, ', podając służbowy adres e-mail.'],
-      ['2. ', { b: 'Wybierz pakiet' }, ' (Choose a plan), a potem kliknij ', { b: 'Start 14-Day Free Trial' }, `: potrzebna jest karta, przez ${days} dni nic nie jest pobierane, ${minutes} minut w cenie. Dopiero ten krok dodaje Twoje ${minutes} minut.`],
+      ['2. ', { b: 'Wybierz pakiet' }, ' (Choose a plan), a potem kliknij ', { b: 'Start 14-Day Free Trial' }, `: potrzebna jest karta, ale przez ${days} dni nic nie jest pobierane; ${minutes} minut w cenie. Dopiero ten krok dodaje do konta Twoje ${minutes} minut.`],
       ['3. ', { b: 'Skonfiguruj agenta' }, ' i przeprowadź pierwsze rozmowy.'],
     ],
-    createNote: (minutes: number) => `Bez kroku 2 na Twoim koncie zostaje 0 minut: okres próbny i ${minutes} minut startują dopiero po wybraniu pakietu.`,
-    creditsNote: (credits: string, price: string) => `Okres próbny obejmuje minuty połączeń, ale nie kredyty na wiadomości: aby przetestować pisemne odpowiedzi AI (czat na stronie, WhatsApp, Messenger), doładuj kredyty w panelu klienta (Add credits), ${credits} kredytów za ${price}.`,
+    createNote: (minutes: number) => `Bez kroku 2 na Twoim koncie pozostaje 0 minut: okres próbny zaczyna się, a ${minutes} minut trafia na konto, dopiero po wybraniu pakietu.`,
+    creditsNote: (credits: string, price: string) => `Okres próbny obejmuje minuty połączeń, ale nie kredyty na wiadomości: aby przetestować pisemne odpowiedzi AI (czat na stronie, WhatsApp, Messenger), doładuj kredyty w panelu klienta (Add credits): ${credits} kredytów za ${price}.`,
     createCta: 'Krok 1: załóż konto',
     already: 'Masz już konto?',
     login: 'Logowanie',

@@ -14,6 +14,9 @@ Hi Autocalls team, a few issues our clients hit on our white-label platform (app
 6. **Chat credits during the trial.** Trial Plans Limits still has no "included chat credits" field: during the 14-day trial, AI written replies (WhatsApp, Messenger, website chat) stop at 0 credits. Could you add this field, or confirm the recommended way to grant credits at signup?
 7. **Interface language.** We are still interested in French, Hebrew (RTL), Italian, Polish and Dutch for the client interface and system emails; please confirm whether the $1,900 per language includes the signup/login pages and the emails, and the timeline.
 
+8. **Paused callback runs from 6 October.** About 20 test runs of our callback automations (6 October, to a blocked test number) are still paused in Automate. Could you cancel them on your side (we do not want to use "Retry")?
+9. **Knowledge base 6229** has been showing "processing" for a long time. Could you check it?
+
 Thank you!
 
 ## Ce que dit ce message, en français
@@ -25,3 +28,5 @@ Thank you!
 5. Un inscrit qui saute « Choose a plan » ne voit jamais l'essai gratuit ; nous avons ajouté un script en attendant.
 6. Pas de crédits de messages pendant l'essai : l'IA ne répond plus par écrit à 0 crédit.
 7. Traduction de l'interface : confirmer ce que couvrent les 1 900 $ par langue et le délai.
+8. Annuler les ~20 exécutions de rappel de test du 6 octobre restées en pause (sans « Retry »).
+9. Vérifier la base de connaissances 6229, affichée « processing » depuis longtemps.

@@ -69,7 +69,7 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     subject: (brand: string, code: string) => `Il Suo codice di accesso ${brand}: ${code}`,
     hello: 'Buongiorno,',
     line: (brand: string) => `Ecco il Suo codice per accedere al Suo account sul sito ${brand}:`,
-    valid: 'È valido 10 minuti e si può usare una sola volta.',
+    valid: 'È valido per 10 minuti e si può usare una sola volta.',
     ignore: 'Se non lo ha richiesto, ignori questa email: nessuno può accedere al Suo account senza questo codice.',
   },
   // Conferma di una richiesta di assistenza (ticket T-XXXXXXXX), email essenziale alla persona che l’ha fatta
@@ -77,11 +77,11 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
   ticketMail: {
     subject: (ticket: string, brand: string) => `La Sua richiesta di assistenza ${ticket} è stata registrata · ${brand}`,
     hello: (first: string | null) => (first ? `Buongiorno ${first},` : 'Buongiorno,'),
-    recorded: (ticket: string) => `Abbiamo registrato la Sua richiesta di assistenza con il numero ${ticket}. Conservi questo numero: ci permette di ritrovare subito la Sua richiesta se ci ricontatta.`,
+    recorded: (ticket: string) => `Abbiamo registrato la Sua richiesta di assistenza con il numero ${ticket}. Lo conservi: ci permetterà di ritrovare subito la Sua richiesta se ci ricontatta.`,
     callAt: (when: string) => `La richiameremo ${when}.`,
-    asap: 'La richiameremo il prima possibile, negli orari in cui effettuiamo le chiamate.',
+    asap: 'La richiameremo il prima possibile, durante i nostri orari di chiamata.',
     team: 'Una persona del nostro team La ricontatterà il prima possibile.',
-    reply: 'Per aggiungere qualche dettaglio, risponda semplicemente a questa email indicando il numero della richiesta.',
+    reply: 'Per aggiungere qualche dettaglio, risponda semplicemente a questa email indicando il numero della Sua richiesta.',
     notYou: 'Se non ha fatto Lei questa richiesta, ignori questo messaggio.',
     sign: (brand: string) => `Il team ${brand}`,
   },

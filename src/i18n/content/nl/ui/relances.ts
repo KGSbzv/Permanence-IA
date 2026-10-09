@@ -59,16 +59,16 @@ export const UI_RELANCES: RelancesContent = {
       category: 'marketing',
       subject: '{first_name}, uw account is nog niet aangemaakt',
       subjectNoName: 'Uw account is nog niet aangemaakt',
-      preheader: 'Uw registratie is nog niet afgerond, en dat kunnen we samen met u doen.',
+      preheader: 'Uw registratie is nog niet voltooid: we kunnen die samen met u afronden.',
       body: [
         `U bent begonnen met het aanmaken van uw ${f.brand}-account via onze pagina voor de gratis proefperiode, maar de registratie lijkt niet te zijn afgerond.`,
-        'Om uw proefperiode te starten zijn er nog twee stappen: de registratie afronden op de pagina van uw klantomgeving (in het Engels, een paar minuten) en daarna het abonnement kiezen dat u wilt testen.',
-        `Pas met die keuze start de proefperiode van ${f.trialDays} dagen, met ${f.trialMinutes} belminuten. Er wordt om een creditcard gevraagd, maar tijdens de proefperiode wordt niets afgeschreven.`,
+        'Om uw proefperiode te starten, zijn er nog twee stappen nodig: uw registratie afronden op de pagina van de klantomgeving (in het Engels, het kost maar een paar minuten) en daarna het abonnement kiezen dat u wilt testen.',
+        `Pas zodra u een abonnement kiest, start uw proefperiode van ${f.trialDays} dagen, met ${f.trialMinutes} belminuten. Er wordt om een creditcard gevraagd, maar tijdens de proefperiode wordt niets afgeschreven.`,
         'Hebt u uw account met een ander e-mailadres aangemaakt? Dan kunt u dit bericht negeren.',
       ],
       cta: { label: 'Mijn registratie afronden', target: 'register' },
-      after: ['Doet u het liever samen met ons? Laat uw nummer achter op onze proefpagina: we bellen u terug op een moment dat u schikt, om samen het account aan te maken en de agent in te stellen. U kunt ook gewoon deze e-mail beantwoorden.'],
-      secondary: { label: 'Laat mij terugbellen', target: 'trial_assist' },
+      after: ['Doet u het liever samen met ons? Laat uw nummer achter op onze proefpagina: we bellen u terug wanneer het u uitkomt, om samen uw account aan te maken en de agent in te stellen. U kunt ook gewoon deze e-mail beantwoorden.'],
+      secondary: { label: 'Bel mij terug om het samen te doen', target: 'trial_assist' },
     }),
     P2: (f) => {
       const r = f.plans.receptionniste;
@@ -173,7 +173,7 @@ export const UI_RELANCES: RelancesContent = {
     // ---------- I: account zonder proefperiode (I1 essential, daarna marketing) ----------
     I1: (f) => ({
       category: 'essential',
-      subject: 'Uw account is aangemaakt: nog één stap om de proefperiode te starten',
+      subject: 'Uw account is klaar: nog één stap naar uw proefperiode',
       preheader: 'De proefperiode start zodra u in uw klantomgeving een abonnement kiest.',
       body: [
         `Uw klantomgeving bij ${f.brand} staat klaar.`,
@@ -238,10 +238,10 @@ export const UI_RELANCES: RelancesContent = {
     I6: (f) => ({
       category: 'marketing',
       subject: 'Nog niet klaar voor een abonnement? Betaal per minuut',
-      preheader: `${f.paygMinute} excl. btw per minuut, tegoed vervalt niet.`,
+      preheader: `${f.paygMinute} per minuut excl. btw, tegoed zonder vervaldatum.`,
       body: [
         `Een abonnement past niet bij iedereen. U kunt uw agent ook zonder abonnement gebruiken: u voegt tegoed toe wanneer u wilt (Add credits), een minuut kost ${f.paygMinute} excl. btw en het tegoed vervalt niet.`,
-        `U hebt dan dezelfde functies als het ${f.plans.receptionniste.name}-abonnement. Bij deze formule hoort geen gratis proefperiode: u betaalt alleen wat u toevoegt. Zodra u regelmatig gebeld wordt, is een abonnement per minuut goedkoper.`,
+        `U hebt dan dezelfde functies als het ${f.plans.receptionniste.name}-abonnement. Bij betalen per gebruik hoort geen gratis proefperiode: u betaalt alleen wat u toevoegt. Zodra u regelmatig gebeld wordt, is een abonnement per minuut goedkoper.`,
       ],
       cta: { label: 'Tegoed toevoegen', target: 'credits' },
     }),
@@ -273,7 +273,7 @@ export const UI_RELANCES: RelancesContent = {
           ],
         },
         'Tijdens de proefperiode wordt niets afgeschreven. U kunt vóór {trial_end_date} opzeggen via Billing info.',
-        'Goed om te weten: de proefperiode bevat belminuten, maar geen berichtcredits. De schriftelijke AI-antwoorden (websitechat, WhatsApp, Messenger) gebruiken die credits, die u kunt toevoegen via Add credits.',
+        'Goed om te weten: de proefperiode bevat belminuten, maar geen berichtcredits. Voor de schriftelijke AI-antwoorden (websitechat, WhatsApp, Messenger) zijn die credits nodig; u voegt ze toe via Add credits.',
       ],
       cta: { label: 'Mijn klantomgeving openen', target: 'app' },
     }),
@@ -317,20 +317,20 @@ export const UI_RELANCES: RelancesContent = {
       subject: `Resterende proefminuten: {minutes_left} van ${f.trialMinutes}`,
       preheader: `Wat er gebeurt zodra de ${f.trialMinutes} minuten op zijn.`,
       body: [
-        `U hebt nog {minutes_left} van de ${f.trialMinutes} minuten van uw proefperiode.`,
-        `Ter informatie: zodra de ${f.trialMinutes} minuten op zijn, stoppen de gesprekken tot het einde van de proefperiode op {trial_end_date}, of tot u uw {plan_name}-abonnement start via Billing info. Doet u niets, dan start het abonnement vanzelf aan het einde van de proefperiode, tenzij u het vóór die tijd opzegt.`,
-        'U beslist zelf.',
+        `Uw proefminuten raken bijna op: u hebt er nog {minutes_left} van de ${f.trialMinutes}.`,
+        `Ter informatie: zodra de ${f.trialMinutes} minuten op zijn, neemt uw agent geen gesprekken meer aan tot het einde van de proefperiode op {trial_end_date}, of tot u uw {plan_name}-abonnement start via Billing info. Doet u niets, dan start het abonnement automatisch aan het einde van de proefperiode, tenzij u vóór die datum opzegt.`,
+        'De keuze is aan u.',
       ],
       cta: { label: 'Mijn abonnement bekijken', target: 'billing' },
     }),
     C4_exhausted: (f) => ({
       category: 'essential',
-      subject: `Uw ${f.trialMinutes} proefminuten zijn op`,
+      subject: `Uw ${f.trialMinutes} proefminuten zijn opgebruikt`,
       preheader: 'Wat er nu gebeurt, tot het einde van uw proefperiode.',
       body: [
-        `De ${f.trialMinutes} minuten van uw proefperiode zijn op: de gesprekken zijn gestopt tot het einde van de proefperiode op {trial_end_date}, of tot u uw {plan_name}-abonnement start via Billing info.`,
-        'Doet u niets, dan start het abonnement vanzelf aan het einde van de proefperiode, tenzij u het vóór die tijd opzegt.',
-        'U beslist zelf.',
+        `De ${f.trialMinutes} minuten van uw proefperiode zijn opgebruikt: uw agent neemt geen gesprekken meer aan tot het einde van de proefperiode op {trial_end_date}, of tot u uw {plan_name}-abonnement start via Billing info.`,
+        'Doet u niets, dan start het abonnement automatisch aan het einde van de proefperiode, tenzij u vóór die datum opzegt.',
+        'De keuze is aan u.',
       ],
       cta: { label: 'Mijn abonnement bekijken', target: 'billing' },
     }),
@@ -358,7 +358,7 @@ export const UI_RELANCES: RelancesContent = {
         'Uw proefperiode eindigt op {trial_end_date}.',
         {
           ul: [
-            'Wilt u doorgaan? Dan hoeft u niets te doen. Uw {plan_name}-abonnement start op die dag met jaarlijkse facturering: het eerste jaar ({plan_price} excl. btw, belastingen afhankelijk van uw land) wordt in één keer van uw creditcard afgeschreven.',
+            'Wilt u doorgaan? Dan hoeft u niets te doen. Uw {plan_name}-abonnement start op die dag, met jaarlijkse facturatie: het bedrag voor het eerste jaar ({plan_price} excl. btw, belastingen afhankelijk van uw land) wordt in één keer van uw creditcard afgeschreven.',
             'Wilt u niet doorgaan? Zeg dan vóór die datum op via Billing info, knop “Cancel subscription”. Er wordt niets afgeschreven.',
           ],
         },
@@ -368,11 +368,11 @@ export const UI_RELANCES: RelancesContent = {
     }),
     C5_cancelled: () => ({
       category: 'essential',
-      subject: 'Uw proefperiode eindigt op {trial_end_date}: er wordt niets afgeschreven',
-      preheader: 'Uw opzegging is geregistreerd.',
+      subject: 'Uw proefperiode eindigt op {trial_end_date}, zonder afschrijving',
+      preheader: 'Uw opzegging is verwerkt.',
       body: [
-        'U hebt uw abonnement tijdens de proefperiode opgezegd: uw opzegging is geregistreerd.',
-        'Uw proefperiode blijft actief tot {trial_end_date}. Uw abonnement start niet op die datum, en er wordt niets van uw creditcard afgeschreven.',
+        'U hebt uw abonnement tijdens de proefperiode opgezegd, en uw opzegging is verwerkt.',
+        'Uw proefperiode blijft actief tot {trial_end_date}. Uw abonnement start op die datum niet en er wordt niets van uw creditcard afgeschreven.',
         'Was dit een vergissing, of hebt u een vraag? Beantwoord dan gewoon deze e-mail.',
       ],
       cta: { label: 'Mijn abonnement bekijken', target: 'billing' },
@@ -397,7 +397,7 @@ export const UI_RELANCES: RelancesContent = {
       body: [
         'Uw proefperiode is afgelopen, maar de betaling van uw abonnement is niet gelukt. Uw abonnement is daardoor niet gestart en er is niets afgeschreven.',
         'Wilt u doorgaan? Voeg dan een geldige creditcard toe in Billing info (tabblad Wallet) en kies daarna opnieuw uw abonnement.',
-        'Een vraag of hulp nodig? Beantwoord gewoon deze e-mail.',
+        'Hebt u een vraag of hulp nodig? Beantwoord dan gewoon deze e-mail.',
       ],
       cta: { label: 'Mijn creditcard bijwerken', target: 'billing' },
     }),
@@ -585,15 +585,15 @@ export const UI_RELANCES: RelancesContent = {
     // ---------- A : mise en route (service, audit du 9 oct., § 7) ----------
     A1: (f) => ({
       category: 'essential',
-      subject: 'Uw agent is nog niet aangemaakt: ongeveer tien minuten is genoeg',
-      preheader: 'Drie stappen zodat hij uw gesprekken aanneemt.',
+      subject: 'Uw agent is nog niet aangemaakt: dat kost zo’n tien minuten',
+      preheader: 'In drie stappen neemt hij uw gesprekken aan.',
       body: [
-        `Uw klantomgeving bij ${f.brand} staat klaar, maar er is nog geen agent aangemaakt. De agent neemt uw gesprekken aan, en het aanmaken duurt ongeveer tien minuten:`,
+        `Uw klantomgeving bij ${f.brand} staat klaar, maar er is nog geen agent aangemaakt. Die agent neemt straks uw gesprekken aan, en u maakt hem in ongeveer tien minuten aan:`,
         {
           ol: [
-            'Open in uw klantomgeving „Assistants”, daarna „Create”, en begin met een sjabloon.',
-            'Pas de instructies aan voor {company}: openingstijden, diensten, wat hij voor u moet noteren.',
-            'Test hem en koppel er daarna een nummer aan: „Get new phone number” als u er nog geen hebt (maandelijkse optie), daarna onderdeel „General”, veld „Phone number”.',
+            'Open in uw klantomgeving “Assistants”, klik op “Create” en begin met een sjabloon.',
+            'Pas zijn instructies aan {company} aan: openingstijden, diensten en wat hij voor u moet noteren.',
+            'Test hem en koppel er daarna een telefoonnummer aan: hebt u er nog geen, vraag er dan een aan via “Get new phone number” (optie, per maand betaald), en selecteer het vervolgens in de agent, onderdeel “General”, veld “Phone number”.',
           ],
         },
         'Hulp nodig? De hulpassistent (chatknop rechtsonder in uw klantomgeving) begeleidt u stap voor stap, in het Nederlands, schriftelijk of gesproken.',
@@ -610,13 +610,13 @@ export const UI_RELANCES: RelancesContent = {
         'Laat uw nummer en een geschikt moment achter: we bellen u terug om de agent van {company} samen met u aan te maken (instructies, nummer, doorschakelen). U kunt ook deze e-mail beantwoorden met een tijdstip.',
       ],
       cta: { label: 'Bel mij terug om samen in te stellen', target: 'setup_assist' },
-      after: ['Doet u het liever zelf? De gids „Een agent aanmaken en bewerken” beschrijft elke stap, en de hulpassistent in uw klantomgeving beantwoordt uw vragen.'],
+      after: ['Doet u het liever zelf? De gids “Een agent aanmaken en bewerken” beschrijft elke stap, en de hulpassistent in uw klantomgeving beantwoordt uw vragen.'],
       secondary: { label: 'De gids lezen', target: 'guide_create' },
     }),
     A3: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
-      subject: 'Uw proefperiode loopt tot {trial_end_date}: uw agent is nog niet aangemaakt',
+      subject: 'Proefperiode tot {trial_end_date}: uw agent is nog niet aangemaakt',
       preheader: 'Er is nog tijd om hem te testen, en we kunnen hem samen met u instellen.',
       body: [
         'Uw proefperiode loopt tot {trial_end_date}, maar uw agent is nog niet aangemaakt. Dit is ons laatste bericht hierover.',
@@ -645,7 +645,7 @@ export const UI_RELANCES: RelancesContent = {
         'Uw agent is aangemaakt, maar heeft nog geen echt gesprek ontvangen. Meestal zijn drie controles genoeg:',
         {
           ol: [
-            'Koppel er een nummer aan: hebt u er nog geen, vraag er dan een aan via „Get new phone number” (maandelijkse optie, prijs zichtbaar vóór aankoop) en open daarna in „Assistants” de agent, onderdeel „General”, veld „Phone number”.',
+            'Koppel er een telefoonnummer aan: hebt u er nog geen, vraag er dan een aan via “Get new phone number” (optie, per maand betaald, prijs zichtbaar vóór de aankoop) en open daarna in “Assistants” de agent, onderdeel “General”, veld “Phone number”.',
             'Bel dat nummer vanaf uw mobiel en stel een vraag die een klant zou stellen.',
             'Bevalt het antwoord, zet dan bij uw provider doorschakelen naar dat nummer aan, bijvoorbeeld alleen als u niet opneemt. U houdt uw eigen nummer.',
           ],
@@ -661,12 +661,12 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Uw agent heeft de afgelopen 30 dagen geen gesprekken ontvangen',
       preheader: 'Een controle van één minuut, zelf of samen met ons.',
       body: [
-        'Uw agent heeft de afgelopen 30 dagen geen enkel gesprek ontvangen. Misschien is dat de bedoeling, maar vaak is het een nummer dat niet meer aan de agent gekoppeld is, of doorschakelen dat uit staat.',
+        'Uw agent heeft de afgelopen 30 dagen geen enkel gesprek ontvangen. Misschien is dat de bedoeling, maar vaak ligt het aan een nummer dat niet meer aan de agent is gekoppeld, of aan doorschakelen dat uit staat.',
         'Controle in één minuut:',
         {
           ol: [
             'Bel uw gewone nummer op een moment waarop doorschakelen actief moet zijn.',
-            'Neemt de agent niet op, controleer dan het doorschakelen bij uw provider, of het nummer dat in uw klantomgeving aan de agent gekoppeld is (onderdeel „General”).',
+            'Neemt de agent niet op, controleer dan het doorschakelen bij uw provider, of het nummer dat in uw klantomgeving aan de agent is gekoppeld (onderdeel “General”).',
           ],
         },
         'Kijkt u het liever samen met ons na? Laat uw nummer achter: we bellen u terug om het samen te bekijken.',
@@ -683,7 +683,7 @@ export const UI_RELANCES: RelancesContent = {
       body: [
         `Ter informatie: het minutensaldo van uw account bij ${f.brand} is laag (resterende minuten: {minutes_left}).`,
         'Komt het op 0, dan neemt uw agent geen gesprekken meer aan tot er minuten worden toegevoegd: bij de verlenging van uw abonnement als u er een hebt, of op elk moment via Add credits.',
-        'Is dit niveau voor u in orde, dan hoeft u niets te doen.',
+        'Vindt u dit saldo voldoende, dan hoeft u niets te doen.',
       ],
       cta: { label: 'Mijn minuten bekijken', target: 'credits' },
     }),
