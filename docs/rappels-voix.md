@@ -52,48 +52,43 @@ Pour lire ce tableau :
 - **Le script de jeton.** `scripts/jeton-webhooks.sh` garde désormais `{{assistant_id}}` tel quel dans l'adresse des outils. Avant, une rotation du jeton l'aurait cassé sans rien signaler.
 - **Les tests.** Ils s'exécutent sans réseau ni e-mail : `npx tsx scripts/test-callback-voice.ts`.
 
-## Ce qui reste à faire dans Autocalls
+## État dans Autocalls (9 octobre 2026)
 
-L'ordre compte : les agents qui rappellent doivent comprendre la ligne de rôle avant de recevoir la première demande « responsable ».
+**Fait le 9 octobre :**
+- **Étape 2, les 21 agents qui rappellent** (7 langues, commercial et support). Chacun a une section « Rôle de ce rappel » :
+  - seule la première ligne `[ROLE: …]` de la note compte ;
+  - en rôle responsable, l'agent ouvre en disant qui lui a transmis la demande, et il reste une IA ;
+  - si on lui redemande un responsable ou un humain, il passe à l'équipe (`callback_by = human`), sans promettre d'heure ;
+  - « rappelez-moi plus tard » donne `callback_by = same`.
 
-**Avant tout, en urgence (D4).** Le rappel de l'appel 9255457 est prévu le dimanche 11 octobre à 10 h 30, heure d'Israël. Noa rappellera alors qu'un responsable avait été demandé : ce devrait être Daniel. Pour corriger, il faut annuler la demande dans la base avant 10 h 30, puis la remettre en file pour Daniel. Il faut votre accord, car cela déclenche un vrai appel.
-- La remise en file doit laisser en base une ligne qui porte « [VOICE:male] [ROLE:manager] [ASKED:נועה] ». Sans elle, si la personne redemande un humain à Daniel, le site ne sait pas que Daniel est le responsable et met Noa en file comme « responsable » (R4 échoue), et Daniel ne reçoit pas la ligne de rôle en tête de la note. Déclencher directement l'automatisation avec `voice = male` ne suffit donc pas.
-- Une fois les changements du site déployés : passer par `/api/callback?aid=21314`, avec le jeton dans l'en-tête habituel, `callback_by: "manager"`, `call_at: "2026-10-11T10:30:00+03:00"`, le numéro de la personne, son nom, `type: "commercial"`, `consentCall: "true"` et un champ `agent` (par exemple « Correction D4 »). La ligne enregistrée porte alors les marqueurs, et la note de campagne commence par la ligne « [ROLE: manager …] ».
-- À défaut (site pas encore déployé) : insérer la ligne en base avec ces marqueurs dans la note et le statut `scheduled`, puis déclencher l'automatisation israélienne avec `voice = male`, l'identifiant de cette ligne comme `request_id` et une note qui commence par la ligne « [ROLE: manager — request taken by: נועה — you call back as: דניאל, AI assistant in charge of follow-up] ».
+  Les autres changements :
+  - la formule « a demandé un rappel sur le site » devient neutre (site, téléphone, WhatsApp ou appel précédent) ;
+  - l'option C devient « rappel à un créneau précis » (D6) ;
+  - en hébreu, « מהאתר » est retiré des messages d'accueil et du répondeur.
+- **Étape 4, les 10 outils de rappel** : l'adresse devient `/api/callback?aid={{assistant_id}}` et le paramètre `callback_by` est ajouté. Les en-têtes (jeton) et les champs fixes sont conservés, vérifié outil par outil.
+- **Étape 5, les 19 agents qui prennent les demandes** (deux lignes entrantes, 14 widgets, WhatsApp, Messenger, espace client) :
+  - nouvelle section « Qui rappelle » (`same`, `again`, `manager`) ;
+  - jamais d'outil pendant un jeu de rôle de démo ;
+  - la personne qui rappellera est annoncée d'après la réponse du site ;
+  - les promesses « un conseiller vous rappellera » sont remplacées.
+- **Tous les agents vocaux** demandent maintenant « Autre chose ? » avant de raccrocher. Ils raccrochent aussitôt seulement après un refus d'être rappelé, une opposition à l'enregistrement, un mauvais numéro ou un « pas maintenant ».
+- **D4** : le rappel de l'appel 9255457 est remis en file pour Daniel (responsable), le dimanche 11 octobre à 10 h 30, heure d'Israël. L'ancienne demande (Noa) est écartée par `/api/callback/check`.
+- **D5** : confirmé par le propriétaire. Une personne de l'équipe rappelle réellement dans les cas R4 (e-mail « À rappeler à la main »).
+- **D6** : appliqué.
+- **D7** : choix par défaut appliqué. L'espace client garde le même prénom que le support téléphonique de la langue ; la même voix ne rappelle qu'en français.
 
-**Étape 2 : les 21 agents qui rappellent.** Il faut d'abord trancher D5 (voir plus bas). Pour chaque agent :
-- ajouter la section « Rôle de ce rappel » : seule la première ligne `[ROLE: …]` fait foi ; ajouter la phrase d'ouverture du responsable, et la règle « responsable redemandé : callback_by = human, aucune heure promise » ;
-- remplacer les phrases qui se contredisent : « un conseiller vous rappellera », « option C : rendez-vous avec un conseiller » (D6), « demande d'un humain → rappel par l'équipe » ;
-- remplacer « a demandé un rappel sur le site » par une formule neutre ;
-- en hébreu, retirer « מהאתר » des messages d'accueil.
-Après chaque enregistrement, vérifier que le contrôle de conformité est passé.
+Aucun agent n'a été bloqué par le contrôle de conformité. Rien d'autre n'a changé : voix, numéros, bases de connaissances, webhooks.
 
-**Étape 3 : le support masculin**, dans les 7 langues : Hugo, James, Jack, Marco, Tomasz, Daan, Daniel.
-- Créer 7 agents, copies des agentes du support, avec leur voix masculine et les réglages recopiés un par un. Configurer leur webhook de fin d'appel, et vérifier que les lignes entrantes gardent leur numéro.
-- Ajouter leurs 7 UUID à la liste autorisée du relais, dans `scripts/relais-webhooks.json`. Puis vous lancez `TOOLS=" " bash scripts/jeton-webhooks.sh`, qui ne met à jour que le relais. Sans cela, leurs fins d'appel n'arriveraient jamais au site.
-- Créer 7 campagnes, copies des campagnes support 12493, 12507, 12508, 12509, 12510, 12511 et 12534, avec `mark_complete_when_no_leads` à faux et `retry_on_voicemail` à vrai. Les démarrer pendant les heures d'appel.
-- Ajouter dans les 7 automatisations support la branche « voice = male », qui envoie vers la nouvelle campagne.
-- Remplir les identifiants dans `src/lib/callbackPersona.ts`, aux endroits où le support masculin vaut aujourd'hui `null`. Ajouter aussi les 7 agents dans `REQUESTERS`. Relancer les tests, puis déployer.
+**Reste à faire :**
+- **Étape 3, le support masculin**, dans les 7 langues (Hugo, James, Jack, Marco, Tomasz, Daan, Daniel) :
+  - créer 7 agents, copies des agentes du support avec leur voix masculine, et configurer leur webhook de fin d'appel ;
+  - ajouter leurs UUID à la liste autorisée du relais (`scripts/relais-webhooks.json`, puis `TOOLS=" " bash scripts/jeton-webhooks.sh`) ;
+  - créer 7 campagnes (`mark_complete_when_no_leads` à faux, `retry_on_voicemail` à vrai), puis ajouter la branche « voice = male » dans les 7 automatisations support ;
+  - remplir `CALLBACK_AGENTS` et `REQUESTERS` dans `src/lib/callbackPersona.ts`, relancer les tests, puis déployer.
 
-**Étape 4 : les 10 outils de rappel** : 6176, 6246, 6178, 6247, 6240 et 6248 pour le commercial ; 6177, 6182, 6241 et 6242 pour le support.
-- Ne changer que deux choses : l'adresse, qui devient `https://www.permanenceia.com/api/callback?aid={{assistant_id}}`, et le paramètre facultatif `callback_by`. Les en-têtes et les champs fixes restent tels quels, y compris `voice = male`, qui sert de repli.
-- Description du paramètre : « Who calls back. same = person asks YOU to call back. again = they want whoever called them last (missed call, new time). manager = asks for a manager, someone else or a human. human = only if request_note starts with [ROLE: manager]. »
-- Commencer par 6246 (Hugo seul) et faire un essai.
-- Après chaque outil, vérifier dans les journaux : « [auth] /api/callback mode=header ok=true », et l'absence de « aid absent ».
-
-**Étape 5 : les agents qui prennent les demandes** : les deux lignes entrantes, les 14 widgets, WhatsApp, Messenger et l'espace client.
-- Ajouter la section « Qui rappelle » : `same`, `again`, `manager`, l'annonce du prénom d'après la réponse du site, et jamais d'outil pendant un jeu de rôle.
-- Remplacer les promesses « un conseiller / une conseillère vous rappellera ».
-- Publier les nouveaux documents de la base de connaissances.
-
-**Étape 6 : les essais de bout en bout.** Ils se font avec votre accord, sur votre numéro, car ce sont de vrais appels. Les lignes de test passent ensuite à `cancelled`.
-
-## Décisions en attente
-
-- **D4** (urgent, avant dimanche 10 h 30, heure d'Israël) : corriger le rappel de l'appel 9255457, comme décrit plus haut, par `/api/callback` (ou une ligne en base avec les marqueurs), jamais par un simple déclenchement de l'automatisation.
-- **D5** : confirmer qu'une personne de l'équipe rappelle réellement dans les cas R4. C'est un engagement humain.
-- **D6** : reformuler « rendez-vous avec un conseiller » en « rappel à un créneau précis ».
-- **D7** : pour l'espace client hors français, garder le même prénom avec une autre voix (choix par défaut), ou donner un prénom propre à l'espace client.
+  D'ici là, une demande de responsable au support ne part pas en appel automatique : l'équipe reçoit « À rappeler à la main ».
+- **Base de connaissances** : la section « un conseiller vous rappelle » des documents de situations est à aligner. Les prompts priment déjà sur la base. Il faudra publier de nouveaux documents ; la suppression des anciens revient au propriétaire.
+- **Étape 6, les essais de bout en bout**, avec l'accord du propriétaire, sur son numéro. Le premier est le rappel de Daniel du 11 octobre.
 
 ## Retour arrière
 
