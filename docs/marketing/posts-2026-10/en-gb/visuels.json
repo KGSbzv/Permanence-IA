@@ -1,0 +1,72 @@
+[
+  {
+    "id": "en-gb-A",
+    "formats": [
+      "square"
+    ],
+    "lang": "en-gb",
+    "theme": "A",
+    "photo": "public/photos/immobilier.jpg",
+    "photopos": "50% 20%",
+    "photozoom": "1.45",
+    "photoorigin": "100% 20%",
+    "badge": "From US$99 excl. tax / month",
+    "title": "Every missed call is *a lost customer*",
+    "sub": "Your AI receptionist answers 24/7 and sends you a summary of every call.",
+    "cta": "See pricing",
+    "url": "permanenceia.com/en-gb/tarifs",
+    "a1": "Incoming call · Sat 11:20am",
+    "a1s": "You’re out on a viewing",
+    "a2": "“Hello, I’m the agency’s AI assistant.”",
+    "a3": "Call ended · summary sent",
+    "a3s": "Viewing booked in your calendar"
+  },
+  {
+    "id": "en-gb-A",
+    "formats": [
+      "wide"
+    ],
+    "lang": "en-gb",
+    "theme": "A",
+    "photo": "public/photos/immobilier.jpg",
+    "photopos": "36% 30%",
+    "badge": "From US$99 excl. tax / month",
+    "title": "Every missed call is *a lost customer*",
+    "sub": "Your AI receptionist answers 24/7 and sends you a summary of every call.",
+    "cta": "See pricing",
+    "url": "permanenceia.com/en-gb/tarifs",
+    "a1": "Incoming call · Sat 11:20am",
+    "a1s": "You’re out on a viewing",
+    "a2": "“Hello, I’m the agency’s AI assistant.”",
+    "a3": "Call ended · summary sent",
+    "a3s": "Viewing booked in your calendar"
+  },
+  {
+    "id": "en-gb-B",
+    "lang": "en-gb",
+    "theme": "B",
+    "badge": "Free live demo",
+    "title": "Ring 07367 090106. *An AI answers.*",
+    "sub": "Or try it in your browser: free, no sign-up.",
+    "cta": "Try our agent live",
+    "url": "permanenceia.com/en-gb/demo",
+    "voices": "Female and male AI voices · 80+ languages",
+    "langs": "English|Français|Italiano|Polski|Nederlands|עברית"
+  },
+  {
+    "id": "en-gb-C",
+    "lang": "en-gb",
+    "theme": "C",
+    "tone": "light",
+    "badge": "30 minutes on us",
+    "title": "Your free AI agent, *live in minutes*",
+    "sub": "-",
+    "cta": "Start for free",
+    "url": "permanenceia.com/en-gb/essai-gratuit",
+    "n1": "14",
+    "l1": "days free",
+    "n2": "30",
+    "l2": "minutes of calls included",
+    "checks": "Card required, nothing charged during the trial|No commitment, cancel at no cost|You keep your number"
+  }
+]

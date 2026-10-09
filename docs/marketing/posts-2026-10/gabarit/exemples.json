@@ -1,0 +1,62 @@
+[
+  {
+    "id": "exemple-fr-A",
+    "lang": "fr",
+    "theme": "A",
+    "photo": "public/photos/services-a-domicile.jpg",
+    "badge": "14 jours gratuits · 30 min offertes",
+    "title": "Un appel manqué, c’est *un client perdu*",
+    "sub": "Votre agent IA répond 24 h/24 et vous envoie le résumé.",
+    "cta": "Essai gratuit",
+    "url": "permanenceia.com/essai-gratuit",
+    "a1": "Appel entrant · 21 h 04",
+    "a1s": "Vous êtes en intervention",
+    "a2": "« Bonjour, je vous écoute. »",
+    "a3": "Appel terminé · résumé envoyé",
+    "a3s": "Demande notée, rappel organisé",
+    "photopos": "30% 50%"
+  },
+  {
+    "id": "exemple-it-B",
+    "lang": "it",
+    "theme": "B",
+    "badge": "Demo gratuita dal vivo",
+    "title": "Ascolti *la voce* del Suo agente AI",
+    "sub": "Provi dal vivo nel browser, senza registrazione.",
+    "cta": "Provi la demo",
+    "url": "permanenceia.com/it/demo",
+    "voices": "Voce femminile e maschile · agenti AI",
+    "langs": "Italiano|Français|English|Polski|Nederlands|עברית"
+  },
+  {
+    "id": "exemple-pl-C",
+    "lang": "pl",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Bezpłatny okres próbny",
+    "title": "Twój darmowy *agent AI* w kilka minut",
+    "sub": "-",
+    "cta": "Zacznij za darmo",
+    "url": "permanenceia.com/pl/essai-gratuit",
+    "n1": "14",
+    "l1": "dni za darmo",
+    "n2": "30",
+    "l2": "minut rozmów gratis",
+    "checks": "Bez opłat w okresie próbnym|Bez zobowiązań, anulujesz bez kosztów|Twój numer zostaje bez zmian"
+  },
+  {
+    "id": "exemple-he-A",
+    "lang": "he",
+    "theme": "A",
+    "badge": "14 ימי ניסיון · 30 דקות מתנה",
+    "title": "שיחה שלא נענתה = *לקוח שהלך*",
+    "sub": "סוכנת AI עונה 24/7 ושולחת לכם סיכום של כל שיחה.",
+    "cta": "התחילו בחינם",
+    "url": "permanenceia.com/he/essai-gratuit",
+    "a1": "שיחה נכנסת · 21:04",
+    "a1s": "אתם באמצע עבודה",
+    "a2": "״שלום, אני מקשיבה.״",
+    "a3": "השיחה הסתיימה · הסיכום נשלח",
+    "a3s": "הפנייה נרשמה, נקבעה שיחה חוזרת"
+  }
+]

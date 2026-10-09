@@ -1,0 +1,441 @@
+<!doctype html>
+<!--
+  Gabarit des posts Facebook / LinkedIn — campagne posts-oct-2026 (Permanence IA / PermanenceAI).
+
+  Formats : format=square (1080×1080, Facebook et LinkedIn) · format=wide (1200×627, lien LinkedIn / Facebook).
+  Couleurs et polices du site : tailwind.config.js (ink, night, signal, glow, paper) ; Poppins (titres), Figtree (texte),
+  Heebo (hébreu), chargées en file:// depuis public/fonts (chemin relatif ../../../../public/fonts).
+
+  Tout se règle dans l'URL (valeurs encodées avec encodeURIComponent) ; le script render.mjs le fait pour vous.
+    lang     fr | en-gb | en-au | it | pl | nl | he   (he : dir=rtl, police Heebo)
+    format   square | wide
+    theme    A (appels manqués) | B (démo, voix) | C (essai gratuit)
+    tone     dark | light
+    badge    pastille d'offre (≤ 5 mots)
+    title    titre (≤ 8 mots) ; *mots en couleur* entre astérisques
+    sub      sous-titre facultatif (≤ 12 mots)
+    cta      texte du bouton
+    url      adresse affichée, sans https:// (ex. permanenceia.com/it/demo)
+    ai       mention IA du bandeau (par défaut selon la langue : « Agent vocal IA », « AI voice agent »…)
+    brand, tagline : par défaut ceux de src/i18n/markets.ts pour la langue
+    Thème A : a1 (appel entrant), a1s (détail), a2 (ce que dit l'agent), a3 (résultat), a3s (détail),
+              photo (chemin depuis la racine du dépôt, ex. public/photos/services-a-domicile.jpg ; facultatif),
+              photopos (cadrage de la photo, ex. « 30% 50% » ; par défaut centré),
+              cards=start (copie nl : cartes à gauche, sujet de la photo à droite), stackw (largeur des cartes en carré, px)
+    badgeicon=- (copie nl : masque le pictogramme cadeau de la pastille, ex. à côté d'un prix)
+    Valeur « - » : masque le champ (badge, sub, a1s, a3s, voices, langs, checks).
+    Thème B : p1, p2 (portraits : jade, hugo, katie, james, charlotte, jack, manuela, marco, lena, tomasz, emma, daan,
+              noa, daniel ; par défaut les deux voix de la langue), p1name, p2name, voices (légende), langs (a|b|c)
+    Thème C : n1, l1, n2, l2 (deux chiffres et leur légende), checks (a|b|c)
+    debug=1  affiche l'état des polices en bas de l'image
+-->
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabarit post social</title>
+<style>
+/* ---------- Polices du site (public/fonts), mêmes fichiers et plages que src/styles/fonts.css ---------- */
+@font-face { font-family: 'Figtree'; font-weight: 400 700; font-display: block;
+  src: url('../../../../public/fonts/figtree/figtree-latin-ext-wght-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Figtree'; font-weight: 400 700; font-display: block;
+  src: url('../../../../public/fonts/figtree/figtree-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-weight: 600; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-weight: 600; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-weight: 700; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-ext-700-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-weight: 700; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-700-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-weight: 800; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-ext-800-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-weight: 800; font-display: block;
+  src: url('../../../../public/fonts/poppins/poppins-latin-800-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Heebo'; font-weight: 400 800; font-display: block;
+  src: url('../../../../public/fonts/heebo/heebo-hebrew-wght-normal.woff2') format('woff2');
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: 'Heebo'; font-weight: 400 800; font-display: block;
+  src: url('../../../../public/fonts/heebo/heebo-latin-ext-wght-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Heebo'; font-weight: 400 800; font-display: block;
+  src: url('../../../../public/fonts/heebo/heebo-latin-wght-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* ---------- Couleurs du site (tailwind.config.js) ---------- */
+:root {
+  --ink: #0E1B4D; --ink-soft: #22306A; --night: #0A1233; --night-raised: #141E47;
+  --signal: #0FA3C4; --signal-deep: #0A7690; --signal-soft: #E2F5FA; --glow: #5AD3EC;
+  --paper: #F5F8FB; --slate: #4A5875; --line: #DDE5EE; --ok: #178256; --no: #C8463D;
+  --f-title: 'Poppins', 'Heebo', sans-serif; --f-text: 'Figtree', 'Heebo', sans-serif;
+}
+html[lang="he"] { --f-title: 'Heebo', sans-serif; --f-text: 'Heebo', sans-serif; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--night); }
+body { width: max-content; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+/* ---------- Toile ---------- */
+.post { position: relative; overflow: hidden; font-family: var(--f-text); color: #fff;
+  background:
+    radial-gradient(760px 520px at 88% 6%, rgba(15,163,196,.34), transparent 62%),
+    radial-gradient(520px 420px at 0% 100%, rgba(90,211,236,.12), transparent 70%),
+    linear-gradient(140deg, #0A1233 0%, #0E1B4D 52%, #13306B 100%); }
+.tone-light .post { color: var(--ink);
+  background:
+    radial-gradient(760px 520px at 88% 6%, rgba(15,163,196,.20), transparent 62%),
+    linear-gradient(160deg, #FFFFFF 0%, var(--paper) 55%, #E7F3F8 100%); }
+.waves { position: absolute; inset-inline: 0; bottom: 0; width: 100%; height: 34%; opacity: .45; pointer-events: none; }
+.tone-light .waves { opacity: .3; }
+
+.square .post { width: 1080px; height: 1080px; padding: 58px 64px 56px; display: flex; flex-direction: column; }
+.square .col-text { display: contents; }
+.square .head { order: 0; }
+.square .visual { order: 1; flex: 1 1 auto; min-height: 0; margin: 34px 0 36px; }
+.square .badge { order: 2; }
+.square .title { order: 3; }
+.square .sub { order: 4; }
+.square .foot { order: 5; }
+
+.wide .post { width: 1200px; height: 627px; padding: 46px 52px 44px; display: grid; grid-template-columns: minmax(0, 1fr) 452px; column-gap: 44px; }
+.wide .col-text { display: flex; flex-direction: column; min-width: 0; position: relative; z-index: 1; }
+.wide .head { margin-bottom: auto; padding-bottom: 22px; }
+.wide .visual { height: 100%; min-height: 0; }
+
+/* ---------- En-tête : logo du site (pictogramme + marque + slogan du marché) et mention IA ---------- */
+.head { position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.markbox { flex: none; width: 66px; height: 66px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 0 0 5px rgba(90,211,236,.22); }
+.markbox img { width: 48px; height: auto; display: block; }
+.tone-light .markbox { box-shadow: 0 0 0 1px var(--line), 0 8px 20px -10px rgba(14,27,77,.35); }
+.logo .brand { font-family: var(--f-title); font-weight: 700; font-size: 31px; line-height: 1; letter-spacing: -.02em; white-space: nowrap; }
+.logo .tagline { margin-top: 6px; font-size: 17px; font-weight: 500; opacity: .66; white-space: nowrap; }
+.wide .markbox { width: 54px; height: 54px; }
+.wide .markbox img { width: 39px; }
+.wide .logo .brand { font-size: 26px; }
+.wide .logo .tagline { font-size: 15px; }
+.ai-chip { flex: none; display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: 99px;
+  font-weight: 700; font-size: 18px; letter-spacing: .01em; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); }
+.ai-chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--glow); box-shadow: 0 0 0 5px rgba(90,211,236,.22); }
+.tone-light .ai-chip { color: var(--signal-deep); background: #fff; border-color: var(--line); }
+.tone-light .ai-chip i { background: var(--signal); box-shadow: 0 0 0 5px rgba(15,163,196,.16); }
+.wide .ai-chip { font-size: 15px; padding: 8px 14px; }
+
+/* ---------- Texte ---------- */
+.badge { position: relative; z-index: 1; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; border-radius: 99px;
+  background: var(--glow); color: var(--ink); font-weight: 700; font-size: 24px; line-height: 1.1; }
+.badge svg { width: 22px; height: 22px; flex: none; }
+.tone-light .badge { background: var(--ink); color: #fff; }
+.wide .badge { font-size: 19px; padding: 8px 16px; }
+.title { position: relative; z-index: 1; margin-top: 20px; font-family: var(--f-title); font-weight: 800; font-size: 74px; line-height: 1.04; letter-spacing: -.025em;
+  overflow-wrap: break-word; hyphens: manual; text-wrap: balance; }
+html[lang="he"] .title { letter-spacing: -.01em; line-height: 1.08; }
+.title em { font-style: normal; color: var(--glow); }
+.tone-light .title em { color: var(--signal-deep); }
+.wide .title { margin-top: 16px; font-size: 54px; }
+.sub { position: relative; z-index: 1; margin-top: 16px; font-size: 30px; line-height: 1.3; font-weight: 500; color: #C9DCEE; text-wrap: pretty; }
+.tone-light .sub { color: var(--slate); }
+.wide .sub { font-size: 22px; margin-top: 12px; }
+.sub:empty { display: none; }
+
+.foot { position: relative; z-index: 1; margin-top: 30px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.wide .foot { margin-top: 24px; }
+.cta { display: inline-flex; align-items: center; gap: 14px; padding: 18px 30px; border-radius: 14px; background: var(--signal); color: #fff;
+  font-family: var(--f-title); font-weight: 700; font-size: 27px; line-height: 1; box-shadow: 0 14px 30px -14px rgba(15,163,196,.9); white-space: nowrap; }
+.tone-light .cta { background: var(--signal-deep); }
+.cta svg { width: 24px; height: 24px; flex: none; }
+[dir="rtl"] .cta svg { transform: scaleX(-1); }
+.wide .cta { font-size: 21px; padding: 14px 22px; border-radius: 12px; }
+.url { font-size: 24px; font-weight: 600; color: #9FC6D8; white-space: nowrap; }
+.tone-light .url { color: var(--signal-deep); }
+.wide .url { font-size: 18px; }
+
+/* ---------- Zone visuelle commune ---------- */
+.visual { position: relative; z-index: 1; border-radius: 30px; }
+.v { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+
+/* Thème A : appel entrant → l'agent IA répond → résumé envoyé */
+.va.has-photo { border-radius: 30px; overflow: hidden; }
+.va .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.va .shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10,18,51,0) 18%, rgba(10,18,51,.55) 52%, rgba(10,18,51,.9) 100%); }
+[dir="rtl"] .va .shade { background: linear-gradient(270deg, rgba(10,18,51,0) 18%, rgba(10,18,51,.55) 52%, rgba(10,18,51,.9) 100%); }
+.stack { position: relative; display: flex; flex-direction: column; gap: 18px; width: 720px; max-width: 100%; }
+.va.has-photo .v { justify-content: flex-end; padding-inline-end: 26px; }
+.va.has-photo .stack { width: 580px; }
+.va.has-photo .card .t { font-size: 25px; }
+.va.has-photo .card .s { font-size: 19px; }
+.va.has-photo .card.ai .t { font-size: 24px; }
+/* Copie nl : cards=start place les cartes du côté du début de ligne (le sujet de la photo reste visible à droite). */
+.va.has-photo.cards-start .v { justify-content: flex-start; padding-inline-end: 0; padding-inline-start: 26px; }
+.va.has-photo.cards-start .shade { background: linear-gradient(270deg, rgba(10,18,51,0) 30%, rgba(10,18,51,.55) 56%, rgba(10,18,51,.9) 100%); }
+.square .va.has-photo.cards-start .stack { width: var(--stackw, 580px); }
+/* Copie nl : un « \n » dans a1, a2 ou a3 force le retour à la ligne (évite la coupure « AI- / assistent »). */
+.card .t, .title { white-space: pre-line; }
+.stack::before { content: ''; position: absolute; inset-inline-start: 53px; top: 40px; bottom: 40px; width: 2px; background: linear-gradient(var(--glow), rgba(90,211,236,.15)); }
+.card { position: relative; display: flex; align-items: center; gap: 18px; padding: 18px 22px; border-radius: 20px; box-shadow: 0 18px 40px -22px rgba(0,0,0,.6); }
+.card .ico { flex: none; width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; }
+.card .ico svg { width: 30px; height: 30px; }
+.card .t { font-weight: 700; font-size: 28px; line-height: 1.2; }
+.card .s { margin-top: 4px; font-size: 21px; line-height: 1.3; opacity: .72; font-weight: 500; }
+.card.in { background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(6px); }
+.card.in .ico { background: rgba(200,70,61,.95); box-shadow: 0 0 0 7px rgba(200,70,61,.22); }
+.card.ai { background: linear-gradient(120deg, var(--signal) 0%, var(--signal-deep) 100%); color: #fff; margin-inline-start: 34px; }
+.card.ai .ico { background: rgba(255,255,255,.16); }
+.card.ai .lbl { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+.card.ai .t { font-weight: 600; font-size: 27px; margin-top: 4px; }
+.card.done { background: #fff; color: var(--ink); }
+.card.done .ico { background: var(--ok); }
+.card.done .s { color: var(--slate); opacity: 1; }
+.tone-light .card.in { background: #fff; border-color: var(--line); color: var(--ink); backdrop-filter: none; }
+.tone-light .card.done { border: 1px solid var(--line); }
+.bars { display: inline-flex; align-items: center; gap: 3px; height: 18px; }
+.bars b { display: block; width: 3px; border-radius: 2px; background: currentColor; }
+.wide .stack { width: 100%; gap: 10px; }
+.wide .va.has-photo .v { padding: 0 14px 16px; align-items: flex-end; justify-content: center; }
+.wide .va.has-photo .stack { width: 100%; }
+.wide .card { padding: 11px 14px; gap: 12px; border-radius: 15px; }
+.wide .card .ico { width: 40px; height: 40px; }
+.wide .card .ico svg { width: 20px; height: 20px; }
+.wide .card .t, .wide .va.has-photo .card .t { font-size: 18px; }
+.wide .card .s, .wide .va.has-photo .card .s { font-size: 14px; margin-top: 2px; }
+.wide .card.ai { margin-inline-start: 22px; }
+.wide .card.ai .lbl { font-size: 12px; }
+.wide .card.ai .t, .wide .va.has-photo .card.ai .t { font-size: 17px; }
+.wide .stack::before { inset-inline-start: 33px; }
+
+/* Thème B : deux voix (féminine, masculine), onde sonore, langues */
+.vb .v { flex-direction: column; gap: 30px; }
+.duo { display: flex; align-items: center; gap: 26px; }
+.who { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.ring { position: relative; border-radius: 50%; padding: 7px; background: linear-gradient(140deg, var(--glow), var(--signal-deep)); box-shadow: 0 0 0 14px rgba(90,211,236,.12), 0 0 0 30px rgba(90,211,236,.06), 0 24px 60px -20px rgba(15,163,196,.8); }
+.ring img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid var(--night); }
+.tone-light .ring img { border-color: #fff; }
+.who.main .ring { width: 238px; height: 238px; }
+.who.alt .ring { width: 170px; height: 170px; }
+.name { display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px; border-radius: 99px; font-weight: 700; font-size: 22px; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16); }
+.name i { width: 9px; height: 9px; border-radius: 50%; background: #3DDC97; }
+.tone-light .name { background: #fff; border-color: var(--line); color: var(--ink); }
+.wave { display: flex; align-items: center; gap: 6px; height: 120px; color: var(--glow); }
+.wave b { display: block; width: 7px; border-radius: 4px; background: currentColor; }
+.tone-light .wave { color: var(--signal); }
+.voices { font-size: 22px; font-weight: 600; opacity: .8; margin-top: -12px; }
+.langs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 900px; }
+.langs span { padding: 8px 16px; border-radius: 99px; font-size: 20px; font-weight: 600; background: rgba(90,211,236,.12); border: 1px solid rgba(90,211,236,.35); color: #DDF6FC; }
+.tone-light .langs span { background: var(--signal-soft); border-color: rgba(15,163,196,.3); color: var(--signal-deep); }
+.wide .vb .v { gap: 20px; }
+.wide .duo { gap: 14px; }
+.wide .who.main .ring { width: 168px; height: 168px; }
+.wide .who.alt .ring { width: 118px; height: 118px; }
+.wide .name { font-size: 17px; padding: 6px 12px; }
+.wide .wave { height: 80px; gap: 4px; }
+.wide .wave b { width: 5px; }
+.wide .voices { font-size: 16px; margin-top: -8px; text-align: center; }
+.wide .langs span { font-size: 15px; padding: 6px 11px; }
+
+/* Thème C : essai gratuit (chiffres) et conditions */
+.vc .v { flex-direction: column; gap: 22px; align-items: stretch; }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.tile { border-radius: 26px; padding: 26px 30px 24px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); }
+.tile.hot { background: linear-gradient(140deg, rgba(90,211,236,.26), rgba(15,163,196,.10)); border-color: rgba(90,211,236,.5); }
+.tile .n { font-family: var(--f-title); font-weight: 800; font-size: 128px; line-height: .95; letter-spacing: -.04em; color: var(--glow); }
+.tile .l { margin-top: 10px; font-size: 25px; font-weight: 600; line-height: 1.25; }
+.tone-light .tile { background: #fff; border-color: var(--line); }
+.tone-light .tile.hot { background: var(--signal-soft); border-color: rgba(15,163,196,.35); }
+.tone-light .tile .n { color: var(--signal-deep); }
+.checks { display: grid; gap: 12px; padding: 22px 26px; border-radius: 22px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); }
+.checks div { display: flex; align-items: center; gap: 14px; font-size: 24px; font-weight: 600; line-height: 1.25; }
+.checks svg { flex: none; width: 30px; height: 30px; }
+.tone-light .checks { background: #fff; border-color: var(--line); }
+.wide .vc .v { gap: 14px; }
+.wide .tiles { gap: 12px; }
+.wide .tile { padding: 18px 18px 16px; border-radius: 20px; }
+.wide .tile .n { font-size: 84px; }
+.wide .tile .l { font-size: 17px; margin-top: 6px; }
+.wide .checks { padding: 16px 18px; gap: 9px; border-radius: 18px; }
+.wide .checks div { font-size: 17px; gap: 10px; }
+.wide .checks svg { width: 22px; height: 22px; }
+
+/* Contrôle des polices (debug=1) */
+#fontstate { position: absolute; inset-inline-start: 0; bottom: 0; z-index: 9; padding: 4px 8px; font: 12px/1.3 monospace; color: #0f0; background: rgba(0,0,0,.75); display: none; }
+.debug #fontstate { display: block; }
+</style>
+</head>
+<body>
+<main class="post" id="post">
+  <svg class="waves" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="#0FA3C4" stroke-width="2">
+      <path d="M0 170 C260 90 460 260 720 160 S1050 90 1200 180"/>
+      <path d="M0 205 C260 130 480 290 720 200 S1050 130 1200 215" opacity=".6"/>
+      <path d="M0 240 C280 175 500 310 720 240 S1060 170 1200 250" opacity=".35"/>
+    </g>
+  </svg>
+  <div class="col-text">
+    <header class="head">
+      <div class="logo">
+        <span class="markbox"><img id="mark" alt=""></span>
+        <div><div class="brand" id="brand"></div><div class="tagline" id="tagline"></div></div>
+      </div>
+      <div class="ai-chip"><i></i><span id="ai"></span></div>
+    </header>
+    <div class="badge" id="badgeBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg><span id="badge"></span></div>
+    <h1 class="title" id="title"></h1>
+    <p class="sub" id="sub"></p>
+    <footer class="foot">
+      <span class="cta"><span id="cta"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <bdi class="url" dir="ltr" id="url"></bdi>
+    </footer>
+  </div>
+  <section class="visual" id="visual"></section>
+  <div id="fontstate"></div>
+</main>
+
+<script>
+(function () {
+  var ROOT = '../../../../';
+  var q = new URLSearchParams(location.search);
+  var get = function (k, d) { var v = q.get(k); return v === null || v === '' ? d : v; };
+
+  // Marque et slogan : src/i18n/markets.ts ; mention IA et voix : textes du site (liveDemo, src/data/personas.ts).
+  var MARKET = {
+    'fr':    { brand: 'Permanence IA', tagline: 'Agents vocaux intelligents',        ai: 'Agent vocal IA',      voices: ['jade', 'Jade', 'hugo', 'Hugo'] },
+    'en-gb': { brand: 'PermanenceAI',  tagline: 'AI Receptionist',                   ai: 'AI voice agent',      voices: ['katie', 'Katie', 'james', 'James'] },
+    'en-au': { brand: 'PermanenceAI',  tagline: '24/7 AI Phone Receptionist',        ai: 'AI voice agent',      voices: ['charlotte', 'Charlotte', 'jack', 'Jack'] },
+    'it':    { brand: 'PermanenceIA',  tagline: 'Assistente telefonico AI',          ai: 'Agente vocale AI',    voices: ['manuela', 'Manuela', 'marco', 'Marco'] },
+    'pl':    { brand: 'PermanenceAI',  tagline: 'Inteligentny asystent telefoniczny', ai: 'Agent głosowy AI',   voices: ['lena', 'Lena', 'tomasz', 'Tomasz'] },
+    'nl':    { brand: 'PermanenceAI',  tagline: 'AI-telefoonassistent',              ai: 'AI-spraakagent',      voices: ['emma', 'Emma', 'daan', 'Daan'] },
+    'he':    { brand: 'PermanenceAI',  tagline: 'מענה טלפוני חכם 24/7',              ai: 'סוכנת קולית AI',      voices: ['noa', 'נועה', 'daniel', 'דניאל'] }
+  };
+  var lang = MARKET[get('lang', 'fr')] ? get('lang', 'fr') : 'fr';
+  var M = MARKET[lang];
+  var format = get('format', 'square') === 'wide' ? 'wide' : 'square';
+  var theme = /^[ABC]$/.test(get('theme', 'A')) ? get('theme', 'A') : 'A';
+  var tone = get('tone', 'dark') === 'light' ? 'light' : 'dark';
+
+  document.documentElement.lang = lang === 'he' ? 'he' : lang.slice(0, 2);
+  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  document.body.className = [format, 'tone-' + tone, 'theme-' + theme, get('debug', '') ? 'debug' : ''].join(' ');
+
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  var svg = function (markup) { var t = document.createElement('template'); t.innerHTML = markup.trim(); return t.content.firstChild; };
+  var ICON = {
+    phone: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
+    mic: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v1a7 7 0 0 0 14 0v-1M12 18v4"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg>',
+    checkRound: '<svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="15" fill="#5AD3EC"/><path d="M8.5 15.5l4 4 9-9" fill="none" stroke="#0E1B4D" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
+  var bars = function (cls, heights) { var b = el('span', cls); heights.forEach(function (h) { var i = el('b'); i.style.height = h + '%'; b.appendChild(i); }); return b; };
+
+  // ---------- En-tête, texte ----------
+  // Pictogramme du site (public/logo/mark-light.png, net en couleur) posé sur une pastille blanche, lisible sur fond sombre.
+  $('mark').src = ROOT + 'public/logo/mark-light.png';
+  $('brand').textContent = get('brand', M.brand);
+  $('tagline').textContent = get('tagline', M.tagline);
+  $('ai').textContent = get('ai', M.ai);
+  var badge = get('badge', '14 jours gratuits · 30 min offertes');
+  if (badge === '-') $('badgeBox').style.display = 'none'; else $('badge').textContent = badge;
+  if (get('badgeicon', '') === '-') { var bi = $('badgeBox').querySelector('svg'); if (bi) bi.style.display = 'none'; }
+  // Titre : les passages entre *astérisques* passent en couleur (aucun HTML injecté).
+  get('title', 'Un appel manqué, c’est *un client perdu*').split('*').forEach(function (part, i) {
+    if (!part) return; $('title').appendChild(i % 2 ? el('em', null, part) : document.createTextNode(part));
+  });
+  $('sub').textContent = get('sub', 'Votre agent IA répond 24 h/24 et vous envoie le résumé.');
+  if (get('sub', '') === '-') $('sub').textContent = '';
+  $('cta').textContent = get('cta', 'Essai gratuit');
+  $('url').textContent = get('url', 'permanenceia.com/essai-gratuit');
+
+  // ---------- Zone visuelle ----------
+  var V = $('visual');
+  var inner = el('div', 'v');
+  if (theme === 'A') {
+    V.classList.add('va');
+    var photo = get('photo', '');
+    if (photo) {
+      V.classList.add('has-photo');
+      if (get('cards', 'end') === 'start') V.classList.add('cards-start');
+      if (get('stackw', '')) V.style.setProperty('--stackw', parseInt(get('stackw', ''), 10) + 'px');
+      var img = el('img', 'photo'); img.src = ROOT + photo; img.alt = ''; img.style.objectPosition = get('photopos', '50% 50%'); V.appendChild(img); V.appendChild(el('div', 'shade'));
+    }
+    var stack = el('div', 'stack');
+    var c1 = el('div', 'card in'); var i1 = el('div', 'ico'); i1.appendChild(svg(ICON.phone)); c1.appendChild(i1);
+    var t1 = el('div'); t1.appendChild(el('div', 't', get('a1', 'Appel entrant · 21 h 04'))); if (get('a1s', 'Votre équipe est occupée') !== '-') t1.appendChild(el('div', 's', get('a1s', 'Votre équipe est occupée'))); c1.appendChild(t1);
+    var c2 = el('div', 'card ai'); var i2 = el('div', 'ico'); i2.appendChild(svg(ICON.mic)); c2.appendChild(i2);
+    var t2 = el('div'); var lbl = el('div', 'lbl'); lbl.appendChild(document.createTextNode(get('ai', M.ai))); lbl.appendChild(bars('bars', [40, 80, 55, 100, 65, 35, 75])); t2.appendChild(lbl);
+    t2.appendChild(el('div', 't', get('a2', '« Bonjour, je vous écoute. »'))); c2.appendChild(t2);
+    var c3 = el('div', 'card done'); var i3 = el('div', 'ico'); i3.appendChild(svg(ICON.check)); c3.appendChild(i3);
+    var t3 = el('div'); t3.appendChild(el('div', 't', get('a3', 'Appel terminé · résumé envoyé'))); if (get('a3s', 'Rendez-vous noté dans votre agenda') !== '-') t3.appendChild(el('div', 's', get('a3s', 'Rendez-vous noté dans votre agenda'))); c3.appendChild(t3);
+    [c1, c2, c3].forEach(function (c) { stack.appendChild(c); });
+    inner.appendChild(stack);
+  } else if (theme === 'B') {
+    V.classList.add('vb');
+    var duo = el('div', 'duo');
+    var who = function (cls, key, name) {
+      var w = el('div', 'who ' + cls); var r = el('div', 'ring'); var im = el('img'); im.src = ROOT + 'public/agents/' + key + '.jpg'; im.alt = ''; r.appendChild(im); w.appendChild(r);
+      var n = el('span', 'name'); n.appendChild(el('i')); n.appendChild(document.createTextNode(name)); w.appendChild(n); return w;
+    };
+    duo.appendChild(who('main', get('p1', M.voices[0]), get('p1name', M.voices[1])));
+    duo.appendChild(bars('wave', [18, 34, 58, 82, 100, 70, 46, 88, 64, 30, 52, 76, 40, 22]));
+    duo.appendChild(who('alt', get('p2', M.voices[2]), get('p2name', M.voices[3])));
+    inner.appendChild(duo);
+    var voices = get('voices', 'Voix féminine et masculine · agents IA');
+    if (voices !== '-') inner.appendChild(el('div', 'voices', voices));
+    var langs = get('langs', 'Français|English|Italiano|Polski|Nederlands|עברית');
+    if (langs !== '-') { var L = el('div', 'langs'); langs.split('|').forEach(function (s) { var sp = el('span', null, s); sp.dir = 'auto'; L.appendChild(sp); }); inner.appendChild(L); }
+  } else {
+    V.classList.add('vc');
+    var tiles = el('div', 'tiles');
+    var tile = function (cls, n, l) { var t = el('div', 'tile ' + cls); t.appendChild(el('div', 'n', n)); t.appendChild(el('div', 'l', l)); return t; };
+    tiles.appendChild(tile('hot', get('n1', '14'), get('l1', 'jours d’essai gratuit')));
+    tiles.appendChild(tile('', get('n2', '30'), get('l2', 'minutes d’appels offertes')));
+    inner.appendChild(tiles);
+    var checks = get('checks', 'Rien n’est débité pendant l’essai|Sans engagement, annulation sans frais|Vous gardez votre numéro');
+    if (checks !== '-') { var C = el('div', 'checks'); checks.split('|').forEach(function (s) { var d = el('div'); d.appendChild(svg(ICON.checkRound)); d.appendChild(el('span', null, s)); C.appendChild(d); }); inner.appendChild(C); }
+  }
+  V.appendChild(inner);
+
+  // ---------- Ajustement du titre (langues longues) et contrôle des polices ----------
+  var post = $('post'), title = $('title');
+  function fit() {
+    var H = format === 'wide' ? 627 : 1080;
+    var size = format === 'wide' ? 54 : 74, min = format === 'wide' ? 34 : 46, maxLines = 3;
+    var minVisual = format === 'wide' ? 0 : 360;
+    for (; size >= min; size -= 2) {
+      title.style.fontSize = size + 'px';
+      var lh = parseFloat(getComputedStyle(title).lineHeight) || size * 1.05;
+      var lines = Math.round(title.scrollHeight / lh);
+      var tooTall = post.scrollHeight > H + 1;
+      var visualOk = V.getBoundingClientRect().height >= minVisual;
+      var colOk = format !== 'wide' || post.querySelector('.col-text').scrollHeight <= H - 90;
+      if (lines <= maxLines && !tooTall && visualOk && colOk) break;
+    }
+    // Zone visuelle trop petite pour son contenu (carré) : réduction homothétique.
+    var vi = V.querySelector('.v');
+    var vh = V.getBoundingClientRect().height, need = vi.scrollHeight;
+    if (need > vh && vh > 0) { var k = Math.max(.62, vh / need); vi.style.transform = 'scale(' + k + ')'; }
+  }
+  function report() {
+    var faces = []; document.fonts.forEach(function (f) { if (f.status !== 'unloaded') faces.push(f.family.replace(/["']/g, '') + ' ' + f.weight + ' ' + f.status); });
+    var errors = faces.filter(function (s) { return / error$/.test(s); });
+    var titleFont = lang === 'he' ? 'Heebo' : 'Poppins';
+    var ok = errors.length === 0 && faces.some(function (s) { return s.indexOf(titleFont) === 0 && / loaded$/.test(s); });
+    document.documentElement.setAttribute('data-fonts', (ok ? 'ok' : 'KO') + ' | ' + faces.join(', '));
+    $('fontstate').textContent = (ok ? 'polices OK : ' : 'POLICES KO : ') + faces.join(' · ');
+  }
+  var probes = [
+    document.fonts.load('800 74px ' + (lang === 'he' ? 'Heebo' : 'Poppins'), title.textContent || 'A'),
+    document.fonts.load('700 27px ' + (lang === 'he' ? 'Heebo' : 'Poppins'), $('cta').textContent || 'A'),
+    document.fonts.load('600 24px ' + (lang === 'he' ? 'Heebo' : 'Figtree'), document.body.textContent.slice(0, 400))
+  ];
+  Promise.all(probes).catch(function () {}).then(function () { return document.fonts.ready; }).then(function () { fit(); report(); document.documentElement.setAttribute('data-ready', '1'); });
+})();
+</script>
+</body>
+</html>

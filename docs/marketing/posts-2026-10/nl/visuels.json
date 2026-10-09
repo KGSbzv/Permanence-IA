@@ -1,0 +1,68 @@
+[
+  {
+    "id": "nl-A",
+    "lang": "nl",
+    "theme": "A",
+    "photo": "public/photos/avocats-experts-comptables.jpg",
+    "photopos": "62% 30%",
+    "cards": "start",
+    "stackw": "560",
+    "badge": "Vanaf US$ 99 excl. btw / maand",
+    "badgeicon": "-",
+    "title": "Gemiste oproep? *Gemiste klant.*",
+    "sub": "Uw AI-agent neemt 24/7 voor u op.",
+    "cta": "Bekijk de prijzen",
+    "url": "permanenceia.com/nl/tarifs",
+    "a1": "Inkomend gesprek · 10.42 uur",
+    "a1s": "U zit in een bespreking",
+    "a2": "„Goedemorgen, met Emma,\nde AI-assistent.”",
+    "a3": "Gesprek beëindigd ·\nsamenvatting verstuurd",
+    "a3s": "Afspraak ingepland in uw agenda"
+  },
+  {
+    "id": "nl-B",
+    "lang": "nl",
+    "theme": "B",
+    "badge": "Gratis live demo",
+    "title": "Praat nu *met onze AI-agent*",
+    "sub": "In uw browser, zonder aanmelden.",
+    "cta": "Start de live demo",
+    "url": "permanenceia.com/nl/demo",
+    "voices": "Vrouwen- en mannenstem · meer dan 80 talen",
+    "langs": "Nederlands|English|Français|Italiano|Polski|עברית",
+    "formats": [
+      "square"
+    ]
+  },
+  {
+    "id": "nl-B",
+    "lang": "nl",
+    "theme": "B",
+    "badge": "Gratis live demo",
+    "title": "Praat nu *met onze AI-agent*",
+    "sub": "In uw browser, zonder aanmelden.",
+    "cta": "Start de live demo",
+    "url": "permanenceia.com/nl/demo",
+    "voices": "Vrouwen- en mannenstem · meer dan 80 talen",
+    "langs": "Nederlands|English|Français|Polski|עברית",
+    "formats": [
+      "wide"
+    ]
+  },
+  {
+    "id": "nl-C",
+    "lang": "nl",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Gratis proefperiode",
+    "title": "Uw gratis AI-agent,\n*binnen enkele\nminuten live*",
+    "sub": "-",
+    "cta": "Gratis starten",
+    "url": "permanenceia.com/nl/essai-gratuit",
+    "n1": "14",
+    "l1": "dagen gratis proberen",
+    "n2": "30",
+    "l2": "belminuten inbegrepen",
+    "checks": "Creditcard gevraagd, niets afgeschreven tijdens de proefperiode|Geen verplichtingen, kosteloos opzeggen|U houdt uw eigen nummer"
+  }
+]

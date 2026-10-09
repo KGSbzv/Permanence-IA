@@ -1,0 +1,70 @@
+[
+  {
+    "id": "pl-A",
+    "formats": [
+      "square"
+    ],
+    "lang": "pl",
+    "theme": "A",
+    "photo": "docs/marketing/posts-2026-10/pl/photo-salon-carre.jpg",
+    "photopos": "50% 50%",
+    "badge": "Od 99 USD netto / mies.",
+    "title": "Nieodebrany telefon to *utracony klient*",
+    "sub": "Agent AI odbiera 24/7 i wysyła Ci podsumowanie.",
+    "cta": "Zobacz cennik",
+    "url": "permanenceia.com/pl/tarifs",
+    "a1": "Połączenie przychodzące · 11:20",
+    "a1s": "Pracujesz przy fotelu",
+    "a2": "„Dzień dobry, tu asystentka AI salonu.”",
+    "a3": "Rozmowa zakończona · podsumowanie wysłane",
+    "a3s": "Wizyta wpisana do grafiku"
+  },
+  {
+    "id": "pl-A",
+    "formats": [
+      "wide"
+    ],
+    "lang": "pl",
+    "theme": "A",
+    "photo": "public/photos/salons-de-coiffure.jpg",
+    "photopos": "28% 50%",
+    "badge": "Od 99 USD netto / mies.",
+    "title": "Nieodebrany telefon to *utracony klient*",
+    "sub": "Agent AI odbiera 24/7 i wysyła Ci podsumowanie.",
+    "cta": "Zobacz cennik",
+    "url": "permanenceia.com/pl/tarifs",
+    "a1": "Połączenie przychodzące · 11:20",
+    "a1s": "Pracujesz przy fotelu",
+    "a2": "„Dzień dobry, tu asystentka AI salonu.”",
+    "a3": "Rozmowa zakończona · podsumowanie wysłane",
+    "a3s": "Wizyta wpisana do grafiku"
+  },
+  {
+    "id": "pl-B",
+    "lang": "pl",
+    "theme": "B",
+    "badge": "Bezpłatne demo na żywo",
+    "title": "Porozmawiaj *z naszym agentem AI* teraz",
+    "sub": "Bez rejestracji: w przeglądarce albo przez telefon.",
+    "cta": "Wypróbuj demo",
+    "url": "permanenceia.com/pl/demo",
+    "voices": "Głos żeński i męski · agenci AI",
+    "langs": "Polski|English|Français|Italiano|Nederlands|עברית|ponad 80 języków"
+  },
+  {
+    "id": "pl-C",
+    "lang": "pl",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Bezpłatny okres próbny",
+    "title": "Twój darmowy agent AI, *gotowy w kilka minut*",
+    "sub": "-",
+    "cta": "Zacznij za darmo",
+    "url": "permanenceia.com/pl/essai-gratuit",
+    "n1": "14",
+    "l1": "dni za darmo",
+    "n2": "30",
+    "l2": "minut połączeń w cenie",
+    "checks": "Karta wymagana, w okresie próbnym nic nie jest pobierane|Anuluj przed końcem okresu próbnego bez kosztów|Bez zobowiązań i bez opłaty aktywacyjnej|Zachowujesz swój numer"
+  }
+]

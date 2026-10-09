@@ -1,0 +1,66 @@
+[
+  {
+    "id": "it-A",
+    "lang": "it",
+    "theme": "A",
+    "photo": "public/photos/restaurants-hotellerie.jpg",
+    "photopos": "22% 35%",
+    "badge": "Da 99 USD IVA esclusa / mese",
+    "title": "Ogni chiamata persa è *un cliente perso*",
+    "sub": "Il Suo agente AI risponde 24/7 e Le invia il riepilogo.",
+    "cta": "Veda i prezzi",
+    "url": "permanenceia.com/it/tarifs",
+    "a1": "Chiamata in arrivo · 20:47",
+    "a1s": "Lei è in sala, nel pieno del servizio",
+    "a2": "«Buonasera, sono l’assistente AI.»",
+    "a3": "Chiamata terminata · riepilogo inviato",
+    "a3s": "Prenotazione annotata: sabato, 4 coperti, 20:30",
+    "badgeicon": "-"
+  },
+  {
+    "id": "it-B",
+    "lang": "it",
+    "theme": "B",
+    "badge": "Demo gratuita dal vivo",
+    "title": "Parli *con il nostro agente AI*, adesso",
+    "sub": "Nel browser, senza iscrizione, o sul Suo telefono.",
+    "cta": "Provi la demo",
+    "url": "permanenceia.com/it/demo",
+    "voices": "Voce femminile e maschile · agenti AI",
+    "langs": "Italiano|English|Français|Polski|Nederlands|עברית",
+    "formats": [
+      "square"
+    ]
+  },
+  {
+    "id": "it-B",
+    "lang": "it",
+    "theme": "B",
+    "badge": "Demo gratuita dal vivo",
+    "title": "Parli *con il nostro agente AI*, adesso",
+    "sub": "Nel browser, senza iscrizione, o sul Suo telefono.",
+    "cta": "Provi la demo",
+    "url": "permanenceia.com/it/demo",
+    "voices": "Voce femminile e maschile · agenti AI",
+    "langs": "Italiano|English|Français|Polski|עברית",
+    "formats": [
+      "wide"
+    ]
+  },
+  {
+    "id": "it-C",
+    "lang": "it",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Prova gratuita",
+    "title": "Il Suo agente AI gratuito, *in pochi minuti*",
+    "sub": "Risponde 24/7, fissa gli appuntamenti e Le invia il riepilogo.",
+    "cta": "Inizi gratis",
+    "url": "permanenceia.com/it/essai-gratuit",
+    "n1": "14",
+    "l1": "giorni di prova gratuita",
+    "n2": "30",
+    "l2": "minuti di chiamate inclusi",
+    "checks": "Carta richiesta, nessun addebito durante la prova|Senza vincoli, disdetta senza costi|Mantiene il Suo numero di sempre"
+  }
+]

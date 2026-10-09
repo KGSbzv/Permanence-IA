@@ -1,0 +1,48 @@
+[
+  {
+    "id": "fr-A",
+    "lang": "fr",
+    "theme": "A",
+    "photo": "public/photos/services-a-domicile.jpg",
+    "photopos": "30% 50%",
+    "badge": "Dès 99 $US HT / mois",
+    "badgeicon": "tag",
+    "title": "Un appel manqué, c’est *un client perdu*",
+    "sub": "Votre agent IA décroche 24 h/24 et vous envoie le résumé.",
+    "cta": "Voir les tarifs",
+    "url": "permanenceia.com/tarifs",
+    "a1": "Appel entrant · 18 h 47",
+    "a1s": "Vous êtes en intervention",
+    "a2": "« Bonjour, ici l’assistante IA, je vous écoute. »",
+    "a3": "Appel terminé · résumé envoyé",
+    "a3s": "Demande qualifiée, rendez-vous noté"
+  },
+  {
+    "id": "fr-B",
+    "lang": "fr",
+    "theme": "B",
+    "badge": "Démo gratuite en direct",
+    "title": "Parlez à *notre agent IA*, maintenant",
+    "sub": "Dans votre navigateur, sans inscription, ou par téléphone.",
+    "cta": "Lancer la démo",
+    "url": "permanenceia.com/demo",
+    "voices": "Voix féminine et masculine · agents IA",
+    "langs": "Français|English|Italiano|Polski|Nederlands|עברית|Plus de 80 langues"
+  },
+  {
+    "id": "fr-C",
+    "lang": "fr",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Essai gratuit",
+    "title": "Votre agent IA gratuit, *prêt en quelques minutes*",
+    "sub": "Le forfait choisi démarre à la fin de l’essai, sauf annulation.",
+    "cta": "Démarrer l’essai de 14 jours",
+    "url": "permanenceia.com/essai-gratuit",
+    "n1": "14",
+    "l1": "jours d’essai gratuit",
+    "n2": "30",
+    "l2": "minutes d’appels incluses",
+    "checks": "Carte demandée, rien n’est débité pendant l’essai|Sans engagement, annulation sans frais|Vous gardez votre numéro"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "en-au-A",
+    "formats": [
+      "square"
+    ],
+    "lang": "en-au",
+    "theme": "A",
+    "photo": "docs/marketing/posts-2026-10/en-au/photo-atelier-carre.jpg",
+    "photopos": "50% 50%",
+    "badge": "From US$99 excl. tax / month",
+    "title": "Every missed call is *a lost customer*",
+    "sub": "Your AI receptionist answers 24/7 and sends you a summary of every call.",
+    "cta": "See pricing",
+    "url": "permanenceia.com/en-au/tarifs",
+    "a1": "Incoming call · 10:40 am",
+    "a1s": "You’re flat out in the workshop",
+    "a2": "“Hi, I’m the workshop’s AI assistant.”",
+    "a3": "Call ended · summary sent",
+    "a3s": "Booking added to your calendar"
+  },
+  {
+    "id": "en-au-A",
+    "formats": [
+      "wide"
+    ],
+    "lang": "en-au",
+    "theme": "A",
+    "photo": "public/photos/automobile.jpg",
+    "photopos": "55% 50%",
+    "badge": "From US$99 excl. tax / month",
+    "title": "Every missed call is *a lost customer*",
+    "sub": "Your AI receptionist answers 24/7 and sends you a summary of every call.",
+    "cta": "See pricing",
+    "url": "permanenceia.com/en-au/tarifs",
+    "a1": "Incoming call · 10:40 am",
+    "a1s": "You’re flat out in the workshop",
+    "a2": "“Hi, I’m the workshop’s AI assistant.”",
+    "a3": "Call ended · summary sent",
+    "a3s": "Booking added to your calendar"
+  },
+  {
+    "id": "en-au-B",
+    "lang": "en-au",
+    "theme": "B",
+    "badge": "Free live demo",
+    "title": "Talk to *our AI agent* right now",
+    "sub": "In your browser, no sign-up. Or have it ring your phone.",
+    "cta": "Try our agent live",
+    "url": "permanenceia.com/en-au/demo",
+    "voices": "Australian accent · female and male AI voices",
+    "langs": "English (AU)|English (UK)|Français|Italiano|Polski|Nederlands|עברית"
+  },
+  {
+    "id": "en-au-C",
+    "lang": "en-au",
+    "theme": "C",
+    "tone": "light",
+    "badge": "Free 14-day trial",
+    "title": "Your free AI agent, *live in minutes*",
+    "sub": "-",
+    "cta": "Start for free",
+    "url": "permanenceia.com/en-au/essai-gratuit",
+    "n1": "14",
+    "l1": "days free on the plan you choose",
+    "n2": "30",
+    "l2": "minutes of calls included",
+    "checks": "Card required, nothing charged during the trial|No lock-in contract, cancel at no cost|You keep your existing number"
+  }
+]
