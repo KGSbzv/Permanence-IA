@@ -29,6 +29,8 @@ export const UI_COMPONENTS = {
     },
     pricing: 'מחירים',
     login: 'כניסה',
+    alreadyClient: 'כבר לקוחות?',
+    clientArea: 'היכנסו לאזור האישי',
     startFree: 'התחילו בחינם',
     mainNav: 'ניווט ראשי',
     mobileNav: 'ניווט בנייד',

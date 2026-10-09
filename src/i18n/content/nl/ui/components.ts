@@ -27,6 +27,8 @@ export const UI_COMPONENTS = {
     },
     pricing: 'Prijzen',
     login: 'Inloggen',
+    alreadyClient: 'Al klant?',
+    clientArea: 'Log in op uw klantomgeving',
     startFree: 'Gratis starten',
     mainNav: 'Hoofdnavigatie',
     mobileNav: 'Mobiele navigatie',

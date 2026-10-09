@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, UserRound, X } from 'lucide-react';
 import Logo from './Logo';
 import LanguageSwitcher from './LanguageSwitcher';
 import { LOGIN_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
@@ -41,12 +41,23 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur">
-      <p className="bg-ink px-4 py-1.5 text-center text-[12px] font-medium text-white sm:text-[13px]">
-        {/* Version courte sur mobile (deux badges), phrase complète à partir de la tablette. */}
-        <span className="sm:hidden">{c.site.trialBadges(market.trial.days, market.trial.minutes).slice(0, 2).join(' — ')}</span>
-        <span className="hidden sm:inline">{c.site.trialLine(market.trial.days, market.trial.minutes)}</span>
-      </p>
-      <div ref={ref} className="wrap flex h-16 items-center gap-6">
+      <div className="bg-ink px-4 py-1.5 text-[12px] font-medium text-white sm:text-[13px]">
+        <div className="mx-auto flex max-w-6xl items-center justify-center gap-4">
+          <p className="text-center">
+            {/* Version courte sur mobile (deux badges), phrase complète à partir de la tablette. */}
+            <span className="sm:hidden">{c.site.trialBadges(market.trial.days, market.trial.minutes).slice(0, 2).join(' — ')}</span>
+            <span className="hidden sm:inline">{c.site.trialLine(market.trial.days, market.trial.minutes)}</span>
+          </p>
+          {/* Accès client bien visible dès le bandeau (ordinateur) ; sur mobile et tablette, bouton dans la barre ci-dessous. */}
+          <a href={LOGIN_URL} className="hidden shrink-0 items-center gap-1.5 rounded-full bg-white/10 px-3 py-0.5 hover:bg-white/20 xl:inline-flex">
+            <span className="text-white/75">{t.alreadyClient}</span>
+            <span className="font-semibold underline underline-offset-2">{t.clientArea}</span>
+          </a>
+        </div>
+      </div>
+      {/* Ligne un peu plus large que le contenu (7xl) et écarts réduits : menus, langue, WhatsApp, connexion et essai
+          tiennent sur une ligne dès 1 280 px, dans toutes les langues. */}
+      <div ref={ref} className="wrap flex h-16 max-w-7xl items-center gap-4 2xl:gap-6">
         <Logo height={40} />
         <nav aria-label={t.mainNav} className="hidden flex-1 items-center gap-1 xl:flex">
           {MENUS.map((m) => (
@@ -74,10 +85,15 @@ export default function Navbar() {
         <div className="ms-auto hidden items-center gap-2 xl:flex">
           <LanguageSwitcher id="lang-desktop" />
           <WhatsAppLink variant="icon" place="header" />
-          <a href={LOGIN_URL} className="rounded-md px-3 py-2 text-[15px] font-medium text-ink hover:bg-paper">{t.login}</a>
+          <a href={LOGIN_URL} className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-line px-3 py-2 text-[15px] font-semibold text-ink hover:border-ink"><UserRound className="h-4 w-4" aria-hidden />{t.login}</a>
           <Link href={SIGNUP_URL} className="btn-primary py-2.5">{t.startFree}</Link>
         </div>
-        <button type="button" className="ms-auto rounded-md p-2 text-ink xl:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
+        {/* Mobile et tablette : la connexion reste visible à côté du menu, sans l’ouvrir. */}
+        {/* Sous 430 px, icône seule (le libellé reste lu par les lecteurs d’écran) pour que la ligne tienne. */}
+        <a href={LOGIN_URL} className="ms-auto inline-flex h-10 items-center gap-1.5 rounded-lg border border-line px-2.5 text-sm font-semibold text-ink hover:border-ink min-[430px]:px-3 xl:hidden">
+          <UserRound className="h-5 w-5 min-[430px]:h-4 min-[430px]:w-4" aria-hidden /><span className="sr-only min-[430px]:not-sr-only">{t.login}</span>
+        </a>
+        <button type="button" className="rounded-md p-2 text-ink xl:hidden" aria-expanded={mobile} aria-label={mobile ? t.closeMenu : t.openMenu} onClick={() => setMobile(!mobile)}>
           {mobile ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>

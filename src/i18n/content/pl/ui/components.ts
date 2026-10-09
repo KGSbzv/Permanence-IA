@@ -38,6 +38,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     },
     pricing: 'Cennik',
     login: 'Logowanie',
+    alreadyClient: 'Masz już konto?',
+    clientArea: 'Zaloguj się do panelu klienta',
     startFree: 'Zacznij za darmo',
     mainNav: 'Nawigacja główna',
     mobileNav: 'Nawigacja mobilna',

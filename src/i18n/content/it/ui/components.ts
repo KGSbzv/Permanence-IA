@@ -29,6 +29,8 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     },
     pricing: 'Prezzi',
     login: 'Accedi',
+    alreadyClient: 'Già cliente?',
+    clientArea: 'Acceda alla Sua area clienti',
     startFree: 'Inizi gratis',
     mainNav: 'Navigazione principale',
     mobileNav: 'Navigazione mobile',

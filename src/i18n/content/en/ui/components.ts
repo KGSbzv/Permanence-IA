@@ -31,6 +31,8 @@ export const UI_COMPONENTS = {
     },
     pricing: 'Pricing',
     login: 'Log in',
+    alreadyClient: 'Already a customer?',
+    clientArea: 'Log in to your customer area',
     startFree: 'Start for free',
     mainNav: 'Main navigation',
     mobileNav: 'Mobile navigation',

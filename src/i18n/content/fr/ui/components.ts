@@ -27,6 +27,8 @@ export const UI_COMPONENTS = {
     },
     pricing: 'Tarifs',
     login: 'Connexion',
+    alreadyClient: 'Déjà client ?',
+    clientArea: 'Accédez à votre espace client',
     startFree: 'Essai gratuit 14 jours',
     mainNav: 'Navigation principale',
     mobileNav: 'Navigation mobile',
