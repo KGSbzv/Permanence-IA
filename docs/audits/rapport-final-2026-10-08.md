@@ -113,14 +113,14 @@ Il y a eu 16 contrôles en échec :
 
 ## 4. Ce qui reste à faire par vous
 
-1. **Tester les paiements** sur un compte test de app.permanenceia.com : essai, changement de forfait, passage à l'annuel, recharge, numéro. *Rien ne prouve encore qu'un client peut payer.*
+1. **Tester les paiements** sur un compte test de app.permanenceia.com : essai, changement de forfait, passage à l'annuel, recharge, numéro. *Rien ne prouve encore qu'un client peut payer.* (9 octobre : la recharge et l'achat de numéro sont déjà faits en réel sur un compte de test, facture PIA-0001 ; reste l'essai et l'abonnement.)
 2. **Tester les appels** :
    - appeler le +44 7367 090106 et le 02-376-7085 ;
    - demander un rappel et ne pas décrocher : il faut un répondeur, puis un SMS ou un WhatsApp ;
    - faire écouter les voix par des natifs.
 3. **Tester l'inscription** avec une adresse Gmail : le message de bienvenue doit arriver hors spam.
 4. **Forfait Réceptionniste.** Plus rien à faire : Autocalls met 200 crédits sur 1646 (dès le prochain renouvellement), et Claude a lancé « Resync Billing Portal ».
-5. **Campagnes.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240.
+5. **Campagnes.** Campaigns > 12519, 12520, 12521, 12522, 12532, 12533, 12534 : Max retries 2, Retry interval 240. *Fait le 8 octobre au soir (revérifié le 9 octobre, audit des parcours).*
 6. **Mot de passe Zoho visible dans Autocalls.** Dans accounts.zoho.com > Sécurité > Mots de passe d'application, créer un nouveau mot de passe pour Autocalls (Settings > SMTP) et un pour ZOHO_SMTP_PASS. Ne pas toucher à RELANCES_IMAP_PASS.
 7. **Bases de connaissances.** Autocalls > Knowledge base : supprimer les documents listés dans docs/autocalls-kb-a-supprimer.md (Claude ne supprime jamais de données définitivement, même avec votre accord).
 8. **Avocat et comptable** : leur confier les décisions 1 et 2.
@@ -159,7 +159,7 @@ La flèche → donne la recommandation de Claude.
 6. **Directeur de publication.** → Vous, avec le +44.
 7. **Les 18 modèles « marketing ».** → Attendre le réexamen. En cas de refus, faire des versions factuelles.
 8. **WhatsApp israélien.** → À créer avant toute publicité en Israël.
-9. **Numéro SMS, et les numéros 11775 et 11795.** → Tester un SMS depuis la ligne britannique, puis libérer les numéros inutiles.
+9. **Numéro SMS, et les numéros 11775 et 11795.** → Tester un SMS depuis la ligne britannique, puis libérer les numéros inutiles. (9 octobre : 11775 et 11795 ne sont plus sur le compte.)
 10. **Bouton « Connect AI ».** → Le garder masqué et retirer la ligne du comparatif.
 11. **Bulle sur téléphone.** → La masquer quand elle est fermée, sous 640 px.
 12. **Google Analytics.** → Ne rien charger avant « Accepter ».

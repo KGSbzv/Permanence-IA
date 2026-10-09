@@ -1,5 +1,8 @@
 // Lecture SEULE de la boîte contact@ (IMAP, commande EXAMINE : aucun message marqué lu, déplacé ni supprimé), pour
-// arrêter les relances d’un contact qui a répondu et repérer les rebonds. Client minimal sur TLS, sans dépendance :
+// arrêter les relances d’un contact qui a répondu et repérer les rebonds. Désinscription envoyée depuis la messagerie
+// (en-tête List-Unsubscribe « mailto:…?subject=unsubscribe », ou objet « unsubscribe », « désinscription »… dans les
+// 7 langues) : reconnue à part, enregistrée comme préférence par le moteur (audit du 9 oct. 2026, action 15).
+// Client minimal sur TLS, sans dépendance :
 // connexion, recherche des messages des derniers jours, lecture des en-têtes et du début du corps, déconnexion.
 // Activé seulement si RELANCES_IMAP_USER et RELANCES_IMAP_PASS existent (mot de passe d’application Zoho conseillé).
 import tls from 'tls';
@@ -78,9 +81,28 @@ function headers(raw: string) {
 }
 
 const EMAIL = /[A-Za-z0-9._%+'-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
+// Objet d’une demande de désinscription : le mot seul (préfixes de réponse ou de transfert permis, « me » ou « please »
+// autour), jamais une phrase qui le contient (« Re: votre essai, je ne veux pas me désinscrire » reste une réponse).
+// Les mots qui désignent d’abord la résiliation d’un abonnement payant (« désabonnement », « me désabonner »,
+// « rezygnacja », « cancellazione », « ביטול מנוי ») n’y sont pas : ces messages restent des réponses, avec leur objet dans l’alerte,
+// pour que l’équipe voie une éventuelle demande de résiliation.
+const UNSUB_WORDS = [
+  'unsubscribe', 'unsubscribe me', 'please unsubscribe', 'please unsubscribe me', 'stop', 'remove me', 'opt out', 'opt-out',
+  'désinscription', 'desinscription', 'désinscrire', 'désinscrivez-moi', 'me désinscrire', 'se désinscrire',
+  'disiscrizione', 'disiscrivimi', 'disiscrivetemi', 'annulla iscrizione', 'cancellami', 'rimuovimi',
+  'wypisz', 'wypisz mnie', 'wypisanie', 'proszę o wypisanie', 'wypisanie z listy',
+  'afmelden', 'afmelding', 'uitschrijven', 'uitschrijving', 'schrijf mij uit', 'schrijf me uit',
+  'הסרה', 'הסר', 'הסירו אותי', 'הסר אותי', 'ביטול הרשמה',
+];
+const REPLY_PREFIX = /^(?:(?:re|aw|tr|fw|fwd|r|odp|pd|antw|doorst|wg|השב|הועבר)\s*:\s*)+/i;
+/** Objet de message qui demande une désinscription (en-tête List-Unsubscribe ou demande écrite d’un mot). */
+export function isUnsubscribeSubject(raw: string) {
+  const s = raw.normalize('NFC').trim().replace(REPLY_PREFIX, '').replace(/[\s.!:;,]+$/, '').replace(/^[\s[(]+|[\])]+$/g, '').trim().toLowerCase();
+  return UNSUB_WORDS.includes(s.replace(/\s+/g, ' '));
+}
 const AUTO_SUBJECT = /^(automatic reply|auto[- ]?reply|autoreply|out of office|absence|réponse automatique|abwesenheit|risposta automatica|automatisch antwoord|odpowiedź automatyczna|מענה אוטומטי)/i;
 
-/** Message lu → réponse, réponse automatique ou rebond. */
+/** Message lu → réponse, réponse automatique, rebond ou demande de désinscription. */
 export function parseMessage(rawHeaders: string, rawBody: string, ownAddress: string): InboundMail {
   const h = headers(rawHeaders);
   const fromRaw = decodeWords(h.from || '');
@@ -93,7 +115,11 @@ export function parseMessage(rawHeaders: string, rawBody: string, ownAddress: st
   const bodyEmails = bounce
     ? Array.from(new Set((rawBody.match(EMAIL) || []).map((e) => e.toLowerCase()))).filter((e) => e !== own && !/^(mailer-daemon|postmaster)@/.test(e))
     : [];
-  return { from, subject, date: h.date || null, automatic: Boolean(auto) && !bounce, bounce, bodyEmails };
+  const automatic = Boolean(auto) && !bounce;
+  // Désinscription reconnue même sur un message marqué automatique : certaines messageries envoient la demande de
+  // l’en-tête List-Unsubscribe avec Auto-Submitted (« message généré automatiquement »). Une vraie réponse automatique
+  // ne passe pas le contrôle de l’objet (« Automatic reply: … », « Out of office: … »).
+  return { from, subject, date: h.date || null, automatic, bounce, bodyEmails, unsubscribe: !bounce && isUnsubscribeSubject(subject) };
 }
 
 /** Messages reçus depuis `sinceDays` jours (200 au plus, les plus récents). */

@@ -7,15 +7,21 @@
 //   ancienne envoie. Envoi en échec : nouvel essai au passage suivant du lundi, 3 fois au plus. Base illisible : rien
 //   n’est envoyé (jamais de résumé en boucle).
 // - Sources, en lecture seule : signups, stripe_subscriptions (essais), call_events (paiements kind stripe_paiement,
-//   appels et conversations, oppositions kind optout, copies d’échange kind email), callbacks. Table absente ou
-//   illisible : la section indique « donnée indisponible », le reste part.
+//   appels et conversations, oppositions kind optout, copies d’échange kind email), callbacks, contacts (e-mails
+//   laissés sur /essai-gratuit, origine trial_signup, sans inscription à ce jour). Table absente ou illisible : la
+//   section indique « donnée indisponible », le reste part.
+// - Ajouté le 9 oct. (audit des parcours, action 7) : essais devenus payants, résiliations d’abonnés, essais annulés,
+//   abonnés payants à ce jour (stripe_subscriptions) ; mise en route à ce jour (dernières lectures des agents,
+//   call_events kind activite_compte) ; e-mails de mise en route (série A) et alertes de solde (série S) envoyés.
 // Accès à la base et envoi passés en paramètre (helpers de src/lib/server.ts en production, faux en test).
 import { localToUtc } from '@/lib/callHours';
 import { COPY_KIND, COPY_OUTCOME } from '@/lib/conversationCopy';
 import { OPTOUT_KIND } from '@/lib/optout';
 import { esc } from '@/lib/server';
 import { localParts } from './calendar';
+import { ACTIVITY_KIND } from './activity';
 import { PAYMENT_KIND, formatAmount } from './payments';
+import type { AccountActivity } from './types';
 
 export const WEEKLY_HOUR = 8;
 export const WEEKLY_KIND = 'resume_hebdo';
@@ -75,6 +81,9 @@ export function periodLabel(from: string, to: string) {
 interface PayRow { external_id: string | null; status: string | null; outcome: string | null; variables: Record<string, any> | null; created_at: string }
 interface ExchangeRow { kind: string; assistant_name: string | null; customer_phone: string | null; status: string | null; duration_seconds: number | null; created_at: string }
 interface CallbackRow { phone: string | null; type: string | null; status: string | null; created_at: string }
+/** cancellation_reason : colonne de la migration du 9 oct. (supabase/migrations/20261009_relances_annulation.sql), lue si elle existe. */
+interface SubRow { status: string | null; trial_end: string | null; canceled_at: string | null; cancel_at_period_end: boolean | null; livemode: boolean | null; cancellation_reason?: string | null }
+interface SeriesLogRow { sequence: string; step: string; status: string | null; created_at: string }
 
 const UNAVAILABLE = 'donnée indisponible';
 const digits = (v: unknown) => String(v ?? '').replace(/\D/g, '');
@@ -108,6 +117,12 @@ export function countPayments(rows: PayRow[]) {
   };
 }
 
+/** E-mails laissés sur /essai-gratuit dont l’adresse n’a pas (encore) d’inscription. */
+export function abandonedTrialEmails<T extends { email: string | null }>(left: T[], signups: { email: string | null }[]) {
+  const signed = new Set(signups.map((r) => String(r.email ?? '').trim().toLowerCase()).filter(Boolean));
+  return left.filter((r) => r.email && !signed.has(r.email.trim().toLowerCase()));
+}
+
 /** Données d’une semaine du résumé, lues en base ; null = source illisible. */
 interface Sources {
   signups: { signed_up_at: string | null }[] | null;
@@ -117,6 +132,17 @@ interface Sources {
   callbacks: CallbackRow[] | null;
   optouts: { created_at: string }[] | null;
   copies: { created_at: string }[] | null;
+  /** E-mails laissés sur /essai-gratuit pendant les deux semaines (fiche contacts, origine trial_signup). */
+  trialEmails: { email: string | null; last_interaction_at: string | null }[] | null;
+  /** Toutes les adresses inscrites, quelle que soit la date (rapprochement avec trialEmails : un client inscrit avant
+   *  la période qui revient retaper son e-mail sur /essai-gratuit n’est pas « sans inscription »). */
+  signupEmails: { email: string | null }[] | null;
+  /** Tous les abonnements (conversions, résiliations, abonnés à ce jour) ; facultatif (anciens appels de test). */
+  subscriptions?: SubRow[] | null;
+  /** Lectures des agents des 3 derniers jours (mise en route à ce jour). */
+  activity?: { variables: AccountActivity | null; created_at: string }[] | null;
+  /** E-mails envoyés des séries A (mise en route) et S (solde de minutes), envoi réel. */
+  seriesLogs?: SeriesLogRow[] | null;
 }
 
 async function loadSources(d: Pick<WeeklyDeps, 'select' | 'log'>, w: Week): Promise<Sources> {
@@ -124,7 +150,8 @@ async function loadSources(d: Pick<WeeklyDeps, 'select' | 'log'>, w: Week): Prom
   const since = enc(w.prevStart.toISOString());
   // Tri unique (date puis clé) : la lecture par pages ne saute ni ne double aucune ligne de même date.
   const range = (col: string, key = 'id') => `${col}=gte.${since}&${col}=lt.${enc(w.end.toISOString())}&order=${col}.asc,${key}.asc`;
-  const load = async <T>(table: string, query: string): Promise<T[] | null> => {
+  /** `quiet` : échec attendu (colonne facultative absente), non journalisé ; l’appelant relit sans elle. */
+  const load = async <T>(table: string, query: string, quiet = false): Promise<T[] | null> => {
     const out: T[] = [];
     try {
       for (let offset = 0; offset < 20 * PAGE; offset += PAGE) {
@@ -134,11 +161,11 @@ async function loadSources(d: Pick<WeeklyDeps, 'select' | 'log'>, w: Week): Prom
       }
       return out;
     } catch (e: any) {
-      log(`[résumé hebdo] ${table} illisible : ${e?.message}`);
+      if (!quiet) log(`[résumé hebdo] ${table} illisible : ${e?.message}`);
       return null;
     }
   };
-  const [signups, trials, payments, exchanges, callbacks, optouts, copies] = await Promise.all([
+  const [signups, trials, payments, exchanges, callbacks, optouts, copies, trialEmails, signupEmails, subscriptions, activity, seriesLogs] = await Promise.all([
     load<{ signed_up_at: string | null }>('signups', `select=signed_up_at&${range('signed_up_at')}`),
     load<{ trial_start: string | null; livemode: boolean | null }>('stripe_subscriptions', `select=trial_start,livemode&${range('trial_start', 'subscription_id')}`),
     load<PayRow>('call_events', `select=external_id,status,outcome,variables,created_at&kind=eq.${PAYMENT_KIND}&${range('created_at')}`),
@@ -147,11 +174,51 @@ async function loadSources(d: Pick<WeeklyDeps, 'select' | 'log'>, w: Week): Prom
     load<CallbackRow>('callbacks', `select=phone,type,status,created_at&${range('created_at')}`),
     load<{ created_at: string }>('call_events', `select=created_at&kind=eq.${OPTOUT_KIND}&${range('created_at')}`),
     load<{ created_at: string }>('call_events', `select=created_at&${COPY_FILTER}&${range('created_at')}`),
+    load<{ email: string | null; last_interaction_at: string | null }>('contacts', `select=email,last_interaction_at&origin=eq.trial_signup&${range('last_interaction_at')}`),
+    // Sans filtre de date (table petite, adresse unique) : une inscription faite ce lundi matin compte aussi.
+    load<{ email: string | null }>('signups', 'select=email&order=email.asc'),
+    // Motif de résiliation lu s’il existe (migration du 9 oct.), sinon colonnes d’origine seulement (start_date et
+    // cancel_at peuvent manquer aussi : jamais lues ici).
+    load<SubRow>('stripe_subscriptions', 'select=status,trial_end,canceled_at,cancel_at_period_end,cancellation_reason,livemode&order=subscription_id.asc', true)
+      .then((rows) => rows ?? load<SubRow>('stripe_subscriptions', 'select=status,trial_end,canceled_at,cancel_at_period_end,livemode&order=subscription_id.asc')),
+    load<{ variables: AccountActivity | null; created_at: string }>('call_events', `select=variables,created_at&kind=eq.${ACTIVITY_KIND}&created_at=gte.${enc(new Date(w.end.getTime() - 3 * 86_400_000).toISOString())}&order=created_at.asc,id.asc`),
+    load<SeriesLogRow>('relance_log', `select=sequence,step,status,created_at&sequence=in.(A,S)&dry_run=eq.false&status=eq.sent&${range('created_at')}`),
   ]);
-  return { signups, trials, payments, exchanges, callbacks, optouts, copies };
+  return { signups, trials, payments, exchanges, callbacks, optouts, copies, trialEmails, signupEmails, subscriptions, activity, seriesLogs };
 }
 
 interface Section { title: string; lines: string[] }
+
+const PAID = ['active', 'past_due', 'unpaid'];
+const DAY_MS = 86_400_000;
+/**
+ * Résiliation après impayé (jamais comptée comme une résiliation d’abonné) : motif Stripe payment_failed ; sans motif
+ * enregistré (migration absente, ligne plus ancienne), essai dont le premier prélèvement a échoué : résilié sans fin
+ * programmée plus de 12 h après la fin de l’essai, dans le mois des nouvelles tentatives de Stripe (comme F1).
+ */
+function unpaidCancel(r: SubRow) {
+  if (r.cancellation_reason) return r.cancellation_reason === 'payment_failed';
+  if (r.status !== 'canceled' || r.cancel_at_period_end || !r.trial_end || !r.canceled_at) return false;
+  const gap = Date.parse(r.canceled_at) - Date.parse(r.trial_end);
+  return gap > DAY_MS / 2 && gap <= 35 * DAY_MS;
+}
+/**
+ * Cycle des abonnements (mode réel seulement) : essais devenus payants (fin d’essai dans la semaine, abonnement actif :
+ * un premier prélèvement refusé, en past_due, n’est pas une conversion), résiliations d’abonnés (demande enregistrée
+ * dans la semaine, hors essai et hors impayé), essais annulés, abonnés payants à ce jour (impayés en cours compris).
+ * Résiliation demandée : Stripe date canceled_at au moment de la demande, même si la fin est programmée.
+ */
+function lifecycleLines(subs: SubRow[] | null, line: <T>(label: string, rows: T[] | null, at: (r: T) => string | null | undefined) => string) {
+  const live = subs && subs.filter((r) => r.livemode !== false);
+  const trialCancel = (r: SubRow) => Boolean(r.trial_end && r.canceled_at && Date.parse(r.canceled_at) <= Date.parse(r.trial_end));
+  const paying = live && live.filter((r) => PAID.includes(String(r.status)));
+  return [
+    line('Essais devenus payants', live && live.filter((r) => r.trial_end && r.status === 'active'), (r) => r.trial_end),
+    line('Résiliations d’abonnés (demandées ou effectives)', live && live.filter((r) => r.canceled_at && !trialCancel(r) && !unpaidCancel(r)), (r) => r.canceled_at),
+    line('Essais annulés', live && live.filter(trialCancel), (r) => r.canceled_at),
+    `Abonnés payants à ce jour : ${paying ? `${paying.length} (dont résiliation programmée : ${paying.filter((r) => r.cancel_at_period_end).length})` : UNAVAILABLE}`,
+  ];
+}
 
 /** Contenu du résumé (sujet, texte, HTML échappé) à partir des données lues ; exporté pour les tests. */
 export function buildWeekly(s: Sources, w: Week) {
@@ -165,8 +232,29 @@ export function buildWeekly(s: Sources, w: Week) {
     lines: [
       line('Nouveaux comptes (inscriptions)', s.signups, (r) => r.signed_up_at),
       line('Essais démarrés', s.trials && s.trials.filter((r) => r.livemode !== false), (r) => r.trial_start),
+      // Prospect le plus avancé : il a cliqué « Créer mon compte » puis n’a pas fini l’inscription (série P, étape
+      // « inscription non terminée », seulement avec base légale).
+      line('E-mails laissés sur /essai-gratuit sans inscription à ce jour', s.trialEmails && s.signupEmails && abandonedTrialEmails(s.trialEmails, s.signupEmails), (r) => r.last_interaction_at),
+      ...(s.subscriptions === undefined ? [] : lifecycleLines(s.subscriptions, line)),
     ],
   };
+
+  // Mise en route à ce jour : dernière lecture des agents de chaque compte suivi (essai, abonné, à la minute).
+  const onboarding: Section = { title: 'Mise en route (à ce jour)', lines: [] };
+  if (s.activity !== undefined) {
+    if (!s.activity) onboarding.lines.push(`Lecture des agents : ${UNAVAILABLE}`);
+    else {
+      const latest = new Map<string, AccountActivity>();
+      s.activity.forEach((r) => { const a = r.variables; if (a?.userId && (!latest.get(a.userId) || latest.get(a.userId)!.readAt < a.readAt)) latest.set(a.userId, a); });
+      const all = Array.from(latest.values());
+      const quiet = all.filter((a) => a.agents > 0 && (a.lastCallAt ? Date.parse(a.readAt) - Date.parse(a.lastCallAt) > 30 * 86_400_000 : a.realCalls === 0));
+      onboarding.lines.push(`Comptes suivis (essai, abonné, paiement à la minute) : ${all.length} ; sans agent : ${all.filter((a) => a.agents === 0).length} ; agent sans numéro relié : ${all.filter((a) => a.agents > 0 && a.agentsWithNumber === 0).length} ; sans appel réel depuis 30 jours : ${quiet.length} ; agents en pause (conformité) : ${all.filter((a) => a.paused?.length).length}`);
+    }
+  }
+  if (s.seriesLogs !== undefined) {
+    onboarding.lines.push(line('E-mails de mise en route envoyés (A1 à A4, suivi mensuel)', s.seriesLogs && s.seriesLogs.filter((r) => r.sequence === 'A'), (r) => r.created_at));
+    onboarding.lines.push(line('Alertes de solde envoyées aux clients (minutes basses ou épuisées)', s.seriesLogs && s.seriesLogs.filter((r) => r.sequence === 'S'), (r) => r.created_at));
+  }
 
   const money: Section = { title: 'Paiements', lines: [] };
   if (!s.payments) money.lines.push(`Paiements reçus : ${UNAVAILABLE}`, `Paiements échoués : ${UNAVAILABLE}`);
@@ -221,7 +309,7 @@ export function buildWeekly(s: Sources, w: Week) {
     ],
   };
 
-  const sections = [accounts, money, talks, callbacks, contact];
+  const sections = [accounts, ...(onboarding.lines.length ? [onboarding] : []), money, talks, callbacks, contact];
   const period = periodLabel(w.from, w.to);
   const intro = `Voici le résumé de la semaine ${period} (heure de Paris). Entre parenthèses : la semaine précédente.`;
   return {

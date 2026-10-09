@@ -1,10 +1,14 @@
 // Accès Supabase du moteur des relances (helpers de src/lib/server.ts). Table absente ou illisible (migration pas
 // encore exécutée) : journal une seule fois par table et par instance, lecture renvoyée vide (null), jamais d’erreur
 // qui casserait le site. Les tests utilisent un faux en mémoire (scripts/test-relances.ts).
+// Mise en route (9 oct.) : lectures quotidiennes des agents dans call_events (kind 'activite_compte', sans changement
+// de schéma) ; verrou des alertes à l’équipe dans stripe_events (« alerte:… », comme les alertes de paiement).
 import { dbInsert, dbInsertIfNew, dbSelect, dbUpdate } from '@/lib/server';
 import { EMAIL_PREF_KIND } from '@/lib/emailPrefs';
 import { OPTOUT_KIND } from '@/lib/optout';
+import { ACTIVITY_KIND } from './activity';
 import type {
+  AccountActivity,
   CallbackRow, ConsentRow, ContactRow, LogRow, RelanceStore, RunRow, SettingsRow, SignupRow, SnapshotRow, StateRow, StopRow,
   StripeCustomerRow, StripeSubscriptionRow,
 } from './types';
@@ -93,6 +97,20 @@ export const SUPABASE_STORE: RelanceStore = {
   async saveRun(row) {
     try { await dbInsert('relance_runs', { ...row }); } catch (e) { warnOnce('relance_runs (écriture)', e); }
   },
+  async activity(since) {
+    const rows = await selectAll<{ variables: AccountActivity | null }>('call_events', `select=variables,created_at&kind=eq.${ACTIVITY_KIND}&created_at=gte.${enc(since)}&order=created_at.asc`, 5_000);
+    return rows ? rows.map((r) => r.variables).filter((a): a is AccountActivity => Boolean(a?.userId && a?.readAt)) : null;
+  },
+  async saveActivity(a) {
+    try {
+      await dbInsert('call_events', {
+        kind: ACTIVITY_KIND, external_id: `${a.userId}:${a.readAt.slice(0, 10)}`, status: 'lu', variables: a,
+        summary: `Mise en route : ${a.agents} agent(s), ${a.agentsWithNumber} avec numéro, ${a.realCalls ?? '?'} appel(s) réel(s) depuis le ${a.callsSince.slice(0, 10)}`,
+      });
+    } catch (e) { warnOnce('call_events (mise en route)', e); }
+  },
+  // Erreur de base : remontée (le moteur la journalise et retente au passage suivant), jamais une alerte en double.
+  claimAlert: (key) => dbInsertIfNew('stripe_events', { event_id: `alerte:${key}`, type: 'alerte_equipe', livemode: null, created_at: new Date().toISOString() }, 'event_id'),
   async recheck(email) {
     try {
       const [signup, customers] = await Promise.all([

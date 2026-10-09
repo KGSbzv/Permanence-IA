@@ -4,6 +4,12 @@
 export const LOCALES = ['fr', 'en-gb', 'en-au', 'it', 'pl', 'nl', 'he'] as const;
 export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'fr';
+/**
+ * Version montrée aux langues non proposées (allemand, espagnol…) : l’anglais (Royaume-Uni). C’est la langue de la
+ * redirection du navigateur (detectLocale) et la cible de hreflang « x-default » (Layout, plan du site) ; décision 16
+ * du rapport du 8 oct. 2026, « anglais par défaut » (audit du 9 oct., action 32 : x-default pointait vers le français).
+ */
+export const X_DEFAULT_LOCALE: Locale = 'en-gb';
 
 /** Langue de contenu : l’anglais est partagé entre le Royaume-Uni et l’Australie. */
 export type Lang = 'fr' | 'en' | 'it' | 'pl' | 'nl' | 'he';
@@ -22,7 +28,7 @@ export const asLocale = (v: unknown): Locale => (isLocale(v) ? v : DEFAULT_LOCAL
  */
 export function detectLocale(acceptLanguage: string | null): Locale {
   // Sans en-tête (robots, outils) : anglais (Royaume-Uni), comme pour toute langue non proposée.
-  if (!acceptLanguage) return 'en-gb';
+  if (!acceptLanguage) return X_DEFAULT_LOCALE;
   const tags = acceptLanguage
     .split(',')
     .map((part) => {
@@ -40,5 +46,5 @@ export function detectLocale(acceptLanguage: string | null): Locale {
     if (lang === 'he' || lang === 'iw') return 'he';
     if (lang === 'en') return region === 'au' || region === 'nz' ? 'en-au' : 'en-gb';
   }
-  return 'en-gb';
+  return X_DEFAULT_LOCALE;
 }

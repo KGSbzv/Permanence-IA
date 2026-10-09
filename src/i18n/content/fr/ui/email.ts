@@ -80,4 +80,17 @@ export const UI_EMAIL = {
     valid: 'Il est valable 10 minutes et ne sert qu’une fois.',
     ignore: 'Si vous n’avez rien demandé, ignorez cet email : personne ne peut accéder à votre compte sans ce code.',
   },
+  // Confirmation d’une demande d’assistance (ticket T-XXXXXXXX), email essentiel envoyé à la personne qui l’a faite
+  // (src/lib/tickets.ts) : purement informatif, sans prix ni offre. when : date et heure du rappel en toutes lettres.
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `Votre demande d’assistance ${ticket} est enregistrée · ${brand}`,
+    hello: (first: string | null) => (first ? `Bonjour ${first},` : 'Bonjour,'),
+    recorded: (ticket: string) => `Votre demande d’assistance est bien enregistrée sous le numéro ${ticket}. Gardez ce numéro : il permet de retrouver votre demande si vous nous recontactez.`,
+    callAt: (when: string) => `Nous vous rappelons le ${when}.`,
+    asap: 'Nous vous rappelons dès que possible, pendant nos horaires d’appel.',
+    team: 'Une personne de l’équipe revient vers vous dès que possible.',
+    reply: 'Pour ajouter une précision, répondez simplement à cet e-mail en rappelant votre numéro de ticket.',
+    notYou: 'Si vous n’êtes pas à l’origine de cette demande, ignorez ce message.',
+    sign: (brand: string) => `L’équipe ${brand}`,
+  },
 };

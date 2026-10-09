@@ -35,4 +35,5 @@ export const fr = {
 // typographie française (espaces insécables) est déjà appliquée.
 export type { RelancesContent, RelanceFacts, RelanceMessage, RelanceKey } from './ui/relances';
 export { buildRelanceFacts } from './ui/relances';
-export const RELANCES_FR = withFrenchTypography(UI_RELANCES);
+// Appel marqué « pur » : le navigateur, qui n’envoie pas d’e-mails, n’en garde rien (pack de langue, src/i18n/packs/fr.ts).
+export const RELANCES_FR = /*#__PURE__*/ withFrenchTypography(UI_RELANCES);

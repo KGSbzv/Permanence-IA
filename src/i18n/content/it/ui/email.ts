@@ -72,4 +72,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     valid: 'È valido 10 minuti e si può usare una sola volta.',
     ignore: 'Se non lo ha richiesto, ignori questa email: nessuno può accedere al Suo account senza questo codice.',
   },
+  // Conferma di una richiesta di assistenza (ticket T-XXXXXXXX), email essenziale alla persona che l’ha fatta
+  // (src/lib/tickets.ts): solo informativa, senza prezzi né offerte; forma di cortesia « Lei ».
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `La Sua richiesta di assistenza ${ticket} è stata registrata · ${brand}`,
+    hello: (first: string | null) => (first ? `Buongiorno ${first},` : 'Buongiorno,'),
+    recorded: (ticket: string) => `Abbiamo registrato la Sua richiesta di assistenza con il numero ${ticket}. Conservi questo numero: ci permette di ritrovare subito la Sua richiesta se ci ricontatta.`,
+    callAt: (when: string) => `La richiameremo ${when}.`,
+    asap: 'La richiameremo il prima possibile, negli orari in cui effettuiamo le chiamate.',
+    team: 'Una persona del nostro team La ricontatterà il prima possibile.',
+    reply: 'Per aggiungere qualche dettaglio, risponda semplicemente a questa email indicando il numero della richiesta.',
+    notYou: 'Se non ha fatto Lei questa richiesta, ignori questo messaggio.',
+    sign: (brand: string) => `Il team ${brand}`,
+  },
 };

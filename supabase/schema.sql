@@ -162,7 +162,7 @@ GRANT ALL ON signups, call_events TO service_role;
 --
 -- 20261008_relances_moteur.sql — moteur des relances et Stripe
 --   relance_settings         interrupteur en base (ligne unique id = 1, créée coupée)
---   relance_state            série suivie par contact (P, I, C, F, U, M), mode test ou réel
+--   relance_state            série suivie par contact (P, I, C, F, U, M ; A et S depuis le 9 oct.), mode test ou réel
 --   relance_log              journal des envois (une ligne par contact, série, étape et mode)
 --   relance_stops            arrêts au niveau du contact (réponse, rebond, manuel)
 --   relance_runs             passages du moteur (compteurs, décisions, erreurs)
@@ -172,3 +172,9 @@ GRANT ALL ON signups, call_events TO service_role;
 --   stripe_events            événements Stripe déjà traités (idempotence du webhook)
 --
 -- Toutes ces tables : RLS activé, accès par la clé service uniquement.
+--
+-- Migrations du 9 oct. 2026 (facultatives : sans elles, le webhook Stripe enregistre l'abonnement sans ces colonnes) :
+--   20261009_relances_annulation.sql      stripe_subscriptions.cancel_at, cancellation_reason (essai annulé, motif)
+--   20261009_relances_mise_en_route.sql   stripe_subscriptions.start_date (début de la mise en route d'un abonné sans essai)
+-- Sans migration : lectures quotidiennes des agents des clients dans call_events (kind activite_compte) et verrous des
+-- alertes à l'équipe dans stripe_events (event_id « alerte:… »).

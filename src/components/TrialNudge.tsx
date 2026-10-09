@@ -7,12 +7,13 @@ import { Check, X } from 'lucide-react';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { SIGNUP_URL } from '@/data/site';
 import { useI18n } from '@/i18n';
+import { nudgeSkipped } from '@/lib/trialNudgePages';
 
 const KEY = 'pia-trial-nudge';
 const WEEK = 7 * 86_400_000;
 const IDLE_MS = 45_000;
-// Pages où le visiteur est déjà en train d’agir, ou où une interruption serait déplacée.
-const SKIP = ['/essai-gratuit', '/contact', '/demo', '/aide', '/mon-compte', '/cgu', '/confidentialite', '/mentions-legales', '/cookies'];
+// Pages où le visiteur est déjà en train d’agir, ou où une interruption serait déplacée (aide et guides, désinscription,
+// pages légales et d’erreur) : liste et comparaison par préfixe dans src/lib/trialNudgePages.ts.
 
 function seenRecently() {
   try { return Date.now() - Number(localStorage.getItem(KEY) || 0) < WEEK; } catch { return false; }
@@ -44,7 +45,7 @@ export default function TrialNudge() {
   }, [callbackOpen]);
 
   useEffect(() => {
-    if (SKIP.includes(pathname)) return;
+    if (nudgeSkipped(pathname)) return;
     // Inactivité apparente pendant une conversation avec l’agent : on attend simplement un nouveau délai.
     const tick = () => { if (busyElsewhere()) idle = window.setTimeout(tick, IDLE_MS); else show(); };
     let idle = window.setTimeout(tick, IDLE_MS);

@@ -1,6 +1,8 @@
 // Textes des relances par langue (l’anglais sert au Royaume-Uni et à l’Australie). Une langue absente ici n’envoie
-// rien : jamais de repli vers une autre langue (mieux vaut ne rien envoyer qu’écrire dans la mauvaise langue).
-// L’ouverture d’un marché se décide par RELANCES_LOCALES (it, pl, nl, he seulement après la case de consentement).
+// rien : jamais de repli d’une langue connue vers une autre (mieux vaut ne rien envoyer qu’écrire dans la mauvaise
+// langue). Seule exception : langue du contact inconnue → messages de service en anglais (moteur, audit du 9 oct.).
+// RELANCES_LOCALES n’ouvre que les e-mails commerciaux (it, pl, nl, he après la case de consentement) ; les messages
+// de service partent dans les 7 langues.
 import { RELANCES_EN } from '@/i18n/content/en';
 import { RELANCES_FR, type RelancesContent } from '@/i18n/content/fr';
 import { RELANCES_HE } from '@/i18n/content/he';

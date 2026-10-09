@@ -5,6 +5,8 @@ export const UI_COMPONENTS = {
     home: 'Accueil',
     freeTrial: 'Essai gratuit',
     callMeBack: 'Être rappelé',
+    // Formulaire envoyé avant la fin du chargement de la page (retour de /api/form-fallback) : rien n’est parti.
+    formInterrupted: 'La page n’avait pas fini de se charger : votre demande n’est pas partie. Merci de la renvoyer.',
   },
 
   navbar: {

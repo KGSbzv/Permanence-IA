@@ -18,6 +18,7 @@ export const UI_RELANCES: RelancesContent = {
       agent_lead: 'Following your conversation with our assistant',
       demo: 'Following your call with our live demo',
       contact: 'Following your message',
+      signup_abandoned: 'You started creating your account',
     },
     signature: (brand) => `The ${brand} team`,
     ctaLine: (label, url) => `${label}: ${url}`,
@@ -48,6 +49,21 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Start my trial', target: 'trial' },
       after: ['Any questions? Just reply to this email: our team reads every reply.'],
+    }),
+    P1_signup: (f) => ({
+      category: 'marketing',
+      subject: '{first_name}, your account isn’t set up yet',
+      subjectNoName: 'Your account isn’t set up yet',
+      preheader: 'Your sign-up isn’t finished yet, and we can complete it with you.',
+      body: [
+        `You started creating your ${f.brand} account on our free trial page, but it looks like the sign-up wasn’t completed.`,
+        'To start your trial, there are two steps left: finish signing up on your customer area page (it only takes a few minutes), then choose the plan you want to try.',
+        `Choosing a plan is what starts your ${f.trialDays}-day trial, with ${f.trialMinutes} minutes of calls. A card is required, but nothing is charged during the trial.`,
+        'If you created your account with a different email address, please ignore this message.',
+      ],
+      cta: { label: 'Finish signing up', target: 'register' },
+      after: ['Would you rather do it with us? Leave your number on our trial page and we’ll call you back at a time that suits you, to create the account and set up the agent together. You can also simply reply to this email.'],
+      secondary: { label: 'Request a call back', target: 'trial_assist' },
     }),
     P2: (f) => {
       const r = f.plans.receptionniste;
@@ -159,7 +175,7 @@ export const UI_RELANCES: RelancesContent = {
         `For your information, the ${f.trialDays}-day free trial (${f.trialMinutes} minutes of calls) starts when you choose a plan in your customer area. A card is required, but nothing is charged during the trial; if you cancel before the end from Billing info, you pay nothing.`,
         'The built-in help assistant in your customer area can guide you, in writing or out loud.',
       ],
-      cta: { label: 'Choose my plan', target: 'billing' },
+      cta: { label: 'Choose my plan', target: 'plans' },
     }),
     I2: () => ({
       category: 'marketing',
@@ -171,7 +187,7 @@ export const UI_RELANCES: RelancesContent = {
         { ol: ['the test chat, to fine-tune its instructions;', 'the browser call, to hear its voice;', 'a real call from your mobile.'] },
         'You only forward your calls once you’re happy with the result. The guide “Test your agent” covers each step.',
       ],
-      cta: { label: 'Start the trial and test', target: 'billing' },
+      cta: { label: 'Start the trial and test', target: 'plans' },
     }),
     I3: (f) => ({
       category: 'marketing',
@@ -192,7 +208,7 @@ export const UI_RELANCES: RelancesContent = {
         'Our advice: don’t forward everything. Switch on forwarding only when you don’t pick up, or in the evenings and at weekends. Those are the calls {company} is losing today, and the ones where the agent will help you most.',
         'You’ll read the summary of every call in your customer area and see straight away whether it’s useful.',
       ],
-      cta: { label: 'Choose my plan and start the trial', target: 'billing' },
+      cta: { label: 'Choose my plan and start the trial', target: 'plans' },
     }),
     I5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -211,7 +227,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           `No need to get it right first time: you can change plan at any time, with no commitment, and the change is shown before you confirm. During the ${f.trialDays}-day trial, nothing is charged.`,
         ],
-        cta: { label: 'Choose my plan', target: 'billing' },
+        cta: { label: 'Choose my plan', target: 'plans' },
       };
     },
     I6: (f) => ({
@@ -222,7 +238,7 @@ export const UI_RELANCES: RelancesContent = {
         `A subscription doesn’t suit everyone. You can also use your agent without a plan: you add credit whenever you like (Add credits), calls cost ${f.paygMinute} per minute excl. tax and credit never expires.`,
         `You then get the same features as the ${f.plans.receptionniste.name} plan. This option doesn’t include the free trial: you only pay for what you add. As soon as your calls become regular, a plan costs less per minute.`,
       ],
-      cta: { label: 'Add credit or choose a plan', target: 'billing' },
+      cta: { label: 'Add credit', target: 'credits' },
     }),
     I7: (f) => ({
       category: 'marketing',
@@ -233,7 +249,7 @@ export const UI_RELANCES: RelancesContent = {
         'If something held you back, a one-line reply would really help us.',
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'Start whenever you’re ready', target: 'billing' },
+      cta: { label: 'Start whenever you’re ready', target: 'plans' },
     }),
 
     // ---------- C : essai en cours (essential, purement informatif) ----------
@@ -252,10 +268,11 @@ export const UI_RELANCES: RelancesContent = {
           ],
         },
         'Nothing is charged during the trial. You can cancel before {trial_end_date} from Billing info.',
+        'Good to know: the trial includes call minutes but no message credits. The AI’s written replies (website chat, WhatsApp, Messenger) use these credits, which you can buy under Add credits in your customer area.',
       ],
       cta: { label: 'Open my customer area', target: 'app' },
     }),
-    C2: (f) => ({
+    C2: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
       subject: 'Your agent is waiting for its first call',
@@ -268,7 +285,7 @@ export const UI_RELANCES: RelancesContent = {
             'If you’re happy with the answer, ask your phone provider to forward calls you don’t pick up.',
           ],
         },
-        `You keep your number and can switch forwarding off at any time. You have ${f.trialMinutes} trial minutes left, until {trial_end_date}.`,
+        'You keep your number and can switch forwarding off at any time. Your trial runs until {trial_end_date}.',
       ],
       cta: { label: 'Open my customer area', target: 'app' },
     }),
@@ -292,11 +309,22 @@ export const UI_RELANCES: RelancesContent = {
     }),
     C4: (f) => ({
       category: 'essential',
-      subject: 'You have {minutes_left} trial minutes left',
+      subject: `Trial minutes left: {minutes_left} of ${f.trialMinutes}`,
       preheader: `What happens once the ${f.trialMinutes} minutes are used up.`,
       body: [
-        `You have {minutes_left} minutes left out of the ${f.trialMinutes} in your trial.`,
+        `Your trial is running low on minutes: {minutes_left} of ${f.trialMinutes} left.`,
         `For your information, once the ${f.trialMinutes} minutes are used up, calls stop until the end of the trial on {trial_end_date}, or until you start your {plan_name} subscription from Billing info. If you do nothing, it starts automatically at the end of the trial, unless you cancel it before then.`,
+        'The choice is yours.',
+      ],
+      cta: { label: 'View my subscription', target: 'billing' },
+    }),
+    C4_exhausted: (f) => ({
+      category: 'essential',
+      subject: `Your ${f.trialMinutes} trial minutes have been used`,
+      preheader: 'What happens now, until the end of your trial.',
+      body: [
+        `All ${f.trialMinutes} minutes of your trial have been used: calls are paused until the end of the trial on {trial_end_date}, or until you start your {plan_name} subscription from Billing info.`,
+        'If you do nothing, it starts automatically at the end of the trial, unless you cancel it before then.',
         'The choice is yours.',
       ],
       cta: { label: 'View my subscription', target: 'billing' },
@@ -317,6 +345,33 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Manage my subscription', target: 'billing' },
     }),
+    C5_annual: () => ({
+      category: 'essential',
+      subject: 'Your trial ends on {trial_end_date}',
+      preheader: 'What happens on that date, and how to cancel without being charged.',
+      body: [
+        'Your trial ends on {trial_end_date}.',
+        {
+          ul: [
+            'If you want to continue: nothing to do. Your {plan_name} plan starts that day, billed annually: the first year ({plan_price} excl. tax, taxes depending on your country) is charged to your card in a single payment.',
+            'If you don’t want to continue: cancel before that date from Billing info, using the “Cancel subscription” button. Nothing will be charged.',
+          ],
+        },
+        'A question about your plan or your minutes? Reply to this email.',
+      ],
+      cta: { label: 'Manage my subscription', target: 'billing' },
+    }),
+    C5_cancelled: () => ({
+      category: 'essential',
+      subject: 'Your trial ends on {trial_end_date}: you won’t be charged',
+      preheader: 'Your cancellation has been recorded.',
+      body: [
+        'You cancelled your subscription during the trial, and your cancellation has been recorded.',
+        'Your trial stays active until {trial_end_date}. Your plan won’t start on that date, and nothing will be charged to your card.',
+        'If this was a mistake, or if you have a question, just reply to this email.',
+      ],
+      cta: { label: 'View my subscription', target: 'billing' },
+    }),
 
     // ---------- F : essai terminé sans forfait (F1 essential, puis marketing) ----------
     F1: (f) => ({
@@ -330,6 +385,17 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: null,
     }),
+    F1_payment_failed: () => ({
+      category: 'essential',
+      subject: 'Your trial has ended: the payment didn’t go through',
+      preheader: 'Your subscription hasn’t started, and nothing was charged.',
+      body: [
+        'Your trial has come to an end, but the payment for your plan couldn’t be taken. Your subscription therefore hasn’t started, and nothing was charged.',
+        'If you’d like to continue, add a valid card in Billing info (Wallet tab), then choose your plan again.',
+        'Any questions, or need a hand? Just reply to this email.',
+      ],
+      cta: { label: 'Update my card', target: 'billing' },
+    }),
     F2: (f) => ({
       category: 'marketing',
       subject: 'Keep your agent, without a subscription',
@@ -338,7 +404,7 @@ export const UI_RELANCES: RelancesContent = {
         'If the subscription is what held you back, there’s another option: pay as you go.',
         `Your customer area is still available. You add credit whenever you like (Add credits), calls cost ${f.paygMinute} per minute excl. tax, with no subscription, and credit never expires. You keep the same features as the ${f.plans.receptionniste.name} plan. A ${f.exampleCallMinutes}-minute call costs about ${f.exampleCallPayg} excl. tax.`,
       ],
-      cta: { label: 'Add credit', target: 'billing' },
+      cta: { label: 'Add credit', target: 'credits' },
     }),
     F3: () => ({
       category: 'marketing',
@@ -348,7 +414,7 @@ export const UI_RELANCES: RelancesContent = {
         'Many businesses don’t use the agent for everything. They keep it alongside their team: it takes over in the evenings, at weekends, over lunch or when every line is busy.',
         'You simply set up call forwarding with your phone provider for those times. The rest of the time, nothing changes for {company}, and the calls that used to go to voicemail finally get an answer, with a summary for you.',
       ],
-      cta: { label: 'Come back with a plan', target: 'billing' },
+      cta: { label: 'Come back with a plan', target: 'plans' },
     }),
     F4: () => ({
       category: 'marketing',
@@ -365,7 +431,7 @@ export const UI_RELANCES: RelancesContent = {
         },
         'The writing assistant in your customer area (AI Prompt Editor) helps you write them.',
       ],
-      cta: { label: 'Come back with these settings', target: 'billing' },
+      cta: { label: 'Come back with these settings', target: 'plans' },
     }),
     F5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -406,7 +472,7 @@ export const UI_RELANCES: RelancesContent = {
         `Your customer area is still available: you can come back with a plan, with no commitment, or pay as you go at ${f.paygMinute} per minute excl. tax.`,
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'My customer area', target: 'billing' },
+      cta: { label: 'My customer area', target: 'app' },
     }),
 
     // ---------- U : comptes à l’usage peu actifs (U1 essential, puis marketing) ----------
@@ -453,7 +519,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'You can track your usage in your customer area, and a plan can be cancelled at any time from Billing info.',
         ],
-        cta: { label: 'View my usage', target: 'billing' },
+        cta: { label: 'View my usage', target: 'app' },
       };
     },
     U4: () => ({
@@ -491,7 +557,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'No commitment: cancel at any time from Billing info.',
         ],
-        cta: { label: 'See the plans', target: 'billing' },
+        cta: { label: 'See the plans', target: 'plans' },
       };
     },
     U6: (f) => ({
@@ -508,7 +574,124 @@ export const UI_RELANCES: RelancesContent = {
         },
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'My customer area', target: 'billing' },
+      cta: { label: 'My customer area', target: 'app' },
+    }),
+
+    // ---------- A : mise en route (service, audit du 9 oct., § 7) ----------
+    A1: (f) => ({
+      category: 'essential',
+      subject: 'Your agent isn’t set up yet: it only takes about ten minutes',
+      preheader: 'Three steps so it can answer your calls.',
+      body: [
+        `Your ${f.brand} customer area is ready, but no agent has been created yet. The agent is what answers your calls, and setting it up takes about ten minutes:`,
+        {
+          ol: [
+            'In your customer area, open “Assistants”, then “Create”, and start from a template.',
+            'Adapt its instructions to {company}: opening hours, services, what it should note down for you.',
+            'Test it, then link a phone number to it: “Get new phone number” if you don’t have one yet (a monthly option), then the “General” section, “Phone number” field.',
+          ],
+        },
+        'Need a hand? The help bubble at the bottom right of your customer area guides you step by step, in writing or out loud.',
+      ],
+      cta: { label: 'Create my agent', target: 'app' },
+      secondary: { label: 'Step-by-step guide: creating an agent', target: 'guide_create' },
+    }),
+    A2: () => ({
+      category: 'essential',
+      subject: 'Want a hand setting up your agent?',
+      preheader: 'Leave your number and we’ll call you back to create it together.',
+      body: [
+        'Your agent still hasn’t been created. If you’re short of time, or not sure where to start, we can set it up with you over the phone.',
+        'Leave your number and a time that suits you: we’ll call you back to create {company}’s agent with you (instructions, phone number, call forwarding). You can also reply to this email with a time slot.',
+      ],
+      cta: { label: 'Get a call back to set it up together', target: 'setup_assist' },
+      after: ['Prefer to do it yourself? The guide “Create and edit an agent” covers each step, and the help bubble in your customer area answers your questions.'],
+      secondary: { label: 'Read the guide', target: 'guide_create' },
+    }),
+    A3: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Your trial runs until {trial_end_date}: your agent isn’t set up yet',
+      preheader: 'There’s still time to try it, and we can set it up with you.',
+      body: [
+        'Your trial runs until {trial_end_date}, but your agent hasn’t been created yet. This is our last message about it.',
+        'There’s still time to try it on real calls: we can set it up with you over the phone. Leave your number, or reply to this email with a time slot.',
+        'If you’ve changed your mind, you can cancel before {trial_end_date} from Billing info: nothing will be charged.',
+      ],
+      cta: { label: 'Get a call back to set it up together', target: 'setup_assist' },
+    }),
+    A3_active: (f) => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Your account is active, but your agent isn’t set up yet',
+      preheader: 'We can set it up with you over the phone.',
+      body: [
+        `Your ${f.brand} account is active, but your agent hasn’t been created yet, so no calls are being answered for now. This is our last message about it.`,
+        'We can set it up with you over the phone: leave your number, or reply to this email with a time slot.',
+      ],
+      cta: { label: 'Get a call back to set it up together', target: 'setup_assist' },
+    }),
+    A4: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Your agent is ready: test it and switch on call forwarding',
+      preheader: 'Three checks before its first calls.',
+      body: [
+        'Your agent has been created, but it hasn’t received a real call yet. Three checks are usually all it takes:',
+        {
+          ol: [
+            'Give it a phone number: if you don’t have one yet, get one under “Get new phone number” (a monthly option, price shown before you buy), then in “Assistants” open the agent, “General” section, “Phone number” field.',
+            'Call that number from your mobile and ask a question a customer would ask.',
+            'If you’re happy with the answer, ask your phone provider to forward calls to that number, for example only when you don’t pick up. You keep your own number.',
+          ],
+        },
+        'The two guides below cover each step, and the help bubble in your customer area answers your questions.',
+      ],
+      cta: { label: 'Guide: test your agent', target: 'guide_test' },
+      secondary: { label: 'Guide: keep your number with call forwarding', target: 'guide_forwarding' },
+    }),
+    A_monthly: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Your agent hasn’t received any calls in the last 30 days',
+      preheader: 'A one-minute check, on your own or with us.',
+      body: [
+        'Your agent hasn’t received any calls in the last 30 days. That may be intentional, but it’s often a number that is no longer linked to the agent, or call forwarding that has been switched off.',
+        'A one-minute check:',
+        {
+          ol: [
+            'Call your usual number at a time when forwarding should kick in.',
+            'If the agent doesn’t answer, check the forwarding with your phone provider, or the number linked to the agent in your customer area (“General” section).',
+          ],
+        },
+        'Would you rather check it with us? Leave your number and we’ll call you back to look at it together.',
+      ],
+      cta: { label: 'Get a call back to check it together', target: 'setup_assist' },
+      secondary: { label: 'Guide: keep your number with call forwarding', target: 'guide_forwarding' },
+    }),
+
+    // ---------- S : solde de minutes d’un abonné ou d’un compte à la minute (service ; l’essai a C4) ----------
+    S1: (f) => ({
+      category: 'essential',
+      subject: 'Call minutes left: {minutes_left}',
+      preheader: 'What happens when your balance reaches 0.',
+      body: [
+        `For your information, the minute balance on your ${f.brand} account is running low (minutes left: {minutes_left}).`,
+        'When it reaches 0, your agent stops taking calls until minutes are added: when your plan renews if you have one, or at any time in Add credits.',
+        'If this level suits you, there’s nothing to do.',
+      ],
+      cta: { label: 'View my minutes', target: 'credits' },
+    }),
+    S2: (f) => ({
+      category: 'essential',
+      subject: 'Your minute balance has run out: your agent is no longer taking calls',
+      preheader: 'It starts again as soon as minutes are added.',
+      body: [
+        `The minute balance on your ${f.brand} account is at 0: your agent is not taking calls for now.`,
+        'It starts again as soon as minutes are added: when your plan renews if you have one, or straight away in Add credits.',
+        'Any questions? Just reply to this email.',
+      ],
+      cta: { label: 'Add minutes', target: 'credits' },
     }),
   },
 
@@ -550,7 +733,7 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Tip of the month: {topic_title}',
       preheader: 'A practical tip from our guides.',
       body: ['{topic_paragraph}'],
-      cta: { label: 'Open my customer area', target: 'billing' },
+      cta: { label: 'Open my customer area', target: 'app' },
       after: ['This is a monthly email; you can unsubscribe in one click at the bottom of this message.'],
     }),
   },

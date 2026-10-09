@@ -3,7 +3,11 @@
 // Variables remplacées à l’affichage : {brand} (marque du marché), {numberFrom} (prix d’entrée d’un numéro dédié).
 // Mêmes slugs, mêmes catégories et même structure dans toutes les langues (typage `typeof` côté traductions).
 
-export type GuideCategory = 'start' | 'assistant' | 'tools' | 'phone' | 'channels' | 'outbound' | 'results' | 'billing';
+import type { GuideCategory } from '../guideCategories';
+
+// Catégories : dans un module à part, lu par la page d’aide sans charger ce fichier (voir ../guideCategories.ts).
+export type { GuideCategory } from '../guideCategories';
+export { GUIDE_CATEGORIES } from '../guideCategories';
 
 export interface GuideSection {
   title: string;
@@ -29,8 +33,6 @@ export interface Guide {
   /** Slugs des guides liés. */
   related: string[];
 }
-
-export const GUIDE_CATEGORIES: GuideCategory[] = ['start', 'assistant', 'tools', 'phone', 'channels', 'outbound', 'results', 'billing'];
 
 export const GUIDES_UI = {
   categories: {

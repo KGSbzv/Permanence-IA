@@ -2,7 +2,8 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Guide } from '@/i18n/content/fr/guides';
-import { GUIDE_CATEGORIES } from '@/i18n/content/fr/guides';
+// Catégories seules (module léger) : les guides français n’entrent pas dans les pages des autres langues.
+import { GUIDE_CATEGORIES } from '@/i18n/content/guideCategories';
 import { useI18n } from '@/i18n';
 
 /** Remplace les variables du contenu : {brand} (marque du marché), {numberFrom} (prix d’entrée d’un numéro). */

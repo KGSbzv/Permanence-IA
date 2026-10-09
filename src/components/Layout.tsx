@@ -6,11 +6,11 @@ import { useRouter } from 'next/router';
 import { PhoneCall } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { SIGNUP_URL, SITE, WIDGET_SRC } from '@/data/site';
+import { SIGNUP_URL, SITE, WIDGET_SRC, readInterruptedNotice } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
 import { WhatsAppLink } from './ui';
-import { DEFAULT_LOCALE, LOCALES, type Locale } from '@/i18n/locales';
+import { DEFAULT_LOCALE, LOCALES, X_DEFAULT_LOCALE, type Locale } from '@/i18n/locales';
 import { MARKETS } from '@/i18n/markets';
 
 interface LayoutProps {
@@ -29,7 +29,8 @@ const localeUrl = (l: Locale, path: string) =>
   l === DEFAULT_LOCALE ? `${SITE.url}${path}` : `${SITE.url}/${l}${path === '/' ? '' : path}`;
 
 export default function Layout({ children, title, description, ogImage, jsonLd, breadcrumbs, noindex }: LayoutProps) {
-  const { asPath } = useRouter();
+  const router = useRouter();
+  const { asPath } = router;
   const { openCallbackModal } = useCallbackModal();
   const { locale, market, c, path: localePath } = useI18n();
   const t = c.ui.components.layout;
@@ -42,6 +43,19 @@ export default function Layout({ children, title, description, ogImage, jsonLd, 
   }, [locale]);
   // asPath ne contient pas le préfixe de langue.
   const path = asPath.split('?')[0].split('#')[0] || '/';
+  // Formulaire envoyé avant la fin du chargement : /api/form-fallback renvoie ici avec « envoi=interrompu ». Rien n’est
+  // parti, on le dit en haut de la page dès l’affichage. Le paramètre est ensuite retiré de l’adresse, une fois le
+  // routeur prêt (shallow : sans rechargement, sans défilement, sans nouvelle page vue) ; sinon il reste, sans gêne.
+  const [interrupted, setInterrupted] = React.useState(false);
+  React.useEffect(() => {
+    if (readInterruptedNotice(window.location.search).interrupted) setInterrupted(true);
+  }, []);
+  React.useEffect(() => {
+    if (!interrupted || !router.isReady) return;
+    const notice = readInterruptedNotice(window.location.search);
+    if (!notice.interrupted) return;
+    router.replace(`${path}${notice.search}`, undefined, { shallow: true, scroll: false }).catch(() => { /* adresse laissée telle quelle */ });
+  }, [interrupted, router, path]);
   const url = localeUrl(locale, path);
   // Barre d’action mobile : on n’y répète pas l’action déjà proposée par la page courante.
   const showTrial = path !== SIGNUP_URL;
@@ -58,7 +72,8 @@ export default function Layout({ children, title, description, ogImage, jsonLd, 
         <meta name="description" content={description} />
         {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={url} />}
         {!noindex && LOCALES.map((l) => <link key={l} rel="alternate" hrefLang={MARKETS[l].hreflang} href={localeUrl(l, path)} />)}
-        {!noindex && <link rel="alternate" hrefLang="x-default" href={localeUrl(DEFAULT_LOCALE, path)} />}
+        {/* x-default : version anglaise, celle que reçoit une langue non proposée (redirection du navigateur). */}
+        {!noindex && <link rel="alternate" hrefLang="x-default" href={localeUrl(X_DEFAULT_LOCALE, path)} />}
         <meta property="og:site_name" content={market.brand} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
@@ -74,7 +89,14 @@ export default function Layout({ children, title, description, ogImage, jsonLd, 
       </Head>
       <a href="#contenu" className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2">{c.site.skipToContent}</a>
       <Navbar />
-      <main id="contenu">{children}</main>
+      <main id="contenu">
+        {interrupted && (
+          <div className="wrap pt-4">
+            <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">{t.formInterrupted}</p>
+          </div>
+        )}
+        {children}
+      </main>
       <Footer />
       {/* Barre d’action collante sur mobile (doc 113) ; l’action de la page courante n’y est pas répétée. */}
       <div className={`fixed inset-x-0 bottom-0 z-40 grid gap-2 border-t border-line bg-white/95 p-3 backdrop-blur lg:hidden ${showTrial && showCallback ? 'grid-cols-[1fr_1fr_auto]' : 'grid-cols-[1fr_auto]'}`}>

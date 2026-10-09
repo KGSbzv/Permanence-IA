@@ -6,7 +6,7 @@ import {
   Lock, Mail, MessageSquare, Minus, MonitorSmartphone, Network, PawPrint, Phone, X, Scale, Scissors, ScrollText, ShieldCheck, Sparkles, Stethoscope, UserCheck,
   UtensilsCrossed, Workflow, Wrench,
 } from 'lucide-react';
-import { MODULES as FR_MODULES } from '@/i18n/content/fr/modules';
+import type { Module } from '@/i18n/content/fr/modules';
 import type { Sector } from '@/i18n/content/fr/sectors';
 import type { Cell } from '@/i18n/content/fr/offers';
 import { DEMO_URL, SIGNUP_URL, isActiveSector } from '@/data/site';
@@ -15,15 +15,20 @@ import { getI18n, useI18n, type Offer } from '@/i18n';
 import { CTAs, CallbackForm, FaqDark, Heading, Photo, Section, Tick, TrialBadges } from './ui';
 import Mock from './Mock';
 import { approx, useFx } from '@/lib/fx';
+import { moduleFamily, type ModuleFamily } from '@/lib/moduleFamilies';
 import LiveDemo from './LiveDemo';
 
 /* ---------- Icônes ---------- */
 
-// Icônes indexées sur les familles françaises (clés stables) : on retrouve la famille d’un module par son slug.
-const FAMILY_ICON: Record<string, React.ElementType> = {
-  'Téléphonie': Phone, Automatisation: Workflow, 'CRM et données': Database, Messages: MessageSquare, Agenda: CalendarDays, Pilotage: BarChart3,
+// Icônes des familles de modules : la famille est reconnue dans la liste de la langue affichée (src/lib/moduleFamilies.ts),
+// sans charger la liste française sur les pages des autres langues.
+const FAMILY_ICON: Record<ModuleFamily, React.ElementType> = {
+  telephonie: Phone, automatisation: Workflow, crm: Database, messages: MessageSquare, agenda: CalendarDays, pilotage: BarChart3,
 };
-const familyIcon = (slug: string) => FAMILY_ICON[FR_MODULES.find((m) => m.slug === slug)?.family ?? ''] || Sparkles;
+const familyIcon = (modules: Module[], slug: string) => {
+  const family = moduleFamily(modules, slug);
+  return family ? FAMILY_ICON[family] : Sparkles;
+};
 export const SECTOR_ICON: Record<string, React.ElementType> = {
   'services-a-domicile': Wrench, 'dentaire-cliniques': Stethoscope, 'kines-paramedical': Activity, 'cliniques-veterinaires': PawPrint,
   immobilier: Home, automobile: Car, 'salons-de-coiffure': Scissors, 'beaute-bien-etre': Sparkles, 'restaurants-hotellerie': UtensilsCrossed,
@@ -60,7 +65,7 @@ export function ModuleCards({ slugs, max }: { slugs?: string[]; max?: number }) 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {list.map((m) => {
-        const Icon = familyIcon(m.slug);
+        const Icon = familyIcon(c.modules, m.slug);
         return (
           <Link key={m.slug} href={`/fonctionnalites/${m.slug}`} className="group flex flex-col rounded-2xl border border-line bg-white p-6 transition-colors hover:border-ink">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-signal-soft"><Icon className="h-5 w-5 text-signal-deep" aria-hidden /></span>

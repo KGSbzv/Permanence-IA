@@ -73,4 +73,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     valid: 'הקוד בתוקף ל-10 דקות ולשימוש חד־פעמי.',
     ignore: 'אם לא ביקשתם קוד, אפשר להתעלם מהודעה זו: אי אפשר להיכנס לחשבון בלי הקוד הזה.',
   },
+  // Confirmation of a support request (ticket T-XXXXXXXX), essential email (src/lib/tickets.ts): information only, no
+  // prices or offers; plural אתם, as in the other emails.
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `פניית התמיכה שלכם ${ticket} התקבלה · ${brand}`,
+    hello: (first: string | null) => (first ? `שלום ${first},` : 'שלום,'),
+    recorded: (ticket: string) => `פניית התמיכה שלכם נרשמה במספר ${ticket}. כדאי לשמור את המספר: בעזרתו נאתר את הפנייה במהירות אם תפנו אלינו שוב.`,
+    callAt: (when: string) => `מועד השיחה החוזרת: ${when}.`,
+    asap: 'נחזור אליכם בהקדם האפשרי, בשעות שבהן אנחנו מתקשרים.',
+    team: 'מישהו מהצוות שלנו יחזור אליכם בהקדם האפשרי.',
+    reply: 'כדי להוסיף פרטים, אפשר פשוט להשיב למייל הזה ולציין את מספר הפנייה.',
+    notYou: 'אם לא אתם פניתם אלינו, אפשר להתעלם מההודעה.',
+    sign: (brand: string) => `הצוות של ${brand}`,
+  },
 };

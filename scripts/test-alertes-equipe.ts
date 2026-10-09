@@ -8,7 +8,14 @@
 // formatés ; journal des paiements compté une fois ; fenêtre « lundi 8 h, heure de Paris » avec changements d’heure ;
 // envoi unique du résumé (deux passages, deux instances, nouvel essai après échec ou réservation interrompue, 3 au plus) ;
 // section manquante tolérée ;
-// routes (fetch simulé) : webhook Stripe en 200 malgré un email impossible, résumé examiné même relances coupées.
+// routes (fetch simulé) : webhook Stripe en 200 malgré un email impossible, résumé examiné même relances coupées ;
+// essai annulé (fin programmée ou résiliation avant la fin) : une seule alerte, texte selon ce que reçoit le client
+// (C5 ou F1) ; e-mails laissés sur /essai-gratuit sans inscription comptés dans le résumé (inscrits de longue date exclus).
+// Moments clés (9 oct., action 7) : essai démarré, essai converti ou abonnement payant, résiliation demandée ou effective,
+// premier achat de crédit, une alerte chacun ; compléments du résumé du lundi (conversions, résiliations, mise en route).
+// Relecture du 9 oct. (lot B) : moments clés sur un changement réel seulement (création, « incomplete » → « active »,
+// première facture payée après l’essai), jamais au renouvellement d’un abonné déjà là ni avant le prélèvement ; résumé :
+// conversions = abonnements actifs, résiliations hors impayé (motif lu s’il existe, sinon dates).
 import assert from 'node:assert/strict';
 import { randomUUID } from 'crypto';
 
@@ -154,15 +161,21 @@ async function main() {
     assert.equal(mails.length, 4);
   });
 
-  await test('past_due et résiliation ordinaire : pas d’alerte ; résiliation d’un abonnement impayé : une alerte', async () => {
+  await test('past_due : pas d’alerte ; résiliation d’un abonnement impayé : une alerte « après impayé » ; abonné qui résilie : « résilié »', async () => {
     await applyStripeEvent(subEvent('evt_8', 'customer.subscription.updated', 'past_due', { id: 'sub_3', latest_invoice: 'in_3' }), db, undefined, undefined, notify);
     assert.equal(mails.length, 4, 'past_due arrive avec le premier échec, déjà signalé');
     await applyStripeEvent(subEvent('evt_9', 'customer.subscription.deleted', 'canceled', { id: 'sub_3', latest_invoice: 'in_3' }), db, undefined, undefined, notify);
     assert.equal(mails.length, 5, 'statut enregistré past_due avant la résiliation');
     assert.match(mails[4].subject, /^Abonnement résilié après impayé/);
-    await applyStripeEvent(subEvent('evt_10', 'customer.subscription.updated', 'active', { id: 'sub_4', latest_invoice: 'in_4' }), db, undefined, undefined, notify);
-    await applyStripeEvent(subEvent('evt_11', 'customer.subscription.deleted', 'canceled', { id: 'sub_4', latest_invoice: 'in_4', cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
-    assert.equal(mails.length, 5, 'résiliation demandée par le client : rien');
+    // Abonnement payant sans essai (créé « active » : premier paiement reçu), puis résilié par le client : « Nouvel
+    // abonnement payant », puis « Abonnement résilié » (audit du 9 oct., action 7), jamais « après impayé ».
+    await applyStripeEvent(subEvent('evt_10', 'customer.subscription.created', 'active', { id: 'sub_4', latest_invoice: 'in_4' }), db, undefined, undefined, notify);
+    assert.equal(mails.length, 6);
+    assert.equal(mails[5].subject, 'Nouvel abonnement payant — alice@exemple.fr');
+    await applyStripeEvent(subEvent('evt_11', 'customer.subscription.deleted', 'canceled', { id: 'sub_4', latest_invoice: 'in_4', ended_at: 1_800_000_150, cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
+    assert.equal(mails.length, 7);
+    assert.equal(mails[6].subject, 'Abonnement résilié — alice@exemple.fr');
+    assert.doesNotMatch(mails[6].subject, /après impayé/);
   });
 
   await test('première facture refusée à l’inscription ou facture à régler : « Paiement refusé », jamais « impayé définitif »', async () => {
@@ -180,11 +193,12 @@ async function main() {
     assert.ok(logged.every((r) => r.variables.final === false), 'pas compté comme impayé définitif dans le résumé');
   });
 
-  await test('résiliation demandée par le client d’un abonnement en retard de paiement : pas d’alerte « après impayé »', async () => {
+  await test('résiliation demandée par le client d’un abonnement en retard de paiement : « résilié », jamais « après impayé »', async () => {
     const before = mails.length;
     await applyStripeEvent(subEvent('evt_14', 'customer.subscription.updated', 'past_due', { id: 'sub_5', latest_invoice: 'in_5' }), db, undefined, undefined, notify);
     await applyStripeEvent(subEvent('evt_15', 'customer.subscription.deleted', 'canceled', { id: 'sub_5', latest_invoice: 'in_5', cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
-    assert.equal(mails.length, before);
+    assert.equal(mails.length, before + 1);
+    assert.match(mails[before].subject, /^Abonnement résilié — /);
   });
 
   await test('email en échec : journalisé, jamais remonté ; événement et journal enregistrés quand même', async () => {
@@ -201,6 +215,141 @@ async function main() {
     const again: string[] = [];
     await applyStripeEvent(failed('evt_12', 'in_5', 1, nextTry), db, undefined, undefined, async (s) => { again.push(s); });
     assert.equal(again.length, 0, 'verrou posé avant l’envoi : pas d’alerte en boucle');
+  });
+
+  await test('essai annulé : une alerte (fin programmée ou résiliation avant la fin), jamais en double ni pour un impayé', async () => {
+    const before = mails.length;
+    const trial = (id: string, type: string, status: string, extra: Any = {}) => subEvent(id, type, status, { id: 'sub_t', latest_invoice: 'in_t', trial_start: 1_799_000_000, trial_end: 1_800_200_000, ...extra });
+    await applyStripeEvent(trial('evt_t0', 'customer.subscription.created', 'trialing'), db, undefined, undefined, notify);
+    assert.equal(mails.length, before + 1, 'essai en cours sans annulation : seulement « Essai démarré »');
+    assert.equal(mails[before].subject, 'Essai démarré — alice@exemple.fr');
+    await applyStripeEvent(trial('evt_t1', 'customer.subscription.updated', 'trialing', { cancel_at_period_end: true, cancellation_details: { feedback: 'too_expensive', comment: 'Trop cher pour moi' } }), db, undefined, undefined, notify);
+    assert.equal(mails.length, before + 2);
+    const m = mails[before + 1];
+    assert.equal(m.subject, 'Essai annulé — alice@exemple.fr');
+    assert.match(sp(m.text), /Fin de l’essai : .*2027/);
+    assert.match(m.text, /Motif indiqué : too_expensive — Trop cher pour moi/);
+    assert.match(m.text, /Rien ne sera débité/);
+    assert.match(m.text, /C5 confirme au client/, 'fin programmée : le client recevra C5');
+    assert.match(sp(m.text), /Forfait : 99,00 \$US par mois/);
+    // Renvoi de l’événement, puis résiliation à la fin de l’essai : pas de seconde alerte.
+    await applyStripeEvent(trial('evt_t1', 'customer.subscription.updated', 'trialing', { cancel_at_period_end: true }), db, undefined, undefined, notify);
+    await applyStripeEvent(trial('evt_t2', 'customer.subscription.deleted', 'canceled', { ended_at: 1_800_200_000, cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
+    assert.equal(mails.length, before + 2, 'fin de l’essai annulé : ni seconde alerte, ni « Abonnement résilié »');
+    // Résiliation immédiate d’un autre essai.
+    await applyStripeEvent(trial('evt_t3', 'customer.subscription.deleted', 'canceled', { id: 'sub_u', ended_at: 1_799_500_000, cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
+    assert.equal(mails.length, before + 3);
+    assert.match(mails[before + 2].text, /Fin de l’essai : immédiate/);
+    // Abonnement déjà résilié : le client reçoit F1, pas C5.
+    assert.match(mails[before + 2].text, /Rien n’a été débité\. L’abonnement est déjà résilié : le client reçoit F1/);
+    assert.doesNotMatch(mails[before + 2].text, /C5 confirme/);
+    // Résiliation constatée à la fin de l’essai, sans événement de fin programmée reçu avant : même texte « F1 ».
+    await applyStripeEvent(trial('evt_t5', 'customer.subscription.deleted', 'canceled', { id: 'sub_w', ended_at: 1_800_200_000, cancellation_details: { reason: 'cancellation_requested' } }), db, undefined, undefined, notify);
+    assert.equal(mails.length, before + 4);
+    assert.doesNotMatch(mails[before + 3].text, /Fin de l’essai : immédiate/);
+    assert.match(mails[before + 3].text, /le client reçoit F1/);
+    // Fin d’essai sur un paiement refusé : pas une annulation du client.
+    const n = mails.length;
+    await applyStripeEvent(trial('evt_t4', 'customer.subscription.deleted', 'canceled', { id: 'sub_v', latest_invoice: 'in_v', ended_at: 1_800_500_000, cancellation_details: { reason: 'payment_failed' } }), db, undefined, undefined, notify);
+    assert.ok(mails.slice(n).every((x) => !/Essai annulé/.test(x.subject)));
+  });
+
+  await test('moments clés : essai démarré, essai converti, résiliation demandée puis effective — une alerte chacun', async () => {
+    const life = memoryDb(() => clock);
+    const out: { subject: string; text: string }[] = [];
+    const tell = async (subject: string, text: string) => { out.push({ subject, text }); };
+    // `prev` : data.previous_attributes de l’événement (seulement les champs changés).
+    const ev = (id: string, type: string, status: string, extra: Any = {}, prev?: Any) => ({
+      id, type, created: 1_800_000_300, livemode: true,
+      data: { object: { id: 'sub_k', customer: 'cus_k', status, trial_start: 1_799_000_000, trial_end: 1_800_200_000, items: { data: [{ current_period_end: 1_802_800_000, price: { unit_amount: 24900, currency: 'usd', recurring: { interval: 'month' } } }] }, ...extra }, ...(prev ? { previous_attributes: prev } : {}) },
+    });
+    // Facture d’abonnement payée : `start` = début de la période facturée (ligne de la facture).
+    const paidInvoice = (id: string, invoice: string, start: number, extra: Any = {}) => ({
+      id, type: 'invoice.paid', created: 1_800_200_400, livemode: true,
+      data: { object: { id: invoice, customer: 'cus_k', amount_paid: 24900, currency: 'usd', billing_reason: 'subscription_cycle', parent: { subscription_details: { subscription: 'sub_k' } }, lines: { data: [{ period: { start, end: start + 2_600_000 } }] }, ...extra } },
+    });
+    await life.insertIfNew('stripe_customers', { customer_id: 'cus_k', email: 'karim@exemple.fr' }, 'customer_id');
+    // Essai démarré (événement de création, puis renvoi et mise à jour) : une seule alerte.
+    await applyStripeEvent(ev('k1', 'customer.subscription.created', 'trialing'), life, undefined, undefined, tell);
+    await applyStripeEvent(ev('k1', 'customer.subscription.created', 'trialing'), life, undefined, undefined, tell);
+    await applyStripeEvent(ev('k2', 'customer.subscription.updated', 'trialing', {}, { cancel_at_period_end: true }), life, undefined, undefined, tell);
+    assert.equal(out.length, 1);
+    assert.equal(out[0].subject, 'Essai démarré — karim@exemple.fr');
+    assert.match(sp(out[0].text), /Forfait : 249,00 \$US par mois/);
+    assert.match(sp(out[0].text), /Fin de l’essai : .*2027/);
+    assert.match(out[0].text, /A2 à J\+3 \(avec une alerte pour vous\)/);
+    assert.match(out[0].text, /C1 \(début d’essai\) au premier passage horaire entre 8 h et 20 h \(heure locale du client\)/);
+    // Fin de l’essai : passage en « active » AVANT le prélèvement → aucune alerte ; facture de la première période
+    // payée → « Essai converti », une seule fois (renvoi, invoice.payment_succeeded, repassage par past_due puis active).
+    await applyStripeEvent(ev('k3', 'customer.subscription.updated', 'active', {}, { status: 'trialing' }), life, undefined, undefined, tell);
+    assert.equal(out.length, 1, 'statut « active » avant le prélèvement : pas encore converti');
+    await applyStripeEvent(paidInvoice('k3i', 'in_k1', 1_800_200_000), life, undefined, undefined, tell);
+    await applyStripeEvent({ ...paidInvoice('k3j', 'in_k1', 1_800_200_000), type: 'invoice.payment_succeeded' }, life, undefined, undefined, tell);
+    await applyStripeEvent(ev('k4', 'customer.subscription.updated', 'past_due', {}, { status: 'active' }), life, undefined, undefined, tell);
+    await applyStripeEvent(ev('k5', 'customer.subscription.updated', 'active', {}, { status: 'past_due' }), life, undefined, undefined, tell);
+    assert.equal(out.length, 2);
+    assert.equal(out[1].subject, 'Essai converti : nouvel abonné payant — karim@exemple.fr');
+    assert.match(sp(out[1].text), /Prochain renouvellement : .*2027/);
+    assert.match(out[1].text, /la première facture du forfait est payée/);
+    assert.match(out[1].text, /Risque de résiliation » dès le prochain passage \(J\+14 compté depuis le début de l’essai\)/);
+    // Renouvellement du mois suivant (facture payée, événement de mise à jour) : aucune alerte.
+    await applyStripeEvent(paidInvoice('k5i', 'in_k2', 1_802_800_000), life, undefined, undefined, tell);
+    await applyStripeEvent(ev('k5r', 'customer.subscription.updated', 'active', {}, { current_period_end: 1_802_800_000 }), life, undefined, undefined, tell);
+    assert.equal(out.length, 2, 'renouvellement : pas d’alerte');
+    // Résiliation demandée (fin programmée) avec motif, puis résiliation effective à la fin de la période : une alerte.
+    await applyStripeEvent(ev('k6', 'customer.subscription.updated', 'active', { cancel_at_period_end: true, cancellation_details: { feedback: 'unused', comment: 'Je ne l’utilise pas' } }, { cancel_at_period_end: false }), life, undefined, undefined, tell);
+    assert.equal(out.length, 3);
+    assert.equal(out[2].subject, 'Résiliation demandée — karim@exemple.fr');
+    assert.match(out[2].text, /Motif indiqué : unused — Je ne l’utilise pas/);
+    assert.match(sp(out[2].text), /Fin de l’abonnement : .*2027/);
+    assert.match(out[2].text, /Personne ne lui a encore demandé pourquoi/);
+    await applyStripeEvent(ev('k7', 'customer.subscription.deleted', 'canceled', { ended_at: 1_802_800_000, cancellation_details: { reason: 'cancellation_requested' } }), life, undefined, undefined, tell);
+    assert.equal(out.length, 3, 'résiliation effective après la demande : pas de seconde alerte');
+    // Essai annulé : jamais « Résiliation demandée » (alerte « Essai annulé » à part), ni « Essai démarré » sur une
+    // mise à jour d’un essai déjà en cours.
+    await applyStripeEvent(ev('k8', 'customer.subscription.updated', 'trialing', { id: 'sub_l', cancel_at_period_end: true }, { cancel_at_period_end: false }), life, undefined, undefined, tell);
+    assert.ok(out.slice(3).every((m) => !/Résiliation demandée|Abonnement résilié|Essai démarré/.test(m.subject)));
+    assert.ok(out.slice(3).some((m) => /^Essai annulé/.test(m.subject)));
+    // Sans destinataire (notify absent) : aucun verrou posé, l’alerte pourra partir plus tard.
+    const n = life.rows('stripe_events').length;
+    await applyStripeEvent(ev('k9', 'customer.subscription.created', 'active', { id: 'sub_m', trial_end: null }), life);
+    assert.equal(life.rows('stripe_events').filter((r) => String(r.event_id).startsWith('alerte:')).length, life.rows('stripe_events').slice(0, n).filter((r) => String(r.event_id).startsWith('alerte:')).length);
+    // Abonnement sans essai : premier paiement réussi (passage d’« incomplete » à « active »).
+    await applyStripeEvent(ev('k10', 'customer.subscription.updated', 'active', { id: 'sub_m', trial_end: null }, { status: 'incomplete' }), life, undefined, undefined, tell);
+    assert.equal(out[out.length - 1].subject, 'Nouvel abonnement payant — karim@exemple.fr', 'abonnement sans essai');
+  });
+
+  await test('moments clés après le déploiement : renouvellement d’un abonné existant, essai déjà en cours, premier prélèvement refusé → aucune alerte à tort', async () => {
+    const old = memoryDb(() => clock);
+    const out: string[] = [];
+    const tell = async (subject: string) => { out.push(subject); };
+    const sub = (id: string, type: string, status: string, object: Any, prev?: Any) => ({
+      id, type, created: 1_800_000_500, livemode: true,
+      data: { object: { customer: 'cus_o', items: { data: [{ current_period_end: 1_802_800_000, price: { unit_amount: 9900, currency: 'usd', recurring: { interval: 'month' } } }] }, status, ...object }, ...(prev ? { previous_attributes: prev } : {}) },
+    });
+    await old.insertIfNew('stripe_customers', { customer_id: 'cus_o', email: 'olga@exemple.fr' }, 'customer_id');
+    // Abonné depuis l’été (essai converti avant le déploiement) : renouvellement mensuel, facture du cycle payée.
+    await applyStripeEvent(sub('o1', 'customer.subscription.updated', 'active', { id: 'sub_o', trial_start: 1_790_000_000, trial_end: 1_791_200_000 }, { current_period_end: 1_800_000_000 }), old, undefined, undefined, tell);
+    await applyStripeEvent({ id: 'o1i', type: 'invoice.paid', created: 1_800_000_600, livemode: true, data: { object: { id: 'in_o1', customer: 'cus_o', amount_paid: 9900, currency: 'usd', billing_reason: 'subscription_cycle', subscription: 'sub_o', period_end: 1_800_000_000, lines: { data: [{ period: { start: 1_800_000_000, end: 1_802_600_000 } }] } } } }, old, undefined, undefined, tell);
+    // Essai commencé avant le déploiement : rappel de fin d’essai (trial_will_end), puis mise à jour.
+    await applyStripeEvent(sub('o2', 'customer.subscription.trial_will_end', 'trialing', { id: 'sub_p', trial_start: 1_799_000_000, trial_end: 1_800_200_000 }), old, undefined, undefined, tell);
+    // Fin d’essai, passage en « active », puis premier prélèvement refusé : jamais « Essai converti ».
+    await applyStripeEvent(sub('o3', 'customer.subscription.updated', 'active', { id: 'sub_p', trial_start: 1_799_000_000, trial_end: 1_800_200_000 }, { status: 'trialing' }), old, undefined, undefined, tell);
+    await applyStripeEvent({ id: 'o3f', type: 'invoice.payment_failed', created: 1_800_204_000, livemode: true, data: { object: { id: 'in_p1', customer: 'cus_o', amount_due: 9900, amount_remaining: 9900, currency: 'usd', attempt_count: 1, next_payment_attempt: 1_800_400_000, billing_reason: 'subscription_cycle' } } }, old, undefined, undefined, tell);
+    await applyStripeEvent(sub('o4', 'customer.subscription.updated', 'past_due', { id: 'sub_p', trial_start: 1_799_000_000, trial_end: 1_800_200_000 }, { status: 'active' }), old, undefined, undefined, tell);
+    assert.deepEqual(out.map(sp), ['Paiement échoué : 99,00 $US — olga@exemple.fr (tentative 1)'], 'seule l’alerte de paiement échoué');
+  });
+
+  await test('premier achat de crédit : une alerte par client (facture « manual » ou Checkout), jamais pour un abonnement', async () => {
+    const buy = memoryDb(() => clock);
+    const out: string[] = [];
+    const tell = async (subject: string) => { out.push(subject); };
+    const ev = (id: string, type: string, object: Any) => ({ id, type, created: 1_800_000_400, livemode: true, data: { object } });
+    await applyStripeEvent(ev('p1', 'invoice.paid', { id: 'in_p1', customer: 'cus_p', customer_email: 'Paul@Exemple.fr', amount_paid: 2000, currency: 'usd', billing_reason: 'manual' }), buy, undefined, undefined, tell);
+    await applyStripeEvent(ev('p2', 'invoice.paid', { id: 'in_p2', customer: 'cus_p', customer_email: 'paul@exemple.fr', amount_paid: 5000, currency: 'usd', billing_reason: 'manual' }), buy, undefined, undefined, tell);
+    await applyStripeEvent(ev('p3', 'invoice.paid', { id: 'in_p3', customer: 'cus_q', amount_paid: 9900, currency: 'usd', billing_reason: 'subscription_cycle', subscription: 'sub_q' }), buy, undefined, undefined, tell);
+    await applyStripeEvent(ev('p4', 'checkout.session.completed', { id: 'cs_1', customer: 'cus_r', mode: 'payment', payment_status: 'paid', amount_total: 1000, currency: 'usd', customer_details: { email: 'rita@exemple.fr' }, payment_intent: 'pi_r' }), buy, undefined, undefined, tell);
+    assert.deepEqual(out.map(sp), ['Premier achat de crédit : 20,00 $US — paul@exemple.fr', 'Premier achat de crédit : 10,00 $US — rita@exemple.fr']);
   });
 
   await test('alerte : HTML échappé, mode test signalé, lien du tableau de bord en /test', async () => {
@@ -279,6 +428,31 @@ async function main() {
     const prev = (day: number) => new Date(Date.UTC(2026, 9, 5 + day, 10)).toISOString();
     d.rows('signups').push({ signed_up_at: cur(0) }, { signed_up_at: cur(3) }, { signed_up_at: cur(6) }, { signed_up_at: prev(1) }, { signed_up_at: '2026-10-19T05:00:00Z' });
     d.rows('stripe_subscriptions').push({ trial_start: cur(1), livemode: true }, { trial_start: cur(2), livemode: false }, { trial_start: prev(2), livemode: true });
+    // Cycle des abonnements (9 oct.) : essai converti cette semaine, abonné qui demande la résiliation, essai annulé,
+    // essai converti en mode test Stripe (écarté). Débuts d’essai avant les deux semaines : « Essais démarrés » inchangé.
+    // Relecture du 9 oct. : essai dont le premier prélèvement a échoué (past_due : pas une conversion), abonnement
+    // résilié après impayé (motif payment_failed) et essai résilié après les nouvelles tentatives, sans motif enregistré
+    // (aucun des deux n’est une résiliation d’abonné).
+    d.rows('stripe_subscriptions').push(
+      { subscription_id: 'sub_conv', trial_start: '2026-09-28T10:00:00Z', trial_end: cur(3), status: 'active', livemode: true },
+      { subscription_id: 'sub_res', trial_start: null, trial_end: null, status: 'active', cancel_at_period_end: true, canceled_at: cur(4), livemode: true },
+      { subscription_id: 'sub_ann', trial_start: '2026-09-30T10:00:00Z', trial_end: cur(5), status: 'trialing', cancel_at_period_end: true, canceled_at: cur(2), livemode: true },
+      { subscription_id: 'sub_tst', trial_start: '2026-09-28T10:00:00Z', trial_end: cur(3), status: 'active', livemode: false },
+      { subscription_id: 'sub_pd', trial_start: '2026-09-29T10:00:00Z', trial_end: cur(4), status: 'past_due', livemode: true },
+      { subscription_id: 'sub_imp', trial_start: null, trial_end: null, status: 'canceled', cancel_at_period_end: false, canceled_at: cur(5), cancellation_reason: 'payment_failed', livemode: true },
+      { subscription_id: 'sub_imq', trial_start: '2026-09-21T10:00:00Z', trial_end: '2026-10-05T10:00:00Z', status: 'canceled', cancel_at_period_end: false, canceled_at: cur(1), livemode: true },
+    );
+    // Mise en route : dernières lectures des agents (un compte sans agent, un agent sans numéro ni appel, un compte actif).
+    const act = (userId: string, agents: number, withNumber: number, realCalls: number | null, lastCallAt: string | null, readAt = '2026-10-18T03:00:00Z') =>
+      ({ id: randomUUID(), kind: 'activite_compte', external_id: `${userId}:${readAt.slice(0, 10)}`, created_at: readAt, variables: { userId, readAt, agents, agentsWithNumber: withNumber, phoneNumbers: withNumber, paused: [], realCalls, lastCallAt, callsSince: '2026-09-03T03:00:00Z' } });
+    d.rows('call_events').push(act('1', 1, 1, 3, '2026-10-10T10:00:00Z', '2026-10-17T03:00:00Z'), act('1', 0, 0, null, null), act('2', 1, 0, 0, null), act('3', 2, 1, 5, '2026-10-17T10:00:00Z'));
+    // E-mails des séries A et S (envoi réel) ; un envoi simulé écarté.
+    d.rows('relance_log').push(
+      { id: randomUUID(), sequence: 'A', step: 'A1', status: 'sent', dry_run: false, created_at: cur(1) },
+      { id: randomUUID(), sequence: 'A', step: 'A2', status: 'sent', dry_run: false, created_at: prev(1) },
+      { id: randomUUID(), sequence: 'S', step: 'S1@2026-10-10', status: 'sent', dry_run: false, created_at: cur(2) },
+      { id: randomUUID(), sequence: 'A', step: 'A3', status: 'dry_run', dry_run: true, created_at: cur(2) },
+    );
     const pay = (external_id: string, status: string, at: string, v: Any, outcome = 'invoice.paid') =>
       ({ id: randomUUID(), kind: PAYMENT_KIND, external_id, status, outcome, created_at: at, variables: { livemode: true, customer: 'cus_1', ...v } });
     d.rows('call_events').push(
@@ -296,6 +470,16 @@ async function main() {
       { id: randomUUID(), kind: 'email', outcome: 'copie_conversation', status: 'echec', created_at: cur(5) },
       { id: randomUUID(), kind: 'email_pref', outcome: 'essential_only', created_at: cur(5) },
     );
+    // E-mails laissés sur /essai-gratuit : un sans inscription, un inscrit lundi matin (après la semaine), un la semaine d’avant.
+    d.rows('contacts').push(
+      { id: randomUUID(), email: 'leo@exemple.fr', origin: 'trial_signup', last_interaction_at: cur(1) },
+      { id: randomUUID(), email: 'Zoe@Exemple.fr', origin: 'trial_signup', last_interaction_at: cur(6) },
+      { id: randomUUID(), email: 'max@exemple.fr', origin: 'trial_signup', last_interaction_at: prev(2) },
+      { id: randomUUID(), email: 'eva@exemple.fr', origin: 'callback', last_interaction_at: cur(2) },
+      // Cliente inscrite en septembre, revenue retaper son e-mail sur /essai-gratuit : jamais « sans inscription ».
+      { id: randomUUID(), email: 'ana@exemple.fr', origin: 'trial_signup', last_interaction_at: cur(4) },
+    );
+    d.rows('signups').push({ email: 'zoe@exemple.fr', signed_up_at: '2026-10-19T05:30:00Z' }, { email: 'Ana@Exemple.fr', signed_up_at: '2026-09-01T10:00:00Z' });
     d.rows('callbacks').push(
       { phone: '+33612345678', type: 'commercial', status: 'scheduled', created_at: cur(2, 9) }, // rappelée à 14 h : faite
       { phone: '+447700900123', type: 'commercial', status: 'pending', created_at: cur(2) }, // pas décroché : en attente
@@ -321,8 +505,9 @@ async function main() {
     const { subject, html } = sent[0];
     const text = sp(sent[0].text);
     assert.equal(subject, 'Résumé de la semaine du lundi 12 au dimanche 18 octobre 2026');
-    assert.match(text, /Nouveaux comptes \(inscriptions\) : 3 \(1\)/);
+    assert.match(text, /Nouveaux comptes \(inscriptions\) : 3 \(1\)/, 'inscription du lundi matin hors semaine');
     assert.match(text, /Essais démarrés : 1 \(1\)/, 'essai du mode test Stripe écarté');
+    assert.match(text, /E-mails laissés sur \/essai-gratuit sans inscription à ce jour : 1 \(1\)/, 'inscrit depuis, ou avant la période : non compté');
     assert.match(text, /Paiements reçus : 2 \(1\) — total 49,00 € \+ 99,00 \$US \(99,00 \$US\)/);
     assert.match(text, /Paiements échoués : 2 \(0\) — 1 client, dont impayé définitif \(dernière tentative\) : 1/);
     assert.match(text, /Appels téléphoniques : 2 \(1\) — 3 min au total/);
@@ -332,6 +517,15 @@ async function main() {
     assert.match(text, /Fiches prospect enregistrées par les agents : 1 \(0\)/);
     assert.match(text, /Oppositions « ne plus appeler » : 1 \(0\)/);
     assert.match(text, /Copies de conversation envoyées : 1 \(0\)/);
+    // Compléments du 9 oct. : cycle des abonnements et mise en route.
+    assert.match(text, /Essais devenus payants : 1 \(0\)/, 'premier prélèvement refusé (past_due) : pas une conversion');
+    assert.match(text, /Résiliations d’abonnés \(demandées ou effectives\) : 1 \(0\)/, 'résiliations après impayé écartées');
+    assert.match(text, /Essais annulés : 1 \(0\)/);
+    assert.match(text, /Abonnés payants à ce jour : 3 \(dont résiliation programmée : 1\)/, 'impayé en cours compris');
+    assert.match(text, /MISE EN ROUTE \(À CE JOUR\)/);
+    assert.match(text, /Comptes suivis \(essai, abonné, paiement à la minute\) : 3 ; sans agent : 1 ; agent sans numéro relié : 1 ; sans appel réel depuis 30 jours : 1 ; agents en pause \(conformité\) : 0/);
+    assert.match(text, /E-mails de mise en route envoyés \(A1 à A4, suivi mensuel\) : 1 \(1\)/);
+    assert.match(text, /Alertes de solde envoyées aux clients \(minutes basses ou épuisées\) : 1 \(0\)/);
     assert.doesNotMatch(text, /indisponible/);
     assert.match(html, /&lt;script&gt;x&lt;\/script&gt; 1/);
     assert.doesNotMatch(html, /<script>/);
@@ -404,9 +598,34 @@ async function main() {
     const text = sp(sent[0].text);
     assert.match(text, /Nouveaux comptes \(inscriptions\) : donnée indisponible/);
     assert.match(text, /Demandes de rappel : donnée indisponible/);
+    assert.match(text, /E-mails laissés sur \/essai-gratuit sans inscription à ce jour : donnée indisponible/, 'inscriptions illisibles : pas de chiffre faux');
     assert.match(text, /Essais démarrés : 1 \(1\)/);
     assert.match(text, /Paiements reçus : 2 \(1\)/);
-    assert.match(String(d.rows('call_events').find((r) => r.kind === WEEKLY_KIND)?.summary), /2 donnée\(s\) indisponible\(s\)/);
+    assert.match(String(d.rows('call_events').find((r) => r.kind === WEEKLY_KIND)?.summary), /3 donnée\(s\) indisponible\(s\)/);
+  });
+
+  await test('résumé sans la colonne cancellation_reason (migration pas encore exécutée) : relu sans elle, impayé reconnu à ses dates', async () => {
+    const { d, deps, sent } = seeded();
+    // La colonne absente fait échouer la lecture qui la cite (PostgREST 400) : seconde lecture sans elle.
+    const select = d.select;
+    const ask: string[] = [];
+    // (La base en mémoire ignore select= : la colonne est retirée des lignes renvoyées, comme sur une base sans migration.)
+    const quiet = {
+      ...deps,
+      select: async <T,>(table: string, query: string) => {
+        if (table === 'stripe_subscriptions') ask.push(query);
+        if (query.includes('cancellation_reason')) throw new Error('Supabase stripe_subscriptions 400: column stripe_subscriptions.cancellation_reason does not exist');
+        return (await select<Any>(table, query)).map(({ cancellation_reason: _, ...r }) => r) as T[];
+      },
+    };
+    const logs: string[] = [];
+    assert.equal(await sendWeeklyIfDue({ ...quiet, log: (m: string) => logs.push(m) }), 'sent');
+    const text = sp(sent[0].text);
+    assert.ok(ask.some((q) => q.includes('cancellation_reason')) && ask.some((q) => q.startsWith('select=status,trial_end,canceled_at,cancel_at_period_end,livemode')));
+    assert.ok(!logs.some((m) => /stripe_subscriptions illisible/.test(m)), 'échec attendu : non journalisé');
+    // Sans motif, l’abonné résilié après impayé (sans essai) compte encore ; l’essai résilié après les tentatives non.
+    assert.match(text, /Résiliations d’abonnés \(demandées ou effectives\) : 2 \(0\)/);
+    assert.match(text, /Abonnés payants à ce jour : 3/);
   });
 
   await test('base illisible pour la réservation : rien n’est envoyé (pas de résumé en boucle)', async () => {

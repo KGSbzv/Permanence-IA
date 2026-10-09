@@ -7,6 +7,8 @@ const nextConfig = {
   images: { unoptimized: true },
   // Pas d’en-tête « X-Powered-By: Next.js ».
   poweredByHeader: false,
+  // src/instrumentation.ts au démarrage du serveur : journal structuré (gravité ERROR visible par l’alerte Google Cloud).
+  experimental: { instrumentationHook: true },
   async headers() {
     // En-têtes de sécurité de toutes les pages. Micro autorisé pour le site et pour app.permanenceia.com :
     // la bulle de l’assistante (embed.js) et la démo dans le navigateur s’ouvrent dans un iframe de ce domaine.

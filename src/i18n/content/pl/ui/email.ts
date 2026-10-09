@@ -78,4 +78,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     valid: 'Kod jest ważny 10 minut i można go użyć tylko raz.',
     ignore: 'Jeśli to nie Państwo o niego prosili, prosimy zignorować tę wiadomość: bez tego kodu nikt nie uzyska dostępu do konta.',
   },
+  // Potwierdzenie zgłoszenia do pomocy technicznej (T-XXXXXXXX), wiadomość niezbędna (src/lib/tickets.ts): tylko
+  // informacja, bez cen i ofert; forma „Państwo”, jak w pozostałych wiadomościach.
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `Zgłoszenie ${ticket} zostało przyjęte · ${brand}`,
+    hello: (_first: string | null) => 'Dzień dobry,',
+    recorded: (ticket: string) => `Przyjęliśmy Państwa zgłoszenie do pomocy technicznej pod numerem ${ticket}. Prosimy zachować ten numer: dzięki niemu szybko odnajdziemy zgłoszenie, jeśli skontaktują się Państwo z nami ponownie.`,
+    callAt: (when: string) => `Termin oddzwonienia: ${when}.`,
+    asap: 'Oddzwonimy najszybciej, jak to możliwe, w godzinach, w których wykonujemy połączenia.',
+    team: 'Ktoś z naszego zespołu skontaktuje się z Państwem najszybciej, jak to możliwe.',
+    reply: 'Aby coś dodać, wystarczy odpowiedzieć na tę wiadomość, podając numer zgłoszenia.',
+    notYou: 'Jeśli to nie Państwo wysłali to zgłoszenie, prosimy zignorować tę wiadomość.',
+    sign: (brand: string) => `Zespół ${brand}`,
+  },
 };

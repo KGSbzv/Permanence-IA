@@ -7,6 +7,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     home: 'Home',
     freeTrial: 'Inizi gratis',
     callMeBack: 'Richieda una richiamata',
+    formInterrupted: 'La pagina non era ancora del tutto caricata: la Sua richiesta non è stata inviata. La preghiamo di inviarla di nuovo.',
   },
 
   navbar: {

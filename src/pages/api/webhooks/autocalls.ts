@@ -1,6 +1,11 @@
 // Webhook Autocalls : fin d’appel (post_call) et fin de conversation (widget, WhatsApp…).
 // Enregistre chaque échange, alerte l’équipe quand un prospect demande une démo ou un rappel, et envoie à la
 // personne la copie de l’échange quand elle l’a demandée (variable copy_email, src/lib/conversationCopy.ts).
+// Audit du 9 oct. 2026 : issue « non_resolu » signalée à l’équipe ; issue « resolu » d’un agent de rappel du support →
+// tickets ouverts de ce numéro clos (src/lib/tickets.ts) ; issue « a_rappeler » (ticket non réglé pendant le rappel)
+// signalée à l’équipe ; « ne plus me contacter » sur un canal sans numéro d’appelant (Messenger, espace client,
+// widgets écrits ou vocaux) appliqué ici (src/lib/writtenOptout.ts) ; lien « Arrêter les relances de ce contact » dans
+// l’alerte « À traiter » quand l’échange donne une adresse e-mail.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, alertTeam, dbInsert, dbSelect, dbUpdate, esc, isAuthorized, langFromPhone, sendMail, toE164 } from '@/lib/server';
 import { STOP_OUTCOMES, isOptedOut, registerOptOut } from '@/lib/optout';
@@ -8,8 +13,13 @@ import { MAX_COPIES_PER_DAY, maskEmails, sendConversationCopy } from '@/lib/conv
 import { CONTACTS_DB, recordConsent } from '@/lib/contacts';
 import { sendMissedCallSms } from '@/lib/sms';
 import { safeFirstName, sendTemplate } from '@/lib/whatsapp';
+import { stopRelancesHtml, stopRelancesLine } from '@/lib/relances/stopLink';
+import { closeResolvedTickets, isSupportCallbackAgent } from '@/lib/tickets';
+import { applyWrittenOptout } from '@/lib/writtenOptout';
 
-const HOT = ['rappel', 'rappel_commercial', 'demo', 'demo_planifiee', 'essai_gratuit', 'ticket_cree', 'ticket_support'];
+// « non_resolu » : échange où l’agent (Lucie, support) n’a pas pu aider, sans ticket créé : l’équipe reprend la main.
+// « a_rappeler » : rappel du support terminé sans régler le ticket (il reste ouvert) : l’équipe est prévenue aussi.
+const HOT = ['rappel', 'rappel_commercial', 'demo', 'demo_planifiee', 'essai_gratuit', 'ticket_cree', 'ticket_support', 'non_resolu', 'a_rappeler'];
 // « failed » (numéro invalide, erreur opérateur) n’est pas un appel manqué : pas de message.
 const MISSED = ['no-answer', 'busy', 'voicemail'];
 const MISSED_OUTCOME = 'whatsapp_rappel_manque';
@@ -118,14 +128,27 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (row.outcome && HOT.includes(String(row.outcome)) && !repeat) {
     const lines = Object.entries(vars).map(([k, v]) => `<li><b>${esc(k)}</b> : ${esc(typeof v === 'object' ? JSON.stringify(v) : v)}</li>`).join('');
+    // Adresse donnée pendant l’échange : lien signé pour arrêter les relances de ce contact (vide sans adresse valide).
+    const contactEmail = vars.email ?? vars.copy_email;
     try {
       await sendMail({
         to: NOTIFY_TO, category: 'internal',
         subject: `À traiter : ${row.outcome} — ${row.assistant_name || 'agent'} (${row.customer_phone || 'site web'})`,
-        text: `${row.summary || ''}\n\n${JSON.stringify(vars, null, 2)}`,
-        html: `<p>${esc(row.summary)}</p><ul>${lines}</ul>${row.recording_url ? `<p><a href="${esc(row.recording_url)}">Écouter l’enregistrement</a></p>` : ''}`,
+        text: [`${row.summary || ''}\n\n${JSON.stringify(vars, null, 2)}`, stopRelancesLine(contactEmail)].filter(Boolean).join('\n\n'),
+        html: `<p>${esc(row.summary)}</p><ul>${lines}</ul>${row.recording_url ? `<p><a href="${esc(row.recording_url)}">Écouter l’enregistrement</a></p>` : ''}${stopRelancesHtml(contactEmail)}`,
       });
     } catch (e: any) { console.error('[autocalls-webhook] email:', e.message); }
+  }
+  // Ticket résolu pendant le rappel du support : demandes de support ouvertes de ce numéro, antérieures à l’appel, closes.
+  if (String(row.outcome) === 'resolu' && kind === 'call' && p.customer_phone && isSupportCallbackAgent(p.assistant_id)) {
+    const phone = toE164(String(p.customer_phone), langFromPhone(String(p.customer_phone))) || String(p.customer_phone);
+    const seconds = Number(p.duration);
+    const ended = Date.parse(String(p.ended_at ?? '')) || Date.now();
+    const callStart = new Date(ended - (Number.isFinite(seconds) && seconds > 0 ? seconds * 1000 : 0) - 60_000);
+    try {
+      const closed = await closeResolvedTickets(phone, callStart);
+      if (closed.length) console.log(`[autocalls-webhook] ticket(s) clos (résolu) : ${closed.join(', ')}`);
+    } catch (e: any) { console.error('[autocalls-webhook] clôture du ticket:', e.message); }
   }
   // Opposition : traitée avant le message « rappel manqué » (jamais de SMS à une personne qui a refusé).
   const stop = STOP.find((o) => o === String(row.outcome));
@@ -142,6 +165,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
       }
     } catch (e: any) { console.error('[autocalls-webhook] opposition:', e.message); }
+  }
+  // Canal sans numéro d’appelant (Messenger, espace client, widgets ; un identifiant Messenger n’est pas un numéro) :
+  // opposition appliquée seulement pour un numéro dont la demande de rappel a été enregistrée pendant ce même échange.
+  // Une session vocale d’un widget arrive en fin d’appel (post_call, sans conversation_id) et sans customer_phone :
+  // même traitement. WhatsApp et les appels téléphoniques (numéro connu) suivent le chemin ci-dessus.
+  const callerNumber = /^\+?\d{8,15}$/.test(String(p.customer_phone ?? '').replace(/[\s.()-]/g, ''));
+  if (!callerNumber && (kind === 'conversation' || !String(p.customer_phone ?? '').trim())) {
+    try {
+      const r = await applyWrittenOptout(p, row.outcome == null ? null : String(row.outcome));
+      if (r.status !== 'none') console.log(`[autocalls-webhook] opposition écrite : ${r.status}`);
+    } catch (e: any) { console.error('[autocalls-webhook] opposition écrite:', e.message); }
   }
   const missed = !stop && kind === 'call' && p.type === 'outbound' && p.customer_phone
     && (MISSED.includes(String(p.status)) || /voicemail/i.test(String(p.ended_by || '')));

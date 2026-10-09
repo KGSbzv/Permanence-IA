@@ -1,0 +1,35 @@
+<!-- Google Analytics 4 (G-4W1B1W52PZ), version du 9 oct. 2026 : chargé seulement après accord aux cookies (pia_consent=granted), signaux publicitaires refusés, adresse des pages sans paramètres -->
+<script>
+(function () {
+  if (!/(^|\.)permanenceia\.com$/.test(location.hostname)) return;
+  var GA_ID = 'G-4W1B1W52PZ';
+  var m = document.cookie.match(/(?:^|;\s*)pia_consent=(granted|denied)/);
+  // Refus ou aucun choix : rien n'est chargé, rien ne part chez Google.
+  if (!m || m[1] !== 'granted') { window['ga-disable-' + GA_ID] = true; return; }
+  // Une seule fois par page (bloc présent dans les deux champs, navigation sans rechargement de l'espace client).
+  if (window.__piaGa) return;
+  window.__piaGa = true;
+  window['ga-disable-' + GA_ID] = false;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'granted' });
+  gtag('js', new Date());
+  // Adresse de la page et page d'origine sans paramètres ni ancre : une recherche ou un filtre d'une liste n'est jamais envoyé.
+  gtag('config', GA_ID, {
+    page_location: location.origin + location.pathname,
+    page_referrer: (document.referrer || '').split(/[?#]/)[0],
+    linker: { domains: ['permanenceia.com', 'app.permanenceia.com'] }
+  });
+  // Inscription terminée : première page de l'espace client après /register, une seule fois par onglet.
+  if (/\/register/.test(document.referrer) && !/\/(register|login)/.test(location.pathname)) {
+    var sent = false;
+    try { sent = sessionStorage.getItem('pia_ga_signup') === '1'; sessionStorage.setItem('pia_ga_signup', '1'); } catch (e) {}
+    if (!sent) gtag('event', 'sign_up', { method: 'app' });
+  }
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+})();
+</script>

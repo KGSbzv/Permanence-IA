@@ -9,28 +9,51 @@
 //   {source_line} (qui peut contenir {request_date}), {sector_name}, {sector_problem}, {sector_handles},
 //   {trial_end_date}, {minutes_left}, {plan_name}, {plan_price} (déjà formaté avec la devise), {topic_title},
 //   {topic_paragraph}. Variable obligatoire absente : l’étape est sautée, jamais de valeur inventée ;
-// - les messages « essential » (I1, C1 à C5, F1, U1) ne contiennent aucun argument de vente : sinon ils deviennent
-//   de la prospection soumise au consentement ;
+// - les messages « essential » (I1, C1 à C5 et leurs variantes, F1 et F1_payment_failed, U1, série A de mise en route,
+//   S1 et S2 sur le solde de minutes) ne contiennent aucun argument de vente ni aucun prix (seul C5 rappelle le montant
+//   du forfait choisi) : sinon ils deviennent de la prospection soumise au consentement. Ils partent dans les 7 langues,
+//   même quand le marché commercial est fermé ;
+// - les boutons de l’espace client : /plans (choisir un forfait, démarrer l’essai), /credits (Add credits), /billing
+//   seulement pour la carte, les factures et la résiliation (C4, C5, paiement refusé) ;
 // - le lien principal n’est pas dans le texte : `cta.target` désigne la page, l’adresse (avec UTM) est construite à l’envoi ;
 // - le pied de page légal et la désinscription sont ajoutés par sendMail (src/lib/emailFooter.ts).
 import type { Market, PlanSlug } from '../../../markets';
 import { MATRIX } from '../offers';
 
-/** Séries : prospects, inscrits sans essai, essai en cours, essai terminé, comptes à l’usage, suivi mensuel. */
-export type RelanceSequence = 'P' | 'I' | 'C' | 'F' | 'U' | 'M';
+/** Séries : prospects, inscrits sans essai, essai en cours, essai terminé, comptes à l’usage, suivi mensuel ; mise en
+ *  route (A) et solde de minutes (S), en parallèle de l’essai, de l’abonnement ou du paiement à la minute. */
+export type RelanceSequence = 'P' | 'I' | 'C' | 'F' | 'U' | 'M' | 'A' | 'S';
 /** « essential » : message de service (envoyé même après désinscription des e-mails non essentiels). */
 export type RelanceCategory = 'essential' | 'marketing';
-/** Page visée par le lien principal : essai, demande d’accompagnement de la page Essai, espace client, facturation, tarifs. */
-export type RelanceCtaTarget = 'trial' | 'trial_assist' | 'app' | 'billing' | 'pricing';
-/** Provenance du contact (contacts.origin), qui choisit la première phrase de P1 ; `callback_done` = rappel effectué. */
-export type RelanceOrigin = 'callback_done' | 'callback' | 'trial_request' | 'agent_lead' | 'demo' | 'contact';
-/** Étapes e-mail de la conception ; P3_generic remplace P3 quand le secteur est inconnu (jamais de version santé). */
+/**
+ * Page visée par le lien principal : essai, demande d’accompagnement de la page Essai (prospect), rappel du support
+ * pour un client (setup_assist : /contact, onglet support), espace client, facturation (Billing info : carte,
+ * factures, résiliation), choix du forfait (/plans, qui démarre l’essai), achat de minutes et de crédits (/credits,
+ * Add credits), création du compte (/register, avec la langue), tarifs du site, guides du site (/aide/guides : créer
+ * un agent, tester son agent, renvoi d’appel).
+ */
+export type RelanceCtaTarget = 'trial' | 'trial_assist' | 'setup_assist' | 'app' | 'billing' | 'plans' | 'credits' | 'register' | 'pricing'
+  | 'guide_create' | 'guide_test' | 'guide_forwarding';
+/**
+ * Provenance du contact (contacts.origin), qui choisit la première phrase de P1 ; `callback_done` = rappel effectué ;
+ * `signup_abandoned` = e-mail laissé sur /essai-gratuit sans inscription au bout de 24 h (P1 devient P1_signup).
+ */
+export type RelanceOrigin = 'callback_done' | 'callback' | 'trial_request' | 'agent_lead' | 'demo' | 'contact' | 'signup_abandoned';
+/**
+ * Étapes e-mail de la conception ; P3_generic remplace P3 quand le secteur est inconnu (jamais de version santé).
+ * Variantes choisies par le moteur (même étape dans le journal) : P1_signup (inscription non terminée), C4_exhausted
+ * (solde de 0 minute : appels déjà arrêtés), C5_cancelled (essai annulé : rien ne sera débité), C5_annual (forfait
+ * annuel), F1_payment_failed (essai terminé, paiement refusé), A3_active (abonné ou compte à la minute : pas de fin
+ * d’essai). Mise en route (audit du 9 oct., § 7) : A1 à A4, A_monthly (suivi mensuel des abonnés sans appel) ; solde
+ * de minutes d’un abonné ou d’un compte à la minute : S1 (bas), S2 (épuisé).
+ */
 export type RelanceKey =
-  | 'P1' | 'P2' | 'P3' | 'P3_generic' | 'P4' | 'P5' | 'P6' | 'P7'
+  | 'P1' | 'P1_signup' | 'P2' | 'P3' | 'P3_generic' | 'P4' | 'P5' | 'P6' | 'P7'
   | 'I1' | 'I2' | 'I3' | 'I4' | 'I5' | 'I6' | 'I7'
-  | 'C1' | 'C2' | 'C3' | 'C4' | 'C5'
-  | 'F1' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'F7'
-  | 'U1' | 'U2' | 'U3' | 'U4' | 'U5' | 'U6';
+  | 'C1' | 'C2' | 'C3' | 'C4' | 'C4_exhausted' | 'C5' | 'C5_cancelled' | 'C5_annual'
+  | 'F1' | 'F1_payment_failed' | 'F2' | 'F3' | 'F4' | 'F5' | 'F6' | 'F7'
+  | 'U1' | 'U2' | 'U3' | 'U4' | 'U5' | 'U6'
+  | 'A1' | 'A2' | 'A3' | 'A3_active' | 'A4' | 'A_monthly' | 'S1' | 'S2';
 
 /** Bloc du corps : paragraphe (un « \n » = retour à la ligne), liste numérotée ou liste à puces. */
 export type RelanceBlock = string | { ol: string[] } | { ul: string[] };
@@ -50,6 +73,8 @@ export interface RelanceMessage {
   cta: { label: string; target: RelanceCtaTarget } | null;
   /** Blocs placés après le lien, avant la signature. */
   after?: RelanceBlock[];
+  /** Second lien, sous les blocs `after` (ex. « Être rappelé » sous « Terminer mon inscription »). */
+  secondary?: { label: string; target: RelanceCtaTarget };
   /** Formule placée juste avant la signature (ex. « Merci pour votre attention, »). */
   closing?: string;
 }
@@ -221,6 +246,7 @@ export const UI_RELANCES: RelancesContent = {
       agent_lead: 'Suite à votre échange avec notre assistante',
       demo: 'Vous avez essayé notre démo en direct',
       contact: 'Suite à votre message',
+      signup_abandoned: 'Vous avez commencé à créer votre compte',
     },
     signature: (brand) => `L’équipe ${brand}`,
     ctaLine: (label, url) => `${label} : ${url}`,
@@ -251,6 +277,23 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Démarrer mon essai', target: 'trial' },
       after: ['Une question ? Répondez à cet e-mail, c’est l’équipe qui le lit.'],
+    }),
+    // P1 pour un e-mail laissé sur /essai-gratuit sans inscription au bout de 24 h (base légale exigée, comme P1).
+    P1_signup: (f) => ({
+      category: 'marketing',
+      subject: '{first_name}, votre compte n’est pas encore créé',
+      subjectNoName: 'Votre compte n’est pas encore créé',
+      preheader: 'Votre inscription n’est pas terminée : nous pouvons la finir avec vous.',
+      body: [
+        `Vous avez commencé à créer votre compte ${f.brand} depuis notre page Essai gratuit, mais l’inscription ne semble pas terminée.`,
+        // Deux étapes, comme sur /essai-gratuit : c’est le choix du forfait (étape 2) qui démarre l’essai.
+        'Pour démarrer votre essai, il reste deux étapes : finir l’inscription sur la page de votre espace client (en anglais, quelques minutes), puis choisir le forfait à tester.',
+        `C’est ce choix qui démarre l’essai de ${f.trialDays} jours, avec ${f.trialMinutes} minutes d’appels. Une carte est demandée, mais rien n’est débité pendant l’essai.`,
+        'Si vous avez créé votre compte avec une autre adresse, ne tenez pas compte de ce message.',
+      ],
+      cta: { label: 'Terminer mon inscription', target: 'register' },
+      after: ['Vous préférez le faire avec nous ? Laissez votre numéro sur notre page Essai : nous vous rappelons au moment qui vous convient pour créer le compte et configurer l’agent avec vous. Vous pouvez aussi répondre à cet e-mail.'],
+      secondary: { label: 'Être rappelé pour le faire ensemble', target: 'trial_assist' },
     }),
     P2: (f) => {
       const r = f.plans.receptionniste;
@@ -362,7 +405,7 @@ export const UI_RELANCES: RelancesContent = {
         `Pour information, l’essai gratuit de ${f.trialDays} jours (${f.trialMinutes} minutes d’appels) démarre quand vous choisissez un forfait dans votre espace. Une carte est demandée, mais rien n’est débité pendant l’essai ; si vous annulez avant la fin depuis Billing info, vous ne payez rien.`,
         'L’espace client est en anglais, mais son assistante d’aide intégrée vous guide en français, par écrit ou à voix haute.',
       ],
-      cta: { label: 'Choisir mon forfait', target: 'billing' },
+      cta: { label: 'Choisir mon forfait', target: 'plans' },
     }),
     I2: () => ({
       category: 'marketing',
@@ -374,7 +417,7 @@ export const UI_RELANCES: RelancesContent = {
         { ol: ['le chat de test, pour ajuster ses consignes ;', 'l’appel dans le navigateur, pour entendre sa voix ;', 'un vrai appel depuis votre portable.'] },
         'Vous ne renvoyez vos appels que lorsque le résultat vous convient. Le guide « Tester votre agent » détaille chaque étape.',
       ],
-      cta: { label: 'Démarrer l’essai et tester', target: 'billing' },
+      cta: { label: 'Démarrer l’essai et tester', target: 'plans' },
     }),
     I3: (f) => ({
       category: 'marketing',
@@ -395,7 +438,7 @@ export const UI_RELANCES: RelancesContent = {
         'Notre conseil : ne renvoyez pas tout. Activez le renvoi seulement quand vous ne décrochez pas, ou le soir et le week-end. Ce sont les appels que {company} perd aujourd’hui, et ceux où l’agent vous sera le plus utile.',
         'Vous lirez le résumé de chaque appel dans votre espace et verrez tout de suite si cela vous sert.',
       ],
-      cta: { label: 'Choisir mon forfait et démarrer l’essai', target: 'billing' },
+      cta: { label: 'Choisir mon forfait et démarrer l’essai', target: 'plans' },
     }),
     I5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -414,7 +457,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           `Pas besoin de viser juste du premier coup : vous changez de forfait à tout moment, sans engagement, et le changement s’affiche avant confirmation. Pendant les ${f.trialDays} jours d’essai, rien n’est débité.`,
         ],
-        cta: { label: 'Choisir mon forfait', target: 'billing' },
+        cta: { label: 'Choisir mon forfait', target: 'plans' },
       };
     },
     I6: (f) => ({
@@ -425,7 +468,7 @@ export const UI_RELANCES: RelancesContent = {
         `Un abonnement ne convient pas à tout le monde. Vous pouvez aussi utiliser votre agent sans forfait : vous ajoutez du crédit quand vous voulez (Add credits), la minute est à ${f.paygMinute} HT et le crédit n’expire pas.`,
         `Vous avez alors les mêmes fonctions que le forfait ${f.plans.receptionniste.name}. Ce mode ne comprend pas l’essai gratuit : vous payez seulement ce que vous ajoutez. Dès que vos appels deviennent réguliers, un forfait revient moins cher à la minute.`,
       ],
-      cta: { label: 'Ajouter du crédit ou choisir un forfait', target: 'billing' },
+      cta: { label: 'Ajouter du crédit', target: 'credits' },
     }),
     I7: (f) => ({
       category: 'marketing',
@@ -436,7 +479,7 @@ export const UI_RELANCES: RelancesContent = {
         'Si quelque chose vous a bloqué, répondez-nous en une ligne : cela nous aide vraiment.',
         'Ensuite, nous vous écrirons au plus une fois par mois. Pour ne plus rien recevoir, cliquez sur le lien de désinscription en bas de cet e-mail.',
       ],
-      cta: { label: 'Démarrer quand vous serez prêt', target: 'billing' },
+      cta: { label: 'Démarrer quand vous serez prêt', target: 'plans' },
     }),
 
     // ---------- C : essai en cours (essential, purement informatif) ----------
@@ -455,10 +498,12 @@ export const UI_RELANCES: RelancesContent = {
           ],
         },
         'Pendant l’essai, rien n’est débité. Vous pouvez annuler avant le {trial_end_date} depuis Billing info.',
+        // Fait à dire (audit du 9 oct.) : l’essai ne crédite que des minutes. Sans prix : message de service.
+        'Bon à savoir : l’essai comprend des minutes d’appels, mais aucun crédit de messages. Les réponses écrites de l’IA (chat du site, WhatsApp, Messenger) utilisent ces crédits, que vous pouvez ajouter dans Add credits.',
       ],
       cta: { label: 'Ouvrir mon espace', target: 'app' },
     }),
-    C2: (f) => ({
+    C2: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
       subject: 'Votre agent attend son premier appel',
@@ -471,7 +516,7 @@ export const UI_RELANCES: RelancesContent = {
             'Si la réponse vous convient, activez chez votre opérateur le renvoi quand vous ne décrochez pas.',
           ],
         },
-        `Vous gardez votre numéro et pouvez désactiver le renvoi à tout moment. Il vous reste ${f.trialMinutes} minutes d’essai, jusqu’au {trial_end_date}.`,
+        'Vous gardez votre numéro et pouvez désactiver le renvoi à tout moment. Votre essai dure jusqu’au {trial_end_date}.',
       ],
       cta: { label: 'Ouvrir mon espace', target: 'app' },
     }),
@@ -493,13 +538,26 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Ouvrir mon espace', target: 'app' },
     }),
+    // C4 : de 1 à 5 minutes restantes (à 0, C4_exhausted). Tournures sans accord du nom avec {minutes_left}.
     C4: (f) => ({
       category: 'essential',
-      subject: 'Il vous reste {minutes_left} minutes d’essai',
+      subject: `Minutes d’essai restantes : {minutes_left} sur ${f.trialMinutes}`,
       preheader: `Ce qui se passe une fois les ${f.trialMinutes} minutes atteintes.`,
       body: [
-        `Il vous reste {minutes_left} minutes sur les ${f.trialMinutes} de votre essai.`,
+        `Votre essai arrive au bout de ses minutes : il en reste {minutes_left} sur ${f.trialMinutes}.`,
         `Pour information, une fois les ${f.trialMinutes} minutes atteintes, les appels s’arrêtent jusqu’à la fin de l’essai, le {trial_end_date}, ou jusqu’à ce que vous démarriez votre abonnement {plan_name} depuis Billing info. Sans action de votre part, il démarre de lui-même à la fin de l’essai, sauf si vous l’annulez avant.`,
+        'C’est vous qui choisissez.',
+      ],
+      cta: { label: 'Voir mon abonnement', target: 'billing' },
+    }),
+    // C4 quand le solde lu vaut 0 : les appels sont déjà arrêtés.
+    C4_exhausted: (f) => ({
+      category: 'essential',
+      subject: `Vos ${f.trialMinutes} minutes d’essai sont utilisées`,
+      preheader: 'Ce qui se passe maintenant, jusqu’à la fin de votre essai.',
+      body: [
+        `Les ${f.trialMinutes} minutes de votre essai sont utilisées : les appels sont arrêtés jusqu’à la fin de l’essai, le {trial_end_date}, ou jusqu’à ce que vous démarriez votre abonnement {plan_name} depuis Billing info.`,
+        'Sans action de votre part, il démarre de lui-même à la fin de l’essai, sauf si vous l’annulez avant.',
         'C’est vous qui choisissez.',
       ],
       cta: { label: 'Voir mon abonnement', target: 'billing' },
@@ -520,6 +578,35 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Gérer mon abonnement', target: 'billing' },
     }),
+    // C5 d’un forfait annuel : {plan_price} est alors le prix de l’année.
+    C5_annual: () => ({
+      category: 'essential',
+      subject: 'Votre essai se termine le {trial_end_date}',
+      preheader: 'Ce qui se passe à cette date, et comment annuler sans débit.',
+      body: [
+        'Votre essai se termine le {trial_end_date}.',
+        {
+          ul: [
+            'Vous souhaitez continuer : rien à faire. Votre forfait {plan_name} démarre ce jour-là, en facturation annuelle : la première année ({plan_price} HT, taxes selon votre pays) est prélevée sur votre carte en une fois.',
+            'Vous ne souhaitez pas continuer : annulez avant cette date depuis Billing info, bouton « Cancel subscription ». Rien ne sera débité.',
+          ],
+        },
+        'Une question sur votre forfait ou vos minutes ? Répondez à cet e-mail.',
+      ],
+      cta: { label: 'Gérer mon abonnement', target: 'billing' },
+    }),
+    // C5 quand l’abonnement d’essai est annulé (fin programmée) : C2 à C4 ne partent plus.
+    C5_cancelled: () => ({
+      category: 'essential',
+      subject: 'Votre essai se termine le {trial_end_date} : rien ne sera débité',
+      preheader: 'Votre annulation est bien enregistrée.',
+      body: [
+        'Vous avez annulé votre abonnement pendant l’essai : votre annulation est bien enregistrée.',
+        'Votre essai reste actif jusqu’au {trial_end_date}. Votre forfait ne démarrera pas à cette date, et rien ne sera débité sur votre carte.',
+        'S’il s’agit d’une erreur, ou si vous avez une question, répondez simplement à cet e-mail.',
+      ],
+      cta: { label: 'Voir mon abonnement', target: 'billing' },
+    }),
 
     // ---------- F : essai terminé sans forfait (F1 essential, puis marketing) ----------
     F1: (f) => ({
@@ -533,6 +620,18 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: null,
     }),
+    // F1 quand l’essai s’est terminé sur un paiement refusé (et non sur une annulation du client).
+    F1_payment_failed: () => ({
+      category: 'essential',
+      subject: 'Votre essai est terminé : le paiement n’a pas abouti',
+      preheader: 'Votre abonnement n’a pas démarré, et rien n’a été débité.',
+      body: [
+        'Votre essai est arrivé à son terme, mais le paiement de votre forfait n’a pas pu être effectué. Votre abonnement n’a donc pas démarré, et rien n’a été débité.',
+        'Si vous souhaitez continuer, enregistrez une carte valide dans Billing info (onglet Wallet), puis choisissez à nouveau votre forfait.',
+        'Une question, ou besoin d’aide ? Répondez simplement à cet e-mail.',
+      ],
+      cta: { label: 'Mettre à jour ma carte', target: 'billing' },
+    }),
     F2: (f) => ({
       category: 'marketing',
       subject: 'Gardez votre agent, sans abonnement',
@@ -541,7 +640,7 @@ export const UI_RELANCES: RelancesContent = {
         'Si c’est l’abonnement qui vous a freiné, il existe une autre formule : le paiement à l’usage.',
         `Votre espace reste accessible. Vous ajoutez du crédit quand vous voulez (Add credits), la minute est à ${f.paygMinute} HT, sans abonnement, et le crédit n’expire pas. Vous gardez les mêmes fonctions que le forfait ${f.plans.receptionniste.name}. Un appel de ${f.exampleCallMinutes} minutes revient à environ ${f.exampleCallPayg} HT.`,
       ],
-      cta: { label: 'Ajouter du crédit', target: 'billing' },
+      cta: { label: 'Ajouter du crédit', target: 'credits' },
     }),
     F3: () => ({
       category: 'marketing',
@@ -551,7 +650,7 @@ export const UI_RELANCES: RelancesContent = {
         'Beaucoup d’entreprises n’utilisent pas l’agent pour tout. Elles le gardent en complément de leur équipe : il prend le relais le soir, le week-end, à la pause déjeuner ou quand toutes les lignes sont occupées.',
         'Vous réglez simplement le renvoi d’appel chez votre opérateur pour ces moments-là. Le reste du temps, rien ne change pour {company}, et les appels qui tombaient sur la messagerie reçoivent enfin une réponse, avec un résumé pour vous.',
       ],
-      cta: { label: 'Reprendre avec un forfait', target: 'billing' },
+      cta: { label: 'Reprendre avec un forfait', target: 'plans' },
     }),
     F4: () => ({
       category: 'marketing',
@@ -568,7 +667,7 @@ export const UI_RELANCES: RelancesContent = {
         },
         'L’assistant de rédaction de votre espace (AI Prompt Editor) vous aide à les écrire.',
       ],
-      cta: { label: 'Reprendre avec ces réglages', target: 'billing' },
+      cta: { label: 'Reprendre avec ces réglages', target: 'plans' },
     }),
     F5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -609,7 +708,7 @@ export const UI_RELANCES: RelancesContent = {
         `Votre espace reste accessible : vous pouvez reprendre avec un forfait, sans engagement, ou à l’usage, à ${f.paygMinute} HT la minute.`,
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'Mon espace', target: 'billing' },
+      cta: { label: 'Mon espace', target: 'app' },
     }),
 
     // ---------- U : comptes à l’usage peu actifs (U1 essential, puis marketing) ----------
@@ -656,7 +755,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'Vous suivez votre consommation dans votre espace, et un forfait se résilie à tout moment depuis Billing info.',
         ],
-        cta: { label: 'Voir ma consommation', target: 'billing' },
+        cta: { label: 'Voir ma consommation', target: 'app' },
       };
     },
     U4: () => ({
@@ -694,7 +793,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'Sans engagement, résiliation à tout moment depuis Billing info.',
         ],
-        cta: { label: 'Voir les forfaits', target: 'billing' },
+        cta: { label: 'Voir les forfaits', target: 'plans' },
       };
     },
     U6: (f) => ({
@@ -711,7 +810,127 @@ export const UI_RELANCES: RelancesContent = {
         },
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'Mon espace', target: 'billing' },
+      cta: { label: 'Mon espace', target: 'app' },
+    }),
+    // ---------- A : mise en route (service, audit du 9 oct., § 7) ----------
+    // Essai, abonnement ou paiement à la minute sans agent, ou agent sans appel. Purement informatifs : ni prix, ni
+    // promotion, ni forfait supérieur. A3, A4 et A_monthly sont sautés après une désinscription (A1 et A2 continuent).
+    A1: (f) => ({
+      category: 'essential',
+      subject: 'Votre agent n’est pas encore créé : une dizaine de minutes suffit',
+      preheader: 'Trois étapes pour qu’il réponde à vos appels.',
+      body: [
+        `Votre espace ${f.brand} est prêt, mais aucun agent n’y est encore créé. C’est lui qui répondra à vos appels, et il se crée en une dizaine de minutes :`,
+        {
+          ol: [
+            'Dans votre espace, ouvrez « Assistants », puis « Create », et partez d’un modèle.',
+            'Adaptez ses consignes à {company} : horaires, services, ce qu’il doit noter pour vous.',
+            'Testez-le, puis reliez-lui un numéro : « Get new phone number » si vous n’en avez pas encore (option au mois), puis section « General », champ « Phone number ».',
+          ],
+        },
+        'Besoin d’aide ? La bulle d’aide en bas à droite de votre espace vous guide pas à pas, en français, par écrit ou à voix haute.',
+      ],
+      cta: { label: 'Créer mon agent', target: 'app' },
+      secondary: { label: 'Le guide pas à pas : créer un agent', target: 'guide_create' },
+    }),
+    A2: () => ({
+      category: 'essential',
+      subject: 'On configure votre agent avec vous ?',
+      preheader: 'Laissez votre numéro : nous vous rappelons pour le créer ensemble.',
+      body: [
+        'Votre agent n’est toujours pas créé. Si le temps vous manque, ou si vous ne savez pas par où commencer, nous pouvons le configurer avec vous, par téléphone.',
+        'Laissez votre numéro et le moment qui vous convient : nous vous rappelons pour créer l’agent de {company} avec vous (consignes, numéro, renvoi d’appel). Vous pouvez aussi répondre à cet e-mail avec un créneau.',
+      ],
+      cta: { label: 'Être rappelé pour configurer ensemble', target: 'setup_assist' },
+      after: ['Vous préférez le faire vous-même ? Le guide « Créer et modifier un agent » détaille chaque étape, et la bulle d’aide de votre espace répond à vos questions.'],
+      secondary: { label: 'Lire le guide', target: 'guide_create' },
+    }),
+    // A3 pendant l’essai (date de fin connue) ; A3_active pour un abonné ou un compte à la minute.
+    A3: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Votre essai dure jusqu’au {trial_end_date} : votre agent n’est pas encore créé',
+      preheader: 'Il est encore temps de le tester : nous pouvons le configurer avec vous.',
+      body: [
+        'Votre essai dure jusqu’au {trial_end_date}, mais votre agent n’est pas encore créé. C’est notre dernier message à ce sujet.',
+        'Il est encore temps de le tester sur de vrais appels : nous pouvons le configurer avec vous, par téléphone. Laissez votre numéro, ou répondez à cet e-mail avec un créneau.',
+        'Si vous avez changé d’avis, vous pouvez annuler avant le {trial_end_date} depuis Billing info : rien ne sera débité.',
+      ],
+      cta: { label: 'Être rappelé pour configurer ensemble', target: 'setup_assist' },
+    }),
+    A3_active: (f) => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Votre compte est actif, mais votre agent n’est pas encore créé',
+      preheader: 'Nous pouvons le configurer avec vous, par téléphone.',
+      body: [
+        `Votre compte ${f.brand} est actif, mais votre agent n’est pas encore créé : pour l’instant, aucun appel n’est pris en charge. C’est notre dernier message à ce sujet.`,
+        'Nous pouvons le configurer avec vous, par téléphone : laissez votre numéro, ou répondez à cet e-mail avec un créneau.',
+      ],
+      cta: { label: 'Être rappelé pour configurer ensemble', target: 'setup_assist' },
+    }),
+    A4: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Votre agent est créé : testez-le et activez le renvoi d’appel',
+      preheader: 'Trois vérifications avant ses premiers appels.',
+      body: [
+        'Votre agent est créé, mais il n’a pas encore reçu de vrai appel. Trois vérifications suffisent en général :',
+        {
+          ol: [
+            'Donnez-lui un numéro : si vous n’en avez pas encore, obtenez-en un dans « Get new phone number » (option au mois, prix affiché avant l’achat), puis, dans « Assistants », ouvrez l’agent, section « General », champ « Phone number ».',
+            'Appelez ce numéro depuis votre portable et posez une question qu’un client poserait.',
+            'Si la réponse vous convient, activez chez votre opérateur le renvoi d’appel vers ce numéro, par exemple seulement quand vous ne décrochez pas. Vous gardez votre numéro.',
+          ],
+        },
+        'Les deux guides ci-dessous détaillent chaque étape, et la bulle d’aide de votre espace répond à vos questions.',
+      ],
+      cta: { label: 'Guide : tester votre agent', target: 'guide_test' },
+      secondary: { label: 'Guide : garder votre numéro avec le renvoi d’appel', target: 'guide_forwarding' },
+    }),
+    A_monthly: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Votre agent n’a reçu aucun appel ces 30 derniers jours',
+      preheader: 'Une vérification d’une minute, ou avec nous.',
+      body: [
+        'Votre agent n’a reçu aucun appel ces 30 derniers jours. C’est peut-être voulu, mais c’est souvent un numéro qui n’est plus relié à l’agent ou un renvoi d’appel désactivé.',
+        'Vérification en une minute :',
+        {
+          ol: [
+            'Appelez votre numéro habituel au moment où le renvoi doit s’activer.',
+            'Si l’agent ne répond pas, vérifiez le renvoi chez votre opérateur, ou le numéro relié à l’agent dans votre espace (section « General »).',
+          ],
+        },
+        'Vous préférez vérifier avec nous ? Laissez votre numéro : nous vous rappelons pour regarder ensemble.',
+      ],
+      cta: { label: 'Être rappelé pour vérifier ensemble', target: 'setup_assist' },
+      secondary: { label: 'Guide : garder votre numéro avec le renvoi d’appel', target: 'guide_forwarding' },
+    }),
+
+    // ---------- S : solde de minutes d’un abonné ou d’un compte à la minute (service ; l’essai a C4) ----------
+    // Tournures sans accord du nom avec {minutes_left} ; aucun prix (montants seulement dans l’espace client).
+    S1: (f) => ({
+      category: 'essential',
+      subject: 'Minutes d’appels restantes : {minutes_left}',
+      preheader: 'Ce qui se passe quand votre solde atteint 0.',
+      body: [
+        `Pour information, le solde de minutes de votre compte ${f.brand} est bas (minutes restantes : {minutes_left}).`,
+        'Quand il atteint 0, votre agent ne prend plus d’appels jusqu’à ce que des minutes soient ajoutées : au renouvellement de votre forfait si vous en avez un, ou à tout moment dans Add credits.',
+        'Si ce niveau vous convient, il n’y a rien à faire.',
+      ],
+      cta: { label: 'Voir mes minutes', target: 'credits' },
+    }),
+    S2: (f) => ({
+      category: 'essential',
+      subject: 'Votre solde de minutes est épuisé : votre agent ne prend plus d’appels',
+      preheader: 'Il reprend dès que des minutes sont ajoutées.',
+      body: [
+        `Le solde de minutes de votre compte ${f.brand} est à 0 : votre agent ne prend plus d’appels pour l’instant.`,
+        'Il les reprend dès que des minutes sont ajoutées : au renouvellement de votre forfait si vous en avez un, ou tout de suite dans Add credits.',
+        'Une question ? Répondez simplement à cet e-mail.',
+      ],
+      cta: { label: 'Ajouter des minutes', target: 'credits' },
     }),
   },
 
@@ -753,7 +972,7 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Le conseil du mois : {topic_title}',
       preheader: 'Un conseil pratique tiré de nos guides.',
       body: ['{topic_paragraph}'],
-      cta: { label: 'Ouvrir mon espace', target: 'billing' },
+      cta: { label: 'Ouvrir mon espace', target: 'app' },
       after: ['C’est un e-mail mensuel ; vous pouvez vous désinscrire en un clic en bas de ce message.'],
     }),
   },

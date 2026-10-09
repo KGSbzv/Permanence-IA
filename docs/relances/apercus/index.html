@@ -14,7 +14,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <h1>Aperçus des relances</h1>
 <p>Chaque message tel que le moteur l’enverrait (mise en forme et pied de page légal compris), pour un contact fictif : Camille Martin, Plomberie Martin, secteur « services à domicile ». Rien n’a été envoyé. Régénérer : <code>npx tsx scripts/preview-relances.ts</code>.</p>
 <nav><a href="#fr">fr</a><a href="#en-gb">en-gb</a><a href="#en-au">en-au</a><a href="#it">it</a><a href="#pl">pl</a><a href="#nl">nl</a><a href="#he">he</a></nav>
-<section id="fr"><h2>fr <small>Permanence IA · 46 aperçus</small></h2>
+<section id="fr"><h2>fr <small>Permanence IA · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -69,6 +69,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="fr/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, votre compte n’est pas encore créé</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -226,11 +235,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="fr/C-4.html">C4</a></td>
-<td dir="auto">Il vous reste 4 minutes d’essai</td>
+<td dir="auto">Minutes d’essai restantes : 4 sur 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="fr/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">Vos 30 minutes d’essai sont utilisées</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -242,6 +260,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="fr/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">Votre essai se termine le 22 octobre 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="fr/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">Votre essai se termine le 22 octobre 2026 : rien ne sera débité</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="fr/F-1.html">F1</a></td>
 <td dir="auto">Votre essai est terminé, rien n’a été débité</td>
@@ -249,6 +285,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="fr/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">Votre essai est terminé : le paiement n’a pas abouti</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -359,6 +404,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-1.html">A1</a></td>
+<td dir="auto">Votre agent n’est pas encore créé : une dizaine de minutes suffit</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-2.html">A2</a></td>
+<td dir="auto">On configure votre agent avec vous ?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-3.html">A3</a></td>
+<td dir="auto">Votre essai dure jusqu’au 22 octobre 2026 : votre agent n’est pas encore créé</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Votre compte est actif, mais votre agent n’est pas encore créé</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-4.html">A4</a></td>
+<td dir="auto">Votre agent est créé : testez-le et activez le renvoi d’appel</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="fr/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Votre agent n’a reçu aucun appel ces 30 derniers jours</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="fr/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Minutes d’appels restantes : 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="fr/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Votre solde de minutes est épuisé : votre agent ne prend plus d’appels</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="fr/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">Le conseil du mois : tester votre agent de 3 façons</td>
@@ -431,7 +548,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="en-gb"><h2>en-gb <small>PermanenceAI · 46 aperçus</small></h2>
+<section id="en-gb"><h2>en-gb <small>PermanenceAI · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -486,6 +603,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="en-gb/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, your account isn’t set up yet</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -643,11 +769,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="en-gb/C-4.html">C4</a></td>
-<td dir="auto">You have 4 trial minutes left</td>
+<td dir="auto">Trial minutes left: 4 of 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="en-gb/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">Your 30 trial minutes have been used</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -659,6 +794,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="en-gb/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">Your trial ends on 22 October 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="en-gb/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">Your trial ends on 22 October 2026: you won’t be charged</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="en-gb/F-1.html">F1</a></td>
 <td dir="auto">Your trial has ended, nothing was charged</td>
@@ -666,6 +819,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="en-gb/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">Your trial has ended: the payment didn’t go through</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -776,6 +938,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-1.html">A1</a></td>
+<td dir="auto">Your agent isn’t set up yet: it only takes about ten minutes</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-2.html">A2</a></td>
+<td dir="auto">Want a hand setting up your agent?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-3.html">A3</a></td>
+<td dir="auto">Your trial runs until 22 October 2026: your agent isn’t set up yet</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Your account is active, but your agent isn’t set up yet</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-4.html">A4</a></td>
+<td dir="auto">Your agent is ready: test it and switch on call forwarding</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-gb/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Your agent hasn’t received any calls in the last 30 days</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="en-gb/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Call minutes left: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="en-gb/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Your minute balance has run out: your agent is no longer taking calls</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="en-gb/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">Tip of the month: test your agent in 3 ways</td>
@@ -848,7 +1082,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="en-au"><h2>en-au <small>PermanenceAI · 46 aperçus</small></h2>
+<section id="en-au"><h2>en-au <small>PermanenceAI · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -903,6 +1137,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="en-au/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, your account isn’t set up yet</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -1060,11 +1303,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="en-au/C-4.html">C4</a></td>
-<td dir="auto">You have 4 trial minutes left</td>
+<td dir="auto">Trial minutes left: 4 of 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="en-au/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">Your 30 trial minutes have been used</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -1076,6 +1328,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="en-au/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">Your trial ends on 22 October 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="en-au/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">Your trial ends on 22 October 2026: you won’t be charged</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="en-au/F-1.html">F1</a></td>
 <td dir="auto">Your trial has ended, nothing was charged</td>
@@ -1083,6 +1353,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="en-au/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">Your trial has ended: the payment didn’t go through</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -1193,6 +1472,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-1.html">A1</a></td>
+<td dir="auto">Your agent isn’t set up yet: it only takes about ten minutes</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-2.html">A2</a></td>
+<td dir="auto">Want a hand setting up your agent?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-3.html">A3</a></td>
+<td dir="auto">Your trial runs until 22 October 2026: your agent isn’t set up yet</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Your account is active, but your agent isn’t set up yet</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-4.html">A4</a></td>
+<td dir="auto">Your agent is ready: test it and switch on call forwarding</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="en-au/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Your agent hasn’t received any calls in the last 30 days</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="en-au/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Call minutes left: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="en-au/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Your minute balance has run out: your agent is no longer taking calls</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="en-au/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">Tip of the month: test your agent in 3 ways</td>
@@ -1265,7 +1616,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="it"><h2>it <small>PermanenceIA · 46 aperçus</small></h2>
+<section id="it"><h2>it <small>PermanenceIA · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -1320,6 +1671,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="it/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, il Suo account non è ancora stato creato</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -1477,11 +1837,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="it/C-4.html">C4</a></td>
-<td dir="auto">Le restano 4 minuti di prova</td>
+<td dir="auto">Minuti di prova rimasti: 4 su 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="it/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">I 30 minuti della Sua prova sono esauriti</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -1493,6 +1862,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="it/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">La Sua prova termina il giorno 22 ottobre 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="it/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">La Sua prova termina il giorno 22 ottobre 2026: non verrà addebitato nulla</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="it/F-1.html">F1</a></td>
 <td dir="auto">La Sua prova è terminata, non è stato addebitato nulla</td>
@@ -1500,6 +1887,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="it/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">La Sua prova è terminata: il pagamento non è andato a buon fine</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -1610,6 +2006,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="it/A-1.html">A1</a></td>
+<td dir="auto">Il Suo agente non è ancora stato creato: bastano una decina di minuti</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="it/A-2.html">A2</a></td>
+<td dir="auto">Configuriamo il Suo agente insieme a Lei?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="it/A-3.html">A3</a></td>
+<td dir="auto">La Sua prova dura fino al giorno 22 ottobre 2026: il Suo agente non è ancora stato creato</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="it/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Il Suo account è attivo, ma il Suo agente non è ancora stato creato</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="it/A-4.html">A4</a></td>
+<td dir="auto">Il Suo agente è pronto: lo provi e attivi la deviazione di chiamata</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="it/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Negli ultimi 30 giorni il Suo agente non ha ricevuto chiamate</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="it/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Minuti di chiamata rimasti: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="it/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Il Suo saldo minuti è esaurito: il Suo agente non risponde più alle chiamate</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="it/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">Il consiglio del mese: provare il Suo agente in 3 modi</td>
@@ -1682,7 +2150,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="pl"><h2>pl <small>PermanenceAI · 46 aperçus</small></h2>
+<section id="pl"><h2>pl <small>PermanenceAI · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -1737,6 +2205,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="pl/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, konto nie zostało jeszcze utworzone</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -1902,12 +2379,39 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 </tr>
 <tr>
 <td>C — essai en cours</td>
+<td><a href="pl/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">Wykorzystano 30 minut okresu próbnego</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
 <td><a href="pl/C-5.html">C5</a></td>
 <td dir="auto">Okres próbny kończy się 22 października 2026</td>
 <td><span class="cat essential">essential</span></td>
 <td>3 jours avant la fin de l’essai</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="pl/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">Okres próbny kończy się 22 października 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="pl/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">Okres próbny kończy się 22 października 2026: nic nie zostanie pobrane</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -1917,6 +2421,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="pl/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">Okres próbny dobiegł końca: płatność nie powiodła się</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -2027,6 +2540,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-1.html">A1</a></td>
+<td dir="auto">Agent nie został jeszcze utworzony: wystarczy około dziesięciu minut</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-2.html">A2</a></td>
+<td dir="auto">Skonfigurujemy agenta razem z Państwem?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-3.html">A3</a></td>
+<td dir="auto">Okres próbny trwa do 22 października 2026: agent nie został jeszcze utworzony</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Konto jest aktywne, ale agent nie został jeszcze utworzony</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-4.html">A4</a></td>
+<td dir="auto">Agent jest gotowy: czas go przetestować i włączyć przekierowanie połączeń</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="pl/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Agent nie odebrał żadnego połączenia w ciągu ostatnich 30 dni</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="pl/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Pozostałe minuty połączeń: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="pl/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Saldo minut się wyczerpało: agent nie odbiera już połączeń</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="pl/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">Porada miesiąca: testowanie agenta na 3 sposoby</td>
@@ -2099,7 +2684,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="nl"><h2>nl <small>PermanenceAI · 46 aperçus</small></h2>
+<section id="nl"><h2>nl <small>PermanenceAI · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -2154,6 +2739,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="nl/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">Camille, uw account is nog niet aangemaakt</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -2311,11 +2905,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="nl/C-4.html">C4</a></td>
-<td dir="auto">U hebt nog 4 proefminuten</td>
+<td dir="auto">Resterende proefminuten: 4 van 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="nl/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">Uw 30 proefminuten zijn op</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -2327,6 +2930,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="nl/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">Uw proefperiode eindigt op 22 oktober 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="nl/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">Uw proefperiode eindigt op 22 oktober 2026: er wordt niets afgeschreven</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="nl/F-1.html">F1</a></td>
 <td dir="auto">Uw proefperiode is afgelopen, er is niets afgeschreven</td>
@@ -2334,6 +2955,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="nl/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">Uw proefperiode is afgelopen: de betaling is niet gelukt</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -2444,6 +3074,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-1.html">A1</a></td>
+<td dir="auto">Uw agent is nog niet aangemaakt: ongeveer tien minuten is genoeg</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-2.html">A2</a></td>
+<td dir="auto">Zullen we uw agent samen met u aanmaken?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-3.html">A3</a></td>
+<td dir="auto">Uw proefperiode loopt tot 22 oktober 2026: uw agent is nog niet aangemaakt</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">Uw account is actief, maar uw agent is nog niet aangemaakt</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-4.html">A4</a></td>
+<td dir="auto">Uw agent staat klaar: test hem en zet doorschakelen aan</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="nl/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">Uw agent heeft de afgelopen 30 dagen geen gesprekken ontvangen</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="nl/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">Resterende belminuten: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="nl/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">Uw minutensaldo is op: uw agent neemt geen gesprekken meer aan</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>M — suivi mensuel</td>
 <td><a href="nl/M-1-prospect.html">M1 (prospect)</a></td>
 <td dir="auto">De tip van de maand: uw agent op 3 manieren testen</td>
@@ -2516,7 +3218,7 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td></td>
 </tr>
 </tbody></table></div></section>
-<section id="he"><h2>he <small>PermanenceAI · 46 aperçus</small></h2>
+<section id="he"><h2>he <small>PermanenceAI · 59 aperçus</small></h2>
 <div class="wrap"><table><thead><tr><th>Série</th><th>Étape</th><th>Objet</th><th>Catégorie</th><th>Délai</th><th>Fenêtre</th><th>Remarques</th></tr></thead><tbody>
 <tr>
 <td>P — prospects</td>
@@ -2571,6 +3273,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>provenance contact</td>
+</tr>
+<tr>
+<td>P — prospects</td>
+<td><a href="he/P-1-signup_abandoned.html">P1 (signup_abandoned)</a></td>
+<td dir="auto">פרסומת: Camille, החשבון שלכם עדיין לא נוצר</td>
+<td><span class="cat marketing">marketing</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>9 h–11 h, jours ouvrés</td>
+<td>provenance signup_abandoned</td>
 </tr>
 <tr>
 <td>P — prospects</td>
@@ -2728,11 +3439,20 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <tr>
 <td>C — essai en cours</td>
 <td><a href="he/C-4.html">C4</a></td>
-<td dir="auto">נותרו לכם 4 דקות ניסיון</td>
+<td dir="auto">דקות ניסיון שנותרו: 4 מתוך 30</td>
 <td><span class="cat essential">essential</span></td>
 <td>Événement : 5 minutes d’essai restantes ou moins</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="he/C-4-epuise.html">C4 (minutes épuisées)</a></td>
+<td dir="auto">כל 30 דקות הניסיון נוצלו</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 5 minutes d’essai restantes ou moins</td>
+<td>8 h–20 h, tous les jours</td>
+<td>solde de 0 minute : les appels sont déjà arrêtés ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>C — essai en cours</td>
@@ -2744,6 +3464,24 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>exige le webhook Stripe</td>
 </tr>
 <tr>
+<td>C — essai en cours</td>
+<td><a href="he/C-5-annuel.html">C5 (forfait annuel)</a></td>
+<td dir="auto">הניסיון שלכם מסתיים ב-22 באוקטובר 2026</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>forfait annuel ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>C — essai en cours</td>
+<td><a href="he/C-5-annule.html">C5 (essai annulé)</a></td>
+<td dir="auto">הניסיון שלכם מסתיים ב-22 באוקטובר 2026: לא יהיה שום חיוב</td>
+<td><span class="cat essential">essential</span></td>
+<td>3 jours avant la fin de l’essai</td>
+<td>8 h–20 h, tous les jours</td>
+<td>annulation programmée : C2 à C4 ne partent pas ; exige le webhook Stripe</td>
+</tr>
+<tr>
 <td>F — essai annulé</td>
 <td><a href="he/F-1.html">F1</a></td>
 <td dir="auto">הניסיון שלכם הסתיים, לא בוצע שום חיוב</td>
@@ -2751,6 +3489,15 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+1 après l’entrée dans la série</td>
 <td>8 h–20 h, tous les jours</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>F — essai annulé</td>
+<td><a href="he/F-1-paiement-refuse.html">F1 (paiement refusé)</a></td>
+<td dir="auto">הניסיון שלכם הסתיים: התשלום לא עבר</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après l’entrée dans la série</td>
+<td>8 h–20 h, tous les jours</td>
+<td>essai terminé sur un paiement refusé ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>F — essai annulé</td>
@@ -2859,6 +3606,78 @@ th{background:#f9fafb;white-space:nowrap}.cat{padding:1px 6px;border-radius:4px;
 <td>J+58 après l’entrée dans la série</td>
 <td>9 h–11 h, jours ouvrés</td>
 <td>exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-1.html">A1</a></td>
+<td dir="auto">הסוכן שלכם עוד לא נוצר: מספיקות כעשר דקות</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+1 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-2.html">A2</a></td>
+<td dir="auto">נגדיר איתכם את הסוכן?</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+3 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-3.html">A3</a></td>
+<td dir="auto">הניסיון שלכם נמשך עד 22 באוקטובר 2026: הסוכן עוד לא נוצר</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-3-compte-actif.html">A3 (abonné ou paiement à la minute)</a></td>
+<td dir="auto">החשבון שלכם פעיל, אבל הסוכן עוד לא נוצר</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+7 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>aucun agent créé ; hors essai ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-4.html">A4</a></td>
+<td dir="auto">הסוכן שלכם מוכן: בדקו אותו והפעילו הפניית שיחות</td>
+<td><span class="cat essential">essential</span></td>
+<td>J+10 après le début de l’essai, de l’abonnement ou du paiement à la minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>agent créé, sans numéro ou sans appel réel ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>A — mise en route</td>
+<td><a href="he/A-mensuel.html">Suivi mensuel A (abonné)</a></td>
+<td dir="auto">הסוכן שלכם לא קיבל שיחות ב-30 הימים האחרונים</td>
+<td><span class="cat essential">essential</span></td>
+<td>Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>0 appel réel sur 30 jours ; 12 envois au plus ; sauté si la personne a choisi « e-mails essentiels seulement » ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="he/S-1.html">S1 (minutes basses)</a></td>
+<td dir="auto">דקות שיחה שנותרו: 15</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : 20 minutes ou moins (ou 15 % des minutes du forfait)</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
+</tr>
+<tr>
+<td>S — solde de minutes</td>
+<td><a href="he/S-2.html">S2 (minutes épuisées)</a></td>
+<td dir="auto">יתרת הדקות שלכם נגמרה: הסוכן כבר לא עונה לשיחות</td>
+<td><span class="cat essential">essential</span></td>
+<td>Événement : solde de 0 minute</td>
+<td>8 h–20 h, tous les jours</td>
+<td>une fois par baisse du solde ; exige le webhook Stripe</td>
 </tr>
 <tr>
 <td>M — suivi mensuel</td>

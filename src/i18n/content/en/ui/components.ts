@@ -9,6 +9,7 @@ export const UI_COMPONENTS = {
     home: 'Home',
     freeTrial: 'Start for free',
     callMeBack: 'Get a call back',
+    formInterrupted: 'The page hadn’t finished loading, so your request wasn’t sent. Please send it again.',
   },
 
   navbar: {

@@ -71,4 +71,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     valid: 'It is valid for 10 minutes and can only be used once.',
     ignore: 'If you didn’t ask for it, just ignore this email: nobody can access your account without this code.',
   },
+  // Confirmation of a support request (ticket T-XXXXXXXX), essential email to the person who made it
+  // (src/lib/tickets.ts): information only, no prices or offers. when: callback date and time in words.
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `Your support request ${ticket} has been received · ${brand}`,
+    hello: (first: string | null) => (first ? `Hello ${first},` : 'Hello,'),
+    recorded: (ticket: string) => `We have received your support request under reference ${ticket}. Please keep this number: it lets us find your request quickly if you get in touch again.`,
+    callAt: (when: string) => `We will call you back on ${when}.`,
+    asap: 'We will call you back as soon as possible, during our calling hours.',
+    team: 'A member of our team will get back to you as soon as possible.',
+    reply: 'To add any details, simply reply to this email and quote your ticket number.',
+    notYou: 'If you did not make this request, please ignore this message.',
+    sign: (brand: string) => `The ${brand} team`,
+  },
 };

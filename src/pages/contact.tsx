@@ -1,9 +1,12 @@
-import React, { useId, useRef, useState } from 'react';
+// Contact : rappel commercial ou support. ?type=support ouvre l’onglet support (bouton « Être rappelé » des e-mails de
+// mise en route, série A : un client déjà en essai ou abonné est rappelé par le support, jamais par la vente).
+import React, { useEffect, useId, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import { CallbackForm, Heading, keepPhone, WhatsAppIcon, WhatsAppStarters } from '@/components/ui';
 import Mock from '@/components/Mock';
 import { tabKeyTarget } from '@/components/tabs';
-import { SITE } from '@/data/site';
+import { SITE, SUPPORT_CALLBACK_ANCHOR } from '@/data/site';
 import { BRAND_MARKS } from '@/data/brandMarks';
 import { useI18n } from '@/i18n';
 import { Mail, MessageSquare, Phone, PhoneCall } from 'lucide-react';
@@ -12,6 +15,9 @@ export default function Contact() {
   const { c, market } = useI18n();
   const t = c.ui.pages.contact;
   const [type, setType] = useState<'commercial' | 'support'>('commercial');
+  // Page statique : le paramètre n’est lu qu’après l’hydratation (onglet commercial au premier affichage).
+  const { isReady, query } = useRouter();
+  useEffect(() => { if (isReady && query.type === 'support') setType('support'); }, [isReady, query.type]);
   // Onglets accessibles au clavier : ←/→ (inversées en RTL), Début/Fin, un seul onglet dans l’ordre de tabulation.
   const base = useId().replace(/:/g, '');
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -38,7 +44,7 @@ export default function Contact() {
             </ul>
             <p className="mt-10 text-sm text-slate-light">{t.legal(market.brand, SITE.company)}</p>
           </div>
-          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8 lg:row-span-2 lg:self-start">
+          <div id={SUPPORT_CALLBACK_ANCHOR} className="scroll-mt-24 rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8 lg:row-span-2 lg:self-start">
             <div role="tablist" aria-label={t.tabsLabel} className="mb-6 grid grid-cols-2 rounded-xl bg-paper p-1">
               {kinds.map((k, i) => (
                 <button key={k} ref={(el) => { tabs.current[i] = el; }} role="tab" id={`${base}-tab-${k}`} aria-selected={type === k} aria-controls={`${base}-panel`}

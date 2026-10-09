@@ -3,9 +3,14 @@
 // voir src/lib/relances/config.ts. Corps facultatif { "dryRun": true } : force le mode test (jamais l’inverse).
 // Après les relances, et quoi qu’elles aient donné (coupées, mode test, erreur) : résumé hebdomadaire à l’équipe le
 // lundi à partir de 8 h, heure de Paris (src/lib/relances/weekly.ts), avec son propre try/catch et un délai maximal.
+// Mise en route (9 oct.) : lecture quotidienne des agents des comptes suivis et solde de l’agence, avec la même clé
+// AUTOCALLS_API_KEY (src/lib/relances/activity.ts) ; sans elle, la série A attend et rien n’est inventé.
+// Action 16 (9 oct.) : un passage qui finit en « not_installed », « error » ou « halted » est journalisé en gravité ERROR.
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { NOTIFY_TO, dbInsert, dbSelect, dbUpdate, sendMail } from '@/lib/server';
-import { emailKey } from '@/lib/emailPrefs';
+import { NOTIFY_TO, PREF_DB, dbInsert, dbSelect, dbUpdate, sendMail } from '@/lib/server';
+import { emailKey, saveEmailPref } from '@/lib/emailPrefs';
+import { accountActivityFetcher, agencyBalanceFetcher } from '@/lib/relances/activity';
+import { logError } from '@/lib/log';
 import { isCronAuthorized } from '@/lib/relances/auth';
 import { platformUsersFetcher } from '@/lib/relances/autocalls';
 import { readConfig } from '@/lib/relances/config';
@@ -51,7 +56,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         sendMail,
         notifyTeam,
         platformUsers: platformUsersFetcher(),
+        accountActivity: accountActivityFetcher(),
+        agencyBalance: agencyBalanceFetcher(),
         inbound: imap ? readInbound(imap, process.env.ZOHO_SMTP_USER || NOTIFY_TO) : undefined,
+        // Désinscription reçue par e-mail : même préférence que le lien de désinscription (call_events kind email_pref).
+        saveEmailPref: (email, source) => saveEmailPref(email, 'essential_only', source, PREF_DB),
         content: relancesContent,
         emailKey,
         now: () => new Date(),
@@ -60,6 +69,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }, { forceDryRun: req.body?.dryRun === true });
     } catch (e: any) {
       console.error('[relances]', e.message);
+    }
+    // Base illisible (tables absentes, clé révoquée), Stripe illisible ou disjoncteur des rejets : gravité ERROR, vue
+    // par l’alerte d’erreurs Google Cloud (docs/journaux-et-alertes.md). Le passage suivant réessaie de lui-même.
+    if (result && (result.status === 'not_installed' || result.status === 'error' || result.status === 'halted')) {
+      logError('relances', `passage terminé en « ${result.status} »${result.reason ? ` (${result.reason})` : ''}`, { status: result.status, dry_run: result.dryRun });
     }
     // Toujours après les relances : il ne les retarde ni ne les bloque.
     const summary = await weekly();

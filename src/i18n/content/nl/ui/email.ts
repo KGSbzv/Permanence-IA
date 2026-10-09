@@ -71,4 +71,17 @@ export const UI_EMAIL: typeof FR_UI_EMAIL = {
     valid: 'De code is 10 minuten geldig en kan maar één keer worden gebruikt.',
     ignore: 'Heeft u hier niet om gevraagd? Dan kunt u deze e-mail negeren: zonder deze code kan niemand uw account openen.',
   },
+  // Bevestiging van een supportverzoek (ticket T-XXXXXXXX), essentiële e-mail aan de aanvrager (src/lib/tickets.ts):
+  // alleen informatie, geen prijzen of aanbiedingen; aanspreekvorm « u ».
+  ticketMail: {
+    subject: (ticket: string, brand: string) => `Uw supportverzoek ${ticket} is ontvangen · ${brand}`,
+    hello: (first: string | null) => (first ? `Hallo ${first},` : 'Hallo,'),
+    recorded: (ticket: string) => `We hebben uw supportverzoek ontvangen onder nummer ${ticket}. Bewaar dit nummer: daarmee vinden we uw verzoek snel terug als u opnieuw contact met ons opneemt.`,
+    callAt: (when: string) => `We bellen u terug op ${when}.`,
+    asap: 'We bellen u zo snel mogelijk terug, binnen onze beltijden.',
+    team: 'Iemand van ons team neemt zo snel mogelijk contact met u op.',
+    reply: 'Wilt u nog iets toevoegen? Beantwoord dan gewoon deze e-mail en vermeld uw ticketnummer.',
+    notYou: 'Heeft u dit verzoek niet gedaan? Dan kunt u dit bericht negeren.',
+    sign: (brand: string) => `Het team van ${brand}`,
+  },
 };

@@ -4,6 +4,9 @@
 //
 // POST { action: 'send_code', email }        → envoie le code (réponse identique que le compte existe ou non)
 // POST { action: 'lookup', email, code }      → renvoie le résumé du compte si le code est bon (code à usage unique)
+// Dossier (audit du 9 oct., action 12) : forfait, état de l’essai, renouvellement, annulation prévue et impayé lus dans
+// Stripe ou dans les tables du webhook Stripe (src/lib/accountPlan.ts) ; plan_status ne déduit plus rien du seul solde
+// de minutes (plus jamais « proposez l’essai » à un client déjà en essai ou abonné).
 import { timingSafeEqual } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { dbSelect, esc, sendMail, clientIp, isAuthorized, tooManyMessage, NOTIFY_TO, PREF_DB } from '@/lib/server';
@@ -12,6 +15,10 @@ import { CONTACTS_DB, insertWithExtras, isYes, normalizeAgentLang, recordConsent
 import { stripPersonaMarks } from '@/lib/callbackPersona';
 import { makeLimiter, sendCodeFlow, verifyCodeFlow } from '@/lib/accountCode';
 import { autocallsApi as api, findPlatformUser, type PlatformUser } from '@/lib/autocallsAccount';
+import { describePlanForAgent, loadAgentPlan } from '@/lib/accountPlan';
+import { NON_CLIENT_AGENT_MESSAGE, isNonClientNote, notifyNonClient } from '@/lib/nonClient';
+import { stopRelancesLine } from '@/lib/relances/stopLink';
+import { stripeReader } from '@/lib/stripeAccount';
 import type { Locale } from '@/i18n/locales';
 
 // Code à 6 chiffres (valable 10 à 20 minutes, 3 envois et 5 essais par heure, 15 essais par jour et par email, usage
@@ -152,6 +159,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Messenger sans numéro : clé « messenger:<conversation> » (ou l’email seul) au lieu du téléphone.
     const phone = e164 || (messengerId ? `messenger:${messengerId}` : '');
     if (!e164 && !(messenger && (messengerId || messengerEmail))) return res.status(200).json({ saved: false, message: 'Numéro inconnu : fiche non enregistrée.' });
+    // Appelant signalé non client (fournisseur, presse, démarchage : « לא לקוח – … » en tête) : pas de fiche prospect,
+    // donc aucune relance ; l’équipe est prévenue (audit du 9 oct., action 19).
+    if (isNonClientNote(b.activity, b.needs, b.next_step)) {
+      await notifyNonClient({ nom: clip(b.name, 120), téléphone: phone, email: clip(b.email, 160), entreprise: clip(b.company, 160), activité: clip(b.activity, 300), besoins: clip(b.needs, 600), canal: clip(b.channel, 20) }, 'l’outil fiche prospect')
+        .catch((e) => console.error('[agent-account] non client, e-mail:', e.message));
+      return res.status(200).json({ saved: false, non_client: true, message: NON_CLIENT_AGENT_MESSAGE });
+    }
     const dupe = phone ? `phone=eq.${encodeURIComponent(phone)}` : `email=eq.${encodeURIComponent(messengerEmail)}`;
     const day = await dbSelect('callbacks', `select=id&${dupe}&status=eq.lead&created_at=gte.${new Date(Date.now() - 86_400_000).toISOString()}&limit=4`).catch(() => []);
     if (day.length >= 3) return res.status(200).json({ saved: false, message: 'Fiche déjà enregistrée aujourd’hui.' });
@@ -186,7 +200,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }),
     ]);
     sendMail({ to: NOTIFY_TO, category: 'internal', subject: `Fiche prospect — ${row.name} (${phone || row.email})`, text: [...Object.entries(row).map(([k, v]) => `${k}: ${v ?? ''}`),
-      `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})`, answered && `accord email marketing : ${isYes(b.marketing_email_consent) ? 'oui' : 'non'}`].filter(Boolean).join('\n') })
+      `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})`, answered && `accord email marketing : ${isYes(b.marketing_email_consent) ? 'oui' : 'non'}`,
+      stopRelancesLine(row.email)].filter(Boolean).join('\n') })
       .catch((e) => console.error('[agent-account] save_lead mail:', e.message));
     return res.status(200).json({ saved: true, message: 'Fiche enregistrée. Ne le dis pas à la personne, continue la conversation.' });
   }
@@ -224,20 +239,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const user = await findPlatformUser(email);
       if (!user) return res.status(200).json({ verified: false, message: 'Aucun compte avec cette adresse : demandez l’email utilisé à l’inscription.' });
 
-      const [summary, requests] = await Promise.all([
+      const [summary, requests, billing] = await Promise.all([
         accountSummary(user).catch(() => null),
         dbSelect<any>('callbacks', `select=created_at,type,slot,note,status&email=eq.${encodeURIComponent(email)}&order=created_at.desc&limit=5`).catch(() => []),
+        // Forfait : API Stripe (clé en lecture) si elle répond à temps, sinon tables du webhook Stripe ; jamais d’erreur.
+        loadAgentPlan(email, { get: stripeReader(), db: PREF_DB }),
       ]);
-      const hasMinutes = Number(user.minutes_balance) > 0;
+      const plan = describePlanForAgent(billing, Number(user.minutes_balance));
       return res.status(200).json({
         verified: true,
         name: user.name,
         account_created: user.created_at,
         minutes_left: user.minutes_balance,
         message_credits_left: user.credits_balance,
-        plan_status: hasMinutes
-          ? 'Forfait ou essai actif (minutes disponibles). Pour le nom exact du forfait et la date de fin d’essai, demandez-lui de regarder Billing info.'
-          : 'Aucune minute : aucun forfait choisi (essai pas démarré) ou minutes épuisées. Proposez Change plan pour démarrer l’essai de 14 jours.',
+        plan_status: plan.plan_status,
+        plan: plan.plan,
         agents: summary?.agents ?? 'indisponible',
         phone_numbers: summary?.phone_numbers ?? 'indisponible',
         last_calls: summary?.last_calls ?? 'indisponible',

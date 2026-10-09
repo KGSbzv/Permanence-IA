@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import type { GetServerSideProps } from 'next';
 import Layout from '@/components/Layout';
 import { Heading, Section } from '@/components/ui';
-import { SITE } from '@/data/site';
+import { FORM_FALLBACK_ACTION, SITE } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { DEFAULT_LOCALE, asLocale, isLocale } from '@/i18n/locales';
 import type { EmailPref } from '@/lib/emailPrefs';
@@ -121,7 +121,7 @@ export default function PreferencesEmail({ email, e, t: token, current, invalid,
                 </div>
               )}
 
-              <form onSubmit={(ev) => { ev.preventDefault(); save(choice); }}>
+              <form method="post" action={FORM_FALLBACK_ACTION} onSubmit={(ev) => { ev.preventDefault(); save(choice); }}>
                 <fieldset className="space-y-3">
                   <legend className="sr-only">{t.h1}</legend>
                   {options.map((p) => (
@@ -142,7 +142,8 @@ export default function PreferencesEmail({ email, e, t: token, current, invalid,
               {invalid && <p className="mb-4 font-semibold text-red-700">{t.invalid}</p>}
               <h2 className="text-h3 font-bold">{t.askTitle}</h2>
               <p className="mt-3">{t.askText}</p>
-              <form className="mt-5 space-y-3" onSubmit={requestLink}>
+              {/* method="post" : un envoi avant le chargement du script ne met jamais l’adresse e-mail dans l’URL. */}
+              <form method="post" action={FORM_FALLBACK_ACTION} className="mt-5 space-y-3" onSubmit={requestLink}>
                 <label htmlFor="pref-email" className="block text-sm font-semibold">{t.emailLabel}</label>
                 <input id="pref-email" name="email" type="email" required autoComplete="email" dir="ltr" className="field" maxLength={160} />
                 {/* Champ piège invisible pour les robots. */}

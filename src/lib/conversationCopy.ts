@@ -30,6 +30,7 @@ import { CALL_TZ } from './callHours';
 import { normalizeAgentLang } from './contacts';
 import { emailText } from './emailFooter';
 import { emailKey, isValidEmail, normEmail } from './emailPrefs';
+import { maskEmails } from './maskEmails';
 import { OPTOUT_KIND, STOP_OUTCOMES } from './optout';
 import { dbInsert, dbSelect, dbUpdate, langFromPhone, sendMail, toE164, type MailOptions } from './server';
 
@@ -293,11 +294,8 @@ export interface CopyResult {
   limit?: 'adresse' | 'global';
 }
 
-/**
- * Adresses email masquées avant d’enregistrer ou de journaliser une erreur d’envoi (réponse SMTP…). Une adresse
- * n’est cherchée qu’au début d’un mot (jamais depuis son milieu) : temps linéaire, même sur un long texte sans « @ ».
- */
-export const maskEmails = (s: string) => s.replace(/(?<![^\s<>@])[^\s<>@]+@[^\s<>@]+/g, '[adresse]');
+// Adresses email masquées avant d’enregistrer une erreur d’envoi : module partagé avec le moteur des relances.
+export { maskEmails };
 
 /** Forme de l’adresse pour le plafond : sans « +étiquette » ni point final, points ignorés chez Gmail (même boîte). */
 function capAddress(email: string) {

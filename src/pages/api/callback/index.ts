@@ -5,8 +5,19 @@ import {
   agentMessage, callbackAgentReply, campaignRoleLine, decideCallback, defuseRoleMarker, needsPrev, parsePrev, readCallbackAsk, storedMarks,
   stripPersonaMarks, teamMailLines, type Kind, type Prev,
 } from '@/lib/callbackPersona';
+// Audit du 9 oct. 2026 : confirmation écrite du ticket de support au client (src/lib/tickets.ts) ; appelant non client
+// signalé par un agent (fournisseur, presse, démarchage) ni rappelé ni enregistré comme prospect (src/lib/nonClient.ts) ;
+// demande écrite (WhatsApp, Messenger, espace client) rappelée dans la langue de l’échange, pas celle de l’indicatif ;
+// lien « Arrêter les relances de ce contact » dans l’e-mail à l’équipe ; marqueur [CONV:<échange>] posé sur une demande
+// d’agent qui donne l’identifiant de l’échange (« ne plus me contacter » écrit, src/lib/writtenOptout.ts).
 import { isOptedOut } from '@/lib/optout';
-import { CONTACTS_DB, captureMeta, insertWithExtras, isYes, recordConsent, recordFormConsents, resolveLocale, upsertContact, type ContactOrigin } from '@/lib/contacts';
+import { CONTACTS_DB, captureMeta, insertWithExtras, isYes, normalizeAgentLang, recordConsent, recordFormConsents, resolveLocale, upsertContact, type ContactOrigin } from '@/lib/contacts';
+import { findRequester } from '@/lib/callbackPersona';
+import { NON_CLIENT_AGENT_MESSAGE, isNonClientNote, notifyNonClient } from '@/lib/nonClient';
+import { stopRelancesLine } from '@/lib/relances/stopLink';
+import { isSupportCallbackAgent, sendTicketConfirmation } from '@/lib/tickets';
+import { exchangeId, exchangeMark } from '@/lib/writtenOptout';
+import { maskEmails } from '@/lib/maskEmails';
 import { NOTIFY_TO, alertTeam, checkCallAt, clientIp, describeLocal, zoneFor, dbSelect, dbUpdate, isAuthorized, isAutoCallable, langFromPhone, resolveCallAt, sendMail, toE164, tooManyMessage } from '@/lib/server';
 
 // Limite simple (par instance) : 20 demandes par tranche de 10 minutes, par adresse IP ; pour un outil d’agent
@@ -28,6 +39,9 @@ const waMark = (lang: string) => `[WA:${lang}] confirmation WhatsApp demandée`;
 const langMark = (lang: string) => `[LANG:${lang}]`;
 /** Site d’où vient la demande (ou langue de l’agent) : choisit le numéro WhatsApp du message « rappel manqué ». */
 const marketMark = (market: string) => `[MKT:${market}]`;
+/** Échange (conversation ou appel) pendant lequel un agent a pris la demande : seule preuve, pour une opposition écrite
+ *  reçue à la fin de ce même échange, que la personne a elle-même donné ce numéro. */
+const convMark = (b: Record<string, any>) => { const id = exchangeId(b.conversation_id ?? b.call_id); return id ? exchangeMark(id) : null; };
 // Créneaux du formulaire (valeurs fixes en français) : en anglais pour les agents des autres pays, qui les résument dans leur langue.
 const SLOT_EN: Record<string, string> = { 'Aujourd’hui après-midi': 'this afternoon', 'Demain matin': 'tomorrow morning', 'Demain après-midi': 'tomorrow afternoon' };
 const clip = (v: unknown, max: number) => (v == null ? v : String(v).slice(0, max));
@@ -54,6 +68,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (!(consentCall === true || consentCall === 'true')) return res.status(400).json({ error: 'Consentement au rappel requis.' });
   if (!name || !phone || String(phone).trim().length < 8) return res.status(400).json({ error: 'Nom et numéro valides requis.' });
 
+  // Appelant signalé non client par un outil d’agent (note « לא לקוח – … » ou « [NON_CLIENT] … ») : aucun rappel, aucune
+  // fiche, aucune relance ; l’équipe est prévenue et l’agent oriente vers contact@ (ligne Israël, action 19).
+  const agentTool = authed || Boolean(findRequester(req.query?.aid));
+  if (agentTool && isNonClientNote(note)) {
+    const [sent] = await Promise.allSettled([notifyNonClient({ nom: name, téléphone: phone, email, entreprise: company, note, agent, outil: req.query?.aid ? String(req.query.aid).slice(0, 64) : null }, `l’outil de rappel${agent ? ` (${agent})` : ''}`)]);
+    if (sent.status === 'rejected') console.error('[callback] non client, e-mail:', sent.reason?.message);
+    return res.status(200).json({ success: true, stored: false, queued: false, scheduled_for: 'not scheduled', non_client: true, message_for_agent: NON_CLIENT_AGENT_MESSAGE });
+  }
+
   // Langue du site (fr, en-gb, en-au, it, pl, nl, he) ; « intl » = demande enregistrée par un agent pendant un appel.
   // Sans langue précisée (outils d’agents WhatsApp, lignes UK / Israël), la campagne suit l’indicatif du numéro.
   const lang = isLocale(locale) ? locale : 'intl';
@@ -68,7 +91,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Demande enregistrée par un agent (outil authentifié par le jeton secret) : campagne choisie d’après
   // l’indicatif du numéro, et reprogrammation permise. Sans jeton, les règles du site s’appliquent.
   const fromAgent = authed && (lang === 'intl' || Boolean(agent));
-  const campaignLang = lang === 'intl' ? langFromPhone(e164) : lang;
+  // Langue de l’échange déclarée par l’agent (champ language des outils écrits : WhatsApp, Messenger, espace client)
+  // avant l’indicatif : un numéro +33 qui a écrit en anglais est rappelé en anglais (« en » tranché par l’indicatif).
+  const exchangeLang = fromAgent && lang === 'intl' ? normalizeAgentLang(b.language, e164) : null;
+  const campaignLang = lang === 'intl' ? exchangeLang ?? langFromPhone(e164) : lang;
   // Date fournie par un outil d’agent (champ call_at) : illisible, passée ou à plus de 30 jours → rien n’est
   // enregistré et l’agent reçoit la date du jour pour redemander, au lieu d’un appel immédiat non souhaité.
   const zone = zoneFor(b.tz, campaignLang);
@@ -146,7 +172,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     slot: [slot || 'asap', scheduled && `→ ${callAt.toISOString()}`].filter(Boolean).join(' '),
     // Marqueurs [WA], [VOICE], [ROLE] et [ASKED] posés seulement par le serveur (crochets retirés du texte du visiteur
     // ou de l’agent) : plafond quotidien WhatsApp, et voix et rôle de cette demande pour la suivante.
-    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang), marketMark(market), storedMarks(persona)].filter(Boolean).join(' — ') || null, type: kind,
+    note: [note && String(note).replace(/[\[\]]/g, ''), wantsWhatsApp && waMark(campaignLang), langMark(campaignLang), marketMark(market), storedMarks(persona), fromAgent && convMark(b)].filter(Boolean).join(' — ') || null, type: kind,
     agent: agent ? `${agent}${isLocale(locale) && locale !== 'fr' ? ` [${locale}]` : ''}` : null, consent_call: true, status: 'pending',
   };
 
@@ -249,7 +275,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const callLine = call.status === 'fulfilled'
     ? `Appel automatique : en file${scheduled ? ` pour ${callAt.toISOString()}` : ' (dès que possible)'}`
     : `Appel automatique : NON (${call.reason?.message || 'motif inconnu'}) — À RAPPELER À LA MAIN`;
-  const [, mail] = await Promise.allSettled([capture, sendMail({
+  // Ticket de support : confirmation écrite au client (numéro, suite prévue), dans sa langue, anglais si elle est inconnue.
+  // Pas quand un agent de rappel du support reprogramme ou recrée la demande (adresse reçue de la campagne) : le client
+  // a déjà reçu son numéro de ticket, un second numéro le perdrait.
+  const ticketMail = ticket && email && !(fromAgent && isSupportCallbackAgent(req.query?.aid))
+    ? sendTicketConfirmation({
+      email: String(email), ticket, name: name == null ? null : String(name),
+      locale: resolved.locale ?? (isLocale(locale) ? locale : null) ?? 'en-gb',
+      queued: call.status === 'fulfilled', callAt: scheduled ? callAt : null, zone,
+    })
+    : Promise.resolve(null);
+  const [, mail, confirmation] = await Promise.allSettled([capture, sendMail({
     to: NOTIFY_TO, category: 'internal',
     subject: `${call.status === 'fulfilled' ? 'Nouvelle demande de rappel' : 'À rappeler à la main'} (${row.type}${ticket ? ` ${ticket}` : ''}) — ${row.name}`,
     // Avec callback_by ou aid : qui rappelle (prénom, voix, rôle) et quel agent a pris la demande. Les marqueurs de
@@ -260,9 +296,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       `langue (relances) : ${resolved.locale || 'À VALIDER'} (${resolved.locale_source})${extra.demo_lang ? ` — langue de la démo : ${extra.demo_lang}` : ''}`,
       extra.marketing_email_consent != null && `accord email marketing : ${extra.marketing_email_consent ? 'oui' : 'non'}${extra.marketing_whatsapp_consent ? ' — WhatsApp marketing : oui' : ''}`,
       meta?.origin_page && `page : ${meta.origin_page}${meta.utm_source ? ` (utm ${[meta.utm_source, meta.utm_medium, meta.utm_campaign].filter(Boolean).join(' / ')})` : ''}`,
-    ].filter((x) => x !== false && x != null).join('\n'),
-  })]);
+      // Lien signé (sans effet sans adresse valide ou sans secret) : l’équipe arrête les relances sans toucher à la base.
+      stopRelancesLine(email) && `\n${stopRelancesLine(email)}`,
+    ].filter((x) => x !== false && x != null && x !== '').join('\n'),
+  }), ticketMail]);
   if (wa.status === 'rejected') console.error('[callback] whatsapp:', wa.reason?.message);
+  // Une réponse SMTP peut citer l’adresse : masquée dans le journal.
+  if (confirmation.status === 'rejected') console.error('[callback] confirmation du ticket:', maskEmails(String(confirmation.reason?.message ?? confirmation.reason)));
+  else if (confirmation.value && confirmation.value !== 'sent') console.log(`[callback] confirmation du ticket non envoyée : ${confirmation.value}`);
   if (db.status === 'rejected') console.error('[callback] supabase:', db.reason?.message);
   if (mail.status === 'rejected') console.error('[callback] email:', mail.reason?.message);
   if (call.status === 'rejected') console.error('[callback] campagne:', call.reason?.message);

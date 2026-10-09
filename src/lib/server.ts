@@ -8,6 +8,11 @@ import { DEFAULT_LOCALE, isRtl, type Locale } from '@/i18n/locales';
 import { appendHtmlFooter, buildEmailFooter, textToHtml } from './emailFooter';
 import { CALL_TZ, localToUtc, nextCallTime, tzOffset } from './callHours';
 import { emailOptedOut, unsubscribeUrl, type MailCategory, type PrefDb } from './emailPrefs';
+import { setupServerLogging } from './log';
+
+// Journal structuré (gravité ERROR visible par l’alerte Google Cloud, src/lib/log.ts) dès la première route API
+// chargée, au cas où src/instrumentation.ts n’aurait pas tourné : sans effet en double, ni hors Cloud Run.
+setupServerLogging();
 
 export const NOTIFY_TO = process.env.NOTIFY_EMAIL || 'contact@permanenceia.com';
 

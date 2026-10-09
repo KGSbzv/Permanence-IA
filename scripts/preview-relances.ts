@@ -1,6 +1,7 @@
 // Aperçus des relances (aucun envoi, aucune base réelle) :
 //   npx tsx scripts/preview-relances.ts [dossier de sortie]   (par défaut docs/relances/apercus)
-// Écrit chaque message de chaque série (P, I, C, F, U, M) dans les 7 langues, tel que le moteur l’enverrait :
+// Écrit chaque message de chaque série (P, I, C, F, U, M, et depuis le 9 oct. A « mise en route » et S « solde de
+// minutes ») dans les 7 langues, tel que le moteur l’enverrait :
 // mêmes textes (src/i18n/content/<langue>/ui/relances.ts), mêmes chiffres du marché (buildRelanceFacts),
 // même mise en forme (renderMessage) et même préparation que sendMail (prepareMail : pied de page légal,
 // en-têtes de désinscription), sans jamais appeler sendMail. Contact fictif : Camille Martin, Plomberie Martin,
@@ -36,8 +37,9 @@ async function main() {
   type Seq = import('@/lib/relances/types').Seq;
   const { renderMessage } = await import('@/lib/relances/render');
   const { MARKETING_HOURS, SERVICE_HOURS } = await import('@/lib/relances/calendar');
-  const { STEPS, MONTHLY_STEPS, C4_MINUTES_LEFT, C5_DAYS_BEFORE_END } = await import('@/lib/relances/sequences');
+  const { STEPS, MONTHLY_STEPS, A_MONTHLY_STEPS, C4_MINUTES_LEFT, C5_DAYS_BEFORE_END, S_LOW_MINUTES } = await import('@/lib/relances/sequences');
   type StepDef = import('@/lib/relances/sequences').StepDef;
+  type SubRow = import('@/lib/relances/types').StripeSubscriptionRow;
   const { prepareMail } = await import('@/lib/server');
   const { PAUSED_SECTORS } = await import('@/data/site');
 
@@ -53,6 +55,10 @@ async function main() {
     if (s.seq === 'M') return `J+${s.offsetDays} après la fin de la série ${origin}`;
     if (s.step === 'C4') return `Événement : ${C4_MINUTES_LEFT} minutes d’essai restantes ou moins`;
     if (s.step === 'C5') return `${C5_DAYS_BEFORE_END} jours avant la fin de l’essai`;
+    if (s.seq === 'A' && s.key === 'A_monthly') return 'Tous les 30 jours après le début (abonné sans appel réel sur 30 jours)';
+    if (s.seq === 'A') return `J+${s.offsetDays} après le début de l’essai, de l’abonnement ou du paiement à la minute`;
+    if (s.key === 'S1') return `Événement : ${S_LOW_MINUTES} minutes ou moins (ou 15 % des minutes du forfait)`;
+    if (s.key === 'S2') return 'Événement : solde de 0 minute';
     return `J+${s.offsetDays} après l’entrée dans la série`;
   };
   const windowOf = (s: StepDef) => (s.service
@@ -77,22 +83,23 @@ async function main() {
     // Contact fictif tel que le moteur le construit (src/lib/relances/selection.ts) : essai en cours (fin TRIAL_END),
     // forfait Réceptionniste au mois, instantané du compte du jour (minutes restantes).
     const now = new Date();
-    const contactOf = (step: StepDef, origin: RelanceOrigin, withSector = true): Contact => ({
-      email: SAMPLE.email, key: 'apercu', firstName: SAMPLE.firstName, company: SAMPLE.company, sector: withSector ? SAMPLE.sector : null,
+    const contactOf = (step: StepDef, origin: RelanceOrigin, withSector = true, sub: Partial<SubRow> = {}, minutes?: number): Contact => ({
+      email: SAMPLE.email, key: 'apercu', firstName: SAMPLE.firstName, name: `${SAMPLE.firstName} Martin`, company: SAMPLE.company, sector: withSector ? SAMPLE.sector : null,
       phones: [], locale, localeSource: 'site_form', origin, requestAt: REQUEST_AT, prospectSince: REQUEST_AT, supportOpen: false, pausedSector: false,
       signup: null,
-      platform: { userId: 'apercu', minutes: step.step === 'C4' ? C4_MINUTES_LEFT - 1 : MINUTES_LEFT, credits: 0, createdAt: null, usage30: null, snapDate: now.toISOString().slice(0, 10) },
+      platform: { userId: 'apercu', minutes: minutes ?? (step.step === 'C4' ? C4_MINUTES_LEFT - 1 : MINUTES_LEFT), credits: 0, createdAt: null, usage30: null, snapDate: now.toISOString().slice(0, 10), hadMinutes: true },
       subscriptions: [{
         subscription_id: 'sub_apercu', customer_id: null, status: 'trialing', trial_start: null, trial_end: TRIAL_END.toISOString(), canceled_at: null, ended_at: null,
         price_amount: plan.price ? Math.round(plan.price * 100) : null, currency: MARKETS[locale].currency, billing_interval: 'month', livemode: false,
+        ...sub,
       }],
       hasPaid: false, hasCreditPurchase: false, preferredLocale: null, isTest: true, consents: [], pref: null, phoneOptout: false, stops: [],
     });
 
-    const one = async (o: { step: StepDef; origin: RelanceOrigin; file: string; label: string; seqOrigin?: Seq; seqLabel?: string; generic?: boolean; note?: string }) => {
+    const one = async (o: { step: StepDef; origin: RelanceOrigin; file: string; label: string; seqOrigin?: Seq; seqLabel?: string; generic?: boolean; note?: string; sub?: Partial<SubRow>; minutes?: number }) => {
       const base = { locale, seq: o.step.seq, label: o.label, delay: delayOf(o.step, o.seqLabel), window: windowOf(o.step) };
-      const contact = contactOf(o.step, o.origin, !o.generic);
-      const tpl = templateOf(content, o.step, contact, locale, o.seqOrigin ?? o.step.seq);
+      const contact = contactOf(o.step, o.origin, !o.generic, o.sub, o.minutes);
+      const tpl = templateOf(content, o.step, contact, locale, o.seqOrigin ?? o.step.seq, now);
       const message = tpl.build(facts);
       if (!message) {
         entries.push({ ...base, file: null, subject: '', category: '', note: 'étape sautée : chiffre du marché manquant' });
@@ -160,7 +167,34 @@ ${m.html}
           // Secteur inconnu : le moteur choisit lui-même P3_generic.
           await one({ step, origin: 'callback_done', generic: true, file: `${seq}-${n}-generique.html`, label: 'P3 (générique)', note: 'secteur inconnu ou en pause' });
         }
+        // Variantes choisies par le moteur d’après le solde ou l’abonnement Stripe (même étape dans le journal).
+        if (step.key === 'C4') {
+          await one({ step, origin: 'callback_done', file: `${seq}-${n}-epuise.html`, label: 'C4 (minutes épuisées)', note: 'solde de 0 minute : les appels sont déjà arrêtés', minutes: 0 });
+        }
+        if (step.key === 'C5') {
+          const annual = plan.annualPrice ? Math.round(plan.annualPrice * 100) : null;
+          await one({ step, origin: 'callback_done', file: `${seq}-${n}-annuel.html`, label: 'C5 (forfait annuel)', note: 'forfait annuel', sub: { billing_interval: 'year', price_amount: annual } });
+          await one({ step, origin: 'callback_done', file: `${seq}-${n}-annule.html`, label: 'C5 (essai annulé)', note: 'annulation programmée : C2 à C4 ne partent pas', sub: { cancel_at_period_end: true } });
+        }
+        if (step.key === 'F1') {
+          await one({ step, origin: 'callback_done', file: `${seq}-${n}-paiement-refuse.html`, label: 'F1 (paiement refusé)', note: 'essai terminé sur un paiement refusé', sub: { status: 'canceled', ended_at: TRIAL_END.toISOString(), cancellation_reason: 'payment_failed' } });
+        }
       }
+    }
+    // Mise en route (série A) : conditions lues chaque jour (agents, numéro, appels) ; A3 pendant l’essai ou compte actif.
+    for (const step of STEPS.A) {
+      const n = step.step.slice(1);
+      const condition = step.step === 'A4' ? 'agent créé, sans numéro ou sans appel réel' : 'aucun agent créé';
+      await one({ step, origin: 'callback_done', file: `A-${n}.html`, label: step.step, note: condition });
+      if (step.step === 'A3') {
+        await one({ step, origin: 'callback_done', file: `A-${n}-compte-actif.html`, label: 'A3 (abonné ou paiement à la minute)', note: `${condition} ; hors essai`, sub: { status: 'active', trial_end: null } });
+      }
+    }
+    await one({ step: A_MONTHLY_STEPS[0], origin: 'callback_done', file: 'A-mensuel.html', label: 'Suivi mensuel A (abonné)', note: '0 appel réel sur 30 jours ; 12 envois au plus', sub: { status: 'active', trial_end: null } });
+    // Solde de minutes (série S) : abonné ou paiement à la minute (l’essai a C4).
+    for (const step of STEPS.S) {
+      const out = step.key === 'S2';
+      await one({ step, origin: 'callback_done', file: `S-${step.step.slice(1)}.html`, label: out ? 'S2 (minutes épuisées)' : 'S1 (minutes basses)', note: 'une fois par baisse du solde', sub: { status: 'active', trial_end: null }, minutes: out ? 0 : 15 });
     }
     // Suivi mensuel : version prospect (après P) et version espace client (après I, F ou U).
     for (const step of MONTHLY_STEPS) {
@@ -173,6 +207,7 @@ ${m.html}
   // Index : un tableau par langue (objet, catégorie, délai, fenêtre, remarques).
   const SEQ_NAMES: Record<string, string> = {
     P: 'P — prospects', I: 'I — inscrits sans essai', C: 'C — essai en cours', F: 'F — essai annulé', U: 'U — comptes peu actifs', M: 'M — suivi mensuel',
+    A: 'A — mise en route', S: 'S — solde de minutes',
   };
   const sections = LOCALES.map((locale) => {
     const rows = entries.filter((e) => e.locale === locale);

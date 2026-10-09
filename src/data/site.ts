@@ -28,6 +28,11 @@ export const whatsappUrl = (text: string, locale: string) => `${whatsappLink(loc
 
 // Inscription : la page /essai-gratuit explique l’essai puis envoie vers la création de compte sur l’app.
 export const SIGNUP_URL = '/essai-gratuit';
+/** Ancre du formulaire « être rappelé » de /essai-gratuit (second lien de la relance « inscription non terminée »). */
+export const TRIAL_ASSIST_ANCHOR = 'accompagnement';
+/** Ancre du formulaire de /contact (onglet support ouvert par ?type=support) : bouton « Être rappelé » des e-mails de
+ *  mise en route (série A), rappel par le support pour un client déjà en essai ou abonné. */
+export const SUPPORT_CALLBACK_ANCHOR = 'rappel';
 export const REGISTER_URL = `${SITE.appUrl}/register`;
 /** Paramètres UTM repris de la page vers la création de compte. */
 const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
@@ -47,6 +52,26 @@ export function registerUrl(locale: string, search = '') {
 }
 export const LOGIN_URL = `${SITE.appUrl}/login`;
 export const DEMO_URL = '/demo';
+/** Action des formulaires (method="post") pour un envoi fait avant le chargement du script : la route ignore le corps
+ *  et renvoie sur la page (src/pages/api/form-fallback.ts) ; les coordonnées ne passent jamais dans l’adresse. */
+export const FORM_FALLBACK_ACTION = '/api/form-fallback';
+/** Paramètre que FORM_FALLBACK_ACTION ajoute à l’adresse de retour : la page dit alors que rien n’est parti (Layout),
+ *  puis le retire de l’adresse. */
+export const FORM_INTERRUPTED = { param: 'envoi', value: 'interrompu' } as const;
+const INTERRUPTED_PAIR = `${FORM_INTERRUPTED.param}=${FORM_INTERRUPTED.value}`;
+const INTERRUPTED_RE = new RegExp(`[?&]${INTERRUPTED_PAIR}(?=&|$)`);
+/** Adresse de retour (chemin et requête) avec « envoi=interrompu », joint par « ? » ou « & », une seule fois. */
+export function withInterruptedNotice(path: string): string {
+  if (INTERRUPTED_RE.test(path)) return path;
+  const sep = !path.includes('?') ? '?' : /[?&]$/.test(path) ? '' : '&';
+  return `${path}${sep}${INTERRUPTED_PAIR}`;
+}
+/** Requête de la page (« ?… ») lue au retour : envoi interrompu ou non, et la même requête sans ce paramètre. */
+export function readInterruptedNotice(search: string): { interrupted: boolean; search: string } {
+  if (!INTERRUPTED_RE.test(search)) return { interrupted: false, search };
+  const rest = search.replace(INTERRUPTED_RE, '').replace(/^&/, '?');
+  return { interrupted: true, search: rest === '?' ? '' : rest };
+}
 /** Page Mon compte du site (forfait, solde, carte et factures en lecture seule, connexion par code email). */
 export const ACCOUNT_URL = '/mon-compte';
 // Pages de l’espace client : Billing info (carte dans l’onglet Wallet, factures, résiliation), choix ou changement

@@ -30,7 +30,8 @@ const NOTHING_CHARGED = 'w okresie próbnym nic nie jest pobierane';
 
 export const UI_RELANCES: RelancesContent = {
   shared: {
-    greeting: { named: 'Dzień dobry {first_name},', anonymous: 'Dzień dobry,' },
+    // Sans prénom : avec « Państwo », un prénom seul au nominatif mélange les registres (formule habituelle des e-mails).
+    greeting: { named: 'Dzień dobry,', anonymous: 'Dzień dobry,' },
     companyFallback: 'Państwa firma',
     sourceLine: {
       callback_done: 'Nawiązując do naszej rozmowy z dnia {request_date}',
@@ -39,6 +40,7 @@ export const UI_RELANCES: RelancesContent = {
       agent_lead: 'Nawiązując do Państwa rozmowy z naszą asystentką',
       demo: 'Wypróbowali Państwo nasze demo na żywo',
       contact: 'Nawiązując do Państwa wiadomości',
+      signup_abandoned: 'Rozpoczęli Państwo zakładanie konta',
     },
     signature: (brand) => `Zespół ${brand}`,
     ctaLine: (label, url) => `${label}: ${url}`,
@@ -69,6 +71,21 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Rozpoczynam okres próbny', target: 'trial' },
       after: ['Mają Państwo pytanie? Wystarczy odpowiedzieć na tę wiadomość, czyta ją nasz zespół.'],
+    }),
+    P1_signup: (f) => ({
+      category: 'marketing',
+      subject: '{first_name}, konto nie zostało jeszcze utworzone',
+      subjectNoName: 'Konto nie zostało jeszcze utworzone',
+      preheader: 'Rejestracja nie została dokończona: możemy ją dokończyć razem z Państwem.',
+      body: [
+        `Rozpoczęli Państwo zakładanie konta ${f.brand} na naszej stronie bezpłatnego okresu próbnego, ale wygląda na to, że rejestracja nie została dokończona.`,
+        'Do rozpoczęcia okresu próbnego zostały dwa kroki: dokończenie rejestracji na stronie panelu klienta (w języku angielskim, kilka minut) i wybór pakietu do przetestowania.',
+        `Dopiero wybór pakietu uruchamia ${f.trialDays}-dniowy okres próbny obejmujący ${minutes(f.trialMinutes)} połączeń. Wymagana jest karta, ale ${NOTHING_CHARGED}.`,
+        'Jeśli założyli Państwo konto na inny adres e-mail, prosimy zignorować tę wiadomość.',
+      ],
+      cta: { label: 'Kończę rejestrację', target: 'register' },
+      after: ['Wolą Państwo zrobić to razem z nami? Wystarczy zostawić numer telefonu na naszej stronie okresu próbnego: oddzwonimy w dogodnym momencie, aby wspólnie założyć konto i skonfigurować agenta. Można też po prostu odpowiedzieć na tę wiadomość.'],
+      secondary: { label: 'Proszę o oddzwonienie', target: 'trial_assist' },
     }),
     P2: (f) => {
       const r = f.plans.receptionniste;
@@ -180,7 +197,7 @@ export const UI_RELANCES: RelancesContent = {
         `Dla informacji: bezpłatny ${f.trialDays}-dniowy okres próbny (${minutes(f.trialMinutes)} połączeń) rozpoczyna się, gdy wybiorą Państwo pakiet w panelu klienta. Wymagana jest karta, ale ${NOTHING_CHARGED}; jeśli anulują Państwo przed jego końcem w Billing info, nic Państwo nie zapłacą.`,
         'Panel klienta jest w języku angielskim, ale wbudowana asystentka pomocy poprowadzi Państwa po polsku, na piśmie lub głosowo.',
       ],
-      cta: { label: 'Wybieram pakiet', target: 'billing' },
+      cta: { label: 'Wybieram pakiet', target: 'plans' },
     }),
     I2: () => ({
       category: 'marketing',
@@ -192,7 +209,7 @@ export const UI_RELANCES: RelancesContent = {
         { ol: ['czat testowy, aby dopracować instrukcje;', 'rozmowa w przeglądarce, aby usłyszeć jego głos;', 'prawdziwe połączenie z Państwa komórki.'] },
         'Połączenia przekierowują Państwo dopiero wtedy, gdy wynik jest zadowalający. Przewodnik „Testowanie agenta” opisuje każdy krok.',
       ],
-      cta: { label: 'Rozpoczynam okres próbny i testuję', target: 'billing' },
+      cta: { label: 'Rozpoczynam okres próbny i testuję', target: 'plans' },
     }),
     I3: (f) => ({
       category: 'marketing',
@@ -213,7 +230,7 @@ export const UI_RELANCES: RelancesContent = {
         'Nasza rada: nie trzeba przekierowywać wszystkiego. Wystarczy włączyć przekierowanie tylko wtedy, gdy Państwo nie odbierają, albo wieczorami i w weekendy. To właśnie te połączenia traci dziś {company} i przy nich agent będzie najbardziej przydatny.',
         'Podsumowanie każdego połączenia przeczytają Państwo w panelu klienta i od razu zobaczą, czy to się sprawdza.',
       ],
-      cta: { label: 'Wybieram pakiet i rozpoczynam okres próbny', target: 'billing' },
+      cta: { label: 'Wybieram pakiet i rozpoczynam okres próbny', target: 'plans' },
     }),
     I5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -232,7 +249,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           `Nie trzeba trafić za pierwszym razem: pakiet można zmienić w dowolnym momencie, bez zobowiązań, a zmiana jest wyświetlana przed potwierdzeniem. W ${f.trialDays}-dniowym okresie próbnym nic nie jest pobierane.`,
         ],
-        cta: { label: 'Wybieram pakiet', target: 'billing' },
+        cta: { label: 'Wybieram pakiet', target: 'plans' },
       };
     },
     I6: (f) => ({
@@ -243,7 +260,7 @@ export const UI_RELANCES: RelancesContent = {
         `Abonament nie każdemu odpowiada. Z agenta można też korzystać bez pakietu: doładowują Państwo kredyty, kiedy chcą (Add credits), minuta kosztuje ${f.paygMinute} netto, a kredyty nie wygasają.`,
         `Mają Państwo wtedy te same funkcje co w pakiecie ${f.plans.receptionniste.name}. Ten tryb nie obejmuje bezpłatnego okresu próbnego: płacą Państwo tylko za to, co doładują. Gdy połączenia staną się regularne, pakiet wychodzi taniej za minutę.`,
       ],
-      cta: { label: 'Doładowuję kredyty lub wybieram pakiet', target: 'billing' },
+      cta: { label: 'Doładowuję kredyty', target: 'credits' },
     }),
     I7: (f) => ({
       category: 'marketing',
@@ -254,7 +271,7 @@ export const UI_RELANCES: RelancesContent = {
         'Jeśli coś Państwa zatrzymało, prosimy napisać nam o tym w jednym zdaniu: to dla nas naprawdę cenne.',
         'Później będziemy pisać najwyżej raz w miesiącu. Aby nie otrzymywać już żadnych wiadomości, wystarczy kliknąć link rezygnacji na dole tego e-maila.',
       ],
-      cta: { label: 'Otwieram panel klienta', target: 'billing' },
+      cta: { label: 'Rozpoczynam okres próbny', target: 'plans' },
     }),
 
     // ---------- C: trwający okres próbny (essential, wyłącznie informacyjne) ----------
@@ -273,10 +290,11 @@ export const UI_RELANCES: RelancesContent = {
           ],
         },
         'W okresie próbnym nic nie jest pobierane. Można go anulować przed {trial_end_date} w Billing info.',
+        'Warto wiedzieć: okres próbny obejmuje minuty połączeń, ale nie obejmuje kredytów na wiadomości. Pisemne odpowiedzi AI (czat na stronie, WhatsApp, Messenger) korzystają z tych kredytów, które można doładować w Add credits.',
       ],
       cta: { label: 'Otwieram panel klienta', target: 'app' },
     }),
-    C2: (f) => ({
+    C2: () => ({
       category: 'essential',
       skipIfEssentialOnly: true,
       subject: 'Państwa agent czeka na pierwsze połączenie',
@@ -289,7 +307,7 @@ export const UI_RELANCES: RelancesContent = {
             'Jeśli odpowiedź jest zadowalająca, wystarczy włączyć u operatora przekierowanie, gdy Państwo nie odbierają.',
           ],
         },
-        `Zachowują Państwo swój numer, a przekierowanie można wyłączyć w każdej chwili. Do {trial_end_date} mają Państwo do dyspozycji ${minutes(f.trialMinutes)} okresu próbnego.`,
+        'Zachowują Państwo swój numer, a przekierowanie można wyłączyć w każdej chwili. Okres próbny trwa do {trial_end_date}.',
       ],
       cta: { label: 'Otwieram panel klienta', target: 'app' },
     }),
@@ -322,6 +340,17 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Moja subskrypcja', target: 'billing' },
     }),
+    C4_exhausted: (f) => ({
+      category: 'essential',
+      subject: `Wykorzystano ${minutes(f.trialMinutes)} okresu próbnego`,
+      preheader: 'Co dzieje się teraz, do końca okresu próbnego.',
+      body: [
+        `Pula ${minutesGen(f.trialMinutes)} okresu próbnego została wykorzystana: połączenia są wstrzymane do końca okresu próbnego ({trial_end_date}) albo do chwili, gdy rozpoczną Państwo subskrypcję pakietu {plan_name} w Billing info.`,
+        'Jeśli nic Państwo nie zrobią, subskrypcja rozpocznie się automatycznie po zakończeniu okresu próbnego, chyba że wcześniej ją Państwo anulują.',
+        'Decyzja należy do Państwa.',
+      ],
+      cta: { label: 'Moja subskrypcja', target: 'billing' },
+    }),
     C5: () => ({
       category: 'essential',
       subject: 'Okres próbny kończy się {trial_end_date}',
@@ -338,6 +367,33 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: { label: 'Zarządzam subskrypcją', target: 'billing' },
     }),
+    C5_annual: () => ({
+      category: 'essential',
+      subject: 'Okres próbny kończy się {trial_end_date}',
+      preheader: 'Co się stanie tego dnia i jak anulować bez opłat.',
+      body: [
+        'Państwa okres próbny kończy się {trial_end_date}.',
+        {
+          ul: [
+            'Chcą Państwo kontynuować: nie trzeba nic robić. Tego dnia rozpocznie się pakiet {plan_name} z rozliczeniem rocznym, a opłata za pierwszy rok ({plan_price} netto, plus podatki zależnie od kraju) zostanie pobrana z karty jednorazowo.',
+            'Nie chcą Państwo kontynuować: wystarczy anulować przed tą datą w Billing info, przycisk „Cancel subscription”. Nic nie zostanie pobrane.',
+          ],
+        },
+        'Pytanie dotyczące pakietu lub minut? Wystarczy odpowiedzieć na tę wiadomość.',
+      ],
+      cta: { label: 'Zarządzam subskrypcją', target: 'billing' },
+    }),
+    C5_cancelled: () => ({
+      category: 'essential',
+      subject: 'Okres próbny kończy się {trial_end_date}: nic nie zostanie pobrane',
+      preheader: 'Anulowanie zostało zarejestrowane.',
+      body: [
+        'Anulowali Państwo subskrypcję w trakcie okresu próbnego: anulowanie zostało zarejestrowane.',
+        'Okres próbny pozostaje aktywny do {trial_end_date}. Pakiet nie rozpocznie się tego dnia i nic nie zostanie pobrane z karty.',
+        'Jeśli to pomyłka lub mają Państwo pytanie, wystarczy odpowiedzieć na tę wiadomość.',
+      ],
+      cta: { label: 'Moja subskrypcja', target: 'billing' },
+    }),
 
     // ---------- F: okres próbny zakończony bez pakietu (F1 essential, potem marketing) ----------
     F1: (f) => ({
@@ -351,6 +407,17 @@ export const UI_RELANCES: RelancesContent = {
       ],
       cta: null,
     }),
+    F1_payment_failed: () => ({
+      category: 'essential',
+      subject: 'Okres próbny dobiegł końca: płatność nie powiodła się',
+      preheader: 'Subskrypcja się nie rozpoczęła i nic nie zostało pobrane.',
+      body: [
+        'Okres próbny dobiegł końca, ale płatność za pakiet nie powiodła się. Subskrypcja się więc nie rozpoczęła i nic nie zostało pobrane.',
+        'Jeśli chcą Państwo kontynuować, wystarczy dodać ważną kartę w Billing info (zakładka Wallet), a następnie ponownie wybrać pakiet.',
+        'Pytanie lub potrzebna pomoc? Wystarczy odpowiedzieć na tę wiadomość.',
+      ],
+      cta: { label: 'Aktualizuję kartę', target: 'billing' },
+    }),
     F2: (f) => ({
       category: 'marketing',
       subject: 'Agent może zostać, bez abonamentu',
@@ -359,7 +426,7 @@ export const UI_RELANCES: RelancesContent = {
         'Jeśli powstrzymał Państwa abonament, jest inna możliwość: płatność za użycie.',
         `Panel klienta pozostaje dostępny. Doładowują Państwo kredyty, kiedy chcą (Add credits), minuta kosztuje ${f.paygMinute} netto, bez abonamentu, a kredyty nie wygasają. Zachowują Państwo te same funkcje co w pakiecie ${f.plans.receptionniste.name}. ${f.exampleCallMinutes}-minutowe połączenie kosztuje około ${f.exampleCallPayg} netto.`,
       ],
-      cta: { label: 'Doładowuję kredyty', target: 'billing' },
+      cta: { label: 'Doładowuję kredyty', target: 'credits' },
     }),
     F3: () => ({
       category: 'marketing',
@@ -369,7 +436,7 @@ export const UI_RELANCES: RelancesContent = {
         'Wiele firm nie powierza agentowi wszystkiego. Traktują go jako wsparcie zespołu: przejmuje rozmowy wieczorem, w weekend, w przerwie obiadowej albo gdy wszystkie linie są zajęte.',
         'Wystarczy ustawić u operatora przekierowanie połączeń na te pory. Przez resztę czasu {company} działa tak jak dotąd, a połączenia, które trafiały na pocztę głosową, wreszcie zostają odebrane, z podsumowaniem dla Państwa.',
       ],
-      cta: { label: 'Wracam z pakietem', target: 'billing' },
+      cta: { label: 'Wracam z pakietem', target: 'plans' },
     }),
     F4: () => ({
       category: 'marketing',
@@ -386,7 +453,7 @@ export const UI_RELANCES: RelancesContent = {
         },
         'Asystent pisania w panelu klienta (AI Prompt Editor) pomoże je przygotować.',
       ],
-      cta: { label: 'Wracam z tymi ustawieniami', target: 'billing' },
+      cta: { label: 'Wracam z tymi ustawieniami', target: 'plans' },
     }),
     F5: (f) => {
       const { receptionniste: r, assistant: a, 'centre-appels': c } = f.plans;
@@ -427,7 +494,7 @@ export const UI_RELANCES: RelancesContent = {
         `Panel klienta pozostaje dostępny: można wrócić z pakietem, bez zobowiązań, albo płacić za użycie, ${f.paygMinute} netto za minutę.`,
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'Mój panel klienta', target: 'billing' },
+      cta: { label: 'Mój panel klienta', target: 'app' },
     }),
 
     // ---------- U: mało aktywne konta z płatnością za użycie (U1 essential, potem marketing) ----------
@@ -474,7 +541,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'Zużycie można śledzić w panelu klienta, a pakiet można anulować w każdej chwili w Billing info.',
         ],
-        cta: { label: 'Sprawdzam zużycie', target: 'billing' },
+        cta: { label: 'Sprawdzam zużycie', target: 'app' },
       };
     },
     U4: () => ({
@@ -512,7 +579,7 @@ export const UI_RELANCES: RelancesContent = {
           },
           'Bez zobowiązań, z możliwością anulowania w każdej chwili w Billing info.',
         ],
-        cta: { label: 'Porównuję pakiety', target: 'billing' },
+        cta: { label: 'Porównuję pakiety', target: 'plans' },
       };
     },
     U6: (f) => ({
@@ -529,7 +596,124 @@ export const UI_RELANCES: RelancesContent = {
         },
         SERIES_END_UNSUBSCRIBE,
       ],
-      cta: { label: 'Mój panel klienta', target: 'billing' },
+      cta: { label: 'Mój panel klienta', target: 'app' },
+    }),
+
+    // ---------- A : mise en route (service, audit du 9 oct., § 7) ----------
+    A1: (f) => ({
+      category: 'essential',
+      subject: 'Agent nie został jeszcze utworzony: wystarczy około dziesięciu minut',
+      preheader: 'Trzy kroki, aby odbierał Państwa połączenia.',
+      body: [
+        `Państwa panel klienta ${f.brand} jest gotowy, ale nie utworzono w nim jeszcze żadnego agenta. To agent odbiera połączenia, a jego utworzenie zajmuje około dziesięciu minut:`,
+        {
+          ol: [
+            'W panelu klienta prosimy otworzyć „Assistants”, następnie „Create”, i zacząć od szablonu.',
+            'Instrukcje warto dopasować do tego, czym zajmuje się {company}: godziny, usługi, informacje do zanotowania.',
+            'Następnie wystarczy go przetestować i przypisać mu numer: „Get new phone number”, jeśli go jeszcze Państwo nie mają (opcja miesięczna), a potem sekcja „General”, pole „Phone number”.',
+          ],
+        },
+        'Potrzebują Państwo pomocy? Asystentka pomocy (dymek w prawym dolnym rogu panelu) poprowadzi Państwa krok po kroku, po polsku, na piśmie lub głosowo.',
+      ],
+      cta: { label: 'Tworzę agenta', target: 'app' },
+      secondary: { label: 'Przewodnik krok po kroku: tworzenie agenta', target: 'guide_create' },
+    }),
+    A2: () => ({
+      category: 'essential',
+      subject: 'Skonfigurujemy agenta razem z Państwem?',
+      preheader: 'Wystarczy zostawić numer: oddzwonimy, aby utworzyć go razem.',
+      body: [
+        'Agent nadal nie został utworzony. Jeśli brakuje czasu albo nie wiadomo, od czego zacząć, możemy skonfigurować go razem z Państwem przez telefon.',
+        'Wystarczy zostawić numer i dogodną porę: oddzwonimy, aby razem z Państwem utworzyć agenta, z którego będzie korzystać {company} (instrukcje, numer, przekierowanie połączeń). Można też odpowiedzieć na tę wiadomość, podając dogodny termin.',
+      ],
+      cta: { label: 'Proszę o oddzwonienie i wspólną konfigurację', target: 'setup_assist' },
+      after: ['Wolą Państwo zrobić to samodzielnie? Przewodnik „Tworzenie i edycja agenta” opisuje każdy krok, a asystentka pomocy w panelu klienta odpowie na pytania.'],
+      secondary: { label: 'Czytam przewodnik', target: 'guide_create' },
+    }),
+    A3: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Okres próbny trwa do {trial_end_date}: agent nie został jeszcze utworzony',
+      preheader: 'Jest jeszcze czas, aby go przetestować: możemy go skonfigurować razem z Państwem.',
+      body: [
+        'Okres próbny trwa do {trial_end_date}, ale agent nie został jeszcze utworzony. To nasza ostatnia wiadomość w tej sprawie.',
+        'Jest jeszcze czas, aby przetestować go na prawdziwych połączeniach: możemy skonfigurować go razem z Państwem przez telefon. Wystarczy zostawić numer albo odpowiedzieć na tę wiadomość, podając dogodny termin.',
+        'Jeśli zmienili Państwo zdanie, okres próbny można anulować przed {trial_end_date} w Billing info: nic nie zostanie pobrane.',
+      ],
+      cta: { label: 'Proszę o oddzwonienie i wspólną konfigurację', target: 'setup_assist' },
+    }),
+    A3_active: (f) => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Konto jest aktywne, ale agent nie został jeszcze utworzony',
+      preheader: 'Możemy skonfigurować go razem z Państwem przez telefon.',
+      body: [
+        `Państwa konto ${f.brand} jest aktywne, ale agent nie został jeszcze utworzony, więc na razie żadne połączenie nie jest obsługiwane. To nasza ostatnia wiadomość w tej sprawie.`,
+        'Możemy skonfigurować go razem z Państwem przez telefon: wystarczy zostawić numer albo odpowiedzieć na tę wiadomość, podając dogodny termin.',
+      ],
+      cta: { label: 'Proszę o oddzwonienie i wspólną konfigurację', target: 'setup_assist' },
+    }),
+    A4: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Agent jest gotowy: czas go przetestować i włączyć przekierowanie połączeń',
+      preheader: 'Trzy kroki przed pierwszymi połączeniami.',
+      body: [
+        'Agent został utworzony, ale nie odebrał jeszcze żadnego prawdziwego połączenia. Zwykle wystarczy:',
+        {
+          ol: [
+            'przypisać mu numer: jeśli go jeszcze Państwo nie mają, można go uzyskać w „Get new phone number” (opcja miesięczna, cena widoczna przed zakupem), a następnie w „Assistants” otworzyć agenta, sekcja „General”, pole „Phone number”;',
+            'zadzwonić na ten numer z komórki i zadać pytanie, jakie zadałby klient;',
+            'jeśli odpowiedź jest zadowalająca, włączyć u operatora przekierowanie na ten numer, np. tylko wtedy, gdy Państwo nie odbierają. Państwa numer pozostaje bez zmian.',
+          ],
+        },
+        'Oba przewodniki poniżej opisują każdy krok, a asystentka pomocy w panelu klienta odpowie na pytania.',
+      ],
+      cta: { label: 'Przewodnik: testowanie agenta', target: 'guide_test' },
+      secondary: { label: 'Przewodnik: zachowanie numeru dzięki przekierowaniu', target: 'guide_forwarding' },
+    }),
+    A_monthly: () => ({
+      category: 'essential',
+      skipIfEssentialOnly: true,
+      subject: 'Agent nie odebrał żadnego połączenia w ciągu ostatnich 30 dni',
+      preheader: 'Sprawdzenie zajmie minutę, możemy też zrobić to razem.',
+      body: [
+        'W ciągu ostatnich 30 dni agent nie odebrał żadnego połączenia. Być może tak ma być, ale często przyczyną jest numer, który nie jest już przypisany do agenta, albo wyłączone przekierowanie połączeń.',
+        'Sprawdzenie w minutę:',
+        {
+          ol: [
+            'Prosimy zadzwonić na swój zwykły numer w chwili, gdy przekierowanie powinno zadziałać.',
+            'Jeśli agent nie odbiera, warto sprawdzić przekierowanie u operatora lub numer przypisany do agenta w panelu klienta (sekcja „General”).',
+          ],
+        },
+        'Wolą Państwo sprawdzić to z nami? Wystarczy zostawić numer: oddzwonimy i sprawdzimy wszystko razem.',
+      ],
+      cta: { label: 'Proszę o oddzwonienie', target: 'setup_assist' },
+      secondary: { label: 'Przewodnik: zachowanie numeru dzięki przekierowaniu', target: 'guide_forwarding' },
+    }),
+
+    // ---------- S : solde de minutes d’un abonné ou d’un compte à la minute (service ; l’essai a C4) ----------
+    S1: (f) => ({
+      category: 'essential',
+      subject: 'Pozostałe minuty połączeń: {minutes_left}',
+      preheader: 'Co się dzieje, gdy saldo spadnie do 0.',
+      body: [
+        `Dla informacji: saldo minut na Państwa koncie ${f.brand} jest niskie (pozostałe minuty: {minutes_left}).`,
+        'Gdy spadnie do 0, agent przestaje odbierać połączenia, dopóki nie zostaną dodane minuty: przy odnowieniu pakietu, jeśli go Państwo mają, albo w dowolnej chwili w Add credits.',
+        'Jeśli ten poziom Państwu odpowiada, nie trzeba nic robić.',
+      ],
+      cta: { label: 'Sprawdzam minuty', target: 'credits' },
+    }),
+    S2: (f) => ({
+      category: 'essential',
+      subject: 'Saldo minut się wyczerpało: agent nie odbiera już połączeń',
+      preheader: 'Wznowi pracę, gdy tylko zostaną dodane minuty.',
+      body: [
+        `Saldo minut na Państwa koncie ${f.brand} wynosi 0: na razie agent nie odbiera połączeń.`,
+        'Wznowi pracę, gdy tylko zostaną dodane minuty: przy odnowieniu pakietu, jeśli go Państwo mają, albo od razu w Add credits.',
+        'Mają Państwo pytania? Wystarczy odpowiedzieć na tę wiadomość.',
+      ],
+      cta: { label: 'Dodaję minuty', target: 'credits' },
     }),
   },
 
@@ -571,7 +755,7 @@ export const UI_RELANCES: RelancesContent = {
       subject: 'Porada miesiąca: {topic_title}',
       preheader: 'Praktyczna porada z naszych przewodników.',
       body: ['{topic_paragraph}'],
-      cta: { label: 'Otwieram panel klienta', target: 'billing' },
+      cta: { label: 'Otwieram panel klienta', target: 'app' },
       after: ['To comiesięczny e-mail; można z niego zrezygnować jednym kliknięciem na dole tej wiadomości.'],
     }),
   },

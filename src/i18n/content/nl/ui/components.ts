@@ -5,6 +5,7 @@ export const UI_COMPONENTS = {
     home: 'Home',
     freeTrial: 'Gratis starten',
     callMeBack: 'Bel mij terug',
+    formInterrupted: 'De pagina was nog niet helemaal geladen, waardoor uw aanvraag niet is verzonden. Wilt u die opnieuw versturen?',
   },
 
   navbar: {

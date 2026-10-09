@@ -29,7 +29,8 @@ export const cancelPendingCallbacks = (e164: string) =>
  * une opposition, plus aucun appel ni message automatique) ou mauvais_contact (rappels annulés seulement).
  * `apply: false` (demande non authentifiée) : rien n’est annulé ni bloqué, l’équipe est seulement prévenue —
  * sinon n’importe qui pourrait faire annuler le rappel d’un autre numéro. L’opposition est alors appliquée
- * par le webhook de fin d’appel (résultat ne_plus_appeler, authentifié) ou à la main.
+ * par le webhook de fin d’échange (authentifié) : issue ne_plus_appeler d’un appel, ou canal écrit avec une demande de
+ * rappel enregistrée pour ce numéro pendant l’échange (src/lib/writtenOptout.ts) ; sinon à la main.
  * Renvoie le détail des étapes, pour les journaux et la réponse à l’agent.
  */
 export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_appeler' | 'desinscription' | 'mauvais_contact'; source: string; reason?: string; apply?: boolean }) {
@@ -59,7 +60,7 @@ export async function registerOptOut(opts: { phone: string; outcome: 'ne_plus_ap
   const lines = [
     `Numéro : ${phone}`, `Source : ${source}`, reason && `Motif : ${reason}`,
     `Rappels en attente : ${cancel.status === 'fulfilled' ? 'annulés' : 'NON annulés'}`,
-    !apply && 'À VÉRIFIER : demande reçue sans jeton, rien n’a été appliqué automatiquement. Elle le sera à la fin de l’appel si son résultat est « ne_plus_appeler » ; sinon, annuler les rappels de ce numéro à la main.',
+    !apply && 'À VÉRIFIER : demande reçue sans jeton, rien n’a été appliqué automatiquement. Elle le sera à la fin de l’échange : appel terminé avec l’issue « ne_plus_appeler », ou, sur un canal écrit (Messenger, espace client, widget), si une demande de rappel a été enregistrée pour ce numéro pendant le même échange (src/lib/writtenOptout.ts). Sinon, annuler les rappels de ce numéro à la main.',
     blacklist?.status === 'fulfilled' && blacklist.value === 'sent'
       ? 'Liste de blocage Autocalls : ajout demandé automatiquement (campagnes et appels entrants de ce numéro bloqués).'
       : apply && isOptOut && `À FAIRE : ajouter ce numéro à la liste de blocage Autocalls (blacklist), pour toutes les campagnes${blacklist?.status === 'rejected' ? ` (ajout automatique impossible : ${blacklist.reason?.message})` : ''}.`,

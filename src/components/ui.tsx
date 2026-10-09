@@ -3,10 +3,11 @@ import { track } from '@/lib/analytics';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ArrowUpRight, Check, ChevronDown, Mic, PhoneCall, Play, Sparkles } from 'lucide-react';
-import { DEMO_URL, SIGNUP_URL, SITE, isActiveSector, whatsappUrl } from '@/data/site';
+import { DEMO_URL, FORM_FALLBACK_ACTION, SIGNUP_URL, SITE, isActiveSector, whatsappUrl } from '@/data/site';
 import { useCallbackModal } from '@/context/CallbackContext';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
+import { visitContext } from '@/lib/attribution';
 import { isCallTime } from '@/lib/callHours';
 import { DATE_INVALID, NOT_QUEUED } from './formTexts';
 
@@ -197,18 +198,12 @@ export const profileNote = (f: FormData) => [cleanWebsite(f.get('site_url')) && 
 
 /**
  * Provenance envoyée avec chaque formulaire : page affichée, site d’où vient la personne (domaine et chemin, sans
- * requête) et UTM de l’adresse actuelle. Rien n’est stocké dans le navigateur (aucun cookie ni stockage local).
+ * requête) et UTM de l’adresse actuelle, sinon ceux de la page d’arrivée de la visite (gardés en mémoire pendant la
+ * visite, src/lib/attribution.ts). Rien n’est stocké dans le navigateur (aucun cookie ni stockage local).
  */
 export function landingContext() {
   if (typeof window === 'undefined') return {};
-  const q = new URLSearchParams(window.location.search);
-  let referrer: string | undefined;
-  try {
-    const r = new URL(document.referrer);
-    if (r.host !== window.location.host) referrer = `${r.origin}${r.pathname}`;
-  } catch { /* pas de référent */ }
-  const utm = { source: q.get('utm_source') || undefined, medium: q.get('utm_medium') || undefined, campaign: q.get('utm_campaign') || undefined };
-  return { originPage: window.location.pathname, referrer, ...(utm.source || utm.medium || utm.campaign ? { utm } : {}) };
+  return visitContext(window.location, document.referrer);
 }
 
 /** Mention d’information sous le champ email (visible même case décochée) : finalité, droit de refus, responsable. */
@@ -325,7 +320,8 @@ export function CallbackForm({
     );
   }
   return (
-    <form onSubmit={submit} className="grid gap-4" noValidate={false}>
+    // method="post" : un envoi avant le chargement du script ne met jamais les coordonnées dans l’adresse.
+    <form method="post" action={FORM_FALLBACK_ACTION} onSubmit={submit} className="grid gap-4" noValidate={false}>
         {/* Champ piège invisible pour les robots (ne pas remplir) */}
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
       <div className={`grid gap-4 ${compact ? '' : 'sm:grid-cols-2'}`}>

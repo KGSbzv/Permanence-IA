@@ -1,7 +1,7 @@
 // Variante australienne (en-AU) du contenu anglais : le texte anglais commun est rédigé pour le Royaume-Uni
 // (£, « flat », « estate agents », MOT, Londres). Ici, seuls les exemples propres au marché sont remplacés :
 // montants en A$, lieux australiens et vocabulaire immobilier et automobile local. Tout le reste vient de `en`.
-// Utilisé par getI18n pour la locale en-au (src/i18n/index.tsx).
+// Utilisé pour la locale en-au par getI18n côté serveur (src/i18n/index.tsx) et par son pack du navigateur (src/i18n/packs/en-au.ts).
 import type { fr } from '../fr';
 import type { Sector } from '../fr/sectors';
 import { en } from './index';

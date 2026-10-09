@@ -1,6 +1,13 @@
-# Autocalls : agents et automatisations, ce qui reste au propriétaire (8 oct. 2026)
+# Autocalls : agents et automatisations, ce qui reste au propriétaire (8 oct. 2026, mis à jour le 9 oct.)
 
 Points des audits 27 à 35 (chaîne D). Ce qui a été fait est listé en premier, puis ce que seul le propriétaire peut faire.
+
+**Mise à jour du 9 octobre (annexe de l'audit des parcours, docs/audits/audit-parcours-2026-10-09.md) :**
+- **Campagnes** : les 7 campagnes qui faisaient 3 tentatives (12532, 12533, 12534, 12519, 12520, 12521, 12522) sont passées à 2 tentatives toutes les 240 minutes le 8 octobre au soir. Les 21 campagnes sont maintenant réglées pareil (revérifié le 9 octobre). Plus rien à faire.
+- **Numéros 11775 et 11795** : ils ne sont plus sur le compte. Plus rien à faire (point 3 ci-dessous).
+- **Rappel du dimanche 11 octobre, 07 h 30 UTC** : c'est l'exécution brzDM… (Daniel, campagne 12533) qui doit appeler. L'exécution lIkW0KeZczN4k44At3wO9 (Noa) doit se terminer **sans** appel : c'est normal, l'ancienne demande est écartée par le contrôle avant appel. Vérifier vers 07 h 35 UTC (09 h 35 à Paris).
+- **Toujours à faire** : les 20 exécutions en pause du 6 octobre (point 1), à faire annuler par le support Autocalls, **sans jamais cliquer sur Retry**.
+- **Corrections d'agents issues de l'audit** : textes exacts dans docs/audits/a-appliquer-autocalls-2026-10-09.md.
 
 ## Fait le 8 octobre
 
@@ -20,7 +27,7 @@ Points des audits 27 à 35 (chaîne D). Ce qui a été fait est listé en premie
 
 Ce sont des exécutions de l'ancienne version, sans contrôle de doublon. Elles attendent dans l'étape de délai. Le MCP ne permet pas de les annuler, et Chrome n'était pas disponible pour le faire.
 
-Pour chacune : Autocalls > Automations > ouvrir l'automatisation > Runs > exécution « Paused » > Stop/Cancel.
+Pour chacune : Autocalls > Automations > ouvrir l'automatisation > Runs > exécution « Paused » > Stop/Cancel. Vérifié ensuite (point 3 des « Points 54 à 62 ») : l'interface ne propose pas d'arrêt, seulement « Retry ». Il faut donc demander l'annulation au support Autocalls, et **ne jamais cliquer sur Retry**. Toujours en pause le 9 octobre.
 
 | Automatisation | Exécutions en pause |
 |---|---|
@@ -48,7 +55,7 @@ Pour chacune : Autocalls > Automations > ouvrir l'automatisation > Runs > exécu
 
 ### 3. Numéro US +1 770 746 6445 (11775)
 
-Il n'est rattaché à aucun agent. Le libérer (release-phone-number, puis chez Twilio) arrête son coût mensuel, mais c'est **irréversible**. Je n'y ai pas touché. Même question pour 11795 (+972 53-389-0402, SIP), libre lui aussi.
+**Sans objet depuis le 9 octobre** : 11775 et 11795 ne sont plus sur le compte Autocalls (constaté lors de l'audit des parcours). Texte d'origine, pour mémoire : il n'était rattaché à aucun agent ; le libérer arrêtait son coût mensuel, mais c'était irréversible. Même question pour 11795 (+972 53-389-0402, SIP).
 
 ### 4. Latence des agents vocaux (choix entre qualité et vitesse)
 
@@ -61,6 +68,7 @@ Ces deux pistes demandent des essais réels et un arbitrage du propriétaire. Ri
 ### 5. Tests réels (propre téléphone, à faire après les correctifs du site)
 
 - Deux rappels programmés (A dans 15 min, puis B dans 30 min) : seul B doit appeler.
+- Premier rappel programmé réel : dimanche 11 octobre, 07 h 30 UTC (voir la mise à jour du 9 octobre en tête de fichier).
 - Un rappel non décroché : vérifier le message de répondeur (get-call et messagerie), puis le SMS de repli (Autocalls > SMS). Si la case WhatsApp est cochée, le test doit attendre la validation Meta des modèles `pia_callback_missed`.
 - Ligne Israël : demander un rappel en donnant un numéro local (05X…) et vérifier qu'il part bien en +972.
 - Décider si le numéro UK 07367 090106 doit figurer dans les messages de répondeur UK et AU. Aujourd'hui, ces messages renvoient seulement vers le site.
@@ -76,9 +84,9 @@ Ces deux pistes demandent des essais réels et un arbitrage du propriétaire. Ri
 
 ### À faire par le propriétaire
 
-1. **7 campagnes encore à 3 tentatives** : Israël 12532 et 12533 (120 min), Israël 12534 (90 min), AU 12519, IT 12520, PL 12521 et NL 12522 (120 min). Les passer à 2 tentatives et 240 min, comme les 14 autres. La modification des campagnes m'a été refusée : je ne l'ai pas retentée.
+1. ~~**7 campagnes encore à 3 tentatives**~~ : **fait le 8 octobre au soir** (revérifié le 9 octobre). Israël 12532, 12533 et 12534, AU 12519, IT 12520, PL 12521 et NL 12522 sont à 2 tentatives et 240 min, comme les 14 autres.
 2. **Samedi en Australie** : les campagnes AU 12503, 12508 et 12519 appellent le samedi jusqu'à 19 h et ne tiennent pas compte des jours fériés nationaux. Or la base anglaise indique 9 h–17 h le samedi. À décider : garder ces horaires et corriger la base, ou réduire la plage (Autocalls applique une seule plage à tous les jours autorisés), et mettre les campagnes AU en pause les jours fériés.
-3. **Rotation du jeton du webhook** : ce jeton figure en clair dans l'URL des outils 6176, 6177, 6178, 6182, 6240, 6241 et 6242, et dans les webhooks des agents de rappel, de 21314, 21376, 21358 et 21297. Pour le changer : 1) nouveau secret `WEBHOOK_TOKEN` dans App Hosting (snarecore-cacrs/voiceia), avec une période où l'ancien et le nouveau sont acceptés tous les deux (modification du site) ; 2) remplacer le jeton dans ces outils et ces webhooks (en-tête `x-webhook-token` pour les outils ; en paramètre d'URL pour les webhooks d'agents, car Autocalls n'y envoie pas d'en-têtes) ; 3) vérifier qu'un appel test reçoit 200, puis retirer l'ancien jeton. Je n'ai rien changé : sans rotation, déplacer le jeton vers un en-tête ne le protégerait pas, puisqu'il reste visible dans les webhooks. Et je ne peux pas vérifier qu'Autocalls envoie bien l'en-tête sans un vrai appel.
+3. **Rotation du jeton du webhook** : ce jeton figure en clair dans l'URL des outils 6176, 6177, 6178, 6182, 6240, 6241 et 6242, et dans les webhooks des agents de rappel, de 21314, 21376, 21358 et 21297. Pour le changer : 1) nouveau secret `WEBHOOK_TOKEN` dans App Hosting (snarecore-cacrs/voiceia), avec une période où l'ancien et le nouveau sont acceptés tous les deux (modification du site) ; 2) remplacer le jeton dans ces outils et ces webhooks (en-tête `x-webhook-token` pour les outils ; en paramètre d'URL pour les webhooks d'agents, car Autocalls n'y envoie pas d'en-têtes) ; 3) vérifier qu'un appel test reçoit 200, puis retirer l'ancien jeton. Je n'ai rien changé : sans rotation, déplacer le jeton vers un en-tête ne le protégerait pas, puisqu'il reste visible dans les webhooks. Et je ne peux pas vérifier qu'Autocalls envoie bien l'en-tête sans un vrai appel. **Mise à jour du 9 octobre** : plus aucun outil d'agent ne porte le jeton dans l'adresse, et le site accepte le jeton suivant (WEBHOOK_TOKEN_NEXT). Reste le retrait de l'ancien jeton : 2 commandes du propriétaire, puis les étapes de Claude, dans docs/autocalls-webhooks-migration.md.
 4. **Profil WhatsApp et nom du compte Meta** : le compte WhatsApp Business s'appelle encore « Permanence agent ». Les conversations reçoivent donc `sender_name = 'Permanence agent'`. Pour le renommer en « Permanence IA » : Meta > Paramètres > Comptes WhatsApp. Facultatif : dans la description du profil +33, ajouter « Israël : 02-376-7085 · facebook.com/permanenceia ». Ensuite, test d'affichage depuis un téléphone qui n'a pas ce numéro dans ses contacts.
 5. **Tests réels, maintenant possibles** (modèles approuvés) :
    - appel au 07367 090106 (ligne UK, Katie), puis vérifier la ligne dans call_events ;
@@ -92,7 +100,7 @@ Ces deux pistes demandent des essais réels et un arbitrage du propriétaire. Ri
 ### Fait ou déjà en place
 
 - **Outil « ne plus appeler » (6243, `ne_plus_appeler`)** : appelle `POST https://www.permanenceia.com/api/agent/optout` (en ligne, vérifié : 405 en GET, refus propre d'un numéro vide). Le numéro est toujours celui de l'échange (`{{customer_phone}}`, champ fixe), l'agent ne fournit que le motif. Le jeton est dans l'en-tête `x-webhook-token` (masqué dans Autocalls) : les rappels en attente de ce numéro sont annulés tout de suite et il n'est plus mis en file. Attaché aux agents qui passent ou reçoivent des appels : 21182, 21270, 21231 à 21235, 21272, 21274, 21276, 21278, 21280, 21308, 21309 (rappels commerciaux) ; 21183, 21236 à 21240, 21310 (rappels support) ; 21376 (ligne UK), 21314 (ligne Israël) ; 21358 (WhatsApp).
-- **Outil « ne plus appeler » pour l'écrit et le site (6244, `ne_plus_appeler_numero`)** : même adresse, **sans jeton**. L'agent passe le numéro que la personne a donné. Rien n'est annulé automatiquement (sinon n'importe qui pourrait bloquer le numéro d'un autre) : l'équipe reçoit un email et applique l'opposition. Attaché à Messenger 21297, à l'espace client 21205 et aux 14 widgets du site (21203, 21206 à 21210, 21269, 21271, 21273, 21275, 21277, 21279, 21306, 21307).
+- **Outil « ne plus appeler » pour l'écrit et le site (6244, `ne_plus_appeler_numero`)** : même adresse, **sans jeton**. L'agent passe le numéro que la personne a donné. L'outil lui-même n'annule rien (sinon n'importe qui pourrait bloquer le numéro d'un autre) : l'équipe reçoit un email. Depuis le 9 octobre, le webhook de fin d'échange (authentifié) applique l'opposition si une demande de rappel a été enregistrée pour ce numéro pendant ce même échange (appel de l'outil de rappel dans la transcription, ou demande marquée de l'identifiant de l'échange ; jamais une demande d'un autre échange), y compris pour une session vocale d'un widget (src/lib/writtenOptout.ts) ; sinon l'équipe reçoit « À vérifier ». Réglages à compléter dans Autocalls : docs/audits/a-appliquer-autocalls-2026-10-09.md (lot C, point 3). Attaché à Messenger 21297, à l'espace client 21205 et aux 14 widgets du site (21203, 21206 à 21210, 21269, 21271, 21273, 21275, 21277, 21279, 21306, 21307).
 - **Consigne dans les prompts** (une seule fois, en silence, jamais pour un simple « pas maintenant ») : ajoutée à 21182, 21376, 21358 (règle STOP), 21297, 21314 et 21310. Les autres agents de rappel avaient déjà la règle « refus → ne_plus_appeler, plus aucun appel » : seul l'outil leur a été ajouté. Les prompts modifiés ont été relus : compliance_blocked_at = null et température inchangée (0,35 ; 0,40 pour 21358 et 21297).
 - **Webhooks de fin d'échange** (points 45 et 53) : 21376, 21358 et 21297 envoient bien leur fin d'appel ou de conversation à `/api/webhooks/autocalls`. Le site traite déjà `rappel_commercial` et `ticket_support` comme des issues à traiter.
 - **Widget 21205** (point 51) : l'accueil est `{{greeting}}` (doubles accolades) et le prompt choisit le prénom selon la langue (Lucie, Katie, Manuela, Lena, Emma, נועה), avec Lucie par défaut si `agent_name` est vide.
@@ -125,6 +133,6 @@ Ces deux pistes demandent des essais réels et un arbitrage du propriétaire. Ri
 ### À faire par le propriétaire
 
 1. **Documents de connaissance obsolètes** (point 55) : les 6 bases restent au statut « failed » tant que les créations en échec n'ont pas été supprimées, et les anciens documents v7 et v9 sont toujours actifs. L'API Autocalls ne modifie que le nom et la description d'un document, pas son contenu : seule la suppression les retire. Liste à jour et ordre conseillé : `docs/autocalls-kb-a-supprimer.md`.
-2. **7 campagnes encore à 3 tentatives** (point 60) : inchangé au 8 octobre (12532, 12533, 12534, 12519, 12520, 12521, 12522). Les passer à 2 tentatives et 240 min.
+2. ~~**7 campagnes encore à 3 tentatives**~~ (point 60) : **fait le 8 octobre au soir** (12532, 12533, 12534, 12519, 12520, 12521, 12522 à 2 tentatives et 240 min ; revérifié le 9 octobre).
 3. **Exécutions en pause du 6 octobre** (point 61) : toujours au statut « Paused » (20 exécutions, liste au point 1 des « Points 27 à 35 »). L'interface Automate ne propose que « Retry on Latest Version » et « Retry From Failed Step », sans bouton d'arrêt. **Ne pas utiliser Retry** : cela relancerait les demandes de test et pourrait ajouter un contact à une campagne. Il faut demander au support Autocalls de les annuler.
 4. **Jeton dédié aux outils** (point 56, facultatif) : les widgets publics utilisent le même outil avec jeton que les agents de rappel. Un visiteur peut donc, via le widget, demander plusieurs rappels pour un même numéro sans la limite des 7 jours (le plafond global de 50 par jour et la liste d'opposition restent actifs). Pour séparer : créer un second secret (par ex. `AGENT_TOOL_TOKEN`) dans App Hosting (snarecore-cacrs/voiceia), adapter le site pour l'accepter, puis retirer le jeton des outils attachés aux widgets. Décision du propriétaire.

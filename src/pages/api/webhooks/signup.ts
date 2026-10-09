@@ -2,6 +2,7 @@
 // L’essai (14 jours, 30 minutes) est géré nativement par la plateforme à la première souscription.
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { NOTIFY_TO, dbInsertIfNew, isAuthorized, sendMail } from '@/lib/server';
+import { stopRelancesLine } from '@/lib/relances/stopLink';
 import { CONTACTS_DB, advanceStage, resolveLocale, selectWithFallback, updateQuietly, upsertContact, type ResolvedLocale } from '@/lib/contacts';
 import { isLocale } from '@/i18n/locales';
 import { emailKey, isValidEmail, normEmail } from '@/lib/emailPrefs';
@@ -69,7 +70,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     await sendMail({
       to: NOTIFY_TO, category: 'internal', subject: `Nouvelle inscription — ${name || email}`,
-      text: `Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nProchaine étape : choix d’un forfait (essai 14 jours / 30 minutes).${context}`,
+      // Lien signé « Arrêter les relances de ce contact » (vide sans secret) : arrêt sans toucher à la base.
+      text: [`Nom : ${name || ''}\nEmail : ${email}\nInscrit le : ${created_at || ''}\nProchaine étape : choix d’un forfait (essai 14 jours / 30 minutes).${context}`, stopRelancesLine(email)].filter(Boolean).join('\n\n'),
     });
   } catch (e: any) { console.error('[signup] email:', e.message); }
 

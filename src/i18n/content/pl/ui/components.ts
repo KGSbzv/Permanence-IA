@@ -16,6 +16,7 @@ export const UI_COMPONENTS: typeof FR_UI_COMPONENTS = {
     home: 'Strona główna',
     freeTrial: 'Zacznij za darmo',
     callMeBack: 'Zamów rozmowę',
+    formInterrupted: 'Strona nie zdążyła się w pełni załadować, więc Twoje zgłoszenie nie zostało wysłane. Wyślij je ponownie.',
   },
 
   navbar: {

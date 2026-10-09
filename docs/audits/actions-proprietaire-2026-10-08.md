@@ -7,24 +7,33 @@ Cette liste ne contient que ce qui reste à faire. « Stripe » désigne le comp
 - widgets, photos des secteurs, modèles WhatsApp ;
 - pied de page de l'e-mail de bienvenue, formulaire d'essai à deux cases, webhooks de fin d'appel, envoi des questions à Autocalls.
 
+**Mise à jour du 9 octobre (annexe de l'audit des parcours, docs/audits/audit-parcours-2026-10-09.md).** Déjà fait, à ne pas refaire :
+- le script « parcours d'essai » est installé dans l'espace client et fonctionne (vérifié le 9 octobre à 12 h 38 UTC sur /plans et /credits). Il n'apparaît pas sur /register et /login, et c'est normal : ces pages ont leur propre champ de scripts ;
+- l'événement `invoice.payment_failed` est ajouté au webhook Stripe « permanenceia-site-relances » depuis le 9 octobre (10 événements écoutés) ;
+- toutes les campagnes de rappel sont à 2 tentatives toutes les 240 minutes depuis le 8 octobre au soir (21 campagnes, revérifié le 9 octobre) ;
+- les numéros 11775 (US) et 11795 (+972 SIP) ne sont plus sur le compte Autocalls ;
+- la recharge à la minute et l'achat de numéro ont déjà été faits en réel sur un compte de test (facture PIA-0001) ;
+- les relances partent en envoi réel depuis le 8 octobre (passage chaque heure, sans erreur).
+
 ## 1. À faire en priorité (bloque des ventes ou crée un risque)
 
 1. **Tests de paiement**, avant toute publicité, sur un compte test de app.permanenceia.com :
    - essai avec carte ;
    - changement de forfait pendant l'essai ;
    - passage à l'annuel ;
-   - recharge et achat de numéro.
+   - annulation par le portail, puis un second essai mené jusqu'au débit.
 
-   Prévenez ensuite Claude.
+   La recharge et l'achat de numéro sont déjà testés (facture PIA-0001) : inutile de les refaire. Déroulé détaillé et points à vérifier : action 1 du § 9 de docs/audits/audit-parcours-2026-10-09.md. Prévenez ensuite Claude.
 2. **Tests d'appels.**
    - Appeler le +44 7367 090106 et le 02-376-7085, en prospect puis en client.
    - Demander deux rappels, A dans 15 min et B dans 30 min : seul B doit appeler.
    - Ne pas décrocher à un rappel : le répondeur doit se déclencher, puis un SMS ou un WhatsApp doit partir.
    - Ouvrir le widget de l'espace client en fr, it et he.
    - Faire écouter les voix étrangères par des natifs.
+   - **Dimanche 11 octobre vers 07 h 35 UTC (09 h 35 à Paris)** : l'exécution brzDM… doit faire appeler votre mobile de test par Daniel (campagne 12533). L'exécution lIkW0… (Noa) doit se terminer **sans** appel : c'est normal, l'ancienne demande est écartée par le contrôle avant appel.
 3. **Test d'inscription** avec une adresse Gmail. Le message de bienvenue doit arriver hors spam, et contact@ doit recevoir « Nouvelle inscription ». Le compte test yossef ne doit pouvoir ni appeler ni acheter.
 4. **Message 5 à Autocalls.** Envoyer le message 5 de docs/autocalls-questions-whatsapp.md : commission de 2,70 $ sur l'achat d'un numéro, et mot de passe SMTP visible. Le forfait Réceptionniste n'est plus à recréer : Autocalls lui donne 200 crédits, et Claude a lancé « Resync Billing Portal » (confirmé).
-5. **Campagnes de rappel.** Fait le 8 octobre au soir par Claude : les 20 campagnes sont à 2 tentatives toutes les 240 minutes (vérifié par l'API).
+5. **Campagnes de rappel.** Fait le 8 octobre au soir par Claude : toutes les campagnes sont à 2 tentatives toutes les 240 minutes (vérifié par l'API ; 21 campagnes, revérifié le 9 octobre).
 6. **Mot de passe Zoho.** Fait : vous l'avez changé le 8 octobre.
 7. **Bases de connaissances.** Supprimer les 8 anciennes bases nommées « ANCIENNE » : 6213, 6214, 6215, 6216, 6218, 6219, 6220 et 6228 (liens dans docs/autocalls-kb-a-supprimer.md). Les 41 agents utilisent les nouvelles (6223 à 6230).
 8. **Avocat et comptable.** Leur confier les décisions 1 et 2.
@@ -41,7 +50,7 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 6. Directeur de publication.
 7. 18 modèles « marketing ».
 8. WhatsApp israélien.
-9. Numéros SMS, 11775 et 11795.
+9. Numéro SMS. Les numéros 11775 et 11795 ne sont plus sur le compte (constaté le 9 octobre).
 10. Bouton « Connect AI ».
 11. Bulle sur téléphone.
 12. Google Analytics.
@@ -61,7 +70,7 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 1. **Stripe.**
    - Représentant du compte marqué « Invalid » : Settings > Business details > Management and ownership, ouvrir la fiche de Joseph Haddad et fournir ce que Stripe demande. Aucun examen n'est en cours ; Cartes Bancaires est en pause.
    - SEPA : inutile. Selon Autocalls, il n'apparaît que sur des prix en euros, et la plateforme facture en dollars.
-   - Alertes « paiement échoué » (ajout du 9 octobre) : Developers > Webhooks > « permanenceia-site-relances » > Modifier les événements, ajouter `invoice.payment_failed`, puis enregistrer. Sans cet événement, l'équipe n'est pas prévenue des paiements refusés.
+   - Alertes « paiement échoué » : fait le 9 octobre. `invoice.payment_failed` est ajouté au webhook « permanenceia-site-relances », qui écoute maintenant 10 événements.
    - Clé pour la langue des factures : Developers > API keys > Create restricted key, nom « langue-factures », droit « Customers : Write » et rien d'autre. Claude vous donnera ensuite la commande pour l'enregistrer en saisie masquée (ne pas la coller dans la conversation).
    - Vérifier vers le 10 octobre, le 11 au plus tard : Settings > Customer emails, domaine « Verified ».
    - Le 31 octobre et le 1er novembre : contrôler la facturation du numéro de nyh770.
@@ -70,16 +79,20 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
    - Plans 1646, 1647 et 1650 : remplacer « 1 / 3 / 10 phone number(s) » par « Up to 1 / 3 / 10 dedicated numbers (optional, from $3.99/month) ». Faire la même correction sur les produits Stripe.
    - Prompt templates : désactiver les 10 modèles santé. Claude fournit les modèles hébreux.
    - Billing > Update information : SINAY STRATEGIC LLC, Cheyenne.
+   - Settings > Custom Scripts : le script « parcours d'essai » est déjà en place. Reste à remplacer le bloc « Google Analytics 4 » par le contenu de docs/autocalls-scripts/ga-consentement-espace-client.html (une ligne de commentaire et le script ; le mode d'emploi est dans le .md voisin, à ne pas coller), dans les deux champs (« Custom scripts » et « Custom scripts (auth) ») : Google Analytics seulement après accord aux cookies, signaux publicitaires refusés, adresse des pages sans paramètres (5 min). À faire après le déploiement du site qui annonce cette mesure dans la politique cookies.
+   - Settings > Email Templates > Welcome Email : coller le paragraphe de docs/autocalls-scripts/bienvenue-etape-essai.md (FR et EN), qui nomme « Choose a plan » et « Start 14-Day Free Trial » (5 min).
 3. **Support Autocalls.**
    - Faire annuler les 20 exécutions en pause, sans cliquer sur Retry.
    - Ajouter la question du coût réseau d'un appel transféré.
 4. **Zoho.** Zoho Mail > Paramètres > Comptes de messagerie > Transfert : ajouter l'adresse que vous lisez chaque jour. Sinon, personne ne lit contact@.
-5. **Google Analytics** (propriété 557884458). Admin > Événements : marquer comme événements clés generate_lead, whatsapp_click, phone_call_click, begin_trial_click et sign_up.
+5. **Google Analytics** (propriété 557884458).
+   - Admin > Événements : marquer comme événements clés generate_lead, whatsapp_click, phone_call_click, begin_trial_click et sign_up.
+   - Admin > Flux de données > flux Web > Configurer les paramètres de la balise > Masquer des données : activer « E-mails », et les paramètres de requête tableSearch, tableFilters, search, q, email, phone (recherches de l'espace client ; docs/audits/a-appliquer-autocalls-2026-10-09.md, Lot D § 2) (5 min).
 6. **Meta.**
    - Events Manager : couper la correspondance automatique, et vérifier que le Controller Addendum est accepté.
    - Renommer le compte WhatsApp « Permanence agent » en « Permanence IA ».
    - Suivre la vérification d'entreprise et le réexamen des 18 modèles.
-7. **Relances.** Lire le rapport quotidien sur contact@ et dire « go » quand il vous convient.
+7. **Relances.** Votre « go » est appliqué : envoi réel depuis le 8 octobre. Vérifier que le rapport « Relances — rapport du 2026-10-09 » est bien arrivé sur contact@. S'il manque, le mot de passe d'application Zoho du site (ZOHO_SMTP_PASS) est peut-être à refaire, et aucune alerte de l'équipe ne part.
 
 ## 4. Peut attendre
 
@@ -96,8 +109,12 @@ Le détail et les recommandations sont dans rapport-final-2026-10-08.md, section
 
 ## 5. À reprendre par Claude
 
-- Relances en envoi réel : votre « go » est reçu, mais le contrôle de sécurité de Claude Code a bloqué le changement (envoi d'e-mails à de vrais contacts). Soit vous lancez la commande donnée par Claude, soit vous autorisez Claude à le faire.
-- Avec votre accord : page /admin, alerte d'erreurs, remplacement du jeton des webhooks, Google Analytics après accord aux cookies, libération des numéros, suppression des anciens documents.
+- Relances en envoi réel : fait le 8 octobre.
+- Alerte d'erreurs : l'alerte Google Cloud sur les erreurs 5xx est en place depuis le 8 octobre. Depuis le 9 octobre, les erreurs du code (e-mails, base, Stripe, Autocalls) sont aussi écrites en gravité ERROR, donc vues par cette alerte. Métrique et alerte dédiées : commandes à lancer dans docs/journaux-et-alertes.md.
+- Jeton des webhooks : plus aucun outil d'agent ne porte le jeton dans l'adresse. Reste le retrait de l'ancien jeton (2 commandes, docs/autocalls-webhooks-migration.md).
+- Google Analytics après accord aux cookies : fait sur le site. Pour l'espace client, le script est prêt à coller (section 3, Admin Autocalls).
+- Libération des numéros : sans objet, 11775 et 11795 ne sont plus sur le compte.
+- Avec votre accord : page /admin (plutôt vers 10 clients réels), suppression des anciens documents.
 - Sans attendre :
   - mention des préférences e-mail dans /confidentialite ;
   - modèles hébreux ;

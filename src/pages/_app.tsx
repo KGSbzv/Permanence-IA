@@ -18,9 +18,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const { locale } = router;
   // Google Analytics et pixel Meta chargés d’emblée seulement si le visiteur a déjà accepté (sinon, au clic sur « Accepter »).
   useEffect(() => { if (readConsent() === 'granted') { loadGoogleAnalytics(); loadMetaPixel(); } }, []);
-  // Pages vues lors des changements de page côté client, et clics utiles (essai, inscription, appel).
+  // Pages vues lors des changements de page côté client, et clics utiles (essai, inscription, appel). Un changement
+  // « shallow » (paramètre retiré de l’adresse sur la même page, voir Layout) n’est pas une nouvelle page vue.
   useEffect(() => {
-    const onRoute = (url: string) => track('page_view', { page_location: window.location.origin + url, page_title: document.title });
+    const onRoute = (url: string, { shallow }: { shallow?: boolean } = {}) => {
+      if (!shallow) track('page_view', { page_location: window.location.origin + url, page_title: document.title });
+    };
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest('a');
       const href = a?.getAttribute('href') || '';

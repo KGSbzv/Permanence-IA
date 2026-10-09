@@ -4,7 +4,7 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { Loader2, Mic, PhoneCall, X } from 'lucide-react';
-import { SITE, isActiveSector } from '@/data/site';
+import { FORM_FALLBACK_ACTION, SITE, isActiveSector } from '@/data/site';
 import { MarketingConsent, MarketingNotice, PhoneField, WhatsAppIcon, dialCode, marketingFields } from './ui';
 import { NOT_QUEUED } from './formTexts';
 import { useI18n } from '@/i18n';
@@ -517,7 +517,8 @@ export default function LiveDemo({ sector: initialSector, showHeader = true, hea
               <button type="button" onClick={() => switchMode('phone')} className="mt-3 text-sm font-semibold text-signal-glow underline-offset-4 hover:underline">{t.again}</button>
             </div>
           ) : (
-            <form onSubmit={submitPhone} className="mt-4 grid gap-3">
+            // method="post" : un envoi avant le chargement du script ne met jamais le numéro dans l’adresse.
+            <form method="post" action={FORM_FALLBACK_ACTION} onSubmit={submitPhone} className="mt-4 grid gap-3">
               {/* Champ piège invisible pour les robots (ne pas remplir) */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
               <div className="grid gap-2">

@@ -7,6 +7,7 @@ export const UI_COMPONENTS = {
     home: 'דף הבית',
     freeTrial: 'התחילו בחינם',
     callMeBack: 'בקשת שיחה חוזרת',
+    formInterrupted: 'הדף עוד לא סיים להיטען, ולכן הבקשה שלכם לא נשלחה. אנא שלחו אותה שוב.',
   },
 
   navbar: {

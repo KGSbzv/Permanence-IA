@@ -66,6 +66,11 @@ export interface Market {
   phoneNumberFrom: number;
   /** Prix de la minute sans forfait (paiement à la consommation, compte sans abonnement dans l’espace client). */
   paygMinute: number;
+  /**
+   * Crédits de messages achetés dans l’espace client (Add credits) : `credits` crédits pour `price` (USD, dès ce
+   * minimum). L’essai n’en donne aucun (seulement des minutes) : affiché sur /essai-gratuit.
+   */
+  creditPack: { credits: number; price: number };
   /** Coût horaire chargé d’un poste d’accueil, en USD, valeur de départ du calculateur (ordre de grandeur local). */
   hourlyCost: number;
   /** Devises locales affichées à titre indicatif sous les prix en USD (taux BCE du jour). */
@@ -97,7 +102,7 @@ const baseRecharges = () => [39, 89, 159, 299, 725];
 // Assistantes commerciales du widget, une par marché (Autocalls : 21203 FR, 21206 UK, 21207 AU, 21208 IT, 21209 PL, 21210 NL, 21306 HE).
 const SALES_WIDGET = '2841fa2d-1fed-4fbc-b832-28b954d049a6';
 // WhatsApp : numéro français (expéditeur Autocalls 521), servi par l’agent IA multilingue, pour tous les marchés sauf Israël.
-const SHARED = { currency: 'USD' as const, hourlyCost: 20, phoneNumberFrom: 3.99, paygMinute: 0.39, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 }, whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' } };
+const SHARED = { currency: 'USD' as const, hourlyCost: 20, phoneNumberFrom: 3.99, paygMinute: 0.39, creditPack: { credits: 100, price: 1 }, trial: { days: 14, minutes: 30 }, autocallsPlanIds: { receptionniste: 1646, assistant: 1647, 'centre-appels': 1650 }, whatsapp: { e164: '+33745460446', display: '+33 7 45 46 04 46' } };
 
 export const MARKETS: Record<Locale, Market> = {
   fr: {

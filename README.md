@@ -38,6 +38,8 @@ Les chiffres affichés sur le site viennent tous de `src/i18n/markets.ts` (un ma
 
 Les textes sont dans `src/i18n/content/<langue>/` (le français fait référence pour les types) ; les bases de connaissances des agents dans `src/data/kb/`.
 
+Chargement des textes : le navigateur ne reçoit que la langue de la page. Chaque langue est un « pack » (`src/i18n/packs/<clé>.ts`) que `I18nProvider` rend avec `next/dynamic` : Next ajoute son script au HTML et l'attend avant l'hydratation. Le serveur lit toutes les langues (`getI18n` reste synchrone pour les relances, le plan du site et les API). Un composant client importe ses textes par `useI18n()`, jamais directement depuis `src/i18n/content/` (sinon ce contenu repart dans les pages de toutes les langues), sauf les modules sans texte comme `src/i18n/content/guideCategories.ts` ; les imports de type (`import type`) et ceux de `getStaticProps`/`getStaticPaths` ne coûtent rien. Pack introuvable (réseau coupé, fichier retiré par un déploiement) : nouvel essai toutes les 3 s, et la page se recharge une fois au 3e échec de suite. Contrôle : `npx tsx scripts/test-i18n-packs.ts` (avec `NEXT_BUILD_DIR=.next` après un `next build` pour vérifier aussi le poids de `_app`).
+
 ---
 
 ## Stack

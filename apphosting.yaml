@@ -50,12 +50,18 @@ env:
   #   secret: STRIPE_ACCOUNT_KEY
   # Relances commerciales (src/lib/relances) : planificateur Cloud Scheduler authentifié par jeton OIDC du compte
   # relances-cron (aucun rôle). Envoi réel depuis le 8 oct. 2026 (RELANCES_DRY_RUN à 0, accord du propriétaire) ; le remettre à 1 pour revenir
-  # en mode test. Un rapport quotidien part à l'équipe. Marchés ouverts : RELANCES_LOCALES. Coupure immédiate : relance_settings.enabled.
+  # en mode test. Un rapport quotidien part à l'équipe (même relances coupées). Marchés ouverts au commercial : RELANCES_LOCALES ;
+  # les messages de service partent dans les 7 langues (RELANCES_SERVICE_LOCALES, facultative, peut en retirer une).
+  # Coupure immédiate : relance_settings.enabled.
   - variable: RELANCES_ENABLED
     value: "1"
   - variable: RELANCES_DRY_RUN
     value: "0"
   - variable: RELANCES_LOCALES
+    value: fr,en-gb,en-au
+  # Messages de service : fr et en seulement le temps de la relecture native des textes it, pl, nl, he (9 oct. 2026) ;
+  # retirer cette variable pour les ouvrir dans les 7 langues.
+  - variable: RELANCES_SERVICE_LOCALES
     value: fr,en-gb,en-au
   - variable: RELANCES_OIDC_AUDIENCE
     value: https://www.permanenceia.com/api/cron/relances

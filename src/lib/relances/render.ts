@@ -4,7 +4,7 @@
 // jamais de valeur inventée.
 import type { RelanceBlock, RelanceCtaTarget, RelanceMessage, RelancesContent } from '@/i18n/content/fr/ui/relances';
 import { DEFAULT_LOCALE, isRtl, type Locale } from '@/i18n/locales';
-import { SITE } from '@/data/site';
+import { APP_BILLING_URL, APP_CREDITS_URL, APP_PLANS_URL, SITE, SUPPORT_CALLBACK_ANCHOR, TRIAL_ASSIST_ANCHOR, registerUrl } from '@/data/site';
 
 /** Variables du contact ; une valeur vide compte comme absente. */
 export type RenderVars = Partial<Record<
@@ -25,19 +25,38 @@ export type RenderResult = { ok: true; mail: RenderedMail } | { ok: false; reaso
 /** Mot imposé en tête de l’objet d’un message publicitaire en Israël (loi sur les communications, art. 30A). */
 export const HE_AD_PREFIX = 'פרסומת';
 
-/** Adresse du lien principal, avec des UTM génériques (jamais de donnée personnelle dans l’adresse). */
+/**
+ * Adresse d’un lien, avec des UTM génériques (jamais de donnée personnelle dans l’adresse). Espace client : /plans
+ * pour choisir un forfait (l’essai y démarre), /credits pour ajouter des minutes ou des crédits, /billing seulement
+ * pour la carte, les factures et la résiliation ; /register avec la langue (?lang=) pour finir une inscription ;
+ * trial_assist : /essai-gratuit avec l’ancre du formulaire « être rappelé » (après les UTM), pour un prospect ;
+ * setup_assist : rappel du support pour un client (essai, abonné), /contact?type=support avec l’ancre du formulaire,
+ * jamais la page de vente de l’essai (forfaits, prix, case marketing) depuis un message de service ; guides du site
+ * dans la langue du contact (/aide/guides : créer un agent, le tester, renvoi d’appel ; mêmes adresses dans les 7 langues).
+ */
 export function ctaUrl(target: RelanceCtaTarget, locale: Locale, campaign: string) {
   const prefix = locale === DEFAULT_LOCALE ? '' : `/${locale}`;
   const base = {
     trial: `${SITE.url}${prefix}/essai-gratuit`,
     trial_assist: `${SITE.url}${prefix}/essai-gratuit`,
+    setup_assist: `${SITE.url}${prefix}/contact?type=support`,
     pricing: `${SITE.url}${prefix}/tarifs`,
     app: SITE.appUrl,
-    billing: `${SITE.appUrl}/billing`,
+    billing: APP_BILLING_URL,
+    plans: APP_PLANS_URL,
+    credits: APP_CREDITS_URL,
+    register: registerUrl(locale),
+    guide_create: `${SITE.url}${prefix}/aide/guides/${GUIDE_SLUGS.guide_create}`,
+    guide_test: `${SITE.url}${prefix}/aide/guides/${GUIDE_SLUGS.guide_test}`,
+    guide_forwarding: `${SITE.url}${prefix}/aide/guides/${GUIDE_SLUGS.guide_forwarding}`,
   }[target];
-  const content = target === 'trial_assist' ? '&utm_content=accompagnement' : '';
-  return `${base}?utm_source=relance&utm_medium=email&utm_campaign=${encodeURIComponent(campaign)}${content}`;
+  const [content, anchor] = target === 'trial_assist' ? ['&utm_content=accompagnement', `#${TRIAL_ASSIST_ANCHOR}`]
+    : target === 'setup_assist' ? ['&utm_content=mise_en_route', `#${SUPPORT_CALLBACK_ANCHOR}`] : ['', ''];
+  return `${base}${base.includes('?') ? '&' : '?'}utm_source=relance&utm_medium=email&utm_campaign=${encodeURIComponent(campaign)}${content}${anchor}`;
 }
+
+/** Guides publiés (src/i18n/content/<langue>/guides.ts), même adresse dans les 7 langues. */
+export const GUIDE_SLUGS = { guide_create: 'creer-un-agent', guide_test: 'tester-son-agent', guide_forwarding: 'renvoi-d-appel' } as const;
 
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
 const PLACEHOLDER = /\{([a-z_]+)\}/g;
@@ -79,6 +98,7 @@ export function renderMessage(o: {
   }
   const greeting = named ? shared.greeting.named : shared.greeting.anonymous;
   const cta = m.cta ? { label: m.cta.label, url: ctaUrl(m.cta.target, locale, o.campaign) } : null;
+  const second = m.secondary ? { label: m.secondary.label, url: ctaUrl(m.secondary.target, locale, o.campaign) } : null;
   const tail = [...(m.after ?? [])];
   const signature = [m.closing, shared.signature(o.brand)].filter(Boolean).join('\n');
 
@@ -89,10 +109,11 @@ export function renderMessage(o: {
     body: m.body.map((b) => fillBlock(b, vars)),
     after: tail.map((b) => fillBlock(b, vars)),
     cta: cta ? { label: fill(cta.label, vars), url: cta.url } : null,
+    second: second ? { label: fill(second.label, vars), url: second.url } : null,
     signature: fill(signature, vars),
   };
   // Variable restée entre accolades : l’étape est sautée.
-  const all = [parts.subject, parts.preheader, parts.greeting, parts.signature, parts.cta?.label ?? '', ...parts.body.map(blockText), ...parts.after.map(blockText)].join('\n');
+  const all = [parts.subject, parts.preheader, parts.greeting, parts.signature, parts.cta?.label ?? '', parts.second?.label ?? '', ...parts.body.map(blockText), ...parts.after.map(blockText)].join('\n');
   const missing = /\{([a-z_]+)\}/.exec(all);
   if (missing) return { ok: false, reason: `missing_variable:${missing[1]}` };
 
@@ -104,6 +125,7 @@ export function renderMessage(o: {
     ...parts.body.map(blockText),
     ...(parts.cta ? [shared.ctaLine(parts.cta.label, parts.cta.url)] : []),
     ...parts.after.map(blockText),
+    ...(parts.second ? [shared.ctaLine(parts.second.label, parts.second.url)] : []),
     parts.signature,
   ].join('\n\n');
 
@@ -118,6 +140,8 @@ export function renderMessage(o: {
     + parts.body.map(blockHtml).join('')
     + button
     + parts.after.map(blockHtml).join('')
+    // Second lien : simple lien souligné, pour ne pas concurrencer le bouton principal.
+    + (parts.second ? `<p style="${P}"><a href="${esc(parts.second.url)}" style="color:#0A7690;font-weight:bold">${esc(parts.second.label)}</a></p>` : '')
     + `<p style="${P}">${esc(parts.signature).replace(/\n/g, '<br>')}</p>`
     + '</div>';
 

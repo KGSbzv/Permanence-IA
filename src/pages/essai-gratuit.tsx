@@ -1,14 +1,17 @@
 // Essai gratuit : création du compte sur l’app (essai natif 14 j / 30 min), ou demande d’accompagnement.
+// Audit du 9 oct. 2026 (action 32) : UTM de la visite repris vers l’inscription, formulaires en POST, bouton de création
+// du compte réactivé après un retour arrière.
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Check } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { Heading, MarketingConsent, MarketingNotice, PhoneField, ProfileFields, TrialBadges, dialCode, marketingFields, profileNote } from '@/components/ui';
 import { NOT_QUEUED } from '@/components/formTexts';
-import { LOGIN_URL, isActiveSector, registerUrl } from '@/data/site';
+import { FORM_FALLBACK_ACTION, LOGIN_URL, TRIAL_ASSIST_ANCHOR, isActiveSector, registerUrl } from '@/data/site';
 import { useI18n } from '@/i18n';
 import { RichText } from '@/i18n/rich';
 import { track } from '@/lib/analytics';
+import { visitSearch } from '@/lib/attribution';
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -22,9 +25,11 @@ async function saveContact(body: Record<string, unknown>) {
 }
 
 export default function EssaiGratuit() {
-  const { c, market, offers, money, locale } = useI18n();
+  const { c, market, offers, money, num, locale } = useI18n();
   const t = c.ui.pages.trial;
   const { days, minutes } = market.trial;
+  // L’essai ne donne que des minutes : les réponses écrites de l’IA demandent des crédits (Add credits).
+  const creditsNote = t.creditsNote(num(market.creditPack.credits), money(market.creditPack.price));
   const { query } = useRouter();
   // sent : demande de rappel enregistrée ; noCall : sans accord de rappel, rien n’est demandé à /api/callback.
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'noCall' | 'error'>('idle');
@@ -34,9 +39,17 @@ export default function EssaiGratuit() {
   const planQuery = typeof query.plan === 'string' ? query.plan : 'decouverte';
   // Facturation annuelle choisie sur la grille des tarifs (lien ?billing=annual de PricingCards).
   const annual = query.billing === 'annual';
-  // Lien de création de compte : langue du site, puis UTM de la page une fois dans le navigateur (pas d’écart d’hydratation).
+  // Lien de création de compte : langue du site, puis UTM une fois dans le navigateur (pas d’écart d’hydratation) :
+  // ceux de la page, sinon ceux de la page d’arrivée de la visite (src/lib/attribution.ts).
   const [register, setRegister] = useState(() => registerUrl(locale));
-  useEffect(() => { setRegister(registerUrl(locale, window.location.search)); }, [locale]);
+  useEffect(() => { setRegister(registerUrl(locale, visitSearch(window.location.search))); }, [locale]);
+  // Retour arrière depuis l’inscription : le navigateur peut restaurer la page telle quelle (cache de navigation),
+  // bouton « Créer mon compte » grisé compris ; il redevient cliquable.
+  useEffect(() => {
+    const onShow = (e: PageTransitionEvent) => { if (e.persisted) setGoing(false); };
+    window.addEventListener('pageshow', onShow);
+    return () => window.removeEventListener('pageshow', onShow);
+  }, []);
 
   /** Création du compte : l’email (et l’accord marketing) est enregistré avec la langue du site, puis redirection. */
   async function startSignup(e: React.FormEvent<HTMLFormElement>) {
@@ -116,8 +129,10 @@ export default function EssaiGratuit() {
               {t.createSteps(days, minutes).map((s, i) => <li key={i}><RichText value={s} /></li>)}
             </ol>
             <p className="mt-3 rounded-xl bg-signal-soft px-4 py-3 text-sm text-ink">{t.createNote(minutes)}</p>
+            <p className="mt-2 text-sm text-slate">{creditsNote}</p>
             {/* Email avant la redirection : fiche contact avec la langue du site (relances), case marketing décochée. */}
-            <form onSubmit={startSignup} className="mt-5 grid gap-3">
+            {/* method="post" : un envoi avant le chargement du script ne met jamais l’adresse e-mail dans l’URL. */}
+            <form method="post" action={FORM_FALLBACK_ACTION} onSubmit={startSignup} className="mt-5 grid gap-3">
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
               <div>
                 <label htmlFor="su-start-email" className="mb-1.5 block text-sm font-semibold text-ink">{t.email}</label>
@@ -129,7 +144,8 @@ export default function EssaiGratuit() {
             </form>
             <p className="mt-3 text-center text-sm">{t.already} <a href={LOGIN_URL} className="font-semibold text-signal-deep hover:underline">{t.login}</a></p>
           </div>
-          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
+          {/* Ancre du lien « Être rappelé » des relances (inscription non terminée) : formulaire d’accompagnement. */}
+          <div id={TRIAL_ASSIST_ANCHOR} className="scroll-mt-24 rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
             {state === 'sent' ? (
               <div role="status">
                 <p className="font-display text-2xl font-bold">{t.sentTitle}</p>
@@ -143,10 +159,11 @@ export default function EssaiGratuit() {
                   {t.createSteps(days, minutes).map((s, i) => <li key={i}><RichText value={s} /></li>)}
                 </ol>
                 <p className="mt-3 rounded-xl bg-signal-soft px-4 py-3 text-sm text-ink">{t.createNote(minutes)}</p>
+                <p className="mt-2 text-sm text-slate">{creditsNote}</p>
                 <a href={register} className="btn-primary mt-6">{t.sentCta}</a>
               </div>
             ) : (
-              <form onSubmit={submit} className="grid gap-4">
+              <form method="post" action={FORM_FALLBACK_ACTION} onSubmit={submit} className="grid gap-4">
         {/* Champ piège invisible pour les robots (ne pas remplir) */}
         <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 opacity-0" />
                 <p className="font-display text-xl font-bold">{t.formTitle}</p>
